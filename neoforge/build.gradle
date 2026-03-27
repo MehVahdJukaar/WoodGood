@@ -149,7 +149,7 @@ dependencies {
     //+ REQUIRED - The modules access libaries from below - ONLY IN NEOFORGE
     modCompileOnly("curse.maven:framework-549225:7530361") // v0.13.11 | Refurbished-Furniture, +Mighty-Mail, Backpacked
     modCompileOnly("curse.maven:titanium-287342:6875285") // v4.0.40 | Functional-Storage
-    modCompileOnly("curse.maven:blueprint-382216:6965808") // v8.0.6 | The-Outer-End, Woodworks, Boatload, Upgrade-Aquatic
+    modCompileOnly("curse.maven:blueprint-382216:7148094") // v8.0.8 | The-Outer-End, Woodworks, Boatload, Upgrade-Aquatic, Curiosities!
     modCompileOnly("curse.maven:valhelsia-core-416935:6296775") // v1.1.5 | Valhelsia Structure, Valhelsia Furniture
 
 
@@ -208,7 +208,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-trapdoors-400933:5977602")
     modCompileOnly("curse.maven:macaws-windows-363569:5592081")
     modCompileOnly("curse.maven:macaws-furniture-359540:7255584")
-    modImplementation("curse.maven:macaws-stairs-1119394:5802422")
+    modCompileOnly("curse.maven:macaws-stairs-1119394:5802422")
 
         //+ GENERAL
     modCompileOnly("curse.maven:absent-by-design-305840:4616702") //!! 1.20.1
@@ -217,6 +217,7 @@ dependencies {
     modCompileOnly("curse.maven:boatload-337396:6449892")
     modCompileOnly("curse.maven:buildersaddition-389697:5544431")
     modCompileOnly("curse.maven:corail-pillar-266228:5669131") //TODO: Move the module to COMMON
+    modCompileOnly("curse.maven:curiosities-syndicate-1489190:7777694") // Blueprint
     modCompileOnly("curse.maven:decoration-delight-687475:5563942") //!! 1.20.1
     modCompileOnly("curse.maven:domum-ornamentum-527361:4174257") //!! 1.20.1
     modCompileOnly("curse.maven:dramatic-doors-380617:6479044")
