@@ -17,6 +17,22 @@
 </div>
 
 ### CHANGES: 
+- **Every Compat** (C): 
+  - Fixed **Chipped** or **Macaw** for `door` and `trapdoor` not being generated when **Framed Blocks** is installed - [#1206](https://github.com/MehVahdJukaar/WoodGood/issues/1206)
+  - Added a tag, `#create:chest_mounted_storage` to all chests & Fixed transport item pipe or similar not connecting to EveryCompat's chests
+  - Improved the `CYCLE_ITEM_RENDER` class where it is iterating every **Every Compat**'s children via **Every Compat**'s tab. If a WoodType or DecorativeType / FurnitureType is diabled, then it won't shown on the tab - [#1203](https://github.com/MehVahdJukaar/WoodGood/issues/1203)
+
+### FIXES:
+- **Macaw's Fences & Walls** (FB): Fixed outdated ResourceLocation for Creative Tab
+
+### NEW SUPPORTED MODS:
+- **Curiosities!** (NF)
+
+---
+
+## v2.11.32
+
+### CHANGES: 
 - **Every Compat** (C): Removed 2 configs due to a misunderstood request
 
 ---
