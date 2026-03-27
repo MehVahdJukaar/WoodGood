@@ -391,6 +391,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return (BL) this;
         }
 
+        /// Default Mode: AFTER_SAME_TYPE
         public BL setTabMode(TabAddMode mode) {
             this.tabMode = mode;
             return (BL) this;
