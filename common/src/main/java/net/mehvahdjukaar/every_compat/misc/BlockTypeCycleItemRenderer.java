@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.moonlight.api.client.ItemStackRenderer;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
@@ -25,7 +26,7 @@ import java.util.List;
 public abstract class BlockTypeCycleItemRenderer<T extends BlockType> extends ItemStackRenderer {
 
     private final List<String> childKeys = new ArrayList<>();
-    private final List<T> moddedTypes = new ArrayList<>();
+    private final List<T> moddedBlockTypes = new ArrayList<>();
     private final Class<T> typeClass;
     private ItemStack currentStack = Items.BARRIER.getDefaultInstance();
     private int lastIndex = 0;
@@ -41,16 +42,20 @@ public abstract class BlockTypeCycleItemRenderer<T extends BlockType> extends It
     private void initialize() {
         BlockTypeRegistry<T> reg = BlockSetAPI.getTypeRegistry(typeClass);
         if (reg == null) return;
-        for (var c : reg.getDefaultType().getChildren()) {
-            if (c.getKey().contains(":") && !childKeys.contains(c.getKey()) && c.getValue() instanceof ItemLike) {
-                childKeys.add(c.getKey());
+        for (var currentChild : reg.getDefaultType().getChildren()) {
+            if (currentChild.getKey().contains(":")
+                    && !childKeys.contains(currentChild.getKey())
+                    && currentChild.getValue() instanceof ItemLike
+                    && ModEntriesConfigs.getChildConfigs(typeClass).get(currentChild.getKey()).get()) {
+
+                childKeys.add(currentChild.getKey());
             }
         }
-        for (var w : reg.getValues()) {
-            if (!w.isVanilla()) moddedTypes.add(w);
+        for (T blockType : reg.getValues()) { // BlockType's children
+            if (!blockType.isVanilla() && ModEntriesConfigs.isTypeEnabled(blockType)) moddedBlockTypes.add(blockType);
         }
-        if (moddedTypes.isEmpty()) childKeys.clear();
-        Collections.shuffle(moddedTypes);
+        if (moddedBlockTypes.isEmpty()) childKeys.clear();
+        Collections.shuffle(moddedBlockTypes);
     }
 
     @Override
@@ -91,10 +96,10 @@ public abstract class BlockTypeCycleItemRenderer<T extends BlockType> extends It
             do {
                 var l = (this.lastIndex + 1) % size;
                 // this.woodIndex = (this.woodIndex + 1);
-                if (l < lastIndex || size == 1) this.typeIndex = (this.typeIndex + 1) % moddedTypes.size();
+                if (l < lastIndex || size == 1) this.typeIndex = (this.typeIndex + 1) % moddedBlockTypes.size();
                 this.lastIndex = l;
                 String key = childKeys.get(lastIndex);
-                var vv = moddedTypes.get(typeIndex % moddedTypes.size()).getChild(key);
+                var vv = moddedBlockTypes.get(typeIndex % moddedBlockTypes.size()).getChild(key);
                 if (vv instanceof ItemLike il) {
                     itemLike = il;
                 }

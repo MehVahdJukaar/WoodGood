@@ -86,7 +86,7 @@ public class ModEntriesConfigs {
         Class<? extends BlockType> typeClass = blockType.getClass();
         Map<String, Supplier<Boolean>> childConfigs = CHILD_CONFIGS.get(typeClass);
         if (childConfigs == null) {
-            EveryCompat.LOGGER.warn("No config map found for block type: {}", typeClass.getName());
+            EveryCompat.LOGGER.warn("No config map found for child type: {}", childType);
             return true;
         }
         if (childType != null && !childConfigs.getOrDefault(childType, () -> true).get()) {
@@ -94,7 +94,7 @@ public class ModEntriesConfigs {
         }
         Map<String, Supplier<Boolean>> blocktypeConfigs = BLOCK_TYPE_CONFIGS.get(typeClass);
         if (blocktypeConfigs == null) {
-            EveryCompat.LOGGER.warn("No config map found for block type: {}", typeClass.getName());
+            EveryCompat.LOGGER.warn("No config map found for {}: {}", typeClass.getName().substring(typeClass.getName().lastIndexOf(".") + 1), blockType.getId());
             return true;
         }
 
@@ -104,4 +104,7 @@ public class ModEntriesConfigs {
         return true; // Vanilla BlockTypes that will have null value in booleanSupplier
     }
 
+    public static Map<String, Supplier<Boolean>> getChildConfigs(Class<? extends BlockType> blockType) {
+        return CHILD_CONFIGS.get(blockType);
+    }
 }
