@@ -4,7 +4,6 @@ import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.moonlight.api.client.ItemStackRenderer;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
@@ -21,6 +20,10 @@ import net.minecraft.world.level.ItemLike;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Supplier;
+
+import static net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs.getBlockTypeConfigs;
+import static net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs.getChildConfigs;
 
 @Environment(EnvType.CLIENT)
 public abstract class BlockTypeCycleItemRenderer<T extends BlockType> extends ItemStackRenderer {
@@ -46,13 +49,13 @@ public abstract class BlockTypeCycleItemRenderer<T extends BlockType> extends It
             if (currentChild.getKey().contains(":")
                     && !childKeys.contains(currentChild.getKey())
                     && currentChild.getValue() instanceof ItemLike
-                    && ModEntriesConfigs.getChildConfigs(typeClass).get(currentChild.getKey()).get()) {
+                    && isChildTypeEnabled(currentChild.getKey())) {
 
                 childKeys.add(currentChild.getKey());
             }
         }
         for (T blockType : reg.getValues()) { // BlockType's children
-            if (!blockType.isVanilla() && ModEntriesConfigs.isTypeEnabled(blockType)) moddedBlockTypes.add(blockType);
+            if (!blockType.isVanilla() && isBlockTypeEnabled(blockType)) moddedBlockTypes.add(blockType);
         }
         if (moddedBlockTypes.isEmpty()) childKeys.clear();
         Collections.shuffle(moddedBlockTypes);
@@ -111,4 +114,19 @@ public abstract class BlockTypeCycleItemRenderer<T extends BlockType> extends It
         return currentStack;
     }
 
+    // Below is a null check & ensure that the code is executed properly.
+
+    public boolean isBlockTypeEnabled(BlockType blockType) {
+        var blockTypeConfig = getBlockTypeConfigs(typeClass).get(blockType.getId().toString());
+
+        if (blockTypeConfig != null) return blockTypeConfig.get();
+        else return true;
+    }
+
+    public boolean isChildTypeEnabled(String currentChildKey) {
+        Supplier<Boolean> childConfig = getChildConfigs(typeClass).get(currentChildKey);
+
+        if (childConfig != null) return childConfig.get();
+        else return true;
+    }
 }
