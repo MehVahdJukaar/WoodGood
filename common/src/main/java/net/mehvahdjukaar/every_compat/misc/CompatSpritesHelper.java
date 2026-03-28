@@ -66,7 +66,11 @@ public class CompatSpritesHelper {
         addOptional("minecraft:mushroom_stem", "_side", "minecraft:block/mushroom_stem");
         addOptional("minecraft:mushroom_stem", "_top", "minecraft:block/mushroom_stem");
 
-        // -------------------- [Let's Do] Meadow
+        // -------------------- More Sniffer Flowers
+        addOptional("moresnifferflowers", "vivicus_log", "_side", "block/vivicus_log"); // was using vivicus_log1c.png
+        addOptional("moresnifferflowers", "vivicus_log", "_top", "block/vivicus_log_top");
+
+        // -------------------- Tech Reborn
         addOptional("techreborn", "rubber_log", "_side", "block/rubber_log_side"); // was using rubber_log_sap.png
         addOptional("techreborn", "rubber_log", "_top", "block/rubber_log_top");
 
