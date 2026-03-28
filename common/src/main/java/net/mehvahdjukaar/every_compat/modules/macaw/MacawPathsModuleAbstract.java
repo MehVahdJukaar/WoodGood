@@ -6,7 +6,9 @@ import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
@@ -20,7 +22,14 @@ public abstract class MacawPathsModuleAbstract extends EveryCompatModule {
 
     public MacawPathsModuleAbstract(String modId) {
         super(modId, "mcp");
-        Supplier<CreativeModeTab> tab = (PlatHelper.getPlatform().isFabric()) ? getModTab("pathgroup") : getModTab("pathsitemgroup");
+
+        ResourceLocation temp; //TODO: Remove when the fix is applied to MacawPaths, should be v1.1.2 or newer
+        if (BuiltInRegistries.CREATIVE_MODE_TAB.containsKey(modRes("pathgroup")))
+            temp = modRes("pathgroup");
+        else
+            temp = ResourceLocation.parse("mod_id:pathgroup");
+
+        Supplier<CreativeModeTab> tab = (PlatHelper.getPlatform().isFabric()) ? getTab(temp) : getModTab("pathsitemgroup");
 
         planks_path = SimpleEntrySet.builder(WoodType.class, "planks_path",
                         getModBlock("oak_planks_path"), () -> VanillaWoodTypes.OAK,
