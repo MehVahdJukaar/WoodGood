@@ -4,7 +4,6 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
-import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
@@ -21,6 +20,7 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.createAndAddCustomTags;
 
@@ -44,7 +45,7 @@ public abstract class RegionsUnexploredModuleAbstract extends EveryCompatModule 
 
     public RegionsUnexploredModuleAbstract(String modId) {
         super(modId, "ru");
-        ResourceLocation tab = (PlatHelper.getPlatform().isFabric()) ? modRes("main") : modRes("ru_main");
+        Supplier<CreativeModeTab> tab = getModTab("main");
 
         branches = SimpleEntrySet.builder(WoodType.class, "branch",
                         getModBlock("oak_branch"), () -> VanillaWoodTypes.OAK,
@@ -54,7 +55,7 @@ public abstract class RegionsUnexploredModuleAbstract extends EveryCompatModule 
                 .addTag(modRes("branches_can_survive_on"), Registries.BLOCK)
                 .addTag(modRes("branches"), Registries.BLOCK)
                 .addTag(modRes("branches"), Registries.ITEM)
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .addRecipe(modRes("oak_branch_from_oak_log"))
                 //RECIPE-GENERATED: stick_from_oak_branch
                 .build();
@@ -74,7 +75,7 @@ public abstract class RegionsUnexploredModuleAbstract extends EveryCompatModule 
                 .addTag(modRes("shrubs"), Registries.BLOCK)
                 .addTag(modRes("shrub_can_survive_on"), Registries.BLOCK)
                 .addTag(modRes("shrubs"), Registries.ITEM)
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .addRecipe(modRes("dark_oak_sapling_from_dark_oak_shrub"))
                 .addRecipe(modRes("dark_oak_shrub"))
                 .copyParentDrop()

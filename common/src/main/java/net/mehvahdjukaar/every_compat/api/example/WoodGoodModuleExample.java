@@ -42,10 +42,10 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
             super("awesome_mod_id", "abm", "Twigs.MOD_ID");
             ///DEFAULT: super("awesome_mod_id", "abm") -> myNamespace will be EveryCompat.MOD_ID
 
-            // your mod's tab or minecraft's tab can be used for setTabKey() - it can use either ResourceKey or ResourceLocation
+            // minecraft's tab can be used for setTab() - it can use either ResourceKey or CreativeModeTab
             ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
-            // location of your tab with helper method
-            ResourceLocation yourModTab = modRes("mod_tab");
+            // your mod's tab using helper method
+            String yourModTabPath = "mod_tab";
 
             // Here we create 2 simple entry sets. You are free to not use these or make your own entry set implementation
             // Discover all the methods that these simple builders have by pressing "." and invoke what you need
@@ -62,6 +62,10 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
                             getModBlock("oak_table"), ()-> VanillaWoodTypes.OAK,
                             woodType -> new TableBlock(Utils.copyPropertySafe(woodType.planks).instabreak())
                     )
+                    ///REQUIRED: Add block to your mod's tab or Minecraft's tab
+                    .setTab(getTab(tab))
+                    .setTab(getModTab(yourModTabPath))
+
                     ///OPTIONAL: Check if a WoodType or LeavesType has the children required, then block will be generated
                     .requiresChildren("slab", "other_childkey") //REASON: can be for recipes or textures
                     .requiresFromMap(sampleBlock_2.blocks) // If your block required another block for crafting or texturing
@@ -82,9 +86,6 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
 
                     ///OPTIONAL: If your block is glasses, then please take a look at below & Looking for // Common Tags which is at the bottom of the class
             // https://github.com/MehVahdJukaar/WoodGood/blob/79396eae711cee032635b52d957ddfe9eaa0121b/common/src/main/java/net/mehvahdjukaar/every_compat/misc/UtilityTag.java#L194
-
-                    ///REQUIRED: Add block to your mod's tab or Minecraft's tab
-                    .setTab(yourModTab)
 
                     ///OPTIONAL: Creating recipes for the block
                     .defaultRecipe() // default: new ResourceLocation("twigs:oak_table") via recipes folder

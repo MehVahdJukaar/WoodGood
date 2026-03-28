@@ -3,9 +3,11 @@ package net.mehvahdjukaar.every_compat.modules.mrcrayfish;
 import com.mrcrayfish.backpacked.block.ShelfBlock;
 import com.mrcrayfish.backpacked.core.ModBlockEntities;
 import com.mrcrayfish.backpacked.core.ModBlocks;
+import com.mrcrayfish.backpacked.core.ModPointOfInterests;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
+import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -26,12 +28,20 @@ public class BackpackedModule extends EveryCompatModule {
                         w -> new ShelfBlock(Utils.copyPropertySafe(w.planks)))
                 .requiresChildren("stripped_log")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(
-"creative_tab"))
+                .setTab(getModTab("creative_tab"))
                 .addRecipe(modRes("oak_backpack_shelf"))
                 .addTile(ModBlockEntities.BACKPACK_SHELF::get)
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
         this.addEntry(shelves);
+    }
+
+    @Override
+    public void onModInit() {
+        super.onModInit();
+        RegHelper.addExtraPOIStatesRegistration(event ->
+                shelves.blocks.values().forEach( block ->
+                        event.addBlock(ModPointOfInterests.BACKPACK_SHELF.key(), block))
+        );
     }
 }

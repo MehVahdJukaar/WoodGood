@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.chipped;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
+import net.mehvahdjukaar.every_compat.misc.UtilityTexture;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
@@ -20,10 +21,12 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LeavesBlock;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.isKnownVanillaLeaves;
+import static net.mehvahdjukaar.every_compat.misc.UtilityTexture.shrinkTextureTo16;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.LEAVES;
 
 //See ChippedAbstractModule's SUPPORTED VERSION
@@ -356,7 +359,9 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
             for (String prefix : prefixes) {
                 generateLeaves(modRes("block/oak_leaves/" + prefix + "_oak_leaves"), sink, manager);
             }
+
             generateFrostedLeaves(modRes("block/oak_leaves/frosted_oak_leaves_top"), sink, manager);
+
         });
     }
 
@@ -369,26 +374,33 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
             try (
                     TextureImage leavesTexture = TextureImage.open(manager,
                             RPUtils.findFirstBlockTextureLocation(manager, leavesType.leaves));
-                    TextureImage targetTexture = TextureImage.open(manager, targetResLoc) // Using chipped's leaves' texture instead of leaves' texture
+                    TextureImage baseTexture = TextureImage.open(manager, targetResLoc) // Using chipped's leaves' texture instead of leaves' texture
             ) {
+
+                ResourceLocation newResLoc = UtilityTexture.modifyTexturePath(targetResLoc.getPath(), "block/", shortenedId(), "oak", leavesType);
+
                 int height = leavesTexture.imageHeight();
                 int width = leavesTexture.imageWidth();
 
-                if (!(leavesTexture.imageWidth() == 16) || !(leavesTexture.imageHeight() == 16))
-                    EveryCompat.LOGGER.error("ChippedLeavesModule - {}'s texture is a {}x{} for {}", Utils.getID(leavesType.leaves), width, height, targetResLoc.getPath());
+                TextureImage currentTexture;
 
-                String path = targetResLoc.getPath();
-                String infix = shortenedId()+"/"+leavesType.getNamespace()+"/";
+                // Shrink the texture to a 16x16
+                if (!(height == 16) && Objects.nonNull(leavesTexture.getMcMeta())) {
+                    currentTexture = shrinkTextureTo16(leavesTexture);
+                    height = currentTexture.imageHeight();
 
-                String newPath = path.substring(0, 6) + infix + path.substring(6);
-                newPath = newPath.replace("oak", leavesType.getTypeName());
-
-                ResourceLocation newResLoc = EveryCompat.res(newPath);
+                    if (!(width == 16) || !(height == 16)) {
+                        EveryCompat.LOGGER.error("ChippedLeavesModule - {}'s texture is a {}x{} for {}", Utils.getID(leavesType.leaves), leavesTexture.imageWidth(), leavesTexture.imageHeight(), targetResLoc.getPath());
+                        return;
+                    }
+                }
+                else currentTexture = leavesTexture;
 
                 sink.addTextureIfNotPresent(manager, newResLoc, () -> {
-                    Respriter respriter = Respriter.of(leavesTexture);
-                    return respriter.recolorWithAnimationOf(targetTexture);
+                    Respriter respriter = Respriter.of(currentTexture);
+                    return respriter.recolorWithAnimationOf(baseTexture);
                 });
+
             } catch (Exception e) {
                 EveryCompat.LOGGER.error("Failed to generate Leave's texture for {} : {}", leavesType.getId(), e);
             }
@@ -407,13 +419,6 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                     TextureImage targetTexture = TextureImage.open(manager, targetResLoc); // Using chipped's leaves' texture instead of leaves' texture
                     TextureImage bottomMask = TextureImage.open(manager, EveryCompat.res("block/ch/oak_leaves/frosted_oak_leaves_m"))
             ) {
-
-                int height = leavesTexture.imageHeight();
-                int width = leavesTexture.imageWidth();
-
-                if (!(width == 16) || !(height == 16))
-                    EveryCompat.LOGGER.error("ChippedLeavesModule - {}'s texture is a {}x{} for frosted_oak_leaves_top", Utils.getID(leavesType.leaves), width, height);
-
                 String path = targetResLoc.getPath();
                 String infix = shortenedId()+"/"+leavesType.getNamespace()+"/";
 
@@ -426,7 +431,24 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                 // block/ch/namespace/oak_leaves/frosted_oak_overlay
                 ResourceLocation overlayResLoc = EveryCompat.res(topPath.replace("leaves_top", "overlay"));
 
-                Respriter respriter = Respriter.of(leavesTexture);
+                int height = leavesTexture.imageHeight();
+                int width = leavesTexture.imageWidth();
+
+                TextureImage currentTexture;
+
+                // Shrink the texture to a 16x16
+                if (!(height == 16) && Objects.nonNull(leavesTexture.getMcMeta())) {
+                    currentTexture = shrinkTextureTo16(leavesTexture);
+                    height = currentTexture.imageHeight();
+
+                    if (!(width == 16) || !(height == 16)) {
+                        EveryCompat.LOGGER.error("ChippedLeavesModule - {}'s texture is a {}x{} for frosted_oak_leaves_top", Utils.getID(leavesType.leaves), leavesTexture.imageWidth(), leavesTexture.imageHeight());
+                        return;
+                    }
+                }
+                else currentTexture = leavesTexture;
+
+                Respriter respriter = Respriter.of(currentTexture);
                 TextureImage frostedTexture = respriter.recolorWithAnimationOf(targetTexture);
                 TextureImage overlayTexture = frostedTexture.makeCopy();
 
@@ -438,6 +460,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                     TextureOps.applyMask(overlayTexture, bottomMask);
                     return overlayTexture;
                 });
+
             } catch (Exception e) {
                 EveryCompat.LOGGER.error("Failed to generate Leave's texture for {} : {}", leavesType.getId(), e);
             }

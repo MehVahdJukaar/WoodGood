@@ -15,6 +15,7 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.buildersaddition.Builders
 import net.mehvahdjukaar.every_compat.modules.neoforge.building_but_better.BuildingButBetterModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.corail_pillar.CorailPillarModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.create.CreateModule;
+import net.mehvahdjukaar.every_compat.modules.neoforge.curiosities.CuriositiesModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.decoration_delight.DecorationDelightModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.dramaticdoors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.dramaticdoors.DramaticDoorsModule;
@@ -109,6 +110,7 @@ public class EveryCompatForge extends EveryCompatCommon {
             addOptionalModule("bbb", () -> BuildingButBetterModule.class);
             addOptionalModule("buildersdelight", () -> BuildersDelightModule.class);
             addOptionalModule("corail_pillar", () -> CorailPillarModule.class);
+            addOptionalModule("curiosities", () -> CuriositiesModule.class);
             addOptionalModule("decoration_delight", () -> DecorationDelightModule.class);
             addOptionalModule("dramaticdoors", () -> DramaticDoorsModule.class);
             addOptionalModule("excessive_building", () -> ExcessiveBuildingModule.class);

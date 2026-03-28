@@ -182,7 +182,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return;
         }
         Holder<CreativeModeTab> tabHolder = this.tab.get();
-        if (tabHolder == null || NO_MOD_CREATIVE_TAB.get()) {
+        if (tabHolder.unwrapKey().isEmpty() || NO_MOD_CREATIVE_TAB.get()) {
             return;
         }
         var tabKey = tabHolder.unwrapKey().get();
@@ -392,6 +392,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return (BL) this;
         }
 
+        /// Default Mode: AFTER_SAME_TYPE
         public BL setTabMode(TabAddMode mode) {
             this.tabMode = mode;
             return (BL) this;
@@ -402,6 +403,8 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return (BL) this;
         }
 
+        /// Use {@link net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet.Builder#setTab(java.util.function.Supplier)}
+        /// with EveryCompatModule#getTab(ResourceLocation)
         @Deprecated(forRemoval = true)
         public BL setTabKey(ResourceLocation res) {
             ResourceKey<CreativeModeTab> key = ResourceKey.create(Registries.CREATIVE_MODE_TAB, res);
@@ -409,12 +412,16 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return (BL) this;
         }
 
+        /// Use {@link net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet.Builder#setTab(java.util.function.Supplier)}
+        /// with EveryCompatModule#getTab(ResourceKey)
         @Deprecated(forRemoval = true)
         public BL setTabKey(Supplier<ResourceKey<CreativeModeTab>> tab) {
             this.tab = () -> BuiltInRegistries.CREATIVE_MODE_TAB.getHolderOrThrow(tab.get());
             return (BL) this;
         }
 
+        /// Use {@link net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet.Builder#setTab(java.util.function.Supplier)}
+        /// with EveryCompatModule#getTab(ResourceKey)
         @Deprecated(forRemoval = true)
         public BL setTabKey(ResourceKey<CreativeModeTab> key) {
             this.setTabKey(() -> key);

@@ -140,7 +140,7 @@ dependencies {
         //- OTHER MAVENS
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN FABRIC
-    modCompileOnly("curse.maven:framework-549225:5911983") // v0.9.4 | Refurbished-Furniture, +Mighty-Mail, Backpacked
+    modCompileOnly("curse.maven:framework-549225:7530359") // v0.13.11 | Refurbished-Furniture, +Mighty-Mail, Backpacked
     modCompileOnly("curse.maven:quad-932715:5903633") // v1.2.9 | More-Chest-Variants, More-Crafting-Tables
     modCompileOnly("curse.maven:valhelsia-core-416935:6296784") // v1.1.5 | Valhelsia-Furniture
     modCompileOnly("maven.modrinth:frozenlib:1.9-mc1.21.1") // Wilder-Wild

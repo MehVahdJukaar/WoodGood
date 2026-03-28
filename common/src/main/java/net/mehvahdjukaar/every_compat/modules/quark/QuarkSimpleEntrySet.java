@@ -11,13 +11,14 @@ import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.Holder;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import org.apache.commons.lang3.function.TriFunction;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.violetmoon.quark.base.Quark;
 import org.violetmoon.zeta.module.IDisableable;
@@ -36,7 +37,7 @@ public class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends S
                                Supplier<B> baseBlock,
                                Supplier<T> baseType,
                                Function<T, B> blockSupplier,
-                               @Nullable Supplier<Holder<CreativeModeTab>> tab,
+                               @NotNull Supplier<Holder<CreativeModeTab>> tab,
                                TabAddMode tabMode,
                                LootTableMode tableMode,
                                @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
