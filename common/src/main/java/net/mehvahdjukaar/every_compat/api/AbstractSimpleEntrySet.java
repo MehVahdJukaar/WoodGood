@@ -181,8 +181,8 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             }
             return;
         }
-        Holder<CreativeModeTab> tabHolder = this.tab.get();
-        if (tabHolder.unwrapKey().isEmpty() || NO_MOD_CREATIVE_TAB.get()) {
+        Holder<CreativeModeTab> tabHolder = getTab();
+        if (tabHolder == null || NO_MOD_CREATIVE_TAB.get()) {
             return;
         }
         var tabKey = tabHolder.unwrapKey().get();
@@ -608,8 +608,8 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     //for null tab
     public Item getItemForECTab(T type) {
         try {
-            Holder<CreativeModeTab> tagKey = tab.get();
-            if (tagKey == null) {
+            Holder<CreativeModeTab> tab = getTab();
+            if (tab == null) {
                 return null;
             }
         } catch (Exception e) {
