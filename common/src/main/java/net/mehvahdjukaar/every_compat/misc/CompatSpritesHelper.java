@@ -67,6 +67,10 @@ public class CompatSpritesHelper {
         addOptional("minecraft:mushroom_stem", "_top", "minecraft:block/mushroom_stem");
 
         // -------------------- [Let's Do] Meadow
+        addOptional("techreborn", "rubber_log", "_side", "block/rubber_log_side");
+        addOptional("techreborn", "rubber_log", "_top", "block/rubber_log_top");
+
+        // -------------------- [Let's Do] Meadow
         // Leaves
         addOptional("meadow:alpine_birch_leaves", "_leaves", "meadow:block/alpine_birch_leaves_top");
 
