@@ -99,43 +99,44 @@ public abstract class EveryCompat {
         //cal
         int myChildrenSize = ACTIVE_MODULES.values().stream().filter(Objects::nonNull).mapToInt(CompatModule::bloatAmount).sum();
 
-        float p = (myChildrenSize / (float) newSize) * 100f;
-        if (myChildrenSize == 0) {
+        if (myChildrenSize == 0 && !ACTIVE_MODULES.isEmpty()) {
             String log = """
-                    \n##########################################################################################################
+                    ##########################################################################################################
                     #                                                                                                        #
                     #  ATTENTION: EVERY COMPAT REGISTERED 0 BLOCK! No Wood mods (Biomes O' Plenty or others) are installed.  #
                     #                            You dont need EveryCompat and should remove it.                             #
                     #                                                                                                        #
                     ##########################################################################################################
                     """;
-            EveryCompat.LOGGER.error("\n{}", log);
+            EveryCompat.LOGGER.error("\n\n{}", log);
             return;
         }
-
-        if (p > 25) {
-            EveryCompat.LOGGER.warn("Registered {} compat blocks making up {}% of total blocks registered", myChildrenSize, String.format("%.2f", p));
-        } else {
-            EveryCompat.LOGGER.info("Registered {} compat blocks making up {}% of total blocks registered", myChildrenSize, String.format("%.2f", p));
-        }
-        if (p > 33) {
-            Optional<CompatModule> compatbloated = ACTIVE_MODULES.values().stream().max(Comparator.comparing(compatModule -> compatModule != null ? compatModule.bloatAmount() : 0));
-            if (compatbloated.isPresent()) {
-                CompatModule bloated = compatbloated.get();
-                EveryCompat.LOGGER.info("Registered {} compat blocks making up {}% of total blocks registered", myChildrenSize, String.format("%.2f", p));
-                //no freaking clue why this was returned as null once
-                EveryCompat.LOGGER.error("Every Compat registered blocks make up more than one third of your registered blocks, taking up memory and load time.");
-                EveryCompat.LOGGER.error("You might want to uninstall some mods, biggest offender was {} ({} blocks)", bloated.getModName().toUpperCase(Locale.ROOT), bloated.bloatAmount());
-            } else {
-                String log = """
-                        \n#######################################################
+        else if (ACTIVE_MODULES.isEmpty()) {
+            String log = """
+                        #######################################################
                         #                                                     #
                         #     ATTENTION: No supported mods are installed.     #
                         #   You dont need EveryCompat and should remove it.   #
                         #                                                     #
                         #######################################################
                         """;
-                EveryCompat.LOGGER.error("\n{}", log);
+            EveryCompat.LOGGER.error("\n\n{}", log);
+        }
+
+        float percent = (myChildrenSize / (float) newSize) * 100f;
+        if (percent > 25) {
+            EveryCompat.LOGGER.warn("Registered {} compat blocks making up {}% of total blocks registered", myChildrenSize, String.format("%.2f", percent));
+        } else {
+            EveryCompat.LOGGER.info("Registered {} compat blocks making up {}% of total blocks registered", myChildrenSize, String.format("%.2f", percent));
+        }
+        if (percent > 33) {
+            Optional<CompatModule> compatbloated = ACTIVE_MODULES.values().stream().max(Comparator.comparing(compatModule -> compatModule != null ? compatModule.bloatAmount() : 0));
+            if (compatbloated.isPresent()) {
+                CompatModule bloated = compatbloated.get();
+                EveryCompat.LOGGER.info("Registered {} compat blocks making up {}% of total blocks registered", myChildrenSize, String.format("%.2f", percent));
+                //no freaking clue why this was returned as null once
+                EveryCompat.LOGGER.error("Every Compat registered blocks make up more than one third of your registered blocks, taking up memory and load time.");
+                EveryCompat.LOGGER.error("You might want to uninstall some mods, biggest offender was {} ({} blocks)", bloated.getModName().toUpperCase(Locale.ROOT), bloated.bloatAmount());
             }
         }
 
