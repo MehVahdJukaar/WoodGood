@@ -236,7 +236,7 @@ dependencies {
     modCompileOnly("curse.maven:redeco-897377:5603009") //!! 1.20.1
     modCompileOnly("curse.maven:table-top-craft-467136:5318681") //!! 1.20.1
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847") //!! 1.20.1
-    modCompileOnly("curse.maven:the-twilight-forest-227639:5759335")
+    modCompileOnly("curse.maven:the-twilight-forest-227639:7797302")
     modCompileOnly("curse.maven:timber-frames-606011:5372390") //!! 1.20.1
     modCompileOnly("curse.maven:tropicraft-254794:5658664")
     modCompileOnly("curse.maven:unusual-furniture-1278034:7147429")
