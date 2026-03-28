@@ -11,7 +11,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.Block;
@@ -25,9 +25,11 @@ import twilightforest.enums.HollowLogVariants;
 import twilightforest.init.TFBlocks;
 import twilightforest.item.HollowLogItem;
 
+import java.util.function.Supplier;
+
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
-//SUPPORT: v4.6.2790+
+//SUPPORT: v4.8.3345+
 public class TwilightForestModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, BanisterBlock> banisters;
@@ -37,7 +39,7 @@ public class TwilightForestModule extends EveryCompatModule {
 
     public TwilightForestModule(String modId) {
         super(modId, "tf");
-        ResourceLocation tab = modRes("blocks");
+        Supplier<CreativeModeTab> tab = getTab(modRes("blocks"));
 
         banisters = SimpleEntrySet.builder(WoodType.class, "banister",
                         TFBlocks.OAK_BANISTER, () -> VanillaWoodTypes.OAK,
@@ -48,7 +50,7 @@ public class TwilightForestModule extends EveryCompatModule {
                 .addTag(modRes("banisters"), Registries.ITEM)
                 .addRecipe(modRes("wood/oak_banister"))
                 .copyParentDrop()
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .build();
         this.addEntry(banisters);
 
@@ -74,7 +76,7 @@ public class TwilightForestModule extends EveryCompatModule {
                 //TEXTURES: stripped_log
                 .addTag(modRes("hollow_logs_vertical"), Registries.BLOCK)
                 .noItem()
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .addRecipe(modRes("stonecutting/birch_log/hollow_birch_log"))
                 .build();
         this.addEntry(hollowLogsVertical);
