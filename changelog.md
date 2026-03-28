@@ -17,6 +17,19 @@
 </div>
 
 ### CHANGES: 
+- **Tech Reborn** (IT): Corrected the wrong texture used for `techreborn:rubber_log` - [#1217](https://github.com/MehVahdJukaar/WoodGood/issues/1217)
+- **Regions Unexplored** (NF): Upated an outdated ResourceLocation key for Creative Tab via **Neoforge** (**Fabric** is fine)
+
+### FIXES
+- **Every Compat** (C): Fixed the crash in the `CYCLE_ITEM_RENDER` with "null check" when opening inventory (Either Creative Mode or with EMI++) in some certain cases - [#1215](https://github.com/MehVahdJukaar/WoodGood/issues/1215)
+- **Macaw's Paths & Pavings** (FB): Temporarily fix the incorrect ResourceLocation for Creative Tab (this is an issue on **Macaw's Paths & Pavings**), This is already reported - [#1216](https://github.com/MehVahdJukaar/WoodGood/issues/1216)
+  - Whenever the fix is applied in the said mod, then the module will automatically use the correct ResourceLocation.
+
+---
+
+## v2.11.33
+
+### CHANGES: 
 - **Every Compat** (C): 
   - Fixed **Chipped** or **Macaw** for `door` and `trapdoor` not being generated when **Framed Blocks** is installed - [#1206](https://github.com/MehVahdJukaar/WoodGood/issues/1206)
   - Added a tag, `#create:chest_mounted_storage` to all chests & Fixed transport item pipe or similar not connecting to EveryCompat's chests
