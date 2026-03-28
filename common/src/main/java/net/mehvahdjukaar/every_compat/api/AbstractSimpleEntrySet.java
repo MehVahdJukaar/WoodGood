@@ -69,7 +69,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     public final String prefix;
     protected final boolean mergePalette;
 
-    protected final Supplier<Holder<CreativeModeTab>> tab;
+    private final Supplier<Holder<CreativeModeTab>> tab;
     protected final TabAddMode tabMode;
     protected final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
     protected final Set<Supplier<ResourceLocation>> recipeLocations = new HashSet<>();
