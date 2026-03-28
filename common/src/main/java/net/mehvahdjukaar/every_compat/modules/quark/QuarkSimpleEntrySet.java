@@ -10,6 +10,7 @@ import net.mehvahdjukaar.every_compat.misc.ExtraModelConfiguration;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.BlockItem;
@@ -35,7 +36,7 @@ public class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends S
                                Supplier<B> baseBlock,
                                Supplier<T> baseType,
                                Function<T, B> blockSupplier,
-                               @Nullable Supplier<ResourceKey<CreativeModeTab>> tab,
+                               @Nullable Supplier<Holder<CreativeModeTab>> tab,
                                TabAddMode tabMode,
                                LootTableMode tableMode,
                                @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,

@@ -17,6 +17,7 @@ import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -144,7 +145,14 @@ public abstract class EveryCompat {
                 for (EntrySet<?> e : sm.getEntries()) {
                     //verify tabs existence and crash early if they aren't there
                     if (e instanceof AbstractSimpleEntrySet<?, ?, ?> ae) {
-                        ae.getTab().unwrapKey().orElseThrow();
+                        Holder<CreativeModeTab> tab = ae.getTab();
+                        if (tab != null) {
+                            tab.unwrapKey().orElseThrow();
+                        } else {
+                            if(PlatHelper.isDev()){
+                                EveryCompat.LOGGER.error("Module {} had an entry set {} without a tab. Are you sure about this?", sm, ae );
+                            }
+                        }
                     }
                 }
             }

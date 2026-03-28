@@ -273,6 +273,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
     }
 
+    @Nullable
     public Holder<CreativeModeTab> getTab(){
         return tab.get();
     }
