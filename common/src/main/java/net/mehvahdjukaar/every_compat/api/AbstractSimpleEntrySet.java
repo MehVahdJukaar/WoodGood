@@ -274,8 +274,13 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     }
 
     @Nullable
-    public Holder<CreativeModeTab> getTab(){
-        return tab.get();
+    public Holder<CreativeModeTab> getTab() {
+        if (tab == null) {
+            return null;
+        }
+        var t = tab.get();
+        if (t == null) throw new IllegalStateException("Failed to get creative tab holder!");
+        return t;
     }
 
     public Map<T, ?> getDefaultEntries() {

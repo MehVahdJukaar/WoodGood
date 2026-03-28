@@ -150,7 +150,7 @@ public abstract class EveryCompat {
                         if (tab != null) {
                             tab.unwrapKey().orElseThrow();
                         } else {
-                            if(PlatHelper.isDev()){
+                            if (PlatHelper.isDev()){
                                 EveryCompat.LOGGER.error("Module {} had an entry set {} without a tab. Are you sure about this?", sm, ae );
                             }
                         }
