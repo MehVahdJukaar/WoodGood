@@ -16,6 +16,16 @@
 
 </div>
 
+### ADDS: 
+- **More Sniffer Flowers** (IT): Corrected vivicus_log's texture - [#1219](https://github.com/MehVahdJukaar/WoodGood/issues/1219) 
+  
+### FIXES:
+- **Every Compat** (C): Fixed the tab being null during the laucnhing with **The Twilight Forest** - [#1220](https://github.com/MehVahdJukaar/WoodGood/issues/1220) 
+
+---
+
+## v2.11.34
+
 ### CHANGES: 
 - **Tech Reborn** (IT): Corrected the wrong texture used for `techreborn:rubber_log` - [#1217](https://github.com/MehVahdJukaar/WoodGood/issues/1217)
 - **Regions Unexplored** (NF): Upated an outdated ResourceLocation key for Creative Tab via **Neoforge** (**Fabric** is fine)
