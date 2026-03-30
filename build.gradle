@@ -461,6 +461,7 @@ ext {
 
 
 
+
 tasks.register('buildAndPublishAll') {
     dependsOn ':clean'
     dependsOn ':common:clean'
@@ -472,11 +473,42 @@ tasks.register('buildAndPublishAll') {
     dependsOn ':fabric:curseforge'
     dependsOn ':fabric:modrinth'
     dependsOn ':publish'
+    finalizedBy 'gitTag'
 
     group = 'build'
     description = 'Runs clean, build, and publish neoforge and fabric'
 }
 
+tasks.register('gitTag') {
+    group = 'release'
+    description = 'Create and push git tag from project version'
+
+    doLast {
+        def tag = project.version.toString()
+
+        // check if tag already exists
+        def stdout = new ByteArrayOutputStream()
+        exec {
+            commandLine 'git', 'tag', '-l', tag
+            standardOutput = stdout
+        }
+
+        if (!stdout.toString().trim().isEmpty()) {
+            logger.warn("Git tag '${tag}' already exists")
+        } else {
+
+            // create annotated tag
+            exec {
+                commandLine 'git', 'tag', '-a', tag, '-m', "Release ${tag}"
+            }
+
+            // push tag
+            exec {
+                commandLine 'git', 'push', 'origin', tag
+            }
+        }
+    }
+}
 
 tasks.register('cleanLogs', Delete) {
     group "build"
