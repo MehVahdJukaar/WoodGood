@@ -148,7 +148,7 @@ public abstract class EveryCompat {
                     if (e instanceof AbstractSimpleEntrySet<?, ?, ?> ae) {
                         Holder<CreativeModeTab> tab = ae.getTab();
                         if (tab != null) {
-                            tab.unwrapKey().orElseThrow();
+                            tab.unwrapKey().orElseThrow(() -> new RuntimeException("The Creative Tab's ResourceLocation is outdated"));
                         } else {
                             if (PlatHelper.isDev()){
                                 EveryCompat.LOGGER.error("Module {} had an entry set {} without a tab. Are you sure about this?", sm, ae );
