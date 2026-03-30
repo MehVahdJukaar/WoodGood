@@ -4,10 +4,8 @@ import com.mcwdoors.kikoz.objects.JapaneseDoors;
 import com.mcwdoors.kikoz.objects.StableDoor;
 import net.mehvahdjukaar.every_compat.modules.macaw.MacawDoorsModuleAbstract;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoorBlock;
-import net.minecraft.world.level.block.SoundType;
 
 //See MacawDoorModuleAbstract's SUPPORTED VERSION
 public class MacawDoorsModule extends MacawDoorsModuleAbstract {
@@ -16,17 +14,17 @@ public class MacawDoorsModule extends MacawDoorsModuleAbstract {
         super(modId);
     }
 
-    protected Block newDoor(WoodType woodType) {
-        return new DoorBlock(woodType.toVanillaOrOak().setType(), Utils.copyPropertySafe(woodType.log).noOcclusion()) {};
+    protected Block newDoor(String blockId, WoodType woodType) {
+        return new DoorBlock(woodType.toVanillaOrOak().setType(), standardPropertiesSafe(blockId, woodType)) {};
     }
 
-    protected Block newJapaneseDoors(WoodType woodType) {
-        return new JapaneseDoors(Utils.copyPropertySafe(woodType.planks).noOcclusion().sound(SoundType.SCAFFOLDING),
+    protected Block newJapaneseDoors(String blockId, WoodType woodType) {
+        return new JapaneseDoors(standardPropertiesSafe(blockId, woodType),
                 woodType.toVanillaOrOak().setType());
     }
 
-    protected Block newStableDoor(WoodType woodType) {
-        return new StableDoor(Utils.copyPropertySafe(woodType.planks).noOcclusion(), woodType.toVanillaOrOak().setType());
+    protected Block newStableDoor(String blockId, WoodType woodType) {
+        return new StableDoor(standardPropertiesSafe(blockId, woodType), woodType.toVanillaOrOak().setType());
     }
 
 }

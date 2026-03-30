@@ -16,6 +16,7 @@ public class UnsafeDisablerConfigs {
     public static final Supplier<List<String>> ENTRY_SETS_BLACKLIST;
     public static final Supplier<List<String>> MODULES_BLACKLIST;
     public static final Supplier<Boolean> INCLUDE_ALL_WOOD_MODULES;
+    public static final Supplier<Boolean> ENABLE_FRAMED_BLOCKS_BLACKLIST;
 
     public static ModConfigHolder CONFIG_SPEC;
 
@@ -102,6 +103,9 @@ public class UnsafeDisablerConfigs {
         builder.push("other");
         INCLUDE_ALL_WOOD_MODULES = builder.comment("Disable all of Supported Mods on EveryCompat's side. This feature is same as Library-Section which do not have any Wood Modules.\nWARNING: If the config between CLIENT & SERVER are not the same, then you won't able to join a server")
                 .define("include_all_wood_modules", true);
+
+        ENABLE_FRAMED_BLOCKS_BLACKLIST = builder.comment("Blacklist all of EveryCompat's supported blocks that may have similar block to Framed Blocks.\nThis will be applied to all mods, EveryCompat, StoneZone, & GemsRealm.\nWARNING: If the config between CLIENT & SERVER are not the same, then you won't able to join a server")
+                .define("enable_framed_blocks_blacklist", false);
         builder.pop();
 
         CONFIG_SPEC = builder.build();
