@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.api;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
@@ -209,7 +210,7 @@ public class SimpleModule extends CompatModule {
         String underscoreConvention = woodTypeFrom + "_" + blockName; // quark_blossom_chair
 
         // Excude Supported-Mods' blocks that are similar to blocks from Framed-Blocks
-        if (PlatHelper.isModLoaded("framedblocks") && FRAMED_BLOCKS_SUFFIX.stream().anyMatch(blockName::contains)) return true;
+        if (UnsafeDisablerConfigs.ENABLE_FRAMED_BLOCKS_BLACKLIST.get() && PlatHelper.isModLoaded("framedblocks") && FRAMED_BLOCKS_SUFFIX.stream().anyMatch(blockName::contains)) return true;
 
         // ugly hardcoded stuff
         if (blockType instanceof WoodType woodType) {
