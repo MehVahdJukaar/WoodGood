@@ -16,6 +16,19 @@
 
 </div>
 
+### FIXES: 
+- **Macaw's Doors** (FB): Fixed the outdated ResourceLocation for Creative Tab. 
+  - NEOFORGE is fine as is.
+- **The Twilight Forest** (NF): Added missing tags to all blocks - [#1223](https://github.com/MehVahdJukaar/WoodGood/issues/1223)
+- **Abnormal's Woodworks** (NF): Fixed the missing LANG for `chest` & `trapped_chest` on SERVER side - [#1222](https://github.com/MehVahdJukaar/WoodGood/issues/1222) 
+
+### ADDS
+- **Every Compat** (C): Added a new config in `everycomp-hazardous.toml` with ENABLE_FRAMED_BLOCKS_BLACKLIST
+
+---
+
+## v2.11.35
+
 ### ADDS: 
 - **More Sniffer Flowers** (IT): Corrected vivicus_log's texture - [#1219](https://github.com/MehVahdJukaar/WoodGood/issues/1219) 
   
