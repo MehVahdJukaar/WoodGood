@@ -60,7 +60,7 @@ public class TextureGenHelper {
                     infoPerTextures.put(textureId, textureInfo);
 
                     if (textureInfo.copyTexture()) {
-                        respriters.put(textureId, Respriter.ofPalette(main, List.of(Palette.ofColors(List.of(new RGBColor(0))))));
+                        respriters.put(textureId, Respriter.ofPalette(main, Palette.ofColors(Set.of(new RGBColor(0)))));
                     } else {
                         imagesToClose.add(main);
 
