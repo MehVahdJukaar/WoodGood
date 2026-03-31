@@ -18,7 +18,7 @@ public class CompatChestBlockEntity extends ChestBlockEntity {
 
     public CompatChestBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState state) {
         super(blockEntityType, pos, state);
-        var w = WoodTypeRegistry.INSTANCE.getBlockTypeOf(state.getBlock());
+        WoodType w = WoodTypeRegistry.INSTANCE.getBlockTypeOf(state.getBlock());
         this.woodType = w == null ? VanillaWoodTypes.OAK : w;
         this.trapped = state.getBlock() instanceof CompatTrappedChestBlock;
     }
@@ -43,6 +43,6 @@ public class CompatChestBlockEntity extends ChestBlockEntity {
 
     @Override
     protected @NotNull Component getDefaultName() {
-        return Component.translatable("container.everycomp.chest.name", Component.translatable(woodType.getTranslationKey()).getString());
+        return Component.translatable("container.everycomp.chest.name", Component.translatable(woodType.getTranslationKey()).toString());
     }
 }
