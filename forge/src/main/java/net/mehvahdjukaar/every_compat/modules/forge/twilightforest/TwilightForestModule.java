@@ -12,6 +12,7 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.Block;
@@ -43,6 +44,8 @@ public class TwilightForestModule extends SimpleModule {
                         TFBlocks.OAK_BANISTER, () -> VanillaWoodTypes.OAK,
                         w -> new BanisterBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("mineable_with_block_and_chain"), Registries.BLOCK)
                 .addTag(modRes("banisters"), Registries.BLOCK, Registries.ITEM)
                 .addRecipe(modRes("wood/oak_banister"))
                 .copyParentDrop()
@@ -55,7 +58,10 @@ public class TwilightForestModule extends SimpleModule {
                         w -> new HollowLogHorizontal(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: Textures
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("mineable_with_block_and_chain"), Registries.BLOCK)
                 .addTag(modRes("hollow_logs_horizontal"), Registries.BLOCK)
+                .addTag(modRes("hollow_logs"), Registries.BLOCK)
                 .noItem().noTab() //REASON: it's using the hollowLogsVertical's tab/item as the main
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
@@ -68,7 +74,10 @@ public class TwilightForestModule extends SimpleModule {
                             return new HollowLogVertical(Utils.copyPropertySafe(w.log), RegistryObject.create(id, ForgeRegistries.BLOCKS));
                         })
                 .requiresChildren(STRIPPED_LOG) //REASON: Textures
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("mineable_with_block_and_chain"), Registries.BLOCK)
                 .addTag(modRes("hollow_logs_vertical"), Registries.BLOCK)
+                .addTag(modRes("hollow_logs"), Registries.BLOCK)
                 .noItem()
                 .setTabKey(tab)
                 .addRecipe(modRes("stonecutting/birch_log/hollow_birch_log"))
@@ -81,7 +90,10 @@ public class TwilightForestModule extends SimpleModule {
                                 RegistryObject.create(Utils.getID(hollowLogsVertical.blocks.get(w)), ForgeRegistries.BLOCKS))
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: Textures
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("mineable_with_block_and_chain"), Registries.BLOCK)
                 .addTag(modRes("hollow_logs_climbable"), Registries.BLOCK)
+                .addTag(modRes("hollow_logs"), Registries.BLOCK)
                 .noItem().noTab() //REASON: it's using the hollowLogsVertical's tab/item as the main
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
