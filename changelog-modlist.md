@@ -22,8 +22,7 @@
 | Wilder Wild                        |   🟦   |
 | More Barrier Variants              |   🟡   |
 |                                    |        |
-
-</div>
+  </div>
 
   <div markdown="1">
 
@@ -71,8 +70,8 @@
 | Valhelsia Furniture                        |   🟩   |
 | \[Let's Do] Hearth & Timber                |   🟡   |
 |                                            |        |
+  </div>
 
-</div>
   <div markdown="1">
 
 | **NEOFORGE**                         | STATUS |
@@ -116,7 +115,6 @@
 | Workshop For Handsome Adventure      |   🟩   |
 | Xerca Mod                            |   ❔    |
 |                                      |        |
-
    </div>
 </div>
 
