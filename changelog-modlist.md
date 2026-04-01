@@ -1,9 +1,10 @@
 <h1><div style="text-align: center; margin-bottom: 10px; color: yellow">SUPPORTED MODLIST</div></h1>
 
-<div style="display:flex; gap:16px; align-items:flex-start; flex-wrap:wrap;">
-  <div markdown="1">
+<table>
+<tr><th>FABRIC</th><th>COMMON</th><th>NEOFORGE</th> </tr>
+<tr><td style="vertical-align:top;">
 
-| **FABRIC**                         | STATUS |
+| MODS                               | STATUS |
 |------------------------------------|:------:|
 | Beautify Refabricated              |   🟡   |
 | Bewitchment                        |   ❔    |
@@ -22,11 +23,10 @@
 | Wilder Wild                        |   🟦   |
 | More Barrier Variants              |   🟡   |
 |                                    |        |
-  </div>
 
-  <div markdown="1">
+</td><td style="vertical-align:top;">
 
-| **COMMON**                                 | STATUS |
+| MODS                                       | STATUS |
 |--------------------------------------------|:------:|
 | Another Furniture                          |   🟩   | 
 | Architect's Palette                        |   🟩   |
@@ -70,11 +70,10 @@
 | Valhelsia Furniture                        |   🟩   |
 | \[Let's Do] Hearth & Timber                |   🟡   |
 |                                            |        |
-  </div>
 
-  <div markdown="1">
+</td><td style="vertical-align:top;">
 
-| **NEOFORGE**                         | STATUS |
+| MODS                                 | STATUS |
 |--------------------------------------|:------:|
 | Abnormal's Boatload                  |   🟩   |
 | Abnormal's Woodworks                 |   🟩   |  
@@ -115,8 +114,8 @@
 | Workshop For Handsome Adventure      |   🟩   |
 | Xerca Mod                            |   ❔    |
 |                                      |        |
-   </div>
-</div>
+
+</td></tr> </table>
 
 ## LEGENDS:
 - 🟩 - AVAILABLE
