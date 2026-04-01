@@ -2,7 +2,7 @@
 
 <table>
 <tr><th>FABRIC</th><th>COMMON</th><th>NEOFORGE</th> </tr>
-<tr><td style="vertical-align:top;">
+<tr><td valign="top">
 
 | MODS                               | STATUS |
 |------------------------------------|:------:|
@@ -24,7 +24,7 @@
 | More Barrier Variants              |   🟡   |
 |                                    |        |
 
-</td><td style="vertical-align:top;">
+</td><td valign="top">
 
 | MODS                                       | STATUS |
 |--------------------------------------------|:------:|
@@ -71,7 +71,7 @@
 | \[Let's Do] Hearth & Timber                |   🟡   |
 |                                            |        |
 
-</td><td style="vertical-align:top;">
+</td><td valign="top">
 
 | MODS                                 | STATUS |
 |--------------------------------------|:------:|
