@@ -1,0 +1,6 @@
+theme: minima
+markdown: kramdown
+
+kramdown:
+  input: GFM
+  parse_block_html: true
