@@ -18,6 +18,18 @@
 
 <br>
 
+### FIXES:
+- **Macaw's Doors** (FB): Fixed the outdated ResourceLocation for Creative Tab.
+  - NEOFORGE is fine as is.
+
+### ADDS: 
+- **Every Compat** (C): Added a new config in `everycomp-hazardous.toml` with ENABLE_FRAMED_BLOCKS_BLACKLIST
+- **The Twilight Forest** (F): Added the missing tags to all blocks
+
+---
+
+## v2.9.18
+
 ### CHANGES: 
 - **Feywild** (IT): Removed the entries for all of logs' ResourceLocation for textures as it's no longer needed
 - **Every Compat**
