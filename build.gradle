@@ -296,76 +296,72 @@ subprojects {
     }
 }
 
-allprojects {
-    apply plugin: "java"
-    apply plugin: "architectury-plugin"
-    apply plugin: "maven-publish"
+tasks.register('buildAndPublishAll') {
+    dependsOn ':clean'
+    dependsOn ':common:clean'
+    dependsOn ':fabric:clean'
+    dependsOn ':forge:clean'
+    dependsOn ':build'
+    dependsOn ':forge:curseforge'
+    dependsOn ':forge:modrinth'
+    dependsOn ':fabric:curseforge'
+    dependsOn ':fabric:modrinth'
+    dependsOn ':publish'
+    finalizedBy 'gitTag'
 
-    archivesBaseName = rootProject.mod_id
-    version = rootProject.mod_version
-    group = rootProject.maven_group
+    group = 'build'
+    description = 'Runs clean, build, and publish forge and fabric'
+}
 
-    repositories {
+tasks.register('gitTag') {
+    group = 'release'
+    description = 'Create and push git tag from project version'
 
-        mavenLocal()
+    doLast {
+        def tag = project.version.toString()
 
-        flatDir {
-            dirs 'mods'
+        // check if tag already exists
+        def stdout = new ByteArrayOutputStream()
+        exec {
+            commandLine 'git', 'tag', '-l', tag
+            standardOutput = stdout
         }
 
-        // Our publishing repo
-        maven { url = "https://registry.somethingcatchy.net/repository/maven-releases/" }
+        if (!stdout.toString().trim().isEmpty()) {
+            logger.warn("Git tag '${tag}' already exists")
+        } else {
 
-        maven { url = "https://maven.parchmentmc.org" }
+            // create annotated tag
+            exec {
+                commandLine 'git', 'tag', '-a', tag, '-m', "Release ${tag}"
+            }
 
-        maven {
-            url = "https://www.cursemaven.com"
-            allowInsecureProtocol = true
+            // push tag
+            exec {
+                commandLine 'git', 'push', 'origin', tag
+            }
         }
-        maven { url = "https://api.modrinth.com/maven" }
-
-        maven { url = "https://mvn.devos.one/snapshots/" } // registrate_fabric & registrate
-
-        maven { url = "https://mvn.devos.one/releases" } // Porting Lib Releases
-
-        maven { url = "https://maven.shedaniel.me/" } // Cloth Config
-
-        // Required for Create
-        maven { url = "https://maven.createmod.net" } // Create, Ponder, Flywheel
-
-        maven { url = "https://maven.tterrag.com" } // Registrate
-
-        maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" } // Forge Config API Port
-
-        maven { // Reach Entity Attributes
-            url = "https://maven.jamieswhiteshirt.com/libs-release"
-            content { includeGroup("com.jamieswhiteshirt") }
-        }
-        maven { url = "https://squiddev.cc/maven" } // CC: Tweaked
-
-        maven { url = 'https://maven.ladysnake.org/releases' } // Unknown
-
-        maven { url = "https://maven.shedaniel.me" } // unknown
-
-        maven { url = "https://maven.blamejared.com/" } // JEI
-
-        maven { url = "https://modmaven.dev" } // Botania & FALLBACK for JEI
-
-        maven { url = "https://maven.teamresourceful.com/repository/maven-public/" } // Chipped
-
-        maven { url = 'https://maven.minecraftforge.net/' } // Terrablender
-
-        maven { url = "https://maven.terraformersmc.com/" } // EMI
-
-        maven { url = "https://maven.terraformersmc.com/releases" }
     }
+}
 
-    tasks.withType(JavaCompile).configureEach {
-        options.encoding = "UTF-8"
-        options.release = 17
-    }
+tasks.register('cleanLogs', Delete) {
+    group "build"
+    description "Delete logs"
 
-    java {
-        withSourcesJar()
-    }
+    // Logs
+    delete fileTree(dir: "$rootDir/forge/run/logs", include: "**/*.gz")
+    delete fileTree(dir: "$rootDir/fabric/run/logs", include: "**/*.gz")
+}
+
+tasks.register('cleanFolders', Delete) {
+    group "build"
+    description "Clean logs & Delete folders of Debug"
+
+    // Logs
+    delete fileTree(dir: "$rootDir/forge/run/logs", include: "**/*.gz")
+    delete fileTree(dir: "$rootDir/fabric/run/logs", include: "**/*.gz")
+
+    // Debug
+    delete "$rootDir/forge/run/debug"
+    delete "$rootDir/fabric/run/debug"
 }
