@@ -66,14 +66,14 @@ public class TextureGenHelper {
 
                         if (maskId != null) {
                             TextureImage mask;
-                            if (textureInfo.autoMask()) {
-                                if (mergePalette) {
-                                    globalPalette.addAll(oakPlanksPalette);
-                                    partialRespriters.put(textureId, main);
-                                } else {
-                                    respriters.put(textureId, Respriter.ofPalette(main, oakPlanksPalette));
-                                }
-                            } else {
+//                            if (textureInfo.autoMask()) {
+//                                if (mergePalette) {
+//                                    globalPalette.addAll(oakPlanksPalette);
+//                                    partialRespriters.put(textureId, main);
+//                                } else {
+//                                    respriters.put(textureId, Respriter.ofPalette(main, oakPlanksPalette));
+//                                }
+//                            } else {
                                 mask = TextureImage.open(manager, maskId);
                                 if (mergePalette) {
                                     globalPalette.addAll(Palette.fromImage(main, mask, 0));
@@ -81,7 +81,7 @@ public class TextureGenHelper {
                                 } else {
                                     respriters.put(textureId, Respriter.masked(main, mask));
                                 }
-                            }
+//                            }
 
                         } else {
                             if (mergePalette) {
@@ -135,7 +135,7 @@ public class TextureGenHelper {
                     for (var info : infoPerTextures.get(oldTextureId)) {
 
                         // return the texture of: WoodType: Planks, StoneType: stone, LeavesType: leaves
-                        var pal = Objects.requireNonNull(info).paletteStrategy().getPaletteAndAnimation(blockType, manager);
+                        var pal = info.paletteStrategy().getPaletteAndAnimation(blockType, manager);
                         McMetaFile targetAnimation = pal.animation();
                         List<Palette> targetPalette = pal.palette();
 
