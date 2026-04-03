@@ -17,6 +17,15 @@
 </div>
 
 ### FIXES: 
+- **The Twilight Forest** (NF): Fixed the tags not being loaded for all blocks. - [#1226](https://github.com/MehVahdJukaar/WoodGood/issues/1226)
+  - MORE DETAIL: in TwilightForest Module, a code was trying to add an ITEM to a tag meant for BLOCKS and this caused the tags to be not loaded when loading into the world
+- **Every Compat** (EXCLUDED): **The Twilight Forest's mangrove** with **The Twilight Forest's hollow_log** - Updated the code to prevent the duplicated block
+
+---
+
+## v2.11.36
+
+### FIXES: 
 - **Macaw's Doors** (FB): Fixed the outdated ResourceLocation for Creative Tab. 
   - NEOFORGE is fine as is.
 - **The Twilight Forest** (NF): Added missing tags to all blocks - [#1223](https://github.com/MehVahdJukaar/WoodGood/issues/1223)
