@@ -124,7 +124,7 @@ public class HardcodedBlockType {
         if (isWoodFrom("refurbished_furniture", "", "dawnoftimebuilder:waxed_oak", "")) return false;
 
         // Minecraft has "mangrove" that caused the generation of blocks with The-Twilight-Forest's mangrove to be skipped.
-        if (isWoodFrom("", "", "twilightforest:mangrove", "")) return false;
+        if (isWoodFrom("\\b(?!twilightforest).*", "", "twilightforest:mangrove", "")) return false;
 
         // Quark's chests & ladders aren't generated with Abnormal's Wood mods | Quark's blocks with Caverns-And-Chasms' AZALEA aren't generated due to Quark's AZALEA
         if (isWoodFrom("quark", "upgrade_aquatic|autumnity|atmospheric|environmental|caverns_and_chasms", "", "")) return false;
