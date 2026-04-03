@@ -121,7 +121,6 @@ public class TwilightForestModule extends EveryCompatModule {
                 .requiresFromMap(hollow_log_climbable.blocks)
                 .setTab(tab)
                 //TEXTURES: stripped_log
-                .addTag(modRes("hollow_logs_climbable"), Registries.BLOCK)
                 .build();
         this.addEntry(hollow_log);
 
