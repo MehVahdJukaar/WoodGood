@@ -18,6 +18,7 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.fml.InterModComms;
@@ -27,10 +28,11 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
-//SUPPORT: v1.31.2+
+///SUPPORT: v1.35.1+
 public class WorkshopForHandsomeAdventurerModule extends EveryCompatModule {
     private static final ResourceLocation TAG_FORGE_WORKBENCH = ResourceLocation.fromNamespaceAndPath("c", "workbench");
     private static final ResourceLocation TAG_PACKINGTAPE_BLACKLIST = ResourceLocation.fromNamespaceAndPath("packingtape", "te_blacklist");
@@ -41,7 +43,7 @@ public class WorkshopForHandsomeAdventurerModule extends EveryCompatModule {
 
     public WorkshopForHandsomeAdventurerModule(String modId) {
         super(modId, "wfha");
-        ResourceLocation tab = modRes(modId);
+        Supplier<CreativeModeTab> tab = getTab(modRes("tab")); //Somehow it's not working & still crash, it's correct key but why?
 
         double_bookshelves = SimpleEntrySet.builder(WoodType.class, "", "book_shelf_double",
                         getModBlock("book_shelf_double_spruce"), () -> VanillaWoodTypes.SPRUCE,
@@ -50,7 +52,7 @@ public class WorkshopForHandsomeAdventurerModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
                 .addRecipe(modRes("book_shelf_double_spruce"))
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .addTile(Registration.BOOK_SHELF_BE)
                 .addCustomItem((wood, block, prop) -> new BlockItemEx( block, prop))
                 .build();
@@ -64,7 +66,7 @@ public class WorkshopForHandsomeAdventurerModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
                 .addRecipe(modRes("book_shelf_open_double_spruce"))
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
                 .build();
         this.addEntry(open_double_bookshelves);
@@ -77,7 +79,7 @@ public class WorkshopForHandsomeAdventurerModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
                 .build();
         this.addEntry(min_bookshelves);
@@ -91,7 +93,7 @@ public class WorkshopForHandsomeAdventurerModule extends EveryCompatModule {
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
                 .addRecipe(modRes("book_shelf_open_minimal_spruce"))
                 .addRecipe(modRes("book_shelf_open_minimal_from_double_spruce"))
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
                 .build();
         this.addEntry(open_min_bookshelves);
@@ -104,7 +106,7 @@ public class WorkshopForHandsomeAdventurerModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
                 .build();
         this.addEntry(lantern_bookshelves);
@@ -118,7 +120,7 @@ public class WorkshopForHandsomeAdventurerModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_FORGE_WORKBENCH, Registries.BLOCK)
                 .addTag(TAG_FORGE_WORKBENCH, Registries.ITEM)
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .addRecipe(modRes("simple_table_normal_spruce"))
                 .addRecipe(modRes("simple_table_replacement_spruce"))
                 .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
@@ -132,7 +134,7 @@ public class WorkshopForHandsomeAdventurerModule extends EveryCompatModule {
                 .addTile(Registration.TOOL_RACK_BE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .defaultRecipe()
                 .copyParentDrop()
                 .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
@@ -146,7 +148,7 @@ public class WorkshopForHandsomeAdventurerModule extends EveryCompatModule {
                 .addTile(Registration.TOOL_RACK_BE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .defaultRecipe()
                 .copyParentDrop()
                 .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
@@ -160,7 +162,7 @@ public class WorkshopForHandsomeAdventurerModule extends EveryCompatModule {
                 .addTile(Registration.TOOL_RACK_BE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .defaultRecipe()
                 .copyParentDrop()
                 .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
@@ -174,7 +176,7 @@ public class WorkshopForHandsomeAdventurerModule extends EveryCompatModule {
                 .addTile(Registration.TOOL_RACK_BE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .defaultRecipe()
                 .addRecipe(modRes("tool_rack_single_from_multi_spruce"))
                 .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
@@ -188,7 +190,7 @@ public class WorkshopForHandsomeAdventurerModule extends EveryCompatModule {
                 .addTile(Registration.POTION_SHELF_BE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(TAG_PACKINGTAPE_BLACKLIST, Registries.BLOCK)
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .defaultRecipe()
                 .addCustomItem((wood, block, prop) -> new BlockItemEx(block, prop))
                 .build();
