@@ -33,6 +33,8 @@ public class UnsafeDisablerConfigs {
                         REASON:
                     This file is a conditional registration. This is harmless in Singleplayer World,
                     but harmful in SERVER because you won't able to join.
+                    Only use for personal play. 
+                    If you are a modpack maker DO NOT use it!
     
                     ══════════════════════════ Detail ═══════════════════════════
                     This file allow you to exclude WoodTypes, LeavesType, EntrySet, or a Module
