@@ -322,6 +322,9 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         protected final String prefix;
         protected Supplier<Holder<CreativeModeTab>> tab = null;
         protected TabAddMode tabMode = TabAddMode.AFTER_SAME_TYPE;
+        /// Will be set to false if noTab() is used
+        protected boolean addToTab = true;
+
         protected final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
         protected final Set<Supplier<ResourceLocation>> recipes = new HashSet<>();
         protected final Set<TextureInfo> textures = new HashSet<>();
@@ -405,6 +408,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
         public BL noTab() {
             this.tab = null;
+            this.addToTab = false;
             return (BL) this;
         }
 
