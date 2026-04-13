@@ -62,7 +62,7 @@ dependencies {
     modCompileOnly("curse.maven:backpacked-352835:7624223")
     modCompileOnly("curse.maven:beautiful-campfires-1085950:6162183")
     modCompileOnly("curse.maven:blockus-312289:6256096")
-    modCompileOnly("curse.maven:building-but-better-989479:6803573")
+    modCompileOnly("curse.maven:building-but-better-989479:7627392")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
     modCompileOnly("curse.maven:chipped-456956:4634858") // v3.0.1
     modCompileOnly("curse.maven:create-fabric-624165:5982726")

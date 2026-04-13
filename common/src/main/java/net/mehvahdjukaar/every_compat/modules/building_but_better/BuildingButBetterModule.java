@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.building_but_better;
 
 import com.starfish_studios.bbb.block.*;
 import com.starfish_studios.bbb.item.DescriptionBlockItem;
+import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -23,7 +24,7 @@ import java.util.Objects;
 import static net.mehvahdjukaar.every_compat.EveryCompat.res;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
-//SUPPORT: v2.0pre3
+//SUPPORT: v2.0pre4
 public class BuildingButBetterModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> balustrade;
@@ -59,7 +60,7 @@ public class BuildingButBetterModule extends SimpleModule {
                 .addTag(modRes("wooden_blocks"), Registries.BLOCK)
                 .addTag(modRes("balustrades"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
-//                .defaultRecipe() // NOT AVAILABLE YET
+                .defaultRecipe()
                 .addCustomItem((woodType, block, properties) -> new DescriptionBlockItem(block, properties))
                 .build();
         this.addEntry(balustrade);
@@ -169,8 +170,7 @@ public class BuildingButBetterModule extends SimpleModule {
                                 .strength(0.3F))
                 )
                 //TEXTURES: planks
-                .addTexture(modRes("block/lantern/oak"))
-//                .addTextureM(modRes("block/lantern/oak"), EveryCompat.res("block/bbb/oak_lantern_m")) //REASON: the texture is 18x16, mask_texture had to be removed
+                .addTextureM(modRes("block/lantern/oak"), EveryCompat.res("block/bbb/oak_lantern_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_blocks"), Registries.BLOCK)
                 .addTag(modRes("wooden_lanterns"), Registries.BLOCK, Registries.ITEM)
@@ -193,7 +193,7 @@ public class BuildingButBetterModule extends SimpleModule {
                 .addTag(modRes("wooden_blocks"), Registries.BLOCK)
                 .addTag(modRes("lattices"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
-//                .defaultRecipe() //TODO: no recipe available - waiting for DEV to add it
+                .defaultRecipe()
                 .addCustomItem((woodType, block, properties) -> new DescriptionBlockItem(block, properties))
                 .build();
         this.addEntry(lattice);
