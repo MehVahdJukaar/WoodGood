@@ -290,15 +290,13 @@ public class CompatSpritesHelper {
 
         // -------------------- Dawn Of The Time: Builder Edition
         //REASON: the planks is actually being treated as a log instead of a planks
-        addOptional("dawnoftimebuilder:waxed_oak_planks", "_side", "dawnoftimebuilder:block/waxed_oak_planks");
-        addOptional("dawnoftimebuilder:waxed_oak_planks", "_top", "dawnoftimebuilder:block/waxed_oak_planks");
-        addOptional("dawnoftimebuilder:charred_spruce_planks", "_side", "dawnoftimebuilder:block/charred_spruce_planks");
-        addOptional("dawnoftimebuilder:charred_spruce_planks", "_top", "dawnoftimebuilder:block/charred_spruce_planks");
+        addOptional("dawnoftimebuilder:waxed_oak_planks", "all", "dawnoftimebuilder:block/waxed_oak_planks");
+        addOptional("dawnoftimebuilder:charred_spruce_planks", "all", "dawnoftimebuilder:block/charred_spruce_planks");
 
         // -------------------- Shadowlands
         addOptional("shadowlands:vellium_log", "_side", "shadowlands:block/velliumlogside");
         addOptional("shadowlands:vellium_log", "_top", "shadowlands:block/log");
-        addOptional("shadowlands:vellium_planks", "_all", "shadowlands:block/velliumplanks");
+        addOptional("shadowlands:vellium_planks", "all", "shadowlands:block/velliumplanks");
         // Leaves
         addOptional("shadowlands:vellium_leaves", "_top", "shadowlands:block/velliumleaves");
 
@@ -433,6 +431,9 @@ public class CompatSpritesHelper {
         addOptional("vinery:dark_cherry", "_leaves", "vinery:block/dark_cherry_leaves");
 
         // -------------------- The Twilight Forest
+        //TODO: temp & remove later when Moonlight-Lib is fixed
+        addOptional("twilightforest", "mangrove_planks", "all", "block/wood/planks_mangrove_1"); //REASON: planks_mangrove_3 somehow caused Index 0 out of bounds for length 0
+
         // Leaves
         addOptional("twilightforest:beanstalk_leaves", "_leaves", "minecraft:block/azalea_leaves");
         addOptional("twilightforest:thorn_leaves", "_leaves", "minecraft:block/oak_leaves");
