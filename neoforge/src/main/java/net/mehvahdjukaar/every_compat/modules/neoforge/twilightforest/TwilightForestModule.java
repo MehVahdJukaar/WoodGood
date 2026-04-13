@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.Block;
@@ -41,7 +42,7 @@ public class TwilightForestModule extends EveryCompatModule {
 
     public TwilightForestModule(String modId) {
         super(modId, "tf");
-        Supplier<CreativeModeTab> tab = getTab(modRes("blocks"));
+        Supplier<CreativeModeTab> tab = getTab(CreativeModeTabs.BUILDING_BLOCKS);
 
         banisters = SimpleEntrySet.builder(WoodType.class, "banister",
                         TFBlocks.OAK_BANISTER, () -> VanillaWoodTypes.OAK,
