@@ -16,6 +16,19 @@
 
 </div>
 
+### CHANGS:
+- **The Twilight Forest** (NF): Updated the Creative Tab's resourcelocation
+
+### ADDS: 
+- **Farmer's Delight**: Updated cabinet's textures with **Darker Depths**  - @Derp via Discord (Ported from 1.20)
+
+### DISABLED:
+- **Workshop For Handsome Adventurer** - At DEV's request & it's not 100% compatible with **EveryCompat**
+
+---
+
+## v2.11.37
+
 ### FIXES: 
 - **The Twilight Forest** (NF): Fixed the tags not being loaded for all blocks. - [#1226](https://github.com/MehVahdJukaar/WoodGood/issues/1226)
   - MORE DETAIL: in TwilightForest Module, a code was trying to add an ITEM to a tag meant for BLOCKS and this caused the tags to be not loaded when loading into the world
