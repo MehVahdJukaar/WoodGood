@@ -18,6 +18,17 @@
 
 <br>
 
+### CHANGES: 
+- **Every Compat** (EXCLUDED): **The Twilight Forest's mangrove** with **The Twilight Forest's hollow_log** - Updated the code to prevent the duplicated block
+- **Building But Better** (C): Updated to support `v2.0pre4` - [BBB#76](https://github.com/starfish-studios/Building-But-Better/issues/78)
+
+### DISABLED:
+- **Workshop For Handsome Adventurer** - At DEV's request & it's not 100% compatible with **EveryCompat**
+
+---
+
+## v2.9.19
+
 ### FIXES:
 - **Macaw's Doors** (FB): Fixed the outdated ResourceLocation for Creative Tab.
   - NEOFORGE is fine as is.
