@@ -22,7 +22,6 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.CreativeModeTab;
@@ -348,8 +347,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         }
 
         public SimpleEntrySet<T, B> build() {
-            if (tab == null && PlatHelper.isDev()) {
-                throw new IllegalStateException("Tab for module " + name + " was null!");
+            if (addToTab && tab == null && PlatHelper.isDev()) {
+                throw new IllegalStateException("Tab for: " + getEntryName() + " was null!");
             }
             var e = new SimpleEntrySet<>(type, name, prefix, blockFactory, baseBlock, baseType, tab, tabMode, lootMode,
                     itemFactory, tileHolder, renderType, null, extraModelTransform, useMergedPalette, copyTint, condition,
@@ -366,6 +365,11 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                 }
             }
             return e;
+        }
+
+        public String getEntryName() {
+            String prefix_ = (prefix != null) ? prefix + "_": "";
+            return prefix_ + name;
         }
 
         public <H extends BlockEntity> Builder<T, B> addTile(String idTile) {

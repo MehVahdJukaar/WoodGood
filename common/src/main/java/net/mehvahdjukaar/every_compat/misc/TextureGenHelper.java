@@ -134,7 +134,7 @@ public class TextureGenHelper {
                     for (var info : infoPerTextures.get(oldTextureId)) {
 
                         // return the texture of: WoodType: Planks, StoneType: stone, LeavesType: leaves
-                        var pal = Objects.requireNonNull(info).paletteStrategy().getPaletteAndAnimation(blockType, manager);
+                        var pal = info.paletteStrategy().getPaletteAndAnimation(blockType, manager);
                         McMetaFile targetAnimation = pal.animation();
                         List<Palette> targetPalette = pal.palette();
 
@@ -142,6 +142,7 @@ public class TextureGenHelper {
                         int oldSize = targetPalette.getFirst().size();
 
                         if (oldSize != targetPalette.getFirst().size()) {
+                            EveryCompat.LOGGER.error("TextureGenHelper Failture: {} with {}", oldTextureId, pal.id());
                             throw new RuntimeException("This should not happen. A palette of size 0 was found");
                         }
 

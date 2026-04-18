@@ -35,7 +35,7 @@ import java.util.function.Supplier;
 
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.createAndAddCustomTags;
 
-//SUPPORT: v0.5.7+
+///SUPPORT: v0.5.7+
 public abstract class RegionsUnexploredModuleAbstract extends EveryCompatModule {
     public final BlockBehaviour.Properties BRANCH_PROPERTIES = BlockBehaviour.Properties.of().noOcclusion().sound(SoundType.MANGROVE_ROOTS).strength(1.0F, 1.5F).dynamicShape();
     public final BlockBehaviour.Properties SHRUB_PROPERTIES = BlockBehaviour.Properties.of().pushReaction(PushReaction.DESTROY).noCollission().instabreak().sound(SoundType.AZALEA).offsetType(BlockBehaviour.OffsetType.XZ);
@@ -231,9 +231,5 @@ public abstract class RegionsUnexploredModuleAbstract extends EveryCompatModule 
             }
 
         });
-    }
-
-    public void createRecipe(WoodType woodType) {
-
     }
 }

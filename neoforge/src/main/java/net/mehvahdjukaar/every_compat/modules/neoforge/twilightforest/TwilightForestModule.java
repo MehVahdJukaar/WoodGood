@@ -11,7 +11,9 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.Block;
@@ -40,15 +42,16 @@ public class TwilightForestModule extends EveryCompatModule {
 
     public TwilightForestModule(String modId) {
         super(modId, "tf");
-        Supplier<CreativeModeTab> tab = getTab(modRes("blocks"));
+        Supplier<CreativeModeTab> tab = getTab(CreativeModeTabs.BUILDING_BLOCKS);
 
         banisters = SimpleEntrySet.builder(WoodType.class, "banister",
                         TFBlocks.OAK_BANISTER, () -> VanillaWoodTypes.OAK,
                         w -> new BanisterBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
                 )
                 //TEXTURES: planks
-                .addTag(modRes("banisters"), Registries.BLOCK)
-                .addTag(modRes("banisters"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("mineable_with_block_and_chain"), Registries.BLOCK)
+                .addTag(modRes("banisters"), Registries.BLOCK, Registries.ITEM)
                 .addRecipe(modRes("wood/oak_banister"))
                 .copyParentDrop()
                 .setTab(tab)
@@ -61,7 +64,10 @@ public class TwilightForestModule extends EveryCompatModule {
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: Textures
                 //TEXTURES: stripped_log
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("mineable_with_block_and_chain"), Registries.BLOCK)
                 .addTag(modRes("hollow_logs_horizontal"), Registries.BLOCK)
+                .addTag(modRes("hollow_logs"), Registries.BLOCK)
                 .noItem().noTab() //REASON: it's using the hollow_log's tab/item as the main
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
@@ -75,7 +81,10 @@ public class TwilightForestModule extends EveryCompatModule {
                         })
                 .requiresChildren(STRIPPED_LOG) //REASON: Textures
                 //TEXTURES: stripped_log
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("mineable_with_block_and_chain"), Registries.BLOCK)
                 .addTag(modRes("hollow_logs_vertical"), Registries.BLOCK)
+                .addTag(modRes("hollow_logs"), Registries.BLOCK)
                 .noItem().noTab() //REASON: it's using the hollow_log's tab/item as the main
                 .addRecipe(modRes("stonecutting/birch_log/hollow_birch_log"))
                 .build();
@@ -89,7 +98,12 @@ public class TwilightForestModule extends EveryCompatModule {
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: Textures
                 //TEXTURES: stripped_log
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
+                .addTag(BlockTags.FALL_DAMAGE_RESETTING, Registries.BLOCK)
+                .addTag(modRes("mineable_with_block_and_chain"), Registries.BLOCK)
                 .addTag(modRes("hollow_logs_climbable"), Registries.BLOCK)
+                .addTag(modRes("hollow_logs"), Registries.BLOCK)
                 .noItem().noTab() //REASON: it's using the hollow_log's tab/item as the main
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
@@ -108,7 +122,6 @@ public class TwilightForestModule extends EveryCompatModule {
                 .requiresFromMap(hollow_log_climbable.blocks)
                 .setTab(tab)
                 //TEXTURES: stripped_log
-                .addTag(modRes("hollow_logs_climbable"), Registries.BLOCK)
                 .build();
         this.addEntry(hollow_log);
 

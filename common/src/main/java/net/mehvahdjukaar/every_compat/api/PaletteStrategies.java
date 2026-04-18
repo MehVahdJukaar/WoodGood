@@ -7,6 +7,7 @@ import net.mehvahdjukaar.moonlight.api.resources.textures.SpriteUtils;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -167,37 +168,41 @@ public class PaletteStrategies {
                                                                                                  @Nullable Consumer<Palette> paletteTransform) {
         var child = blockType.getChild(childKey);
         /// BLOCK
-        if (child instanceof Block b) {
+        if (child instanceof Block block) {
             if (whichSide != null) { /// PaletteSupplier: childkey with whichSide - example: log_side or log_top
                 try (TextureImage blockTexture = TextureImage.open(m,
-                        RPUtils.findFirstBlockTextureLocation(m, b, whichSide))) {
+                        RPUtils.findFirstBlockTextureLocation(m, block, whichSide))
+                ) {
+                    ResourceLocation textureId = RPUtils.findFirstBlockTextureLocation(m, block, whichSide);
 
                     List<Palette> targetPalette = Palette.fromAnimatedImage(blockTexture);
                     if (paletteTransform != null) targetPalette.forEach(paletteTransform);
-                    return PaletteStrategy.PaletteAndAnimation.of(targetPalette, blockTexture.getMcMeta());
+                    return PaletteStrategy.PaletteAndAnimation.of(targetPalette, blockTexture.getMcMeta(), textureId);
                 } catch (Exception e) {
                     throw new RuntimeException(String.format("Failed to generate palette for %s : %s", blockType, e));
                 }
             } else { /// default PaletteSupplier: planks
-                try (TextureImage plankTexture = TextureImage.open(m,
-                        RPUtils.findFirstBlockTextureLocation(m, b))) {
+                try (TextureImage plankTexture = TextureImage.open(m, RPUtils.findFirstBlockTextureLocation(m, block))) {
+
+                    ResourceLocation textureId = RPUtils.findFirstBlockTextureLocation(m, block);
 
                     List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
                     if (paletteTransform != null) targetPalette.forEach(paletteTransform);
-                    return PaletteStrategy.PaletteAndAnimation.of(targetPalette, plankTexture.getMcMeta());
+                    return PaletteStrategy.PaletteAndAnimation.of(targetPalette, plankTexture.getMcMeta(), textureId);
                 } catch (Exception e) {
                     throw new RuntimeException(String.format("Failed to generate palette for %s : %s", blockType, e));
                 }
             }
             /// ITEM
-        } else if (child instanceof Item i) {
+        } else if (child instanceof Item item) {
             /// Default PaletteSupplier: planks
-            try (TextureImage plankTexture = TextureImage.open(m,
-                    RPUtils.findFirstItemTextureLocation(m, i))) {
+            try (TextureImage plankTexture = TextureImage.open(m, RPUtils.findFirstItemTextureLocation(m, item))) {
+
+                ResourceLocation textureId = RPUtils.findFirstItemTextureLocation(m, item);
 
                 List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
                 if (paletteTransform != null) targetPalette.forEach(paletteTransform);
-                return PaletteStrategy.PaletteAndAnimation.of(targetPalette, plankTexture.getMcMeta());
+                return PaletteStrategy.PaletteAndAnimation.of(targetPalette, plankTexture.getMcMeta(), textureId);
             } catch (Exception e) {
                 throw new RuntimeException(String.format("Failed to generate palette for %s : %s", blockType, e));
             }

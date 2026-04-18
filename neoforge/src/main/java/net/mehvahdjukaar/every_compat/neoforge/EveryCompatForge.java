@@ -41,7 +41,6 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.unusual_furniture.Unusual
 import net.mehvahdjukaar.every_compat.modules.neoforge.valhelsia.ValhelsiaStructuresModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.variants.VariantCraftingTablesModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.woodster.WoodsterModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.workshop.WorkshopForHandsomeAdventurerModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.xerca.XercaModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
@@ -136,7 +135,7 @@ public class EveryCompatForge extends EveryCompatCommon {
             addOptionalModule("vct", () -> VariantCraftingTablesModule.class);
             addOptionalModule("woodster", () -> WoodsterModule.class);
             addOptionalModule("woodworks", () -> WoodworksModule.class);
-            addOptionalModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule.class);
+//            addOptionalModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule.class); //REASON: Not 100% compatible & CreativeTab key is outdated but even it's correct & will still crash
             addOptionalModule("xercamod", () -> XercaModule.class);
 
             //REASON: There are 2 mods with the same modId but has different group_id. only Beautify! (Beautify Decorate) is applied
