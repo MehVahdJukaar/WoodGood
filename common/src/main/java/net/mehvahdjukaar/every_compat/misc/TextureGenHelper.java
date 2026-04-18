@@ -28,11 +28,11 @@ import java.util.*;
 public class TextureGenHelper {
 
     //TODO: this is unmanageable. needs to be split in smaller manageable bits and commented better
-    public static <T extends BlockType> void generateDefault(ResourceSink sink, ResourceManager manager,
+    public static <T extends BlockType, O extends ItemLike> void generateDefault(ResourceSink sink, ResourceManager manager,
                                                              String modId,
                                                              Set<TextureInfo> textureInfos, T baseType,
                                                              boolean mergePalette,
-                                                             Map<T, ?> entries) throws Exception {
+                                                             Map<T, O> entries) throws Exception {
 
         List<TextureImage> imagesToClose = new ArrayList<>();
 
@@ -106,7 +106,7 @@ public class TextureGenHelper {
             }
             /// Swapping out the old palettes of the texture with new palettes
             for (var entry : entries.entrySet()) {
-                Object block = entry.getValue();
+                ItemLike block = entry.getValue();
                 T blockType = entry.getKey();
                 // skips disabled ones
                 // actually we dont otherwise we get mission texture log spam. TODO: replace models with empty dummy instead

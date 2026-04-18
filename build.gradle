@@ -459,9 +459,6 @@ ext {
 }
 
 
-
-
-
 tasks.register('buildAndPublishAll') {
     dependsOn ':clean'
     dependsOn ':common:clean'

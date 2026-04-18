@@ -31,6 +31,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -69,6 +70,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     public final String prefix;
     protected final boolean mergePalette;
 
+    @Nullable
     private final Supplier<Holder<CreativeModeTab>> tab;
     protected final TabAddMode tabMode;
     protected final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
@@ -84,7 +86,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     protected AbstractSimpleEntrySet(Class<T> type,
                                      String name, @Nullable String prefix,
                                      Supplier<T> baseType,
-                                     Supplier<Holder<CreativeModeTab>> tab,
+                                     @Nullable Supplier<Holder<CreativeModeTab>> tab,
                                      TabAddMode tabMode,
                                      BiFunction<T, ResourceManager, PaletteStrategy.PaletteAndAnimation> paletteSupplier,
                                      @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
@@ -176,9 +178,6 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     @Override
     public void registerItemsToExistingTabs(SimpleModule module, RegHelper.ItemToTabEvent event) {
         if (tab == null) {
-            if (PlatHelper.isDev()) {
-                throw new UnsupportedOperationException("Creative tab cant be null. Found null one for entry set: " + Utils.getID(this.getBaseType()).toString());
-            }
             return;
         }
         Holder<CreativeModeTab> tabHolder = getTab();
@@ -283,8 +282,8 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         return t;
     }
 
-    public Map<T, ?> getDefaultEntries() {
-        return blocks;
+    public Map<T, ItemLike> getDefaultEntries() {
+        return (Map) blocks;
     }
 
     @Override
