@@ -54,6 +54,13 @@ itemIcon="minecraft:oak_planks" #catalogue icon
 # ======================================================== MODS ====================================================== #
 
 [[dependencies.everycomp]]
+    modId="storagedrawers"
+    mandatory=false
+    versionRange="[10.3.0,]"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.everycomp]]
     modId="projectbrazier"
     mandatory=false
     versionRange="[0.6.2,]"
