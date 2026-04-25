@@ -47,6 +47,7 @@ public class SimpleModule extends CompatModule {
         this.shortId = shortId;
     }
 
+    /// Adding extra info to {@link SimpleModule#toString()}
     public void setBlockType(String blockType) {
         this.blockType = blockType;
     }
@@ -78,7 +79,7 @@ public class SimpleModule extends CompatModule {
         }
         this.affectedTypes.add(entryHolder.getTypeClass());
         //ugly
-        EveryCompat.trackChildType(entryHolder.getTypeClass(), entryHolder.getChildKey(this));
+        EveryCompat.trackChildType(entryHolder.getTypeClass(), entryHolder.makeChildKey(this));
         return entryHolder;
     }
 
