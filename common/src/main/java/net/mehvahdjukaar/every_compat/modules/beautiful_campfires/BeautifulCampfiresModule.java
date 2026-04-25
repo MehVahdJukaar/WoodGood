@@ -62,7 +62,8 @@ public class BeautifulCampfiresModule extends EveryCompatModule {
                 .addTextureM(modRes("item/acacia_soul_campfire"), EveryCompat.res("item/bc/campfire_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.CAMPFIRES, Registries.BLOCK)
-                .setTab(getTab(tab))                //RECIPES: Manully created below
+                .setTab(getTab(tab))
+                //RECIPES: Manully created below
                 .build();
         this.addEntry(campfires);
 
@@ -133,15 +134,10 @@ public class BeautifulCampfiresModule extends EveryCompatModule {
             recipe.getAsJsonObject("key").getAsJsonObject("L")
                     .addProperty("tag", getATagOrCreateANew("logs", "caps", woodType, sink, manager).toString());
 
-            recipe.getAsJsonObject("result").addProperty("item", Utils.getID(output).toString());
+            recipe.getAsJsonObject("result").addProperty("id", Utils.getID(output).toString());
 
             // Adding to resources
-            sink.addJson(
-                    EveryCompat.res(shortenedId() +"/"+ woodType.getAppendableId() +"_"+ recipeName),
-                    recipe,
-                    ResType.RECIPES
-            );
-
+            sink.addJson(EveryCompat.res(woodType.createPathWith(shortenedId(), recipeName)), recipe, ResType.RECIPES);
         }
         catch (IOException e) {
             EveryCompat.LOGGER.error("Failed to generate the {} recipe for {} : {}", recipeName, woodType.getId(), e);
