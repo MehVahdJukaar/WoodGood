@@ -37,6 +37,7 @@ public abstract class CompatModule {
     protected final String modId;
     protected final String modName; //readable name
     protected final String shortId;
+    protected String blockType = "";
 
     //EC or addon namespace
     private final String myNamespace;
@@ -105,9 +106,15 @@ public abstract class CompatModule {
         return shortId;
     }
 
+    /// Adding extra info to {@link CompatModule#toString()}
+    public void setBlockType(String blockType) {
+        this.blockType = blockType;
+    }
+
     @Override
     public String toString() {
-        return "module[ " + getModName() + " @ " + getMyNamespace() + " ]";
+        String typeOrEmpty = (!blockType.isEmpty()) ? "'s " + blockType : "";
+        return "module[ " + getModName() + typeOrEmpty + " @ " + getMyNamespace() + " ]";
     }
 
     public ResourceLocation modRes(String string) {

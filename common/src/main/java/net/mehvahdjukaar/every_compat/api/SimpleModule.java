@@ -62,7 +62,7 @@ public class SimpleModule extends CompatModule {
         }
         this.affectedTypes.add(entrySet.getTypeClass());
         //ugly
-        EveryCompat.trackChildType(entrySet.getTypeClass(), entrySet.getChildKey(this));
+        EveryCompat.trackChildType(entrySet.getTypeClass(), entrySet.makeChildKey(this));
         return entrySet;
     }
 
