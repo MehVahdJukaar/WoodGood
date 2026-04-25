@@ -92,7 +92,6 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
                         this.items.put(blockType, item);
 
                         blockType.addChild(childKey, item);
-                        totalChildren++;
                     } catch (Exception e){
                         throw new UnsupportedOperationException("Failed to create or register item of " + blockType.getTranslationKey() + " with an EntrySetId: " + childKey + ". ERROR: " + e);
                     }

@@ -49,8 +49,6 @@ import static net.mehvahdjukaar.every_compat.misc.UtilityTag.addTagToAllBlocks;
 @SuppressWarnings({"unused"})
 public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Block, I extends Item> implements EntrySet<T> {
 
-    public static int totalChildren = 0;
-
     protected static final ResourceLocation NO_TAB_MARKER = new ResourceLocation("none");
 
     public final Map<T, B> blocks = new HashMap<>();
