@@ -1,10 +1,10 @@
 package net.mehvahdjukaar.every_compat.misc;
 
-import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Set;
 
 import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.*;
@@ -19,6 +19,51 @@ public class HardcodedBlockType {
     public static String supportedMod;
     public static String supportedBlockName;
 
+    public static final List<String> FRAMED_BLOCKS_SUFFIX = List.of(
+
+            // Slabs
+            "slab", "slab_edge", "slab_corner",
+            "divided_slab", "adj_double_slab", "adj_double_copycat_slab",
+            "centered_slab", "pyramid_slab", "checkered_slab",
+
+            // Stairs
+            "stairs", "double_stairs", "half_stairs",
+            "divided_stairs", "double_half_stairs", "sliced_stairs_panel",
+            "vertical_stairs", "vertical_double_stairs", "vertical_half_stairs",
+            "vertical_divided_stairs", "vertical_double_half_stairs", "vertical_sliced_stairs",
+            "sliced_stairs_slab", "vertical_sloped_stairs",
+
+            // Walls
+            "wall", "floor_board", "wall_board",
+
+            // Fences & Gates
+            "fence", "fence_gate", "gate", "iron_gate",
+
+            // Panels
+            "panel", "divided_panel_horizontal", "divided_panel_vertical", "centered_panel",
+
+            // Pillars & Posts
+            "pillar", "half_pillar", "post",
+            "corner_pillar", "threeway_corner_pillar", "double_threeway_corner_pillar",
+
+            // Buttons, Levers & Plates
+            "pressure_plate", "large_button", "lever",
+
+            // Torches
+            "torch", "soul_torch", "redstone_torch",
+            "wall_torch", "soul_wall_torch", "redstone_wall_torch",
+
+            // Chests & Storage
+            "chest", "secret_storage",
+
+            // Misc blocks
+            "cube", "bouncy_cube", "glowing_cube",
+            "pyramid", "bookshelf", "chiseled_bookshelf",
+            "flower_pot", "item_frame", "glowing_item_frame",
+            "ladder", "bars", "pane",
+            "horizontal_pane"
+    );
+
     @Nullable
     public static Boolean isWoodBlockAlreadyRegistered(String entrySetId, String blockName, WoodType woodType, String supportedModId) {
         woodTypeFromMod = woodType.getNamespace();
@@ -28,14 +73,7 @@ public class HardcodedBlockType {
 
         String blockId = supportedModId +"/"+ woodTypeFromMod +"/"+ blockName;
 
-        /// ─────────────────────────── Include Vanilla Type ────────────────────────────
-        // Dawn-Of-Time's fancy-fence only has birch but no other vanilla variants
-        if (isWoodFrom("dawnoftimebuilder", "", "minecraft:(oak|acacia|jungle|dark_oak|spruce|mangrove|cherry)", "fancy_fence")) return false;
-
-        // Chipped's glass & glass_panes has no Vanilla WoodTypes except OAK
-        if (isWoodFrom("chipped", "", "minecraft:(acacia|birch|jungle|dark_oak|spruce|mangrove|cherry)", "\\w+_glass(_pane)?")) return false;
-
-        /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ EXCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ SPECIAL EXCLUSION ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
         // Exclude one WoodType from a Wood Mod
         if (WOOD_TYPES_BLACKLIST.get().stream().anyMatch(woodidentify::matches)) return true;
@@ -46,14 +84,24 @@ public class HardcodedBlockType {
         // Exclude one EntrySet from a module
         if (ENTRY_SETS_BLACKLIST.get().stream().anyMatch(entrySetId::matches)) return true;
 
+        /// ─────────────────────────── Include Vanilla Type ────────────────────────────
+        // Dawn-Of-Time's fancy-fence only has birch but no other vanilla variants
+        if (isWoodFrom("dawnoftimebuilder", "", "minecraft:(oak|acacia|jungle|dark_oak|spruce|mangrove|cherry)", "fancy_fence")) return false;
+
+        // Chipped's glass & glass_panes has no Vanilla WoodTypes except OAK
+        if (isWoodFrom("chipped", "", "minecraft:(acacia|birch|jungle|dark_oak|spruce|mangrove|cherry)", "\\w+_glass(_pane)?")) return false;
+
+        /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ EXCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
         // Exclude all of Vanilla Types that we know of. Excludes other mc namespaced added by mods
         if (isKnownVanillaWood(woodType)) return true;
 
+        // Marvelous Menagerie Paradoxical's calamites_log is a 8x8 log and its texture won't work with supported-mod that directly use the textures
+        if (isWoodFrom("mcwfences|mcwstairs", "", "marvelous_menagerie:calamites", "")) return true;
+        if (isWoodFrom("quark", "", "marvelous_menagerie:calamites", "hollow_calamites_log")) return true;
+
         // The WoodType from Cobblemon's Legendary Monuments has a 32x32 texture
         if (isWoodFrom("", "", "legendarymonuments:distortion", "")) return true;
-
-        // Supported Mods that have supportedBlockId should be excluded due to FramedBlocks
-        if (isWoodFrom("", "", "", "torch") && PlatHelper.isModLoaded("framedblocks")) return true;
 
         // Nature's-Spirit's joshua texture is a 8x8, it's currently excluded in Valhelaia-Structure for now - the texture generation could be improved
         if (isWoodFrom("valhelsia_structures", "", "natures_spirit:joshua", "")) return true;
@@ -76,7 +124,7 @@ public class HardcodedBlockType {
         if (isWoodFrom("refurbished_furniture", "", "dawnoftimebuilder:waxed_oak", "")) return false;
 
         // Minecraft has "mangrove" that caused the generation of blocks with The-Twilight-Forest's mangrove to be skipped.
-        if (isWoodFrom("", "", "twilightforest:mangrove", "")) return false;
+        if (isWoodFrom("\\b(?!twilightforest).*", "", "twilightforest:mangrove", "")) return false;
 
         // Quark's chests & ladders aren't generated with Abnormal's Wood mods | Quark's blocks with Caverns-And-Chasms' AZALEA aren't generated due to Quark's AZALEA
         if (isWoodFrom("quark", "upgrade_aquatic|autumnity|atmospheric|environmental|caverns_and_chasms", "", "")) return false;

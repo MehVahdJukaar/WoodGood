@@ -131,7 +131,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                         if (lootMode == LootTableMode.DROP_SELF && YEET_JSONS) {
                             SIMPLE_DROPS.add(block);
                         }
-                        totalChildren++;
                     } catch (Exception e) {
                         throw new UnsupportedOperationException("Failed to create or register block of " + blockType.getTranslationKey() + " with an EntrySetId: " + childKey + ". ERROR: " + e);
                     }

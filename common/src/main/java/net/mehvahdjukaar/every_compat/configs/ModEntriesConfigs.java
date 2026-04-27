@@ -6,10 +6,12 @@ import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigSpec;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -22,6 +24,9 @@ public class ModEntriesConfigs {
 
     public static ConfigSpec SPEC;
     private static boolean wasInit = false;
+    private static boolean logOnce = false;
+    private static final ArrayList<ResourceLocation> loggedBlockType = new ArrayList<>();
+    private static final ArrayList<String> loggedChildType = new ArrayList<>();
 
     // default as we are initializing it late
 
@@ -86,7 +91,14 @@ public class ModEntriesConfigs {
         Class<? extends BlockType> typeClass = blockType.getClass();
         Map<String, Supplier<Boolean>> childConfigs = CHILD_CONFIGS.get(typeClass);
         if (childConfigs == null) {
-            EveryCompat.LOGGER.warn("No config map found for block type: {}", typeClass.getName());
+            if (!logOnce) {
+                EveryCompat.LOGGER.warn("==> This meant you have no Supported Mod installed. <==");
+                logOnce = true;
+            }
+            if (!loggedChildType.contains(childType)) {
+                EveryCompat.LOGGER.warn("No ChildType config map found for: {}", childType);
+                loggedChildType.add(childType);
+            }
             return true;
         }
         if (childType != null && !childConfigs.getOrDefault(childType, () -> true).get()) {
@@ -94,7 +106,14 @@ public class ModEntriesConfigs {
         }
         Map<String, Supplier<Boolean>> blocktypeConfigs = BLOCK_TYPE_CONFIGS.get(typeClass);
         if (blocktypeConfigs == null) {
-            EveryCompat.LOGGER.warn("No config map found for block type: {}", typeClass.getName());
+            if (!logOnce) {
+                EveryCompat.LOGGER.warn("==> This meant you have no BlockType Mod (Wood, Stone, & Others) installed. <==");
+                logOnce = true;
+            }
+            if (!loggedBlockType.contains(blockType.getId())) {
+                EveryCompat.LOGGER.warn("No BlockType config map found for {} - {}", typeClass.getName().substring(typeClass.getName().lastIndexOf(".") + 1), blockType.getId());
+                loggedBlockType.add(blockType.getId());
+            }
             return true;
         }
 
@@ -104,4 +123,11 @@ public class ModEntriesConfigs {
         return true; // Vanilla BlockTypes that will have null value in booleanSupplier
     }
 
+    public static Map<String, Supplier<Boolean>> getChildConfigs(Class<? extends BlockType> blockType) {
+        return CHILD_CONFIGS.get(blockType);
+    }
+
+    public static Map<String, Supplier<Boolean>> getBlockTypeConfigs(Class<? extends BlockType> blockType) {
+        return BLOCK_TYPE_CONFIGS.get(blockType);
+    }
 }

@@ -15,7 +15,6 @@ import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -341,7 +340,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     public void onModSetup() {
         super.onModSetup();
 
-        // POI & ACQUIREABLE_JOB //!! Dont use below until the problem is fixed
+        // POI & ACQUIREABLE_JOB //!! Dont use below until the problem is fixed - REASON: crashed upon creating a world or loading a world, cause is unknown
         /*
         RegHelper.addBlocksToPOI(PoiTypes.BEEHIVE, beehive.blocks.values());
         RegHelper.addBlocksToPOI(PoiTypes.LIBRARIAN, lectern.blocks.values());

@@ -49,7 +49,7 @@ public class TextureGenHelper {
 
             Multimap<ResourceLocation, TextureInfo> infoPerTextures = ArrayListMultimap.create();
 
-            /// Adding multiple textures from one block into Respriter without/with mask & infoPerTextures
+            ///STAGE-0: Adding multiple textures from one block into Respriter without/with mask & infoPerTextures
             for (TextureInfo textureInfo : textureInfos) {
                 ResourceLocation textureId = textureInfo.texture();
 
@@ -60,20 +60,20 @@ public class TextureGenHelper {
                     infoPerTextures.put(textureId, textureInfo);
 
                     if (textureInfo.copyTexture()) {
-                        respriters.put(textureId, Respriter.ofPalette(main, List.of(Palette.ofColors(List.of(new RGBColor(0))))));
+                        respriters.put(textureId, Respriter.ofPalette(main, Palette.ofColors(Set.of(new RGBColor(0)))));
                     } else {
                         imagesToClose.add(main);
 
                         if (maskId != null) {
                             TextureImage mask;
-                            if (textureInfo.autoMask()) {
-                                if (mergePalette) {
-                                    globalPalette.addAll(oakPlanksPalette);
-                                    partialRespriters.put(textureId, main);
-                                } else {
-                                    respriters.put(textureId, Respriter.ofPalette(main, oakPlanksPalette));
-                                }
-                            } else {
+//                            if (textureInfo.autoMask()) {
+//                                if (mergePalette) {
+//                                    globalPalette.addAll(oakPlanksPalette);
+//                                    partialRespriters.put(textureId, main);
+//                                } else {
+//                                    respriters.put(textureId, Respriter.ofPalette(main, oakPlanksPalette));
+//                                }
+//                            } else {
                                 mask = TextureImage.open(manager, maskId);
                                 if (mergePalette) {
                                     globalPalette.addAll(Palette.fromImage(main, mask, 0));
@@ -81,7 +81,7 @@ public class TextureGenHelper {
                                 } else {
                                     respriters.put(textureId, Respriter.masked(main, mask));
                                 }
-                            }
+//                            }
 
                         } else {
                             if (mergePalette) {
@@ -100,10 +100,12 @@ public class TextureGenHelper {
                 }
             }
 
+            ///STAGE-1
             for (var e : partialRespriters.entrySet()) {
                 respriters.put(e.getKey(), Respriter.ofPalette(e.getValue(), globalPalette));
             }
-            /// Swapping out the old palettes of the texture with new palettes
+
+            ///STAGE-2A: Swapping out the old palettes of the texture with new palettes
             for (var entry : entries.entrySet()) {
                 Object block = entry.getValue();
                 T blockType = entry.getKey();
@@ -113,7 +115,7 @@ public class TextureGenHelper {
                 ResourceLocation blockId = Utils.getID(block);
 
 
-                /// Creating new Path to add the new textures via the resources
+                ///STAGE-2B: Creating new Path to add the new textures via the resources
                 for (var respriterSet : respriters.entrySet()) {
 
 
@@ -129,11 +131,11 @@ public class TextureGenHelper {
 
                     ResourceLocation newId;
 
-                    /// Adding the textures to the resource
+                    ///STAGE-2C: Generating the textures & Add it to the resource
                     for (var info : infoPerTextures.get(oldTextureId)) {
 
                         // return the texture of: WoodType: Planks, StoneType: stone, LeavesType: leaves
-                        var pal = Objects.requireNonNull(info).paletteStrategy().getPaletteAndAnimation(blockType, manager);
+                        var pal = info.paletteStrategy().getPaletteAndAnimation(blockType, manager);
                         McMetaFile targetAnimation = pal.animation();
                         List<Palette> targetPalette = pal.palette();
 

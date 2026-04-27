@@ -18,6 +18,42 @@
 
 <br>
 
+### CHANGES: 
+- **Every Compat** (EXCLUDED): **The Twilight Forest's mangrove** with **The Twilight Forest's hollow_log** - Updated the code to prevent the duplicated block
+- **Building But Better** (C): Updated to support `v2.0pre4` - [BBB#76](https://github.com/starfish-studios/Building-But-Better/issues/78)
+
+### DISABLED:
+- **Workshop For Handsome Adventurer** - At DEV's request & it's not 100% compatible with **EveryCompat**
+
+---
+
+## v2.9.19
+
+### FIXES:
+- **Macaw's Doors** (FB): Fixed the outdated ResourceLocation for Creative Tab.
+  - NEOFORGE is fine as is.
+
+### ADDS: 
+- **Every Compat** (C): Added a new config in `everycomp-hazardous.toml` with ENABLE_FRAMED_BLOCKS_BLACKLIST
+- **The Twilight Forest** (F): Added the missing tags to all blocks
+
+---
+
+## v2.9.18
+
+### CHANGES: 
+- **Feywild** (IT): Removed the entries for all of logs' ResourceLocation for textures as it's no longer needed
+- **Every Compat**
+  - (EXCLUDED): Excluded some blocks from supported mods if **Framed Blocks** is installed
+  - (OTHERS): Backported some codes from 1.21.1
+
+### FIXES
+- **Chipped** (C): Fixed the manual texture generation from failing to generate textures for blocks with **Productive Trees** - [#1995](https://github.com/MehVahdJukaar/WoodGood/issues/1995)
+
+---
+
+## v2.9.17
+
 ### UPDATED: 
 - **Every Compat** (C): Backported a feature from 1.21 that ensure the Blockstate files get modified and pointing at the correct model files for the blocks - [#1177](https://github.com/MehVahdJukaar/WoodGood/issues/1177)
   - Related to **Copper Age Backport**

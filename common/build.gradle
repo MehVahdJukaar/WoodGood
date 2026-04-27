@@ -22,13 +22,12 @@ dependencies {
 
     //- LOCAL
     if (enable_moonlight_test.toBoolean()) {
-        modImplementation(files(path + "\\Moonlight\\fabric\\build\\libs\\moonlight-$moonlight_testVersion-fabric.jar"))
+        modApi(files(path + "\\Moonlight\\common\\build\\libs\\moonlight-${moonlight_testVersion}.jar"))
     }
     //+ MAVEN
     else {
-        modApi("net.mehvahdjukaar:moonlight:$moonlight_mavenVersion"){
-            transitive = false
-        }
+        if (maven_backup.toBoolean()) modApi("maven.modrinth:moonlight:$moonlight_version-fabric")
+        else modApi("net.mehvahdjukaar:moonlight:$moonlight_version") { transitive = false }
     }
 
 
@@ -60,10 +59,10 @@ dependencies {
 
     //+ GENERAL
     modCompileOnly("curse.maven:another-furniture-610492:4815126")
-    modCompileOnly("curse.maven:backpacked-352835:5401968")
+    modCompileOnly("curse.maven:backpacked-352835:7624223")
     modCompileOnly("curse.maven:beautiful-campfires-1085950:6162183")
     modCompileOnly("curse.maven:blockus-312289:6256096")
-    modCompileOnly("curse.maven:building-but-better-989479:6803573")
+    modCompileOnly("curse.maven:building-but-better-989479:7627392")
     modCompileOnly("curse.maven:camp-chair-531744:4579679")
     modCompileOnly("curse.maven:chipped-456956:4634858") // v3.0.1
     modCompileOnly("curse.maven:create-fabric-624165:5982726")

@@ -22,7 +22,7 @@ import java.util.function.Consumer;
 ///      ┌──────────────────────────────────────────────────────────┐
 ///      │       WoodGoodModule using Twigs Mod as An Example       │
 ///      └──────────────────────────────────────────────────────────┘
-public class WoodGoodModule extends SimpleModule {
+public class WoodGoodModuleExample extends SimpleModule {
 
         /// For Blocks
         public final SimpleEntrySet<WoodType, Block> sampleBlock, sampleBlock_2;
@@ -30,7 +30,7 @@ public class WoodGoodModule extends SimpleModule {
         /// For Items
         public final ItemOnlyEntrySet<WoodType, Item> sampleItem;
 
-        public WoodGoodModule(String modId) {
+        public WoodGoodModuleExample(String modId) {
             // an example of shortened ID for TerraFirmaCraft is "tfc", so one for Twigs is "tw"
             super(modId, "tw");
 

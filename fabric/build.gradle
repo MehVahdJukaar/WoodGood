@@ -101,13 +101,12 @@ dependencies {
 
     //- LOCAL
     if (enable_moonlight_test.toBoolean()) {
-        modImplementation(files(path + "\\Moonlight\\fabric\\build\\libs\\moonlight-$moonlight_testVersion-fabric.jar"))
+        modApi(files(path + "\\Moonlight\\fabric\\build\\libs\\moonlight-$moonlight_testVersion-fabric.jar"))
     }
     //+ MAVEN
     else {
-        modApi("net.mehvahdjukaar:moonlight-fabric:$moonlight_mavenVersion:fabric"){
-            transitive = false
-        }
+        if (maven_backup.toBoolean()) modApi("maven.modrinth:moonlight:$moonlight_version-fabric")
+        else modApi("net.mehvahdjukaar:moonlight-fabric:$moonlight_version:fabric") { transitive = false }
     }
 
 
@@ -144,7 +143,7 @@ dependencies {
 //    modRuntimeOnly("io.github.tropheusj:milk-lib:1.3.61") // Create
 
     //+ REQUIRED - The modules access libraries from below - ONLY IN fABRIC
-    modCompileOnly("curse.maven:framework-549225:5911975") // v0.7.12 | Refurbished Furniture, Mighty Mail, Backpacked
+    modCompileOnly("curse.maven:framework-549225:7573737") // v0.8 | Refurbished Furniture, Mighty Mail, Backpacked
     modCompileOnly("curse.maven:quad-932715:5146132") // More Crafting Tables
     modCompileOnly("maven.modrinth:frozenlib:1.9.3-mc1.20.1") // Wilder-Wild
     modCompileOnly("curse.maven:valhelsia-core-416935:5376599") // Valhelsia-Furniture
@@ -163,7 +162,7 @@ dependencies {
 //!! ================================================== IMPORTS ===================================================== \\
     //- ONLY FOR TESTING - can be commented out or enabled
 //    modRuntimeOnly("curse.maven:another-furniture-610492:4815126") //
-//    modRuntimeOnly("curse.maven:backpacked-352835:5401968")
+//    modRuntimeOnly("curse.maven:backpacked-352835:7624223") // Framework
 //    modRuntimeOnly("curse.maven:blockus-312289:6256096") // Terraformermc-[Wood-APi, Shapes-API, Biolith]
 //    modRuntimeOnly("curse.maven:building-but-better-989479:5362379") // has a built-in module
 //    modRuntimeOnly("curse.maven:camp-chair-531744:4579676")
@@ -201,8 +200,8 @@ dependencies {
 
         // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5240495")
-    modCompileOnly("curse.maven:macaws-doors-378646:6146455")
-    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:6363061")
+    modCompileOnly("curse.maven:macaws-doors-378646:7618793")
+    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:7308361")
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:5450302")
     modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:5054857")
     modCompileOnly("curse.maven:macaws-roofs-352039:4590013")

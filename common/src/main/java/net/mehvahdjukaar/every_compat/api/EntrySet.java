@@ -20,8 +20,9 @@ public interface EntrySet<T extends BlockType> {
 
     String getName();
 
+    ///@deprecated use {@link EntrySet#makeChildKey(SimpleModule)}
     @Deprecated(forRemoval = true)
-    default String  getChildKey(SimpleModule module){
+    default String getChildKey(SimpleModule module){
         return makeChildKey(module);
     }
 

@@ -47,7 +47,6 @@ import net.mehvahdjukaar.every_compat.modules.forge.unusual_furniture.UnusualFur
 import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaStructuresModule;
 import net.mehvahdjukaar.every_compat.modules.forge.variants.VariantCraftingTablesModule;
 import net.mehvahdjukaar.every_compat.modules.forge.woodster.WoodsterModule;
-import net.mehvahdjukaar.every_compat.modules.forge.workshop.WorkshopForHandsomeAdventurerModule;
 import net.mehvahdjukaar.every_compat.modules.forge.xerca.XercaModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.network.forge.ChannelHandlerImpl;
@@ -156,7 +155,7 @@ public class EveryCompatForge extends EveryCompatCommon {
             addIfLoaded("vct", () -> VariantCraftingTablesModule::new);
             addIfLoaded("woodster", () -> WoodsterModule::new);
             addIfLoaded("woodworks", () -> WoodworksModule::new);
-            addIfLoaded("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new);
+//            addIfLoaded("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule::new); //REASON: Not 100% compatible
             addIfLoaded("xercamod", () -> XercaModule::new);
             addIfLoaded("youkaishomecoming", () -> YoukaisHomecomingModule::new);
 

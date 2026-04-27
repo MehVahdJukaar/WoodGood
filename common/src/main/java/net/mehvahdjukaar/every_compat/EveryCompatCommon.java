@@ -106,7 +106,8 @@ public class EveryCompatCommon {
             addIfLoaded("backpacked", () -> BackpackedModule::new);
             addIfLoaded("barkcarpets", () -> BarkCarpetsModule::new); // Exline's
             if (PlatHelper.isModLoaded("bbb")) {
-                if (PlatHelper.getModVersion("bbb").contains("2.0pre3"))
+                //noinspection DataFlowIssue
+                if (PlatHelper.getModVersion("bbb").matches("2.0pre\\d+"))
                     addIfLoaded("bbb", () -> BuildingButBetterModule::new);
             }
             addIfLoaded("beautifulcampfires", () -> BeautifulCampfiresModule::new);

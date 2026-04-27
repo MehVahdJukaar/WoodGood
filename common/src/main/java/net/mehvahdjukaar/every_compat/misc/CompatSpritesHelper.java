@@ -73,6 +73,10 @@ public class CompatSpritesHelper {
         addOptional("minecraft:mushroom_stem", "_side", "minecraft:block/mushroom_stem");
         addOptional("minecraft:mushroom_stem", "_top", "minecraft:block/mushroom_stem");
 
+        // -------------------- Marvelous Menagerie Paradoxical
+        addOptional("marvelous_menagerie", "calamites_log", "_side", "block/calamites_log"); // is a 8x8 log
+        addOptional("marvelous_menagerie", "calamites_log", "_top", "block/calamites_log"); // is a 8x8 log
+
         // -------------------- Frightful Winter
         // Leaves
         addOptional("natures_spirit", "joshua_leaves", "_leaves", "block/joshua_leaves"); // Was using joshua_ends.png
@@ -360,20 +364,6 @@ public class CompatSpritesHelper {
         // Leaves
         addOptional("dreamy_cottage:strawberry_leaves", "_leaves", "dreamy_cottage:block/whiteoakleaves");
         addOptional("dreamy_cottage:white_oak_leaves", "_leaves", "dreamy_cottage:block/whiteoakleaves");
-
-        // -------------------- Feywild
-        addOptional("feywild:spring_tree_log", "_side", "feywild:block/spring_tree_wood");
-        addOptional("feywild:spring_tree_log", "_top", "feywild:block/spring_tree_log");
-        addOptional("feywild:summer_tree_log", "_side", "feywild:block/summer_tree_wood");
-        addOptional("feywild:summer_tree_log", "_top", "feywild:block/summer_tree_log");
-        addOptional("feywild:autumn_tree_log", "_side", "feywild:block/autumn_tree_wood");
-        addOptional("feywild:autumn_tree_log", "_top", "feywild:block/autumn_tree_log");
-        addOptional("feywild:winter_tree_log", "_side", "feywild:block/winter_tree_wood");
-        addOptional("feywild:winter_tree_log", "_top", "feywild:block/winter_tree_log");
-        addOptional("feywild:blossom_tree_log", "_side", "feywild:block/blossom_tree_wood");
-        addOptional("feywild:blossom_tree_log", "_top", "feywild:block/blossom_tree_log");
-        addOptional("feywild:hexen_tree_log", "_side", "feywild:block/hexen_tree_wood");
-        addOptional("feywild:hexen_tree_log", "_top", "feywild:block/hexen_tree_log");
 
 
         // -------------------- Born In Chaos

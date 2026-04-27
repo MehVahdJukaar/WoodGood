@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.api;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
@@ -25,6 +26,8 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import java.util.*;
 import java.util.function.Consumer;
 
+import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.FRAMED_BLOCKS_SUFFIX;
+
 public class SimpleModule extends CompatModule {
 
     private final String shortId;
@@ -44,6 +47,7 @@ public class SimpleModule extends CompatModule {
         this.shortId = shortId;
     }
 
+    /// Adding extra info to {@link SimpleModule#toString()}
     public void setBlockType(String blockType) {
         this.blockType = blockType;
     }
@@ -75,7 +79,7 @@ public class SimpleModule extends CompatModule {
         }
         this.affectedTypes.add(entryHolder.getTypeClass());
         //ugly
-        EveryCompat.trackChildType(entryHolder.getTypeClass(), entryHolder.getChildKey(this));
+        EveryCompat.trackChildType(entryHolder.getTypeClass(), entryHolder.makeChildKey(this));
         return entryHolder;
     }
 
@@ -248,6 +252,9 @@ public class SimpleModule extends CompatModule {
 
         String slashConvention = woodTypeFrom + "/" + blockName; // quark/blossom_chair
         String underscoreConvention = woodTypeFrom + "_" + blockName; // quark_blossom_chair
+
+        // Excude Supported-Mods' blocks that are similar to blocks from Framed-Blocks
+        if (UnsafeDisablerConfigs.ENABLE_FRAMED_BLOCKS_BLACKLIST.get() && PlatHelper.isModLoaded("framedblocks") && FRAMED_BLOCKS_SUFFIX.stream().anyMatch(blockName::contains)) return true;
 
         // ugly hardcoded stuff
         if (blockType instanceof WoodType woodType) {

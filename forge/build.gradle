@@ -101,13 +101,12 @@ dependencies {
 
     //- LOCAL
     if (enable_moonlight_test.toBoolean()) {
-        modImplementation(files(path + "\\Moonlight\\forge\\build\\libs\\moonlight-$moonlight_testVersion-forge.jar"))
+        modApi(files(path + "\\Moonlight\\forge\\build\\libs\\moonlight-$moonlight_testVersion-forge.jar"))
     }
     //+ MAVEN
     else {
-        modApi("net.mehvahdjukaar:moonlight-forge:$moonlight_mavenVersion:forge"){
-            transitive = false
-        }
+        if (maven_backup.toBoolean()) modApi("maven.modrinth:moonlight:$moonlight_version-forge")
+        else modApi("net.mehvahdjukaar:moonlight-forge:$moonlight_version:forge") { transitive = false }
     }
 
 //!! TOOLS ========================================================================================================== \\
@@ -135,7 +134,6 @@ dependencies {
 //    modRuntimeOnly("curse.maven:rechiseled-558998:5286306") // Rechiseled @ ISN'T SUPPORTED YET
 //    modRuntimeOnly("curse.maven:curios-309927:6418456") // v5.14.1 | Malum, Aether, Ars-Nouveau
 //    modRuntimeOnly("curse.maven:lodestone-616457:5712854") // Malum
-//    modRuntimeOnly("curse.maven:geckolib-388172:7025129") // v4.8.2 | Ars-Nouveau
     modRuntimeOnly("curse.maven:citadel-331936:6702068") // v2.6.2 | Alex's Cave, Rats
 //    modRuntimeOnly("curse.maven:structure-gel-api-378802:5188368") // Blue-Skies
 //    modRuntimeOnly("curse.maven:patchouli-306770:6164575") // v84.1 | TFC, Timber-Frames
@@ -152,12 +150,14 @@ dependencies {
 //    forgeRuntimeLibrary("com.teamresourceful:yabn:1.0.3") // Ad-Astra
 //    modRuntimeOnly("dev.engine-room.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}") // Create
 //    modRuntimeOnly("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_version}") // Create
+//    modRuntimeOnly("software.bernie.geckolib:geckolib-forge-$minecraft_version:4.8.3") // Ars-Nouveau
+//    forgeRuntimeLibrary("com.eliotlash.mclib:mclib:20") // Geckolib
 
     //+ REQUIRED - The modules access libraries from below - ONLY IN FORGE
     modCompileOnly("curse.maven:autoreglib-250363:3857246")
     modCompileOnly("curse.maven:blueprint-382216:5292242") // v7.10 | The-Outer-End, +Woodworks, Boatload, Sully Mod
     modCompileOnly("curse.maven:valhelsia-core-416935:5189548") // v1.1.2 | Valhelsia Structure, Valhelsia Furniture
-    modCompileOnly("curse.maven:framework-549225:5911986") // v0.7.12 | Refurbished Furniture, +Mighty-Mail, Backpacked
+    modCompileOnly("curse.maven:framework-549225:7573740") // v0.8 | Refurbished Furniture, +Mighty-Mail, Backpacked
     modCompileOnly("curse.maven:quad-932715:5900857") // v1.2.9 | More Chest Variants, More Crafting Table
     modCompileOnly("curse.maven:titanium-287342:5468426") // v3.8.32 | Functional-Storage
     modCompileOnly("curse.maven:zeta-968868:6432578") // v1.0-30 | Quark
@@ -168,7 +168,7 @@ dependencies {
 //!! ================================================== IMPORTS ===================================================== \\
     //- ONLY FOR TESTING - can be commented out or enabled
 //    modRuntimeOnly("curse.maven:another-furniture-610492:4034009") //WARNING: v2.1.2-1.19.2 -> 1.20.1: Cannot remap access widener from namespace 'srg'. Expected: 'intermediary'
-//    modRuntimeOnly("curse.maven:backpacked-352835:5401965")
+//    modRuntimeOnly("curse.maven:backpacked-352835:7624219") // Framework
 //    modRuntimeOnly("curse.maven:camp-chair-531744:4579679")
 //    modCompileOnly("curse.maven:dawn-of-time-312359:6863591") // Fusion, YetAnotherConfigLib - NOTE: Test in production (PrismLauncher or others)
 //    modRuntimeOnly("curse.maven:decorative-blocks-362528:5089406")
@@ -192,7 +192,7 @@ dependencies {
             //- OTHER MAVENS
 //    modRuntimeOnly("maven.modrinth:stylish-stiles:l9FFA4BK")
 //    modRuntimeOnly("fuzs.diagonalblocks:diagonalblocks-forge:8.0.6")
-//    modRuntimeOnly("earth.terrarium.chipped:chipped-forge-${minecraft_version}:3.0.7") //INCLUDED: Athena, Resourceful-Lib, REQUIRED: Bytecodecs, ConnectedTexturesMod (CTM)
+//    modRuntimeOnly("earth.terrarium.chipped:chipped-forge-$minecraft_version:3.0.7") //INCLUDED: Athena, Resourceful-Lib, REQUIRED: Bytecodecs, ConnectedTexturesMod (CTM)
 
             //- LOCAL
 //    modRuntimeOnly("copper-age-neoforge:copperagebackport-forge-1.20.1-0.1.4")
@@ -207,8 +207,8 @@ dependencies {
 
         // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:5240518")
-    modCompileOnly("curse.maven:macaws-doors-378646:6146379")
-    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:6363155")
+    modCompileOnly("curse.maven:macaws-doors-378646:7618714")
+    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:7308423")
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:5450327")
     modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:5054882")
     modCompileOnly("curse.maven:macaws-roofs-352039:4590032")
@@ -312,5 +312,6 @@ dependencies {
 
     //!! OTHERS
 //    modRuntimeOnly("maven.modrinth:stone-zone:1.20-2.7.14") //REQUIRE: Stone Mods
+//    modRuntimeOnly("com.hollingsworth.ars_nouveau:ars_nouveau-$minecraft_version:4.9.0.165") // Get version @ https://maven.blamejared.com/com/hollingsworth/ars_nouveau/ars_nouveau-1.20.1/
 
 }

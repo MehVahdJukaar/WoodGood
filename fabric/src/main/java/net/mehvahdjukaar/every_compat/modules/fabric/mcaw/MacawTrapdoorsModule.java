@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.TrapDoorBlock;
 
 
-//SUPPORT: v1.1.2+
+//See MacawTrapdoorsModuleAbstract's SUPPORTED VERSION
 public class MacawTrapdoorsModule extends MacawTrapdoorsModuleAbstract {
 
     public MacawTrapdoorsModule(String modId) {
