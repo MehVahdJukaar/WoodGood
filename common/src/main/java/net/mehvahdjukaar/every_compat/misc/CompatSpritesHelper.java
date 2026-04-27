@@ -35,17 +35,25 @@ public class CompatSpritesHelper {
 
     public static Set<SpriteExtra> spriteExtraSet = new HashSet<>();
 
+    private static String normalizeLabel(String s) {
+        try {
+            return new ResourceLocation(s).getPath();
+        } catch (Exception ignored) {
+        }
+        return s.replace("#", "");
+    }
+
     public static final @NotNull Predicate<String> LOOKS_LIKE_TOP_LOG_TEXTURE = (s) -> {
-        s = (new ResourceLocation(s)).getPath();
+        s = normalizeLabel(s);
         if (s.contains("_overlay")) return false;
         return s.contains("_top") || s.contains("_end") || s.contains("_up");
     };
     public static final @NotNull Predicate<String> LOOKS_LIKE_SIDE_LOG_TEXTURE = (s) -> {
-        s = (new ResourceLocation(s)).getPath();
+        s = normalizeLabel(s);
         return (!LOOKS_LIKE_TOP_LOG_TEXTURE.test(s) && !(s.contains("_overlay") && !(s.contains("_leaves"))));
     };
     public static final @NotNull Predicate<String> LOOKS_LIKE_LEAF_TEXTURE = (s) -> {
-        s = (new ResourceLocation(s)).getPath();
+        s = normalizeLabel(s);
         return !s.contains("_top") && !s.contains("_bushy") && !s.contains("_snow") && !s.contains("_overlay") && !s.contains("/snow");
     };
 
