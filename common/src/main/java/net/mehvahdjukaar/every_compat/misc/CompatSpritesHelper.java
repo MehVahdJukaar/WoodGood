@@ -36,17 +36,23 @@ public class CompatSpritesHelper {
 
     public static Set<SpriteExtra> spriteExtraSet = new HashSet<>();
 
+    private static String normalizeLabel(String s) {
+        var res = ResourceLocation.tryParse(s);
+        return res == null ? s.replace("#", "") : res.getPath();
+    }
+
     public static final @NotNull Predicate<String> LOOKS_LIKE_TOP_LOG_TEXTURE = (s) -> {
-        s = (ResourceLocation.parse(s)).getPath();
+        s = normalizeLabel(s);
         if (s.contains("_overlay")) return false;
         return s.contains("_top") || s.contains("_end") || s.contains("_up");
     };
+
     public static final @NotNull Predicate<String> LOOKS_LIKE_SIDE_LOG_TEXTURE = (s) -> {
-        s = (ResourceLocation.parse(s)).getPath();
+        s = normalizeLabel(s);
         return (!LOOKS_LIKE_TOP_LOG_TEXTURE.test(s) && !(s.contains("_overlay") && !(s.contains("_leaves"))));
     };
     public static final @NotNull Predicate<String> LOOKS_LIKE_LEAF_TEXTURE = (s) -> {
-        s = (ResourceLocation.parse(s)).getPath();
+        s = normalizeLabel(s);
         return !s.contains("_top") && !s.contains("_bushy") && !s.contains("_snow") && !s.contains("_overlay") && !s.contains("/snow");
     };
 
@@ -645,7 +651,7 @@ public class CompatSpritesHelper {
     //for Advent-Of-Ascension's stranglewood
     private static void strangewoodPattern(TextureImage image, ResourceManager manager) {
         try (TextureImage vineOverlay = TextureImage.open(manager,
-                ResourceLocation.parse("aoa3:block/stranglewood_log_vine"));
+                ResourceLocation.fromNamespaceAndPath("aoa3","block/stranglewood_log_vine"));
              TextureImage logTexture = TextureImage.open(manager,
                      RPUtils.findFirstBlockTextureLocation(manager, STRANGEWOOD.get().log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))) {
 
