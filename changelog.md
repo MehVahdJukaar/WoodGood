@@ -27,6 +27,12 @@
 
 ---
 
+## v2.11.38
+
+### FIXES:
+- Fied an issue that would prevent block models gen for certain models
+---
+
 ## v2.11.37
 
 ### FIXES: 
