@@ -4,13 +4,13 @@
 
 <div style="text-align: left;">
 
-* (C): FORGE & FABRIC <br>
-* (FB): FABRIC <br>
-* (NF): NEOFORGE <br>
-* (IT): Included Texture: Added the ResourceLocation of the missing textures required for blocks or generating a new texture <br>
-* (COMPAT): Create an exception for a compat mod. EveryCompat won't included for the Supported Mod and the Wood Mod <br>
-* (INCLUDED): The block is not generated because a Wood Mod already have the same block as the supported mod will be generated <br>
-* (EXCLUDED): The block is generated BUT it shouldn't be generated for a reason <br>
+* <strong>(C)</strong>: FORGE & FABRIC <br>
+* <strong>(FB)</strong>: FABRIC <br>
+* <strong>(NF)</strong>: NEOFORGE <br>
+* <strong>(IT)</strong>: Included Texture: Added the ResourceLocation of the missing textures required for blocks or generating a new texture <br>
+* <strong>(COMPAT)</strong>: Create an exception for a compat mod. EveryCompat won't included for the Supported Mod and the Wood Mod <br>
+* <strong>(INCLUDED)</strong>: The block is not generated because a Wood Mod already have the same block as the supported mod will be generated <br>
+* <strong>(EXCLUDED)</strong>: The block is generated BUT it shouldn't be generated for a reason <br>
 
 </div>
 
