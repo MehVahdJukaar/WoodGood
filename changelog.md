@@ -4,17 +4,32 @@
 
 <div style="text-align: left;">
 
-* **(C)**: FORGE & FABRIC
-* **(FB)**: FABRIC
-* **(NF)**: NEOFORGE
-* **(IT)**: Included Texture: Added the ResourceLocation of the missing textures required for blocks or generating a new texture
-* **(COMPAT)**: Create an exception for a compat mod. EveryCompat won't included for the Supported Mod and the Wood Mod
-* **(INCLUDED)**: The block is not generated because a Wood Mod already have the same block as the supported mod will be generated
-* **(EXCLUDED)**: The block is generated BUT it shouldn't be generated for a reason
+* (C): FORGE & FABRIC <br>
+* (FB): FABRIC <br>
+* (NF): NEOFORGE <br>
+* (IT): Included Texture: Added the ResourceLocation of the missing textures required for blocks or generating a new texture <br>
+* (COMPAT): Create an exception for a compat mod. EveryCompat won't included for the Supported Mod and the Wood Mod <br>
+* (INCLUDED): The block is not generated because a Wood Mod already have the same block as the supported mod will be generated <br>
+* (EXCLUDED): The block is generated BUT it shouldn't be generated for a reason <br>
 
 </div>
 
 </div>
+
+<br>
+
+## v2.11.39
+
+### CHANGES:
+- **Every Compat** (C): Tweaks in codes for nullable fix - @MehVahdJukaar
+
+### FIXES: 
+- **Beauitful Campfire** (C): Oudated recipe generation (using format from 1.20) & Updated for 1.21 - [#1236](https://github.com/MehVahdJukaar/WoodGood/issues/1236)
+- **Every Comp** (c): Fixed an issue that would prevent block models gen for certain models
+
+---
+
+## v2.11.38
 
 ### CHANGS:
 - **The Twilight Forest** (NF): Updated the Creative Tab's resourcelocation
@@ -25,12 +40,6 @@
 ### DISABLED:
 - **Workshop For Handsome Adventurer** - At DEV's request & it's not 100% compatible with **EveryCompat**
 
----
-
-## v2.11.38
-
-### FIXES:
-- Fied an issue that would prevent block models gen for certain models
 ---
 
 ## v2.11.37
