@@ -189,24 +189,30 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             event.add(tabKey, items.values().toArray(new Item[0]));
         } else if (tabMode == TabAddMode.AFTER_SAME_WOOD) {
             var reg = BlockSetAPI.getBlockSet(type);
-            for (var e : items.entrySet()) {
-                var item = e.getValue();
-                var wood = e.getKey();
-                //adds after first wooden block it finds. quite bad tbh
-                event.addAfter(tabKey, s -> reg.getBlockTypeOf(s.getItem()) == wood, item);
+            for (var entry : items.entrySet()) {
+                I item = entry.getValue();
+                T wood = entry.getKey();
+                if (ModEntriesConfigs.isEntryEnabled(wood, item)) {
+                    //adds after first wooden block it finds. quite bad tbh
+                    event.addAfter(tabKey, s -> reg.getBlockTypeOf(s.getItem()) == wood, item);
+                }
             }
         } else if (tabMode == TabAddMode.AFTER_SAME_TYPE) {
             var reg = BlockSetAPI.getBlockSet(type);
             String childKey = makeChildKey(module);
             Class<T> typeClass = this.getTypeClass();
-            for (var e : items.entrySet()) {
-                var item = e.getValue();
-                event.addAfter(tabKey, s -> {
-                    T type = reg.getBlockTypeOf(s.getItem());
-                    if (type == null) return false;
-                    return type.getClass() == typeClass
-                            && Objects.equals(type.getChildKey(s.getItem()), childKey);
-                }, item);
+            for (var entry : items.entrySet()) {
+                I item = entry.getValue();
+                T wood = entry.getKey();
+
+                if (ModEntriesConfigs.isEntryEnabled(wood, item)) {
+                    event.addAfter(tabKey, s -> {
+                        T type = reg.getBlockTypeOf(s.getItem());
+                        if (type == null) return false;
+                        return type.getClass() == typeClass
+                                && Objects.equals(type.getChildKey(s.getItem()), childKey);
+                    }, item);
+                }
             }
         }
     }
