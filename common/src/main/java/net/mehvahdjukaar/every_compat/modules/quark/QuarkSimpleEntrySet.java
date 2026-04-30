@@ -11,7 +11,6 @@ import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Holder;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -68,7 +67,7 @@ public class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends S
     public @Nullable Item getItemOf(T type) {
         ZetaModule mod = zetaModule.get();
         if (mod == null || mod.isEnabled()) {
-            var item = super.getItemOf(type);
+            Item item = super.getItemOf(type);
             if (item instanceof IDisableable<?> d && !d.doesConditionApply()) {
                 return null;
             }
