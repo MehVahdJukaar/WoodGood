@@ -368,7 +368,7 @@ public class WoodworksModule extends EveryCompatModule {
                         EveryCompat.res("block/abnww/chest/oak/right_o"),
                         EveryCompat.res("block/abnww/chest/oak/trapped_right_o")
                 );
-        })
+            })
         );
     }
 
