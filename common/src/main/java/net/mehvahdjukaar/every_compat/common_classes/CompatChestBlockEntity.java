@@ -43,6 +43,6 @@ public class CompatChestBlockEntity extends ChestBlockEntity {
 
     @Override
     protected @NotNull Component getDefaultName() {
-        return Component.translatable("container.everycomp.chest.name", Component.translatable(woodType.getTranslationKey()).toString());
+        return Component.translatable("container.everycomp.chest.name", Component.translatable(woodType.getTranslationKey()).getString());
     }
 }
