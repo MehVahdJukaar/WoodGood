@@ -18,6 +18,17 @@
 
 <br>
 
+## v2.11.40
+
+### FIXES:
+- **Every Compat** (C): 
+  - Fixed a SERVER Crash when `onItemTooltip()` is executed - This should be only on CLIENT
+  - Corrected the method that grab WoodType's READABLE LANG for Chests' LANG - [#1233](https://github.com/MehVahdJukaar/WoodGood/issues/1233)
+  - Improved the code where items are still being added to Creative-Tab & REI/EMI/REI when an item is disabled in `everycomp-entries.toml` - [#1239](https://github.com/MehVahdJukaar/WoodGood/issues/1239)
+- **More Crafting Table For Forge** (INCLUDED): Due to **Biomes O' Plenty**'s 3 WoodTypes that prevented **No Man's Land**'s 3 WoodType from being generated - [#1237](https://github.com/MehVahdJukaar/WoodGood/issues/1237)
+  
+---
+
 ## v2.11.39
 
 ### CHANGES:
