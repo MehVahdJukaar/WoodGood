@@ -118,6 +118,10 @@ public class HardcodedBlockType {
 
 
         /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ INCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // More-Crafting-Table-For-Forge supported Biomes-O'-Plenty's 3 WoodTypes: MAPLE, PINE, & WILLOW that prevented No-Man's-Land's 3 similar WoodTypes from generated
+        if (isWoodFrom("mctb", "nomansland", "", "")) return false;
+
         // Minecraft's CHERRY prevent the generation of blocks with Terraqueous's CHERRY
         if (isWoodFrom("", "", "terraqueous:cherry", "")) return false;
 
