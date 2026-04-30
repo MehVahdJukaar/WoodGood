@@ -175,7 +175,8 @@ public class EveryCompatForge extends EveryCompatCommon {
             );
         }
 
-        EveryCompatClient.onItemTooltip(event.getItemStack(), event.getContext(), event.getFlags(), event.getToolTip());
+        if (PlatHelper.getPhysicalSide().isClient())
+            EveryCompatClient.onItemTooltip(event.getItemStack(), event.getContext(), event.getFlags(), event.getToolTip());
     }
 /*
     @SubscribeEvent
