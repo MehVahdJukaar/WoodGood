@@ -279,7 +279,9 @@ subprojects {
             apiKey = env.CURSEFORGE_TOKEN
             project {
                 id = curseforge_id
-                changelog = changelogText
+                changelog = """
+                See the [Changelog @Github](https://github.com/MehVahdJukaar/WoodGood/blob/1.21/changelog.md)
+                """
                 changelogType = 'markdown'
                 releaseType = release_type
                 for (var ver : versions) {
