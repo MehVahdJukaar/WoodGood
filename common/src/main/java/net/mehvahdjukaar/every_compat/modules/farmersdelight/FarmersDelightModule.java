@@ -1,7 +1,10 @@
 package net.mehvahdjukaar.every_compat.modules.farmersdelight;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.api.*;
+import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
+import net.mehvahdjukaar.every_compat.api.PaletteStrategy;
+import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.every_compat.api.TabAddMode;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
@@ -58,7 +61,8 @@ public class FarmersDelightModule extends EveryCompatModule {
                 .addTexture(modRes("block/oak_cabinet_top"), customPalette)
                 .addTexture(modRes("block/oak_cabinet_front_open"), customPalette)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("cabinets/wooden"), Registries.ITEM)
+                .addTag(modRes("cabinets"), Registries.BLOCK, Registries.ITEM)
+                .addTag(modRes("cabinets/wooden"), Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getModTab(
 "farmersdelight"))
