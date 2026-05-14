@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.teamabnormals.blueprint.common.block.BlueprintBeehiveBlock;
 import com.teamabnormals.blueprint.common.block.BlueprintChiseledBookShelfBlock;
 import com.teamabnormals.blueprint.common.block.LeafPileBlock;
+import com.teamabnormals.woodworks.common.item.crafting.SawmillRecipe;
 import com.teamabnormals.woodworks.core.registry.WoodworksBlocks;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
@@ -12,6 +13,7 @@ import net.mehvahdjukaar.every_compat.common_classes.*;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
+import net.mehvahdjukaar.moonlight.api.resources.RecipeTemplate;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
@@ -21,6 +23,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -30,6 +33,8 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LadderBlock;
@@ -45,6 +50,7 @@ import net.neoforged.neoforge.common.Tags;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -75,11 +81,12 @@ public class WoodworksModule extends EveryCompatModule {
                                 .strength(1.5F)
                         )
                 )
+                .addTextureM(EveryCompat.res("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.ENCHANTMENT_POWER_PROVIDER, Registries.BLOCK)
                 .addTag(Tags.Blocks.BOOKSHELVES, Registries.BLOCK)
                 .addTag(Tags.Items.BOOKSHELVES, Registries.ITEM)
-                .addTextureM(EveryCompat.res("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
+                .addTag(ResourceLocation.parse("blueprint:wooden_bookshelves"), Registries.BLOCK, Registries.ITEM)
                 .setTab(getTab(tab))
                 .defaultRecipe()
                 .copyParentDrop()
@@ -94,14 +101,15 @@ public class WoodworksModule extends EveryCompatModule {
                                 .strength(1.5F)
                         )
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(Tags.Blocks.BOOKSHELVES, Registries.BLOCK)
-                .addTag(Tags.Items.BOOKSHELVES, Registries.ITEM)
                 .addTexture(modRes("block/chiseled_acacia_bookshelf_empty"))
                 .addTextureM(modRes("block/chiseled_acacia_bookshelf_occupied"),
                         EveryCompat.res("block/acacia_chiseled_bookshelf_occupied_m"))
                 .addTexture(modRes("block/chiseled_acacia_bookshelf_side"))
                 .addTexture(modRes("block/chiseled_acacia_bookshelf_top"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(Tags.Blocks.BOOKSHELVES, Registries.BLOCK)
+                .addTag(Tags.Items.BOOKSHELVES, Registries.ITEM)
+                .addTag(ResourceLocation.parse("blueprint:wooden_chiseled_bookshelves"), Registries.BLOCK, Registries.ITEM)
                 .setTab(getTab(tab))
                 .defaultRecipe()
                 .copyParentDrop()
@@ -114,10 +122,12 @@ public class WoodworksModule extends EveryCompatModule {
                                 .strength(2.0F, 3.0F))
                 )
                 .copyParentDrop()
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTexture(modRes("block/oak_boards"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("wooden_boards"), Registries.BLOCK, Registries.ITEM)
                 .setTab(getTab(tab))
                 .defaultRecipe()
+                .addRecipe(modRes("oak_boards_from_oak_planks_sawing"))
                 .build();
         this.addEntry(boards);
 
@@ -133,11 +143,10 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTexture(EveryCompat.res("block/spruce_ladder"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
-                .addTag(ResourceLocation.parse("quark:ladders"), Registries.BLOCK)
-                .addTag(ResourceLocation.parse("quark:ladders"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("quark:ladders"), Registries.BLOCK, Registries.ITEM)
+                .addTag(ResourceLocation.parse("blueprint:wooden_ladders"), Registries.BLOCK, Registries.ITEM)
                 .setTab(getTab(tab))
                 .defaultRecipe()
-                .addTexture(EveryCompat.res("block/spruce_ladder"))
                 .build();
         this.addEntry(ladders);
 
@@ -155,6 +164,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTexture(EveryCompat.res("block/spruce_beehive_end"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.BEEHIVES, Registries.BLOCK)
+                .addTag(ResourceLocation.parse("blueprint:wooden_beehives"), Registries.BLOCK, Registries.ITEM)
                 .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
@@ -168,6 +178,7 @@ public class WoodworksModule extends EveryCompatModule {
                 )
                 .addTile(abwwChestBlockEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(ResourceLocation.parse("blueprint:wooden_chests"), Registries.BLOCK, Registries.ITEM)
                 .addTag(ResourceLocation.parse("quark:revertable_chests"), Registries.ITEM)
                 .addTag(ResourceLocation.parse("quark:boatable_chests"), Registries.ITEM)
                 .setTab(getTab(tab))
@@ -184,6 +195,7 @@ public class WoodworksModule extends EveryCompatModule {
                 )
                 .addTile(abwwTrappedBlockEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(ResourceLocation.parse("blueprint:wooden_trapped_chests"), Registries.BLOCK, Registries.ITEM)
                 .setTab(getTab(tab))
                 .defaultRecipe()
                 .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
@@ -199,11 +211,11 @@ public class WoodworksModule extends EveryCompatModule {
                                 .pushReaction(PushReaction.DESTROY)
                         )
                 )
-                .requiresChildren(LOG)
+                .requiresChildren(LOG) //REASON:
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
-                .addTag(modRes("leaf_piles"), Registries.BLOCK)
+                .addTag(modRes("leaf_piles"), Registries.BLOCK, Registries.ITEM)
                 .setTab(getTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
@@ -281,8 +293,6 @@ public class WoodworksModule extends EveryCompatModule {
                     sink, manager, wood);
 
             // - from PLANKS
-            sawmillRecipe("oak_boards_from_oak_planks_sawing", wood.planks.asItem(), boards.items.get(wood),
-                    sink, manager, wood);
             sawmillRecipe("spruce_ladder_from_spruce_planks_sawing", wood.planks.asItem(), ladder,
                     sink, manager, wood);
             createRecipeIfNotNull("oak_button_from_oak_planks_sawing", false, "button",
@@ -370,6 +380,23 @@ public class WoodworksModule extends EveryCompatModule {
                 );
             })
         );
+    }
+
+    @Override
+    public void onModSetup() {
+        super.onModSetup();
+
+        RecipeTemplate.register(SawmillRecipe.class, (original, oldBlockType, newBlockType) -> {
+            List<Ingredient> modifiedIngredient = RecipeTemplate.convertIngredients(original.getIngredients(), oldBlockType, newBlockType);
+            Ingredient newInput = Ingredient.of(modifiedIngredient.getFirst().getItems()[0]);
+            ItemStack originalResult = original.getResultItem(RegistryAccess.EMPTY);
+            ItemStack newResult = RecipeTemplate.convertItemStack(originalResult, oldBlockType, newBlockType);
+            if (newResult == null) {
+                throw new UnsupportedOperationException("Failed to convert recipe result");
+            } else {
+                return new SawmillRecipe(original.getGroup(), newInput, newResult);
+            }
+        });
     }
 
 }
