@@ -20,6 +20,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 
+import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -74,5 +75,18 @@ public class CuriositiesModule extends EveryCompatModule {
                 }
             });
         }
+    }
+
+    @Override
+    public List<String> getAlreadySupportedMods() {
+        return List.of(
+                "atmospheric",
+                "autumnity",
+//                "caverns_and_chasms",
+                "environmental",
+                "gardens_of_the_dead",
+                "mynethersdelight",
+                "upgrade_aquatic"
+        );
     }
 }
