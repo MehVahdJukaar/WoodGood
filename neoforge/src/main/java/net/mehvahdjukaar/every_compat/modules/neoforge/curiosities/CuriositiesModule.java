@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.curiosities;
 
 import com.syndicatemc.curiosities.common.block.VerticalConnectingPillarBlock;
+import com.teamabnormals.woodworks.common.item.crafting.SawmillRecipe;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.TabAddMode;
@@ -8,16 +9,20 @@ import net.mehvahdjukaar.every_compat.misc.UtilityRecipe;
 import net.mehvahdjukaar.every_compat.misc.UtilityTag;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.api.resources.RecipeTemplate;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 
 import java.util.List;
@@ -72,6 +77,25 @@ public class CuriositiesModule extends EveryCompatModule {
 
                     UtilityRecipe.createRecipeWithTag(sawingLoc, EveryCompat.res(newSawingLoc),
                             "minecraft:oak_logs", newTagIng, block, sink, manager);
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onModSetup() {
+        super.onModSetup();
+
+        if (PlatHelper.isModLoaded("woodworks")) {
+            RecipeTemplate.register(SawmillRecipe.class, (original, oldBlockType, newBlockType) -> {
+                List<Ingredient> modifiedIngredient = RecipeTemplate.convertIngredients(original.getIngredients(), oldBlockType, newBlockType);
+                Ingredient newInput = Ingredient.of(modifiedIngredient.getFirst().getItems()[0]);
+                ItemStack originalResult = original.getResultItem(RegistryAccess.EMPTY);
+                ItemStack newResult = RecipeTemplate.convertItemStack(originalResult, oldBlockType, newBlockType);
+                if (newResult == null) {
+                    throw new UnsupportedOperationException("Failed to convert recipe result");
+                } else {
+                    return new SawmillRecipe(original.getGroup(), newInput, newResult);
                 }
             });
         }
