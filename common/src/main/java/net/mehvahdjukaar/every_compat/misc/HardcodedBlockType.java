@@ -119,6 +119,9 @@ public class HardcodedBlockType {
 
         /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ INCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+        // Curiosities' FANCIED_PLANKS is not getting generated with No-Man's-Land, PINE from Biomes-O'-Plenty & Windswept
+        if (isWoodFrom("curiosities", "biomesoplenty|nomansland|windswept", "", "")) return false;
+
         // More-Crafting-Table-For-Forge supported Biomes-O'-Plenty's 3 WoodTypes: MAPLE, PINE, & WILLOW that prevented No-Man's-Land's 3 similar WoodTypes from generated
         if (isWoodFrom("mctb", "nomansland", "", "")) return false;
 
