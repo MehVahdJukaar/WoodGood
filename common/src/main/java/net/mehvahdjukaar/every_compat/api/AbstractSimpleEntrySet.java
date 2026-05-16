@@ -276,6 +276,9 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         addTagToAllBlocks(blocks, "", "create", "chest_mounted_storage",
                 true, false, sink, "^(?:\\w+)?trapped(?:\\w+)?_chest$");
 
+        /// Ladders
+        addTagToAllBlocks(blocks, "", "", "c:ladders",
+                true, true, sink, "\\w+_ladder");
     }
 
     @Nullable
