@@ -47,6 +47,8 @@ public class ServerDynamicResourcesHandler extends DynamicServerResourceProvider
             namespaces.add("lieonstudio");
             namespaces.add("quad");
         }
+        namespaces.add("blueprint"); // it doesn't show up in modlist, so isModLoaded() can't be used & too many dependents to count
+
         return namespaces;
     }
 
