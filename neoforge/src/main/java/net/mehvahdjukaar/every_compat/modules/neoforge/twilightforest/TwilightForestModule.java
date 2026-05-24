@@ -66,7 +66,6 @@ public class TwilightForestModule extends EveryCompatModule {
                 .addTile(getModTile("drying_rack"))
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("mineable_with_block_and_chain"), Registries.BLOCK)
                 .addTag(modRes("drying_racks"), Registries.BLOCK, Registries.ITEM)
                 .setTab(tab)
                 .addRecipe(modRes("wood/oak_drying_rack"))
