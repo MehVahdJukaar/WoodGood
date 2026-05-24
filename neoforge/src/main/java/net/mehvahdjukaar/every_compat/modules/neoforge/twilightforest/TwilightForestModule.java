@@ -17,24 +17,25 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
-import twilightforest.block.BanisterBlock;
-import twilightforest.block.ClimbableHollowLogBlock;
-import twilightforest.block.HorizontalHollowLogBlock;
-import twilightforest.block.VerticalHollowLogBlock;
+import twilightforest.block.*;
 import twilightforest.enums.HollowLogVariants;
 import twilightforest.init.TFBlocks;
 import twilightforest.item.HollowLogItem;
 
 import java.util.function.Supplier;
 
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.SLAB;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
 //SUPPORT: v4.8.3345+
 public class TwilightForestModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, BanisterBlock> banisters;
+    public final SimpleEntrySet<WoodType, Block> drying_rack;
     public final SimpleEntrySet<WoodType, VerticalHollowLogBlock> hollow_log_vertical;
     public final SimpleEntrySet<WoodType, HorizontalHollowLogBlock> hollow_log_horizontal;
     public final SimpleEntrySet<WoodType, ClimbableHollowLogBlock> hollow_log_climbable;
@@ -57,6 +58,20 @@ public class TwilightForestModule extends EveryCompatModule {
                 .setTab(tab)
                 .build();
         this.addEntry(banisters);
+
+        drying_rack = SimpleEntrySet.builder(WoodType.class, "drying_rack",
+                        getModBlock("oak_drying_rack"), () -> VanillaWoodTypes.OAK,
+                        w -> new DryingRackBlock(copySlabPropertySafe(w, 0.5F).noOcclusion())
+                )
+                .addTile(getModTile("drying_rack"))
+                //TEXTURES: planks
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("mineable_with_block_and_chain"), Registries.BLOCK)
+                .addTag(modRes("drying_racks"), Registries.BLOCK, Registries.ITEM)
+                .setTab(tab)
+                .addRecipe(modRes("wood/oak_drying_rack"))
+                .build();
+        this.addEntry(drying_rack);
 
         hollow_log_horizontal = SimpleEntrySet.builder(WoodType.class, "log_horizontal", "hollow",
                         TFBlocks.HOLLOW_BIRCH_LOG_HORIZONTAL, () -> VanillaWoodTypes.BIRCH,
@@ -140,4 +155,16 @@ public class TwilightForestModule extends EveryCompatModule {
                 hollow_log_horizontal.blocks.values().toArray(Block[]::new));
     }
 
+    @SuppressWarnings("DataFlowIssue")
+    private BlockBehaviour.Properties copySlabPropertySafe(WoodType woodType, float scale) {
+        Block slab = (woodType.getBlockOfThis(SLAB) != null)
+                ? woodType.getBlockOfThis(SLAB)
+                : Blocks.OAK_SLAB;
+
+        BlockBehaviour.Properties properties = Utils.copyPropertySafe(slab);
+
+        return properties.noOcclusion()
+                .destroyTime(slab.defaultDestroyTime() * scale)
+                .explosionResistance(slab.getExplosionResistance() * scale);
+    }
 }
