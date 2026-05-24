@@ -61,8 +61,9 @@ public class TwilightForestModule extends EveryCompatModule {
 
         drying_rack = SimpleEntrySet.builder(WoodType.class, "drying_rack",
                         getModBlock("oak_drying_rack"), () -> VanillaWoodTypes.OAK,
-                        w -> new DryingRackBlock(copySlabPropertySafe(w, 0.5F).noOcclusion())
+                        w -> new DryingRackBlock(copySlabPropertySafe(w, 0.5F))
                 )
+                .requiresChildren(SLAB) //REASON: recipes, properties
                 .addTile(getModTile("drying_rack"))
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
