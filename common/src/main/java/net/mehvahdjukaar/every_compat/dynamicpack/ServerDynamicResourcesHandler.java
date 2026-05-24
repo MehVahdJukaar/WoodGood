@@ -22,6 +22,7 @@ import java.util.function.Consumer;
 public class ServerDynamicResourcesHandler extends DynamicServerResourceProvider {
 
     private static ServerDynamicResourcesHandler INSTANCE;
+    private static ArrayList<String> namespaces = new ArrayList<>();
 
     public static ServerDynamicResourcesHandler getInstance() {
         if (INSTANCE == null) {
@@ -47,6 +48,7 @@ public class ServerDynamicResourcesHandler extends DynamicServerResourceProvider
             namespaces.add("lieonstudio");
             namespaces.add("quad");
         }
+        if (PlatHelper.isModLoaded("toughasnails")) namespaces.add("toughasnails");
         namespaces.add("blueprint"); // it doesn't show up in modlist, so isModLoaded() can't be used & too many dependents to count
 
         return namespaces;

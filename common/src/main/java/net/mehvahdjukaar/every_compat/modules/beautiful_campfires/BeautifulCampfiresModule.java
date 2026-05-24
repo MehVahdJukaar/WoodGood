@@ -6,9 +6,11 @@ import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
+import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
@@ -116,6 +118,19 @@ public class BeautifulCampfiresModule extends EveryCompatModule {
                 createRecipe("campfire", wood, block, campfireLoc, sink, manager);
                 createRecipe("soul_campfire", wood, soul_campfires.blocks.get(wood), soulCampfireLoc,
                         sink, manager);
+
+                if (PlatHelper.isModLoaded("toughasnails")) {
+                    SimpleTagBuilder warmingTag = SimpleTagBuilder.of(ResourceLocation.parse("toughasnails:heating_blocks"));
+                    SimpleTagBuilder coolingTag = SimpleTagBuilder.of(ResourceLocation.parse("toughasnails:cooling_blocks"));
+
+                    warmingTag.addEntry(block);
+                    sink.addTag(warmingTag, Registries.BLOCK);
+                    sink.addTag(warmingTag, Registries.ITEM);
+
+                    coolingTag.addEntry(soul_campfires.blocks.get(wood));
+                    sink.addTag(coolingTag, Registries.BLOCK);
+                    sink.addTag(coolingTag, Registries.ITEM);
+                }
             });
 
         });
