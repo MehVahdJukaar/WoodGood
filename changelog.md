@@ -13,6 +13,29 @@
 
 ---
 
+## v2.11.41
+
+### FIXES: 
+- **Curiosities** (NF): Missing recipe with using PLANKS to get FANCIED_PLANKS via Sawmill from **Woodworks** - [#1244](https://github.com/MehVahdJukaar/WoodGood/issues/1244) 
+- **Farmer's Delight** (C): Updated Cabinets' tags to have `#farmersdelight:cabinets` and `#farmersdelight:cabinets/wooden` - [#1248](https://github.com/MehVahdJukaar/WoodGood/issues/1248)
+- **Enderscape** (INCLUDED): Still missing a shelf from either **Copper Age Backport** or **Another Furniture** for MURUBLIGHT - [#1256](https://github.com/MehVahdJukaar/WoodGood/issues/1256), [#1199](https://github.com/MehVahdJukaar/WoodGood/issues/1199), [#970](https://github.com/MehVahdJukaar/WoodGood/issues/970)
+  - NOTE: the solution to fix the issue above was not correct, MURUBLIGHT_SHELF will be added without any exception   
+
+### ADDED:
+- **Every Compat** (C): Added tag, `#c:ladders` to all of supported mods' LADDERS - [#1246](https://github.com/MehVahdJukaar/WoodGood/issues/1246)
+- **Woodworks** (NF): added missing tags to blocks - related to [#1238](https://github.com/MehVahdJukaar/WoodGood/issues/1238)
+- **Curiosities** (NF): Made an exception for built-in supported Wood Mods:  
+  - atmospheric
+  - autumnity
+  - environmental
+  - gardens_of_the_dead
+  - mynethersdelight
+  - upgrade_aquatic
+- **Beautiful Campfires** (C): Added tags, `#toughasnails:heating_blocks` or `#toughasnails:cooling_blocks` to campfires or soul_campfires - [#1254](https://github.com/MehVahdJukaar/WoodGood/issues/1254)
+- **The Twilight Forest** (NF): Added DRYING_RACK - [#1253](https://github.com/MehVahdJukaar/WoodGood/issues/1253)
+
+---
+
 ## v2.11.40
 
 ### FIXES:
