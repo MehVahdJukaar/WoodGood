@@ -65,6 +65,7 @@ dependencies {
 //!! ================================================ IMPORTS ==========================================================
     //+ REQUIRED - The modules access libaries from below
     // ~/common/mods LOCAL
+//    modCompileOnly("local-bibliocraft_legacy_expanded:bibliocraftfabric-1.1.0") //@ Dont import because it was built with Loom-1.14+
     modCompileOnly("net.darktree.redbits:redbits-1.20.1-1.16.1") //FABRIC
 //    modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
 
