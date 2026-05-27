@@ -2,7 +2,6 @@ package net.mehvahdjukaar.every_compat.fabric;
 
 import net.fabricmc.api.ModInitializer;
 import net.mehvahdjukaar.every_compat.EveryCompatCommon;
-import net.mehvahdjukaar.every_compat.modules.fabric.beautify_decorate.BeautifyRefabricatedModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.bewitchment.BewitchmentModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.building_but_better.BuildingButBetterModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.clutter.ClutterModule;
@@ -66,21 +65,24 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
             addOptionalModule("mighty_mail", () -> MightyMailModule.class);
             addOptionalModule("redbits", () -> RedBitsModule.class);
             addOptionalModule("regions_unexplored", () -> RegionsUnexploredModule.class);
-            addOptionalModule("shutter", () -> LauchsShuttersModule.class);
             addOptionalModule("wilderwild", () -> WilderWildModule.class);
             addOptionalModule("woodenhoppers", () -> WoodenHoppersModule.class);
-
-            /// Remove it in the next version: v2.11.27
-            if (PlatHelper.isModLoaded("beautify")) {
-                if (!PlatHelper.getModVersion("beautify").matches("2.0.\\d\\+1.21.1"))
-                    addOptionalModule("beautify", () -> BeautifyRefabricatedModule.class);
-            }
 
             if (PlatHelper.isModLoaded("mcwdoors")) {
                 addOptionalModule("dramaticdoors", () -> DramaticDoorsMacawModule.class);
             }
 
             addOptionalModule("create", () -> CreateModule.class); // ONLY TEMP until FABRIC v6.0.0 is out
+
+            // Load if The-New-Shutters is loaded, not Vanilla-Shutters
+            if (PlatHelper.isModLoaded("shutters")) {
+                Class<?> modClass = null;
+                try {
+                    modClass = Class.forName("net.stehschnitzel.shutter.ShutterMain");
+                } catch (Exception ignored) {}
+
+                if (modClass != null) addOptionalModule("shutter", () -> LauchsShuttersModule.class);
+            }
         }
 
 // ============================================== DISABLED FOR A REASON ============================================= \\
