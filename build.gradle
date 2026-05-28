@@ -101,12 +101,12 @@ subprojects {
     }
 
     dependencies {
-        minecraft "com.minecraft:minecraft:${rootProject.minecraft_version}"
+        minecraft "com.minecraft:minecraft:${minecraft_version}"
         mappings loom.layered() {
             it.officialMojangMappings {
                 setNameSyntheticMembers(false)
             }
-            it.parchment("org.parchmentmc.data:parchment-${rootProject.parchment_version}")
+            it.parchment("org.parchmentmc.data:parchment-${parchment_mappings_version}")
         }
 
     }
@@ -452,8 +452,8 @@ ext {
             mod_homepage         : mod_homepage,
             mod_github           : mod_github,
 
-            neo_version          : neo_version,
-            neo_version_range    : neo_version_range,
+            neo_version          : neoforge_version,
+            neo_version_range    : neoforge_version_range,
             loader_version_range : loader_version_range,
 
             moonlight_required_version: moonlight_required_version

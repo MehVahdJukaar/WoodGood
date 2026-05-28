@@ -97,7 +97,7 @@ dependencies {
     modCompileOnly("curse.maven:exlines-awnings-526698:4668406") //FABRIC //!! 1.20.1
     modCompileOnly("curse.maven:exlines-bark-carpets-527296:4661550") //!! 1.20.1
 //    modCompileOnly("curse.maven:farmersdelight-398521:5962800")
-    modCompileOnly("curse.maven:farmers-delight-refabricated-993166:8088691")
+    modCompileOnly("curse.maven:farmers-delight-refabricated-993166:6955339") // v3.3.3 -> 8088691
     modCompileOnly("curse.maven:friends-and-foes-551364:6354620")
     modCompileOnly("curse.maven:furnish-547069:5683297")
     modCompileOnly("curse.maven:handcrafted-538214:5617253")
