@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.utils.extendsFrom
-
 plugins {
     id("com.possible-triangle.neoforge")
 }
@@ -9,18 +7,10 @@ neoforge {
     accessWidener(project(":common"))
 }
 
-neoForge {
-    accessTransformers {
-    }
-}
-
-val cloth_version: String by extra
-val path = System.getenv("REPOS21_1")
-val enable_moonlight_test: String by extra
-val maven_backup: String by extra
+val path = System.getenv("REPOS21_1").toString()
 dependencies {
 
-//    neoForge "net.neoforged:neoforge:$neo_version"
+//    neoForge("net.neoforged:neoforge:${property("neoforge_version")}")
 
 //    common(project(path: ':common', configuration: 'namedElements')) { transitive false }
 //    shadowCommon(project(path: ':common', configuration: 'transformProductionNeoForge'))
@@ -30,13 +20,13 @@ dependencies {
 //!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
 
     //- LOCAL
-    if (enable_moonlight_test.toBoolean()) {
-        modImplementation(files(path + "\\Moonlight\\neoforge\\build\\libs\\moonlight-${property("moonlight_testVersion")}-neoforge.jar"))
+    if (property("enable_moonlight_test").toString().toBoolean()) {
+        modApi(files(path + "\\Moonlight\\neoforge\\build\\libs\\moonlight-${property("moonlight_testVersion")}-neoforge.jar"))
     }
     //+ MAVEN
     else {
-        if (maven_backup.toBoolean()) modImplementation("maven.modrinth:moonlight:${property("moonlight_version")}-neoforge")
-        else modImplementation("net.mehvahdjukaar:moonlight-neoforge:${property("moonlight_version")}:neoforge") { isTransitive = false }
+        if (property("maven_backup").toString().toBoolean()) modApi("maven.modrinth:moonlight:${property("moonlight_version")}-neoforge")
+        else modApi("net.mehvahdjukaar:moonlight-neoforge:${property("moonlight_version")}:neoforge") { isTransitive = false }
     }
 
 //!! TOOLS ========================================================================================================== \\

@@ -1,6 +1,8 @@
 pluginManagement {
     repositories {
-        maven { url = uri("https://maven.muon.rip/releases") }
+        maven("https://maven.muon.rip/releases")
+        maven("https://maven.fabricmc.net/")
+        maven("https://maven.neoforged.net/releases")
         gradlePluginPortal()
         mavenLocal()
     }

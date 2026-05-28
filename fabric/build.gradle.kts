@@ -7,19 +7,16 @@ fabric {
     accessWidener(project(":common"))
 }
 
-val cloth_version: String by extra
 val path = System.getenv("REPOS21_1").toString()
-val enable_moonlight_test: String by extra
-val maven_backup: String by extra
 dependencies {
 
-//    modImplementation ("net.fabricmc:fabric-loader:${fabric_loader_version}")
-//    modApi "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
+    modImplementation("net.fabricmc:fabric-loader:${property("fabric_loader_version")}")
+    modApi("net.fabricmc.fabric-api:fabric-api:${property("fabric_api_version")}")
 
 //    common(project(path: ":common", configuration: "namedElements")) { transitive false }
 //    shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 
-//    modCompileOnly("me.shedaniel.cloth:cloth-config-fabric:$project.cloth_version") {
+//    modCompileOnly("me.shedaniel.cloth:cloth-config-fabric:${property("cloth_version")}") {
 //        exclude(group: "net.fabricmc.fabric-api")
 //    }
 
@@ -31,13 +28,13 @@ dependencies {
 //!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
 
     //- LOCAL
-    if (enable_moonlight_test.toBoolean()) {
-        modImplementation(files(path + "\\Moonlight\\fabric\\build\\libs\\moonlight-${property("moonlight_testVersion")}-fabric.jar"))
+    if (property("enable_moonlight_test").toString().toBoolean()) {
+        modApi(files(path + "\\Moonlight\\fabric\\build\\libs\\moonlight-${property("moonlight_testVersion")}-fabric.jar"))
     }
     //+ MAVEN
     else {
-        if (maven_backup.toBoolean()) modImplementation("maven.modrinth:moonlight:${property("moonlight_version")}-fabric")
-        else modImplementation("net.mehvahdjukaar:moonlight-fabric:${property("moonlight_version")}:fabric") { isTransitive = false }
+        if (property("maven_backup").toString().toBoolean()) modApi("maven.modrinth:moonlight:${property("moonlight_version")}-fabric")
+        else modApi("net.mehvahdjukaar:moonlight-fabric:${property("moonlight_version")}:fabric") { isTransitive = false }
     }
 
 //!! SUPPLEMENTARIES ------------------------------------------------------------------------------------------------ \\

@@ -1,32 +1,53 @@
-plugins {
-    id("com.possible-triangle.common")
+architectury {
+    common(enabled_platforms.split(","))
 }
 
-common {
-    accessWidener()
+loom {
+    accessWidenerPath = file("src/main/resources/${mod_id}.accesswidener")
 }
 
-val path = System.getenv("REPOS21_1").toString()
-val enable_moonlight_test: String = findProperty("enable_moonlight_test") as String
-val maven_backup = findProperty("maven_backup") as String
+
+
+publishing {
+    publications {
+        mavenCommon(MavenPublication) {
+            artifactId = rootProject.mod_id
+            from components.java
+        }
+    }
+
+    repositories {
+        // Add repositories to publish to here.
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.compilerArgs.add("-Acrafttweaker.processor.document.output_directory=${new File(rootProject.buildDir, "docsOut")}")
+    it.options.compilerArgs.add("-Acrafttweaker.processor.document.multi_source=true")
+
+    it.options.compilerArgs << "-Xmaxerrs" << "4000"
+
+}
+
 dependencies {
 
     // We depend on fabric loader here to use the fabric @Environment annotations and get the mixin dependencies
     // Do NOT use other classes from fabric loader
-//    modImplementation "net.fabricmc:fabric-loader:$fabric_loader_version"
-//    modApi "net.fabricmc.fabric-api:fabric-api:$fabric_api_version"
+    modImplementation "net.fabricmc:fabric-loader:$fabric_loader_version"
+    modApi "net.fabricmc.fabric-api:fabric-api:$fabric_api_version"
 
 //!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
     //- Repository LOCAL
+    String path = System.getenv('REPOS21_1')
 
     //- LOCAL
     if (enable_moonlight_test.toBoolean()) {
-        modImplementation(files(path + "\\Moonlight\\common\\build\\libs\\moonlight-${property("moonlight_testVersion")}.jar"))
+        modImplementation(files(path + "\\Moonlight\\common\\build\\libs\\moonlight-${moonlight_testVersion}.jar"))
     }
     //+ MAVEN
     else {
-        if (maven_backup.toBoolean()) modImplementation("maven.modrinth:moonlight:${property("moonlight_version")}-fabric")
-        else modImplementation("net.mehvahdjukaar:moonlight:${property("moonlight_version")}") { isTransitive = false }
+        if (maven_backup.toBoolean()) modApi("maven.modrinth:moonlight:$moonlight_version-fabric")
+        else modApi("net.mehvahdjukaar:moonlight:$moonlight_version") { transitive = false }
     }
 
 //!! ============================================= DEPENDENCIES ========================================================
@@ -105,8 +126,4 @@ dependencies {
     //+ LOCAL
     modCompileOnly("copper-age-common:copperagebackport-fabric-1.21.1-0.1.4")
 
-}
-
-tasks.named("copyAccessTransformersPublications") {
-    dependsOn(":common:transformAccessWidener")
 }
