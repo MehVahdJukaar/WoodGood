@@ -17,7 +17,7 @@ public class HardcodedBlockType {
     public static String woodTypeFromMod;
     public static String leavesidentify;
     public static String leavesTypeFromMod;
-    public static String supportedMod;
+    public static String supportedModId;
     public static String supportedBlockName;
 
     public static final List<String> FRAMED_BLOCKS_SUFFIX = List.of(
@@ -69,7 +69,7 @@ public class HardcodedBlockType {
     public static Boolean isWoodBlockAlreadyRegistered(String entrySetId, String blockName, WoodType woodType, String supportedModId) {
         woodTypeFromMod = woodType.getNamespace();
         woodidentify = woodType.getId().toString();
-        supportedMod = supportedModId;
+        HardcodedBlockType.supportedModId = supportedModId;
         supportedBlockName = blockName;
 
         String blockId = supportedModId +"/"+ woodTypeFromMod +"/"+ blockName;
@@ -97,6 +97,10 @@ public class HardcodedBlockType {
 
         // Exclude all of Vanilla Types that we know of. Excludes other mc namespaced added by mods
         if (isKnownVanillaWood(woodType)) return true;
+
+        // Marvelous Menagerie Paradoxical's calamites_log is a 8x8 log and its texture won't work with supported-mod that directly use the textures
+        if (isWoodFrom("mcwfences|mcwstairs", "", "marvelous_menagerie:calamites", "")) return true;
+        if (isWoodFrom("quark", "", "marvelous_menagerie:calamites", "hollow_calamites_log")) return true;
 
         // The WoodType from Cobblemon's Legendary Monuments has a 32x32 texture
         if (isWoodFrom("", "", "legendarymonuments:distortion", "")) return true;
@@ -171,7 +175,7 @@ public class HardcodedBlockType {
     public static Boolean isLeavesBlockAlreadyRegistered(String entrySetId, String blockName, LeavesType leavesType, String supportedModId) {
         leavesTypeFromMod = leavesType.getNamespace();
         leavesidentify = leavesType.getId().toString();
-        supportedMod = supportedModId;
+        HardcodedBlockType.supportedModId = supportedModId;
         supportedBlockName = blockName;
 
         String blockId = supportedModId +"/"+ leavesTypeFromMod +"/"+ blockName;
@@ -223,6 +227,8 @@ public class HardcodedBlockType {
     public static Boolean isWoodFrom(String SupportedModId, String woodtypeFromMod, String woodTypeId,
                                      String supportedBlockId) {
 
+        if (woodTypeFromMod.equals(supportedModId)) return false;
+
         String[] expressions = {
                 SupportedModId,
                 woodtypeFromMod,
@@ -231,7 +237,7 @@ public class HardcodedBlockType {
         };
 
         String[] values = {
-                supportedMod,
+                supportedModId,
                 woodTypeFromMod,
                 woodidentify,
                 supportedBlockName
@@ -261,6 +267,8 @@ public class HardcodedBlockType {
     public static Boolean isLeavesFrom(String whichSupportedModId, String leavestypeFromMod, String leavesTypeId,
                                        String supportedBlockId) {
 
+        if (woodTypeFromMod.equals(supportedModId)) return false;
+
         String[] expressions = {
                 whichSupportedModId,
                 leavestypeFromMod,
@@ -269,7 +277,7 @@ public class HardcodedBlockType {
         };
 
         String[] values = {
-                supportedMod,
+                supportedModId,
                 leavesTypeFromMod,
                 leavesidentify,
                 supportedBlockName
