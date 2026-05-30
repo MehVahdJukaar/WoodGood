@@ -116,6 +116,9 @@ public class HardcodedBlockType {
 
         /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ INCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+        // Valhelsia-Structures' POST, STRIPPED_POST are not generated because Quark has POST and STRIPPED_POST
+        if (isWoodFrom("valhelsia_structures", "quark", "", "")) return false;
+
         // MURUBLIGHT_SHELF from Enderscape is preventing SHELF from Copper-Age-Backport or Another-Furniture to be generated
         if (isWoodFrom("copperagebackport|another_furniture", "", "enderscape:murublight", "")) return false;
 
