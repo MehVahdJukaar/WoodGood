@@ -211,15 +211,15 @@ public class ValhelsiaStructuresModule extends EveryCompatModule {
                          TextureImage topTexture = TextureImage.open(manager,
                                  RPUtils.findFirstBlockTextureLocation(manager, w.getBlockOfThis("stripped_log"), CompatSpritesHelper.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
 
-                        String newId = BlockTypeResTransformer.replaceTypeNoNamespace("block/post/stripped_oak_post", w, id, "oak");
+                        ResourceLocation newResLoc = EveryCompat.res(BlockTypeResTransformer.replaceTypeNoNamespace("block/post/stripped_oak_post", w, id, "oak"));
 
                         try (TextureImage newTexture = logTexture.makeCopy();
                              TextureImage newTop = topTexture.makeCopy()) {
-                            sink.addTextureIfNotPresent(manager, newId, () -> newTexture);
+                            sink.addTextureIfNotPresent(manager, newResLoc, () -> newTexture);
 
                             CompatSpritesHelper.createSmallLogTopTexture(topTexture, newTop);
 
-                            sink.addTextureIfNotPresent(manager, newId + "_top", () -> newTop);
+                            sink.addTextureIfNotPresent(manager, newResLoc.withSuffix("_top"), () -> newTop);
                         }
 
                     } catch (Exception e) {
@@ -243,8 +243,6 @@ public class ValhelsiaStructuresModule extends EveryCompatModule {
             ) {
 
                 bundledPosts.blocks.forEach((w, block) -> {
-//                    String resLoc = "block/" + shortenedId() + "/" + w.getNamespace() + "/bundled_posts/bundled_"
-//                            + w.getTypeName() + "_posts";
                     ResourceLocation resLoc = ResourceLocation.parse(w.createFullIdWith(EveryCompat.MOD_ID, "block", shortenedId(),
                             "bundled_posts/bundled_", "posts"));
 
@@ -255,8 +253,6 @@ public class ValhelsiaStructuresModule extends EveryCompatModule {
                 });
 
                 bundledStrippedPosts.blocks.forEach((w, block) -> {
-//                    String newPath = "block/" + shortenedId() + "/" + w.getNamespace() + "/bundled_posts/bundled_stripped_"
-//                            + w.getTypeName() + "_posts";
                     ResourceLocation resLoc = ResourceLocation.parse(w.createFullIdWith(EveryCompat.MOD_ID, "block", shortenedId(),
                             "bundled_posts/bundled_stripped_", "posts"));
 
@@ -338,7 +334,7 @@ public class ValhelsiaStructuresModule extends EveryCompatModule {
                 while (targetTopOuter.getFirst().size() < 3) targetTopOuter.getFirst().increaseInner();
 
                 // Adding to the Resource
-                sink.addTextureIfNotPresent(manager, resLoc + "_top", () ->
+                sink.addTextureIfNotPresent(manager, resLoc.withSuffix("_top"), () ->
                         outerTopResp.recolorWithAnimation(targetTopOuter, metaTop)
                 );
             }
