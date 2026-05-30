@@ -91,6 +91,10 @@ public class CompatSpritesHelper {
         } // Archwood-Good add archwood_log and 5 colored planks for logs from Ars-Nouveau & Ars-Elemental
 
         // -------------------- Nature's Spirit
+        addOptional("natures_spirit", "joshua_log", "_side", "block/joshua_bundle"); // joshua_log.png is a 8x8
+        addOptional("natures_spirit", "joshua_log", "_top", "block/joshua_bundle_top"); // joshua_log_top.png is a 8x8
+        addOptional("natures_spirit", "stripped_joshua_log", "_side", "block/stripped_joshua_bundle"); // stripped_joshua_log.png is a 8x8
+        addOptional("natures_spirit", "stripped_joshua_log", "_top", "block/stripped_joshua_bundle_top"); // joshua_log_top.png is a 8x8
         // Leaves
         addOptional("natures_spirit", "joshua_leaves", "_leaves", "block/joshua_leaves"); // Was using joshua_ends.png
 
