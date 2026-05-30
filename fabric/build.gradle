@@ -224,7 +224,7 @@ dependencies {
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094") //!! NOT AVAILABLE
     modCompileOnly("curse.maven:wooden-hoppers-406021:4796143") //!! 1.20.1
 
-    modCompileOnly("curse.maven:regions-unexplored-659110:7434061") // Forge-Config-API-Port
+    modCompileOnly("curse.maven:regions-unexplored-659110:8167272") // Forge-Config-API-Port
 
         // OTHER MAVENS
     modCompileOnly("maven.modrinth:wilder-wild:4.0-mc1.21.1") // Frozen-Lib

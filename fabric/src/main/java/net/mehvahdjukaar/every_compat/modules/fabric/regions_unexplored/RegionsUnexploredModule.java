@@ -4,7 +4,7 @@ import net.mehvahdjukaar.every_compat.modules.regions_unexplored.RegionsUnexplor
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.world.level.block.Block;
-import net.regions_unexplored.world.level.block.plant.branch.BranchBlock;
+import net.regions_unexplored.block.type.wood.BranchBlock;
 import net.regions_unexplored.world.level.block.plant.tall.ShrubBlock;
 
 //See MacawFurnitureAbstractModule's SUPPORTED VERSION
@@ -21,7 +21,7 @@ public class RegionsUnexploredModule extends RegionsUnexploredModuleAbstract {
 
     @Override
     public Block newBranchBlock(WoodType w) {
-        return new BranchBlock(BRANCH_PROPERTIES, BranchBlock.BranchType.BRANCH);
+        return new BranchBlock(BRANCH_PROPERTIES);
     }
 
 }

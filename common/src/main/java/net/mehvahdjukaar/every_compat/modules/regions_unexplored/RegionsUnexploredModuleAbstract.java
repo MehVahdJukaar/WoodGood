@@ -35,7 +35,7 @@ import java.util.function.Supplier;
 
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.createAndAddCustomTags;
 
-///SUPPORT: v0.5.7+
+///SUPPORT: v0.6+
 public abstract class RegionsUnexploredModuleAbstract extends EveryCompatModule {
     public final BlockBehaviour.Properties BRANCH_PROPERTIES = BlockBehaviour.Properties.of().noOcclusion().sound(SoundType.MANGROVE_ROOTS).strength(1.0F, 1.5F).dynamicShape();
     public final BlockBehaviour.Properties SHRUB_PROPERTIES = BlockBehaviour.Properties.of().pushReaction(PushReaction.DESTROY).noCollission().instabreak().sound(SoundType.AZALEA).offsetType(BlockBehaviour.OffsetType.XZ);
@@ -52,9 +52,14 @@ public abstract class RegionsUnexploredModuleAbstract extends EveryCompatModule 
                         this::newBranchBlock
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK)
+                .addTag(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE, Registries.BLOCK)
+                .addTag(BlockTags.LOGS_THAT_BURN, Registries.BLOCK)
+                .addTag(BlockTags.PARROTS_SPAWNABLE_ON, Registries.BLOCK)
                 .addTag(modRes("branches_can_survive_on"), Registries.BLOCK)
-                .addTag(modRes("branches"), Registries.BLOCK)
-                .addTag(modRes("branches"), Registries.ITEM)
+                .addTag(modRes("supports/branches"), Registries.BLOCK)
+                .addTag(modRes("replaceable_blocks"), Registries.BLOCK)
+                .addTag(modRes("branches"), Registries.BLOCK, Registries.ITEM)
                 .setTab(tab)
                 .addRecipe(modRes("oak_branch_from_oak_log"))
                 //RECIPE-GENERATED: stick_from_oak_branch
@@ -72,9 +77,8 @@ public abstract class RegionsUnexploredModuleAbstract extends EveryCompatModule 
                     return log && sapling;
                 })
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("shrubs"), Registries.BLOCK)
-                .addTag(modRes("shrub_can_survive_on"), Registries.BLOCK)
-                .addTag(modRes("shrubs"), Registries.ITEM)
+                .addTag(modRes("shrubs"), Registries.BLOCK, Registries.ITEM)
+                .addTag(modRes("replaceable_blocks"), Registries.BLOCK)
                 .setTab(tab)
                 .addRecipe(modRes("dark_oak_sapling_from_dark_oak_shrub"))
                 .addRecipe(modRes("dark_oak_shrub"))

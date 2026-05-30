@@ -73,3 +73,11 @@ referralUrl = "https://www.curseforge.com/minecraft/mc-mods/blockus"
 versionRange = "[2.9.11,]"
 ordering = "AFTER"
 side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "regions_unexplored"
+type = "optional"
+referralUrl = "https://www.curseforge.com/minecraft/mc-mods/blockus"
+versionRange = "[0.6,]"
+ordering = "AFTER"
+side = "BOTH"
