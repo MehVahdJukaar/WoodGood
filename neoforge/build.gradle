@@ -1,13 +1,11 @@
 plugins {
-    id "com.github.johnrengelman.shadow" version "7.1.2"
+    id 'com.gradleup.shadow'
 
 }
 
 architectury {
     platformSetupLoomIde()
-    neoForge {
-        //platformPackage = "forge"
-    }
+    neoForge()
 }
 
 
@@ -82,9 +80,9 @@ publishing {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
-    neoForge "net.neoforged:neoforge:$neo_version"
+    neoForge "net.neoforged:neoforge:$neoforge_version"
 
-    common(project(path: ':common', configuration: 'namedElements')) { transitive false }
+    common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
     shadowCommon(project(path: ':common', configuration: 'transformProductionNeoForge'))
 
     implementation 'org.jetbrains:annotations:22.0.0'

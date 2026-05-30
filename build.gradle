@@ -1,10 +1,11 @@
 plugins {
     id "architectury-plugin" version "3.4-SNAPSHOT" apply false
-    id "dev.architectury.loom" version "1.14.+" apply false
+    id "dev.architectury.loom" version "1.13.+" apply false
     id "io.github.juuxel.loom-quiltflower" version "1.7.1" apply false
     id "com.matthewprenger.cursegradle" version "1.+"
     id "com.modrinth.minotaur" version "2.+"
     id "com.possible-triangle.publishing" version "1.2.67" apply false
+    id 'com.gradleup.shadow' version '8.3.6' apply false
 }
 
 allprojects {
@@ -14,7 +15,7 @@ allprojects {
 
     group = mod_group_id
     version = mod_version
-    archivesBaseName = mod_id
+    base.archivesName = mod_id
 
     repositories {
         // Standard repositories
@@ -32,12 +33,11 @@ allprojects {
         maven { url = "https://jitpack.io" }
 
         maven { url = "https://maven.neoforged.net/releases" }
-        maven { url = "https://maven.neoforged.net" }
         maven { url = "https://maven.architectury.dev" }
         maven { url = "https://maven.parchmentmc.org" }
 
         maven { url = "https://maven.createmod.net" } // Create Mod, Ponder, Flywheel
-        maven { url = "https://maven.blamejared.com" } // JEI, Vazkii's Mods
+        maven { url = "https://maven.blamejared.com" } // JEI, Vazkii's Mods, CraftTweaker
         maven { url = "https://maven.ladysnake.org/releases" } // Ladysnake mods
         maven { url = "https://maven.tterrag.com/" } // Flywheel, EnderIO
         maven { url = "https://maven.ithundxr.dev/snapshots" } // Registrate
@@ -54,17 +54,9 @@ allprojects {
         maven { url = "https://maven.firstdarkdev.xyz/snapshots" } // FirstDarkDev (snapshots)
         maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven" } // NeoForge-config-API-port
 
-        maven { url = "https://mvn.devos.one/snapshots/" }
-        maven { url = "https://mvn.devos.one/releases" } // Porting Lib Releases
         maven { url = "https://maven.shedaniel.me/" } // Cloth Config
-        maven { url = "https://maven.createmod.net" } // Create, Ponder, Flywheel
-        maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven" } // Forge-Config-API-Port
-        maven { url = "https://squiddev.cc/maven" } // CC: Tweaked
-        maven { name = "Jared's maven"; url = "https://maven.blamejared.com/" } // JEI, CraftTweaker
         maven { name = "ModMaven"; url = "https://modmaven.dev" } // Botania & FALLBACK for JEI
         maven { url = "https://maven.teamresourceful.com/repository/maven-public/" } // Chipped
-        maven { url = "https://maven.firstdarkdev.xyz/snapshots" }
-        maven { name = "TerraformersMC"; url = "https://maven.terraformersmc.com/" }
         maven { url = "https://raw.githubusercontent.com/moddingplayground/maven/main/" }
         maven { name = "Xander Maven"; url = "https://maven.isxander.dev/releases" } // Yet-Another-Config-Lib
         maven { url = "https://maven.resourcefulbees.com/repository/maven-public/" } // Resourceful-Lib
@@ -452,8 +444,8 @@ ext {
             mod_homepage         : mod_homepage,
             mod_github           : mod_github,
 
-            neo_version          : neoforge_version,
-            neo_version_range    : neoforge_version_range,
+            neoforge_version          : neoforge_version,
+            neoforge_version_range    : neoforge_version_range,
             loader_version_range : loader_version_range,
 
             moonlight_required_version: moonlight_required_version
