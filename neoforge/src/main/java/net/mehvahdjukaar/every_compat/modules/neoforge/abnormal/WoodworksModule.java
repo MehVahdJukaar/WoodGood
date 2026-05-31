@@ -9,6 +9,7 @@ import com.teamabnormals.woodworks.core.registry.WoodworksBlocks;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.every_compat.api.TabAddMode;
 import net.mehvahdjukaar.every_compat.common_classes.*;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
@@ -88,6 +89,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTag(Tags.Items.BOOKSHELVES, Registries.ITEM)
                 .addTag(ResourceLocation.parse("blueprint:wooden_bookshelves"), Registries.BLOCK, Registries.ITEM)
                 .setTab(getTab(tab))
+                .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .defaultRecipe()
                 .copyParentDrop()
                 .build();
@@ -111,6 +113,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTag(Tags.Items.BOOKSHELVES, Registries.ITEM)
                 .addTag(ResourceLocation.parse("blueprint:wooden_chiseled_bookshelves"), Registries.BLOCK, Registries.ITEM)
                 .setTab(getTab(tab))
+                .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .defaultRecipe()
                 .copyParentDrop()
                 .build();
@@ -126,6 +129,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_boards"), Registries.BLOCK, Registries.ITEM)
                 .setTab(getTab(tab))
+                .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .defaultRecipe()
                 .addRecipe(modRes("oak_boards_from_oak_planks_sawing"))
                 .build();
@@ -146,6 +150,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTag(ResourceLocation.parse("quark:ladders"), Registries.BLOCK, Registries.ITEM)
                 .addTag(ResourceLocation.parse("blueprint:wooden_ladders"), Registries.BLOCK, Registries.ITEM)
                 .setTab(getTab(tab))
+                .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .defaultRecipe()
                 .build();
         this.addEntry(ladders);
@@ -166,6 +171,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTag(BlockTags.BEEHIVES, Registries.BLOCK)
                 .addTag(ResourceLocation.parse("blueprint:wooden_beehives"), Registries.BLOCK, Registries.ITEM)
                 .setTab(getTab(tab))
+                .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .defaultRecipe()
                 .build();
         this.addEntry(beehives);
@@ -182,6 +188,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTag(ResourceLocation.parse("quark:revertable_chests"), Registries.ITEM)
                 .addTag(ResourceLocation.parse("quark:boatable_chests"), Registries.ITEM)
                 .setTab(getTab(tab))
+                .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .defaultRecipe()
                 .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
                 .build();
@@ -197,6 +204,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ResourceLocation.parse("blueprint:wooden_trapped_chests"), Registries.BLOCK, Registries.ITEM)
                 .setTab(getTab(tab))
+                .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .defaultRecipe()
                 .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
                 .build();
@@ -217,6 +225,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(modRes("leaf_piles"), Registries.BLOCK, Registries.ITEM)
                 .setTab(getTab(tab))
+                .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
                 .copyParentTint()
