@@ -30,6 +30,10 @@
   "container.everycomp.chest.name": "%s Chest",
 
 
+  "block.everycomp.q.enderscape.hollow_celestial_log": "Hollow Celestial Stem",
+  "block.everycomp.q.enderscape.hollow_murublight_log": "Hollow Murublight Stem",
+  "block.everycomp.q.infernalexp.hollow_luminous_log": "Hollow Luminous Stem",
+
   "block.everycomp.q.sniffed_out.hollow_vessel_log": "Hollow Vessel Stem",
 
   "block.everycomp.q.soulfulnether.hollow_fright_log": "Hollow Fright Stem",
@@ -90,6 +94,10 @@
   "block.everycomp.tf.soulfulnether.hollow_fright_log": "Hollow Fright Stem",
 
   "block.everycomp.tf.sniffed_out.hollow_vessel_log": "Hollow Vessel Stem",
+
+  "block.everycomp.tf.enderscape.hollow_celestial_log": "Hollow Celestial Stem",
+  "block.everycomp.tf.enderscape.hollow_murublight_log": "Hollow Murublight Stem",
+  "block.everycomp.tf.infernalexp.hollow_luminous_log": "Hollow Luminous Stem",
 
 
   "wood_type.blocksplus.bamboo": "Green Bamboo",
