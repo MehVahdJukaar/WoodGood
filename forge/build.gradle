@@ -30,12 +30,11 @@ configurations {
 
 
 processResources {
-    inputs.property "version", project.version
-    //inputs.property "mod_name": project.getArchivesBaseName()
-
-    filesMatching("META-INF/mods.toml") {
-        expand "version": project.version
-        expand "mod_name": project.getArchivesBaseName()
+    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+        filter { String line ->
+            line.replace("@@pack_format_number@@", (pack_format_number as Integer).toString())
+        }
+        expand rootProject.ext.replaceProperties + [project: project]
     }
 }
 

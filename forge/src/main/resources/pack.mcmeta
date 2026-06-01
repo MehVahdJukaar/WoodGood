@@ -1,7 +1,6 @@
 {
     "pack": {
-        "description": "Mod resources",
-        "pack_format": 6,
-        "_comment": "uwu"
+        "description": "Every Compat (Wood Good) resources",
+        "pack_format": @@pack_format_number@@
     }
 }

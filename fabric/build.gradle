@@ -21,11 +21,8 @@ configurations {
 }
 
 processResources {
-    inputs.property "version", project.version
-    inputs.property "mod_id", mod_id
-
-    filesMatching("fabric.mod.json") {
-        expand "version": project.version, "mod_id": mod_id
+    filesMatching('fabric.mod.json') {
+        expand rootProject.ext.replaceProperties + [project: project]
     }
 }
 

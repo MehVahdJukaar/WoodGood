@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "id": "everycomp",
-  "version": "${version}",
-  "name": "Every Compat",
-  "description": "Ultimate Wood Compat Mod",
+  "id": "${mod_id}",
+  "version": "${mod_version}",
+  "name": "${mod_name}",
+  "description": "${mod_description}",
   "authors": [
-    "MehVahdJukaar"
+    "${mod_authors}"
   ],
   "contact": {
-    "homepage": "https://github.com/MehVahdJukaar/every_compat",
-    "sources": "https://github.com/MehVahdJukaar/WoodGood"
+    "homepage": "${mod_homepage}",
+    "sources": "${mod_github}"
   },
-  "license": "ARR",
+  "license": "${mod_license}",
   "icon": "logo.png",
   "environment": "*",
   "mixins": [
@@ -27,8 +27,8 @@
   },
   "depends": {
     "fabric": "*",
-    "minecraft": ">=1.20",
-    "moonlight": ">=1.20-2.16.0"
+    "minecraft": ">=${minecraft_min_version} <${minecraft_max_version}",
+    "moonlight": ">=${moonlight_required_version}"
   },
   "recommends": {
     "sawmill": "*"

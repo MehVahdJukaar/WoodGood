@@ -15,9 +15,9 @@ allprojects {
     apply plugin: "architectury-plugin"
     apply plugin: "maven-publish"
 
-    archivesBaseName = rootProject.mod_id
-    version = rootProject.mod_version
-    group = rootProject.maven_group
+    base.archivesName = mod_id
+    version = mod_version
+    group = mod_group_id
 
     repositories {
 
@@ -124,24 +124,137 @@ subprojects {
     var changelogFile = rootProject.file("changelog.md")
     var changelogText = changelogFile.exists() ? changelogFile.text : ""
 
+    var versions = listGameVersions(minecraft_min_version, minecraft_version)
+
     if (env.MODRINTH_TOKEN) {
         modrinth {
             projectId = "${modrinth_id}"
             uploadFile = tasks.remapJar
             additionalFiles.add(tasks.remapSourcesJar)
-            gameVersions = [minecraft_version]
+            gameVersions = versions
             loaders = [modLoader]
             changelog = changelogText
-            versionNumber = mod_version + '-' + modLoader
+            versionNumber = mod_version +"-"+ modLoader
+            versionType = release_type
 
             if (modLoader == "fabric") {
                 dependencies {
                     required.project "fabric-api"
                     required.project "moonlight"
+                    optional.project("another-furniture")
+                    optional.project("architects-palette-fabric")
+//                    optional.project("backpacked")
+                    optional.project("guitas-woodworks")
+                    optional.project("building-but-better")
+                    optional.project("camp-chair")
+                    optional.project("chipped")
+                    optional.project("clutter")
+//                    optional.project("corail-pillar")
+                    optional.project("create-fabric")
+                    optional.project("dawn-of-time")
+                    optional.project("decorative-blocks")
+                    optional.project("dramatic-doors")
+                    optional.project("exlines-awnings")
+                    optional.project("bark-carpets")
+                    optional.project("excessive-building")
+                    optional.project("farmers-delight-fabric")
+                    optional.project("farmers-delight-refabricated")
+                    optional.project("friends-and-foes")
+                    optional.project("furnish")
+                    optional.project("handcrafted")
+                    optional.project("hearth-and-home")
+                    optional.project("infinitybuttons")
+                    optional.project("lightmans-currency")
+                    optional.project("macaws-bridges")
+                    optional.project("macaws-doors")
+                    optional.project("macaws-fences-and-walls")
+                    optional.project("macaws-furniture")
+                    optional.project("macaws-lights-and-lamps")
+                    optional.project("macaws-paths-and-pavings")
+                    optional.project("macaws-roofs")
+                    optional.project("macaws-trapdoors")
+                    optional.project("macaws-windows")
+//                    optional.project("mighty-mail-fabric")
+                    optional.project("missing-wilds")
+                    optional.project("more-beautiful-torches")
+                    optional.project("more-crafting-tables-lieonlion")
+                    optional.project("quark")
+                    optional.project("regions-unexplored")
+//                    optional.project("the-twilight-forest") //NOT AVAILABLE
+                    optional.project("table-top-craft")
+                    optional.project("twigs")
+                    optional.project("valhelsia-furniture")
+                    optional.project("variant-vanilla-blocks")
+                    optional.project("villagersplus")
+                    optional.project("wooden-hoppers")
                 }
             } else {
                 dependencies {
                     required.project "moonlight"
+                    optional.project("sawmill")
+                    optional.project("absent-by-design")
+                    optional.project("another-furniture")
+                    optional.project("architects-palette")
+                    optional.project("bibliocraft-legacy")
+                    optional.project("boatload")
+                    optional.project("guitas-woodworks")
+                    optional.project("buildersaddition")
+                    optional.project("building-but-better")
+                    optional.project("camp-chair")
+                    optional.project("chipped")
+//                    optional.project("corail-pillar")
+                    optional.project("create")
+                    optional.project("decorative-blocks")
+//                    optional.project("decoration-delight")
+//                    optional.project("domum-ornamentum")
+                    optional.project("dramatic-doors")
+                    optional.project("bark-carpets")
+                    optional.project("excessive-building")
+                    optional.project("farmers-delight")
+                    optional.project("friends-and-foes-forge")
+                    optional.project("functional-storage")
+                    optional.project("furnish")
+                    optional.project("handcrafted")
+                    optional.project("hearth-and-home")
+                    optional.project("infinitybuttons")
+                    optional.project("just-a-raft-mod")
+                    optional.project("lightmans-currency")
+                    optional.project("macaws-bridges")
+                    optional.project("macaws-doors")
+                    optional.project("macaws-fences-and-walls")
+                    optional.project("macaws-furniture")
+                    optional.project("macaws-lights-and-lamps")
+                    optional.project("macaws-paths-and-pavings")
+                    optional.project("macaws-roofs")
+                    optional.project("macaws-trapdoors")
+                    optional.project("macaws-windows")
+//                    optional.project("mighty-mail")
+                    optional.project("missing-wilds")
+                    optional.project("more-beautiful-torches")
+                    optional.project("more-chest-variants-lieonlion")
+//                    optional.project("more-crafting-tables-for-forge")
+                    optional.project("more-crafting-tables-lieonlion")
+                    optional.project("mosaic-carpentry")
+//                    optional.project("pokecube-aoi")
+                    optional.project("premium-wood")
+//                    optional.project("productivebees")
+                    optional.project("quark")
+                    optional.project("redeco")
+                    optional.project("regions-unexplored")
+                    optional.project("storage-drawers")
+                    optional.project("timber-frames")
+                    optional.project("the-graveyard-forge")
+                    optional.project("the-twilight-forest")
+                    optional.project("table-top-craft")
+                    optional.project("tropicraft")
+                    optional.project("twigs")
+                    optional.project("valhelsia-furniture")
+                    optional.project("variant-crafting-tables")
+                    optional.project("variant-vanilla-blocks")
+                    optional.project("villagersplus")
+                    optional.project("woodworks")
+                    optional.project("workshop-for-handsome-adventurer")
+                    optional.project("xercamod")
                 }
             }
         }
@@ -294,6 +407,46 @@ subprojects {
             }
         }
     }
+
+}
+
+// --- Utils
+static def listGameVersions(String minVersion, String maxVersion) {
+// minVersion like "1.20", maxVersion like "1.20.4"
+    def versions = []
+    versions << minVersion
+    int endPatch = Integer.parseInt(maxVersion.split('\\.')[2])
+    for (int i = 1; i <= endPatch; i++) {
+        versions << "${minVersion}.${i}"
+    }
+    return versions
+}
+
+ext {
+    var usesMavenLocalML = System.getenv().MY_PC == "1"
+    print "isMyPc: $usesMavenLocalML\n"
+    replaceProperties = [
+            minecraft_version    : minecraft_version,
+            minecraft_min_version: minecraft_min_version,
+            minecraft_max_version: minecraft_max_version,
+            pack_format_number   : pack_format_number,
+
+            mod_id               : mod_id,
+            mod_name             : mod_name,
+            mod_version          : mod_version,
+            mod_license          : mod_license,
+            mod_authors          : mod_authors,
+            mod_description      : mod_description,
+            mod_credits          : mod_credits,
+            mod_homepage         : mod_homepage,
+            mod_github           : mod_github,
+
+            forge_version        : forge_version,
+            forge_version_range  : forge_version_range,
+            loader_version_range : loader_version_range,
+
+            moonlight_required_version: moonlight_required_version
+    ]
 }
 
 tasks.register('buildAndPublishAll') {
@@ -318,11 +471,12 @@ tasks.register('gitTag') {
     description = 'Create and push git tag from project version'
 
     doLast {
+        def execOps = services.get(ExecOperations)
         def tag = project.version.toString()
 
         // check if tag already exists
         def stdout = new ByteArrayOutputStream()
-        exec {
+        execOps.exec {
             commandLine 'git', 'tag', '-l', tag
             standardOutput = stdout
         }
@@ -332,12 +486,12 @@ tasks.register('gitTag') {
         } else {
 
             // create annotated tag
-            exec {
+            execOps.exec {
                 commandLine 'git', 'tag', '-a', tag, '-m', "Release ${tag}"
             }
 
             // push tag
-            exec {
+            execOps.exec {
                 commandLine 'git', 'push', 'origin', tag
             }
         }
