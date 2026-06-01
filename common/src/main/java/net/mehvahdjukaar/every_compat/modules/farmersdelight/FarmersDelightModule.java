@@ -42,8 +42,9 @@ import static java.util.Map.entry;
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
-// SUPPORT: FABRIC-v3.2.0+ | NEOFORGE-v1.2.9+
+//SUPPORT: FABRIC-v3.2.0+ | NEOFORGE-v1.2.9+
 public class FarmersDelightModule extends EveryCompatModule {
+//NOTE: the new version has a reworked recipe system since v3.3.0+ or v1.3.0+
 
     public final SimpleEntrySet<WoodType, Block> cabinets;
 
