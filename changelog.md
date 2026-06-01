@@ -1,17 +1,37 @@
-| **Legends**                                                                                                                      |
-|----------------------------------------------------------------------------------------------------------------------------------|
-| - **(C)**: FORGE & FABRIC                                                                                                        |
-| - **(FB)**: FABRIC                                                                                                               |
-| - **(NF)**: NEOFORGE                                                                                                             |
+| **Legends**                                                                                                                       |
+|-----------------------------------------------------------------------------------------------------------------------------------|
+| \- **(C)**: FORGE & FABRIC                                                                                                        |
+| - **(FB)**: FABRIC                                                                                                                |
+| - **(NF)**: NEOFORGE                                                                                                              |
 | - **(IT)**: Included Texture — added the ResourceLocation of the missing textures required for blocks or generating a new texture |
-| - **(TEX)**: hand-made textures to improve the way a block looks                                                                 |
-| - **(COMPAT)**: Create an exception for a compat mod. EveryCompat won't include the Supported Mod and the Wood Mod               |
+| - **(TEX)**: hand-made textures to improve the way a block looks                                                                  |
+| - **(COMPAT)**: Create an exception for a compat mod. EveryCompat won't include the Supported Mod and the Wood Mod                |
 | - **(INCLUDED)**: The block is not generated because a Wood Mod already has the same block as the supported mod will be generated |
-| - **(EXCLUDED)**: The block is generated BUT it shouldn't be generated for a reason                                              |
-| - **(UDBT)**: Undetected BlockTypes will be manually added                                                                       |
-|                                                                                                                                  |
+| - **(EXCLUDED)**: The block is generated BUT it shouldn't be generated for a reason                                               |
+| - **(UDBT)**: Undetected BlockTypes will be manually added                                                                        |
+|                                                                                                                                   |
 
 ---
+
+## v2.11.42
+
+### CHANGES:
+- **Regions Unexplored** (C): Updated to support v0.6+ and the older version won't be supported onward - [#1262](https://github.com/MehVahdJukaar/WoodGood/issues/1262)
+- **Woodworks** (NF): Change the order of how items are placed in Creative Tab, Items are placed after the same WoodType instead of DecorativeType or FurnitureType - [#1259](https://github.com/MehVahdJukaar/WoodGood/issues/1259)
+- **Farmer's Delight** (C): Updated the recipe generation for the new recipe system since FABRIC-v3.3.0+ or NEOFORGE-v1.3.0+ - [#1257](https://github.com/MehVahdJukaar/WoodGood/issues/1257)
+
+### ADDED:
+- **Valhelsia Structures** (INCLUDED): With **Quark** for POST & STRIPPED_POST - [#1260](https://github.com/MehVahdJukaar/WoodGood/issues/1260)
+
+### LANG:
+- **EN_US**: Corrected the LANG for HOLLOW_LOG from **The Twilight Forest** & **Quark** with **Enderscape** & **Infernal Expansion**
+
+### FIXES:
+- **Every Compat** (FB): Exclude **Lauch's Shutters aka The New Shutter** from being loaded when **Vanilla Shutters** is installed - [#1261](https://github.com/MehVahdJukaar/WoodGood/issues/1261)
+- **Nature's Spirit** (IT): Using `joshua_bundle` and `stripped_joshua_bundle` instead of `joshua_log` and `stripped_joshua_log` for texture generation - [#1251](https://github.com/MehVahdJukaar/WoodGood/issues/1251)
+- **Alex's Caves (Unofficial Port)** (IT): Fixed the missing texture for WoodType, thornwood using either log or stripped_log - [#1258](https://github.com/MehVahdJukaar/WoodGood/issues/1258)
+
+--- 
 
 ## v2.11.41
 
