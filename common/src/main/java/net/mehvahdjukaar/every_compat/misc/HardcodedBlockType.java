@@ -17,7 +17,7 @@ public class HardcodedBlockType {
     public static String woodTypeFromMod;
     public static String leavesidentify;
     public static String leavesTypeFromMod;
-    public static String supportedModId;
+    public static String supportedMod;
     public static String supportedBlockName;
 
     public static final List<String> FRAMED_BLOCKS_SUFFIX = List.of(
@@ -69,12 +69,15 @@ public class HardcodedBlockType {
     public static Boolean isWoodBlockAlreadyRegistered(String entrySetId, String blockName, WoodType woodType, String supportedModId) {
         woodTypeFromMod = woodType.getNamespace();
         woodidentify = woodType.getId().toString();
-        HardcodedBlockType.supportedModId = supportedModId;
+        supportedMod = supportedModId;
         supportedBlockName = blockName;
 
         String blockId = supportedModId +"/"+ woodTypeFromMod +"/"+ blockName;
 
         /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ SPECIAL EXCLUSION ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // Exclude blocks from a mod that are both Supported-Mod & Wood-Mod
+        if (woodType.getNamespace().equals(supportedModId)) return false;
 
         // Exclude one WoodType from a Wood Mod
         if (WOOD_TYPES_BLACKLIST.get().stream().anyMatch(woodidentify::matches)) return true;
@@ -175,12 +178,15 @@ public class HardcodedBlockType {
     public static Boolean isLeavesBlockAlreadyRegistered(String entrySetId, String blockName, LeavesType leavesType, String supportedModId) {
         leavesTypeFromMod = leavesType.getNamespace();
         leavesidentify = leavesType.getId().toString();
-        HardcodedBlockType.supportedModId = supportedModId;
+        supportedMod = supportedModId;
         supportedBlockName = blockName;
 
         String blockId = supportedModId +"/"+ leavesTypeFromMod +"/"+ blockName;
 
-        /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ EXCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ SPECIAL EXCLUSION ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        // Exclude blocks from a mod that are both Supported-Mod & Wood-Mod
+        if (leavesType.getNamespace().equals(supportedModId)) return false;
 
         // Exclude one LeavesType from a Wood mod
         if (LEAVES_TYPES_BLACKLIST.get().stream().anyMatch(leavesidentify::matches)) return true;
@@ -190,6 +196,8 @@ public class HardcodedBlockType {
 
         // Exclude one EntrySet from a module
         if (ENTRY_SETS_BLACKLIST.get().stream().anyMatch(entrySetId::matches)) return true;
+
+        /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ EXCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
         // Exclude all of Vanilla Types
         if (isKnownVanillaLeaves(leavesType)) return true;
@@ -227,8 +235,6 @@ public class HardcodedBlockType {
     public static Boolean isWoodFrom(String SupportedModId, String woodtypeFromMod, String woodTypeId,
                                      String supportedBlockId) {
 
-        if (woodTypeFromMod.equals(supportedModId)) return false;
-
         String[] expressions = {
                 SupportedModId,
                 woodtypeFromMod,
@@ -237,7 +243,7 @@ public class HardcodedBlockType {
         };
 
         String[] values = {
-                supportedModId,
+                supportedMod,
                 woodTypeFromMod,
                 woodidentify,
                 supportedBlockName
@@ -267,8 +273,6 @@ public class HardcodedBlockType {
     public static Boolean isLeavesFrom(String whichSupportedModId, String leavestypeFromMod, String leavesTypeId,
                                        String supportedBlockId) {
 
-        if (woodTypeFromMod.equals(supportedModId)) return false;
-
         String[] expressions = {
                 whichSupportedModId,
                 leavestypeFromMod,
@@ -277,7 +281,7 @@ public class HardcodedBlockType {
         };
 
         String[] values = {
-                supportedModId,
+                supportedMod,
                 leavesTypeFromMod,
                 leavesidentify,
                 supportedBlockName
