@@ -119,7 +119,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:flib-661261:5495793") // Absent-By-Design //!! 1.20.1
 //    modRuntimeOnly("curse.maven:curios-309927:5680164") // Malum //!! 1.20.1
 //    modRuntimeOnly("curse.maven:lodestone-616457:5712854") // Malum //!! 1.20.1
-//    modRuntimeOnly("curse.maven:citadel-331936:5143956") // Alex's Cave //!! 1.20.1
+    modRuntimeOnly("curse.maven:citadel-1-21-1-port-1415723:7982052") // v2.7.6 | Alex's Caves
 //    modRuntimeOnly("curse.maven:structure-gel-api-378802:5188368") // Blue-Skies //!! 1.20.1
 //    modRuntimeOnly("curse.maven:monolib-968432:6123990") //v2.0.0 | More-Beautiful-Torches
 //    modRuntimeOnly("curse.maven:quad-932715:5900860") // v1.2.9 | More-Chest-Variants, More-Crafting-Table
@@ -259,11 +259,11 @@ dependencies {
 //    modRuntimeOnly("curse.maven:strata-forge-edition-387296:4989643") // STONE-TYPES //!! 1.20.1
 //    modRuntimeOnly("curse.maven:endless-biomes-667688:5109705") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:blue-skies-312918:5010316") // structure-gel-api //!! 1.20.1
-    modRuntimeOnly("curse.maven:biomes-o-plenty-220318:6501142") // Terrablender, GlitchCore
+//    modRuntimeOnly("curse.maven:biomes-o-plenty-220318:6501142") // Terrablender, GlitchCore
 //    modRuntimeOnly("curse.maven:upgrade-aquatic-326895:6969604") // Blueprint
 //    modRuntimeOnly("curse.maven:autumnity-365045:7118591") // Blueprint
 //    modRuntimeOnly("curse.maven:the-outer-end-430404:5043937") // Blueprint //!! 1.20.1
-//    modRuntimeOnly("curse.maven:alexs-caves-924854:5162617") // citadel //!! 1.20.1
+    modRuntimeOnly("curse.maven:alexs-caves-unofficial-port-1420348:7981977") // citadel
 //    modRuntimeOnly("curse.maven:deeperdarker-659011:6463247")
 //    modRuntimeOnly("curse.maven:frightful-winter-1241289:6447798")
 //    modRuntimeOnly("curse.maven:natures-spirit-1044992:6962784") // Tinted LeavesType
