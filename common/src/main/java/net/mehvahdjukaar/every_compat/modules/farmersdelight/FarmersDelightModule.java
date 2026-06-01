@@ -18,10 +18,10 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -32,6 +32,8 @@ import vectorwing.farmersdelight.common.crafting.ingredient.ChanceResult;
 import vectorwing.farmersdelight.common.item.FuelBlockItem;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -98,28 +100,20 @@ public class FarmersDelightModule extends EveryCompatModule {
             for (WoodType woodType : WoodTypeRegistry.INSTANCE) {
                 if (HardcodedBlockType.isKnownVanillaWood(woodType)) continue;
 
-                // Skip if one of Farmer's-Cutting mods is installed
+                // Skip if one of Farmer's-Cutting compat mods is installed
                 String namespaceRegex = COMPAT_RECIPE_MODS.getOrDefault(woodType.getNamespace(), "none");
                 boolean isRecipeModNotInstalled = !PlatHelper.getInstalledMods().contains(namespaceRegex);
-                boolean isCollectionModNotInstalled = PlatHelper.getInstalledMods().contains("mr_farmers_cuttingcollection")
+                boolean isCollectionModNotInstalled = !PlatHelper.getInstalledMods().contains("mr_farmers_cuttingcollection")
                         && !COMPAT_RECIPE_MODS.containsKey(woodType.getNamespace());
 
                 if (isRecipeModNotInstalled && isCollectionModNotInstalled) {
-
-                    //adding compat cutting board recipes for vanilla modded stuff i guess
-                    createCuttingRecipe(DOOR, woodType.getBlockOfThis(DOOR),
-                            woodType, sink, manager);
-                    createCuttingRecipe(HANGING_SIGN, woodType.getBlockOfThis(HANGING_SIGN),
-                            woodType, sink, manager);
-                    createCuttingRecipe(SIGN, woodType.getBlockOfThis(SIGN),
-                            woodType, sink, manager);
-                    createCuttingRecipe(TRAPDOOR, woodType.getBlockOfThis(TRAPDOOR),
-                            woodType, sink, manager);
                     createCuttingRecipe(LOG, woodType.getBlockOfThis(LOG),
                             woodType, sink, manager);
                     createCuttingRecipe(WOOD, woodType.getBlockOfThis(WOOD),
                             woodType, sink, manager);
 
+                    createSalvagingRecipe("furniture", woodType, sink, manager);
+                    createSalvagingRecipe(CHEST_BOAT, woodType, sink, manager);
                 }
             }
         });
@@ -133,30 +127,87 @@ public class FarmersDelightModule extends EveryCompatModule {
         String recipeLocation = modRes("cutting/oak_" + recipeType).toString();
         Recipe<?> recipe = RPUtils.readRecipe(manager, recipeLocation);
 
-        if (recipe instanceof CuttingBoardRecipe crRecipe) {
+        if (recipe instanceof CuttingBoardRecipe cuttingRecipe) {
 
-            String path = this.shortenedId() + "/cutting/" + targetType.getAppendableId() + "_" + recipeType;
 
-            NonNullList<ChanceResult> oldResult = crRecipe.getRollableResults();
+            NonNullList<ChanceResult> oldResult = cuttingRecipe.getRollableResults();
             NonNullList<ChanceResult> newResult = NonNullList.withSize(oldResult.size(), ChanceResult.EMPTY);
-            for (int i = 0; i < oldResult.size(); i++) {
-                ChanceResult r = oldResult.get(i);
-                Item critem = r.stack().getItem();
-                WoodType originalType = WoodTypeRegistry.INSTANCE.getBlockTypeOf(critem);
+            for (int idx = 0; idx < oldResult.size(); idx++) {
+                ChanceResult chanceResult = oldResult.get(idx);
+                Item baseItem = chanceResult.stack().getItem();
+                WoodType originalType = WoodTypeRegistry.INSTANCE.getBlockTypeOf(baseItem);
                 if (originalType == VanillaWoodTypes.OAK) {
-                    Item newItem = BlockSetAPI.changeItemType(critem, originalType, targetType);
+                    Item newItem = BlockSetAPI.changeItemType(baseItem, originalType, targetType);
                     if (newItem != null) {
-                        newResult.set(i, new ChanceResult(r.stack().transmuteCopy(newItem), r.chance()));
+                        newResult.set(idx, new ChanceResult(chanceResult.stack().transmuteCopy(newItem), chanceResult.chance()));
                         continue;
                     }
                 }
-                newResult.set(i, r);
+                newResult.set(idx, chanceResult);
             }
-            CuttingBoardRecipe newRec = new CuttingBoardRecipe(modRes("cutting").toString(),
-                    Ingredient.of(input), crRecipe.getTool(), newResult, crRecipe.getSoundEvent());
+            String newPath = targetType.createPathWith(shortenedId(), "cutting/", recipeType);
+            CuttingBoardRecipe newRecipe = new CuttingBoardRecipe(modRes("cutting").toString(),
+                    Ingredient.of(input), cuttingRecipe.getTool(), newResult, cuttingRecipe.getSoundEvent());
 
-            ResourceLocation recipePath = EveryCompat.res(path);
-            sink.addRecipe(new RecipeHolder<>(recipePath, newRec));
+            sink.addRecipe(new RecipeHolder<>(EveryCompat.res(newPath), newRecipe));
+        }
+    }
+
+    public void createSalvagingRecipe(String recipeType, WoodType newWoodType, ResourceSink sink, ResourceManager manager) {
+
+        String recipeLocation = modRes("salvaging/oak_" + recipeType).toString();
+        Recipe<?> recipe = RPUtils.readRecipe(manager, recipeLocation);
+
+        if (recipe instanceof CuttingBoardRecipe cuttingRecipe) {
+
+            boolean isIngredientModified = false;
+            NonNullList<ChanceResult> oldResult = cuttingRecipe.getRollableResults();
+            NonNullList<ChanceResult> newResult = NonNullList.withSize(oldResult.size(), ChanceResult.EMPTY);
+
+            var oldIngredients = cuttingRecipe.getIngredients();
+            var oldItemStacks = oldIngredients.getFirst().getItems();
+
+            List<ItemStack> itemStackList = new ArrayList<>();
+
+            /// Modifying Ingredients
+            for (ItemStack oldItemStack : oldItemStacks) {
+
+                Item oldItem = oldItemStack.getItem();
+                WoodType oldWoodType = WoodTypeRegistry.INSTANCE.getBlockTypeOf(oldItem);
+                Item newItem = BlockSetAPI.changeItemType(oldItem, oldWoodType, newWoodType);
+
+                if (newItem != null) {
+                    itemStackList.add(new ItemStack(newItem));
+                    isIngredientModified = true;
+                }
+            }
+
+            if (isIngredientModified) {
+                Ingredient newIngredient = Ingredient.of(itemStackList.stream());
+
+                /// Modifying result
+                for (int idx = 0; idx < oldResult.size(); idx++) {
+                    ChanceResult chanceResult = oldResult.get(idx);
+                    Item baseItem = chanceResult.stack().getItem();
+                    WoodType originalType = WoodTypeRegistry.INSTANCE.getBlockTypeOf(baseItem);
+                    if (originalType == VanillaWoodTypes.OAK) {
+                        Item newItem = BlockSetAPI.changeItemType(baseItem, originalType, newWoodType);
+                        if (newItem != null) {
+                            newResult.set(idx, new ChanceResult(chanceResult.stack().transmuteCopy(newItem), chanceResult.chance()));
+                            continue;
+                        }
+                    }
+                    newResult.set(idx, chanceResult);
+                }
+
+                String newPath = newWoodType.createPathWith(shortenedId(), "salvaging/", recipeType);
+                CuttingBoardRecipe newRecipe = new CuttingBoardRecipe(modRes("cutting").toString(),
+                        newIngredient, cuttingRecipe.getTool(), newResult, cuttingRecipe.getSoundEvent());
+
+                sink.addRecipe(new RecipeHolder<>(EveryCompat.res(newPath), newRecipe));
+            }
+            else
+                EveryCompat.LOGGER.warn("SalvagingRecipe - Skipping due to no ingredients being modified for {}", newWoodType.getId());
         }
     }
 
