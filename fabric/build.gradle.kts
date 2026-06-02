@@ -104,9 +104,9 @@ dependencies {
 //    modRuntimeOnly("curse.maven:dawn-of-time-312359:7029308")
 //    modRuntimeOnly("curse.maven:decorative-blocks-reborn-1327768:6897415")
 //    modRuntimeOnly("curse.maven:excessive-building-845097:6075987") // v3.3.10
-modCompileOnly("curse.maven:exlines-bark-carpets-527296:4661550") //!! 1.20.1
-modCompileOnly("curse.maven:farmers-delight-refabricated-993166:8088691")
-modCompileOnly("curse.maven:friends-and-foes-551364:8154503")
+    modCompileOnly("curse.maven:exlines-bark-carpets-527296:4661550") //!! 1.20.1
+    modCompileOnly("curse.maven:farmers-delight-refabricated-993166:8088691")
+    modCompileOnly("curse.maven:friends-and-foes-551364:8154503")
 //    modRuntimeOnly("curse.maven:furnish-547069:5683297")
 //    modRuntimeOnly("curse.maven:handcrafted-538214:5617253")
 //    modRuntimeOnly("curse.maven:hearth-and-home-849364:4828281") //!! 1.20.1
@@ -117,9 +117,9 @@ modCompileOnly("curse.maven:friends-and-foes-551364:8154503")
 //    modRuntimeOnly("curse.maven:rechiseled-558998:7687483") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ]
 //    modRuntimeOnly("curse.maven:storage-drawers-223852:6967726")
 //    modRuntimeOnly("curse.maven:table-top-craft-fabric-729535:5319819") //@RLM: exp4j //!! 1.20.1
-modCompileOnly("curse.maven:twigs-496913:4605097") //!! 1.20.1
+    modCompileOnly("curse.maven:twigs-496913:4605097") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:valhelsia-furniture-694349:5189603") //!! 1.20.1
-modCompileOnly("curse.maven:variant-vanilla-blocks-866509:5703471") // v2.1
+    modCompileOnly("curse.maven:variant-vanilla-blocks-866509:5703471") // v2.1
 //    modRuntimeOnly("curse.maven:villagersplus-fabric-809542:4996993") //!! 1.20.1
 
     //- OTHER MAVENS
