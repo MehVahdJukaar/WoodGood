@@ -119,7 +119,7 @@ dependencies {
     modCompileOnly("curse.maven:twigs-496913:4605097") //!! 1.20.1
     modCompileOnly("maven.modrinth:valhelsia-furniture:1.1.3") //!! 1.20.1
     modCompileOnly("curse.maven:variant-vanilla-blocks-866509:5703471")
-    modCompileOnly("curse.maven:villagersplus-fabric-809542:5703471") //!! 1.20.1
+//    modCompileOnly("curse.maven:villagersplus-fabric-809542:4996993") //!! 1.20.1
 
     //- OTHER MAVENS
 //    modRuntimeOnly("maven.modrinth:stylish-stiles:zLlRqz68") //!! 1.20.1
