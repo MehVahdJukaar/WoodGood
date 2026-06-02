@@ -141,7 +141,7 @@ dependencies {
     modCompileOnly("maven.modrinth:macaws-stairs:1.0.2")
 
     //+ GENERAL
-    modCompileOnly("maven.modrinth:absent-by-design:1.21.1-1.9.2") //!! 1.20.1
+    modCompileOnly("maven.modrinth:absent-by-design:1.21.1-1.9.2")
     modCompileOnly("maven.modrinth:beautify:2.0.2")
     modCompileOnly("maven.modrinth:bibliocraft-legacy:1.21.1-1.6.5")
     modCompileOnly("maven.modrinth:boatload:5.0.1") //!! 1.20.1
@@ -149,20 +149,20 @@ dependencies {
     modCompileOnly("curse.maven:corail-pillar-266228:5669131") //TODO: Move the module to COMMON
     modCompileOnly("maven.modrinth:curiosities-syndicate:0.2.1") // Blueprint
     modCompileOnly("curse.maven:decoration-delight-687475:5563942") //!! 1.20.1
-    modCompileOnly("curse.maven:domum-ornamentum-527361:7812603") //!! 1.20.1
+    modCompileOnly("curse.maven:domum-ornamentum-527361:7812603")
     modCompileOnly("maven.modrinth:dramatic-doors:1.21.1-3.3.2")
     modCompileOnly("maven.modrinth:functional-storage:1.21-1.5.7")
     modCompileOnly("curse.maven:infinity-buttons-661902:6630983") //!! 1.20.1
     modCompileOnly("maven.modrinth:just-a-raft-mod:7.0.4")
     modCompileOnly("maven.modrinth:lightmans-currency:1.20.1-2.3.0.4g")
-    modCompileOnly("curse.maven:mighty-mail-902986:6542124") //!! 1.20.1
+    modCompileOnly("curse.maven:mighty-mail-902986:6542124")
     modCompileOnly("curse.maven:missing-wilds-622590:6302230")
-    modCompileOnly("curse.maven:more-crafting-tables-for-forge-417365:6002554") //CRAFTING_TABLES for FORGE //!! 1.20.1
+    modCompileOnly("curse.maven:more-crafting-tables-for-forge-417365:6002554") //CRAFTING_TABLES for FORGE
     modCompileOnly("maven.modrinth:mosaic-carpentry:1.3") //!! 1.20.1
     modCompileOnly("maven.modrinth:oreberries-replanted:0.5.2") //!! 1.20.1
-    modCompileOnly("curse.maven:pokecube-aoi-285121:7374140") //!! 1.20.1
+    modCompileOnly("curse.maven:pokecube-aoi-285121:7374140")
     modCompileOnly("curse.maven:premium-wood-353515:3905203") //!! 1.20.1
-    modCompileOnly("maven.modrinth:productivebees:1.21.1-13.13.0") // WIP //!! 1.20.1
+    modCompileOnly("maven.modrinth:productivebees:1.21.1-13.13.0") // WIP
     modCompileOnly("maven.modrinth:redeco:1.14.1") //!! 1.20.1
     modCompileOnly("maven.modrinth:table-top-craft:1.20.1-6.1.2") //!! 1.20.1
     modCompileOnly("maven.modrinth:the-graveyard-forge:3.1") //!! 1.20.1

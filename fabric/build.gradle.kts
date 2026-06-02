@@ -143,7 +143,7 @@ dependencies {
     modCompileOnly("maven.modrinth:macaws-stairs:1.0.2")
 
     //+ GENERAL
-    modCompileOnly("maven.modrinth:beautify-refabricated:2.0.0+1.21.1") //!! 1.20.1
+    modCompileOnly("maven.modrinth:beautify-refabricated:2.0.0+1.21.1")
     modCompileOnly("maven.modrinth:bewitchment:1.20-10") //!! 1.20.1
     modCompileOnly("maven.modrinth:building-but-better:2.0pre4") //!! 1.20.1
     modCompileOnly("maven.modrinth:clutter:1.20.(0-1)-0.6.2") //@RML: Geckolib //!! 1.20.1
@@ -153,7 +153,7 @@ dependencies {
     modCompileOnly("curse.maven:infinity-buttons-661902:5409967") //!! 1.20.1
     modCompileOnly("maven.modrinth:lightmans-currency:1.20.1-1.0.2.4") //!! Not maintained since 1.20.1
     modCompileOnly("curse.maven:mighty-mail-fabric-904097:4750271") //!! 1.20.1
-    modCompileOnly("curse.maven:missing-wilds-622590:6302231") //!! 1.20.1
+    modCompileOnly("curse.maven:missing-wilds-622590:6302231")
     modCompileOnly("curse.maven:refurbished-furniture-897116:7473562") // Framework, Reflection - @DNU
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094") //!! NOT AVAILABLE //!! 1.20.1
     modCompileOnly("maven.modrinth:wooden-hoppers:1.6.0") //!! 1.20.1

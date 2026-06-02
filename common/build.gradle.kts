@@ -62,7 +62,7 @@ dependencies {
 //    modCompileOnly("curse.maven:macaws-stairs-1119394:5802484") // Not needed
 
     //+ GENERAL
-    modCompileOnly("maven.modrinth:another-furniture:4.0.2") //!! 1.20.1
+    modCompileOnly("maven.modrinth:another-furniture:4.0.2")
     modCompileOnly("maven.modrinth:architects-palette:1.4.0-beta.5N") //!! BETA
     modCompileOnly("curse.maven:backpacked-352835:7866688")
     modCompileOnly("maven.modrinth:beautiful-campfires:1.0.2")
@@ -78,14 +78,14 @@ dependencies {
     modCompileOnly("maven.modrinth:handcrafted:4.0.3")
     modCompileOnly("maven.modrinth:hearth-and-home:1.20.1-2.0.3") //!! 1.20.1
     modCompileOnly("curse.maven:missing-wilds-622590:6302230")
-    modCompileOnly("curse.maven:more-beautiful-torches-860325:5609745") // MonoLib //!! 1.20.1
+    modCompileOnly("curse.maven:more-beautiful-torches-860325:5609745") // MonoLib
     modCompileOnly("curse.maven:more-chest-variants-lieonlion-858032:7310871")
-    modCompileOnly("maven.modrinth:more-crafting-tables-lieonlion:1.2.9+1.21-Neo") //!! 1.20.1
+    modCompileOnly("maven.modrinth:more-crafting-tables-lieonlion:1.2.9+1.21-Neo")
     modCompileOnly("curse.maven:refurbished-furniture-897116:7473565") // Framework
 //    modCompileOnly("curse.maven:rechiseled-558998:7687483") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ] //!! Not created yet - do not import it because fabric-loom is v1.14+
     modCompileOnly("maven.modrinth:storagedrawers:1.21.1-13.11.4")
     modCompileOnly("maven.modrinth:table-top-craft:1.20.1-6.1.2") //!! 1.20.1
-    modCompileOnly("maven.modrinth:valhelsia-furniture:1.1.1") //!! 1.20.1
+    modCompileOnly("maven.modrinth:valhelsia-furniture:1.1.1")
     modCompileOnly("maven.modrinth:villagersplus:3.1") //!! 1.20.1
 
     //+ OTHER MAVENS
