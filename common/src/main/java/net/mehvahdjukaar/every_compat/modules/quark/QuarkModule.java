@@ -2,7 +2,6 @@ package net.mehvahdjukaar.every_compat.modules.quark;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.mehvahdjukaar.every_compat.ECPlatformStuff;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.*;
 import net.mehvahdjukaar.every_compat.common_classes.*;
@@ -316,7 +315,7 @@ public class QuarkModule extends EveryCompatModule {
     public void onModSetup() {
         posts.blocks.forEach((w, post) -> {
             Block stripped = strippedPosts.blocks.get(w);
-            if (stripped != null) ECPlatformStuff.registerStripping(post, stripped);
+            if (stripped != null) ECPlatStuff.registerStripping(post, stripped);
         });
         leafCarpets.blocks.forEach((w, leaf) -> ComposterBlock.COMPOSTABLES.put(leaf, 0.2F));
     }

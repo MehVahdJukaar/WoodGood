@@ -9,8 +9,13 @@ import java.util.List;
 
 public class ECPlatStuff {
 
-    @ExpectPlatform
+    @PlatformImpl
     public static List<ItemStack> modifyLoot(ResourceLocation id, List<ItemStack> stacks, LootParams lootContext) {
+        throw new AssertionError();
+    }
+
+    @PlatformImpl
+    public static void registerStripping(Block post, Block stripped) {
         throw new AssertionError();
     }
 }

@@ -1,15 +1,13 @@
-package net.mehvahdjukaar.every_compat.neoforge;
+package net.mehvahdjukaar.every_compat.platform;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;
 import net.mehvahdjukaar.moonlight.api.platform.configs.neoforge.ConfigBuilderImpl;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.neoforged.neoforge.common.CommonHooks;
-import net.neoforged.neoforge.common.ModConfigSpec;
-import net.neoforged.neoforge.event.EventHooks;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +18,11 @@ public class ECPlatStuffImpl {
         ItemStack[] array = stacks.toArray(ItemStack[]::new);
         return CommonHooks.modifyLoot(id, ObjectArrayList.wrap(array),
                 (new LootContext.Builder(lootContext)).create(Optional.of(id)));
+    }
+
+    public static void registerStripping(Block post, Block stripped) {
+        //TODO: add back
+        //  ToolInteractionHandler.registerInteraction(ItemAbilities.AXE_STRIP,post, stripped);
     }
 
 }
