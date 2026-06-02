@@ -212,6 +212,12 @@ public class SimpleModule extends CompatModule {
         // Excude Supported-Mods' blocks that are similar to blocks from Framed-Blocks
         if (UnsafeDisablerConfigs.ENABLE_FRAMED_BLOCKS_BLACKLIST.get() && PlatHelper.isModLoaded("framedblocks") && FRAMED_BLOCKS_SUFFIX.stream().anyMatch(blockName::contains)) return true;
 
+        // Exclude blocks from a mod that are both Supported-Mod & Wood-Mod
+        if (woodTypeFrom.equals(modId)) return true; //Example: quark, blossom
+
+        // Exclude blocks when a supported-mod have an internal support for mods that add new BlockTypes
+        if (this.getAlreadySupportedMods().contains(woodTypeFrom)) return true;
+
         // ugly hardcoded stuff
         if (blockType instanceof WoodType woodType) {
             Boolean hardcoded = HardcodedBlockType.isWoodBlockAlreadyRegistered(entrySetId, blockName, woodType, modId);
@@ -222,11 +228,6 @@ public class SimpleModule extends CompatModule {
         }
 
         /// ========== EXCLUDE ========== \\\
-        if (this.getAlreadySupportedMods().contains(woodTypeFrom)) return true;
-
-        // Discard the blocks that are already in the supportedModId from woodTypeFrom
-        // a mod shouldadd its own blocks in its own wood types
-        if (woodTypeFrom.equals(modId)) return true; // quark, blossom
 
         // Discards the supportedBlockName being already in the supportedModId & Vanilla blockType (mod has builtin compat)
         if (registry.containsKey(ResourceLocation.fromNamespaceAndPath(modId, blockName)) ||
