@@ -24,7 +24,10 @@ dependencies {
     //+ MAVEN
     else {
         if (property("maven_backup").toString().toBoolean()) modImplementation("maven.modrinth:moonlight:${property("moonlight_version")}-fabric")
-        else modImplementation("net.mehvahdjukaar:moonlight:${property("moonlight_version")}")
+        else {
+            modCompileOnly("net.mehvahdjukaar:moonlight-neoforge:${property("moonlight_version")}")
+            accessTransformers("net.mehvahdjukaar:moonlight-neoforge:${property("moonlight_version")}")
+        }
     }
 
 //!! ============================================= DEPENDENCIES ========================================================
