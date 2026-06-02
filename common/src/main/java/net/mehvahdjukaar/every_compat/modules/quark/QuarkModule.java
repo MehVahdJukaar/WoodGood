@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.quark;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.mehvahdjukaar.every_compat.ECPlatStuff;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.*;
 import net.mehvahdjukaar.every_compat.common_classes.*;

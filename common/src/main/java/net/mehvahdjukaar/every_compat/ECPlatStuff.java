@@ -1,8 +1,9 @@
 package net.mehvahdjukaar.every_compat;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.mehvahdjukaar.candlelight.api.PlatformImpl;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootParams;
 
 import java.util.List;

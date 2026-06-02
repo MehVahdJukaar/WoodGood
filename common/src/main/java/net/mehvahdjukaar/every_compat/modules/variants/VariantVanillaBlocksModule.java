@@ -105,7 +105,7 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
 
         cartography = SimpleEntrySet.builder(WoodType.class, "cartography_table",
                         getModBlock("oak_cartography_table"), () -> VanillaWoodTypes.OAK,
-                        w -> new CartographyTableBlock(Utils.copyPropertySafe(Blocks.CARTOGRAPHY_TABLE))
+                        w -> new CartographyTableBlock(Utils.copyPropertySafe(Blocks.CARTOGRAPHY_TABLE)){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("cartography_tables"), Registries.BLOCK, Registries.ITEM)
