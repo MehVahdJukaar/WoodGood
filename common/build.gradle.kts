@@ -6,7 +6,7 @@ common {
     accessWidener()
 }
 
-val path = System.getenv("REPOS21_1").toString()
+//val path = System.getenv("REPOS21_1").toString()
 dependencies {
 
     // We depend on fabric loader here to use the fabric @Environment annotations and get the mixin dependencies
@@ -19,12 +19,12 @@ dependencies {
 
     //- LOCAL
     if (property("enable_moonlight_test").toString().toBoolean()) {
-        modImplementation(files(path + "\\Moonlight\\common\\build\\libs\\moonlight-${property("moonlight_testVersion")}.jar"))
+       // modImplementation(files(path + "\\Moonlight\\common\\build\\libs\\moonlight-${property("moonlight_testVersion")}.jar"))
     }
     //+ MAVEN
     else {
         if (property("maven_backup").toString().toBoolean()) modImplementation("maven.modrinth:moonlight:${property("moonlight_version")}-fabric")
-        else modImplementation("net.mehvahdjukaar:moonlight:${property("moonlight_version")}") { isTransitive = false }
+        else modImplementation("net.mehvahdjukaar:moonlight:${property("moonlight_version")}")
     }
 
 //!! ============================================= DEPENDENCIES ========================================================

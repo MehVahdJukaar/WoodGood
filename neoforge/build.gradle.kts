@@ -7,7 +7,7 @@ neoforge {
     accessWidener(project(":common"))
 }
 
-val path = System.getenv("REPOS21_1").toString()
+//val path = System.getenv("REPOS21_1").toString()
 dependencies {
 
 //    neoForge("net.neoforged:neoforge:${property("neoforge_version")}")
@@ -21,7 +21,7 @@ dependencies {
 
     //- LOCAL
     if (property("enable_moonlight_test").toString().toBoolean()) {
-        modApi(files(path + "\\Moonlight\\neoforge\\build\\libs\\moonlight-${property("moonlight_testVersion")}-neoforge.jar"))
+      //  modApi(files(path + "\\Moonlight\\neoforge\\build\\libs\\moonlight-${property("moonlight_testVersion")}-neoforge.jar"))
     }
     //+ MAVEN
     else {

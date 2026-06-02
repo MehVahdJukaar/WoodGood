@@ -13,12 +13,7 @@ import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.*;
 // ugly mess. Too coupled with WoodTypes|LeavesTypes and too many hardcoded exceptions
 public class HardcodedBlockType {
 
-    public static String woodidentify;
-    public static String woodTypeFromMod;
-    public static String leavesidentify;
-    public static String leavesTypeFromMod;
-    public static String supportedMod;
-    public static String supportedBlockName;
+    //WTF where those fields?? bad. static state causing functons here to have unpredictable outcomes
 
     public static final List<String> FRAMED_BLOCKS_SUFFIX = List.of(
 
@@ -67,10 +62,10 @@ public class HardcodedBlockType {
 
     @Nullable
     public static Boolean isWoodBlockAlreadyRegistered(String entrySetId, String blockName, WoodType woodType, String supportedModId) {
-        woodTypeFromMod = woodType.getNamespace();
-        woodidentify = woodType.getId().toString();
-        supportedMod = supportedModId;
-        supportedBlockName = blockName;
+      var  woodTypeFromMod = woodType.getNamespace();
+        var     woodidentify = woodType.getId().toString();
+        var     supportedMod = supportedModId;
+        var      supportedBlockName = blockName;
 
         String blockId = supportedModId +"/"+ woodTypeFromMod +"/"+ blockName;
 
@@ -176,10 +171,10 @@ public class HardcodedBlockType {
 
     @Nullable
     public static Boolean isLeavesBlockAlreadyRegistered(String entrySetId, String blockName, LeavesType leavesType, String supportedModId) {
-        leavesTypeFromMod = leavesType.getNamespace();
-        leavesidentify = leavesType.getId().toString();
-        supportedMod = supportedModId;
-        supportedBlockName = blockName;
+        var    leavesTypeFromMod = leavesType.getNamespace();
+        var    leavesidentify = leavesType.getId().toString();
+        var  supportedMod = supportedModId;
+        var   supportedBlockName = blockName;
 
         String blockId = supportedModId +"/"+ leavesTypeFromMod +"/"+ blockName;
 

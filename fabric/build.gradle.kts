@@ -7,7 +7,7 @@ fabric {
     accessWidener(project(":common"))
 }
 
-val path = System.getenv("REPOS21_1").toString()
+//val path = System.getenv("REPOS21_1").toString()
 dependencies {
 
     modImplementation("net.fabricmc:fabric-loader:${property("fabric_loader_version")}")
@@ -29,7 +29,7 @@ dependencies {
 
     //- LOCAL
     if (property("enable_moonlight_test").toString().toBoolean()) {
-        modApi(files(path + "\\Moonlight\\fabric\\build\\libs\\moonlight-${property("moonlight_testVersion")}-fabric.jar"))
+       // modApi(files(path + "\\Moonlight\\fabric\\build\\libs\\moonlight-${property("moonlight_testVersion")}-fabric.jar"))
     }
     //+ MAVEN
     else {
