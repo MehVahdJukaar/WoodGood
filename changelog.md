@@ -13,6 +13,15 @@
 
 ---
 
+## v2.11.43
+
+### CHANGES:
+- **Every Compat** (C): Tweaked the code in duplication system to check first & ensure `blocks from a mod that are both Supported-Mod & Wood-Mod` to be excluded
+  - Example: `everycomp:q/quark/azalea_ladder` and `quark:azalea_ladder` are exactly the same block, so we want to exclude EC's block, 
+  - NOTE: `q` is the shortened_id for **Quark** as supported-mod
+
+---
+
 ## v2.11.42
 
 ### CHANGES:
