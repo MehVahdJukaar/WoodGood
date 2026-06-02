@@ -63,14 +63,19 @@ dependencies {
 
     //+ GENERAL
     modCompileOnly("maven.modrinth:another-furniture:4.0.2") //!! 1.20.1
-    modCompileOnly("curse.maven:backpacked-352835:7866688") //!! 1.20.1
+    modCompileOnly("maven.modrinth:architects-palette:1.4.0-beta.5N") //!! BETA
+    modCompileOnly("curse.maven:backpacked-352835:7866688")
     modCompileOnly("maven.modrinth:beautiful-campfires:1.0.2")
     modCompileOnly("curse.maven:camp-chair-531744:4579679") //!! 1.20.1
     modCompileOnly("maven.modrinth:chipped:4.0.2")
-    modCompileOnly("maven.modrinth:create:6.0.10+mc1.21.1") //!! 1.20.1
+    modCompileOnly("maven.modrinth:create:6.0.10+mc1.21.1")
 //    modCompileOnly("curse.maven:corail-pillar-266228:5613351") //!! TODO: Add it for FABRIC
     modCompileOnly("maven.modrinth:dawn-of-time:1.6.6")
+    modCompileOnly("maven.modrinth:decorative-blocks-reborn:6.0.2")
+    modCompileOnly("maven.modrinth:excessive-building:4.0.1")
 //    modCompileOnly("curse.maven:farmersdelight-398521:5962800")
+    modCompileOnly("curse.maven:furnish-547069:7662583")
+    modCompileOnly("maven.modrinth:handcrafted:4.0.3")
     modCompileOnly("maven.modrinth:hearth-and-home:1.20.1-2.0.3") //!! 1.20.1
     modCompileOnly("curse.maven:missing-wilds-622590:6302230")
     modCompileOnly("curse.maven:more-beautiful-torches-860325:5609745") // MonoLib //!! 1.20.1
