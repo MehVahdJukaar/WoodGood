@@ -32,6 +32,7 @@ dependencies {
         }
     }
 
+
 //!! TOOLS ========================================================================================================== \\
     modRuntimeOnly("dev.emi:emi-neoforge:${property("emi_version")}+${property("minecraft_version")}")
     modRuntimeOnly("com.blamejared.crafttweaker:CraftTweaker-neoforge-${property("minecraft_version")}:${property("crafttweaker_version")}")

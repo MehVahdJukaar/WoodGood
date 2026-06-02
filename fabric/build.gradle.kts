@@ -10,9 +10,6 @@ fabric {
 //val path = System.getenv("REPOS21_1").toString()
 dependencies {
 
-    modImplementation("net.fabricmc:fabric-loader:${property("fabric_loader_version")}")
-    modApi("net.fabricmc.fabric-api:fabric-api:${property("fabric_api_version")}")
-
 //    common(project(path: ":common", configuration: "namedElements")) { transitive false }
 //    shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 
