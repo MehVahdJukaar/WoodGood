@@ -70,9 +70,6 @@ public class HardcodedBlockType {
 
         /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ SPECIAL EXCLUSION ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-        // Exclude blocks from a mod that are both Supported-Mod & Wood-Mod
-        if (woodType.getNamespace().equals(modThatTheBlockIsFrom)) return false;
-
         // Exclude one WoodType from a Wood Mod
         if (WOOD_TYPES_BLACKLIST.get().stream().anyMatch(woodFullId::matches)) return true;
 
