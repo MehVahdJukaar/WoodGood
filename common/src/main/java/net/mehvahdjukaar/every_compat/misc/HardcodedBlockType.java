@@ -13,8 +13,6 @@ import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.*;
 // ugly mess. Too coupled with WoodTypes|LeavesTypes and too many hardcoded exceptions
 public class HardcodedBlockType {
 
-
-    //WTF where those fields?? bad. static state causing functons here to have unpredictable outcomes
     public static final List<String> FRAMED_BLOCKS_SUFFIX = List.of(
 
             // Slabs
@@ -60,64 +58,20 @@ public class HardcodedBlockType {
             "horizontal_pane"
     );
 
-    //would be better to have wood namespace and id either path and namespace or just full id. not a mix.
-    private record PendingBlockInfo(String woodNamespace, String woodFullId, String modThatTheBlockIsFor, String blockName) {
-
-        //TOOD: use these instead
-        public boolean isForMod(String modId) {
-            return this.modThatTheBlockIsFor.matches(modId);
-        }
-
-        public boolean isForBlockName(String blockName) {
-            return this.blockName.matches(blockName);
-        }
-
-        public boolean isForWoodNamespace(String woodNamespace) {
-            return this.woodNamespace.matches(woodNamespace);
-        }
-
-        public boolean isForWoodFullId(String woodFullId) {
-            return this.woodFullId.matches(woodFullId);
-        }
-
-        //ugly api
-        @Deprecated
-        public boolean checkMatch(String supportedModId, String woodTypeNamespace, String woodTypeFullId, String blockName) {
-
-            if (!supportedModId.isEmpty() && !(modThatTheBlockIsFor.matches(supportedModId))) {
-                return false;
-            }
-
-            if (!woodTypeNamespace.isEmpty() && !(woodNamespace.matches(woodTypeNamespace))) {
-                return false;
-            }
-
-            if (!woodTypeFullId.isEmpty() && !(woodFullId.matches(woodTypeFullId))) {
-                return false;
-            }
-
-            if (!blockName.isEmpty() && !(this.blockName.matches(blockName))) {
-                return false;
-            }
-
-            return true;
-        }
-    }
-
     @Nullable
-    public static Boolean isWoodBlockAlreadyRegistered(String entrySetId, String blockName, WoodType woodType, String modThatTheBlockIsFor) {
-        var woodNamespace = woodType.getNamespace();
-        var woodFullId = woodType.getId().toString();
+    public static Boolean isWoodBlockAlreadyRegistered(String entrySetId, String blockName, WoodType woodType, String modThatTheBlockIsFrom) {
+        String woodNamespace = woodType.getNamespace();
+        String woodFullId = woodType.getId().toString();
 
-        PendingBlockInfo bi = new PendingBlockInfo(woodNamespace, woodFullId, modThatTheBlockIsFor, blockName);
+        PendingBlockInfo pendingInfo = new PendingBlockInfo(modThatTheBlockIsFrom, woodNamespace, woodFullId, blockName);
 
-
-        String blockId = modThatTheBlockIsFor + "/" + woodNamespace + "/" + blockName;
+        // create supported_modId/WoodTypeNamespace/blockName - Example: quark/biomesoplenty/redwood_ladder
+        String blockId = modThatTheBlockIsFrom + "/" + woodNamespace + "/" + blockName;
 
         /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ SPECIAL EXCLUSION ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
         // Exclude blocks from a mod that are both Supported-Mod & Wood-Mod
-        if (woodType.getNamespace().equals(modThatTheBlockIsFor)) return false;
+        if (woodType.getNamespace().equals(modThatTheBlockIsFrom)) return false;
 
         // Exclude one WoodType from a Wood Mod
         if (WOOD_TYPES_BLACKLIST.get().stream().anyMatch(woodFullId::matches)) return true;
@@ -131,11 +85,11 @@ public class HardcodedBlockType {
         /// ─────────────────────────── Include Vanilla Type ────────────────────────────
 
         // Dawn-Of-Time's fancy-fence only has birch but no other vanilla variants
-        if (bi.checkMatch("dawnoftimebuilder", "", "minecraft:(oak|acacia|jungle|dark_oak|spruce|mangrove|cherry)", "fancy_fence"))
+        if (pendingInfo.checkMatch("dawnoftimebuilder", "", "minecraft:(oak|acacia|jungle|dark_oak|spruce|mangrove|cherry)", "fancy_fence"))
             return false;
 
         // Chipped's glass & glass_panes has no Vanilla WoodTypes except OAK
-        if (bi.checkMatch("chipped", "", "minecraft:(acacia|birch|jungle|dark_oak|spruce|mangrove|cherry)", "\\w+_glass(_pane)?"))
+        if (pendingInfo.checkMatch("chipped", "", "minecraft:(acacia|birch|jungle|dark_oak|spruce|mangrove|cherry)", "\\w+_glass(_pane)?"))
             return false;
 
         /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ EXCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -144,97 +98,94 @@ public class HardcodedBlockType {
         if (isKnownVanillaWood(woodType)) return true;
 
         // Marvelous Menagerie Paradoxical's calamites_log is a 8x8 log and its texture won't work with supported-mod that directly use the textures
-        if (bi.checkMatch("mcwfences|mcwstairs", "", "marvelous_menagerie:calamites", "")) return true;
-        if (bi.checkMatch("quark", "", "marvelous_menagerie:calamites", "hollow_calamites_log")) return true;
+        if (pendingInfo.checkMatch("mcwfences|mcwstairs", "", "marvelous_menagerie:calamites", "")) return true;
+        if (pendingInfo.checkMatch("quark", "", "marvelous_menagerie:calamites", "hollow_calamites_log")) return true;
 
         // The WoodType from Cobblemon's Legendary Monuments has a 32x32 texture
-        if (bi.checkMatch("", "", "legendarymonuments:distortion", "")) return true;
+        if (pendingInfo.checkMatch("", "", "legendarymonuments:distortion", "")) return true;
 
         // Supported Mods that have supportedBlockId should be excluded due to FramedBlocks
-        if (bi.checkMatch("", "", "", "torch") && PlatHelper.isModLoaded("framedblocks")) return true;
+        if (pendingInfo.checkMatch("", "", "", "torch") && PlatHelper.isModLoaded("framedblocks")) return true;
 
         // Nature's-Spirit's joshua texture is a 8x8, it's currently excluded in Valhelaia-Structure for now - the texture generation could be improved
-        if (bi.checkMatch("valhelsia_structures", "", "natures_spirit:joshua", "")) return true;
+        if (pendingInfo.checkMatch("valhelsia_structures", "", "natures_spirit:joshua", "")) return true;
 
         // Garden-Of-The-dead's whistle, Snifferent's globar, Nethers-Exoticism's jabuticaba already has branches, Regions-Unexplored's branches is not needed
-        if (bi.checkMatch("regions_unexplored", "gardens_of_the_dead|snifferent|nethers_exoticism", "", "(whistlecane|globar|jabuticaba)_branch"))
-            return true;
+        if (pendingInfo.checkMatch("regions_unexplored", "gardens_of_the_dead|snifferent|nethers_exoticism", "", "(whistlecane|globar|jabuticaba)_branch")) return true;
 
         // Quark's stripped_post with Ecologics must be excluded beacuse azalea_post and stripped_azalea_post's texture are identical
-        if (bi.checkMatch("quark", "ecologics", "", "stripped_flowering_azalea_post")) return true;
+        if (pendingInfo.checkMatch("quark", "ecologics", "", "stripped_flowering_azalea_post")) return true;
 
 
         /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ INCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
         // Valhelsia-Structures' POST, STRIPPED_POST are not generated because Quark has POST and STRIPPED_POST
-        if (bi.checkMatch("valhelsia_structures", "quark", "", "")) return false;
+        if (pendingInfo.checkMatch("valhelsia_structures", "quark", "", "")) return false;
 
         // MURUBLIGHT_SHELF from Enderscape is preventing SHELF from Copper-Age-Backport or Another-Furniture to be generated
-        if (bi.checkMatch("copperagebackport|another_furniture", "", "enderscape:murublight", "")) return false;
+        if (pendingInfo.checkMatch("copperagebackport|another_furniture", "", "enderscape:murublight", "")) return false;
 
         // Curiosities' FANCIED_PLANKS is not getting generated with No-Man's-Land, PINE from Biomes-O'-Plenty & Windswept
-        if (bi.checkMatch("curiosities", "biomesoplenty|nomansland|windswept", "", "")) return false;
+        if (pendingInfo.checkMatch("curiosities", "biomesoplenty|nomansland|windswept", "", "")) return false;
 
         // More-Crafting-Table-For-Forge supported Biomes-O'-Plenty's 3 WoodTypes: MAPLE, PINE, & WILLOW that prevented No-Man's-Land's 3 similar WoodTypes from generated
-        if (bi.checkMatch("mctb", "nomansland", "", "")) return false;
+        if (pendingInfo.checkMatch("mctb", "nomansland", "", "")) return false;
 
         // Minecraft's CHERRY prevent the generation of blocks with Terraqueous's CHERRY
-        if (bi.checkMatch("", "", "terraqueous:cherry", "")) return false;
+        if (pendingInfo.checkMatch("", "", "terraqueous:cherry", "")) return false;
 
         // Refurbished-Furniture's oak_table wasn't generated due to Dawn-Of-Time's waxed_oak_table
-        if (bi.checkMatch("refurbished_furniture", "", "dawnoftimebuilder:waxed_oak", "")) return false;
+        if (pendingInfo.checkMatch("refurbished_furniture", "", "dawnoftimebuilder:waxed_oak", "")) return false;
 
         // Minecraft has "mangrove" that caused the generation of blocks with The-Twilight-Forest's mangrove to be skipped.
-        if (bi.checkMatch("\\b(?!twilightforest).*", "", "twilightforest:mangrove", "")) return false;
+        if (pendingInfo.checkMatch("\\b(?!twilightforest).*", "", "twilightforest:mangrove", "")) return false;
 
         // Quark's chests & ladders aren't generated with Abnormal's Wood mods | Quark's blocks with Caverns-And-Chasms' AZALEA aren't generated due to Quark's AZALEA
-        if (bi.checkMatch("quark", "upgrade_aquatic|autumnity|atmospheric|environmental|caverns_and_chasms", "", ""))
-            return false;
+        if (pendingInfo.checkMatch("quark", "upgrade_aquatic|autumnity|atmospheric|environmental|caverns_and_chasms", "", "")) return false;
 
         // Better Nether & Better End have stripped_bark as stripped_wood but bark from Bewitchment caused EC to skip
-        if (bi.checkMatch("bewitchment", "betternether|betterend", "", "")) return false;
+        if (pendingInfo.checkMatch("bewitchment", "betternether|betterend", "", "")) return false;
 
         // Create's windows will be skipped blc [Let's do] Blooming Nature & Meadow already has windows
-        if (bi.checkMatch("", "bloomingnature|meadow", "", "window")) return false;
+        if (pendingInfo.checkMatch("", "bloomingnature|meadow", "", "window")) return false;
 
         // ArchitectPalette's boards will be skipped blc Upgrade-Aqautic already has boards but have no recipes & no item in CreativeMode
-        if (bi.checkMatch("architects_palette", "upgrade_aquatic", "", "driftwood_boards|river_boards")) return false;
+        if (pendingInfo.checkMatch("architects_palette", "upgrade_aquatic", "", "driftwood_boards|river_boards")) return false;
 
         // Similar to above, Architect's Palette - boards will be skipped due to the existing boards in Autumnity
-        if (bi.checkMatch("architects_palette", "autumnity", "", "maple_boards")) return false;
+        if (pendingInfo.checkMatch("architects_palette", "autumnity", "", "maple_boards")) return false;
 
         // Ensure blocks to be generated because TerraFirmaCraft has similar name of vanilla woodType (oak, acacia, so on)
-        if (bi.checkMatch("", "tfc", "", "")) return false;
+        if (pendingInfo.checkMatch("", "tfc", "", "")) return false;
 
         //ecologics and quark azalea. tbh not sure why needed
-        if (bi.checkMatch("quark", "", "ecologics:azalea", "")) return false;
+        if (pendingInfo.checkMatch("quark", "", "ecologics:azalea", "")) return false;
 
         // we always register everything for these (mehvahdjukaar)
-        if (bi.checkMatch("woodworks", "architects_palette", "", "")) return false;
+        if (pendingInfo.checkMatch("woodworks", "architects_palette", "", "")) return false;
 
         // Ensure the Architects-Palette's boards are generated with Abnormal mods (Upgrade Aquatic, Woodworks)
-        if (bi.checkMatch("architects_palette", "upgrade_aquatic|autumnity|atmospheric|environmental|caverns_and_chasms", "", ""))
-            return false;
+        if (pendingInfo.checkMatch("architects_palette", "upgrade_aquatic|autumnity|atmospheric|environmental|caverns_and_chasms", "", "")) return false;
 
         return null;
     }
 
     @Nullable
-    public static Boolean isLeavesBlockAlreadyRegistered(String entrySetId, String blockName, LeavesType leavesType, String supportedModId) {
-        var leavesTypeFromMod = leavesType.getNamespace();
-        var leavesidentify = leavesType.getId().toString();
-        var supportedMod = supportedModId;
-        var supportedBlockName = blockName;
+    public static Boolean isLeavesBlockAlreadyRegistered(String entrySetId, String blockName, LeavesType leavesType, String modThatTheBlockIsFrom) {
+        String leavesNamespace = leavesType.getNamespace();
+        String leavesFullId = leavesType.getId().toString();
 
-        String blockId = supportedModId + "/" + leavesTypeFromMod + "/" + blockName;
+        String blockId = modThatTheBlockIsFrom + "/" + leavesNamespace + "/" + blockName;
+
+        PendingBlockInfo pendingInfo = new PendingBlockInfo(modThatTheBlockIsFrom, leavesNamespace, leavesFullId, blockName);
 
         /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ SPECIAL EXCLUSION ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
         // Exclude blocks from a mod that are both Supported-Mod & Wood-Mod
-        if (leavesType.getNamespace().equals(supportedModId)) return false;
+        if (leavesType.getNamespace().equals(modThatTheBlockIsFrom)) return false;
 
         // Exclude one LeavesType from a Wood mod
-        if (LEAVES_TYPES_BLACKLIST.get().stream().anyMatch(leavesidentify::matches)) return true;
+        if (LEAVES_TYPES_BLACKLIST.get().stream().anyMatch(leavesFullId::matches)) return true;
 
         // Exclude a specific LeavesType Block
         if (BLOCKS_BLACKLIST.get().stream().anyMatch(blockId::matches)) return true;
@@ -249,66 +200,61 @@ public class HardcodedBlockType {
 
         // Productive-Trees' CHERRY_PLUM shouldn't be supported
         // REASON: Productive Trees' CHERRY_PLUM & PLUM can caused crash & it's very tricky to fix, not worth it.
-        if (isLeavesFrom("chipped", "", "productivetrees:cherry_plum", "")) return true;
+        if (pendingInfo.checkMatch("chipped", "", "productivetrees:cherry_plum", "")) return true;
 
         // Chipped's LeavesType and its supported Block shouldn't be generated
-        if (isLeavesFrom("chipped", "chipped", "", "")) return true;
+        if (pendingInfo.checkMatch("chipped", "chipped", "", "")) return true;
 
         // Traversable-Leaves' leaves is a testing item and should be excluded
-        if (isLeavesFrom("", "", "traversable_leaves:dev_leaves", "")) return true;
+        if (pendingInfo.checkMatch("", "", "traversable_leaves:dev_leaves", "")) return true;
 
         /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ INCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
         // Prevent Productive-Trees' CHERRY_PLUM_LEAVES from being added to PLUM's children
-        if (isLeavesFrom("chipped", "", "productivetrees:plum", "cherry_plum_leaves")) return false;
+        if (pendingInfo.checkMatch("chipped", "", "productivetrees:plum", "cherry_plum_leaves")) return false;
 
         // Unrelated to Quark's ancient_leaves & Alex's Cave (ancient_leaves) should be included
-        if (isLeavesFrom("quark", "", "alexscaves:ancient", "")) return false;
+        if (pendingInfo.checkMatch("quark", "", "alexscaves:ancient", "")) return false;
 
         // Macaw's Fences&Walls or MrCrayFish's Furniture - hedges will be skipped because Quark already has hedges
-        if (isLeavesFrom("mcwfences|cfm", "quark", "", "")) return false;
+        if (pendingInfo.checkMatch("mcwfences|cfm", "quark", "", "")) return false;
 
         return null;
     }
 
+    private record PendingBlockInfo(String modThatTheBlockIsFrom, String woodNamespace, String woodFullId, String blockName) {
 
-    /**
-     * @param whichSupportedModId Id of Supported Mods That EveryCompat is supporting
-     * @param leavestypeFromMod   Id of mod that LeavesType is from
-     * @param leavesTypeId        id of LeavesType, ex: "biomesoplenty:redwood"
-     * @param supportedBlockId    Id of block: "hedge" OR id with name of leavesType: "redwood_hedge"
-     */
-    public static Boolean isLeavesFrom(String whichSupportedModId, String leavestypeFromMod, String leavesTypeId,
-                                       String supportedBlockId) {
-
-        String[] expressions = {
-                whichSupportedModId,
-                leavestypeFromMod,
-                leavesTypeId,
-                supportedBlockId
-        };
-
-        String[] values = {
-                supportedMod,
-                leavesTypeFromMod,
-                leavesidentify,
-                supportedBlockName
-        };
-
-        for (int idx = 0; idx < values.length; idx++) {
-
-            if (!expressions[idx].isEmpty()) { // Skip the blank expressions
-                boolean mismatched = !(values[idx].matches(expressions[idx]) || values[idx].contains(expressions[idx]));
-
-                // If first expression is mismatched, then...
-                if (mismatched) return false;
-            }
+        public boolean isForMod(String modId) {
+            return this.modThatTheBlockIsFrom.matches(modId);
         }
 
-        // Matched
-        return true;
-    }
+        public boolean isForWoodNamespace(String woodNamespace) {
+            return this.woodNamespace.matches(woodNamespace);
+        }
 
+        public boolean isForWoodFullId(String woodFullId) {
+            return this.woodFullId.matches(woodFullId);
+        }
+
+        public boolean isForBlockName(String blockName) {
+            return this.blockName.matches(blockName);
+        }
+
+        //ugly api
+        @SuppressWarnings("RedundantIfStatement")
+        public boolean checkMatch(String supportedModId, String woodTypeNamespace, String woodTypeFullId, String blockName) {
+
+            if (!supportedModId.isEmpty() && !isForMod(supportedModId)) return false;
+
+            if (!woodTypeNamespace.isEmpty() && !isForWoodNamespace(woodTypeNamespace)) return false;
+
+            if (!woodTypeFullId.isEmpty() && !isForWoodFullId(woodTypeFullId)) return false;
+
+            if (!blockName.isEmpty() && !isForBlockName(blockName)) return false;
+
+            return true;
+        }
+    }
 
     //for mods that might add in vanilla namespace
     public static boolean isKnownVanillaWood(WoodType woodType) {
