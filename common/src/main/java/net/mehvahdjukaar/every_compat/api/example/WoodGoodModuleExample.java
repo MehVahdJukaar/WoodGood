@@ -1,11 +1,20 @@
 package net.mehvahdjukaar.every_compat.api.example;
 
 import com.ninni.twigs.block.TableBlock;
-import net.mehvahdjukaar.every_compat.api.*;
+import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
+import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
+import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
+import net.mehvahdjukaar.every_compat.misc.UtilityTag;
+import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
+import net.mehvahdjukaar.moonlight.api.set.BlockType;
+import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -14,21 +23,22 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Consumer;
 
 @SuppressWarnings("unused")
-///      ┌──────────────────────────────────────────────────────────┐
-///      │       WoodGoodModule using Twigs Mod as An Example       │
-///      └──────────────────────────────────────────────────────────┘
-public class WoodGoodModuleExample extends SimpleModule {
+///      ┌──────────────────────────────────────────────────────┐
+///      │   WoodGoodModule example module. Use as a template   │
+///      └──────────────────────────────────────────────────────┘
+public final class WoodGoodModuleExample extends EveryCompatModule {
 
         /// For Blocks
-        public final SimpleEntrySet<WoodType, Block> sampleBlock, sampleBlock_2;
+        private final SimpleEntrySet<WoodType, Block> sampleBlock, sampleBlock_2;
 
         /// For Items
-        public final ItemOnlyEntrySet<WoodType, Item> sampleItem;
+        private final ItemOnlyEntrySet<WoodType, Item> sampleItem;
 
         public WoodGoodModuleExample(String modId) {
             // an example of shortened ID for TerraFirmaCraft is "tfc", so one for Twigs is "tw"
@@ -36,10 +46,14 @@ public class WoodGoodModuleExample extends SimpleModule {
 
             //  your mod's tab or minecraft's tab can be used for setTabKey() - it can use either ResourceKey or ResourceLocation
             ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
-            ResourceLocation yourModTab = modRes("twig");
+            // your mod's tab using helper method
+            ResourceLocation yourModTab = modRes("mod_tab");
 
+            // Here we create 2 simple entry sets. You are free to not use these or make your own entry set implementation
+            // Discover all the methods that these simple builders have by pressing "." and invoke what you need
+            // after creating the entry set, don't forget to add it to the module via this.addEntry(entrySet);
             sampleBlock_2 = SimpleEntrySet.builder(WoodType.class,"suffix", "prefix",
-                    getModBlock("oak_table"), ()-> VanillaWoodTypes.OAK,
+                            getModBlock("oak_table"), ()-> VanillaWoodTypes.OAK,
                     woodType -> new TableBlock(Utils.copyPropertySafe(woodType.planks).instabreak())
                     )
                     /// Similar setup as sampleBlock
@@ -50,6 +64,9 @@ public class WoodGoodModuleExample extends SimpleModule {
                             getModBlock("oak_table"), ()-> VanillaWoodTypes.OAK,
                             woodType -> new TableBlock(Utils.copyPropertySafe(woodType.planks).instabreak())
                     )
+                    ///REQUIRED: Add block to your mod's tab or Minecraft's tab
+                    .setTabKey(yourModTab)
+
                     ///OPTIONAL: Check if a WoodType or LeavesType has the children required, then block will be generated
                     .requiresChildren("slab", "other_childkey") //REASON: can be for recipes or textures
                     .requiresFromMap(sampleBlock_2.blocks) // If your block required another block for crafting or texturing
@@ -57,6 +74,7 @@ public class WoodGoodModuleExample extends SimpleModule {
 
                     ///OPTIONAL: Add the block to EntityBlockType
                     .addTile(getModTile("id_of_EntityType"))
+                    //.addTile(() -> BlockEntityType.CAMPFIRE) //OPTIONAL: you can use BlockEntity as a reference
 
                     ///OPTIONAL: Adding block's textures to be generated
                     .addTexture(modRes("block/oak_table"), PaletteStrategies.LOG_SIDE_STANDARD)
@@ -65,14 +83,12 @@ public class WoodGoodModuleExample extends SimpleModule {
 
                     ///OPTIONAL: Adding tags to the block
                     .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                    .addTag(new ResourceLocation("twigs:tables"), Registries.BLOCK)
-                    .addTag(new ResourceLocation("twigs:tables"), Registries.ITEM)
+                    .addTag(modRes("tables"), Registries.BLOCK, Registries.ITEM)
+                    // For FORGE, the tag will be forge:tables & for FABRIC, it will be c:tables
+                    .addTag(UtilityTag.platformTag("tables"), Registries.ITEM)
 
                     ///OPTIONAL: If your block is glasses, then please take a look at below & Looking for // Common Tags which is at the bottom of the class
-            // https://github.com/MehVahdJukaar/WoodGood/blob/1.20/common/src/main/java/net/mehvahdjukaar/every_compat/common_classes/TagUtility.java#L186
-
-                    ///REQUIRED: Add block to your mod's tab or Minecraft's tab
-                    .setTabKey(yourModTab)
+            // https://github.com/MehVahdJukaar/WoodGood/blob/79396eae711cee032635b52d957ddfe9eaa0121b/common/src/main/java/net/mehvahdjukaar/every_compat/misc/UtilityTag.java#L194
 
                     ///OPTIONAL: Creating recipes for the block
                     .defaultRecipe() // default: new ResourceLocation("twigs:oak_table") via recipes folder
@@ -80,6 +96,9 @@ public class WoodGoodModuleExample extends SimpleModule {
                     .addRecipe(modRes("path/to/recipeFile")) // Do not use "recipes/"
 
                     ///OPTIONAL: Special cases
+                    // Without the .copyParentDrop(), blocks will self-drop with their own loot_table by default.
+                    // But some blocks like Bookshelf won't drop anything, the .copyParentDrop() can be used to ensure
+                    // books are dropped just like vanilla bookshelf's loot_table
                     .copyParentDrop() // copy the loot_table of the baseBlock (oak_table)
                     .copyParentTint() // Applying tinted color to Leaves - Good example is hedge from Quark OR Macaw's Fences & Walls
                     .setRenderType(RenderLayer.CUTOUT) //USAGE: CUTOUT, CUTOUT_MIPPED, SOLID, TRANSLUCENT
@@ -92,8 +111,8 @@ public class WoodGoodModuleExample extends SimpleModule {
                             w -> new Item(new Item.Properties())
                     )
                     .addTexture(modRes("item/itemTexture"))
-                    .addTag(new ResourceLocation("twigs:tables"), Registries.ITEM)
-                    .setTabKey(tab)
+                    .addTag(modRes("tables"), Registries.ITEM)
+                    .setTabKey(yourModTab)
                     .defaultRecipe()
                     .addRecipe(modRes("path/to/recipeFile"))
                     .build();
@@ -131,10 +150,89 @@ public class WoodGoodModuleExample extends SimpleModule {
         }
 
 ///      ┌──────────────────────────────────────────────────────────┐
-///      │   If the mod has built-in codes that support Wood Mods   │
+///      │  If the mod has built-in codes that already support      │
+///      │  Wood Mods                                               │
 ///      └──────────────────────────────────────────────────────────┘
     @Override
     public List<String> getAlreadySupportedMods() {
         return List.of("biomesoplenty", "so_on...");
+    }
+
+///      ┌──────────────────────────────────────────────────────────┐
+///      │  Duplication System - To whitelist/blacklist a block     │
+///      │  from being registered                                   │
+///      └──────────────────────────────────────────────────────────┘
+    @Override
+    public boolean isEntryAlreadyRegistered(String entrySetId, ResourceLocation blockId, BlockType blockType, Registry<?> registry) {
+        // A NOTE:
+        // You can whitelist a block with vanilla WoodTypes (spruce, acacia, jungle, so on) if your mod only have minecraft:oak
+        // It can be temporary until you add other Vanilla WoodType into your mod
+
+        String blockPath = blockId.getPath();
+        String blockName = blockPath.substring(blockPath.lastIndexOf("/") + 1);
+
+        if (blockType instanceof WoodType woodType) {
+            Boolean hardcoded = customHardedBlockType.isWoodBlockAlreadyRegistered(entrySetId, blockName, woodType, modId);
+            if (hardcoded != null) return hardcoded;
+        } else if (blockType instanceof LeavesType leavesType) {
+            Boolean hardcoded = customHardedBlockType.isLeavesBlockAlreadyRegistered(entrySetId, blockName, leavesType, modId);
+            if (hardcoded != null) return hardcoded;
+        }
+
+
+//        return super.isEntryAlreadyRegistered(entrySetId, blockId, blockType, registry);
+        return false; /// Instead of this, use above
+    }
+
+/// A subClass of HardedBlockType that will have what you need for any BlockType
+    public static class customHardedBlockType extends HardcodedBlockType {
+
+        @Nullable
+        public static Boolean isWoodBlockAlreadyRegistered(String entrySetId, String blockName, WoodType woodType, String modThatTheBlockIsFrom) {
+            String woodNamespace = woodType.getNamespace();
+            String woodFullId = woodType.getId().toString();
+
+            PendingBlockInfo pendingInfo = PendingBlockInfo.of(modThatTheBlockIsFrom, woodNamespace, woodFullId, blockName);
+
+            if (
+                    /// ID of Supported Mod that Every Compat is supporting
+                    pendingInfo.isForSupportedModId("quark")
+
+                    /// ID of Wood-Mods that new WoodTypes are from
+                            && pendingInfo.isForWoodTypeNamespace("gardens_of_the_dead|snifferent|nethers_exoticism")
+
+                    /// ID of WoodTypes - It can use RegEx (Regular Expression)
+                            && pendingInfo.isForWoodTypeFullId("gardens_of_the_dead:whistlecane")
+
+                    /// Name of Block from Every Compat - It can use RegEx (Regular Expression)
+                    // NOTE: the Name is from everycomp:quark/gardens_of_the_dead/Name_Of_Block <- Right here
+                    // example: everycomp:quark/gardens_of_the_dead/whistle_ladder -> whistle_ladder as Name of Block
+                            && pendingInfo.isForBlockName("(whistlecane|globar|jabuticaba)_ladder")
+            ) {
+                return true; /// - this ensure a block will not be generated/registered
+            }
+
+            return null;
+        }
+
+        /// Below is same as above but it's for LeavesType, a subclass of BlockType
+        // NOTE: the 3rd parameter is LeavesType Instead of WoodType
+        @Nullable
+        public static Boolean isLeavesBlockAlreadyRegistered(String entrySetId, String blockName, LeavesType leavesType, String modThatTheBlockIsFrom) {
+            String leavesNamespace = leavesType.getNamespace();
+            String leavesFullId = leavesType.getId().toString();
+
+            PendingBlockInfo pendingInfo = PendingBlockInfo.of(modThatTheBlockIsFrom, leavesNamespace, leavesFullId, blockName);
+
+            if (pendingInfo.isForSupportedModId("quark")
+                    && pendingInfo.isForWoodTypeNamespace("gardens_of_the_dead|snifferent|nethers_exoticism")
+                    && pendingInfo.isForWoodTypeFullId("gardens_of_the_dead:whistlecane")
+                    && pendingInfo.isForBlockName("(whistlecane|globar|jabuticaba)_hedge")
+            ) {
+                return false; /// - this esnure a block will be generated/registered
+            }
+
+            return null;
+        }
     }
 }

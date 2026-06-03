@@ -63,7 +63,7 @@ public class HardcodedBlockType {
         String woodNamespace = woodType.getNamespace();
         String woodFullId = woodType.getId().toString();
 
-        PendingBlockInfo pendingInfo = new PendingBlockInfo(modThatTheBlockIsFrom, woodNamespace, woodFullId, blockName);
+        PendingBlockInfo pendingInfo = PendingBlockInfo.of(modThatTheBlockIsFrom, woodNamespace, woodFullId, blockName);
 
         // create supported_modId/WoodTypeNamespace/blockName - Example: quark/biomesoplenty/redwood_ladder
         String blockId = modThatTheBlockIsFrom + "/" + woodNamespace + "/" + blockName;
@@ -178,7 +178,7 @@ public class HardcodedBlockType {
 
         String blockId = modThatTheBlockIsFrom + "/" + leavesNamespace + "/" + blockName;
 
-        PendingBlockInfo pendingInfo = new PendingBlockInfo(modThatTheBlockIsFrom, leavesNamespace, leavesFullId, blockName);
+        PendingBlockInfo pendingInfo = PendingBlockInfo.of(modThatTheBlockIsFrom, leavesNamespace, leavesFullId, blockName);
 
         /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ SPECIAL EXCLUSION ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -220,7 +220,11 @@ public class HardcodedBlockType {
         return null;
     }
 
-    private record PendingBlockInfo(String modThatTheBlockIsFrom, String woodNamespace, String woodFullId, String blockName) {
+    protected record PendingBlockInfo(String modThatTheBlockIsFrom, String woodNamespace, String woodFullId, String blockName) {
+
+        public static PendingBlockInfo of(String modThatTheBlockIsFrom, String woodNamespace, String woodFullId, String blockName) {
+            return new PendingBlockInfo(modThatTheBlockIsFrom, woodNamespace, woodFullId, blockName);
+        }
 
         public boolean isForSupportedModId(String modId) {
             return this.modThatTheBlockIsFrom.matches(modId);
