@@ -4,13 +4,16 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 //SUPPORT: v2.0.2+
 public abstract class LauchsShuttersModuleAbstract extends EveryCompatModule {
@@ -19,6 +22,7 @@ public abstract class LauchsShuttersModuleAbstract extends EveryCompatModule {
 
     public LauchsShuttersModuleAbstract(String modId) {
         super(modId, "ls");
+        Supplier<CreativeModeTab> tab = (PlatHelper.getPlatform().isFabric()) ? getModTab("shutter") : getModTab("shutter_tab");
 
         shutters = SimpleEntrySet.builder(WoodType.class, "shutter",
                         getModBlock("oak_shutter"), () -> VanillaWoodTypes.OAK,
@@ -34,7 +38,7 @@ public abstract class LauchsShuttersModuleAbstract extends EveryCompatModule {
                 .addTexture(modRes("block/oak_shutter_middle"))
                 .addTexture(modRes("block/oak_shutter_middle_big"))
                 .addTexture(modRes("item/oak_shutter"))
-                .setTab(getModTab(modId))
+                .setTab(tab)
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .build();
