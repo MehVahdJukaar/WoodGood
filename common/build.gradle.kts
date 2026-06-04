@@ -66,7 +66,7 @@ dependencies {
     modCompileOnly("curse.maven:chipped-456956:5813117")
     modCompileOnly("curse.maven:create-624165:5168511")
 //    modCompileOnly("curse.maven:corail-pillar-266228:5613351") //!! TODO: Add it for FABRIC
-    modCompileOnly("curse.maven:dawn-of-time-312359:8004650")
+   // modCompileOnly("curse.maven:dawn-of-time-312359:8004650")
     modCompileOnly("curse.maven:decorative-blocks-reborn-1327768:7926194")
     modCompileOnly("curse.maven:excessive-building-845097:7783277")
 //    modCompileOnly("curse.maven:farmersdelight-398521:5962800")
