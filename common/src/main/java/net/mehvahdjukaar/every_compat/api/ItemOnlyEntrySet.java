@@ -66,6 +66,11 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
 
     }
 
+    @Override
+    public int getBlockCount() {
+        return this.items.size();
+    }
+
     @Deprecated(forRemoval = true)
     /// @deprecated USE {@link AbstractSimpleEntrySet#makeEntryName(BlockType)}
     public String getItemName(T w) {

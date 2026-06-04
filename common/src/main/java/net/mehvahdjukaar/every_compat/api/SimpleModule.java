@@ -30,6 +30,7 @@ import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.FRAMED_BLOC
 
 public class SimpleModule extends CompatModule {
 
+    private Class<? extends BlockType> typeClazz = null;
     private final String shortId;
     protected String blockType = "";
     private final Map<String, EntrySet<?>> entries = new LinkedHashMap<>();
@@ -103,6 +104,7 @@ public class SimpleModule extends CompatModule {
 
     public <T extends BlockType> void registerBlocks(Class<T> typeClass,
                                                      Registrator<Block> registry, Collection<T> types) {
+        this.typeClazz = typeClass;
         int blockCount = 0;
         for (var e : getEntries()) {
             if (e.getTypeClass().isAssignableFrom(typeClass)) {
@@ -122,7 +124,13 @@ public class SimpleModule extends CompatModule {
 
     @Override
     public void registerItems(Registrator<Item> registry) {
-        getEntries().forEach(e -> e.registerItems(this, registry));
+        int blockCount = 0;
+        for (EntrySet<?> e : getEntries()) {
+                e.registerItems(this, registry);
+                if (e instanceof ItemOnlyEntrySet<?,?>) blockCount += e.getBlockCount();
+        }
+        bloat += blockCount;
+        if (blockCount > 0) EveryCompat.LOGGER.info("{}: registered {} {} items", this, blockCount, typeClazz.getSimpleName());
     }
 
     @Override
