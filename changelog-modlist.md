@@ -8,19 +8,19 @@
 |------------------------------------|:------:|
 | Beautify Refabricated              |   🟡   |
 | Bewitchment                        |   ❔    |
-| Blockus                            |   🟦   |
-| Clutter                            |   🟦   |
+| Blockus                            |   🟩   |
+| Clutter                            |   🟩   |
 | Create (FABRIC)                    |   ❔    |
-| Excessive Building                 |   🟦   |
-| Exline's Awning                    |   🟦   |
-| Exline's Bark Carpet               |   🟦   |
-| Lightman's Currency Fabric         |   🟦   |
-| Missing Wilds                      |   🟦   |
-| Red Bits                           |   🟦   |
-| Stylish Stiles - Renewed           |   🟦   |
-| Variant Vanilla Blocks (XanthianZ) |   🟦   |
+| Excessive Building                 |   🟩   |
+| Exline's Awning                    |   🟩   |
+| Exline's Bark Carpet               |   🟩   |
+| Lightman's Currency Fabric         |   🟩   |
+| Missing Wilds                      |   🟩   |
+| Red Bits                           |   🟩   |
+| Stylish Stiles - Renewed           |   🟩   |
+| Variant Vanilla Blocks (XanthianZ) |   🟩   |
 | Villagers Plus (FABRIC)            |   ❔    |
-| Wilder Wild                        |   🟦   |
+| Wilder Wild                        |   🟩   |
 | More Barrier Variants              |   🟡   |
 |                                    |        |
 
@@ -119,7 +119,6 @@
 
 ## LEGENDS:
 - 🟩 - AVAILABLE
-- 🟦 - AVAILABLE & CAN BE USED WITH SINYTRA CONNECTOR
 - 🟥 - NOT AVAILABLE
 - 🟡 - Built-in Module within the mod, not Every Compat's
 - ❔ - Don't know when it will be update to 1.21.1

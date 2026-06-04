@@ -139,6 +139,7 @@ dependencies {
     modCompileOnly("curse.maven:clutter-826060:7876249") //@RML: Geckolib //!! 1.20.1
     modCompileOnly("curse.maven:create-fabric-624165:7286603") //!! 1.20.1
     modCompileOnly("curse.maven:dramatic-doors-380617:6479044")
+    modCompileOnly("curse.maven:excessive-building-845097:6075987") // v3.3.10
     modCompileOnly("curse.maven:exlines-awnings-526698:5478883")
     modCompileOnly("curse.maven:infinity-buttons-661902:5409967") //!! 1.20.1
     modCompileOnly("curse.maven:lightmans-currency-fabric-724119:5544643") //!! Not maintained since 1.20.1
