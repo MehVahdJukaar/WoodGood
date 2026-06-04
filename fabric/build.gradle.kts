@@ -87,7 +87,6 @@ dependencies {
 //    modRuntimeOnly("curse.maven:architects-palette-433862:6861002") // Forge-Config-API-Port @ BETA
 //    modRuntimeOnly("curse.maven:beautiful-campfires-1085950:6828158")
 //    modRuntimeOnly("curse.maven:backpacked-352835:7500600")
-    modCompileOnly("curse.maven:blockus-312289:7920575")
 //    modRuntimeOnly("curse.maven:camp-chair-531744:4579676") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:corail-pillar-266228:5613351")
 //    modRuntimeOnly("curse.maven:dawn-of-time-312359:7029308")
@@ -134,6 +133,7 @@ dependencies {
     //+ GENERAL
     modCompileOnly("curse.maven:beautify-refabricated-809311:7553989")
     modCompileOnly("curse.maven:bewitchment-394915:5819540") //!! 1.20.1
+    modCompileOnly("curse.maven:blockus-312289:7920575")
     modCompileOnly("curse.maven:building-but-better-989479:7627392") //!! 1.20.1
     modCompileOnly("curse.maven:clutter-826060:7876249") //@RML: Geckolib //!! 1.20.1
     modCompileOnly("curse.maven:create-fabric-624165:7286603") //!! 1.20.1

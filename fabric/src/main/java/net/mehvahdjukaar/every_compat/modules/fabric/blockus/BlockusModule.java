@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.blockus;
+package net.mehvahdjukaar.every_compat.modules.fabric.blockus;
 
 import com.brand.blockus.blocks.base.OrientableBlockBase;
 import com.brand.blockus.blocks.base.PostBlock;

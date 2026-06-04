@@ -4,7 +4,6 @@ import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.beautiful_campfires.BeautifulCampfiresModule;
-import net.mehvahdjukaar.every_compat.modules.blockus.BlockusModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.chipped.*;
 import net.mehvahdjukaar.every_compat.modules.copper_age_backport.CopperAgeBackportModule;
@@ -105,7 +104,6 @@ public class EveryCompatCommon {
             addOptionalModule("backpacked", () -> BackpackedModule.class);
             addOptionalModule("barkcarpets", () -> BarkCarpetsModule.class); // Exline's
             addOptionalModule("beautifulcampfires", () -> BeautifulCampfiresModule.class);
-            addOptionalModule("blockus", () -> BlockusModule.class);
             addOptionalModule("campchair", () -> CampChairModule.class);
             addMultipleOptional("chipped", () -> ChippedMainModule.class, () -> ChippedLogModule.class, () -> ChippedDoorModule.class, () -> ChippedGlassModule.class, () -> ChippedLeavesModule.class);
             addOptionalModule("copperagebackport", () -> CopperAgeBackportModule.class);

@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.fabric;
 import net.fabricmc.api.ModInitializer;
 import net.mehvahdjukaar.every_compat.EveryCompatCommon;
 import net.mehvahdjukaar.every_compat.modules.fabric.bewitchment.BewitchmentModule;
+import net.mehvahdjukaar.every_compat.modules.fabric.blockus.BlockusModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.building_but_better.BuildingButBetterModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.clutter.ClutterModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.create.CreateModule;
@@ -58,6 +59,7 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
             // =============================================== GENERAL ================================================== \\
             addOptionalModule("bbb", () -> BuildingButBetterModule.class);
             addOptionalModule("bewitchment", () -> BewitchmentModule.class);
+            addOptionalModule("blockus", () -> BlockusModule.class);
             addOptionalModule("clutter", () -> ClutterModule.class);
             addOptionalModule("dramaticdoors", () -> DramaticDoorsModule.class);
             addOptionalModule("exlineawnings", () -> AwningModule.class);
