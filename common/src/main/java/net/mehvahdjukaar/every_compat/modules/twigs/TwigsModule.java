@@ -28,8 +28,7 @@ public class TwigsModule extends EveryCompatModule {
                 .addTag(modRes("tables"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(getModTab(
-"twig"))
+                .setTab(getModTab("twig"))
                 .setTabMode(TabAddMode.AFTER_SAME_TYPE)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .addTexture(modRes("block/oak_table"), PaletteStrategies.PLANKS_REMOVE_DARKEST)

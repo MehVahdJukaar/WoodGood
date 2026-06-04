@@ -5,11 +5,15 @@ import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
+import net.mehvahdjukaar.moonlight.api.set.BlockType;
+import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -18,6 +22,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -147,10 +152,89 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
         }
 
 ///      ┌──────────────────────────────────────────────────────────┐
-///      │   If the mod has built-in codes that already support Wood Mods   │
+///      │  If the mod has built-in codes that already support      │
+///      │  Wood Mods                                               │
 ///      └──────────────────────────────────────────────────────────┘
     @Override
     public List<String> getAlreadySupportedMods() {
         return List.of("biomesoplenty", "so_on...");
+    }
+
+///      ┌──────────────────────────────────────────────────────────┐
+///      │  Duplication System - To whitelist/blacklist a block     │
+///      │  from being registered                                   │
+///      └──────────────────────────────────────────────────────────┘
+    @Override
+    public boolean isEntryAlreadyRegistered(String entrySetId, ResourceLocation blockId, BlockType blockType, Registry<?> registry) {
+        // A NOTE:
+        // You can whitelist a block with vanilla WoodTypes (spruce, acacia, jungle, so on) if your mod only have minecraft:oak
+        // It can be temporary until you add other Vanilla WoodType into your mod
+
+        String blockPath = blockId.getPath();
+        String blockName = blockPath.substring(blockPath.lastIndexOf("/") + 1);
+
+        if (blockType instanceof WoodType woodType) {
+            Boolean hardcoded = customHardedBlockType.isWoodBlockAlreadyRegistered(entrySetId, blockName, woodType, modId);
+            if (hardcoded != null) return hardcoded;
+        } else if (blockType instanceof LeavesType leavesType) {
+            Boolean hardcoded = customHardedBlockType.isLeavesBlockAlreadyRegistered(entrySetId, blockName, leavesType, modId);
+            if (hardcoded != null) return hardcoded;
+        }
+
+
+//        return super.isEntryAlreadyRegistered(entrySetId, blockId, blockType, registry);
+        return false; /// Instead of this, use above
+    }
+
+/// A subClass of HardedBlockType that will have what you need for any BlockType
+    public static class customHardedBlockType extends HardcodedBlockType {
+
+        @Nullable
+        public static Boolean isWoodBlockAlreadyRegistered(String entrySetId, String blockName, WoodType woodType, String modThatTheBlockIsFrom) {
+            String woodNamespace = woodType.getNamespace();
+            String woodFullId = woodType.getId().toString();
+
+            PendingBlockInfo pendingInfo = PendingBlockInfo.of(modThatTheBlockIsFrom, woodNamespace, woodFullId, blockName);
+
+            if (
+                    /// ID of Supported Mod that Every Compat is supporting
+                    pendingInfo.isForSupportedModId("quark")
+
+                    /// ID of Wood-Mods that new WoodTypes are from
+                            && pendingInfo.isForWoodTypeNamespace("gardens_of_the_dead|snifferent|nethers_exoticism")
+
+                    /// ID of WoodTypes - It can use RegEx (Regular Expression)
+                            && pendingInfo.isForWoodTypeFullId("gardens_of_the_dead:whistlecane")
+
+                    /// Name of Block from Every Compat - It can use RegEx (Regular Expression)
+                    // NOTE: the Name is from everycomp:quark/gardens_of_the_dead/Name_Of_Block <- Right here
+                    // example: everycomp:quark/gardens_of_the_dead/whistle_ladder -> whistle_ladder as Name of Block
+                            && pendingInfo.isForBlockName("(whistlecane|globar|jabuticaba)_ladder")
+            ) {
+                return true; /// - this ensure a block will not be generated/registered
+            }
+
+            return null;
+        }
+
+        /// Below is same as above but it's for LeavesType, a subclass of BlockType
+        // NOTE: the 3rd parameter is LeavesType Instead of WoodType
+        @Nullable
+        public static Boolean isLeavesBlockAlreadyRegistered(String entrySetId, String blockName, LeavesType leavesType, String modThatTheBlockIsFrom) {
+            String leavesNamespace = leavesType.getNamespace();
+            String leavesFullId = leavesType.getId().toString();
+
+            PendingBlockInfo pendingInfo = PendingBlockInfo.of(modThatTheBlockIsFrom, leavesNamespace, leavesFullId, blockName);
+
+            if (pendingInfo.isForSupportedModId("quark")
+                    && pendingInfo.isForWoodTypeNamespace("gardens_of_the_dead|snifferent|nethers_exoticism")
+                    && pendingInfo.isForWoodTypeFullId("gardens_of_the_dead:whistlecane")
+                    && pendingInfo.isForBlockName("(whistlecane|globar|jabuticaba)_hedge")
+            ) {
+                return false; /// - this esnure a block will be generated/registered
+            }
+
+            return null;
+        }
     }
 }
