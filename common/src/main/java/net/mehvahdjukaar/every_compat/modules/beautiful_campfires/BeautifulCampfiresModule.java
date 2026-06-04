@@ -6,9 +6,11 @@ import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
+import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
@@ -37,6 +39,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.ToIntFunction;
 
@@ -72,7 +75,7 @@ public class BeautifulCampfiresModule extends SimpleModule {
                         w -> new CampfireBlock(true, 2, copyProperties(10))
                 )
                 .addTile(() -> BlockEntityType.CAMPFIRE)
-                //TEXTURE: using acacia_soul_campfire above
+                //TEXTURES: acacia_soul_campfire above
                 .addTextureM(modRes("block/acacia_campfire_log_lit"), EveryCompat.res("block/bc/campfire_log_lit_m"),
                         PaletteStrategies.LOG_SIDE_STANDARD)
                 .addTextureM(modRes("block/acacia_soul_campfire_log_lit"), EveryCompat.res("block/bc/campfire_log_lit_m"),
@@ -107,16 +110,45 @@ public class BeautifulCampfiresModule extends SimpleModule {
     public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicServerResources(executor);
 
-        executor.accept((manager, handler) -> {
+        executor.accept((manager, sink) -> {
             ResourceLocation campfireLoc = modRes("acacia_campfire");
             ResourceLocation soulCampfireLoc = modRes("acacia_soul_campfire");
 
             campfires.blocks.forEach((wood, block) -> {
-                createRecipe("campfire", wood, block, campfireLoc, handler, manager);
+                createRecipe("campfire", wood, block, campfireLoc, sink, manager);
                 createRecipe("soul_campfire", wood, soul_campfires.blocks.get(wood), soulCampfireLoc,
-                        handler, manager);
+                        sink, manager);
             });
+
         });
+
+        if (PlatHelper.isModLoaded("toughasnails")) {
+            executor.accept((manager, sink) -> {
+
+                boolean isTagFilled = false;
+                SimpleTagBuilder warmingTag = null;
+                SimpleTagBuilder coolingTag = null;
+
+                for (Map.Entry<WoodType, CampfireBlock> entry : campfires.blocks.entrySet()) {
+                    WoodType wood = entry.getKey();
+                    CampfireBlock block = entry.getValue();
+                    var soulBlock = soul_campfires.blocks.get(wood);
+                    warmingTag = SimpleTagBuilder.of(new ResourceLocation("toughasnails:heating_blocks"));
+                    coolingTag = SimpleTagBuilder.of(new ResourceLocation("toughasnails:cooling_blocks"));
+
+                    if (block != null) warmingTag.addEntry(block);
+                    if (soulBlock != null) coolingTag.addEntry(soulBlock);
+                    if (block != null || soulBlock != null) isTagFilled = true;
+                }
+
+                if (isTagFilled) {
+                    sink.addTag(warmingTag, Registries.BLOCK);
+                    sink.addTag(warmingTag, Registries.ITEM);
+                    sink.addTag(coolingTag, Registries.BLOCK);
+                    sink.addTag(coolingTag, Registries.ITEM);
+                }
+            });
+        }
     }
 
     public void createRecipe(String recipeName, WoodType woodType, Block output, ResourceLocation recipeLoc,
