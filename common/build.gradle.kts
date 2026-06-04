@@ -59,7 +59,7 @@ dependencies {
     modCompileOnly("curse.maven:decorative-blocks-reborn-1327768:7926194")
     modCompileOnly("curse.maven:exlines-bark-carpets-527296:5259192")
     modCompileOnly("curse.maven:farmersdelight-398521:8083481")
-    modCompileOnly("curse.maven:furnish-547069:7662583")
+//    modCompileOnly("curse.maven:furnish-547069:7662583-neoforge")
     modCompileOnly("curse.maven:handcrafted-538214:6330030")
     modCompileOnly("curse.maven:hearth-and-home-849364:5310272") //!! 1.20.1
     modCompileOnly("curse.maven:missing-wilds-622590:6302230")
@@ -76,7 +76,7 @@ dependencies {
 
     //+ OTHER MAVENS
     modCompileOnly("maven.modrinth:stylish-stiles:1.1.1-1.20.4") //!! 1.20.1
-
+    modCompileOnly("maven.modrinth:furnish-furniture:27-neoforge")
     modCompileOnly("org.violetmoon.quark:Quark:4.1-472-SNAPSHOT") // Zeta @ DNU - https://maven.blamejared.com/org/violetmoon/quark/Quark/
     modCompileOnly("curse.maven:quark-243121:8146177") // TEMP BACKUP MAVEN
 

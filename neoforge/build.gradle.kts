@@ -92,7 +92,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:exlines-bark-carpets-527296:4094399") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:farmersdelight-398521:8083481")
 //    modRuntimeOnly("curse.maven:friends-and-foes-forge-602059:6470209") // Yet-Another-Config-Lib-V3, ResourcefulLib
-//    modRuntimeOnly("curse.maven:furnish-547069:4821511") //!! 1.20.1 -> 1.21.1 Cannot remap access widener from namespace 'mojang'. Expected: 'intermediary'
+//    modRuntimeOnly("curse.maven:furnish-547069:7662583") //v29
 //    modRuntimeOnly("curse.maven:handcrafted-538214:5617252") // Resourceful-Lib
 //    modRuntimeOnly("curse.maven:missing-wilds-622590:6302230")
 //    modRuntimeOnly("curse.maven:more-beautiful-torches-860325:5609745") // MonoLib
