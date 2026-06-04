@@ -92,7 +92,6 @@ dependencies {
 //    modRuntimeOnly("curse.maven:corail-pillar-266228:5613351")
 //    modRuntimeOnly("curse.maven:dawn-of-time-312359:7029308")
 //    modRuntimeOnly("curse.maven:decorative-blocks-reborn-1327768:6897415")
-//    modRuntimeOnly("curse.maven:excessive-building-845097:6075987") // v3.3.10
     modCompileOnly("curse.maven:exlines-bark-carpets-527296:4661550") //!! 1.20.1
     modCompileOnly("curse.maven:farmers-delight-refabricated-993166:8088691")
     modCompileOnly("curse.maven:friends-and-foes-551364:8154503")
@@ -116,9 +115,9 @@ dependencies {
 //    modRuntimeOnly("earth.terrarium.chipped:chipped-fabric-${minecraft_version}:4.0.2") //INCLUDED: Athena, Resourceful-Lib -NOTE: no need to enable these dependencies mods, it's already included
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN FABRIC
-    // ~/forge/mods LOCAL
+    // ~/fabric/mods LOCAL
     modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
-    modCompileOnly("net.darktree.redbits:redbits-1.20.1-1.16.1")
+    modCompileOnly("net.darktree.redbits:redbits-1.21-1.16.6")
 
     // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:7628029")
