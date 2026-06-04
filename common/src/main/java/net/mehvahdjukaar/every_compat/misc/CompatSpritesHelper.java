@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.misc;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.TextureInfo;
 import net.mehvahdjukaar.moonlight.api.client.TextureCache;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
@@ -77,7 +78,35 @@ public class CompatSpritesHelper {
         addOptional("marvelous_menagerie", "calamites_log", "_side", "block/calamites_log"); // is a 8x8 log
         addOptional("marvelous_menagerie", "calamites_log", "_top", "block/calamites_log"); // is a 8x8 log
 
-        // -------------------- Frightful Winter
+        // -------------------- Alex's Caves
+        addOptional("alexscaves", "thornwood_log", "_side", "block/thornwood_log");
+        addOptional("alexscaves", "thornwood_log", "_top", "block/thornwood_log_top");
+        addOptional("alexscaves", "stripped_thornwood_log", "_side", "block/stripped_thornwood_log");
+        addOptional("alexscaves", "stripped_thornwood_log", "_top", "block/stripped_thornwood_log_top");
+
+        // -------------------- More Sniffer Flowers
+        addOptional("moresnifferflowers", "vivicus_log", "_side", "block/vivicus_log"); // was using vivicus_log1c.png
+        addOptional("moresnifferflowers", "vivicus_log", "_top", "block/vivicus_log_top");
+
+        // -------------------- Tech Reborn
+        addOptional("techreborn", "rubber_log", "_side", "block/rubber_log_side"); // was using rubber_log_sap.png
+        addOptional("techreborn", "rubber_log", "_top", "block/rubber_log_top");
+
+        // -------------------- [Let's Do] Meadow
+        // Leaves
+        addOptional("meadow:alpine_birch_leaves", "_leaves", "meadow:block/alpine_birch_leaves_top");
+
+        // -------------------- Ars Nouveau
+        if (!PlatHelper.isModLoaded("archwood_good")) {
+            addOptional("ars_nouveau:blue_archwood_log", "_side", "ars_nouveau:block/archwood_log");
+            addOptional("ars_nouveau:blue_archwood_log", "_top", "ars_nouveau:block/archwood_log_top");
+        } // Archwood-Good add archwood_log and 5 colored planks for logs from Ars-Nouveau & Ars-Elemental
+
+        // -------------------- Nature's Spirit
+        addOptional("natures_spirit", "joshua_log", "_side", "block/joshua_bundle"); // joshua_log.png is a 8x8
+        addOptional("natures_spirit", "joshua_log", "_top", "block/joshua_bundle_top"); // joshua_log_top.png is a 8x8
+        addOptional("natures_spirit", "stripped_joshua_log", "_side", "block/stripped_joshua_bundle"); // stripped_joshua_log.png is a 8x8
+        addOptional("natures_spirit", "stripped_joshua_log", "_top", "block/stripped_joshua_bundle_top"); // joshua_log_top.png is a 8x8
         // Leaves
         addOptional("natures_spirit", "joshua_leaves", "_leaves", "block/joshua_leaves"); // Was using joshua_ends.png
 
