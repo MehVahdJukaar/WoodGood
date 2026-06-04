@@ -2,8 +2,6 @@ package net.mehvahdjukaar.every_compat.common_classes;
 
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.moonlight.api.client.ICustomItemRendererProvider;
 import net.mehvahdjukaar.moonlight.api.client.ItemStackRenderer;
 import net.minecraft.client.Minecraft;
@@ -15,6 +13,8 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ChestBlock;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
@@ -26,7 +26,7 @@ public class CompatChestItem extends BlockItem implements ICustomItemRendererPro
     }
 
     @Override
-    @Environment(EnvType.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     public Supplier<ItemStackRenderer> getRendererFactory() {
         return () -> ClientProxy.getItemStackRenderer(this);
     }

@@ -2,8 +2,6 @@ package net.mehvahdjukaar.every_compat.misc;
 
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.moonlight.api.client.ItemStackRenderer;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
@@ -16,6 +14,8 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,7 +25,7 @@ import java.util.function.Supplier;
 import static net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs.getBlockTypeConfigs;
 import static net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs.getChildConfigs;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public abstract class BlockTypeCycleItemRenderer<T extends BlockType> extends ItemStackRenderer {
 
     private final List<String> childKeys = new ArrayList<>();

@@ -1,8 +1,6 @@
 package net.mehvahdjukaar.every_compat.api;
 
 import com.google.common.base.Preconditions;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.misc.ExtraModelConfiguration;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
@@ -31,6 +29,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.apache.commons.lang3.function.TriFunction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -530,7 +530,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
         BlockEntityType<H> get();
 
-        @Environment(EnvType.CLIENT)
+        @OnlyIn(Dist.CLIENT)
         default void registerRenderer(ClientHelper.BlockEntityRendererEvent event, BlockEntityRendererProvider<BlockEntity> renderer) {
             event.register(get(), renderer);
         }

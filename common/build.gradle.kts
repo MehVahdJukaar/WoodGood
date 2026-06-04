@@ -30,8 +30,9 @@ dependencies {
 //!! ================================================ IMPORTS ==========================================================
     //+ REQUIRED - The modules access libaries from below
     // ~/common/mods LOCAL
+    modCompileOnly("copper-age-common:copperagebackport-fabric-1.21.1-0.1.4")
+    modCompileOnly("net.darktree.redbits:redbits-1s.20.1-1.16.1") //FABRIC
 //    modCompileOnly("local-bibliocraft_legacy_expanded:bibliocraftfabric-1.1.0") //@ Dont import because it was built with Loom-1.14+
-    modCompileOnly("net.darktree.redbits:redbits-1.20.1-1.16.1") //FABRIC
 //    modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
 
     // MACAW's
@@ -55,7 +56,7 @@ dependencies {
     modCompileOnly("curse.maven:chipped-456956:5813117")
     modCompileOnly("curse.maven:create-624165:5168511")
 //    modCompileOnly("curse.maven:corail-pillar-266228:5613351") //!! TODO: Add it for FABRIC
-   // modCompileOnly("curse.maven:dawn-of-time-312359:8004650")
+    modCompileOnly("curse.maven:dawn-of-time-312359:7029195")
     modCompileOnly("curse.maven:decorative-blocks-reborn-1327768:7926194")
     modCompileOnly("curse.maven:excessive-building-845097:7783277")
 //    modCompileOnly("curse.maven:farmersdelight-398521:5962800")
@@ -70,6 +71,7 @@ dependencies {
 //    modCompileOnly("curse.maven:rechiseled-558998:7687483") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ] //!! Not created yet - do not import it because fabric-loom is v1.14+
     modCompileOnly("curse.maven:storage-drawers-223852:6995432") // 1.21.1-13.11.4 NeoForge
     modCompileOnly("curse.maven:table-top-craft-fabric-729535:5319819") //!! 1.20.1
+    modCompileOnly("curse.maven:twigs-496913:8191595")
     modCompileOnly("curse.maven:valhelsia-furniture-694349:6341023")
     modCompileOnly("curse.maven:villagersplus-fabric-809542:4996993") //!! 1.20.1
 
@@ -79,7 +81,6 @@ dependencies {
     modCompileOnly("org.violetmoon.quark:Quark:4.1-472-SNAPSHOT") // Zeta @ DNU - https://maven.blamejared.com/org/violetmoon/quark/Quark/
     modCompileOnly("curse.maven:quark-243121:8146177") // TEMP BACKUP MAVEN
 
-    modCompileOnly("copper-age-common:copperagebackport-fabric-1.21.1-0.1.4")
 
 }
 
