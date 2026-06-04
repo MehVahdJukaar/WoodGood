@@ -10,7 +10,7 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 
-
+///SUPPORT: v1.3.0+
 public class BarkCarpetsModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, BarkCarpetBlock> barkCarpets;
