@@ -1,6 +1,3 @@
-import org.apache.commons.io.output.ByteArrayOutputStream
-import org.gradle.internal.extensions.core.serviceOf
-import java.nio.charset.Charset
 
 plugins {
     id("com.possible-triangle.core")

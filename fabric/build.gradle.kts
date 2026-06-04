@@ -24,17 +24,7 @@ dependencies {
 
 //!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
 
-    //- LOCAL
-    if (property("enable_moonlight_test").toString().toBoolean()) {
-       // modApi(files(path + "\\Moonlight\\fabric\\build\\libs\\moonlight-${property("moonlight_testVersion")}-fabric.jar"))
-    }
-    //+ MAVEN
-    else {
-        if (property("maven_backup").toString().toBoolean()) modApi("maven.modrinth:moonlight:${property("moonlight_version")}-fabric")
-        else {
-            modImplementation("net.mehvahdjukaar:moonlight-fabric:${property("moonlight_version")}")
-        }
-    }
+    modImplementation("net.mehvahdjukaar:moonlight-fabric:${property("moonlight_version")}")
 
 //!! SUPPLEMENTARIES ------------------------------------------------------------------------------------------------ \\
 //     modImplementation("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
@@ -171,5 +161,4 @@ dependencies {
     modRuntimeOnly("curse.maven:biomes-o-plenty-220318:7251967")
 //    modRuntimeOnly("curse.maven:gardens-of-the-dead-683174:4784268")
 //    modRuntimeOnly("curse.maven:terrestria-323974:5799166")
-
 }
