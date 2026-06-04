@@ -9,13 +9,13 @@ plugins {
 }
 
 mod {
-    additional.add("mod_description", provider { property("mod_description").toString() })
-    additional.add("mod_credits", provider { property("mod_credits").toString() })
-    additional.add("mod_license", provider { property("mod_license").toString() })
-    additional.add("mod_homepage", provider { property("mod_homepage").toString() })
-    additional.add("mod_authors", provider { property("mod_authors").toString() })
-    additional.add("mod_github", provider { property("mod_github").toString() })
-    additional.add("moonlight_required_version", provider { property("moonlight_required_version").toString() })
+    additional.add("mod_description")
+    additional.add("mod_credits")
+    additional.add("mod_license")
+    additional.add("mod_homepage")
+    additional.add("mod_authors")
+    additional.add("mod_github")
+    additional.add("moonlight_required_version")
 }
 
 
@@ -73,8 +73,6 @@ subprojects {
         flatDir { dirs("mods") }
 
         // Our publishing repo
-        if (!property("maven_backup").toString().toBoolean()) maven("https://registry.somethingcatchy.net/repository/maven-releases/")
-
         maven("https://api.modrinth.com/maven")
         maven("https://www.cursemaven.com")
         maven("https://jitpack.io")

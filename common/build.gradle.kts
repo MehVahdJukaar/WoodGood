@@ -11,8 +11,8 @@ dependencies {
 
 //!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
 
-    modApi("net.mehvahdjukaar:moonlight-neoforge:${property("moonlight_version")}")
-    accessTransformers("net.mehvahdjukaar:moonlight-neoforge:${property("moonlight_version")}")
+    modApi("net.mehvahdjukaar:moonlight-common:${property("moonlight_version")}")
+    accessTransformers("net.mehvahdjukaar:moonlight-common:${property("moonlight_version")}")
 
 
 //!! ============================================= DEPENDENCIES ========================================================
