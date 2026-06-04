@@ -92,7 +92,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:dawn-of-time-312359:7029308")
 //    modRuntimeOnly("curse.maven:decorative-blocks-reborn-1327768:6897415")
     modCompileOnly("curse.maven:exlines-bark-carpets-527296:4661550") //!! 1.20.1
-    modCompileOnly("curse.maven:farmers-delight-refabricated-993166:8088691")
+//    modRuntimeOnly("curse.maven:farmers-delight-refabricated-993166:8088691")
     modCompileOnly("curse.maven:friends-and-foes-551364:8154503")
 //    modRuntimeOnly("curse.maven:furnish-547069:5683297")
 //    modRuntimeOnly("curse.maven:handcrafted-538214:5617253")

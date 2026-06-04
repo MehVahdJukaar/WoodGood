@@ -58,7 +58,7 @@ dependencies {
 //    modCompileOnly("curse.maven:corail-pillar-266228:5613351") //!! TODO: Add it for FABRIC
     modCompileOnly("curse.maven:decorative-blocks-reborn-1327768:7926194")
     modCompileOnly("curse.maven:exlines-bark-carpets-527296:5259192")
-//    modCompileOnly("curse.maven:farmersdelight-398521:5962800")
+    modCompileOnly("curse.maven:farmersdelight-398521:8083481")
     modCompileOnly("curse.maven:furnish-547069:7662583")
     modCompileOnly("curse.maven:handcrafted-538214:6330030")
     modCompileOnly("curse.maven:hearth-and-home-849364:5310272") //!! 1.20.1
