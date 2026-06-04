@@ -24,7 +24,7 @@ dependencies {
 
 //!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
 
-    modImplementation("net.mehvahdjukaar:moonlight-fabric:${property("moonlight_version")}")
+    modApi("net.mehvahdjukaar:moonlight-fabric:${property("moonlight_version")}")
 
 //!! SUPPLEMENTARIES ------------------------------------------------------------------------------------------------ \\
 //     modImplementation("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
