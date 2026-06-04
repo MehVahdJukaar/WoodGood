@@ -9,22 +9,11 @@ common {
 //val path = System.getenv("REPOS21_1").toString()
 dependencies {
 
-
 //!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
-    //- Repository LOCAL
 
-    //- LOCAL
-    if (property("enable_moonlight_test").toString().toBoolean()) {
-       // modImplementation(files(path + "\\Moonlight\\common\\build\\libs\\moonlight-${property("moonlight_testVersion")}.jar"))
-    }
-    //+ MAVEN
-    else {
-        if (property("maven_backup").toString().toBoolean()) modImplementation("maven.modrinth:moonlight:${property("moonlight_version")}-fabric")
-        else {
-            modCompileOnly("net.mehvahdjukaar:moonlight-neoforge:${property("moonlight_version")}")
-            accessTransformers("net.mehvahdjukaar:moonlight-neoforge:${property("moonlight_version")}")
-        }
-    }
+    modApi("net.mehvahdjukaar:moonlight-neoforge:${property("moonlight_version")}")
+    accessTransformers("net.mehvahdjukaar:moonlight-neoforge:${property("moonlight_version")}")
+
 
 //!! ============================================= DEPENDENCIES ========================================================
     //+ REQUIRED - The modules access libaries from below

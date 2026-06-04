@@ -19,18 +19,9 @@ dependencies {
 
 //!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
 
-    //- LOCAL
-    if (property("enable_moonlight_test").toString().toBoolean()) {
-      //  modApi(files(path + "\\Moonlight\\neoforge\\build\\libs\\moonlight-${property("moonlight_testVersion")}-neoforge.jar"))
-    }
-    //+ MAVEN
-    else {
-        if (property("maven_backup").toString().toBoolean()) modApi("maven.modrinth:moonlight:${property("moonlight_version")}-neoforge")
-        else {
-            modImplementation("net.mehvahdjukaar:moonlight-neoforge:${property("moonlight_version")}")
-            accessTransformers("net.mehvahdjukaar:moonlight-neoforge:${property("moonlight_version")}")
-        }
-    }
+    modApi("net.mehvahdjukaar:moonlight-neoforge:${property("moonlight_version")}")
+    accessTransformers("net.mehvahdjukaar:moonlight-neoforge:${property("moonlight_version")}")
+
 
 
 //!! TOOLS ========================================================================================================== \\
