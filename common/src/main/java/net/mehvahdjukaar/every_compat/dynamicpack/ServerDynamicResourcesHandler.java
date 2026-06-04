@@ -44,6 +44,8 @@ public class ServerDynamicResourcesHandler extends DynServerResourcesGenerator {
             getPack().addNamespaces("lieonstudio");
             getPack().addNamespaces("quad");
         }
+        if (PlatHelper.isModLoaded("toughasnails")) getPack().addNamespaces("toughasnails");
+        getPack().addNamespaces("blueprint"); // it doesn't show up in modlist, so isModLoaded() can't be used & too many dependents to count
     }
 
     @Override
