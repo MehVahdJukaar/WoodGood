@@ -30,8 +30,8 @@ dependencies {
 //!! ================================================ IMPORTS ==========================================================
     //+ REQUIRED - The modules access libaries from below
     // ~/common/mods LOCAL
-    modCompileOnly("copper-age-common:copperagebackport-fabric-1.21.1-0.1.4")
-    modCompileOnly("net.darktree.redbits:redbits-1s.20.1-1.16.1") //FABRIC
+    modCompileOnly("local-dawnoftimebuilder:dawnoftimebuilder-neoforge-1.21.1-1.6.6")
+    modCompileOnly("copper-age-common:copperagebackport-neoforge-1.21.1-0.1.4")
 //    modCompileOnly("local-bibliocraft_legacy_expanded:bibliocraftfabric-1.1.0") //@ Dont import because it was built with Loom-1.14+
 //    modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
 
@@ -56,9 +56,7 @@ dependencies {
     modCompileOnly("curse.maven:chipped-456956:5813117")
     modCompileOnly("curse.maven:create-624165:5168511")
 //    modCompileOnly("curse.maven:corail-pillar-266228:5613351") //!! TODO: Add it for FABRIC
-    modCompileOnly("curse.maven:dawn-of-time-312359:7029195")
     modCompileOnly("curse.maven:decorative-blocks-reborn-1327768:7926194")
-    modCompileOnly("curse.maven:excessive-building-845097:7783277")
 //    modCompileOnly("curse.maven:farmersdelight-398521:5962800")
     modCompileOnly("curse.maven:furnish-547069:7662583")
     modCompileOnly("curse.maven:handcrafted-538214:6330030")
