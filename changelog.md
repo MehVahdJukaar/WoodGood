@@ -1,22 +1,43 @@
-<div style="text-align: center; border: 1px solid yellow; padding: 10px;">
+| **Legends**                                                                                                                       |
+|-----------------------------------------------------------------------------------------------------------------------------------|
+| - **(C)**: FORGE & FABRIC                                                                                                         |
+| - **(FB)**: FABRIC                                                                                                                |
+| - **(FG)**: FORGE                                                                                                                 |
+| - **(IT)**: Included Texture — added the ResourceLocation of the missing textures required for blocks or generating a new texture |
+| - **(TEX)**: hand-made textures to improve the way a block looks                                                                  |
+| - **(COMPAT)**: Create an exception for a compat mod. EveryCompat won't include the Supported Mod and the Wood Mod                |
+| - **(INCLUDED)**: The block is not generated because a Wood Mod already has the same block as the supported mod will be generated |
+| - **(EXCLUDED)**: The block is generated BUT it shouldn't be generated for a reason                                               |
+| - **(UDBT)**: Undetected BlockTypes will be manually added                                                                        |
+|                                                                                                                                   |
 
-<h2><div style="text-align: center; margin-bottom: 10px;">LEGENDS</div></h2>
+---
 
-<div style="text-align: left;">
+## v2.9.21
 
-* **(C)**: FORGE & FABRIC
-* **(FB)**: FABRIC
-* **(F)**: FORGE
-* **(IT)**: Included Texture: Added the ResourceLocation of the missing textures required for blocks or generating a new texture
-* **(COMPAT)**: Create an exception for a compat mod. EveryCompat's blocks won't included for the Supported Mod and the Wood Mod
-* **(INCLUDED)**: The block is not generated because a Wood Mod already have the same block as the supported mod will be generated
-* **(EXCLUDED)**: The block is generated BUT it shouldn't be generated for a reason
+### CHANGES:
+- **Farmer's Delight** 
+  - (TEX): Updated CABINETS' textures with **Quark** - @derp_gamer22 via Discord
+  - (C): Updated the recipe generation for the new recipe system since FABRIC-v3.3.0+ or NEOFORGE-v1.3.0+ - [#1257](https://github.com/MehVahdJukaar/WoodGood/issues/1257)
+- **Every Compat** (C): 
+  - Improved the Duplication System & Added a few exception for blocks that should be included or excluded (Backported from 1.21.1) 
+  - Improved Logging in latest.log for how many Only-Items are registered along with how many blocks are registered 
+- **BoatLoad** (NF): Improved the texture generation for boats
+- **Woodworks** (NF): Added a missing tag to CHISELED_BOOKSHELVES
 
-</div>
+### ADDED:
+- **Every Compat** - Backported from 1.21.1 
+  - (C): Added tag, `#c:ladders` to all of supported mods' LADDERS - [#1246](https://github.com/MehVahdJukaar/WoodGood/issues/1246)
+  - (IT): Corrected the ResourceLocation for the following WoodTypes from:
+    - **Alex's Caves** - thornwood_log & stripped_thornwood_log
+    - **More Sniffer Flowers** - vivicus_log
+    - **Tech Reborn** - rubber_log
+    - **\[Let's Do] Meadow** - alpine_birch_leaves
+    - **Nature's Spirit** - joshua_log & stripped_joshua_log
 
-</div>
+---
 
-<br>
+## v2.9.20
 
 ### CHANGES: 
 - **Every Compat** (EXCLUDED): **The Twilight Forest's mangrove** with **The Twilight Forest's hollow_log** - Updated the code to prevent the duplicated block
