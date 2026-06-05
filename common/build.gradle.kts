@@ -53,7 +53,6 @@ dependencies {
     modCompileOnly("curse.maven:backpacked-352835:7866688")
     modCompileOnly("curse.maven:beautiful-campfires-1085950:6162194")
     modCompileOnly("curse.maven:camp-chair-531744:4579679") //!! 1.20.1
-    modCompileOnly("curse.maven:chipped-456956:5813117")
     modCompileOnly("curse.maven:create-624165:5168511")
 //    modCompileOnly("curse.maven:corail-pillar-266228:5613351") //!! TODO: Add it for FABRIC
     modCompileOnly("curse.maven:decorative-blocks-reborn-1327768:7926194")
@@ -77,6 +76,7 @@ dependencies {
     //+ OTHER MAVENS
     modCompileOnly("maven.modrinth:stylish-stiles:1.1.1-1.20.4") //!! 1.20.1
     modCompileOnly("maven.modrinth:furnish-furniture:27-neoforge")
+    modCompileOnly("earth.terrarium.chipped:chipped-neoforge-${property("minecraft_version")}:4.0.2") //INCLUDED: Athena, Resourceful-Lib, REQUIRED: +Bytecodecs
     modCompileOnly("org.violetmoon.quark:Quark:4.1-481-SNAPSHOT") // Zeta @ DNU - https://maven.blamejared.com/org/violetmoon/quark/Quark/
 //    modCompileOnly("curse.maven:quark-243121:8146177") // TEMP BACKUP MAVEN
 
