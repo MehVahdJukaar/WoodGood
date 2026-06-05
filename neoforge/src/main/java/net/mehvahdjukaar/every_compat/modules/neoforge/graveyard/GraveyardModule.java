@@ -1,8 +1,10 @@
 
 package net.mehvahdjukaar.every_compat.modules.neoforge.graveyard;
 
-import com.finallion.graveyard.blockentities.SarcophagusBlockEntity;
-import com.finallion.graveyard.blocks.SarcophagusBlock;
+import com.lion.graveyard.blockentities.SarcophagusBlockEntity;
+import com.lion.graveyard.blocks.SarcophagusBlock;
+import com.lion.graveyard.init.TGBlockEntities;
+import com.lion.graveyard.init.TGItems;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
@@ -17,6 +19,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -35,7 +38,7 @@ public class GraveyardModule extends EveryCompatModule {
                         getModBlock("oak_coffin"), () -> VanillaWoodTypes.OAK,
                         w -> new CompatCoffinfBlock(Utils.copyPropertySafe(Blocks.OAK_PLANKS).noOcclusion(), w)
                 )
-                .addTile(CompatCoffinBlockTile::new)
+                .addTile(TGBlockEntities.SARCOPHAGUS_BLOCK_ENTITY)
                 .addTextureM(modRes("block/oak_coffin"), EveryCompat.res("model/oak_coffin_m"))
                 .addTag(modRes("coffins"), Registries.BLOCK, Registries.ITEM)
                 .setTab(getModTab(
@@ -81,8 +84,9 @@ public class GraveyardModule extends EveryCompatModule {
     private class CompatCoffinfBlock extends SarcophagusBlock {
         private final WoodType woodType;
 
-        public CompatCoffinfBlock(Properties properties, WoodType woodType) {
-            super(properties, true, "lid", "base");
+        ///If the mod get updated to 1.21.1, then below will need updates
+        public CompatCoffinfBlock(BlockBehaviour.Properties properties, WoodType woodType) {
+            super(properties, true, TGItems.OAK_COFFIN_LID, TGItems.OAK_COFFIN_BASE);
             this.woodType = woodType;
         }
 
