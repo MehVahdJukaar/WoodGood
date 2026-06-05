@@ -1,7 +1,6 @@
 package net.mehvahdjukaar.every_compat.platform;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.mehvahdjukaar.moonlight.api.platform.configs.neoforge.ConfigBuilderImpl;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -22,7 +21,7 @@ public class ECPlatStuffImpl {
 
     public static void registerStripping(Block post, Block stripped) {
         //TODO: add back
-        //  ToolInteractionHandler.registerInteraction(ItemAbilities.AXE_STRIP,post, stripped);
+//          ToolInteractionHandler.registerInteraction(ItemAbilities.AXE_STRIP, post, stripped);
     }
 
 }
