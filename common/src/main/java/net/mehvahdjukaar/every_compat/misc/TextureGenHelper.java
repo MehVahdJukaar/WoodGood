@@ -122,12 +122,7 @@ public class TextureGenHelper {
                     ResourceLocation oldTextureId = respriterSet.getKey();
                     String oldPath = oldTextureId.getPath();
 
-                    //TODO: ugly, change
-                    // boatload's texture path has 2 folder
-                    String newPath = (oldPath.startsWith("entity/") && modId.equals("boatload"))
-                            ? BlockTypeResTransformer.replaceFullGenericType(oldPath, blockType, blockId, baseType.getTypeName(), null, 2)
-                            // Default
-                            : BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, blockType, blockId, baseType.getTypeName());
+                    String newPath = BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, blockType, blockId, baseType.getTypeName());
 
                     ResourceLocation newId;
 
