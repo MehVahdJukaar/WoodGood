@@ -4,17 +4,16 @@ import com.mrcrayfish.furniture.block.*;
 import com.mrcrayfish.furniture.common.ModTags;
 import com.mrcrayfish.furniture.core.ModBlockEntities;
 import com.mrcrayfish.furniture.core.ModBlocks;
-import com.mrcrayfish.furniture.core.ModCreativeTabs;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
-import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.leaves.VanillaLeavesTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
@@ -58,6 +57,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
 
     public MrCrayfishFurnitureModule(String modId) {
         super(modId, "cfm");
+        ResourceLocation tab = modRes("creative_tab");
 
         bedsideCabinets = SimpleEntrySet.builder(WoodType.class, "bedside_cabinet",
                         ModBlocks.BEDSIDE_CABINET_OAK, () -> VanillaWoodTypes.OAK,
@@ -65,7 +65,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.BEDROOM, Registries.ITEM)
                 .addTag(ModTags.Items.STORAGE, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .addTile(ModBlockEntities.BEDSIDE_CABINET)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
@@ -78,7 +78,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.BEDROOM, Registries.ITEM)
                 .addTag(ModTags.Items.STORAGE, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .requiresChildren("stripped_log")
                 .addTile(ModBlockEntities.BEDSIDE_CABINET)
                 .defaultRecipe()
@@ -92,7 +92,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.OUTDOORS, Registries.ITEM)
                 .addTag(ModTags.Items.STORAGE, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
@@ -105,7 +105,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .addTag(ModTags.Items.OUTDOORS, Registries.ITEM)
                 .addTag(ModTags.Items.STORAGE, Registries.ITEM)
                 .requiresChildren("stripped_log")
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
@@ -117,7 +117,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .requiresChildren("stripped_log")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.BEDROOM, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(blinds);
@@ -128,7 +128,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .requiresChildren("stripped_log")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.BEDROOM, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedBlinds);
@@ -138,7 +138,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                         w -> new CabinetBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.STORAGE, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .addTile(ModBlockEntities.CABINET)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
@@ -151,7 +151,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .requiresChildren("stripped_log")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.STORAGE, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .addTile(ModBlockEntities.CABINET)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
@@ -163,7 +163,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                         w -> new ChairBlock(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.GENERAL, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
@@ -175,7 +175,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .requiresChildren("stripped_log")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.GENERAL, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
@@ -186,7 +186,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                         w -> new CoffeeTableBlock(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.GENERAL, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
@@ -198,7 +198,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .requiresChildren("stripped_log")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.GENERAL, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
@@ -209,7 +209,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                         w -> new CrateBlock(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.STORAGE, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .addTile(ModBlockEntities.CRATE)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
@@ -222,7 +222,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .requiresChildren("stripped_log")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.STORAGE, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .addTile(ModBlockEntities.CRATE)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
@@ -234,7 +234,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                         w -> new DeskBlock(Utils.copyPropertySafe(w.planks), DeskBlock.MaterialType.OAK))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.BEDROOM, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
@@ -246,7 +246,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .requiresChildren("stripped_log")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.BEDROOM, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
@@ -258,7 +258,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.BEDROOM, Registries.ITEM)
                 .addTag(ModTags.Items.STORAGE, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .addTile(ModBlockEntities.DESK_CABINET)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
@@ -271,7 +271,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.BEDROOM, Registries.ITEM)
                 .addTag(ModTags.Items.STORAGE, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .addTile(ModBlockEntities.DESK_CABINET)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
@@ -283,7 +283,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                         w -> new KitchenCounterBlock(Utils.copyPropertySafe(w.planks)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.KITCHEN, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
@@ -294,7 +294,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                         w -> new KitchenCounterBlock(Utils.copyPropertySafe(w.log))).requiresChildren("stripped_log")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.KITCHEN, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
@@ -307,7 +307,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .addTag(ModTags.Items.KITCHEN, Registries.ITEM)
                 .addTag(ModTags.Items.STORAGE, Registries.ITEM)
                 .addTile(ModBlockEntities.KITCHEN_DRAWER)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
@@ -320,7 +320,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.KITCHEN, Registries.ITEM)
                 .addTag(ModTags.Items.STORAGE, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .addTile(ModBlockEntities.KITCHEN_DRAWER)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
@@ -332,7 +332,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                         w -> new KitchenSinkBlock(Utils.copyPropertySafe(w.planks), true))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.KITCHEN, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .addTile(ModBlockEntities.KITCHEN_SINK)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
@@ -345,7 +345,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .requiresChildren("stripped_log")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.KITCHEN, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .addTile(ModBlockEntities.KITCHEN_SINK)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
@@ -357,7 +357,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                         w -> new KitchenSinkBlock(Utils.copyPropertySafe(w.planks), true))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.KITCHEN, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .addTile(ModBlockEntities.KITCHEN_SINK)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
@@ -370,7 +370,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .requiresChildren("stripped_log")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.KITCHEN, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .addTile(ModBlockEntities.KITCHEN_SINK)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
@@ -383,7 +383,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.OUTDOORS, Registries.ITEM)
                 .addTag(ModTags.Items.STORAGE, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .addTile(ModBlockEntities.MAIL_BOX)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
@@ -397,7 +397,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.OUTDOORS, Registries.ITEM)
                 .addTag(ModTags.Items.STORAGE, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .addTile(ModBlockEntities.MAIL_BOX)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
@@ -410,7 +410,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .requiresChildren("stripped_log")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.GENERAL, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
@@ -421,7 +421,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                         w -> new TableBlock(Utils.copyPropertySafe(w.log)))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Items.GENERAL, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
@@ -435,7 +435,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .addTag(ModTags.Blocks.UPGRADED_FENCES, Registries.BLOCK)
                 .addTag(ModTags.Items.OUTDOORS, Registries.ITEM)
                 .addTag(ModTags.Items.UPGRADED_FENCES, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
@@ -449,7 +449,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .addTag(ModTags.Blocks.UPGRADED_FENCES, Registries.BLOCK)
                 .addTag(ModTags.Items.OUTDOORS, Registries.ITEM)
                 .addTag(ModTags.Items.UPGRADED_FENCES, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
@@ -464,7 +464,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .addTag(ModTags.Blocks.UPGRADED_FENCE_GATES, Registries.BLOCK)
                 .addTag(ModTags.Items.OUTDOORS, Registries.ITEM)
                 .addTag(ModTags.Items.UPGRADED_FENCE_GATES, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
@@ -479,7 +479,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .addTag(ModTags.Blocks.UPGRADED_FENCE_GATES, Registries.BLOCK)
                 .addTag(ModTags.Items.OUTDOORS, Registries.ITEM)
                 .addTag(ModTags.Items.UPGRADED_FENCE_GATES, Registries.ITEM)
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
@@ -498,7 +498,7 @@ public class MrCrayfishFurnitureModule extends SimpleModule {
                 .addTag(ModTags.Items.OUTDOORS, Registries.ITEM)
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
-                .setTab(ModCreativeTabs.MAIN)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .copyParentTint()
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
