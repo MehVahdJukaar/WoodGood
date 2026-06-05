@@ -2,23 +2,26 @@ package net.mehvahdjukaar.every_compat.misc;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategy;
+import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
-import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
-import net.mehvahdjukaar.moonlight.api.resources.textures.TextureOps;
+import net.mehvahdjukaar.moonlight.api.resources.textures.*;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.world.item.Item;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
 import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.isKnownVanillaWood;
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.BOAT;
 
 @SuppressWarnings("LoggingSimilarMessage")
 public class UtilityTexture {
@@ -205,4 +208,96 @@ public class UtilityTexture {
         }
     }
 
+    //      ┌──────────────────────────────────────────────────────────┐
+    //      │                       BOAT TEXTURE                       │
+    //      └──────────────────────────────────────────────────────────┘
+    public static void addBoatTextureEntity(ItemOnlyEntrySet<WoodType, Item> boats, ResourceLocation baseTextureLoc, ResourceLocation maskTextureLoc,
+                                            ResourceManager manager, ResourceSink sink) {
+
+        /// Entity Textures
+        try (TextureImage baseImage = TextureImage.open(manager, baseTextureLoc)
+        ) {
+            TextureImage maskImage = (maskTextureLoc != null) ? TextureImage.open(manager, maskTextureLoc) : null;
+
+            Respriter respriter = (maskImage != null) ? Respriter.masked(baseImage, maskImage) : Respriter.of(baseImage);
+
+            //unfortunately theres no programmatic way to get all boat textures of a given boat. also because entities might be for multiple wod types. we can only generate them from scratc
+            boats.items.forEach((woodType, boat) -> {
+                var newPath = BlockTypeResTransformer.replaceFullGenericType(baseTextureLoc.getPath(), woodType, Utils.getID(boat), "oak", null, 2);
+
+                sink.addTextureIfNotPresent(manager, newPath, () -> {
+                    try (TextureImage plankTexture = TextureImage.open(manager,
+                        RPUtils.findFirstBlockTextureLocation(manager, woodType.planks))) {
+                        //Palette targetPalette = SpriteUtils.extrapolateWoodItemPalette(plankTexture);
+                        Palette targetPalette = Palette.fromImage(plankTexture);
+                        //TextureImage newImage = respriter.recolorWithAnimationOf(plankTexture);
+
+                        Respriter r =  respriter;
+                        return r.recolor(targetPalette);
+
+                    } catch (Exception e) {
+                        EveryCompat.LOGGER.error("Failed to get planks texture for {} - {}", woodType.getId(), e);
+                    }
+                    return baseImage;
+                });
+
+
+            });
+        } catch (Exception ex) {
+            EveryCompat.LOGGER.error("Failed to generate Entity Texture for {} - {} ", baseTextureLoc, ex);
+        }
+    }
+
+    public static void addBoatTextureItem(ItemOnlyEntrySet<WoodType, Item> boats, ResourceLocation baseTextureLoc, ResourceLocation maskTextureLoc,
+                                          ResourceManager manager, ResourceSink sink) {
+        /// Item Textures
+        try (TextureImage baseImage = TextureImage.open(manager, baseTextureLoc)
+        ) {
+            TextureImage maskImage = (maskTextureLoc != null) ? TextureImage.open(manager, maskTextureLoc) : null;
+
+            Palette palette = (maskTextureLoc != null) ? Palette.fromImage(baseImage, maskImage) : Palette.fromImage(baseImage);
+            Respriter respriter = Respriter.ofPalette(baseImage, palette);
+
+            boats.items.forEach((woodType, boat) -> {
+
+                var newPath = BlockTypeResTransformer.replaceFullGenericType(baseTextureLoc.getPath(), woodType, Utils.getID(boat), "oak", null, 1);
+
+                sink.addTextureIfNotPresent(manager, newPath,
+                        () -> createBoatItemTexture(manager, woodType, respriter)
+                );
+            });
+        } catch (Exception ex) {
+            EveryCompat.LOGGER.error("Failed to generate Item Texture for {} - {} ", baseTextureLoc, ex);
+        }
+    }
+
+
+    @Nullable
+    private static TextureImage createBoatItemTexture(ResourceManager manager, WoodType wood, Respriter respriter) {
+        TextureImage newImage = null;
+        Item boat = wood.getItemOfThis(BOAT);
+        if (boat != null) {
+            try (TextureImage vanillaBoat = TextureImage.open(manager,
+                    RPUtils.findFirstItemTextureLocation(manager, boat))) {
+
+                Palette targetPalette = Palette.fromImage(vanillaBoat);
+                newImage = respriter.recolor(targetPalette);
+
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+        //if it failed, then use plank one
+        if (newImage == null) {
+            try (TextureImage plankPalette = TextureImage.open(manager,
+                    RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
+                Palette targetPalette = SpriteUtils.extrapolateWoodItemPalette(plankPalette);
+                newImage = respriter.recolor(targetPalette);
+
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return newImage;
+    }
 }
