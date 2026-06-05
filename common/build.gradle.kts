@@ -71,7 +71,7 @@ dependencies {
     modCompileOnly("curse.maven:table-top-craft-467136:5318681") //!! 1.20.1
     modCompileOnly("curse.maven:twigs-496913:8191595")
     modCompileOnly("curse.maven:valhelsia-furniture-694349:6341023")
-    modCompileOnly("curse.maven:villagersplus-fabric-809542:4996993") //!! 1.20.1
+    modCompileOnly("curse.maven:villagersplus-forge-817272:4996995") //!! 1.20.1
 
     //+ OTHER MAVENS
     modCompileOnly("maven.modrinth:furnish-furniture:27-neoforge")
