@@ -68,7 +68,7 @@ dependencies {
     modCompileOnly("curse.maven:refurbished-furniture-897116:7473565") // Framework
 //    modCompileOnly("curse.maven:rechiseled-558998:7687483") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ] //!! Not created yet - do not import it because fabric-loom is v1.14+
     modCompileOnly("curse.maven:storage-drawers-223852:6995432") // 1.21.1-13.11.4 NeoForge
-    modCompileOnly("curse.maven:table-top-craft-fabric-729535:5319819") //!! 1.20.1
+    modCompileOnly("curse.maven:table-top-craft-467136:5318681") //!! 1.20.1
     modCompileOnly("curse.maven:twigs-496913:8191595")
     modCompileOnly("curse.maven:valhelsia-furniture-694349:6341023")
     modCompileOnly("curse.maven:villagersplus-fabric-809542:4996993") //!! 1.20.1
