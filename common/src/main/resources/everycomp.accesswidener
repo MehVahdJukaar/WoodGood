@@ -22,3 +22,7 @@ accessible method net/minecraft/world/entity/ai/village/poi/PoiTypes registerBlo
 accessible method net/minecraft/world/level/block/WallTorchBlock <init> (Lnet/minecraft/core/particles/SimpleParticleType;Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;)V
 accessible method net/minecraft/world/level/block/TorchBlock <init> (Lnet/minecraft/core/particles/SimpleParticleType;Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;)V
 accessible method net/minecraft/world/level/block/TransparentBlock <init> (Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;)V
+
+# For More Beautiful Torches
+accessible method net/minecraft/world/level/block/RedstoneWallTorchBlock <init> (Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;)V
+accessible method net/minecraft/world/level/block/RedstoneTorchBlock <init> (Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;)V
