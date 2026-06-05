@@ -24,8 +24,8 @@ dependencies {
     modCompileOnly("curse.maven:valhelsia-core-416935:6296775") // Valhelsia-Furniture
 //    modCompileOnly("curse.maven:supermartijn642s-core-lib-454372:7521829") // v1.1.20 | Rechiseled
 
-//    modCompileOnly("org.violetmoon.zeta:Zeta:1.1-36-SNAPSHOT") // Quark - @ DNU - https://maven.blamejared.com/org/violetmoon/zeta/Zeta/
-    modCompileOnly("curse.maven:zeta-968868:7980010") // TEMP BACKUP MAVEN
+    modCompileOnly("org.violetmoon.zeta:Zeta:1.1-40-SNAPSHOT") // Quark - @ DNU - https://maven.blamejared.com/org/violetmoon/zeta/Zeta/
+//    modCompileOnly("curse.maven:zeta-968868:7980010") // TEMP BACKUP MAVEN
 
 //!! ================================================ IMPORTS ==========================================================
     //+ REQUIRED - The modules access libaries from below
@@ -77,8 +77,8 @@ dependencies {
     //+ OTHER MAVENS
     modCompileOnly("maven.modrinth:stylish-stiles:1.1.1-1.20.4") //!! 1.20.1
     modCompileOnly("maven.modrinth:furnish-furniture:27-neoforge")
-    modCompileOnly("org.violetmoon.quark:Quark:4.1-472-SNAPSHOT") // Zeta @ DNU - https://maven.blamejared.com/org/violetmoon/quark/Quark/
-    modCompileOnly("curse.maven:quark-243121:8146177") // TEMP BACKUP MAVEN
+    modCompileOnly("org.violetmoon.quark:Quark:4.1-481-SNAPSHOT") // Zeta @ DNU - https://maven.blamejared.com/org/violetmoon/quark/Quark/
+//    modCompileOnly("curse.maven:quark-243121:8146177") // TEMP BACKUP MAVEN
 
 
 }

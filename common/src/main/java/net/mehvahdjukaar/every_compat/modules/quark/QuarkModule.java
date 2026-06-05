@@ -37,6 +37,8 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import org.violetmoon.quark.content.building.block.*;
+import org.violetmoon.quark.content.building.module.*;
 import org.violetmoon.zeta.block.ZetaBlock;
 
 import java.util.Objects;
@@ -47,7 +49,7 @@ import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.g
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.getATagOrCreateANew;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
-//SUPPORT: v4.0-435+
+///SUPPORT: v4.1-481+
 public class QuarkModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> verticalSlabs;
