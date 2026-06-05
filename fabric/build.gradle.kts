@@ -151,6 +151,7 @@ dependencies {
     modCompileOnly("curse.maven:regions-unexplored-659110:8167272") // Forge-Config-API-Port
 
     // OTHER MAVENS
+    modCompileOnly("maven.modrinth:stylish-stiles:1.1.1-1.21")
     modCompileOnly("maven.modrinth:wilder-wild:4.2.1-mc1.21.1") // Frozen-Lib
 //    modCompileOnly("com.simibubi.create:create-fabric-1.20.1:$create_fabric_version") // Registrate, Flywheel //!! Need to update maven to get other libraries & the old maven are outdated
 

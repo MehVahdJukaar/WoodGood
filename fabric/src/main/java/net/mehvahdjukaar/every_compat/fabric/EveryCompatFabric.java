@@ -18,6 +18,7 @@ import net.mehvahdjukaar.every_compat.modules.fabric.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.fabric.mrcrayfish.MightyMailModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.red_bits.RedBitsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.regions_unexplored.RegionsUnexploredModule;
+import net.mehvahdjukaar.every_compat.modules.fabric.stylish_stiles.StylishStilesModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.wilder_wild.WilderWildModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.wooden_hoppers.WoodenHoppersModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
@@ -66,6 +67,7 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
             addOptionalModule("infinitybuttons", () -> InfinityButtonsModule.class);
             addOptionalModule("lightmanscurrency", () -> LightmansCurrencyModule.class); //!! Not maintained since 1.20.1
             addOptionalModule("mighty_mail", () -> MightyMailModule.class);
+            addOptionalModule("stylishstiles", () -> StylishStilesModule.class);
             addOptionalModule("redbits", () -> RedBitsModule.class);
             addOptionalModule("regions_unexplored", () -> RegionsUnexploredModule.class);
             addOptionalModule("wilderwild", () -> WilderWildModule.class);

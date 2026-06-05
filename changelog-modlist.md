@@ -17,7 +17,7 @@
 | Lightman's Currency Fabric         |   🟩   |
 | Missing Wilds                      |   🟩   |
 | Red Bits                           |   🟩   |
-| Stylish Stiles - Renewed           |   🟩   |
+| Stylish Stiles                     |   🟩   |
 | Variant Vanilla Blocks (XanthianZ) |   🟩   |
 | Villagers Plus (FABRIC)            |   ❔    |
 | Wilder Wild                        |   🟩   |

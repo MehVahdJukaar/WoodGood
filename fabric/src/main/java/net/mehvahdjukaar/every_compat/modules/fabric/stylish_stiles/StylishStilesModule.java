@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.stylish_stiles;
+package net.mehvahdjukaar.every_compat.modules.fabric.stylish_stiles;
 
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
@@ -38,7 +38,7 @@ public class StylishStilesModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
-                .setTabKey(CreativeModeTabs.BUILDING_BLOCKS)
+                .setTab(getTab(CreativeModeTabs.BUILDING_BLOCKS))
                 .defaultRecipe()
                 .build();
         this.addEntry(STILE);

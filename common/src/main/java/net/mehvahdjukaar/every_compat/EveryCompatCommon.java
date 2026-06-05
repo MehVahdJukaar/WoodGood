@@ -23,7 +23,6 @@ import net.mehvahdjukaar.every_compat.modules.mrcrayfish.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish.RefurbishedFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.storagedrawers.StorageDrawersModule;
-import net.mehvahdjukaar.every_compat.modules.stylish_stiles.StylishStilesModule;
 import net.mehvahdjukaar.every_compat.modules.table_top_craft.TableTopCraftModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.valhelsia_furniture.ValhelsiaFurnitureModule;
@@ -121,7 +120,7 @@ public class EveryCompatCommon {
             addOptionalModule("quark", () -> QuarkModule.class);
             addOptionalModule("refurbished_furniture", () -> RefurbishedFurnitureModule.class);
             addOptionalModule("storagedrawers", () -> StorageDrawersModule.class);
-            addOptionalModule("stylishstiles", () -> StylishStilesModule.class);
+//            addOptionalModule("stylishstiles", () -> StylishStilesModule.class);
             addOptionalModule("table_top_craft", () -> TableTopCraftModule.class);
             addOptionalModule("twigs", () -> TwigsModule.class);
             addOptionalModule("valhelsia_furniture", () -> ValhelsiaFurnitureModule.class);

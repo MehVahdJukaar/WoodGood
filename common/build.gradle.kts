@@ -74,7 +74,6 @@ dependencies {
     modCompileOnly("curse.maven:villagersplus-fabric-809542:4996993") //!! 1.20.1
 
     //+ OTHER MAVENS
-    modCompileOnly("maven.modrinth:stylish-stiles:1.1.1-1.20.4") //!! 1.20.1
     modCompileOnly("maven.modrinth:furnish-furniture:27-neoforge")
     modCompileOnly("earth.terrarium.chipped:chipped-neoforge-${property("minecraft_version")}:4.0.2") //INCLUDED: Athena, Resourceful-Lib, REQUIRED: +Bytecodecs
     modCompileOnly("org.violetmoon.quark:Quark:4.1-481-SNAPSHOT") // Zeta @ DNU - https://maven.blamejared.com/org/violetmoon/quark/Quark/
