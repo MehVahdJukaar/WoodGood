@@ -3,6 +3,8 @@ package net.mehvahdjukaar.every_compat.neoforge;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.EveryCompatCommon;
+import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.integration.neoforge.ECConfigSelectScreen;
 import net.mehvahdjukaar.every_compat.modules.neoforge.abnormal.BoatLoadModule;
@@ -43,19 +45,31 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.variants.VariantCraftingT
 import net.mehvahdjukaar.every_compat.modules.neoforge.woodster.WoodsterModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.xerca.XercaModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
-import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.Container;
+import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerNegotiationEvent;
+import net.neoforged.neoforge.items.IItemHandlerModifiable;
+import net.neoforged.neoforge.items.wrapper.InvWrapper;
+import net.neoforged.neoforge.items.wrapper.SidedInvWrapper;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.WeakReference;
 import java.util.Objects;
 
 import static net.mehvahdjukaar.every_compat.EveryCompat.addOptionalModule;
+import static net.mehvahdjukaar.every_compat.EveryCompat.forAllModules;
 import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.INCLUDE_ALL_WOOD_MODULES;
 
 /**
@@ -66,19 +80,52 @@ public class EveryCompatForge extends EveryCompatCommon {
     private static WeakReference<IEventBus> BUS = new WeakReference<>(null);
 
     public EveryCompatForge(IEventBus bus) {
-        RegHelper.startRegisteringFor(bus);
         BUS = new WeakReference<>(bus);
         this.initialize();
 
         NeoForge.EVENT_BUS.register(this);
+        bus.addListener(EventPriority.LOW, EveryCompatForge::register);
 
         if (PlatHelper.getPhysicalSide().isClient()) {
             EveryCompatForgeClient.init();
 
-            if(PlatHelper.isModLoaded("configured")){
+            if (PlatHelper.isModLoaded("configured")) {
                 ECConfigSelectScreen.registerConfigScreen(EveryCompat.MOD_ID, ECConfigSelectScreen::new);
             }
         }
+    }
+
+    //TOOD: replace this with ForgeHelperImpl.makeDefaultInvHandler
+    private static @NotNull IItemHandlerModifiable makeDefaultInvHandler(Container container, Direction side) {
+        if (container instanceof WorldlyContainer wc) {
+            return new SidedInvWrapper(wc, side == null ? Direction.UP : side);
+        } else {
+            return new InvWrapper(container);
+        }
+    }
+
+    public static void register(RegisterCapabilitiesEvent event) {
+        //auto register module capabilities
+        forAllModules(m -> {
+            if (!(m instanceof SimpleModule sm)) return;
+            sm.getEntries().forEach(e -> {
+                if (!(e instanceof SimpleEntrySet<?, ?> te)) return;
+                try {
+                    BlockEntityType<?> beType = te.getTile();
+                    Block baseBlock = beType.getValidBlocks().stream().findFirst().get();
+                    if (event.isBlockRegistered(Capabilities.ItemHandler.BLOCK, baseBlock)) return;
+
+                    var instance = beType.create(BlockPos.ZERO, baseBlock.defaultBlockState());
+                    if (instance instanceof Container) {
+                        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, beType,
+                                (be, side) -> makeDefaultInvHandler((Container) be, side));
+
+                    }
+                } catch (Exception ignored) {
+                    EveryCompat.LOGGER.warn("Failed to register capability for entry {} of module {}, skipping", e, m);
+                }
+            });
+        });
     }
 
     @Override
@@ -144,7 +191,8 @@ public class EveryCompatForge extends EveryCompatCommon {
                 Class<?> modClass = null;
                 try {
                     modClass = Class.forName("com.github.Pandarix.beautify.Beautify");
-                } catch (Exception ignored) {}
+                } catch (Exception ignored) {
+                }
 
                 if (Objects.nonNull(modClass)) addOptionalModule("beautify", () -> BeautifyDecorateModule.class);
             }

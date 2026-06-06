@@ -68,10 +68,10 @@ dependencies {
 //    modRuntimeOnly("com.teamresourceful.resourcefullib:resourcefullib-neoforge-1.21:$resourcefullib_version") // Chipped, Handcrafted, Cozy, Friends&Foes
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN NEOFORGE
-    modCompileOnly("curse.maven:framework-549225:7530361") // Refurbished-Furniture, +Mighty-Mail, Backpacked
+//    modCompileOnly("curse.maven:framework-549225:7530361") // Refurbished-Furniture, +Mighty-Mail, Backpacked [in common]
     modCompileOnly("curse.maven:titanium-287342:7951516") // Functional-Storage
     modCompileOnly("curse.maven:blueprint-382216:8048607") // The-Outer-End, Woodworks, Boatload, Upgrade-Aquatic, Curiosities!, Autumnity
-    modCompileOnly("curse.maven:valhelsia-core-416935:6296775") // Valhelsia Structure, Valhelsia Furniture
+//    modCompileOnly("curse.maven:valhelsia-core-416935:6296775") // Valhelsia Structure, Valhelsia Furniture [in common]
 
 
     //+ OTHER MAVENs
@@ -128,7 +128,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-roofs-352039:6494399")
     modCompileOnly("curse.maven:macaws-trapdoors-400933:7256148")
     modCompileOnly("curse.maven:macaws-windows-363569:7317672")
-    modCompileOnly("curse.maven:macaws-furniture-359540:7255584")
+//    modCompileOnly("curse.maven:macaws-furniture-359540:7255584") // [in common]
     modCompileOnly("curse.maven:macaws-stairs-1119394:7317479")
 
     //+ GENERAL
@@ -147,7 +147,7 @@ dependencies {
     modCompileOnly("curse.maven:just-a-raft-mod-274350:6945796")
     modCompileOnly("curse.maven:lightmans-currency-fabric-472521:8133254")
     modCompileOnly("curse.maven:mighty-mail-902986:6542124")
-    modCompileOnly("curse.maven:missing-wilds-622590:6302230")
+//    modCompileOnly("curse.maven:missing-wilds-622590:6302230") // [in common]
     modCompileOnly("curse.maven:more-crafting-tables-for-forge-417365:6002554") //CRAFTING_TABLES for FORGE
     modCompileOnly("curse.maven:mosaic-carpentry-690226:7325187") //!! 1.20.1
     modCompileOnly("curse.maven:oreberries-replanted-454062:6123417") //!! 1.20.1
