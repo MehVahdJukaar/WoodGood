@@ -53,3 +53,4 @@ Follow these rules exactly:
 - When you find or use a new/updated file ID or version for any dep, **update `mod-registry.json` immediately** — edit the relevant entry's `curse_files`, `modrinth_versions`, or `maven_versions`, and update `_last_checked` to today's date (ISO 8601).
 - The `mc_version` field on an entry indicates the Minecraft version the listed files target; omit it when it matches `_mc_version` (the project's current MC target).
 - Do not re-fetch version info from CurseForge/Modrinth if the registry already has an entry and `_last_checked` is recent (within ~2 weeks). Ask the user if unsure whether to re-check.
+- To bulk-check all deps for newer versions run: `CF_API_KEY=<key> python3 check-mod-updates.py` (or `--dry-run` to preview, `--slug <slug>` for a single mod). The script updates the registry and `_last_checked` automatically. A backup is kept at `mod-registry.backup.json`.
