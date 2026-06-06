@@ -15,7 +15,6 @@ import net.mehvahdjukaar.every_compat.modules.fabric.infinitybuttons.InfinityBut
 import net.mehvahdjukaar.every_compat.modules.fabric.lauchs.LauchsShuttersModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.lightmans_currency.LightmansCurrencyModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.mcaw.*;
-import net.mehvahdjukaar.every_compat.modules.fabric.mrcrayfish.MightyMailModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.red_bits.RedBitsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.regions_unexplored.RegionsUnexploredModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.stylish_stiles.StylishStilesModule;
@@ -66,7 +65,6 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
             addOptionalModule("exlineawnings", () -> AwningModule.class);
             addOptionalModule("infinitybuttons", () -> InfinityButtonsModule.class);
             addOptionalModule("lightmanscurrency", () -> LightmansCurrencyModule.class); //!! Not maintained since 1.20.1
-            addOptionalModule("mighty_mail", () -> MightyMailModule.class);
             addOptionalModule("stylishstiles", () -> StylishStilesModule.class);
             addOptionalModule("redbits", () -> RedBitsModule.class);
             addOptionalModule("regions_unexplored", () -> RegionsUnexploredModule.class);

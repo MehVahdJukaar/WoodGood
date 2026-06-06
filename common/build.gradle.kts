@@ -18,7 +18,7 @@ dependencies {
 //!! ============================================= DEPENDENCIES ========================================================
     //+ REQUIRED - The modules access libaries from below
 //    modCompileOnly("curse.maven:configured-457570:7122913") // v2.6.2 - NOT ADDED YET
-    modCompileOnly("curse.maven:framework-549225:7530361") // +Refurbished-Furniture, Mighty-Mail, Backpacked
+    modCompileOnly("curse.maven:framework-549225:7530361") // +Refurbished-Furniture, +Mighty-Mail, Backpacked
     modCompileOnly("curse.maven:resourceful-lib-570073:5973188")
     modCompileOnly("curse.maven:architectury-api-419699:5786327")
     modCompileOnly("curse.maven:valhelsia-core-416935:6296775") // Valhelsia-Furniture
@@ -61,6 +61,7 @@ dependencies {
 //    modCompileOnly("curse.maven:furnish-547069:7662583-neoforge")
     modCompileOnly("curse.maven:handcrafted-538214:6330030")
     modCompileOnly("curse.maven:hearth-and-home-849364:5310272") //!! 1.20.1
+    modCompileOnly("curse.maven:mighty-mail-902986:6542124")
     modCompileOnly("curse.maven:missing-wilds-622590:6302230")
     modCompileOnly("curse.maven:more-beautiful-torches-860325:5609745") // MonoLib
     modCompileOnly("curse.maven:more-chest-variants-lieonlion-858032:7310871")
