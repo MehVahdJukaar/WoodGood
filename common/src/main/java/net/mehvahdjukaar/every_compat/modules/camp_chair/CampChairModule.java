@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.camp_chair;
-
+// DISABLED: Camp Chair mod has no 1.21.1 release on CurseForge.
+/*
 import dlovin.smalls.campchair.core.blocks.CampChairBlock;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
@@ -34,3 +35,4 @@ public class CampChairModule extends EveryCompatModule {
     }
 
 }
+*/

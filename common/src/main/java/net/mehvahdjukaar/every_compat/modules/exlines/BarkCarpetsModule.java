@@ -1,4 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.exlines;
+// DISABLED: Exlines Bark Carpets has no 1.21.1 NeoForge release on CurseForge
+/*
 
 import com.exline.barkcarpets.block.BarkCarpetBlock;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
@@ -29,3 +31,4 @@ public class BarkCarpetsModule extends EveryCompatModule {
         this.addEntry(barkCarpets);
     }
 }
+*/

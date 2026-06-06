@@ -4,19 +4,19 @@ import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.beautiful_campfires.BeautifulCampfiresModule;
-import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
+//import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule; // DISABLED: 1.20.1-only on CF
 import net.mehvahdjukaar.every_compat.modules.chipped.*;
 import net.mehvahdjukaar.every_compat.modules.copper_age_backport.CopperAgeBackportModule;
 import net.mehvahdjukaar.every_compat.modules.dawn_of_time.DawnOfTimeModule;
 import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
-import net.mehvahdjukaar.every_compat.modules.exlines.BarkCarpetsModule;
+//import net.mehvahdjukaar.every_compat.modules.exlines.BarkCarpetsModule; // DISABLED: no 1.21.1 NeoForge release
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
 import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
 import net.mehvahdjukaar.every_compat.modules.handcrafted.HandcraftedModule;
-import net.mehvahdjukaar.every_compat.modules.hearth_and_home.HearthAndHomeModule;
+//import net.mehvahdjukaar.every_compat.modules.hearth_and_home.HearthAndHomeModule; // DISABLED: 1.20.1-only on CF
 import net.mehvahdjukaar.every_compat.modules.lieonlion.MoreChestVariantsModule;
-import net.mehvahdjukaar.every_compat.modules.lieonlion.MoreCraftingTablesModule;
+//import net.mehvahdjukaar.every_compat.modules.lieonlion.MoreCraftingTablesModule; // DISABLED: no 1.21.1 NeoForge release
 import net.mehvahdjukaar.every_compat.modules.missing_wilds.MissingWildModule;
 import net.mehvahdjukaar.every_compat.modules.more_beautiful_torches.MoreBeautifulTorches;
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish.BackpackedModule;
@@ -101,9 +101,9 @@ public class EveryCompatCommon {
             addOptionalModule("architects_palette", () -> ArchitectsPaletteModule.class);
             addOptionalModule("another_furniture", () -> AnotherFurnitureModule.class);
             addOptionalModule("backpacked", () -> BackpackedModule.class);
-            addOptionalModule("barkcarpets", () -> BarkCarpetsModule.class); // Exline's
+//            addOptionalModule("barkcarpets", () -> BarkCarpetsModule.class); // DISABLED: no 1.21.1 NeoForge release
             addOptionalModule("beautifulcampfires", () -> BeautifulCampfiresModule.class);
-            addOptionalModule("campchair", () -> CampChairModule.class);
+//            addOptionalModule("campchair", () -> CampChairModule.class); // DISABLED: 1.20.1-only on CF
             addMultipleOptional("chipped", () -> ChippedMainModule.class, () -> ChippedLogModule.class, () -> ChippedDoorModule.class, () -> ChippedGlassModule.class, () -> ChippedLeavesModule.class);
             addOptionalModule("copperagebackport", () -> CopperAgeBackportModule.class);
             addOptionalModule("dawnoftimebuilder", () -> DawnOfTimeModule.class);
@@ -112,8 +112,8 @@ public class EveryCompatCommon {
             addOptionalModule("friendsandfoes", () -> FriendsAndFoesModule.class);
             addOptionalModule("furnish", () -> FurnishModule.class);
             addOptionalModule("handcrafted", () -> HandcraftedModule.class);
-            addOptionalModule("hearth_and_home", () -> HearthAndHomeModule.class);
-            addOptionalModule("lolmct", () -> MoreCraftingTablesModule.class);
+//            addOptionalModule("hearth_and_home", () -> HearthAndHomeModule.class); // DISABLED: 1.20.1-only on CF
+//            addOptionalModule("lolmct", () -> MoreCraftingTablesModule.class); // DISABLED: no 1.21.1 NeoForge release
             addOptionalModule("lolmcv", () -> MoreChestVariantsModule.class);
             addOptionalModule("missingwilds", () -> MissingWildModule.class);
             addOptionalModule("more_beautiful_torches", () -> MoreBeautifulTorches.class);

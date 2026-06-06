@@ -46,3 +46,10 @@ Follow these rules exactly:
 - General:
     - “ALWAYS prefer mixin/IDE tools” means **use them instead of shell/grep**, NOT “fire many unfocused searches.”
     - When in doubt: first try “read the one file I care about” or “lookup this one symbol,” and only then escalate to wider searches.
+
+## Mod dependency registry (mod-registry.json)
+- `mod-registry.json` at the project root tracks CurseForge project IDs, file IDs, Modrinth IDs, versions, and MC version compatibility for every dependency used across common, fabric, and neoforge.
+- **Always read `mod-registry.json` first** before looking up any mod's project ID, file ID, or version. This avoids redundant fetches.
+- When you find or use a new/updated file ID or version for any dep, **update `mod-registry.json` immediately** — edit the relevant entry's `curse_files`, `modrinth_versions`, or `maven_versions`, and update `_last_checked` to today's date (ISO 8601).
+- The `mc_version` field on an entry indicates the Minecraft version the listed files target; omit it when it matches `_mc_version` (the project's current MC target).
+- Do not re-fetch version info from CurseForge/Modrinth if the registry already has an entry and `_last_checked` is recent (within ~2 weeks). Ask the user if unsure whether to re-check.

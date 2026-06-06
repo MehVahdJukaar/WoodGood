@@ -17,7 +17,7 @@ dependencies {
 
 //!! ============================================= DEPENDENCIES ========================================================
     //+ REQUIRED - The modules access libaries from below
-//    modCompileOnly("curse.maven:configured-457570:7122913") // v2.6.2 - NOT ADDED YET
+//    modApi("curse.maven:configured-457570:7122913") // v2.6.2 - NOT ADDED YET
     modCompileOnly("curse.maven:framework-549225:7530361") // +Refurbished-Furniture, Mighty-Mail, Backpacked
     modCompileOnly("curse.maven:resourceful-lib-570073:5973188")
     modCompileOnly("curse.maven:architectury-api-419699:5786327")
@@ -52,7 +52,7 @@ dependencies {
     modCompileOnly("curse.maven:architects-palette-433862:6861008") //!! BETA
     modCompileOnly("curse.maven:backpacked-352835:7866688")
     modCompileOnly("curse.maven:beautiful-campfires-1085950:6162194")
-    modCompileOnly("curse.maven:camp-chair-531744:4579679") //!! 1.20.1
+//    modCompileOnly("curse.maven:camp-chair-531744:4579679") //!! 1.20.1
     modCompileOnly("curse.maven:create-624165:5168511")
 //    modCompileOnly("curse.maven:corail-pillar-266228:5613351") //!! TODO: Add it for FABRIC
     modCompileOnly("curse.maven:decorative-blocks-reborn-1327768:7926194")
@@ -60,7 +60,7 @@ dependencies {
     modCompileOnly("curse.maven:farmersdelight-398521:8083481")
 //    modCompileOnly("curse.maven:furnish-547069:7662583-neoforge")
     modCompileOnly("curse.maven:handcrafted-538214:6330030")
-    modCompileOnly("curse.maven:hearth-and-home-849364:5310272") //!! 1.20.1
+//    modCompileOnly("curse.maven:hearth-and-home-849364:5310272") //!! 1.20.1
     modCompileOnly("curse.maven:missing-wilds-622590:6302230")
     modCompileOnly("curse.maven:more-beautiful-torches-860325:5609745") // MonoLib
     modCompileOnly("curse.maven:more-chest-variants-lieonlion-858032:7310871")
@@ -71,7 +71,7 @@ dependencies {
     modCompileOnly("curse.maven:table-top-craft-467136:5318681") //!! 1.20.1
     modCompileOnly("curse.maven:twigs-496913:8191595")
     modCompileOnly("curse.maven:valhelsia-furniture-694349:6341023")
-    modCompileOnly("curse.maven:villagersplus-forge-817272:4996995") //!! 1.20.1
+//    modCompileOnly("curse.maven:villagersplus-forge-817272:4996995") //!! 1.20.1
 
     //+ OTHER MAVENS
     modCompileOnly("maven.modrinth:furnish-furniture:27-neoforge")

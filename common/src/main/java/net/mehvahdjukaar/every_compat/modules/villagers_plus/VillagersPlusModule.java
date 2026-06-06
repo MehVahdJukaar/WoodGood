@@ -1,4 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.villagers_plus;
+// DISABLED: VillagersPlus mod has no 1.21.1 release on CurseForge.
+/*
 
 import com.lion.villagersplus.blocks.HorticulturistTableBlock;
 import com.lion.villagersplus.init.VPBlockEntities;
@@ -40,3 +42,4 @@ public class VillagersPlusModule extends EveryCompatModule {
 
     }
 }
+*/
