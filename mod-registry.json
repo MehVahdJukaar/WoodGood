@@ -1,22 +1,23 @@
 {
   "_schema_version": "1.0",
   "_mc_version": "1.21.1",
-  "_last_checked": "2026-06-06",
-  "_note": "WoodGood mod dependency registry. curse_files maps loader -> CurseForge file ID (curse.maven:<name>-<project_id>:<file_id>). mc_version only set when it differs from _mc_version.",
+  "_note": "WoodGood mod dependency registry. curse_files maps loader -> CurseForge file ID. mc_version and last_checked are per entry.",
   "mods": {
     "absent-by-design": {
       "name": "Absent by Design",
       "curse_project_id": 305840,
       "curse_files": {
         "neoforge": "8030393"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "another-furniture": {
       "name": "Another Furniture",
       "curse_project_id": 610492,
       "curse_files": {
         "common": "7355747"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "architects-palette": {
       "name": "Architect's Palette",
@@ -24,7 +25,8 @@
       "curse_files": {
         "common": "6861008"
       },
-      "notes": "BETA"
+      "notes": "BETA",
+      "mc_version": "1.21.1"
     },
     "architectury-api": {
       "name": "Architectury API",
@@ -32,7 +34,8 @@
       "curse_files": {
         "common": "5786327",
         "neoforge": "5786327"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "backpacked": {
       "name": "Backpacked",
@@ -40,28 +43,32 @@
       "curse_files": {
         "common": "7866688",
         "neoforge": "7866688"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "beautify-decorate": {
       "name": "Beautify! [Decorate]",
       "curse_project_id": 633252,
       "curse_files": {
         "neoforge": "5947973"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "beautify-refabricated": {
       "name": "Beautify! [Refabricated]",
       "curse_project_id": 809311,
       "curse_files": {
         "fabric": "7553989"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "beautiful-campfires": {
       "name": "Beautiful Campfires",
       "curse_project_id": 1085950,
       "curse_files": {
         "common": "6162194"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "bewitchment": {
       "name": "Bewitchment",
@@ -76,7 +83,8 @@
       "curse_project_id": 1122260,
       "curse_files": {
         "neoforge": "7740866"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "biomes-o-plenty": {
       "name": "Biomes O' Plenty",
@@ -84,21 +92,24 @@
       "curse_files": {
         "fabric": "7251967",
         "neoforge": "7251965"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "blockus": {
       "name": "Blockus",
       "curse_project_id": 312289,
       "curse_files": {
         "fabric": "7920575"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "blueprint": {
       "name": "Blueprint",
       "curse_project_id": 382216,
       "curse_files": {
         "neoforge": "8048607"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "boatload": {
       "name": "Boatload",
@@ -113,12 +124,14 @@
       "curse_project_id": 389697,
       "curse_files": {
         "neoforge": "8155184"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "builders-delight": {
       "name": "Builder's Delight",
       "source": "local",
-      "notes": "neoforge flatDir: com.tynoxs.buildersdelight:BuildersDelight-1.20.1-v.1.3"
+      "notes": "neoforge flatDir: com.tynoxs.buildersdelight:BuildersDelight-1.20.1-v.1.3",
+      "mc_version": "1.21.1"
     },
     "building-but-better": {
       "name": "Building But Better",
@@ -145,7 +158,8 @@
       "curse_project_id": 456956,
       "curse_files": {
         "common": "5813117"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "clutter": {
       "name": "Clutter",
@@ -162,12 +176,14 @@
       "curse_files": {
         "fabric": "7276575",
         "neoforge": "7276577"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "copper-age": {
       "name": "Copper Age Backport",
       "source": "local",
-      "notes": "flatDir: copperagebackport-fabric-1.21.1-0.1.4 (common/fabric), copperagebackport-neoforge-1.21.1-0.1.4 (neoforge)"
+      "notes": "flatDir: copperagebackport-fabric-1.21.1-0.1.4 (common/fabric), copperagebackport-neoforge-1.21.1-0.1.4 (neoforge)",
+      "mc_version": "1.21.1"
     },
     "corail-pillar": {
       "name": "Corail Pillar",
@@ -175,7 +191,8 @@
       "curse_files": {
         "neoforge": "5669131"
       },
-      "notes": "TODO: move module to common"
+      "notes": "TODO: move module to common",
+      "mc_version": "1.21.1"
     },
     "create": {
       "name": "Create",
@@ -189,19 +206,22 @@
       "maven_versions": {
         "neoforge": "${create_version}"
       },
-      "notes": "NeoForge uses maven coord (isTransitive=false); same CurseForge project ID across loaders"
+      "notes": "NeoForge uses maven coord (isTransitive=false); same CurseForge project ID across loaders",
+      "mc_version": "1.21.1"
     },
     "curiosities-syndicate": {
       "name": "Curiosities! (Syndicate)",
       "curse_project_id": 1489190,
       "curse_files": {
         "neoforge": "7893051"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "dawn-of-time": {
       "name": "Dawn of Time Builder",
       "source": "local",
-      "notes": "neoforge flatDir: local-dawnoftimebuilder:dawnoftimebuilder-neoforge-1.21.1-1.6.6"
+      "notes": "neoforge flatDir: local-dawnoftimebuilder:dawnoftimebuilder-neoforge-1.21.1-1.6.6",
+      "mc_version": "1.21.1"
     },
     "decoration-delight": {
       "name": "Decoration & Delight",
@@ -217,14 +237,16 @@
       "curse_files": {
         "common": "7926194",
         "neoforge": "7926194"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "domum-ornamentum": {
       "name": "Domum Ornamentum",
       "curse_project_id": 527361,
       "curse_files": {
         "neoforge": "7812603"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "dramatic-doors": {
       "name": "Dramatic Doors",
@@ -232,21 +254,24 @@
       "curse_files": {
         "fabric": "6479044",
         "neoforge": "6479044"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "excessive-building": {
       "name": "Excessive Building",
       "curse_project_id": 845097,
       "curse_files": {
         "common": "7783277"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "exlines-awnings": {
       "name": "Exline's Awnings",
       "curse_project_id": 526698,
       "curse_files": {
         "fabric": "5478883"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "exlines-bark-carpets": {
       "name": "Exline's Bark Carpets",
@@ -262,7 +287,8 @@
       "curse_files": {
         "fabric": "8088691"
       },
-      "notes": "Separate CurseForge project from NeoForge version (398521)"
+      "notes": "Separate CurseForge project from NeoForge version (398521)",
+      "mc_version": "1.21.1"
     },
     "farmers-delight-neoforge": {
       "name": "Farmer's Delight (NeoForge)",
@@ -270,7 +296,8 @@
       "curse_files": {
         "neoforge": "8083481"
       },
-      "notes": "Separate CurseForge project from Fabric Refabricated version (993166)"
+      "notes": "Separate CurseForge project from Fabric Refabricated version (993166)",
+      "mc_version": "1.21.1"
     },
     "framework": {
       "name": "Framework",
@@ -279,28 +306,32 @@
         "common": "7530361",
         "fabric": "7530359",
         "neoforge": "7530361"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "friends-and-foes": {
       "name": "Friends & Foes",
       "curse_project_id": 551364,
       "curse_files": {
         "fabric": "8154503"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "frozenlib": {
       "name": "FrozenLib",
       "modrinth_id": "frozenlib",
       "modrinth_versions": {
         "fabric": "2.2.4-mc1.21.1"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "functional-storage": {
       "name": "Functional Storage",
       "curse_project_id": 556861,
       "curse_files": {
         "neoforge": "8179577"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "furnish": {
       "name": "Furnish",
@@ -311,7 +342,8 @@
       "modrinth_id": "furnish-furniture",
       "modrinth_versions": {
         "neoforge": "29"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "glitchcore": {
       "name": "GlitchCore",
@@ -319,7 +351,8 @@
       "curse_files": {
         "fabric": "8109791",
         "neoforge": "8109792"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "handcrafted": {
       "name": "Handcrafted",
@@ -327,7 +360,8 @@
       "curse_files": {
         "common": "6330030",
         "neoforge": "6330030"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "hearth-and-home": {
       "name": "Hearth and Home",
@@ -352,21 +386,24 @@
       "curse_files": {
         "fabric": "7545228",
         "neoforge": "7545219"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "jei": {
       "name": "Just Enough Items",
       "curse_project_id": 238222,
       "curse_files": {
         "neoforge": "7420587"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "just-a-raft-mod": {
       "name": "Just a Raft Mod",
       "curse_project_id": 274350,
       "curse_files": {
         "neoforge": "6945796"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "lightmans-currency-fabric": {
       "name": "Lightman's Currency (Fabric)",
@@ -383,7 +420,8 @@
       "curse_files": {
         "neoforge": "8133254"
       },
-      "notes": "Separate CurseForge project from Fabric version (724119)"
+      "notes": "Separate CurseForge project from Fabric version (724119)",
+      "mc_version": "1.21.1"
     },
     "macaws-bridges": {
       "name": "Macaw's Bridges",
@@ -391,7 +429,8 @@
       "curse_files": {
         "fabric": "7628029",
         "neoforge": "7627896"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "macaws-doors": {
       "name": "Macaw's Doors",
@@ -399,7 +438,8 @@
       "curse_files": {
         "fabric": "7618800",
         "neoforge": "7618651"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "macaws-fences-and-walls": {
       "name": "Macaw's Fences and Walls",
@@ -407,7 +447,8 @@
       "curse_files": {
         "fabric": "7308375",
         "neoforge": "7308338"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "macaws-furniture": {
       "name": "Macaw's Furniture",
@@ -416,7 +457,8 @@
         "common": "7255584",
         "fabric": "7255687",
         "neoforge": "7255584"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "macaws-lights-and-lamps": {
       "name": "Macaw's Lights and Lamps",
@@ -424,7 +466,8 @@
       "curse_files": {
         "fabric": "7304042",
         "neoforge": "7304075"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "macaws-paths-and-pavings": {
       "name": "Macaw's Paths and Pavings",
@@ -432,7 +475,8 @@
       "curse_files": {
         "fabric": "7029506",
         "neoforge": "7029451"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "macaws-roofs": {
       "name": "Macaw's Roofs",
@@ -440,7 +484,8 @@
       "curse_files": {
         "fabric": "6494433",
         "neoforge": "6494399"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "macaws-stairs": {
       "name": "Macaw's Stairs",
@@ -448,7 +493,8 @@
       "curse_files": {
         "fabric": "7317453",
         "neoforge": "7317479"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "macaws-trapdoors": {
       "name": "Macaw's Trapdoors",
@@ -456,7 +502,8 @@
       "curse_files": {
         "fabric": "7256233",
         "neoforge": "7256148"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "macaws-windows": {
       "name": "Macaw's Windows",
@@ -464,7 +511,8 @@
       "curse_files": {
         "fabric": "7317646",
         "neoforge": "7317672"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "mighty-mail-fabric": {
       "name": "Mighty Mail (Fabric)",
@@ -481,7 +529,8 @@
       "curse_files": {
         "neoforge": "6542124"
       },
-      "notes": "Separate CurseForge project from Fabric version (904097)"
+      "notes": "Separate CurseForge project from Fabric version (904097)",
+      "mc_version": "1.21.1"
     },
     "missing-wilds": {
       "name": "Missing Wilds",
@@ -490,21 +539,24 @@
         "common": "6302230",
         "fabric": "6302231",
         "neoforge": "6302230"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "more-beautiful-torches": {
       "name": "More Beautiful Torches",
       "curse_project_id": 860325,
       "curse_files": {
         "common": "5609745"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "more-chest-variants-lieonlion": {
       "name": "More Chest Variants (LieOnLion)",
       "curse_project_id": 858032,
       "curse_files": {
         "common": "7310871"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "more-crafting-tables-fabric": {
       "name": "More Crafting Tables (Fabric/LieOnLion)",
@@ -512,7 +564,8 @@
       "curse_files": {
         "common": "5330971"
       },
-      "notes": "Separate CurseForge project from NeoForge version (417365)"
+      "notes": "Separate CurseForge project from NeoForge version (417365)",
+      "mc_version": "1.21.1"
     },
     "more-crafting-tables-neoforge": {
       "name": "More Crafting Tables (NeoForge)",
@@ -520,7 +573,8 @@
       "curse_files": {
         "neoforge": "6002554"
       },
-      "notes": "Separate CurseForge project from Fabric version (913586)"
+      "notes": "Separate CurseForge project from Fabric version (913586)",
+      "mc_version": "1.21.1"
     },
     "mosaic-carpentry": {
       "name": "Mosaic Carpentry",
@@ -543,14 +597,16 @@
       "curse_project_id": 306770,
       "curse_files": {
         "neoforge": "7730942"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "pokecube-aoi": {
       "name": "Pokecube AoI",
       "curse_project_id": 285121,
       "curse_files": {
         "neoforge": "7374140"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "premium-wood": {
       "name": "Premium Wood",
@@ -565,14 +621,16 @@
       "curse_project_id": 377897,
       "curse_files": {
         "neoforge": "8022994"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "quad": {
       "name": "Quad",
       "curse_project_id": 932715,
       "curse_files": {
         "fabric": "5903633"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "quark": {
       "name": "Quark",
@@ -586,7 +644,8 @@
       "maven_versions": {
         "common": "4.1-472-SNAPSHOT",
         "neoforge": "4.1-475-SNAPSHOT"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "redeco": {
       "name": "ReDeco",
@@ -599,7 +658,8 @@
     "redbits": {
       "name": "Redbits",
       "source": "local",
-      "maven_coord": "net.darktree.redbits:redbits"
+      "maven_coord": "net.darktree.redbits:redbits",
+      "mc_version": "1.21.1"
     },
     "refurbished-furniture": {
       "name": "Refurbished Furniture",
@@ -608,7 +668,8 @@
         "common": "7473565",
         "fabric": "7473562",
         "neoforge": "7473565"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "regions-unexplored": {
       "name": "Regions Unexplored",
@@ -616,7 +677,8 @@
       "curse_files": {
         "fabric": "8167272",
         "neoforge": "8167399"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "registrate": {
       "name": "Registrate",
@@ -626,7 +688,8 @@
       "maven_versions": {
         "fabric": "${registrate_fabric_version}",
         "neoforge": "${registrate_version}"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "resourceful-lib": {
       "name": "Resourceful Lib",
@@ -634,12 +697,14 @@
       "curse_files": {
         "common": "5973188",
         "neoforge": "5973188"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "shutter": {
       "name": "Shutter",
       "source": "local",
-      "notes": "fabric: net.stehschnitzel.shutter:shutter-2.0.2-1.20.1, neoforge: net.stehschnitzel.shutter:shutters-2.0.2-1.20.1 (different artifact names)"
+      "notes": "fabric: net.stehschnitzel.shutter:shutter-2.0.2-1.20.1, neoforge: net.stehschnitzel.shutter:shutters-2.0.2-1.20.1 (different artifact names)",
+      "mc_version": "1.21.1"
     },
     "storage-drawers": {
       "name": "Storage Drawers",
@@ -647,7 +712,8 @@
       "curse_files": {
         "common": "6995432",
         "neoforge": "6995432"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "stylish-stiles": {
       "name": "Stylish Stiles",
@@ -681,7 +747,8 @@
       "curse_files": {
         "fabric": "6054948"
       },
-      "notes": "Separate CurseForge project from NeoForge version (940057)"
+      "notes": "Separate CurseForge project from NeoForge version (940057)",
+      "mc_version": "1.21.1"
     },
     "terrablender-neoforge": {
       "name": "TerraBlender (NeoForge)",
@@ -689,7 +756,8 @@
       "curse_files": {
         "neoforge": "6054947"
       },
-      "notes": "Separate CurseForge project from Fabric version (565956)"
+      "notes": "Separate CurseForge project from Fabric version (565956)",
+      "mc_version": "1.21.1"
     },
     "the-graveyard-forge": {
       "name": "The Graveyard (NeoForge)",
@@ -706,7 +774,8 @@
         "fabric": "4389094",
         "neoforge": "7797302"
       },
-      "notes": "Fabric file is 1.20.1 (NOT AVAILABLE for 1.21.1)"
+      "notes": "Fabric file is 1.20.1 (NOT AVAILABLE for 1.21.1)",
+      "mc_version": "1.21.1"
     },
     "timber-frames": {
       "name": "Timber Frames",
@@ -721,14 +790,16 @@
       "curse_project_id": 287342,
       "curse_files": {
         "neoforge": "7951516"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "tropicraft": {
       "name": "Tropicraft",
       "curse_project_id": 254794,
       "curse_files": {
         "neoforge": "6600109"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "twigs": {
       "name": "Twigs",
@@ -737,14 +808,16 @@
         "fabric": "4605097",
         "neoforge": "8191595"
       },
-      "notes": "Fabric file is 1.20.1; neoforge file is 1.21.1"
+      "notes": "Fabric file is 1.20.1; neoforge file is 1.21.1",
+      "mc_version": "1.21.1"
     },
     "unusual-furniture": {
       "name": "Unusual Furniture",
       "curse_project_id": 1278034,
       "curse_files": {
         "neoforge": "7332052"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "valhelsia-core": {
       "name": "Valhelsia Core",
@@ -753,7 +826,8 @@
         "common": "6296775",
         "fabric": "6296784",
         "neoforge": "6296775"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "valhelsia-furniture": {
       "name": "Valhelsia Furniture",
@@ -763,14 +837,16 @@
         "fabric": "5189603",
         "neoforge": "6341023"
       },
-      "notes": "Fabric file is 1.20.1"
+      "notes": "Fabric file is 1.20.1",
+      "mc_version": "1.21.1"
     },
     "valhelsia-structures": {
       "name": "Valhelsia Structures",
       "curse_project_id": 347488,
       "curse_files": {
         "neoforge": "6814480"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "variant-crafting-tables": {
       "name": "Variant Crafting Tables",
@@ -785,7 +861,8 @@
       "curse_project_id": 866509,
       "curse_files": {
         "fabric": "5703471"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "villagersplus": {
       "name": "Villagers+",
@@ -800,7 +877,8 @@
       "modrinth_id": "wilder-wild",
       "modrinth_versions": {
         "fabric": "4.2.1-mc1.21.1"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "wooden-hoppers": {
       "name": "Wooden Hoppers",
@@ -815,21 +893,24 @@
       "curse_project_id": 869951,
       "curse_files": {
         "neoforge": "6732058"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "woodworks": {
       "name": "Woodworks",
       "curse_project_id": 543610,
       "curse_files": {
         "neoforge": "7118286"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "workshop-for-handsome-adventurer": {
       "name": "Workshop for Handsome Adventurer",
       "curse_project_id": 875843,
       "curse_files": {
         "neoforge": "7903929"
-      }
+      },
+      "mc_version": "1.21.1"
     },
     "xercamod": {
       "name": "XercaMod",
@@ -851,7 +932,8 @@
       "maven_versions": {
         "neoforge": "1.1-39-SNAPSHOT"
       },
-      "notes": "Common uses CurseForge backup; NeoForge uses maven SNAPSHOT"
+      "notes": "Common uses CurseForge backup; NeoForge uses maven SNAPSHOT",
+      "mc_version": "1.21.1"
     }
   }
 }

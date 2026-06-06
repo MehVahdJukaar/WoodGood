@@ -87,7 +87,7 @@ def modrinth_latest(modrinth_id: str, loader: str, mc_version: str) -> Optional[
 def check_mod(slug: str, mod: dict, mc_version: str, dry_run: bool) -> tuple[list[str], list[str]]:
     """Returns (changes, warnings)."""
     changes, warnings = [], []
-    mod_mc = mod.get("mc_version", mc_version)
+    mod_mc = mod.get("mc_version") or mc_version
     curse_id = mod.get("curse_project_id")
     modrinth_id = mod.get("modrinth_id")
     # curse_maven_slug overrides the registry slug for cursemaven URL construction
@@ -171,6 +171,9 @@ def main():
             all_errors.append(f"{slug}: {e}")
             continue
 
+        if not dry_run:
+            mod["last_checked"] = date.today().isoformat()
+
         if changes or warnings:
             label = f"[{len(changes)}u/{len(warnings)}w]" if warnings else f"[{len(changes)} update(s)]"
             print(f" {label}")
@@ -186,10 +189,9 @@ def main():
             print(" ok")
 
     if not dry_run:
-        registry["_last_checked"] = date.today().isoformat()
         with open(REGISTRY_PATH, "w") as f:
             json.dump(registry, f, indent=2)
-        print(f"\nRegistry saved. _last_checked = {registry['_last_checked']}")
+        print(f"\nRegistry saved.")
 
     print("\n--- Summary ---")
     total_c = sum(len(v) for v in all_changes.values())

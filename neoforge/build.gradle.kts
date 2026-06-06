@@ -88,7 +88,7 @@ dependencies {
     modCompileOnly("curse.maven:valhelsia-furniture-694349:6341023")
     modCompileOnly("copper-age-common:copperagebackport-neoforge-1.21.1-0.1.4")
     modCompileOnly("local-dawnoftimebuilder:dawnoftimebuilder-neoforge-1.21.1-1.6.6")
-    modCompileOnly("maven.modrinth:furnish-furniture:27-neoforge")
+    modCompileOnly("maven.modrinth:furnish-furniture:29-neoforge")
 
 
     //+ OTHER MAVENs
