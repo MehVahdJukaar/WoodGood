@@ -12,13 +12,19 @@
 |                                                                                                                                   |
 
 ---
+## v2.9.22
+
+### CHANGES:
+- **Every Compat** (C): Clean out some old codes that are no longer needed - Due to Boatloads' new texture generation from `v2.9.21`
+- **Farmer's Delight** (C): Updated the recipe generation for the new recipe system since FABRIC-v3.3.0+ or NEOFORGE-v1.3.0+ - [#1257](https://github.com/MehVahdJukaar/WoodGood/issues/1257)
+
+---
 
 ## v2.9.21
 
 ### CHANGES:
 - **Farmer's Delight** 
   - (TEX): Updated CABINETS' textures with **Quark** - @derp_gamer22 via Discord
-  - (C): Updated the recipe generation for the new recipe system since FABRIC-v3.3.0+ or NEOFORGE-v1.3.0+ - [#1257](https://github.com/MehVahdJukaar/WoodGood/issues/1257)
 - **Every Compat** (C): 
   - Improved the Duplication System & Added a few exception for blocks that should be included or excluded (Backported from 1.21.1) 
   - Improved Logging in latest.log for how many Only-Items are registered along with how many blocks are registered 
