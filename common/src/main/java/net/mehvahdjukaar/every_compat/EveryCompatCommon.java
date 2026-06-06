@@ -20,6 +20,7 @@ import net.mehvahdjukaar.every_compat.modules.lieonlion.MoreChestVariantsModule;
 import net.mehvahdjukaar.every_compat.modules.missing_wilds.MissingWildModule;
 import net.mehvahdjukaar.every_compat.modules.more_beautiful_torches.MoreBeautifulTorches;
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish.BackpackedModule;
+import net.mehvahdjukaar.every_compat.modules.mrcrayfish.MightyMailModule;
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish.RefurbishedFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.storagedrawers.StorageDrawersModule;
@@ -115,6 +116,7 @@ public class EveryCompatCommon {
 //            addOptionalModule("hearth_and_home", () -> HearthAndHomeModule.class); // DISABLED: 1.20.1-only on CF
 //            addOptionalModule("lolmct", () -> MoreCraftingTablesModule.class); // DISABLED: no 1.21.1 NeoForge release
             addOptionalModule("lolmcv", () -> MoreChestVariantsModule.class);
+            addOptionalModule("mighty_mail", () -> MightyMailModule.class);
             addOptionalModule("missingwilds", () -> MissingWildModule.class);
             addOptionalModule("more_beautiful_torches", () -> MoreBeautifulTorches.class);
             addOptionalModule("quark", () -> QuarkModule.class);

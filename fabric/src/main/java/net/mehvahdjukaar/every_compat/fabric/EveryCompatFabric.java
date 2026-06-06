@@ -6,7 +6,6 @@ import net.mehvahdjukaar.every_compat.modules.fabric.bewitchment.BewitchmentModu
 import net.mehvahdjukaar.every_compat.modules.fabric.blockus.BlockusModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.building_but_better.BuildingButBetterModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.clutter.ClutterModule;
-import net.mehvahdjukaar.every_compat.modules.fabric.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.dramatic_doors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.dramatic_doors.DramaticDoorsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.excessive_building.ExcessiveBuildingModule;
@@ -15,7 +14,6 @@ import net.mehvahdjukaar.every_compat.modules.fabric.infinitybuttons.InfinityBut
 import net.mehvahdjukaar.every_compat.modules.fabric.lauchs.LauchsShuttersModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.lightmans_currency.LightmansCurrencyModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.mcaw.*;
-import net.mehvahdjukaar.every_compat.modules.fabric.mrcrayfish.MightyMailModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.red_bits.RedBitsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.regions_unexplored.RegionsUnexploredModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.stylish_stiles.StylishStilesModule;
@@ -66,7 +64,6 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
             addOptionalModule("exlineawnings", () -> AwningModule.class);
             addOptionalModule("infinitybuttons", () -> InfinityButtonsModule.class);
             addOptionalModule("lightmanscurrency", () -> LightmansCurrencyModule.class); //!! Not maintained since 1.20.1
-            addOptionalModule("mighty_mail", () -> MightyMailModule.class);
             addOptionalModule("stylishstiles", () -> StylishStilesModule.class);
             addOptionalModule("redbits", () -> RedBitsModule.class);
             addOptionalModule("regions_unexplored", () -> RegionsUnexploredModule.class);
@@ -77,7 +74,7 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
                 addOptionalModule("dramaticdoors", () -> DramaticDoorsMacawModule.class);
             }
 
-            addOptionalModule("create", () -> CreateModule.class); // ONLY TEMP until FABRIC v6.0.0 is out
+//            addOptionalModule("create", () -> CreateModule.class); // ONLY TEMP until FABRIC v6.0.0 is out
 
             // Load if The-New-Shutters is loaded, not Vanilla-Shutters
             if (PlatHelper.isModLoaded("shutters")) {

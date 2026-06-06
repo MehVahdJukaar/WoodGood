@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.neoforge.mrcrayfish;
+package net.mehvahdjukaar.every_compat.modules.mrcrayfish;
 
 import com.mrcrayfish.mightymail.block.MailboxBlock;
 import com.mrcrayfish.mightymail.core.ModBlockEntities;
@@ -31,8 +31,7 @@ public class MightyMailModule extends EveryCompatModule {
                 .addTextureM(modRes("block/oak_mail_box"),
                         EveryCompat.res("block/mm/oak_mail_box_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(
-"creative_tab"))
+                .setTab(getModTab("creative_tab"))
                 .setRenderType(RenderLayer.CUTOUT)
                 .defaultRecipe()
                 .build();
