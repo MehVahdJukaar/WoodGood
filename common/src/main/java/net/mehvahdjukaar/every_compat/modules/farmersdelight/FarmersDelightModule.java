@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.farmersdelight;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.*;
@@ -9,14 +10,17 @@ import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
+import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import vectorwing.farmersdelight.common.block.CabinetBlock;
 
@@ -33,6 +37,7 @@ import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
 // SUPPORT: FABRIC-v2.4.0+ | FORGE-v1.2.8+
 public class FarmersDelightModule extends SimpleModule {
+//NOTE: the new version has a reworked recipe system since (FB)-v3.3.0+ or (FG)-v1.3.0+
 
     public final SimpleEntrySet<WoodType, Block> cabinets;
 
@@ -80,59 +85,118 @@ public class FarmersDelightModule extends SimpleModule {
     public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicServerResources(executor);
 
-        executor.accept((manager, handler) -> {
+        executor.accept((manager, sink) -> {
             // Creating cutting_board recipes
             for (WoodType woodType : WoodTypeRegistry.INSTANCE) {
                 if (HardcodedBlockType.isKnownVanillaWood(woodType)) continue;
 
-                // Skip if one of Farmer's-Cutting mods is installed
+                // Skip if one of Farmer's-Cutting compat mods is installed
                 String namespaceRegex = COMPAT_RECIPE_MODS.getOrDefault(woodType.getNamespace(), "none");
                 boolean isRecipeModNotInstalled = !PlatHelper.getInstalledMods().contains(namespaceRegex);
+                boolean isCollectionModNotInstalled = !PlatHelper.getInstalledMods().contains("mr_farmers_cuttingcollection")
+                        && !COMPAT_RECIPE_MODS.containsKey(woodType.getNamespace());
 
-                if (isRecipeModNotInstalled) {
-                    createCuttingRecipe("door", woodType.getBlockOfThis("door"), woodType.planks,
-                            woodType, handler, manager);
-                    createCuttingRecipe("hanging_sign", woodType.getBlockOfThis("hanging_sign"), woodType.planks,
-                            woodType, handler, manager);
-                    createCuttingRecipe("sign", woodType.getBlockOfThis("sign"), woodType.planks,
-                            woodType, handler, manager);
-                    createCuttingRecipe("trapdoor", woodType.getBlockOfThis("trapdoor"), woodType.planks,
-                            woodType, handler, manager);
-                    createCuttingRecipe("log", woodType.log, woodType.getBlockOfThis("stripped_log"),
-                            woodType, handler, manager);
-                    createCuttingRecipe("wood", woodType.getBlockOfThis("wood"), woodType.getBlockOfThis("stripped_wood"),
-                            woodType, handler, manager);
+                if (isRecipeModNotInstalled && isCollectionModNotInstalled) {
+                    createCuttingRecipe(LOG, woodType, sink, manager);
+                    createCuttingRecipe(WOOD, woodType, sink, manager);
+
+                    createSalvagingRecipe("furniture", woodType, sink, manager);
+                    createSalvagingRecipe(CHEST_BOAT, woodType, sink, manager);
                 }
             }
         });
     }
 
-    public void createCuttingRecipe(String recipeType, Block input, Block output,
-                                    WoodType woodType, ResourceSink handler, ResourceManager manager) {
+    public void createCuttingRecipe(String recipeType, WoodType woodType, ResourceSink sink, ResourceManager manager) {
 
-        if (Objects.nonNull(input) && Objects.nonNull(output)) {
-        ResourceLocation recipeLocation = modRes("recipes/cutting/oak_"+recipeType+".json");
+        if (Objects.isNull(woodType.getBlockOfThis(recipeType))) return;
 
-            try (InputStream recipeStream = manager.getResource(recipeLocation)
-                    .orElseThrow(() -> new FileNotFoundException(recipeLocation.toString())).open()) {
-                JsonObject recipe = RPUtils.deserializeJson(recipeStream);
+        ResourceLocation recipeLocation = ResType.RECIPES.getPath(modRes("cutting/oak_"+recipeType));
 
-                // EDITING RECIPE
-                JsonObject getItem = recipe.getAsJsonArray("ingredients").get(0).getAsJsonObject();
-                getItem.addProperty("item", Utils.getID(input).toString());
+        try (InputStream recipeStream = manager.getResource(recipeLocation)
+                .orElseThrow(() -> new FileNotFoundException(recipeLocation.toString())).open()) {
+            JsonObject recipe = RPUtils.deserializeJson(recipeStream);
 
-                JsonObject getResult = recipe.getAsJsonArray("result").get(0).getAsJsonObject();
-                getResult.addProperty("item", Utils.getID(output).toString());
+            // EDITING RECIPE
+            parseAndModifyRecipe(recipe, woodType);
 
-                // Adding to ResourceLocation
-                String path = this.shortenedId() + "/cutting/" + woodType.getAppendableId() +"_"+recipeType;
+            // Adding to ResourceLocation
+            String newPath = woodType.createPathWith(shortenedId(), "cutting/", recipeType);
 
-                handler.addJson(EveryCompat.res(path), recipe, ResType.RECIPES);
-            } catch (IOException e) {
-                EveryCompat.LOGGER.error("Failed to generate the cutting recipe for {} - {}", Utils.getID(output), e);
+            sink.addJson(EveryCompat.res(newPath), recipe, ResType.RECIPES);
+        } catch (IOException e) {
+            EveryCompat.LOGGER.error("Failed to generate the cutting recipe for {} - {}", recipeLocation.toString(), e);
+        }
+    }
+
+    public void createSalvagingRecipe(String recipeType, WoodType woodType, ResourceSink sink, ResourceManager manager) {
+
+        ResourceLocation recipeLocation = ResType.RECIPES.getPath(modRes("salvaging/oak_"+recipeType));
+
+        try (InputStream recipeStream = manager.getResource(recipeLocation)
+                .orElseThrow(() -> new FileNotFoundException(recipeLocation.toString())).open()) {
+            JsonObject recipe = RPUtils.deserializeJson(recipeStream);
+
+            // EDITING RECIPE
+            parseAndModifyRecipe(recipe, woodType);
+
+            // Adding to ResourceLocation
+            String newPath = woodType.createPathWith(shortenedId(), "salvaging/", recipeType);
+
+            sink.addJson(EveryCompat.res(newPath), recipe, ResType.RECIPES);
+        } catch (IOException e) {
+            EveryCompat.LOGGER.error("Failed to generate the cutting recipe for {} - {}", recipeLocation.toString(), e);
+        }
+    }
+
+    public static void parseAndModifyRecipe(Object object, WoodType woodType) {
+
+        if (object instanceof JsonObject jsonObject) {
+            for (String key : jsonObject.keySet()) {
+                switch (key) {
+                    case "ingredients" -> {
+                        if (jsonObject.get(key).isJsonArray())
+                            parseAndModifyRecipe(jsonObject.getAsJsonArray(key), woodType);
+                        else
+                            parseAndModifyRecipe(jsonObject.getAsJsonObject(key), woodType);
+                    }
+                    // modifying
+                    case "result" -> {
+                        if (jsonObject.get(key).isJsonArray()) {
+                            parseAndModifyRecipe(jsonObject.getAsJsonArray(key), woodType);
+                        }
+                    }
+                }
+            }
+        }
+        // Modifying ingredients or results - NOTE: this is JsonArray
+        else if (object instanceof JsonArray jsonArray) {
+            for (int idx = 0; idx < jsonArray.size(); idx++) {
+                if (jsonArray.get(idx).isJsonArray()) {
+                    parseAndModifyRecipe(jsonArray.get(idx).getAsJsonArray(), woodType);
+                }
+                else if (jsonArray.get(idx).isJsonObject()) {
+                    convertItemType(jsonArray.get(idx).getAsJsonObject(), woodType, "item");
+                }
             }
         }
     }
+
+    public static void convertItemType(JsonObject jsonObject, WoodType woodType, String jsonKey) {
+        ResourceLocation baseItemId = new ResourceLocation(jsonObject.get(jsonKey).getAsString());
+        Item baseItem = BuiltInRegistries.ITEM.get(baseItemId);
+        WoodType originalType = WoodTypeRegistry.INSTANCE.getBlockTypeOf(baseItem);
+
+        if (originalType == VanillaWoodTypes.OAK) {
+            Item newItem = BlockSetAPI.changeItemType(baseItem, originalType, woodType);
+
+            if (newItem != null)
+                jsonObject.addProperty(jsonKey, Utils.getID(newItem).toString());
+            else
+                jsonObject.remove(jsonKey);
+        }
+    }
+
 
     // a recipe mod, not full Compat-Mod providing cutting-board recipes for other Wood-Mods
     // farmers-cutting-collection.*.jar
