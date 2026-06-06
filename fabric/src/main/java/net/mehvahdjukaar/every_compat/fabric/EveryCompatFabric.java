@@ -3,11 +3,13 @@ package net.mehvahdjukaar.every_compat.fabric;
 import net.fabricmc.api.ModInitializer;
 import net.mehvahdjukaar.every_compat.EveryCompatCommon;
 import net.mehvahdjukaar.every_compat.modules.fabric.bewitchment.BewitchmentModule;
+import net.mehvahdjukaar.every_compat.modules.fabric.blockus.BlockusModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.building_but_better.BuildingButBetterModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.clutter.ClutterModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.dramatic_doors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.dramatic_doors.DramaticDoorsModule;
+import net.mehvahdjukaar.every_compat.modules.fabric.excessive_building.ExcessiveBuildingModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.exlines.AwningModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.lauchs.LauchsShuttersModule;
@@ -16,6 +18,7 @@ import net.mehvahdjukaar.every_compat.modules.fabric.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.fabric.mrcrayfish.MightyMailModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.red_bits.RedBitsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.regions_unexplored.RegionsUnexploredModule;
+import net.mehvahdjukaar.every_compat.modules.fabric.stylish_stiles.StylishStilesModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.wilder_wild.WilderWildModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.wooden_hoppers.WoodenHoppersModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
@@ -57,12 +60,14 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
             // =============================================== GENERAL ================================================== \\
             addOptionalModule("bbb", () -> BuildingButBetterModule.class);
             addOptionalModule("bewitchment", () -> BewitchmentModule.class);
+            addOptionalModule("blockus", () -> BlockusModule.class);
             addOptionalModule("clutter", () -> ClutterModule.class);
             addOptionalModule("dramaticdoors", () -> DramaticDoorsModule.class);
             addOptionalModule("exlineawnings", () -> AwningModule.class);
             addOptionalModule("infinitybuttons", () -> InfinityButtonsModule.class);
             addOptionalModule("lightmanscurrency", () -> LightmansCurrencyModule.class); //!! Not maintained since 1.20.1
             addOptionalModule("mighty_mail", () -> MightyMailModule.class);
+            addOptionalModule("stylishstiles", () -> StylishStilesModule.class);
             addOptionalModule("redbits", () -> RedBitsModule.class);
             addOptionalModule("regions_unexplored", () -> RegionsUnexploredModule.class);
             addOptionalModule("wilderwild", () -> WilderWildModule.class);
@@ -82,6 +87,12 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
                 } catch (Exception ignored) {}
 
                 if (modClass != null) addOptionalModule("shutter", () -> LauchsShuttersModule.class);
+            }
+
+            //REASON: v4.0.0+ is no longer supported because it no longer has variant blocks
+            if (PlatHelper.isModLoaded("excessive_building")) {
+                if (!PlatHelper.getModVersion("excessive_building").matches("4[.\\d]{4}"))
+                    addOptionalModule("excessive_building", () -> ExcessiveBuildingModule.class);
             }
         }
 

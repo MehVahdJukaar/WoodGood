@@ -4,13 +4,11 @@ import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.beautiful_campfires.BeautifulCampfiresModule;
-import net.mehvahdjukaar.every_compat.modules.blockus.BlockusModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.chipped.*;
 import net.mehvahdjukaar.every_compat.modules.copper_age_backport.CopperAgeBackportModule;
 import net.mehvahdjukaar.every_compat.modules.dawn_of_time.DawnOfTimeModule;
 import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
-import net.mehvahdjukaar.every_compat.modules.excessive_building.ExcessiveBuildingModule;
 import net.mehvahdjukaar.every_compat.modules.exlines.BarkCarpetsModule;
 import net.mehvahdjukaar.every_compat.modules.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
@@ -25,7 +23,6 @@ import net.mehvahdjukaar.every_compat.modules.mrcrayfish.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish.RefurbishedFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.storagedrawers.StorageDrawersModule;
-import net.mehvahdjukaar.every_compat.modules.stylish_stiles.StylishStilesModule;
 import net.mehvahdjukaar.every_compat.modules.table_top_craft.TableTopCraftModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.valhelsia_furniture.ValhelsiaFurnitureModule;
@@ -106,7 +103,6 @@ public class EveryCompatCommon {
             addOptionalModule("backpacked", () -> BackpackedModule.class);
             addOptionalModule("barkcarpets", () -> BarkCarpetsModule.class); // Exline's
             addOptionalModule("beautifulcampfires", () -> BeautifulCampfiresModule.class);
-            addOptionalModule("blockus", () -> BlockusModule.class);
             addOptionalModule("campchair", () -> CampChairModule.class);
             addMultipleOptional("chipped", () -> ChippedMainModule.class, () -> ChippedLogModule.class, () -> ChippedDoorModule.class, () -> ChippedGlassModule.class, () -> ChippedLeavesModule.class);
             addOptionalModule("copperagebackport", () -> CopperAgeBackportModule.class);
@@ -124,17 +120,11 @@ public class EveryCompatCommon {
             addOptionalModule("quark", () -> QuarkModule.class);
             addOptionalModule("refurbished_furniture", () -> RefurbishedFurnitureModule.class);
             addOptionalModule("storagedrawers", () -> StorageDrawersModule.class);
-            addOptionalModule("stylishstiles", () -> StylishStilesModule.class);
+//            addOptionalModule("stylishstiles", () -> StylishStilesModule.class);
             addOptionalModule("table_top_craft", () -> TableTopCraftModule.class);
             addOptionalModule("twigs", () -> TwigsModule.class);
             addOptionalModule("valhelsia_furniture", () -> ValhelsiaFurnitureModule.class);
             addOptionalModule("variantvanillablocks", () -> VariantVanillaBlocksModule.class);
-
-            //REASON: v4.0.0+ is no longer supported because it no longer has variant blocks
-            if (PlatHelper.isModLoaded("excessive_building")) {
-                if (!PlatHelper.getModVersion("excessive_building").matches("4[.\\d]{4}"))
-                    addOptionalModule("excessive_building", () -> ExcessiveBuildingModule.class);
-            }
 
 //!! =================================================== OTHERS ===================================================== \\
             forAllModules(m -> EveryCompat.LOGGER.info("Loaded {}", m.toString()));

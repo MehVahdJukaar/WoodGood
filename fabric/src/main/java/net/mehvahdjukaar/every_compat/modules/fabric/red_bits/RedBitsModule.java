@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.red_bits;
 
-import net.darktree.redbits.RedBits;
 import net.darktree.redbits.blocks.LargeButtonBlock;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
@@ -15,7 +14,7 @@ import net.minecraft.world.level.material.PushReaction;
 
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.BUTTON;
 
-//SUPPORT v1.16.1+
+//SUPPORT v1.16.6+
 public class RedBitsModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> large_buttons;
@@ -24,8 +23,8 @@ public class RedBitsModule extends EveryCompatModule {
         super(modId, "rb");
 
         large_buttons = SimpleEntrySet.builder(WoodType.class, "large_button",
-                        () -> RedBits.OAK_LARGE_BUTTON, () -> VanillaWoodTypes.OAK,
-                        wood -> new LargeButtonBlock(true, new BlockSetType(wood.getTypeName()), BlockBehaviour.Properties.of()
+                        getModBlock("oak_large_button"), () -> VanillaWoodTypes.OAK,
+                        wood -> new LargeButtonBlock(new BlockSetType(wood.getTypeName()), BlockBehaviour.Properties.of()
                                 .noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY))
                 )
                 .requiresChildren(BUTTON) // Recipes

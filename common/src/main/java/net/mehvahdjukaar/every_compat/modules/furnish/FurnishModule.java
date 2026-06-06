@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.furnish;
 
-import io.github.wouink.furnish.Furnish;
 import io.github.wouink.furnish.block.*;
 import io.github.wouink.furnish.block.util.VoxelShapeHelper;
 import io.github.wouink.furnish.setup.FurnishBlocks;
@@ -29,7 +28,8 @@ import net.minecraft.world.level.material.PushReaction;
 
 import java.util.function.Consumer;
 
-// SUPPORT: v24+
+///SUPPORT: v27+
+//TODO: This NEED UPDATES because the v28+ has major changes
 public class FurnishModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> bedsideTable;
@@ -52,7 +52,7 @@ public class FurnishModule extends EveryCompatModule {
 
     public FurnishModule(String modId) {
         super(modId, "fur");
-        ResourceLocation tab = modRes(Furnish.MODID);
+        ResourceLocation tab = modRes(modId);
 
         table = SimpleEntrySet.builder(WoodType.class, "table",
                         getModBlock("oak_table"), () -> VanillaWoodTypes.OAK,
@@ -333,11 +333,11 @@ public class FurnishModule extends EveryCompatModule {
                         RPUtils.findFirstBlockTextureLocation(manager, w.log, CompatSpritesHelper.LOOKS_LIKE_TOP_LOG_TEXTURE));
                      TextureImage newTexture = topTexture.makeCopy()) {
 
-                    String newId = BlockTypeResTransformer.replaceTypeNoNamespace("block/oak_log_bench_top", w, id, "oak");
+                    String newPath = BlockTypeResTransformer.replaceTypeNoNamespace("block/oak_log_bench_top", w, id, "oak");
 
-                    sink.addTextureIfNotPresent(manager, newId, () -> newTexture);
+                    sink.addTextureIfNotPresent(manager, EveryCompat.res(newPath), () -> newTexture);
 
-                    sink.addTextureIfNotPresent(manager, newId + "_top", () -> {
+                    sink.addTextureIfNotPresent(manager, EveryCompat.res(newPath + "_top"), () -> {
                         TextureImage newTop = topTexture.makeCopy();
                         CompatSpritesHelper.createSmallLogTopTexture(topTexture, newTop);
                         return newTop;
@@ -355,16 +355,16 @@ public class FurnishModule extends EveryCompatModule {
                 try (TextureImage topTexture = TextureImage.open(manager,
                         RPUtils.findFirstBlockTextureLocation(manager, w.log, CompatSpritesHelper.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
 
-                    String newId = BlockTypeResTransformer.replaceTypeNoNamespace("block/jungle_coffin_sides", w, id, "jungle");
+                    String newPath = BlockTypeResTransformer.replaceTypeNoNamespace("block/jungle_coffin_sides", w, id, "jungle");
 
-                    sink.addTextureIfNotPresent(manager, newId + "_top", () -> {
+                    sink.addTextureIfNotPresent(manager, EveryCompat.res(newPath + "_top"), () -> {
                         TextureImage newTop = topTexture.makeCopy();
                         CompatSpritesHelper.createSmallLogTopTexture(topTexture, newTop);
                         return newTop;
                     });
 
                     //odd. reusing an existing texture
-                    sink.addTextureIfNotPresent(manager, newId, () -> topTexture);
+                    sink.addTextureIfNotPresent(manager, EveryCompat.res(newPath), () -> topTexture);
 
                 } catch (Exception e) {
                     EveryCompat.LOGGER.error("Failed to generate coffin block texture for for {} : {}", block, e);

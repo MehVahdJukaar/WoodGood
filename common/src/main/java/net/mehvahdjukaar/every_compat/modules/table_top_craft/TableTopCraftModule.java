@@ -12,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
-//SUPPORT: FORGE-v6.1.0+ | FABRIC-v5.0.0+
+///SUPPORT: FORGE-v6.1.2+ | FABRIC-v5.0.2+
 public class TableTopCraftModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> chessBoards;

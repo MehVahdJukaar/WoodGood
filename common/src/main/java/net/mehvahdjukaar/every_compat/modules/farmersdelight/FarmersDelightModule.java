@@ -42,7 +42,7 @@ import static java.util.Map.entry;
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
-//SUPPORT: FABRIC-v3.2.0+ | NEOFORGE-v1.2.9+
+///SUPPORT: FABRIC-v3.3.3+ | NEOFORGE-v1.3.2+
 public class FarmersDelightModule extends EveryCompatModule {
 //NOTE: the new version has a reworked recipe system since v3.3.0+ or v1.3.0+
 
@@ -67,8 +67,7 @@ public class FarmersDelightModule extends EveryCompatModule {
                 .addTag(modRes("cabinets"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("cabinets/wooden"), Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(
-"farmersdelight"))
+                .setTab(getModTab("farmersdelight"))
                 .setTabMode(TabAddMode.AFTER_SAME_TYPE)
                 .defaultRecipe()
                 .addCustomItem((w, block, p) -> new FuelBlockItem(block, ModItems.basicItem(), 300))

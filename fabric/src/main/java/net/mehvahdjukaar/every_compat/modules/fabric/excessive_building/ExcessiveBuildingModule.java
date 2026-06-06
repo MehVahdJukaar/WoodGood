@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.excessive_building;
+package net.mehvahdjukaar.every_compat.modules.fabric.excessive_building;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
