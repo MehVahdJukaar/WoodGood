@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.quark;
+package net.mehvahdjukaar.every_compat.modules.neoforge.quark;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Suppliers;
