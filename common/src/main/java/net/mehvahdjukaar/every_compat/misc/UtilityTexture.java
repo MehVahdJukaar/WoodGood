@@ -224,17 +224,15 @@ public class UtilityTexture {
             //unfortunately theres no programmatic way to get all boat textures of a given boat. also because entities might be for multiple wod types. we can only generate them from scratc
             boats.items.forEach((woodType, boat) -> {
                 //NOTE: folderDepth is set to 3 so it can include entity/
-                var newPath = BlockTypeResTransformer.replaceFullGenericType(baseTextureLoc.getPath(), woodType, Utils.getID(boat), "oak", null, 2);
+                String newPath = BlockTypeResTransformer.replaceFullGenericType(baseTextureLoc.getPath(), woodType, Utils.getID(boat), "oak", null, 2);
 
                 sink.addTextureIfNotPresent(manager, newPath, () -> {
                     try (TextureImage plankTexture = TextureImage.open(manager,
                         RPUtils.findFirstBlockTextureLocation(manager, woodType.planks))) {
-                        //Palette targetPalette = SpriteUtils.extrapolateWoodItemPalette(plankTexture);
                         Palette targetPalette = Palette.fromImage(plankTexture);
-                        //TextureImage newImage = respriter.recolorWithAnimationOf(plankTexture);
 
-                        Respriter r =  respriter;
-                        return r.recolor(targetPalette);
+                        Respriter copiedRespriter = respriter;
+                        return copiedRespriter.recolor(targetPalette);
 
                     } catch (Exception e) {
                         EveryCompat.LOGGER.error("Failed to get planks texture for {} - {}", woodType.getId(), e);
@@ -261,7 +259,7 @@ public class UtilityTexture {
 
             boats.items.forEach((woodType, boat) -> {
 
-                var newPath = BlockTypeResTransformer.replaceTypeNoNamespace(baseTextureLoc.getPath(), woodType, Utils.getID(boat), "oak");
+                String newPath = BlockTypeResTransformer.replaceTypeNoNamespace(baseTextureLoc.getPath(), woodType, Utils.getID(boat), "oak");
 
                 sink.addTextureIfNotPresent(manager, newPath,
                         () -> createBoatItemTexture(manager, woodType, respriter)
