@@ -43,6 +43,7 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.variants.VariantCraftingT
 import net.mehvahdjukaar.every_compat.modules.neoforge.woodster.WoodsterModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.xerca.XercaModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.Container;
@@ -66,6 +67,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.WeakReference;
 import java.util.Objects;
+import java.util.Optional;
 
 import static net.mehvahdjukaar.every_compat.EveryCompat.addOptionalModule;
 import static net.mehvahdjukaar.every_compat.EveryCompat.forAllModules;
@@ -110,18 +112,21 @@ public class EveryCompatForge extends EveryCompatCommon {
             if (!(module instanceof SimpleModule simpleModule)) return;
             simpleModule.getEntries().forEach(entrySet -> {
                 if (!(entrySet instanceof SimpleEntrySet<?, ?> simpleEntrySet)) return;
-                try {
-                    BlockEntityType<?> beType = simpleEntrySet.getTile();
-                    Block baseBlock = beType.getValidBlocks().stream().findFirst().get();
-                    if (event.isBlockRegistered(Capabilities.ItemHandler.BLOCK, baseBlock)) return;
+                if (simpleEntrySet.hasTile()) {
+                    try {
+                        BlockEntityType<?> beType = simpleEntrySet.getTile();
+                        Optional<Block> baseBlock = beType.getValidBlocks().stream().findFirst();
+                        if (baseBlock.isEmpty() || event.isBlockRegistered(Capabilities.ItemHandler.BLOCK, baseBlock.get())) return;
 
-                    BlockEntity instance = beType.create(BlockPos.ZERO, baseBlock.defaultBlockState());
-                    if (instance instanceof Container) {
-                        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, beType,
-                                (be, side) -> makeDefaultInvHandler((Container) be, side));
+                        BlockEntity instance = beType.create(BlockPos.ZERO, baseBlock.get().defaultBlockState());
+                        if (instance instanceof Container) {
+                            event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, beType,
+                                    (be, side) -> makeDefaultInvHandler((Container) be, side));
+                        }
+                    } catch (Exception ignored) {
+                        EveryCompat.LOGGER.warn("Failed to register capability for entry[ {} ] from {}, skipping",
+                                Utils.getID(simpleEntrySet.getBaseBlock()), module);
                     }
-                } catch (Exception ignored) {
-                    EveryCompat.LOGGER.warn("Failed to register capability for entry {} of module {}, skipping", entrySet, module);
                 }
             });
         });
