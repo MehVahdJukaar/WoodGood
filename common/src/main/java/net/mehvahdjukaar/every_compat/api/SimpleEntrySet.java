@@ -115,6 +115,10 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         return tileHolder.get();
     }
 
+    public boolean hasTile() {
+        return tileHolder != null;
+    }
+
     public B getBaseBlock() {
         return baseBlock.get();
     }
