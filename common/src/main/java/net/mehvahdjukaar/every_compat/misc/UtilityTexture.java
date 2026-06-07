@@ -223,6 +223,7 @@ public class UtilityTexture {
 
             //unfortunately theres no programmatic way to get all boat textures of a given boat. also because entities might be for multiple wod types. we can only generate them from scratc
             boats.items.forEach((woodType, boat) -> {
+                //NOTE: folderDepth is set to 3 so it can include entity/
                 var newPath = BlockTypeResTransformer.replaceFullGenericType(baseTextureLoc.getPath(), woodType, Utils.getID(boat), "oak", null, 2);
 
                 sink.addTextureIfNotPresent(manager, newPath, () -> {
@@ -260,7 +261,7 @@ public class UtilityTexture {
 
             boats.items.forEach((woodType, boat) -> {
 
-                var newPath = BlockTypeResTransformer.replaceFullGenericType(baseTextureLoc.getPath(), woodType, Utils.getID(boat), "oak", null, 1);
+                var newPath = BlockTypeResTransformer.replaceTypeNoNamespace(baseTextureLoc.getPath(), woodType, Utils.getID(boat), "oak");
 
                 sink.addTextureIfNotPresent(manager, newPath,
                         () -> createBoatItemTexture(manager, woodType, respriter)
