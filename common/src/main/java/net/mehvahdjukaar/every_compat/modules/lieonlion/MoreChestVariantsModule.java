@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.lieonlion;
 
+import net.mehvahdjukaar.candlelight.api.ClientOnly;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlock;
@@ -25,8 +26,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.function.Consumer;
 
@@ -113,7 +112,7 @@ public class MoreChestVariantsModule extends EveryCompatModule {
 
     // Registry --------------------------------------------------------------------------------------------------------
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @ClientOnly
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
         CompatChestBlockRenderer.register(event, chests.getTile(CompatChestBlockEntity.class), shortenedId());

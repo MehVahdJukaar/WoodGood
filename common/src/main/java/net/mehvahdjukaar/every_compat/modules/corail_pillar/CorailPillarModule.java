@@ -9,7 +9,6 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 import ovh.corail.corail_pillar.block.BlockPillar;
-import ovh.corail.corail_pillar.registry.ModTabs;
 
 import java.util.function.Supplier;
 
@@ -21,7 +20,7 @@ public class CorailPillarModule extends EveryCompatModule {
     public final SimpleEntrySet<WoodType, Block> SMALL_PLANK_PILLAR;
     public CorailPillarModule(String modId) {
         super(modId, "cpr");
-        Supplier<CreativeModeTab> tab = getTab(ModTabs.TAB_ID);
+        Supplier<CreativeModeTab> tab = getModTab("creative_tab");
 
         LOG_PILLAR = SimpleEntrySet.builder(WoodType.class, "log", "pillar",
                 getModBlock("pillar_oak_log"), () -> VanillaWoodTypes.OAK,

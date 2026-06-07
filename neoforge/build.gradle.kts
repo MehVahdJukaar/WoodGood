@@ -7,6 +7,27 @@ neoforge {
     accessWidener(project(":common"))
 }
 
+val modId: String = property("mod_id").toString()
+val modVersion: String = property("mod_version").toString()
+tasks.named<Jar>("jar") {
+    archiveBaseName.set(modId)
+    archiveVersion.set(modVersion)
+    archiveClassifier.set("neoforge")
+}
+tasks.named<Jar>("sourcesJar") {
+    from(sourceSets.main.get().allSource)
+    archiveBaseName.set(modId)
+    archiveVersion.set(modVersion)
+    archiveClassifier.set("neoforge-sources")
+}
+
+val packFormatNumber: String = property("pack_format_number").toString()
+tasks.named<ProcessResources>("processResources") {
+    filesMatching("pack.mcmeta") {
+        filter { line: String -> line.replace("@@pack_format_number@@", packFormatNumber) }
+    }
+}
+
 //val path = System.getenv("REPOS21_1").toString()
 dependencies {
 
@@ -41,14 +62,13 @@ dependencies {
     //- Only For TESTING - can be commented out or enabled
     modRuntimeOnly("curse.maven:terrablender-neoforge-940057:6054947") // BOP, Regions-Unexplored
     modRuntimeOnly("curse.maven:glitchcore-955399:8109792") // BOP
+//    modRuntimeOnly("curse.maven:patchouli-306770:7730942") // TFC, Timber-Frames
 //    modRuntimeOnly("curse.maven:athena-841890:5629395") // v4.0.1 | Chipped
-//    modRuntimeOnly("curse.maven:architectury-api-419699:5786327") // v13.0.8 | REI, Furnish, [Let's Do]-Meadow
 //    modRuntimeOnly("curse.maven:cloth-config-348521:5729127") // v15.0.140 | REI
 //    modRuntimeOnly("curse.maven:fusion-connected-textures-854949:7471474") // v1.2.12 | Dawn of Time, Timber-Frame, Rechiseled
 //    modRuntimeOnly("curse.maven:supermartijn642s-config-lib-438332:5546996") // v1.1.8 | Rechiseled
 //    modRuntimeOnly("curse.maven:supermartijn642s-core-lib-454372:7521894") // v1.1.20 | Rechiseled
 //    modRuntimeOnly("maven.modrinth:midnightlib:YeePowOJ") // v1.6.3 | Building-But-Better
-    modRuntimeOnly("curse.maven:patchouli-306770:7730942") // TFC, Timber-Frames
 //    modRuntimeOnly("curse.maven:flib-661261:5495793") // Absent-By-Design //!! 1.20.1
 //    modRuntimeOnly("curse.maven:curios-309927:5680164") // Malum //!! 1.20.1
 //    modRuntimeOnly("curse.maven:lodestone-616457:5712854") // Malum //!! 1.20.1
@@ -65,7 +85,6 @@ dependencies {
 //    modRuntimeOnly("dev.engine-room.flywheel:flywheel-neoforge-${minecraft_version}:${flywheel_version}") // Create
 //    modRuntimeOnly("net.createmod.ponder:Ponder-NeoForge-${minecraft_version}:${ponder_version}") // Create
 //    modRuntimeOnly("dev.isxander:yet-another-config-lib:$yacl_version-neoforge") // Friends&Foes
-//    modRuntimeOnly("com.teamresourceful.resourcefullib:resourcefullib-neoforge-1.21:$resourcefullib_version") // Chipped, Handcrafted, Cozy, Friends&Foes
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN NEOFORGE
     modCompileOnly("curse.maven:framework-549225:7530361") // Refurbished-Furniture, +Mighty-Mail, Backpacked
@@ -73,53 +92,52 @@ dependencies {
     modCompileOnly("curse.maven:blueprint-382216:8048607") // The-Outer-End, Woodworks, Boatload, Upgrade-Aquatic, Curiosities!, Autumnity
     modCompileOnly("curse.maven:valhelsia-core-416935:6296775") // Valhelsia Structure, Valhelsia Furniture
 
-    //+ MIRRORED FROM COMMON - needed because dependOn(common) compiles common sources with neoforge classpath
-    modCompileOnly("curse.maven:architectury-api-419699:5786327") // Furnish
-    modCompileOnly("curse.maven:resourceful-lib-570073:5973188")
-    modCompileOnly("curse.maven:another-furniture-610492:7355747")
-    modCompileOnly("curse.maven:architects-palette-433862:6861008")
-    modCompileOnly("curse.maven:backpacked-352835:7866688")
-    modCompileOnly("curse.maven:decorative-blocks-reborn-1327768:7926194")
-    modCompileOnly("curse.maven:farmersdelight-398521:8083481")
-    modCompileOnly("curse.maven:handcrafted-538214:6330030")
-    modCompileOnly("curse.maven:refurbished-furniture-897116:7473565")
-    modCompileOnly("curse.maven:storage-drawers-223852:6995432")
-    modCompileOnly("curse.maven:twigs-496913:8191595")
-    modCompileOnly("curse.maven:valhelsia-furniture-694349:6341023")
-    modCompileOnly("copper-age-common:copperagebackport-neoforge-1.21.1-0.1.4")
-    modCompileOnly("local-dawnoftimebuilder:dawnoftimebuilder-neoforge-1.21.1-1.6.6")
-    modCompileOnly("maven.modrinth:furnish-furniture:29-neoforge")
-
-
     //+ OTHER MAVENs
     modCompileOnly("com.tterrag.registrate:Registrate:${property("registrate_version")}") // Create, The-Twilight-Forest, Tropicraft
 
     modCompileOnly("org.violetmoon.zeta:Zeta:1.1-39-SNAPSHOT") // Quark - @ https://maven.blamejared.com/org/violetmoon/zeta/Zeta/
 //    modCompileOnly("curse.maven:zeta-968868:7640154") // v1.1-39 | TEMP BACKUP MAVEN
 
+    //+ MIRRORED FROM COMMON - Required because dependOn(common) compiles common sources with neoforge classpath
+    modCompileOnly("com.teamresourceful.resourcefullib:resourcefullib-neoforge-1.21:${property("resourcefullib_version")}") // Chipped, Handcrafted, Cozy, Friends&Foes
+    modCompileOnly("curse.maven:architectury-api-419699:5786327") // v13.0.8 | REI, Furnish, [Let's Do]-Meadow
+
 //!! =================================================== IMPORTS ==================================================== \\
+    //+ MIRRORED FROM COMMON - Required because dependOn(common) compiles common sources with neoforge classpath
+    modCompileOnly("curse.maven:another-furniture-610492:7355747")
+    modCompileOnly("curse.maven:architects-palette-433862:6861008") //@ BETA
+    modCompileOnly("curse.maven:backpacked-352835:7866688")
+    modCompileOnly("curse.maven:corail-pillar-266228:5669131")
+    modCompileOnly("curse.maven:decorative-blocks-reborn-1327768:7926194")
+    modCompileOnly("curse.maven:farmersdelight-398521:8083481")
+    modCompileOnly("curse.maven:handcrafted-538214:6330030") // Resourceful-Lib
+    modCompileOnly("curse.maven:refurbished-furniture-897116:7473565")
+    modCompileOnly("curse.maven:storage-drawers-223852:6995432")
+    modCompileOnly("curse.maven:twigs-496913:8191595")
+    modCompileOnly("curse.maven:valhelsia-furniture-694349:6341023")
+    modCompileOnly("curse.maven:mighty-mail-902986:6542124")
+    modCompileOnly("curse.maven:missing-wilds-622590:6302230")
+    // OTHER MAVENs
+
+    // ~/neoforge/mods LOCAL
+    modCompileOnly("local-copper-age-neoforge:copperagebackport-neoforge-1.21.1-0.1.4")
+    modCompileOnly("local-dawnoftimebuilder:dawnoftimebuilder-neoforge-1.21.1-1.6.6")
+
+// ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
     //- ONLY FOR TESTING - can be commented out or enabled
-//    modRuntimeOnly("curse.maven:another-furniture-610492:4034009") //WARNING: version 2.1.2-1.19.2
-//    modRuntimeOnly("curse.maven:architects-palette-433862:6861008") //@ BETA
 //    modRuntimeOnly("curse.maven:beautiful-campfires-1085950:6162194")
-//    modRuntimeOnly("curse.maven:backpacked-352835:7500602")
 //    modRuntimeOnly("curse.maven:camp-chair-531744:4579679") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:dawn-of-time-312359:7029195") // Fusion-Connected-Texture //@ Use Local mods blc Distribution is not allowed
-//    modRuntimeOnly("curse.maven:decorative-blocks-reborn-1327768:6897419")
 //    modRuntimeOnly("curse.maven:exlines-bark-carpets-527296:4094399") //!! 1.20.1
-//    modRuntimeOnly("curse.maven:farmersdelight-398521:8083481")
 //    modRuntimeOnly("curse.maven:friends-and-foes-forge-602059:6470209") // Yet-Another-Config-Lib-V3, ResourcefulLib
-//    modRuntimeOnly("curse.maven:furnish-547069:7662583") //v29
-//    modRuntimeOnly("curse.maven:handcrafted-538214:5617252") // Resourceful-Lib
+//    modRuntimeOnly("curse.maven:mighty-mail-902986:6542124")
 //    modRuntimeOnly("curse.maven:missing-wilds-622590:6302230")
 //    modRuntimeOnly("curse.maven:more-beautiful-torches-860325:5609745") // MonoLib
 //    modRuntimeOnly("curse.maven:more-chest-variants-lieonlion-858032:5862569") // Quad - LieOnLion
 //    modRuntimeOnly("curse.maven:more-crafting-tables-lieonlion-913586:5520190") // Quad - LieOnLion
 //    modRuntimeOnly("curse.maven:refurbished-furniture-897116:6272849") // Framework
 //    modRuntimeOnly("curse.maven:rechiseled-558998:7687594") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ]
-//    modRuntimeOnly("curse.maven:storage-drawers-223852:6967730")
-//    modRuntimeOnly("curse.maven:twigs-496913:4605097") //!! 1.20.1
-//    modRuntimeOnly("curse.maven:valhelsia-furniture-694349:5189602") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:variant-vanilla-blocks-866509:4997060") //v1.3.6 //@ 1.20.1-NOT_AVAILABLE
 //    modRuntimeOnly("curse.maven:villagersplus-forge-817272:4996995") //!! 1.20.1
 
@@ -127,14 +145,11 @@ dependencies {
 //    modRuntimeOnly("maven.modrinth:stylish-stiles:l9FFA4BK") //!! 1.20.1
 //    modRuntimeOnly("earth.terrarium.chipped:chipped-neoforge-${minecraft_version}:4.0.2") //INCLUDED: Athena, Resourceful-Lib, REQUIRED: +Bytecodecs
 
-    //- LOCAL
-//    modRuntimeOnly("copper-age-neoforge:copperagebackport-neoforge-1.21.1-0.1.4")
-
     //+ REQUIRED - The modules access libaries from below - ONLY IN NEOFORGE
     // ~/forge/mods LOCAL
-    modCompileOnly("net.stehschnitzel.shutter:shutters-2.0.2-1.20.1")
-    modCompileOnly("com.tynoxs.buildersdelight:BuildersDelight-1.20.1-v.1.3")
-    //modCompileOnly("com.polipo.bookshelf:giacomos_bookshelf-1.20.1-1.3.9") // WIP
+    modCompileOnly("local-shutter-neoforge:shutters-2.0.2-1.20.1")
+    modCompileOnly("local-buildersdelight-neoforge:BuildersDelight-1.20.1-v.1.3")
+    //modCompileOnly("local-giacomos_bookshelf-neoforge:giacomos_bookshelf-1.20.1-1.3.9") // WIP
 
     // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:7627896")
@@ -154,7 +169,6 @@ dependencies {
     modCompileOnly("curse.maven:bibliocraft-legacy-1122260:7740866")
     modCompileOnly("curse.maven:boatload-337396:7118750") //!! 1.20.1
     modCompileOnly("curse.maven:buildersaddition-389697:8155184")
-    modCompileOnly("curse.maven:corail-pillar-266228:5669131") //TODO: Move the module to COMMON
     modCompileOnly("curse.maven:curiosities-syndicate-1489190:7893051") // Blueprint
     modCompileOnly("curse.maven:decoration-delight-687475:5563942") //!! 1.20.1
     modCompileOnly("curse.maven:domum-ornamentum-527361:7812603")
@@ -163,8 +177,6 @@ dependencies {
     modCompileOnly("curse.maven:infinity-buttons-661902:6630983") //!! 1.20.1
     modCompileOnly("curse.maven:just-a-raft-mod-274350:6945796")
     modCompileOnly("curse.maven:lightmans-currency-fabric-472521:8133254")
-    modCompileOnly("curse.maven:mighty-mail-902986:6542124")
-    modCompileOnly("curse.maven:missing-wilds-622590:6302230")
     modCompileOnly("curse.maven:more-crafting-tables-for-forge-417365:6002554") //CRAFTING_TABLES for FORGE
     modCompileOnly("curse.maven:mosaic-carpentry-690226:7325187") //!! 1.20.1
     modCompileOnly("curse.maven:oreberries-replanted-454062:6123417") //!! 1.20.1
@@ -191,16 +203,14 @@ dependencies {
     modCompileOnly("maven.modrinth:building-but-better:2.0pre4") // MidnightLib //!! 1.20.1
     modCompileOnly("com.simibubi.create:create-${property("minecraft_version")}:${property("create_version")}:slim") { isTransitive = false } // Registrate, Flywheel, Ponder
 
-    modCompileOnly("org.violetmoon.quark:Quark:4.1-475-SNAPSHOT") // Zeta, Biolith @ https://maven.blamejared.com/org/violetmoon/quark/Quark/
+    modCompileOnly("org.violetmoon.quark:Quark:4.1-481-SNAPSHOT") // Zeta, Biolith @ https://maven.blamejared.com/org/violetmoon/quark/Quark/
 //    modCompileOnly("curse.maven:quark-243121:7640331") // v4.1.474 | TEMP BACKUP MAVEN
 
-    // ======================================== DISABLED FOR A REASON =============================================== \\
-//     modRuntimeOnly("curse.maven:geckolib-388172:5460309") //
+//!! ========================================== DISABLED FOR A REASON =============================================== \\
+
     // implementation fg.deobf("curse.maven:marg-324494:3723497") // LIBRARY
     // implementation fg.deobf("curse.maven:ortuslib-616457:3768197") // LIBRARY
     // implementation fg.deobf("curse.maven:project-brazier-238326:3835038")
-
-    // modImplementation("curse.maven:benched-417063:3821546") // Use OBJ Format
 
 //     modRuntimeOnly("curse.maven:malum-484064:5718038") // MAGIC MOD & use BBModel
 

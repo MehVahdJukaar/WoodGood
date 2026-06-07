@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.variants;
 
+import net.mehvahdjukaar.candlelight.api.ClientOnly;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlock;
@@ -22,8 +23,6 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.function.Consumer;
 
@@ -308,7 +307,7 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
 
     // REGISTRY --------------------------------------------------------------------------------------------------------
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @ClientOnly
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         /* REASON:
         apparently due to class verifier issues this is needed since it needs to check if that lambda actually implements that interface and to do so it needs to load the class

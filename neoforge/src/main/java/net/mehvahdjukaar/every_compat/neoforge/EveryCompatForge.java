@@ -15,7 +15,6 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.bibliocraft.BibliocraftLe
 import net.mehvahdjukaar.every_compat.modules.neoforge.builders_delight.BuildersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.buildersaddition.BuildersAdditionModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.building_but_better.BuildingButBetterModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.corail_pillar.CorailPillarModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.curiosities.CuriositiesModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.decoration_delight.DecorationDelightModule;
@@ -32,6 +31,7 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.mosaic_carpentry.MosaicCa
 import net.mehvahdjukaar.every_compat.modules.neoforge.oreberries_replanted.OreberriesReplantedModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.pokecube.PokecubeAIOModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.premium_wood.PremiumWoodModule;
+import net.mehvahdjukaar.every_compat.modules.neoforge.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.redeco.ReDecoModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.regions_unexplored.RegionsUnexploredModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.timber_frames.TimberFramesModule;
@@ -153,7 +153,6 @@ public class EveryCompatForge extends EveryCompatCommon {
             addOptionalModule("buildersaddition", () -> BuildersAdditionModule.class);
             addOptionalModule("bbb", () -> BuildingButBetterModule.class);
             addOptionalModule("buildersdelight", () -> BuildersDelightModule.class);
-            addOptionalModule("corail_pillar", () -> CorailPillarModule.class);
             addOptionalModule("curiosities", () -> CuriositiesModule.class);
             addOptionalModule("decoration_delight", () -> DecorationDelightModule.class);
             addOptionalModule("dramaticdoors", () -> DramaticDoorsModule.class);
@@ -166,6 +165,7 @@ public class EveryCompatForge extends EveryCompatCommon {
             addOptionalModule("lightmanscurrency", () -> LightmansCurrencyModule.class);
             addOptionalModule("pokecube_legends", () -> PokecubeAIOModule.class);
             addOptionalModule("premium_wood", () -> PremiumWoodModule.class);
+            addOptionalModule("quark", () -> QuarkModule.class);
             addOptionalModule("redeco", () -> ReDecoModule.class);
             addOptionalModule("regions_unexplored", () -> RegionsUnexploredModule.class);
             addOptionalModule("shutter", () -> LauchsShuttersModule.class);
@@ -174,7 +174,6 @@ public class EveryCompatForge extends EveryCompatCommon {
             addOptionalModule("twilightforest", () -> TwilightForestModule.class);
             addOptionalModule("unusual_furniture", () -> UnusualFurnitureModule.class);
             addOptionalModule("valhelsia_structures", () -> ValhelsiaStructuresModule.class);
-//        addOptionalModule("variantvanillablocks", () -> VariantVanillaBlocksModule::new); .class-AVAILABLE
             addOptionalModule("vct", () -> VariantCraftingTablesModule.class);
             addOptionalModule("woodster", () -> WoodsterModule.class);
             addOptionalModule("woodworks", () -> WoodworksModule.class);
