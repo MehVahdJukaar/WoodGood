@@ -12,6 +12,17 @@
 |                                                                                                                                   |
 
 ---
+
+## v2.9.23
+
+### CHANGES:
+- **Macaw's Paths & Pavings** (FB): Removed the temp fix for Creative-Tab's ID since **Macaw's Path (FABRIC)**'s ID for creative_tab is fixed in v1.1.2 
+
+### FIXES:
+- **Boatload** (NF): Fixed the placed LARGE_BOAT's missing textures - [#1269](https://github.com/MehVahdJukaar/WoodGood/issues/1269)
+
+---
+
 ## v2.9.22
 
 ### CHANGES:
