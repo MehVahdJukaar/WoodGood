@@ -35,7 +35,6 @@ dependencies {
     modCompileOnly("local-dawnoftimebuilder:dawnoftimebuilder-neoforge-1.21.1-1.6.6")
     modCompileOnly("copper-age-common:copperagebackport-neoforge-1.21.1-0.1.4")
 //    modCompileOnly("local-bibliocraft_legacy_expanded:bibliocraftfabric-1.1.0") //@ Dont import because it was built with Loom-1.14+
-//    modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
 
     // MACAW's
 //    modCompileOnly("curse.maven:macaws-bridges-351725:5465222")
