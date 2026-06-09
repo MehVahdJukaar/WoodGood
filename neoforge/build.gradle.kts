@@ -21,13 +21,6 @@ tasks.named<Jar>("sourcesJar") {
     archiveClassifier.set("neoforge-sources")
 }
 
-val packFormatNumber: String = property("pack_format_number").toString()
-tasks.named<ProcessResources>("processResources") {
-    filesMatching("pack.mcmeta") {
-        filter { line: String -> line.replace("@@pack_format_number@@", packFormatNumber) }
-    }
-}
-
 //val path = System.getenv("REPOS21_1").toString()
 dependencies {
 
