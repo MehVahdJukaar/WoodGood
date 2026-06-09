@@ -9,16 +9,16 @@ fabric {
 
 val modId: String = property("mod_id").toString()
 val modVersion: String = property("mod_version").toString()
-tasks.named<Jar>("jar") {
+tasks.remapJar {
     archiveBaseName.set(modId)
     archiveVersion.set(modVersion)
-    archiveClassifier.set("neoforge")
+    archiveClassifier.set("fabric")
 }
-tasks.named<Jar>("sourcesJar") {
+tasks.remapSourcesJar {
     from(sourceSets.main.get().allSource)
     archiveBaseName.set(modId)
     archiveVersion.set(modVersion)
-    archiveClassifier.set("neoforge-sources")
+    archiveClassifier.set("fabric-sources")
 }
 
 //val path = System.getenv("REPOS21_1").toString()
