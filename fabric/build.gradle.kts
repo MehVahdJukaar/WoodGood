@@ -7,6 +7,20 @@ fabric {
     accessWidener(project(":common"))
 }
 
+val modId: String = property("mod_id").toString()
+val modVersion: String = property("mod_version").toString()
+tasks.named<Jar>("jar") {
+    archiveBaseName.set(modId)
+    archiveVersion.set(modVersion)
+    archiveClassifier.set("neoforge")
+}
+tasks.named<Jar>("sourcesJar") {
+    from(sourceSets.main.get().allSource)
+    archiveBaseName.set(modId)
+    archiveVersion.set(modVersion)
+    archiveClassifier.set("neoforge-sources")
+}
+
 //val path = System.getenv("REPOS21_1").toString()
 dependencies {
 
@@ -82,31 +96,40 @@ dependencies {
     modImplementation("com.electronwill.night-config:toml:3.8.1")
 
 //!! =================================================== IMPORTS ==================================================== \\
-    //- ONLY FOR TESTING - can be commented out or enabled
-//    modRuntimeOnly("curse.maven:another-furniture-610492:4815126") //!! 1.20.1
-//    modRuntimeOnly("curse.maven:architects-palette-433862:6861002") // Forge-Config-API-Port @ BETA
-//    modRuntimeOnly("curse.maven:beautiful-campfires-1085950:6828158")
-//    modRuntimeOnly("curse.maven:backpacked-352835:7500600")
-//    modRuntimeOnly("curse.maven:camp-chair-531744:4579676") //!! 1.20.1
-//    modRuntimeOnly("curse.maven:corail-pillar-266228:5613351")
-//    modRuntimeOnly("curse.maven:dawn-of-time-312359:7029308")
-//    modRuntimeOnly("curse.maven:decorative-blocks-reborn-1327768:6897415")
-    modCompileOnly("curse.maven:exlines-bark-carpets-527296:4661550") //!! 1.20.1
-//    modRuntimeOnly("curse.maven:farmers-delight-refabricated-993166:8088691")
+    //+ MIRRORED FROM COMMON - Required because dependOn(common) compiles common sources with fabric classpath
+    modCompileOnly("curse.maven:another-furniture-610492:4815126") //!! 1.20.1
+    modCompileOnly("curse.maven:architects-palette-433862:6861002") // Forge-Config-API-Port @ BETA
+    modCompileOnly("curse.maven:backpacked-352835:7500600")
+    modCompileOnly("curse.maven:corail-pillar-266228:5613351")
+    modCompileOnly("curse.maven:decorative-blocks-reborn-1327768:6897415")
+    modCompileOnly("curse.maven:farmers-delight-refabricated-993166:8088691")
     modCompileOnly("curse.maven:friends-and-foes-551364:8154503")
-//    modRuntimeOnly("curse.maven:furnish-547069:7662583") //v29
+    modCompileOnly("curse.maven:handcrafted-538214:6330030") // Resourceful-Lib
+    modCompileOnly("curse.maven:mighty-mail-902986:6542124")
+    modCompileOnly("curse.maven:missing-wilds-622590:6302231")
+    modCompileOnly("curse.maven:more-chest-variants-lieonlion-858032:5476664") // Quad - LieOnLion
+    modCompileOnly("curse.maven:refurbished-furniture-897116:7473565")
+    modCompileOnly("curse.maven:storage-drawers-223852:6967726")
+    modCompileOnly("curse.maven:table-top-craft-fabric-729535:5319819") //@RLM: exp4j //!! 1.20.1
+    modCompileOnly("curse.maven:twigs-496913:4605097")
+    modCompileOnly("curse.maven:valhelsia-furniture-694349:6334936")
+    modCompileOnly("curse.maven:variant-vanilla-blocks-866509:5703471")
+    // OTHER MAVENs
+    modCompileOnly("maven.modrinth:furnish-furniture:29")
+    // ~/fabric/mods LOCAL
+    modCompileOnly("local-copper-age-neoforge:copperagebackport-fabric-1.21.1-0.1.4")
+    modCompileOnly("local-dawnoftimebuilder:Dawn Of Time-fabric-1.21.1-1.6.6")
+
+    //- ONLY FOR TESTING - can be commented out or enabled
+//    modRuntimeOnly("curse.maven:beautiful-campfires-1085950:6828158")
+//    modRuntimeOnly("curse.maven:camp-chair-531744:4579676") //!! 1.20.1
+//    modRuntimeOnly("curse.maven:dawn-of-time-312359:7029308")
+//    modRuntimeOnly("curse.maven:exlines-bark-carpets-527296:4661550") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:handcrafted-538214:5617253")
 //    modRuntimeOnly("curse.maven:hearth-and-home-849364:4828281") //!! 1.20.1
-//    modRuntimeOnly("curse.maven:missing-wilds-622590:6302231")
 //    modRuntimeOnly("curse.maven:more-beautiful-torches-860325:5609745") // MonoLib
-//    modRuntimeOnly("curse.maven:more-chest-variants-lieonlion-858032:5476664") // Quad - LieOnLion
 //    modRuntimeOnly("curse.maven:more-crafting-tables-lieonlion-913586:5473304") // Quad - LieOnLion
 //    modRuntimeOnly("curse.maven:rechiseled-558998:7687483") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ]
-//    modRuntimeOnly("curse.maven:storage-drawers-223852:6967726")
-//    modRuntimeOnly("curse.maven:table-top-craft-fabric-729535:5319819") //@RLM: exp4j //!! 1.20.1
-    modCompileOnly("curse.maven:twigs-496913:4605097") //!! 1.20.1
-    modCompileOnly("curse.maven:valhelsia-furniture-694349:5189603") //!! 1.20.1
-    modCompileOnly("curse.maven:variant-vanilla-blocks-866509:5703471")
 //    modCompileOnly("curse.maven:villagersplus-fabric-809542:4996993") //!! 1.20.1
 
     //- OTHER MAVENS
@@ -115,8 +138,8 @@ dependencies {
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN FABRIC
     // ~/fabric/mods LOCAL
-    modCompileOnly("net.stehschnitzel.shutter:shutter-2.0.2-1.20.1")
-    modCompileOnly("net.darktree.redbits:redbits-1.21-1.16.6")
+    modCompileOnly("local-shutter-fabric:shutter-2.0.2-1.20.1")
+    modCompileOnly("local-redbits-fabric:redbits-1.21-1.16.6")
 
     // MACAW's
     modCompileOnly("curse.maven:macaws-bridges-351725:7628029")

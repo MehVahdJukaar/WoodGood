@@ -14,9 +14,9 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -27,8 +27,9 @@ import net.valhelsia.valhelsia_furniture.core.registry.ModTags;
 
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
-//SUPPORT: v1.1.3+
+///SUPPORT: v1.1.1+
 public class ValhelsiaFurnitureModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, TableBlock> tables;
@@ -40,7 +41,7 @@ public class ValhelsiaFurnitureModule extends EveryCompatModule {
 
     public ValhelsiaFurnitureModule(String modId) {
         super(modId, "vf");
-        ResourceLocation tab = modRes("main");
+        Supplier<CreativeModeTab> tab = getTab(modRes("main"));
 
         tables = SimpleEntrySet.builder(WoodType.class, "table",
                         getModBlock("oak_table", TableBlock.class), () -> VanillaWoodTypes.OAK,
@@ -52,7 +53,7 @@ public class ValhelsiaFurnitureModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Blocks.TABLES, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .build();
         this.addEntry(tables);
 
@@ -65,7 +66,7 @@ public class ValhelsiaFurnitureModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Blocks.CHAIRS, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .build();
         this.addEntry(chairs);
 
@@ -79,7 +80,7 @@ public class ValhelsiaFurnitureModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Blocks.CHAIRS, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .build();
         this.addEntry(hay_chairs);
 
@@ -92,7 +93,7 @@ public class ValhelsiaFurnitureModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Blocks.STOOLS, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .build();
         this.addEntry(stools);
 
@@ -111,7 +112,7 @@ public class ValhelsiaFurnitureModule extends EveryCompatModule {
                 .addTag(ModTags.Blocks.DESKS, Registries.BLOCK)
                 .addTag(ModTags.Items.DESKS, Registries.ITEM)
                 .defaultRecipe()
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .build();
         this.addEntry(desks);
 
@@ -124,7 +125,7 @@ public class ValhelsiaFurnitureModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Blocks.DESKS, Registries.BLOCK)
                 .addTag(ModTags.Items.DESKS, Registries.ITEM)
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(desk_drawers);

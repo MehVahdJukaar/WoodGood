@@ -15,7 +15,6 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.bibliocraft.BibliocraftLe
 import net.mehvahdjukaar.every_compat.modules.neoforge.builders_delight.BuildersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.buildersaddition.BuildersAdditionModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.building_but_better.BuildingButBetterModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.corail_pillar.CorailPillarModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.curiosities.CuriositiesModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.decoration_delight.DecorationDelightModule;
@@ -32,6 +31,7 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.mosaic_carpentry.MosaicCa
 import net.mehvahdjukaar.every_compat.modules.neoforge.oreberries_replanted.OreberriesReplantedModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.pokecube.PokecubeAIOModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.premium_wood.PremiumWoodModule;
+import net.mehvahdjukaar.every_compat.modules.neoforge.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.redeco.ReDecoModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.regions_unexplored.RegionsUnexploredModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.timber_frames.TimberFramesModule;
@@ -43,11 +43,13 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.variants.VariantCraftingT
 import net.mehvahdjukaar.every_compat.modules.neoforge.woodster.WoodsterModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.xerca.XercaModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.Container;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
@@ -65,6 +67,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.WeakReference;
 import java.util.Objects;
+import java.util.Optional;
 
 import static net.mehvahdjukaar.every_compat.EveryCompat.addOptionalModule;
 import static net.mehvahdjukaar.every_compat.EveryCompat.forAllModules;
@@ -82,7 +85,7 @@ public class EveryCompatForge extends EveryCompatCommon {
         this.initialize();
 
         NeoForge.EVENT_BUS.register(this);
-        bus.addListener(EventPriority.LOW, EveryCompatForge::register);
+        bus.addListener(EventPriority.LOW, EveryCompatForge::registerCapabilities);
 
         if (PlatHelper.getPhysicalSide().isClient()) {
             EveryCompatForgeClient.init();
@@ -102,25 +105,28 @@ public class EveryCompatForge extends EveryCompatCommon {
         }
     }
 
-    public static void register(RegisterCapabilitiesEvent event) {
+    // Neoforge Capabilities
+    public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         //auto register module capabilities
-        forAllModules(m -> {
-            if (!(m instanceof SimpleModule sm)) return;
-            sm.getEntries().forEach(e -> {
-                if (!(e instanceof SimpleEntrySet<?, ?> te)) return;
-                try {
-                    BlockEntityType<?> beType = te.getTile();
-                    Block baseBlock = beType.getValidBlocks().stream().findFirst().get();
-                    if (event.isBlockRegistered(Capabilities.ItemHandler.BLOCK, baseBlock)) return;
+        forAllModules(module -> {
+            if (!(module instanceof SimpleModule simpleModule)) return;
+            simpleModule.getEntries().forEach(entrySet -> {
+                if (!(entrySet instanceof SimpleEntrySet<?, ?> simpleEntrySet)) return;
+                if (simpleEntrySet.hasTile()) {
+                    try {
+                        BlockEntityType<?> beType = simpleEntrySet.getTile();
+                        Optional<Block> baseBlock = beType.getValidBlocks().stream().findFirst();
+                        if (baseBlock.isEmpty() || event.isBlockRegistered(Capabilities.ItemHandler.BLOCK, baseBlock.get())) return;
 
-                    var instance = beType.create(BlockPos.ZERO, baseBlock.defaultBlockState());
-                    if (instance instanceof Container) {
-                        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, beType,
-                                (be, side) -> makeDefaultInvHandler((Container) be, side));
-
+                        BlockEntity instance = beType.create(BlockPos.ZERO, baseBlock.get().defaultBlockState());
+                        if (instance instanceof Container) {
+                            event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, beType,
+                                    (be, side) -> makeDefaultInvHandler((Container) be, side));
+                        }
+                    } catch (Exception ignored) {
+                        EveryCompat.LOGGER.warn("Failed to register capability for entry[ {} ] from {}, skipping",
+                                Utils.getID(simpleEntrySet.getBaseBlock()), module);
                     }
-                } catch (Exception ignored) {
-                    EveryCompat.LOGGER.warn("Failed to register capability for entry {} of module {}, skipping", e, m);
                 }
             });
         });
@@ -153,7 +159,6 @@ public class EveryCompatForge extends EveryCompatCommon {
             addOptionalModule("buildersaddition", () -> BuildersAdditionModule.class);
             addOptionalModule("bbb", () -> BuildingButBetterModule.class);
             addOptionalModule("buildersdelight", () -> BuildersDelightModule.class);
-            addOptionalModule("corail_pillar", () -> CorailPillarModule.class);
             addOptionalModule("curiosities", () -> CuriositiesModule.class);
             addOptionalModule("decoration_delight", () -> DecorationDelightModule.class);
             addOptionalModule("dramaticdoors", () -> DramaticDoorsModule.class);
@@ -166,6 +171,7 @@ public class EveryCompatForge extends EveryCompatCommon {
             addOptionalModule("lightmanscurrency", () -> LightmansCurrencyModule.class);
             addOptionalModule("pokecube_legends", () -> PokecubeAIOModule.class);
             addOptionalModule("premium_wood", () -> PremiumWoodModule.class);
+            addOptionalModule("quark", () -> QuarkModule.class);
             addOptionalModule("redeco", () -> ReDecoModule.class);
             addOptionalModule("regions_unexplored", () -> RegionsUnexploredModule.class);
             addOptionalModule("shutter", () -> LauchsShuttersModule.class);
@@ -174,7 +180,6 @@ public class EveryCompatForge extends EveryCompatCommon {
             addOptionalModule("twilightforest", () -> TwilightForestModule.class);
             addOptionalModule("unusual_furniture", () -> UnusualFurnitureModule.class);
             addOptionalModule("valhelsia_structures", () -> ValhelsiaStructuresModule.class);
-//        addOptionalModule("variantvanillablocks", () -> VariantVanillaBlocksModule::new); .class-AVAILABLE
             addOptionalModule("vct", () -> VariantCraftingTablesModule.class);
             addOptionalModule("woodster", () -> WoodsterModule.class);
             addOptionalModule("woodworks", () -> WoodworksModule.class);

@@ -1,8 +1,8 @@
-package net.mehvahdjukaar.every_compat.modules.botanypots;
+package net.mehvahdjukaar.every_compat.modules.neoforge.botanypots;
 
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
+import net.mehvahdjukaar.every_compat.modules.neoforge.quark.QuarkModule;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
