@@ -273,9 +273,9 @@ subprojects {
             changelog = rootProject.file("changelog.md").readText()
             versionName = "${mod.id.get()}-${mod.version.get()}-${project.name}"
         }
-        maven {
-            nexus()
-        }
+//        maven {
+//            nexus()
+//        }
     }
 
     tasks.withType<JavaCompile> {
@@ -332,40 +332,3 @@ subprojects {
         }
     }
 }
-
-//tasks.register("buildAndPublishAll") {
-//    group = "build"
-//    description = "Runs clean, build, publish for all projects"
-//
-//    dependsOn(subprojects.map { it.tasks.named("clean") })
-//    dependsOn(subprojects.map { it.tasks.named("build") })
-//    dependsOn(subprojects.map { it.tasks.named("upload") })
-//
-//    finalizedBy("gitTag")
-//}
-//
-//tasks.register("gitTag") {
-//    group = "build"
-//    description = "Create a tag using mod_version and add the commits"
-//    doLast {
-//        val execOps = serviceOf<ExecOperations>() // Fetches the service
-//        val tag = property("mod_version").toString()
-//        val stdout = ByteArrayOutputStream()
-//
-//        execOps.exec {
-//            commandLine("git", "tag", "-l", tag)
-//            standardOutput = stdout
-//        }
-//
-//        if (!stdout.toString(Charset.defaultCharset()).trim().isEmpty()) {
-//            logger.warn("Git tag '${tag}' already exists")
-//        } else {
-//            execOps.exec {
-//                commandLine("git", "tag", "-a", tag, "-m", "Release $tag")
-//            }
-//            execOps.exec {
-//                commandLine("git", "push", "origin", tag)
-//            }
-//        }
-//    }
-//}
