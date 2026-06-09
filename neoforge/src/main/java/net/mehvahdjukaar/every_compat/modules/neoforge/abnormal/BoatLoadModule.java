@@ -5,7 +5,9 @@ import com.teamabnormals.boatload.common.item.LargeBoatItem;
 import com.teamabnormals.boatload.core.api.BoatloadBoatType;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
+import net.mehvahdjukaar.every_compat.misc.UtilityTexture;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.Registries;
@@ -17,6 +19,7 @@ import net.minecraft.world.item.Item;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 //SUPPORT: v6.0.1+
 public class BoatLoadModule extends EveryCompatModule {
@@ -37,9 +40,6 @@ public class BoatLoadModule extends EveryCompatModule {
                 .addTag(ItemTags.BOATS, Registries.ITEM)
                 .addTag(modRes("large_boats"), Registries.ITEM)
                 .addRecipe(modRes("large_oak_boat"))
-                .addTexture(modRes("entity/large_boat/oak"))
-                .addTextureM(modRes("entity/furnace_boat/oak_on"), EveryCompat.res("entity/furnace_boat_mask"))
-                .addTextureM(modRes("entity/furnace_boat/oak"), EveryCompat.res("entity/furnace_boat_mask"))
                 .build();
         this.addEntry(largeBoats);
 
@@ -52,8 +52,6 @@ public class BoatLoadModule extends EveryCompatModule {
                 .addTag(ItemTags.BOATS, Registries.ITEM)
                 .addTag(modRes("furnace_boats"), Registries.ITEM)
                 .addRecipe(modRes("oak_furnace_boat"))
-                .addTexture(modRes("item/large_oak_boat"))
-                .addTextureM(modRes("item/oak_furnace_boat"), EveryCompat.res("item/furnace_boat_mask"))
                 .build();
         this.addEntry(furnaceBoats);
     }
@@ -69,6 +67,31 @@ public class BoatLoadModule extends EveryCompatModule {
                 w.canBurn(),
                 false
         )));
+    }
+
+    @Override
+    public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicClientResources(executor);
+
+        executor.accept((manager, sink) -> {
+            UtilityTexture.addBoatTextureEntity(furnaceBoats,
+                    modRes("entity/furnace_boat/oak_on"), EveryCompat.res("entity/furnace_boat_mask"),
+                    manager, sink);
+
+            UtilityTexture.addBoatTextureEntity(furnaceBoats,
+                    modRes("entity/furnace_boat/oak"), EveryCompat.res("entity/furnace_boat_mask"),
+                    manager, sink);
+
+            UtilityTexture.addBoatTextureItem(furnaceBoats,
+                    modRes("item/oak_furnace_boat"), EveryCompat.res("item/furnace_boat_mask"),
+                    manager, sink);
+
+            UtilityTexture.addBoatTextureEntity(largeBoats,
+                    modRes("entity/large_boat/oak"), null, manager, sink);
+
+            UtilityTexture.addBoatTextureItem(largeBoats,
+                    modRes("item/large_oak_boat"), null, manager, sink);
+        });
     }
 
 }

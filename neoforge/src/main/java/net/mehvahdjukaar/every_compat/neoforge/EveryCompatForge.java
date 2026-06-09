@@ -3,6 +3,8 @@ package net.mehvahdjukaar.every_compat.neoforge;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.EveryCompatCommon;
+import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.integration.neoforge.ECConfigSelectScreen;
 import net.mehvahdjukaar.every_compat.modules.neoforge.abnormal.BoatLoadModule;
@@ -13,13 +15,11 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.bibliocraft.BibliocraftLe
 import net.mehvahdjukaar.every_compat.modules.neoforge.builders_delight.BuildersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.buildersaddition.BuildersAdditionModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.building_but_better.BuildingButBetterModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.corail_pillar.CorailPillarModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.curiosities.CuriositiesModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.decoration_delight.DecorationDelightModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.dramaticdoors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.dramaticdoors.DramaticDoorsModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.excessive_building.ExcessiveBuildingModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.functional_storage.FunctionalStorageModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.just_a_raft.JustARaftModule;
@@ -28,10 +28,10 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.lightmans_currency.Lightm
 import net.mehvahdjukaar.every_compat.modules.neoforge.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.neoforge.more.MoreCraftingTablesForForgeModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.mosaic_carpentry.MosaicCarpentryModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.mrcrayfish.MightyMailModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.oreberries_replanted.OreberriesReplantedModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.pokecube.PokecubeAIOModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.premium_wood.PremiumWoodModule;
+import net.mehvahdjukaar.every_compat.modules.neoforge.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.redeco.ReDecoModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.regions_unexplored.RegionsUnexploredModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.timber_frames.TimberFramesModule;
@@ -43,19 +43,34 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.variants.VariantCraftingT
 import net.mehvahdjukaar.every_compat.modules.neoforge.woodster.WoodsterModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.xerca.XercaModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
-import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
+import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.Container;
+import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerNegotiationEvent;
+import net.neoforged.neoforge.items.IItemHandlerModifiable;
+import net.neoforged.neoforge.items.wrapper.InvWrapper;
+import net.neoforged.neoforge.items.wrapper.SidedInvWrapper;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.WeakReference;
 import java.util.Objects;
+import java.util.Optional;
 
 import static net.mehvahdjukaar.every_compat.EveryCompat.addOptionalModule;
+import static net.mehvahdjukaar.every_compat.EveryCompat.forAllModules;
 import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.INCLUDE_ALL_WOOD_MODULES;
 
 /**
@@ -66,19 +81,55 @@ public class EveryCompatForge extends EveryCompatCommon {
     private static WeakReference<IEventBus> BUS = new WeakReference<>(null);
 
     public EveryCompatForge(IEventBus bus) {
-        RegHelper.startRegisteringFor(bus);
         BUS = new WeakReference<>(bus);
         this.initialize();
 
         NeoForge.EVENT_BUS.register(this);
+        bus.addListener(EventPriority.LOW, EveryCompatForge::registerCapabilities);
 
         if (PlatHelper.getPhysicalSide().isClient()) {
             EveryCompatForgeClient.init();
 
-            if(PlatHelper.isModLoaded("configured")){
+            if (PlatHelper.isModLoaded("configured")) {
                 ECConfigSelectScreen.registerConfigScreen(EveryCompat.MOD_ID, ECConfigSelectScreen::new);
             }
         }
+    }
+
+    //TOOD: replace this with ForgeHelperImpl.makeDefaultInvHandler
+    private static @NotNull IItemHandlerModifiable makeDefaultInvHandler(Container container, Direction side) {
+        if (container instanceof WorldlyContainer wc) {
+            return new SidedInvWrapper(wc, side == null ? Direction.UP : side);
+        } else {
+            return new InvWrapper(container);
+        }
+    }
+
+    // Neoforge Capabilities
+    public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+        //auto register module capabilities
+        forAllModules(module -> {
+            if (!(module instanceof SimpleModule simpleModule)) return;
+            simpleModule.getEntries().forEach(entrySet -> {
+                if (!(entrySet instanceof SimpleEntrySet<?, ?> simpleEntrySet)) return;
+                if (simpleEntrySet.hasTile()) {
+                    try {
+                        BlockEntityType<?> beType = simpleEntrySet.getTile();
+                        Optional<Block> baseBlock = beType.getValidBlocks().stream().findFirst();
+                        if (baseBlock.isEmpty() || event.isBlockRegistered(Capabilities.ItemHandler.BLOCK, baseBlock.get())) return;
+
+                        BlockEntity instance = beType.create(BlockPos.ZERO, baseBlock.get().defaultBlockState());
+                        if (instance instanceof Container) {
+                            event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, beType,
+                                    (be, side) -> makeDefaultInvHandler((Container) be, side));
+                        }
+                    } catch (Exception ignored) {
+                        EveryCompat.LOGGER.warn("Failed to register capability for entry[ {} ] from {}, skipping",
+                                Utils.getID(simpleEntrySet.getBaseBlock()), module);
+                    }
+                }
+            });
+        });
     }
 
     @Override
@@ -108,21 +159,19 @@ public class EveryCompatForge extends EveryCompatCommon {
             addOptionalModule("buildersaddition", () -> BuildersAdditionModule.class);
             addOptionalModule("bbb", () -> BuildingButBetterModule.class);
             addOptionalModule("buildersdelight", () -> BuildersDelightModule.class);
-            addOptionalModule("corail_pillar", () -> CorailPillarModule.class);
             addOptionalModule("curiosities", () -> CuriositiesModule.class);
             addOptionalModule("decoration_delight", () -> DecorationDelightModule.class);
             addOptionalModule("dramaticdoors", () -> DramaticDoorsModule.class);
-            addOptionalModule("excessive_building", () -> ExcessiveBuildingModule.class);
             addOptionalModule("functionalstorage", () -> FunctionalStorageModule.class);
             addOptionalModule("infinitybuttons", () -> InfinityButtonsModule.class);
             addOptionalModule("justaraftmod", () -> JustARaftModule.class);
             addOptionalModule("mctb", () -> MoreCraftingTablesForForgeModule.class);
-            addOptionalModule("mighty_mail", () -> MightyMailModule.class);
             addOptionalModule("mosaic_carpentry", () -> MosaicCarpentryModule.class);
             addOptionalModule("oreberriesreplanted", () -> OreberriesReplantedModule.class);
             addOptionalModule("lightmanscurrency", () -> LightmansCurrencyModule.class);
             addOptionalModule("pokecube_legends", () -> PokecubeAIOModule.class);
             addOptionalModule("premium_wood", () -> PremiumWoodModule.class);
+            addOptionalModule("quark", () -> QuarkModule.class);
             addOptionalModule("redeco", () -> ReDecoModule.class);
             addOptionalModule("regions_unexplored", () -> RegionsUnexploredModule.class);
             addOptionalModule("shutter", () -> LauchsShuttersModule.class);
@@ -131,7 +180,6 @@ public class EveryCompatForge extends EveryCompatCommon {
             addOptionalModule("twilightforest", () -> TwilightForestModule.class);
             addOptionalModule("unusual_furniture", () -> UnusualFurnitureModule.class);
             addOptionalModule("valhelsia_structures", () -> ValhelsiaStructuresModule.class);
-//        addOptionalModule("variantvanillablocks", () -> VariantVanillaBlocksModule::new); .class-AVAILABLE
             addOptionalModule("vct", () -> VariantCraftingTablesModule.class);
             addOptionalModule("woodster", () -> WoodsterModule.class);
             addOptionalModule("woodworks", () -> WoodworksModule.class);
@@ -144,7 +192,8 @@ public class EveryCompatForge extends EveryCompatCommon {
                 Class<?> modClass = null;
                 try {
                     modClass = Class.forName("com.github.Pandarix.beautify.Beautify");
-                } catch (Exception ignored) {}
+                } catch (Exception ignored) {
+                }
 
                 if (Objects.nonNull(modClass)) addOptionalModule("beautify", () -> BeautifyDecorateModule.class);
             }

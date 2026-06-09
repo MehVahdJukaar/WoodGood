@@ -1,25 +1,30 @@
 package net.mehvahdjukaar.every_compat.modules.villagers_plus;
+// DISABLED: VillagersPlus mod has no 1.21.1 release on CurseForge.
+/*
 
 import com.lion.villagersplus.blocks.HorticulturistTableBlock;
 import com.lion.villagersplus.init.VPBlockEntities;
 import com.lion.villagersplus.init.VPBlocks;
-import com.lion.villagersplus.init.VPItemGroups;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
-//SUPPORT: v3.1+
+import java.util.function.Supplier;
+
+///SUPPORT: v3.1+
 public class VillagersPlusModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> tub;
 
     public VillagersPlusModule(String modId) {
         super(modId, "vp");
+        Supplier<CreativeModeTab> tab = getModTab("group");
 
         tub = SimpleEntrySet.builder(WoodType.class, "horticulturist_table",
                         VPBlocks.OAK_HORTICULTURIST_TABLE_BLOCK, () -> VanillaWoodTypes.OAK,
@@ -30,10 +35,11 @@ public class VillagersPlusModule extends EveryCompatModule {
                         EveryCompat.res("block/vp/oak_horticulturist_workstation_m"),
                         PaletteStrategies.STRIPPED_LOG_SIDE_STANDARD)
                 .addTile(VPBlockEntities.HORTICULTURIST_TABLE_BLOCK_ENTITY)
-                .setTabKey(VPItemGroups.ITEM_GROUP)
+                .setTab(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(tub);
 
     }
 }
+*/

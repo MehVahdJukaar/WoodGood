@@ -1,4 +1,4 @@
-build/
+../build/
 *.ipr
 run/
 *.iws
@@ -17,17 +17,15 @@ classes/
 .vscode
 .settings
 *.launch
-/forge/mods/Registrate-MC1.19-1.1.5.jar
-/forge/mods/flywheel-forge-1.19.2-0.6.7-8.jar
-/forge/mods/
-
-# MixinMCP auto-injected rules
-.cursor/rules/minecraft-mod-project.mdc
-.cursor/skills/mixin-writing/SKILL.md
-.cursor/skills/mixin-writing/references/at-reference.md
-.cursor/skills/mixin-writing/references/expressions-language.md
-.cursor/skills/mixinmcp-tools/SKILL.md
-.claude/skills/mixin-writing/SKILL.md
-.claude/skills/mixin-writing/references/at-reference.md
-.claude/skills/mixin-writing/references/expressions-language.md
-.claude/skills/mixinmcp-tools/SKILL.md
+/unique_lines.txt
+/.junie/memory/
+/.codex
+/.aiassistant/
+/.ai/
+/common/build/
+/fabric/build/
+/neoforge/build/
+/forge/build/
+/build/
+/.claude/
+/.junie/

@@ -1,9 +1,8 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.graveyard;
 
-import com.finallion.graveyard.blockentities.SarcophagusBlockEntity;
-import com.finallion.graveyard.blockentities.enums.SarcophagusPart;
-import com.finallion.graveyard.blockentities.render.SarcophagusBlockEntityRenderer;
-import com.finallion.graveyard.blocks.SarcophagusBlock;
+import com.lion.graveyard.blockentities.SarcophagusBlockEntity;
+import com.lion.graveyard.blockentities.renders.SarcophagusBlockEntityRenderer;
+import com.lion.graveyard.blocks.SarcophagusBlock;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
@@ -12,10 +11,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
-import net.minecraft.world.level.block.ChestBlock;
-import net.minecraft.world.level.block.DoubleBlockCombiner;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
@@ -26,7 +21,7 @@ public class CompatCoffinRenderer extends SarcophagusBlockEntityRenderer<Graveya
     }
 
     public void render(SarcophagusBlockEntity entity, float tickDelta, PoseStack matrixStack, MultiBufferSource vertexConsumers, int light, int overlay) {
-        BlockState blockState = entity.getBlockState();
+        /*BlockState blockState = entity.getBlockState();
         DoubleBlockCombiner.NeighborCombineResult<? extends SarcophagusBlockEntity> propertySource = DoubleBlockCombiner.combineWithNeigbour(
                 (BlockEntityType) GraveyardModule.COFFIN_TILE,
                 SarcophagusBlock::getBlockType,
@@ -48,7 +43,7 @@ public class CompatCoffinRenderer extends SarcophagusBlockEntityRenderer<Graveya
             this.render(entity, matrixStack, vertexConsumers, light, overlay, g, lidModel, true);
             this.render(entity, matrixStack, vertexConsumers, light, overlay, g, baseModel, false);
         }
-
+*/
     }
 
     //TODO: this uses custom item models. adding is not trivial.

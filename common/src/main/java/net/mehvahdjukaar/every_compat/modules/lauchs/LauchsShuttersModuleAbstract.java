@@ -22,7 +22,7 @@ public abstract class LauchsShuttersModuleAbstract extends EveryCompatModule {
 
     public LauchsShuttersModuleAbstract(String modId) {
         super(modId, "ls");
-        Supplier<CreativeModeTab> tab = (PlatHelper.getPlatform().isFabric()) ? getModTab("shutter") : getModTab("shutter_tab");
+        Supplier<CreativeModeTab> tab = (PlatHelper.getPlatform().isFabric() && !PlatHelper.isModLoaded("connector")) ? getModTab("shutter") : getModTab("shutter_tab");
 
         shutters = SimpleEntrySet.builder(WoodType.class, "shutter",
                         getModBlock("oak_shutter"), () -> VanillaWoodTypes.OAK,

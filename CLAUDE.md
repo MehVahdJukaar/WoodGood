@@ -1,0 +1,56 @@
+
+You are working on a multi-project Minecraft mod that uses SpongePowered Mixin + MixinExtras.
+Follow these rules exactly:
+
+## Tool usage & classpath navigation
+- **Never** use grep, rg, find, unzip, unjar, cat, or any tool that searches the filesystem for classes, methods, fields, or signatures inside JARs (dependencies/vanilla). You have better alternatives.
+- **Never** use commands or attempt to read files outside this project.
+- **Never** extract, decompile, or read JAR/class files directly.
+- **Always** use the provided IntelliJ MPC symbol-navigation tools. Especially prefer the one prefixed with "mixin" keyword as they are the most accurate. They see the entire classpath, including dependencies, and are faster/more precise.
+- **Prioritize** tools like “references”, “implementations”, “super calls”, and “mixin*” over regex or keyword searches. These tools help you navigate from reference to reference like a human would do. Use text search only as a last resort.
+- Many tools require a project parameter so remember to specify t.
+- TRUST the tools. For instance, if you search for a symbol, especially using "mixin" tools and it does not exist, don't use regex search; that's futile, it doesn't exist.
+- REALLY don't use regex searches! Mixin tools will give you ABSOLUTE answers. Don't do things stubbornly. Ask the user when in doubt.
+- ALWAYS use *mixin* tools when possible.
+- Unless specified, don't worry about compiling stuff. User will run compileJava and report eventual errors.
+- If you want to see the MC sources or libraries sources you really have to use the mixin tools.
+- **REALLY** If you have a reference to a field or element, search THAT using the mixin tools instead of searching by string!
+
+## Efficiency
+- Avoid reading an entire class unless you are certain you need it. Prefer targeted reads (methods, fields, specific ranges).
+- Be smart about tool usage. MCP calls are a precious resource, so optimize read calls when you know you'll likely need to see an entire class just read it once. In contrast when you know you are just looking for something specific JUST read that part instead with the tools provided.
+- If you are making too many MCP calls for information the user can provide, ask the user instead.
+- Favor simpler solutions first, unless the user specifies otherwise.
+- Only run syntax/lint checks on large changes that are likely to introduce errors.
+- If possible avoid re reading files you already read. You can also make some minor asumptions if it saves many calls and tokens
+- dont verify stuff like project being setup right, code style being consistent and all other things that would not add a lot of value are likely are already working
+- Stop yourself if you find yourself getting stuck in loops.
+- Make use of notes to note down discoveries to avoid having to re read very long files.
+
+### AI use of IntelliJ / mixin MCP tools
+
+- The AI MUST prefer IntelliJ MCP / mixin tools over shell/grep/cat for reading code and navigating symbols.
+- For **small, local edits** (known classes, no new mixins, no vanilla/deps inspection):
+    - Use at most a few **targeted** IDE calls:
+        - Direct `read_file` by known path, and/or
+        - `search_symbol` for a specific class/method, then `read_file` on that file.
+    - AVOID:
+        - Broad project-wide `search_text` / `search_regex` when the file/symbol is already known.
+        - Re-reading the same file multiple times; read once, then patch.
+        - Looking up vanilla implementation your model already probably learned unless chasing a specific issue that requires looking up the source code precisely.
+
+- For **vanilla/dependency/mixin work** (locating targets, injection points, bytecode, cross-mod conflicts):
+    - Aggressively use the dedicated `mixin_*` tools (type hierarchy, references, call graph, bytecode) instead of any form of text search.
+    - It is acceptable to use more tool calls here, but prefer precise symbol-based queries over broad regex searches.
+
+- General:
+    - “ALWAYS prefer mixin/IDE tools” means **use them instead of shell/grep**, NOT “fire many unfocused searches.”
+    - When in doubt: first try “read the one file I care about” or “lookup this one symbol,” and only then escalate to wider searches.
+
+## Mod dependency registry (mod-registry.json)
+- `mod-registry.json` at the project root tracks CurseForge project IDs, file IDs, Modrinth IDs, versions, and MC version compatibility for every dependency used across common, fabric, and neoforge.
+- **Always read `mod-registry.json` first** before looking up any mod's project ID, file ID, or version. This avoids redundant fetches.
+- When you find or use a new/updated file ID or version for any dep, **update `mod-registry.json` immediately** — edit the relevant entry's `curse_files`, `modrinth_versions`, or `maven_versions`, and update `_last_checked` to today's date (ISO 8601).
+- The `mc_version` field on an entry indicates the Minecraft version the listed files target; omit it when it matches `_mc_version` (the project's current MC target).
+- Do not re-fetch version info from CurseForge/Modrinth if the registry already has an entry and `_last_checked` is recent (within ~2 weeks). Ask the user if unsure whether to re-check.
+- To bulk-check all deps for newer versions run: `CF_API_KEY=<key> python3 check-mod-updates.py` (or `--dry-run` to preview, `--slug <slug>` for a single mod). The script updates the registry and `_last_checked` automatically. A backup is kept at `mod-registry.backup.json`.

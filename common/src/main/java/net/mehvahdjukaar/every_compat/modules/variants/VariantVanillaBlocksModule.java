@@ -1,7 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.variants;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.mehvahdjukaar.candlelight.api.ClientOnly;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlock;
@@ -105,7 +104,7 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
 
         cartography = SimpleEntrySet.builder(WoodType.class, "cartography_table",
                         getModBlock("oak_cartography_table"), () -> VanillaWoodTypes.OAK,
-                        w -> new CartographyTableBlock(Utils.copyPropertySafe(Blocks.CARTOGRAPHY_TABLE))
+                        w -> new CartographyTableBlock(Utils.copyPropertySafe(Blocks.CARTOGRAPHY_TABLE)){}
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("cartography_tables"), Registries.BLOCK, Registries.ITEM)
@@ -308,7 +307,7 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
 
     // REGISTRY --------------------------------------------------------------------------------------------------------
     @Override
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         /* REASON:
         apparently due to class verifier issues this is needed since it needs to check if that lambda actually implements that interface and to do so it needs to load the class

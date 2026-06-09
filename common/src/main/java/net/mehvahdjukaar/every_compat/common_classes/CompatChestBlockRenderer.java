@@ -3,8 +3,7 @@ package net.mehvahdjukaar.every_compat.common_classes;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.mehvahdjukaar.candlelight.api.ClientOnly;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
@@ -32,7 +31,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-@Environment(EnvType.CLIENT)
+@ClientOnly
 public class CompatChestBlockRenderer extends ChestRenderer<CompatChestBlockEntity> {
     public static final ResourceLocation CHEST_SHEET = ResourceLocation.withDefaultNamespace("textures/atlas/chest.png");
     private final Map<WoodType, Material> single = new HashMap<>();
