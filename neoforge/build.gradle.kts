@@ -31,13 +31,6 @@ tasks.named<ProcessResources>("processResources") {
 //val path = System.getenv("REPOS21_1").toString()
 dependencies {
 
-//    neoForge("net.neoforged:neoforge:${property("neoforge_version")}")
-
-//    common(project(path: ':common', configuration: 'namedElements')) { transitive false }
-//    shadowCommon(project(path: ':common', configuration: 'transformProductionNeoForge'))
-
-//    implementation("org.jetbrains:annotations:22.0.0")
-
 //!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
 
     modApi("net.mehvahdjukaar:moonlight-neoforge:${property("moonlight_version")}")

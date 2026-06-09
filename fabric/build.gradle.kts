@@ -24,18 +24,6 @@ tasks.named<Jar>("sourcesJar") {
 //val path = System.getenv("REPOS21_1").toString()
 dependencies {
 
-//    common(project(path: ":common", configuration: "namedElements")) { transitive false }
-//    shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
-
-//    modCompileOnly("me.shedaniel.cloth:cloth-config-fabric:${property("cloth_version")}") {
-//        exclude(group: "net.fabricmc.fabric-api")
-//    }
-
-    // porting_lib required by fabric & everycomp
-//    for (String module in port_lib_modules.split(",")) {
-    // modImplementation("io.github.fabricators_of_create.Porting-Lib:$module:$port_lib_version")
-//}
-
 //!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
 
     modApi("net.mehvahdjukaar:moonlight-fabric:${property("moonlight_version")}")
