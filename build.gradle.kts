@@ -4,8 +4,6 @@ plugins {
     id("com.possible-triangle.fabric") apply false
     id("com.possible-triangle.neoforge") apply false
     id("net.mehvahdjukaar.candlelight") version "1.2.1" apply false
-    id("dev.mixinmcp.decompile") version "0.9.0" apply false
-    id("me.modmuss50.mod-publish-plugin") version "2.0.+"
 }
 
 mod {
@@ -23,7 +21,6 @@ subprojects {
 
     pluginManager.apply("com.possible-triangle.core")
     pluginManager.apply("net.mehvahdjukaar.candlelight")
-    pluginManager.apply("dev.mixinmcp.decompile")
     pluginManager.apply("maven-publish")
 
     dependencies {
