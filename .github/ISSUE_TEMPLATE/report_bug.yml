@@ -55,6 +55,15 @@ body:
       required: true
 
   - type: textarea
+    id: issue-with-mods
+    attributes:
+      label: "Issue with mods"
+      description: "List the mods that Every Compat is having issue with. The minimal modlist will help DEV to try and reproduce"
+      placeholder: "example:\n- Strata-version (MetalType Mod) \n- Chipped-version (Supported Mod)"
+    validations:
+      required: true
+
+  - type: textarea
     id: description
     attributes:
       label: Issue Details
@@ -62,7 +71,7 @@ body:
       placeholder: |
         What happened:
         
-        Steps to reproduce:
+        Steps to reproduce (OPTIONAL):
         1. 
         2. 
     validations:
