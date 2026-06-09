@@ -273,9 +273,9 @@ subprojects {
             changelog = rootProject.file("changelog.md").readText()
             versionName = "${mod.id.get()}-${mod.version.get()}-${project.name}"
         }
-//        maven {
-//            nexus()
-//        }
+        maven {
+            nexus()
+        }
     }
 
     tasks.withType<JavaCompile> {
