@@ -92,8 +92,7 @@ subprojects {
                     optional("variant-vanilla-blocks")
                     optional("villagersplus-fabric")
                     optional("wooden-hoppers")
-                } else { // NEOFORGE
-
+                } else { //!! NEOFORGE
                     optional("absent-by-design")
                     optional("another-furniture")
                     optional("architects-palette")
@@ -172,11 +171,10 @@ subprojects {
                 optional("macaws-windows")
 
                 optional("chipped")
-                optional("corail-pillar")
+//                optional("corail-pillar") // Not-Available on Modrinth
                 optional("dramatic-doors")
 
                 if (modLoader == "fabric") {
-
                     required("fabric-api")
                     optional("another-furniture")
                     optional("architects-palette-fabric")
@@ -199,7 +197,7 @@ subprojects {
 //                    optional("hearth-and-home")
                     optional("infinitybuttons")
                     optional("lightmans-currency")
-                    optional("mighty-mail-fabric")
+//                    optional("mighty-mail-fabric") // Not-Available on Modrinth
                     optional("missing-wilds")
                     optional("more-beautiful-torches")
 //                    optional("more-crafting-tables-lieonlion")
@@ -209,11 +207,10 @@ subprojects {
 //                    optional("table-top-craft")
                     optional("twigs")
                     optional("valhelsia-furniture")
-                    optional("variant-vanilla-blocks")
-                    optional("villagersplus") // FABRIC
+//                    optional("variant-vanilla-blocks") // Not-Available on Modrinth
+                    optional("villagersplus")
                     optional("wooden-hoppers") // FABRIC
                 } else { //!! NEOFORGE
-
                     optional("absent-by-design")
                     optional("another-furniture")
                     optional("architects-palette")
@@ -225,7 +222,7 @@ subprojects {
 //                    optional("camp-chair")
                     optional("create")
                     optional("decorative-blocks")
-                    optional("decoration-delight")
+//                    optional("decoration-delight") // Not-Available on Modrinth
 //                    optional("domum-ornamentum")
                     optional("dramatic-doors")
                     optional("bark-carpets")
@@ -243,10 +240,10 @@ subprojects {
                     optional("missing-wilds")
                     optional("more-beautiful-torches")
                     optional("more-chest-variants-lieonlion")
-                    optional("more-crafting-tables-for-forge")
+//                    optional("more-crafting-tables-for-forge") // Not-Available on Modrinth
 //                    optional("more-crafting-tables-lieonlion")
                     optional("mosaic-carpentry")
-                    optional("pokecube-aoi")
+//                    optional("pokecube-aoi") // Not-Available on Modrinth
                     optional("premium-wood")
 //                    optional("productivebees")
                     optional("quark")
@@ -254,24 +251,24 @@ subprojects {
                     optional("regions-unexplored")
                     optional("storage-drawers")
                     optional("timber-frames")
-                    optional("the-graveyard-forge")
-                    optional("the-twilight-forest")
-                    optional("table-top-craft")
+//                    optional("the-graveyard-forge") // Idk what changed in the source code
+//                    optional("the-twilight-forest") // Not-Available on Modrinth
+//                    optional("table-top-craft")
                     optional("tropicraft")
                     optional("twigs")
                     optional("valhelsia-furniture")
-                    optional("variant-crafting-tables")
-                    optional("variant-vanilla-blocks")
+//                    optional("variant-crafting-tables") // Not-Available on Modrinth
+//                    optional("variant-vanilla-blocks") // Not-Available on Modrinth
                     optional("villagersplus")
                     optional("woodworks")
 //                    optional("workshop-for-handsome-adventurer")
-                    optional("xercamod")
+//                    optional("xercamod") // Not-Available on Modrinth
                 }
             }
         }
         forEach {
             changelog = rootProject.file("changelog.md").readText()
-            versionName = "${mod.id.get()}-${mod.version.get()}-${project.name}"
+            versionName = "${mod.id.get()}-${mod.version.get()}-${name}"
         }
         maven {
             nexus()
