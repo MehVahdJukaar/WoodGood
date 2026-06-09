@@ -41,7 +41,7 @@ body:
     attributes:
       label: EveryCompat Version
       description: The current version of EveryCompat
-      placeholder: ex. everycompat-1.20-2.6.7
+      placeholder: everycompat-1.20-2.9.0
     validations:
       required: true
 
@@ -50,7 +50,7 @@ body:
     attributes:
       label: Moonlight Lib Version
       description: The current version of Moonlight Lib
-      placeholder: ex. moonlight-1.20-2.8.46-forge
+      placeholder: moonlight-1.20-2.8.46-forge
     validations:
       required: true
 
@@ -87,6 +87,6 @@ body:
         These are found in: `.minecraft/logs/` or `.minecraft/crash-reports/`
         
         Include additional screenshot if needed.
-      placeholder: "Drop files or paste logs here..."
+      placeholder: "Drop files or paste a link using https://mclo.gs/ to share the log here..."
     validations:
       required: true
