@@ -21,7 +21,6 @@ subprojects {
 
     pluginManager.apply("com.possible-triangle.core")
     pluginManager.apply("net.mehvahdjukaar.candlelight")
-    pluginManager.apply("dev.mixinmcp.decompile")
     pluginManager.apply("maven-publish")
 
     dependencies {
