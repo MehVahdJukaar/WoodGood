@@ -12,6 +12,36 @@
 |                                                                                                                                   |
 
 ---
+## v2.11.44
+
+### FIXES:
+- **Every Compat** (NF): Auto-registering blocks to Neoforge Capabilities
+  - Other supported Mods that has CHESTS that doesn't work with **Create**'s item handler and also other Mods' item handler with CHESTS 
+    - [#1209](https://github.com/MehVahdJukaar/WoodGood/issues/1209)
+    - [#1266](https://github.com/MehVahdJukaar/WoodGood/issues/1266)
+    - [#1241](https://github.com/MehVahdJukaar/WoodGood/issues/1241)
+- **The New Shutter** (NF): Corrected the ID for Creative Tab on NEOFORGE side with **Sinytra Connector**
+  - What happened is with **Sinytra Connector**, it was using **The New Shutter (FABRIC)**'s ID for Creative Tab
+
+### CHANGES: 
+- <span style="color: yellow;">**Every Compat** (SEE NOTE below): Using new build script</span>
+- **Corail Pillar** (NF): Moved to COMMON, the FABRIC side is now supported
+- **Macaw's Paths & Pavings** (FB): Removed the temp fix for Creative-Tab's ID since **Macaw's Path (FABRIC)**'s ID for creative_tab is fixed in v1.1.2
+- **Furnish** (FB): Updated to support `v29+`
+- **BoatLoad** (NF): Improved the texture generation for boats
+
+### NOTE: 
+**Every Compat** is using a new build script that replace Architectury-Loom because it haven't received updates and is stuck
+on 1.13
+
+it's no longer using Architectury-Loom. COMMON is based on NEOFORGE (no longer based on FABRIC)
+This meant the supported mods from FABRIC side cannot be supported with Sinytra Connector. Here's a list of affected mods that has to be moved back to FABRIC side: 
+- **Blockus**
+- **Stylish Stiles**
+- **Excessive Building**
+- **Furnish**
+
+---
 
 ## v2.11.43
 
