@@ -18,6 +18,7 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -94,4 +95,10 @@ public class BoatLoadModule extends EveryCompatModule {
         });
     }
 
+    @Override
+    public List<String> getAlreadySupportedMods() {
+        return List.of(
+                "abundant_atmosphere"
+        );
+    }
 }
