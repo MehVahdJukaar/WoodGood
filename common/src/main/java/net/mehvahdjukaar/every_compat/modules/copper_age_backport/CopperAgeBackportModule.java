@@ -18,8 +18,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
-import java.util.function.Supplier;
-
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
 //SUPPORT: v0.1.4+
@@ -70,9 +68,5 @@ public class CopperAgeBackportModule extends EveryCompatModule {
                 .build();
         this.addEntry(shelf);
 
-    }
-
-    private Supplier<Block> getShelfBlock() {
-        return () -> BuiltInRegistries.BLOCK.get(ResourceLocation.withDefaultNamespace("oak_shelf"));
     }
 }
