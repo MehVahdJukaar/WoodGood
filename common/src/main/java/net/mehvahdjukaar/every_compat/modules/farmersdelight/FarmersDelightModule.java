@@ -229,4 +229,9 @@ public class FarmersDelightModule extends EveryCompatModule {
         entry("terrestria", "fcterrestria"),
         entry("twilightforest", "fctf")
     );
+
+    @Override
+    public List<String> getAlreadySupportedMods() {
+        return List.of("abundant_atmosphere");
+    }
 }
