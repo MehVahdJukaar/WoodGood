@@ -327,5 +327,6 @@ subprojects {
             url = uri("https://maven.jamieswhiteshirt.com/libs-release")
             content { includeGroup(("com.jamieswhiteshirt")) }
         }
+        maven("https://maven.muon.rip/releases") // Possible-Triangle Plugins
     }
 }
