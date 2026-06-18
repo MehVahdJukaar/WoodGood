@@ -4,6 +4,7 @@
   "package": "net.mehvahdjukaar.every_compat.mixins",
   "compatibilityLevel": "JAVA_21",
   "client": [
+    "client.ModelManagerMixin"
   ],
   "mixins": [
     "LootTablesHackMixin"
