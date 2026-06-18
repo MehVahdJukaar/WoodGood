@@ -65,8 +65,9 @@ public class ResourcesUtils {
 
         /// Blockstate & Models
         try {
-            StaticResource oakBlockstate = StaticResource.getOrFail(manager, ResType.BLOCKSTATES.getPath(baseId));
+            StaticResource oakBlockstate = StaticResource.getOrLog(manager, ResType.BLOCKSTATES.getPath(baseId));
 
+            if (oakBlockstate == null) return;
             JsonElement insideBlockstates = RPUtils.deserializeJson(new ByteArrayInputStream(oakBlockstate.data));
 
             modelsLoc.addAll(RPUtils.findAllResourcesInJsonRecursive(insideBlockstates, s -> s.equals("model")));
@@ -160,9 +161,10 @@ public class ResourcesUtils {
             //we cant use this since it might override parent too. Custom textured items need a custom model added manually with addBlockResources
             // modelModifier.replaceItemType(baseItemname);
 
-            StaticResource oakItemModel = StaticResource.getOrFail(manager,
+            StaticResource oakItemModel = StaticResource.getOrLog(manager,
                     ResType.ITEM_MODELS.getPath(Utils.getID(oakItem)));
 
+            if (oakItemModel == null) return;
             JsonObject json = RPUtils.deserializeJson(new ByteArrayInputStream(oakItemModel.data));
             //adds models/item references from here. not recursive
             modelsLoc.addAll(RPUtils.findAllResourcesInJsonRecursive(json, s -> s.equals("model") || s.equals("parent")));

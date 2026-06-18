@@ -187,7 +187,9 @@ public class ValhelsiaStructuresModule extends EveryCompatModule {
                          TextureImage topTexture = TextureImage.open(manager,
                                  RPUtils.findFirstBlockTextureLocation(manager, w.log, CompatSpritesHelper.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
 
-                        String newId = BlockTypeResTransformer.replaceTypeNoNamespace("block/post/oak_post", w, id, "oak");
+                        ResourceLocation newId = EveryCompat.res(
+                                BlockTypeResTransformer.replaceTypeNoNamespace("block/post/oak_post", w, id, "oak")
+                        );
                         var newTexture = logTexture.makeCopy();
 
                         sink.addTextureIfNotPresent(manager, newId, () -> newTexture);
@@ -195,7 +197,7 @@ public class ValhelsiaStructuresModule extends EveryCompatModule {
                         var newTop = topTexture.makeCopy();
                         CompatSpritesHelper.createSmallLogTopTexture(topTexture, newTop);
 
-                        sink.addTextureIfNotPresent(manager, newId + "_top", () -> newTop);
+                        sink.addTextureIfNotPresent(manager, newId.withSuffix("_top"), () -> newTop);
 
                     } catch (Exception e) {
                         EveryCompat.LOGGER.error("Failed to generate Post texture for for {} : {}", block, e);
@@ -211,7 +213,9 @@ public class ValhelsiaStructuresModule extends EveryCompatModule {
                          TextureImage topTexture = TextureImage.open(manager,
                                  RPUtils.findFirstBlockTextureLocation(manager, w.getBlockOfThis("stripped_log"), CompatSpritesHelper.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
 
-                        ResourceLocation newResLoc = EveryCompat.res(BlockTypeResTransformer.replaceTypeNoNamespace("block/post/stripped_oak_post", w, id, "oak"));
+                        ResourceLocation newResLoc = EveryCompat.res(
+                                BlockTypeResTransformer.replaceTypeNoNamespace("block/post/stripped_oak_post", w, id, "oak")
+                        );
 
                         try (TextureImage newTexture = logTexture.makeCopy();
                              TextureImage newTop = topTexture.makeCopy()) {

@@ -1,4 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.hearth_and_home;
+// DISABLED: Hearth and Home mod has no 1.21.1 release on CurseForge.
+/*
 
 import com.starfish_studios.hearth_and_home.HearthAndHome;
 import com.starfish_studios.hearth_and_home.block.LatticeBlock;
@@ -86,3 +88,4 @@ public class HearthAndHomeModule extends EveryCompatModule {
         this.addEntry(lattice);
     }
 }
+*/

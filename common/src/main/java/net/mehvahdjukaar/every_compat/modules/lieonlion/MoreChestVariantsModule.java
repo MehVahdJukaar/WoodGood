@@ -1,7 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.lieonlion;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.mehvahdjukaar.candlelight.api.ClientOnly;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlock;
@@ -113,7 +112,7 @@ public class MoreChestVariantsModule extends EveryCompatModule {
 
     // Registry --------------------------------------------------------------------------------------------------------
     @Override
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
         CompatChestBlockRenderer.register(event, chests.getTile(CompatChestBlockEntity.class), shortenedId());

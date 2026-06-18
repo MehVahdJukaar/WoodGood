@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.macaw;
 
-import net.kikoz.mcwfurnitures.MacawsFurniture;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
@@ -16,7 +15,7 @@ import net.minecraft.world.level.material.MapColor;
 
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
-// SUPPORT: v3.4.1+
+///SUPPORT: v3.4.1+
 public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
 
     //TYPE: CABINET
@@ -104,9 +103,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
 
     public MacawFurnitureModuleAbstract(String modId) {
         super(modId, "mcfur");
-        ResourceLocation tab = (PlatHelper.getPlatform().isFabric())
-                ? MacawsFurniture.FURNITUREGROUP.location()
-                : modRes("furnitures");
+        ResourceLocation tab =  modRes("furnitures");
 
         String entityType = (PlatHelper.getPlatform().isFabric()) ? "box_block" : "furniture_storage";
 

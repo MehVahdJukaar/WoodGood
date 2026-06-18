@@ -10,7 +10,7 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 
-//SUPPORT v4.0.0-BETA+
+///SUPPORT v4.0.0-BETA+
 public class MissingWildModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> fallenLogs;
@@ -22,8 +22,7 @@ public class MissingWildModule extends EveryCompatModule {
                         getModBlock("fallen_acacia_log"), () -> VanillaWoodTypes.ACACIA,
                         w -> new FallenLogBlock(Utils.copyPropertySafe(w.log).noOcclusion()))
                 .addTag(modRes("fallen_logs"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getModTab(
-"items"))
+                .setTab(getModTab("items"))
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 //REASON: The top texture is not a standard 16x16. Take a look, you'll see why

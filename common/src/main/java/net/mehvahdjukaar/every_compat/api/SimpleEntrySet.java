@@ -1,8 +1,7 @@
 package net.mehvahdjukaar.every_compat.api;
 
 import com.google.common.base.Preconditions;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.mehvahdjukaar.candlelight.api.ClientOnly;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.misc.ExtraModelConfiguration;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
@@ -114,6 +113,10 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     public BlockEntityType<?> getTile() {
         Preconditions.checkNotNull(tileHolder, "Entry set has no tile entity!");
         return tileHolder.get();
+    }
+
+    public boolean hasTile() {
+        return tileHolder != null;
     }
 
     public B getBaseBlock() {
@@ -530,7 +533,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
         BlockEntityType<H> get();
 
-        @Environment(EnvType.CLIENT)
+        @ClientOnly
         default void registerRenderer(ClientHelper.BlockEntityRendererEvent event, BlockEntityRendererProvider<BlockEntity> renderer) {
             event.register(get(), renderer);
         }

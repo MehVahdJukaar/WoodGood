@@ -1,20 +1,20 @@
 1.21.1-NEOFORGE:
-  - '(1.21.1 - NEOFORGE|- \[(x|X)\] 1.21.1 \| NEOFORGE)'
+  - '(1.21.1\s?-\s?NEOFORGE|- \[(x|X)\] 1.21.1 \| NEOFORGE)'
 
 1.21.1-FABRIC:
-  - '(1.21.1 - FABRIC|- \[(x|X)\] 1.21.1 \| FABRIC)'
+  - '(1.21.1\s?-\s?FABRIC|- \[(x|X)\] 1.21.1 \| FABRIC)'
 
 1.20.1-FORGE:
-  - '(1.20.1 - FORGE|- \[(x|X)\] 1.20.1 \| FORGE)'
+  - '(1.20.1\s?-\s?FORGE|- \[(x|X)\] 1.20.1 \| FORGE)'
 
 1.20.1-FABRIC:
-  - '(1.20.1 - FABRIC|- \[(x|X)\] 1.20.1 \| FABRIC)'
+  - '(1.20.1\s?-\s?FABRIC|- \[(x|X)\] 1.20.1 \| FABRIC)'
 
 1.19.2-FORGE:
-  - '(1.19.2 - FORGE|- \[(x|X)\] 1.19.2 \| FORGE)'
+  - '(1.19.2\s?-\s?FORGE|- \[(x|X)\] 1.19.2 \| FORGE)'
 
 1.19.2-FABRIC:
-  - '(1.19.2 - FABRIC|- \[(x|X)\] 1.19.2 \| FABRIC)'
+  - '(1.19.2\s?-\s?FABRIC|- \[(x|X)\] 1.19.2 \| FABRIC)'
 
 1.18.2:
   - '1.18.2'

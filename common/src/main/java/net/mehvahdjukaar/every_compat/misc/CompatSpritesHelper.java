@@ -72,13 +72,6 @@ public class CompatSpritesHelper {
         addOptional("minecraft:mushroom_stem", "_side", "minecraft:block/mushroom_stem");
         addOptional("minecraft:mushroom_stem", "_top", "minecraft:block/mushroom_stem");
 
-
-        // -------------------- Alex's Caves
-        addOptional("alexscaves", "thornwood_log", "_side", "block/thornwood_log");
-        addOptional("alexscaves", "thornwood_log", "_top", "block/thornwood_log_top");
-        addOptional("alexscaves", "stripped_thornwood_log", "_side", "block/stripped_thornwood_log");
-        addOptional("alexscaves", "stripped_thornwood_log", "_top", "block/stripped_thornwood_log_top");
-
         // -------------------- More Sniffer Flowers
         addOptional("moresnifferflowers", "vivicus_log", "_side", "block/vivicus_log"); // was using vivicus_log1c.png
         addOptional("moresnifferflowers", "vivicus_log", "_top", "block/vivicus_log_top");

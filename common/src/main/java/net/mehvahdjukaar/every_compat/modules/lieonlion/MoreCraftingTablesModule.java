@@ -1,4 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.lieonlion;
+// DISABLED: More Crafting Tables (LieOnLion) has no 1.21.1 NeoForge release on CurseForge
+/*
 
 import io.github.lieonlion.lolmct.block.MoreCraftingTableBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -41,3 +43,4 @@ public class MoreCraftingTablesModule extends EveryCompatModule {
         this.addEntry(craftingTable);
     }
 }
+*/
