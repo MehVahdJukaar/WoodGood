@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.regions_unexplored;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
+import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
@@ -121,7 +122,7 @@ public abstract class RegionsUnexploredModuleAbstract extends EveryCompatModule 
 
         executor.accept((manager, sink) -> {
             for (WoodType woodType : WoodTypeRegistry.INSTANCE) {
-                if (woodType.isVanilla() || woodType.getNamespace().equals("regions_unexplored")) continue;
+                if (HardcodedBlockType.isKnownVanillaWood(woodType) || woodType.getNamespace().equals("regions_unexplored")) continue;
 
                 //Tagging the planks as ingredient to get painted_planks
                 createAndAddCustomTags(ResourceLocation.withDefaultNamespace("planks"), sink, woodType.planks);

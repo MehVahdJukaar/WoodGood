@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.configs;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigBuilder;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ModConfigHolder;
@@ -40,7 +41,7 @@ public class ModEntriesConfigs {
         for (var reg : BlockSetAPI.getRegistries()) {
             builder.push(reg.typeName().replace(" ", "_"));
             for (var w : reg.getValues()) {
-                if (!w.isVanilla()) {
+                if (!HardcodedBlockType.isKnownVanillaType(w)) {
                     String key = w.toString().replace(":", ".");
                     var config = builder.define(key, true);
                     var map = BLOCK_TYPE_CONFIGS.computeIfAbsent(reg.getType(), s -> new HashMap<>());

@@ -7,6 +7,7 @@ import moonfather.workshop_for_handsome_adventurer.items.WorkstationPlacerItem;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.every_compat.neoforge.EveryCompatForge;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
@@ -271,7 +272,7 @@ public class WorkshopForHandsomeAdventurerModule extends EveryCompatModule {
     public static void sendIMC(final InterModEnqueueEvent event) {
         ArrayList<String> blacklist = new ArrayList<>();
         for (WoodType w : WoodTypeRegistry.INSTANCE) {
-            if (!w.getNamespace().equals("minecraft")) {
+            if (!HardcodedBlockType.isKnownVanillaWood(w)) {
                 // we need to tell carry on not to break our multiblock structures
                 blacklist.add(MessageFormat.format("{0}:wfha/{1}/tool_rack_double_{2}", EveryCompat.MOD_ID, w.getNamespace(), w.getTypeName()));
                 blacklist.add(MessageFormat.format("{0}:wfha/{1}/tool_rack_framed_{2}", EveryCompat.MOD_ID, w.getNamespace(), w.getTypeName()));

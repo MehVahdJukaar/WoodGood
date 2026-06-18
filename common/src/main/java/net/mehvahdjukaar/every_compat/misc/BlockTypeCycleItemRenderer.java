@@ -54,7 +54,7 @@ public abstract class BlockTypeCycleItemRenderer<T extends BlockType> extends It
             }
         }
         for (T blockType : reg.getValues()) { // BlockType's children
-            if (!blockType.isVanilla() && isBlockTypeEnabled(blockType)) moddedBlockTypes.add(blockType);
+            if (!HardcodedBlockType.isKnownVanillaType(blockType) && isBlockTypeEnabled(blockType)) moddedBlockTypes.add(blockType);
         }
         if (moddedBlockTypes.isEmpty()) childKeys.clear();
         Collections.shuffle(moddedBlockTypes);

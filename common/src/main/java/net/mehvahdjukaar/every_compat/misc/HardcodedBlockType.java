@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.misc;
 
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import org.jetbrains.annotations.Nullable;
@@ -262,6 +263,19 @@ public class HardcodedBlockType {
             return VANILLA_LEAVES.contains(id.getPath());
         }
         return false;
+    }
+
+    /**
+     * Like {@link BlockType#isVanilla()} but namespace-aware: a mod can register a new wood/leaves type under the
+     * "minecraft" namespace, and {@link BlockType#isVanilla()} (which only checks the namespace) would wrongly treat it
+     * as a vanilla type and make us skip it - leading to missing entries/textures. Use this whenever we want to exclude
+     * only the *actual* vanilla types.
+     */
+    public static boolean isKnownVanillaType(BlockType blockType) {
+        if (blockType instanceof WoodType woodType) return isKnownVanillaWood(woodType);
+        if (blockType instanceof LeavesType leavesType) return isKnownVanillaLeaves(leavesType);
+        // other block types (stone, ...) have no known mod-added "minecraft" variants, fall back to the namespace check
+        return blockType.isVanilla();
     }
 
     private static final Set<String> VANILLA_WOODS = Set.of(
