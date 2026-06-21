@@ -67,7 +67,9 @@ public abstract class EveryCompatModule extends SimpleModule {
     private <T> Supplier<T> memor(String id, Registry<?> reg) {
         return Suppliers.memoize(() -> {
             try {
-                return (T) reg.getOptional(modRes(id)).orElseThrow();
+                return (id.contains(":"))
+                        ? (T) reg.getOptional(ResourceLocation.parse(id)).orElseThrow()
+                        : (T) reg.getOptional(modRes(id)).orElseThrow();
             } catch (Throwable e) {
                 throw new IllegalStateException("Could not find \"" + id + "\" in " + reg + ". This likely means that the reigstry entry was renamed in the original mod and EC needs updating. " +
                         "Is the mod, " + this.getModName().toUpperCase() + " up to date, if yes, then downgrade to the previous version & wait for an Every Compat update. Otherwise, update the mod to the latest version.");

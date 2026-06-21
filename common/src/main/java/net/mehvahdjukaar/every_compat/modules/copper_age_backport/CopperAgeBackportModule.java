@@ -1,7 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.copper_age_backport;
 
 import com.github.smallinger.copperagebackport.block.shelf.ShelfBlock;
-import com.github.smallinger.copperagebackport.registry.ModBlockEntities;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
@@ -59,7 +58,7 @@ public class CopperAgeBackportModule extends EveryCompatModule {
                                                 "\"" +blockId.withPrefix("block/") + "_$1\"")
                         )
                 )
-                .addTile(ModBlockEntities.SHELF_BLOCK_ENTITY)
+                .addTile(getModTile("minecraft:shelf"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ResourceLocation.withDefaultNamespace("wooden_shelves"), Registries.BLOCK)
                 .addTag(modRes("wooden_shelves"), Registries.BLOCK)
