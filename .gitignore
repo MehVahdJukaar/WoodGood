@@ -29,3 +29,6 @@ classes/
 /build/
 /.claude/
 /.junie/
+/.cursor/
+CLAUDE.md
+AGENTS.md

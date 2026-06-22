@@ -4,7 +4,6 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.TextureInfo;
-import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
@@ -23,6 +22,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 
 import java.util.*;
+import java.util.concurrent.Callable;
 
 //Sprite Helper is too big
 public class TextureGenHelper {
@@ -49,6 +49,7 @@ public class TextureGenHelper {
             Palette globalPalette = Palette.empty();
 
             Multimap<ResourceLocation, TextureInfo> infoPerTextures = ArrayListMultimap.create();
+            TaskRunnerWithFaliureCollection failures = TaskRunnerWithFaliureCollection.active();
 
             /// Adding multiple textures from one block into Respriter without/with mask & infoPerTextures
             for (TextureInfo textureInfo : textureInfos) {
@@ -94,10 +95,9 @@ public class TextureGenHelper {
                         }
                     }
                 } catch (UnsupportedOperationException e) {
-                    EveryCompat.LOGGER.error("Could not generate textures for {}", textureInfo, e);
+                    failures.record("source texture", () -> String.valueOf(textureInfo), e);
                 } catch (Exception e) {
-                    if (PlatHelper.isDev()) throw new RuntimeException(e);
-                    EveryCompat.LOGGER.error("Failed to read block texture at {}", textureInfo, e);
+                    failures.record("source texture", () -> String.valueOf(textureInfo), e);
                 }
             }
 
@@ -108,68 +108,65 @@ public class TextureGenHelper {
             for (var entry : entries.entrySet()) {
                 ItemLike block = entry.getValue();
                 T blockType = entry.getKey();
-                // skips disabled ones
-                // actually we dont otherwise we get mission texture log spam. TODO: replace models with empty dummy instead
-                // if (!ModConfigs.isEntryEnabled(w, b)) continue;
                 ResourceLocation blockId = Utils.getID(block);
 
+                failures.runSafely("block texture", blockId::toString, () -> {
+                    /// Creating new Path to add the new textures via the resources
+                    for (var respriterSet : respriters.entrySet()) {
+                        ResourceLocation oldTextureId = respriterSet.getKey();
+                        String baseOldPath = oldTextureId.getPath();
 
-                /// Creating new Path to add the new textures via the resources
-                for (var respriterSet : respriters.entrySet()) {
+                        String newPath = BlockTypeResTransformer.replaceTypeNoNamespace(baseOldPath, blockType, blockId, baseType.getTypeName());
 
+                        /// Adding the textures to the resource
+                        for (var info : infoPerTextures.get(oldTextureId)) {
+                            failures.runSafely("block texture", () -> blockId + " (" + info.texture() + ")", (Callable<Void>) () -> {
+                                // return the texture of: WoodType: Planks, StoneType: stone, LeavesType: leaves
+                                var pal = info.paletteStrategy().getPaletteAndAnimation(blockType, manager);
+                                McMetaFile targetAnimation = pal.animation();
+                                List<Palette> targetPalette = pal.palette();
 
-                    ResourceLocation oldTextureId = respriterSet.getKey();
-                    String oldPath = oldTextureId.getPath();
+                                //sanity check to verity that palette isn't changed. can be removed
+                                int oldSize = targetPalette.getFirst().size();
 
-                    String newPath = BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, blockType, blockId, baseType.getTypeName());
+                                if (oldSize != targetPalette.getFirst().size()) {
+                                    EveryCompat.LOGGER.error("TextureGenHelper Failture: {} with {}", oldTextureId, pal.id());
+                                    throw new RuntimeException("This should not happen. A palette of size 0 was found");
+                                }
 
-                    ResourceLocation newId;
+                                ResourceLocation newId;
+                                /// Creating a new Id for the texture
+                                if (info.customTexturePath() != null) {
+                                    String textureOldPath = info.customTexturePath();
+                                    String transformedPath = BlockTypeResTransformer.replaceTypeNoNamespace(textureOldPath, blockType, blockId, baseType.getTypeName());
+                                    newId = blockId.withPath(transformedPath);
+                                } else if (Objects.nonNull(info.replacePath())) {
+                                    String transformedPath = newPath.replace(info.replacePath().getFirst(), info.replacePath().getSecond());
+                                    newId = blockId.withPath(transformedPath);
+                                } else if (info.keepNamespace()) {
+                                    newId = oldTextureId.withPath(newPath);
+                                } else { /// DEFAULT
+                                    newId = ResourceLocation.fromNamespaceAndPath(blockId.getNamespace(), newPath);
+                                }
 
-                    /// Adding the textures to the resource
-                    for (var info : infoPerTextures.get(oldTextureId)) {
+                                if (newId.getPath().isEmpty()) {
+                                    EveryCompat.LOGGER.error("The path of new texture is empty for: {}", info.texture());
+                                    return null;
+                                }
 
-                        // return the texture of: WoodType: Planks, StoneType: stone, LeavesType: leaves
-                        var pal = info.paletteStrategy().getPaletteAndAnimation(blockType, manager);
-                        McMetaFile targetAnimation = pal.animation();
-                        List<Palette> targetPalette = pal.palette();
-
-                        //sanity check to verity that palette isn't changed. can be removed
-                        int oldSize = targetPalette.getFirst().size();
-
-                        if (oldSize != targetPalette.getFirst().size()) {
-                            EveryCompat.LOGGER.error("TextureGenHelper Failture: {} with {}", oldTextureId, pal.id());
-                            throw new RuntimeException("This should not happen. A palette of size 0 was found");
+                                ResourceLocation finalNewId = newId;
+                                sink.addTextureIfNotPresent(manager, newId, () -> {
+                                    Respriter respriter = respriterSet.getValue();
+                                    TextureImage img = respriter.recolorWithAnimation(targetPalette, targetAnimation);
+                                    if (info.overlay() != null) getAndApplyOverlay(img, info.overlay(), manager);
+                                    postProcessSpecialTexture(blockType, finalNewId, manager, img, info);
+                                    return img;
+                                });
+                                return null;
+                            });
                         }
-
-                        /// Creating a new Id for the texture
-                        if (info.customTexturePath() != null) {
-                            oldPath = info.customTexturePath();
-                            String transformedPath = BlockTypeResTransformer.replaceTypeNoNamespace(oldPath, blockType, blockId, baseType.getTypeName());
-                            newId = blockId.withPath(transformedPath);
-                        } else if (Objects.nonNull(info.replacePath())) {
-                            String transformedPath = newPath.replace(info.replacePath().getFirst(), info.replacePath().getSecond());
-                            newId = blockId.withPath(transformedPath);
-                        } else if (info.keepNamespace()) {
-                            newId = oldTextureId.withPath(newPath);
-                        } else { /// DEFAULT
-                            newId = ResourceLocation.fromNamespaceAndPath(blockId.getNamespace(), newPath);
-                        }
-
-                        if (newId.getPath().isEmpty()) {
-                            EveryCompat.LOGGER.error("The path of new texture is empty for: {}", info.texture());
-                            continue;
-                        }
-
-                        ResourceLocation finalNewId = newId;
-                        sink.addTextureIfNotPresent(manager, newId, () -> {
-                            Respriter respriter = respriterSet.getValue();
-                            TextureImage img = respriter.recolorWithAnimation(targetPalette, targetAnimation);
-                            if (info.overlay() != null) getAndApplyOverlay(img, info.overlay(), manager);
-                            postProcessSpecialTexture(blockType, finalNewId, manager, img, info);
-                            return img;
-                        });
                     }
-                }
+                });
             }
 
         } finally {
@@ -191,7 +188,7 @@ public class TextureGenHelper {
         try (TextureImage overlayTexture = TextureImage.open(manager, overlayLocation)) {
             TextureOps.applyOverlay(image, overlayTexture);
         } catch (Exception e) {
-            EveryCompat.LOGGER.error("Failed to get an overlay texture: ", e);
+            TaskRunnerWithFaliureCollection.active().record("texture overlay", overlayLocation::toString, e);
         }
     }
 

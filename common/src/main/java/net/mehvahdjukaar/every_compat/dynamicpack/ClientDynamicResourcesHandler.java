@@ -4,6 +4,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
+import net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFaliureCollection;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.IProgressTracker;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicClientResourceProvider;
@@ -63,25 +64,32 @@ public class ClientDynamicResourcesHandler extends DynamicClientResourceProvider
 
     @Override
     public void regenerateDynamicAssets(Consumer<ResourceGenTask> executor) {
-        PaletteStrategies.clearCache();
+        TaskRunnerWithFaliureCollection.run("Client dynamic resources generation", () -> {
+            PaletteStrategies.clearCache();
 
-        List<ResourceGenTask> tasks = new ArrayList<>();
-        EveryCompat.forAllModules(m -> m.addDynamicClientResources(tasks::add));
+            List<ResourceGenTask> tasks = new ArrayList<>();
+            EveryCompat.forAllModules(m -> m.addDynamicClientResources(tasks::add));
 
-        int minBatches = Runtime.getRuntime().availableProcessors();
-        int maxBatches = tasks.size() / Runtime.getRuntime().availableProcessors();
-        int batchSize = Math.max(minBatches, maxBatches);
+            int minBatches = Runtime.getRuntime().availableProcessors();
+            int maxBatches = tasks.size() / Runtime.getRuntime().availableProcessors();
+            int batchSize = Math.max(minBatches, maxBatches);
 
-        //submit tasks in batches. to do so split that list in sizes of that batchSize then submit a task to the executor where that list is iterated and executed
-        EveryCompat.LOGGER.info("Starting dynamic resources generation tasks: {} in batches of {}", tasks.size(), batchSize);
-        for (int i = 0; i < tasks.size(); i += batchSize) {
-            int end = Math.min(i + batchSize, tasks.size());
-            var subList = tasks.subList(i, end);
-            executor.accept((resourceManager, resourceSink) -> {
-                for (ResourceGenTask subtask : subList) {
-                    subtask.accept(resourceManager, resourceSink);
-                }
-            });
-        }
+            //submit tasks in batches. to do so split that list in sizes of that batchSize then submit a task to the executor where that list is iterated and executed
+            EveryCompat.LOGGER.info("Starting dynamic resources generation tasks: {} in batches of {}", tasks.size(), batchSize);
+            TaskRunnerWithFaliureCollection failures = TaskRunnerWithFaliureCollection.active();
+            for (int i = 0; i < tasks.size(); i += batchSize) {
+                int batchStart = i;
+                int end = Math.min(i + batchSize, tasks.size());
+                var subList = tasks.subList(i, end);
+                executor.accept((resourceManager, resourceSink) -> {
+                    for (int j = 0; j < subList.size(); j++) {
+                        ResourceGenTask subtask = subList.get(j);
+                        int taskIndex = batchStart + j;
+                        failures.runSafely("client resource task", () -> "task #" + taskIndex,
+                                () -> subtask.accept(resourceManager, resourceSink));
+                    }
+                });
+            }
+        });
     }
 }

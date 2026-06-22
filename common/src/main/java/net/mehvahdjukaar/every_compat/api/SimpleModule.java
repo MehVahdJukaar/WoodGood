@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.api;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFaliureCollection;
 import net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
@@ -119,7 +120,7 @@ public class SimpleModule extends CompatModule {
                 e.generateTags(this, manager, sink);
 
             } catch (Exception ex) {
-                EveryCompat.LOGGER.error("Failed to generate server resources for entry set {} from module {}:", e, this, ex);
+                TaskRunnerWithFaliureCollection.active().record("server entry set", () -> String.valueOf(e), ex);
                 if (PlatHelper.isDev()) throw ex;
             }
         }));
@@ -134,7 +135,7 @@ public class SimpleModule extends CompatModule {
                     entry.generateModels(this, manager, sink);
 
                 } catch (Exception ex) {
-                    EveryCompat.LOGGER.error("Failed to generate client resources for entry set {} from module {}:", entry, this, ex);
+                    TaskRunnerWithFaliureCollection.active().record("client entry set", () -> String.valueOf(entry), ex);
                     if (PlatHelper.isDev()) throw ex;
                 }
             });

@@ -50,6 +50,8 @@ public class ResourcesUtils {
 
         if (blocks.isEmpty()) return;
 
+        TaskRunnerWithFaliureCollection failures = TaskRunnerWithFaliureCollection.active();
+
         //finds one entry to grab the baseType equivalent (oak, stone, iron or amethyst)
         var first = blocks.entrySet().stream().findFirst().get();
         Block baseBlock = BlockType.changeBlockType(first.getValue(), first.getKey(), baseType);
@@ -76,7 +78,7 @@ public class ResourcesUtils {
 
             blocks.forEach((blockType, block) -> {
                 ResourceLocation blockId = Utils.getID(block);
-                try {
+                failures.runSafely("blockstate", blockId::toString, () -> {
                     if (true || ModEntriesConfigs.isEntryEnabled(blockType, block)) { //generating all the times otherwise we get log spam
                         /// Creates blockstate
                         StaticResource newBlockState = blockStateTransformer.transform(oakBlockstate, blockId, blockType);
@@ -87,7 +89,7 @@ public class ResourcesUtils {
 
                         /// Creates models/block
                         for (StaticResource model : oakBlockModels) {
-                            try {
+                            failures.runSafely("block model", () -> blockId + " (" + model.location + ")", () -> {
                                 // Modifying models' contents & path
                                 StaticResource newModel = modelTransformer.transform(model, blockId, blockType);
 
@@ -95,17 +97,13 @@ public class ResourcesUtils {
                                         "ids cant be the same: " + newModel.location);
                                 //Adding to the resources
                                 sink.addResourceIfNotPresent(manager, newModel);
-                            } catch (Exception e) {
-                                EveryCompat.LOGGER.error("Failed to add {}'s models/block file: {}", Utils.getID(block), e.getMessage());
-                            }
+                            });
                         }
                     } else {
                         //dummy blockstate so we don't generate models for this
                         sink.addJson(blockId, DUMMY_BLOCKSTATE, ResType.BLOCKSTATES);
                     }
-                } catch (Exception e) {
-                    EveryCompat.LOGGER.error("Failed to add {}'s blockstate file: {}", block, e.getMessage());
-                }
+                });
             });
         } catch (Exception e) {
             EveryCompat.LOGGER.error("Could not find blockstate definition for {}", baseId);
@@ -144,6 +142,8 @@ public class ResourcesUtils {
 
         if (items.isEmpty()) return;
 
+        TaskRunnerWithFaliureCollection failures = TaskRunnerWithFaliureCollection.active();
+
         //finds one entry. used so we can grab the oak equivalent
         var first = items.entrySet().stream().findFirst().get();
         Item oakItem = BlockType.changeItemType(first.getValue(), first.getKey(), baseType);
@@ -179,14 +179,12 @@ public class ResourcesUtils {
 
             items.forEach((blockType, item) -> {
                 ResourceLocation id = Utils.getID(item);
-                try {
+                failures.runSafely("item model", id::toString, () -> {
                     StaticResource newRes = itemModelTransformer.transform(oakItemModel, id, blockType);
                     Preconditions.checkArgument(newRes.location != oakItemModel.location,
                             "ids cant be the same: " + newRes.location);
                     sink.addResourceIfNotPresent(manager, newRes);
-                } catch (Exception e) {
-                    EveryCompat.LOGGER.error("Failed to add {} item model json file:", item, e);
-                }
+                });
             });
         } catch (Exception e) {
             EveryCompat.LOGGER.error("Could not find item model for {}", oakItem);
@@ -202,13 +200,11 @@ public class ResourcesUtils {
 
                 //creates item model
                 for (StaticResource model : oakItemModels) {
-                    try {
+                    failures.runSafely("item model", () -> id + " (" + model.location + ")", () -> {
                         StaticResource newModel = itemModelTransformer.transform(model, id, w);
                         assert newModel.location != model.location : "ids cant be the same";
                         sink.addResourceIfNotPresent(manager, newModel);
-                    } catch (Exception exception) {
-                        EveryCompat.LOGGER.error("Failed to add {} model json file:", b, exception);
-                    }
+                    });
                 }
             }
         });
@@ -249,20 +245,16 @@ public class ResourcesUtils {
 
         blocks.forEach((wood, value) -> {
             if (ModEntriesConfigs.isEntryEnabled(wood, value)) {
+                ResourceLocation blockId = Utils.getID(value);
                 for (var res : original) {
-
-                    try {
-                        StaticResource newRes = modifier.transform(res, Utils.getID(value), wood);
+                    TaskRunnerWithFaliureCollection.active().runSafely("block resource", () -> blockId + " (" + res.location + ")", () -> {
+                        StaticResource newRes = modifier.transform(res, blockId, wood);
 
                         Preconditions.checkArgument(newRes.location != res.location,
                                 "ids cant be the same: " + newRes.location);
 
                         sink.addResource(newRes);
-                    } catch (Exception e) {
-                        if (res != null) {
-                            EveryCompat.LOGGER.error("Failed to generate json resource from {}", res.location);
-                        }
-                    }
+                    });
                 }
             }
         });
@@ -301,7 +293,8 @@ public class ResourcesUtils {
         items.forEach((blockType, i) -> {
 
             if (ModEntriesConfigs.isEntryEnabled(blockType, i)) {
-                try {
+                ResourceLocation itemId = Utils.getID(i);
+                TaskRunnerWithFaliureCollection.active().runSafely("recipe", () -> itemId + " (" + baseRecipe + ")", () -> {
                     //check for disabled ones. Will actually crash if its null since vanilla recipe builder expects a non-null one
                     ResourceLocation blockId = RecipeBuilder.getDefaultRecipeId(i);
                     String baseRecipePath = baseRecipe.getPath();
@@ -319,10 +312,7 @@ public class ResourcesUtils {
                     else {
                         sink.addBlockTypeSwapRecipe(manager, baseRecipe, fromType, blockType, blockId);
                     }
-
-                } catch (Exception e) {
-                    EveryCompat.LOGGER.error("Failed to generate recipe @ {} for {}: {}", baseRecipe, i, e.getMessage());
-                }
+                });
             }
         });
     }
