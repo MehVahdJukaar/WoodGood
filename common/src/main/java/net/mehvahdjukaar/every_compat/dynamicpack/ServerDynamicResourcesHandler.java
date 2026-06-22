@@ -2,7 +2,7 @@ package net.mehvahdjukaar.every_compat.dynamicpack;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
-import net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFaliureCollection;
+import net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicServerResourceProvider;
@@ -62,7 +62,7 @@ public class ServerDynamicResourcesHandler extends DynamicServerResourceProvider
 
     @Override
     public void regenerateDynamicAssets(Consumer<ResourceGenTask> executor) {
-        TaskRunnerWithFaliureCollection.run("Server dynamic resources generation", () -> {
+        TaskRunnerWithFailureCollection.run("Server dynamic resources generation", () -> {
             List<ResourceGenTask> tasks = new ArrayList<>();
             EveryCompat.forAllModules(m -> m.addDynamicServerResources(tasks::add));
 
@@ -72,7 +72,7 @@ public class ServerDynamicResourcesHandler extends DynamicServerResourceProvider
 
             //submit tasks in batches. to do so split that list in sizes of that batchSize then submit a task to the executor where that list is iterated and executed
             EveryCompat.LOGGER.info("Every Compat is starting dynamic server resources generation tasks: {} in batches of {}", tasks.size(), batchSize);
-            TaskRunnerWithFaliureCollection failures = TaskRunnerWithFaliureCollection.active();
+            TaskRunnerWithFailureCollection failures = TaskRunnerWithFailureCollection.active();
             for (int i = 0; i < tasks.size(); i += batchSize) {
                 int batchStart = i;
                 int end = Math.min(i + batchSize, tasks.size());

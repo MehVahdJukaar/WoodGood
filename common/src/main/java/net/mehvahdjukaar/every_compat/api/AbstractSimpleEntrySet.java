@@ -7,7 +7,7 @@ import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.ColoringUtils;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
-import net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFaliureCollection;
+import net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection;
 import net.mehvahdjukaar.every_compat.misc.TextureGenHelper;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
@@ -304,7 +304,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             try {
                 ResourcesUtils.addBlocksRecipes(manager, sink, items, res, baseType.get(), i++);
             } catch (Exception e) {
-                TaskRunnerWithFaliureCollection.active().record("recipe template", () -> String.valueOf(res), e);
+                TaskRunnerWithFailureCollection.active().record("recipe template", () -> String.valueOf(res), e);
             }
         }
     }
@@ -316,7 +316,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             TextureGenHelper.generateDefault(sink, manager, module.modId, textures, getBaseType(),
                     mergePalette, this.getDefaultEntries());
         } catch (Exception e) {
-            TaskRunnerWithFaliureCollection.active().record(
+            TaskRunnerWithFailureCollection.active().record(
                     "entry set textures",
                     () -> module == null ? getName() : module.modRes(getName()).toString(),
                     e

@@ -49,7 +49,7 @@ public class TextureGenHelper {
             Palette globalPalette = Palette.empty();
 
             Multimap<ResourceLocation, TextureInfo> infoPerTextures = ArrayListMultimap.create();
-            TaskRunnerWithFaliureCollection failures = TaskRunnerWithFaliureCollection.active();
+            TaskRunnerWithFailureCollection failures = TaskRunnerWithFailureCollection.active();
 
             /// Adding multiple textures from one block into Respriter without/with mask & infoPerTextures
             for (TextureInfo textureInfo : textureInfos) {
@@ -188,7 +188,7 @@ public class TextureGenHelper {
         try (TextureImage overlayTexture = TextureImage.open(manager, overlayLocation)) {
             TextureOps.applyOverlay(image, overlayTexture);
         } catch (Exception e) {
-            TaskRunnerWithFaliureCollection.active().record("texture overlay", overlayLocation::toString, e);
+            TaskRunnerWithFailureCollection.active().record("texture overlay", overlayLocation::toString, e);
         }
     }
 
