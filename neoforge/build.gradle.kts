@@ -81,7 +81,7 @@ dependencies {
     //+ OTHER MAVENs
     modCompileOnly("com.tterrag.registrate:Registrate:${property("registrate_version")}") // Create, The-Twilight-Forest, Tropicraft
 
-    modImplementation("org.violetmoon.zeta:Zeta:1.1-40-SNAPSHOT") // Quark - @ https://maven.blamejared.com/org/violetmoon/zeta/Zeta/
+    modCompileOnly("org.violetmoon.zeta:Zeta:1.1-40-SNAPSHOT") // Quark - @ https://maven.blamejared.com/org/violetmoon/zeta/Zeta/
 //    modCompileOnly("curse.maven:zeta-968868:7640154") // v1.1-39 | TEMP BACKUP MAVEN
 
     //+ MIRRORED FROM COMMON - Required because dependOn(common) compiles common sources with neoforge classpath
@@ -189,7 +189,7 @@ dependencies {
     modCompileOnly("maven.modrinth:building-but-better:2.0pre4") // MidnightLib //!! 1.20.1
     modCompileOnly("com.simibubi.create:create-${property("minecraft_version")}:${property("create_version")}:slim") { isTransitive = false } // Registrate, Flywheel, Ponder
 
-    modImplementation("org.violetmoon.quark:Quark:4.1-481-SNAPSHOT") // Zeta, Biolith @ https://maven.blamejared.com/org/violetmoon/quark/Quark/
+    modCompileOnly("org.violetmoon.quark:Quark:4.1-481-SNAPSHOT") // Zeta, Biolith @ https://maven.blamejared.com/org/violetmoon/quark/Quark/
 //    modCompileOnly("curse.maven:quark-243121:7640331") // v4.1.474 | TEMP BACKUP MAVEN
 
 //!! ========================================== DISABLED FOR A REASON =============================================== \\

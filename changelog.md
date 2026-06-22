@@ -12,6 +12,25 @@
 |                                                                                                                                   |
 
 ---
+## v2.11.45
+
+### CHANGES:
+- **Every Compat** (C): 
+  - Add new class to prevent multiple missing texture due to texture generation failure & model generation failing to generate models/block or models/item files
+  - Replaced a few classes from the deprecated, `isVanilla()` to `isKnownVanillaWood(WoodType)`
+  - `CompatChestBlockEntity` no longer have `getDefaultName()` so this mean when you open Chest, you will see on left, top side where the name is "Chest". "\[WoodName] Chest" is no longer there. - [#1233](https://github.com/MehVahdJukaar/WoodGood/issues/1233)
+
+### ADDED:
+- **Boatload** (EXCLUDED): **Abundant Atmosphere** has its own support compat for **Boatload**
+- **Abundant Atmosphere** (EXCLUDED): Blocks from **Farmer's Delight** will be no longer generated because **Abundant Atmosphere** has a built-in compat
+- **Architects Palette** (INCLUDED): ensure BOARDS with **Darker Depths** is generated if **Woodworks** are installed
+  - NOTE: **Darker Depths** has a built-in support for **Woodworks**'s BOARDS
+
+### LANG:
+- **JL_JP**: Correcting LANG for WoodTypes that are noun or adjective - Updated by Abbage230
+
+---
+
 ## v2.11.44
 
 ### FIXES:

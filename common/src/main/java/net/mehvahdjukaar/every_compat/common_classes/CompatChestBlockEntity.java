@@ -4,13 +4,11 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.NotNull;
 
 public class CompatChestBlockEntity extends ChestBlockEntity {
     private final WoodType woodType;
@@ -41,8 +39,4 @@ public class CompatChestBlockEntity extends ChestBlockEntity {
         return trapped;
     }
 
-    @Override
-    protected @NotNull Component getDefaultName() {
-        return Component.translatable("container.everycomp.chest.name", Component.translatable(woodType.getTranslationKey()).getString());
-    }
 }
