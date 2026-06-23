@@ -35,7 +35,6 @@ import vectorwing.farmersdelight.common.registry.ModItems;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.function.Consumer;
 
 import static java.util.Map.entry;
@@ -101,16 +100,18 @@ public class FarmersDelightModule extends EveryCompatModule {
                 if (HardcodedBlockType.isKnownVanillaWood(woodType)) continue;
 
                 // Skip if one of Farmer's-Cutting compat mods is installed
-                String namespaceRegex = COMPAT_RECIPE_MODS.getOrDefault(woodType.getNamespace(), "none");
-                boolean isRecipeModNotInstalled = !PlatHelper.getInstalledMods().contains(namespaceRegex);
-                boolean isCollectionModNotInstalled = !PlatHelper.getInstalledMods().contains("mr_farmers_cuttingcollection")
-                        && !COMPAT_RECIPE_MODS.containsKey(woodType.getNamespace());
+                String shortenedRecipeId = COMPAT_RECIPE_MODS.getOrDefault(woodType.getNamespace(), "none");
+                // Check for Individual Recipe Compat Mods
+                boolean isRecipeModNotInstalled = !PlatHelper.getInstalledMods().contains(shortenedRecipeId);
+                // CHeck for one mod with all Recipe Compat Mods
+                boolean isCollectionModNotInstalled = !(PlatHelper.getInstalledMods().contains("mr_farmers_cuttingcollection")
+                        && COMPAT_RECIPE_MODS.containsKey(woodType.getNamespace()));
+                boolean isNotAlreadySupportedMods = !getAlreadySupportedMods().contains(woodType.getNamespace());
 
-                if (isRecipeModNotInstalled && isCollectionModNotInstalled) {
-                    createCuttingRecipe(LOG, woodType.getBlockOfThis(LOG),
-                            woodType, sink, manager);
-                    createCuttingRecipe(WOOD, woodType.getBlockOfThis(WOOD),
-                            woodType, sink, manager);
+                if (isRecipeModNotInstalled && isCollectionModNotInstalled && isNotAlreadySupportedMods) {
+
+                    createCuttingRecipe(LOG, woodType.getBlockOfThis(LOG), woodType.getBlockOfThis(STRIPPED_LOG), woodType, sink, manager);
+                    createCuttingRecipe(WOOD, woodType.getBlockOfThis(WOOD), woodType.getBlockOfThis(STRIPPED_WOOD), woodType, sink, manager);
 
                     createSalvagingRecipe("furniture", woodType, sink, manager);
                     createSalvagingRecipe(CHEST_BOAT, woodType, sink, manager);
@@ -119,16 +120,18 @@ public class FarmersDelightModule extends EveryCompatModule {
         });
     }
 
-    public void createCuttingRecipe(String recipeType, Block input,
+    public void createCuttingRecipe(String recipeType, Block input, Block output,
                                     WoodType targetType, ResourceSink sink, ResourceManager manager) {
 
-        if (Objects.isNull(input)) return;
+        if ((input == null && output == null) || IsBambooLike(targetType)) return;
 
-        String recipeLocation = modRes("cutting/oak_" + recipeType).toString();
+        String recipeLocation = (IsBambooLike(targetType))
+                ? modRes("cutting/bamboo_block").toString()
+                : modRes("cutting/oak_" + recipeType).toString();
+
         Recipe<?> recipe = RPUtils.readRecipe(manager, recipeLocation);
 
         if (recipe instanceof CuttingBoardRecipe cuttingRecipe) {
-
 
             NonNullList<ChanceResult> oldResult = cuttingRecipe.getRollableResults();
             NonNullList<ChanceResult> newResult = NonNullList.withSize(oldResult.size(), ChanceResult.EMPTY);
@@ -211,6 +214,11 @@ public class FarmersDelightModule extends EveryCompatModule {
         }
     }
 
+    public static boolean IsBambooLike(WoodType woodType) {
+        String name = Utils.getID(woodType.log).getPath();
+        return name.contains("bamboo") || name.contains("_block");
+    }
+
     // a recipe mod, not full Compat-Mod providing cutting-board recipes for other Wood-Mods
     // farmers-cutting-collection.*.jar
     private final Map<String, String> COMPAT_RECIPE_MODS = Map.ofEntries(
@@ -232,6 +240,6 @@ public class FarmersDelightModule extends EveryCompatModule {
 
     @Override
     public List<String> getAlreadySupportedMods() {
-        return List.of("abundant_atmosphere");
+        return List.of("abundant_atmosphere", "mynethersdelight");
     }
 }
