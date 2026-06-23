@@ -103,6 +103,7 @@ dependencies {
     modCompileOnly("curse.maven:valhelsia-furniture-694349:6341023")
     modCompileOnly("curse.maven:mighty-mail-902986:6542124")
     modCompileOnly("curse.maven:missing-wilds-622590:6302230")
+    modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5520190") // Quad - LieOnLion
     // OTHER MAVENs
 
     // ~/neoforge/mods LOCAL
@@ -121,7 +122,6 @@ dependencies {
 //    modRuntimeOnly("curse.maven:missing-wilds-622590:6302230")
 //    modRuntimeOnly("curse.maven:more-beautiful-torches-860325:5609745") // MonoLib
 //    modRuntimeOnly("curse.maven:more-chest-variants-lieonlion-858032:5862569") // Quad - LieOnLion
-//    modRuntimeOnly("curse.maven:more-crafting-tables-lieonlion-913586:5520190") // Quad - LieOnLion
 //    modRuntimeOnly("curse.maven:refurbished-furniture-897116:6272849") // Framework
 //    modRuntimeOnly("curse.maven:rechiseled-558998:7687594") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ]
 //    modRuntimeOnly("curse.maven:variant-vanilla-blocks-866509:4997060") //v1.3.6 //@ 1.20.1-NOT_AVAILABLE
