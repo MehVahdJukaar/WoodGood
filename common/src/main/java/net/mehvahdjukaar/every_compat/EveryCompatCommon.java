@@ -65,6 +65,7 @@ public class EveryCompatCommon {
             // Farmer's Delight
             addOtherCompatMod("natures_delight", "natures_spirit", "farmersdelight");
             addOtherCompatMod("undergardendelight", "undergarden", "farmersdelight");
+            addOtherCompatMod("windswept_delights", "windswept", "farmersdelight");
 
             // Macaw's Addon
             addOtherCompatMod("macawsbridgesbop", "biomesoplenty", "mcwbridges");
