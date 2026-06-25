@@ -39,6 +39,7 @@ import java.util.function.Consumer;
 
 import static java.util.Map.entry;
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
+import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.IsBambooLike;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
 ///SUPPORT: FABRIC-v3.3.3+ | NEOFORGE-v1.3.2+
@@ -214,11 +215,6 @@ public class FarmersDelightModule extends EveryCompatModule {
         }
     }
 
-    public static boolean IsBambooLike(WoodType woodType) {
-        String name = Utils.getID(woodType.log).getPath();
-        return name.contains("bamboo") || name.contains("_block");
-    }
-
     // a recipe mod, not full Compat-Mod providing cutting-board recipes for other Wood-Mods
     // farmers-cutting-collection.*.jar
     private final Map<String, String> COMPAT_RECIPE_MODS = Map.ofEntries(
@@ -240,6 +236,6 @@ public class FarmersDelightModule extends EveryCompatModule {
 
     @Override
     public List<String> getAlreadySupportedMods() {
-        return List.of("abundant_atmosphere", "mynethersdelight");
+        return List.of("abundant_atmosphere", "mynethersdelight", "newworld", "verdance");
     }
 }
