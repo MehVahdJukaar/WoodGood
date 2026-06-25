@@ -388,21 +388,4 @@ public class WoodworksModule extends EveryCompatModule {
         );
     }
 
-//    @Override
-//    public void onModSetup() {
-//        super.onModSetup();
-//
-//        RecipeTemplate.register(SawmillRecipe.class, (original, oldBlockType, newBlockType) -> {
-//            List<Ingredient> modifiedIngredient = RecipeTemplate.convertIngredients(original.getIngredients(), oldBlockType, newBlockType);
-//            Ingredient newInput = Ingredient.of(modifiedIngredient.getFirst().getItems()[0]);
-//            ItemStack originalResult = original.getResultItem(RegistryAccess.EMPTY);
-//            ItemStack newResult = RecipeTemplate.convertItemStack(originalResult, oldBlockType, newBlockType);
-//            if (newResult == null) {
-//                throw new UnsupportedOperationException("Failed to convert recipe result");
-//            } else {
-//                return new SawmillRecipe(original.getGroup(), newInput, newResult);
-//            }
-//        });
-//    }
-
 }
