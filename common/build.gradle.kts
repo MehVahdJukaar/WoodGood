@@ -6,6 +6,20 @@ common {
     accessWidener()
 }
 
+val modId: String = property("mod_id").toString()
+val modVersion: String = property("mod_version").toString()
+tasks.named<Jar>("jar") {
+    archiveBaseName.set(modId)
+    archiveVersion.set(modVersion)
+    archiveClassifier.set("common")
+}
+tasks.named<Jar>("sourcesJar") {
+    from(sourceSets.main.get().allSource)
+    archiveBaseName.set(modId)
+    archiveVersion.set(modVersion)
+    archiveClassifier.set("common-sources")
+}
+
 //val path = System.getenv("REPOS21_1").toString()
 dependencies {
 
