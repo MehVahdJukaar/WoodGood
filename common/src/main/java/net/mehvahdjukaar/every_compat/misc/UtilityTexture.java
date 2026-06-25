@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.misc;
 
-import com.mojang.blaze3d.platform.NativeImage;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
@@ -108,25 +107,22 @@ public class UtilityTexture {
                 // Recoloring the baseTexture
                 try (
                         TextureImage logTexture = TextureImage.open(manager,
-                                RPUtils.findFirstBlockTextureLocation(manager, woodType.log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
+                                RPUtils.findFirstBlockTextureLocation(manager, woodType.log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))
                 ) {
                     TextureImage currentLogTexture;
                     int height = logTexture.imageHeight();
                     int width = logTexture.imageWidth();
 
                     if (!(height == 16) && Objects.nonNull(logTexture.getMcMeta())) { // Shrink the texture to a 16x16
-                        NativeImage standardSize = new NativeImage(16, 16, false);
-                        standardSize.copyFrom(logTexture.getImage());
-                        currentLogTexture = TextureImage.of(standardSize);
+                        currentLogTexture = shrinkTextureTo16(logTexture);
                         height = currentLogTexture.imageHeight();
+                        if (!(width == 16) || !(height == 16)) {
+                            EveryCompat.LOGGER.error("ChippedLogModule - {}'s texture is a {}x{} for {}", Utils.getID(woodType.log), logTexture.imageWidth(), logTexture.imageHeight(), baseTextureLoc.getPath());
+                            sink.addTextureIfNotPresent(manager, newPath, baseTexture::makeCopy);
+                            return;
+                        }
                     }
                     else currentLogTexture = logTexture;
-
-                    if (!(width == 16) || !(height == 16)) {
-                        EveryCompat.LOGGER.error("ChippedLogModule - {}'s texture is a {}x{} for {}", Utils.getID(woodType.log), width, height, baseTextureLoc.getPath());
-                        sink.addTextureIfNotPresent(manager, newPath, baseTexture::makeCopy);
-                        return;
-                    }
 
                     var planksPalette = PaletteStrategies.PLANKS_REMOVE_DARKEST.getPaletteAndAnimation(woodType, manager);
 
@@ -166,7 +162,7 @@ public class UtilityTexture {
 
                 try (
                         TextureImage logTexture = TextureImage.open(manager,
-                                RPUtils.findFirstBlockTextureLocation(manager, woodType.log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
+                                RPUtils.findFirstBlockTextureLocation(manager, woodType.log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))
                 ) {
                     int height = logTexture.imageHeight();
                     int width = logTexture.imageWidth();
@@ -176,19 +172,16 @@ public class UtilityTexture {
 
                     // Shrink the texture to a 16x16
                     if (!(height == 16) && Objects.nonNull(logTexture.getMcMeta())) {
-                        NativeImage standardSize = new NativeImage(16, 16, false);
-                        standardSize.copyFrom(logTexture.getImage());
-                        currentLogOverlay = TextureImage.of(standardSize);
+                        currentLogOverlay = shrinkTextureTo16(logTexture);
                         height = currentLogOverlay.imageHeight();
+
+                        if (!(width == 16) || !(height == 16)) {
+                            EveryCompat.LOGGER.error("ChippedLogModule - {}'s texture is a {}x{} for {}", Utils.getID(woodType.log), logTexture.imageWidth(), logTexture.imageHeight(), baseTextureLoc.getPath());
+                            sink.addTextureIfNotPresent(manager, newPath, baseTexture::makeCopy);
+                            return;
+                        }
                     }
                     else currentLogOverlay = logTexture.makeCopy();
-
-                    if (!(width == 16) || !(height == 16)) {
-                        EveryCompat.LOGGER.error("ChippedLogModule - {}'s texture is a {}x{} for {}", Utils.getID(woodType.log), width, height, baseTextureLoc.getPath());
-                        sink.addTextureIfNotPresent(manager, newPath, baseTexture::makeCopy);
-                        return;
-                    }
-
 
                     // Adding to the resource
                     sink.addTextureIfNotPresent(manager, newPath, () -> {
@@ -206,6 +199,25 @@ public class UtilityTexture {
         } catch (Exception e) {
             EveryCompat.LOGGER.error("Failed to generate texture with logOverlay: ", e);
         }
+    }
+
+    /// Shrink an animated texture to 16x16
+    public static TextureImage shrinkTextureTo16(TextureImage texture) {
+        return shrinkTextureTo(16, 16, texture);
+    }
+
+    /// Shrink an animated texture to width x height
+    public static TextureImage shrinkTextureTo(int widthSize, int heightSize, TextureImage texture) {
+
+        TextureImage image = TextureImage.createNew(widthSize, heightSize);
+        TextureCollager transformer = TextureCollager.builder(
+                texture.frameWidth(), texture.frameHeight(),
+                image.frameWidth(), image.frameHeight()).copyFrom(0, 0,
+                texture.frameWidth(), texture.frameHeight()).to(0, 0,
+                image.frameWidth(), image.frameHeight()
+        ).build();
+        transformer.apply(texture, image);
+        return image;
     }
 
     //      ┌──────────────────────────────────────────────────────────┐
@@ -231,8 +243,7 @@ public class UtilityTexture {
                         RPUtils.findFirstBlockTextureLocation(manager, woodType.planks))) {
                         Palette targetPalette = Palette.fromImage(plankTexture);
 
-                        Respriter copiedRespriter = respriter;
-                        return copiedRespriter.recolor(targetPalette);
+                        return respriter.recolor(targetPalette);
 
                     } catch (Exception e) {
                         EveryCompat.LOGGER.error("Failed to get planks texture for {} - {}", woodType.getId(), e);
@@ -261,9 +272,7 @@ public class UtilityTexture {
 
                 String newPath = BlockTypeResTransformer.replaceTypeNoNamespace(baseTextureLoc.getPath(), woodType, Utils.getID(boat), "oak");
 
-                sink.addTextureIfNotPresent(manager, newPath,
-                        () -> createBoatItemTexture(manager, woodType, respriter)
-                );
+                sink.addTextureIfNotPresent(manager, newPath, () -> createBoatItemTexture(manager, woodType, respriter));
             });
         } catch (Exception ex) {
             EveryCompat.LOGGER.error("Failed to generate Item Texture for {} - {} ", baseTextureLoc, ex);
