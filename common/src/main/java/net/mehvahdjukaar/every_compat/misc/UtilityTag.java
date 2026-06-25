@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
+import java.util.Optional;
 
 @SuppressWarnings("UnusedReturnValue")
 public class UtilityTag {
@@ -30,12 +31,15 @@ public class UtilityTag {
         String resLocMOD = blockType.getNamespace() + ":" + blockType.getTypeName();
 
         // ResourceLocation
+        ResourceLocation tagId = getTagId(blockType);
         ResourceLocation RLocLogs = new ResourceLocation(resLocMOD + "_" + suffixTag); // modId:TYPE_suffix
         ResourceLocation RLocStems = new ResourceLocation(resLocMOD + "_" + suffixAlt);
         ResourceLocation RLocFolders = new ResourceLocation(blockType.getNamespace() + ":" + suffixTag + "/" + blockType.getTypeName()); // modId:suffix/TYPE
         ResourceLocation RLocEC = EveryCompat.res(blockType.getAppendableId() + "_" + suffixTag); // everycomp:modId/TYPE_suffix
 
-        if (doTagExistFor(RLocLogs, manager))
+        if (doTagExistFor(tagId, manager))
+            return tagId;
+        else if (doTagExistFor(RLocLogs, manager))
             return RLocLogs;
         else if (doTagExistFor(RLocStems, manager))
             return RLocStems;
@@ -48,6 +52,15 @@ public class UtilityTag {
 
         return RLocEC;
 
+    }
+
+    private static ResourceLocation getTagId(BlockType blockType) {
+        Optional<Block> log = Optional.ofNullable(blockType.getBlockOfThis("log"));
+        Optional<Block> block = Optional.ofNullable(blockType.getBlockOfThis("block"));
+
+        if (log.isPresent()) return Utils.getID(log.get()).withSuffix("s");
+        else if (block.isPresent()) return Utils.getID(block).withSuffix("s");
+        else return null;
     }
 
     /**
