@@ -78,11 +78,11 @@ public class CompatSpritesHelper {
         addOptional("marvelous_menagerie", "calamites_log", "_side", "block/calamites_log"); // is a 8x8 log
         addOptional("marvelous_menagerie", "calamites_log", "_top", "block/calamites_log"); // is a 8x8 log
 
-        // -------------------- Alex's Caves
-        addOptional("alexscaves", "thornwood_log", "_side", "block/thornwood_log");
-        addOptional("alexscaves", "thornwood_log", "_top", "block/thornwood_log_top");
-        addOptional("alexscaves", "stripped_thornwood_log", "_side", "block/stripped_thornwood_log");
-        addOptional("alexscaves", "stripped_thornwood_log", "_top", "block/stripped_thornwood_log_top");
+        // -------------------- Alex's Caves @ Temp disabled for now
+//        addOptional("alexscaves", "thornwood_log", "_side", "block/thornwood_log");
+//        addOptional("alexscaves", "thornwood_log", "_top", "block/thornwood_log_top");
+//        addOptional("alexscaves", "stripped_thornwood_log", "_side", "block/stripped_thornwood_log");
+//        addOptional("alexscaves", "stripped_thornwood_log", "_top", "block/stripped_thornwood_log_top");
 
         // -------------------- More Sniffer Flowers
         addOptional("moresnifferflowers", "vivicus_log", "_side", "block/vivicus_log"); // was using vivicus_log1c.png
@@ -130,16 +130,13 @@ public class CompatSpritesHelper {
         // Planks
         addOptional("luminous_nether:withered_planks", "all", "luminous_nether:block/ashplanks");
 
-        // -------------------- golden_stem aka "mushroom"
+        // golden_stem aka "Mushroom Stipe"
         // log
         addOptional("luminous_nether:goldenstem", "_side", "luminous_nether:block/stembase");
         addOptional("luminous_nether:goldenstem", "_top", "luminous_nether:block/mushroominside");
-        // stripped_log
+        // stripped_log - Shredded Mushroom Stipe
         addOptional("luminous_nether:shredded_stem", "_side", "luminous_nether:block/mushroomblockside");
         addOptional("luminous_nether:shredded_stem", "_top", "luminous_nether:block/mushroomstemtop");
-        // wood
-        addOptional("luminous_nether:shredded_stem", "_side", "luminous_nether:block/goldenmushroomside");
-        addOptional("luminous_nether:shredded_stem", "_top", "luminous_nether:block/goldenmushroomtop");
 
         // -------------------- Mofu's Better End
         addOptional("mofus_better_end_:weepingstar_log", "_side", "mofus_better_end_:block/weepingstarlogside");
