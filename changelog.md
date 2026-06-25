@@ -12,6 +12,25 @@
 |                                                                                                                                   |
 
 ---
+## v2.11.46
+
+### ADDED:
+- **Farmer's Delight** (COMPAT): **Windswept Delights**
+
+### CHANGES:
+- **Every Compat** (C): Added a new class to Collects resource-generation failures during a single generation pass - @MehVahdJukaar
+- **More Crafting Tables -LieOnLion** (C): Re-enabled - [#1285](https://github.com/MehVahdJukaar/WoodGood/issues/1285)
+
+### FIXES:
+- **Copper Age Backport** (C): Fixed the crash on SERVER Side - [#1277](https://github.com/MehVahdJukaar/WoodGood/issues/1277)
+- **Farmer's Delight** (C): 
+  - Excluded **Abundant Atmosphere** from Recipe Generation for CUTTING_BOARDS' recipe with all WoodType's Children
+  - Tweaked the recipe generation to use Bamboo Recipes only for WoodType that are Bamboo-like
+- **Woodworks** (NF): Tweaked the recipe generation to use Bamboo Recipes only for WoodType that are Bamboo-like
+- **Curiosities** (NF): Tweaked the recipe generation to use Bamboo Recipes only for WoodType that are Bamboo-like
+
+---
+
 ## v2.11.45
 
 ### CHANGES:
