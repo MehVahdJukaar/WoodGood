@@ -56,13 +56,9 @@ public class UtilityTag {
 
     private static ResourceLocation getTagId(BlockType blockType) {
         Optional<Block> log = Optional.ofNullable(blockType.getBlockOfThis("log"));
-        Optional<Block> stem = Optional.ofNullable(blockType.getBlockOfThis("stem"));
-        Optional<Block> cap = Optional.ofNullable(blockType.getBlockOfThis("cap"));
         Optional<Block> block = Optional.ofNullable(blockType.getBlockOfThis("block"));
 
         if (log.isPresent()) return Utils.getID(log.get()).withSuffix("s");
-        else if (stem.isPresent()) return Utils.getID(stem).withSuffix("s");
-        else if (cap.isPresent()) return Utils.getID(cap).withSuffix("s");
         else if (block.isPresent()) return Utils.getID(block).withSuffix("s");
         else return null;
     }
