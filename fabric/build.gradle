@@ -115,6 +115,7 @@ dependencies {
 //!! TOOLS ========================================================================================================== \\
     modRuntimeOnly("dev.emi:emi-fabric:$emi_version+$minecraft_version")
     modRuntimeOnly("com.blamejared.crafttweaker:CraftTweaker-fabric-$minecraft_version:$crafttweaker_version")
+    modRuntimeOnly("mezz.jei:jei-$minecraft_version-fabric:$jei_version")
 //    modRuntimeOnly("curse.maven:jade-324717:5666690")
 
 //!! ================================================ DEPENDENCIES ================================================== \\

@@ -110,10 +110,10 @@ dependencies {
 
 //!! TOOLS ========================================================================================================== \\
     modRuntimeOnly("dev.emi:emi-forge:$emi_version+$minecraft_version")
+    modRuntimeOnly("mezz.jei:jei-$minecraft_version-forge:$jei_version")
     modRuntimeOnly("com.blamejared.crafttweaker:CraftTweaker-forge-$minecraft_version:$crafttweaker_version")
     modRuntimeOnly("curse.maven:jade-324717:6106101") // v11.12.3
     modRuntimeOnly("curse.maven:configured-457570:5180902") // v2.2.3
-    modRuntimeOnly("curse.maven:jei-238222:6600311") // v15.20.0.112
 //    modRuntimeOnly("curse.maven:worldedit-225608:4586218")
 
 //!! ================================================ DEPENDENCIES ================================================== \\
