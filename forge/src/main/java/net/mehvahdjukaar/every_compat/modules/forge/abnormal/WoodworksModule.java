@@ -1,10 +1,13 @@
 package net.mehvahdjukaar.every_compat.modules.forge.abnormal;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.teamabnormals.blueprint.common.block.BlueprintBeehiveBlock;
 import com.teamabnormals.blueprint.common.block.LeafPileBlock;
 import com.teamabnormals.blueprint.core.registry.BlueprintBlockEntityTypes;
+import com.teamabnormals.woodworks.common.item.crafting.SawmillRecipe;
 import com.teamabnormals.woodworks.core.registry.WoodworksBlocks;
+import com.teamabnormals.woodworks.core.registry.WoodworksRecipes;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -15,21 +18,31 @@ import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
+import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
+import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
+import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.VanillaLeavesTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
+import net.minecraft.tags.TagKey;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
@@ -38,14 +51,17 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.Tags;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
+import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.IsBambooLike;
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.getATagOrCreateANew;
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
 //SUPPORT: v3.0.0+
 @SuppressWarnings({"removal", "DataFlowIssue", "deprecation"})
@@ -258,108 +274,256 @@ public class WoodworksModule extends SimpleModule {
     }
 
     @Override
-    // Recipes
+    // RECIPES
     public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicServerResources(executor);
+        executor.accept((manager, sink) -> bookshelves.items.forEach((wood, item) -> {
+            // The generation of ladders get skipped due to some mods already have ladders and will be used as an alt
+            Item getLadder = ladders.items.get(wood);
+            Item ladder = (getLadder != null) ? getLadder : BuiltInRegistries.ITEM.get(
+                    ResourceLocation.fromNamespaceAndPath(wood.getNamespace(), wood.getTypeName() +"_ladder"));
 
-        executor.accept((manager, sink) ->
-            bookshelves.items.forEach((wood, item) -> {
-                // The generation of ladders get skipped due to some mods already have ladders and will be used as an alt
-                Item getLadder = ladders.items.get(wood);
-                Item ladder = (getLadder != null) ? getLadder : BuiltInRegistries.ITEM.get(
-                        ResourceLocation.fromNamespaceAndPath(wood.getNamespace(), wood.getTypeName() +"_ladder"));
+            // sawmill recipes - from LOGS
+            createSawmillRecipe(PLANKS, "logs", wood.getItemOfThis(PLANKS), sink, manager, wood);
+            createSawmillRecipe("boards", "logs", boards.items.get(wood), sink, manager, wood);
+            createSawmillRecipe("ladder", "logs", ladder, sink, manager, wood);
+            createSawmillRecipe(BUTTON, "logs", wood.getItemOfThis(BUTTON), sink, manager, wood);
+            createSawmillRecipe(DOOR, "logs", wood.getItemOfThis(DOOR), sink, manager, wood);
+            createSawmillRecipe(FENCE, "logs", wood.getItemOfThis(FENCE), sink, manager, wood);
+            createSawmillRecipe(FENCE_GATE, "logs", wood.getItemOfThis(FENCE_GATE), sink, manager, wood);
+            createSawmillRecipe(SIGN, "logs", wood.getItemOfThis(SIGN), sink, manager, wood);
+            createSawmillRecipe(SLAB, "logs", wood.getItemOfThis(SLAB), sink, manager, wood);
+            createSawmillRecipe(STAIRS, "logs", wood.getItemOfThis(STAIRS), sink, manager, wood);
+            createSawmillRecipe(TRAPDOOR, "logs", wood.getItemOfThis(TRAPDOOR), sink, manager, wood);
 
-                // sawmill recipes - from LOGS
-                sawmillRecipe("oak_planks_from_oak_logs_sawing", wood.log.asItem(), wood.planks.asItem(),
-                        sink, manager, wood);
-                sawmillRecipe("oak_boards_from_oak_logs_sawing", wood.log.asItem(), boards.items.get(wood),
-                        sink, manager, wood);
-                sawmillRecipe("spruce_ladder_from_spruce_logs_sawing", wood.log.asItem(), ladder,
-                        sink, manager, wood);
-                createRecipeIfNotNull("oak_button_from_oak_logs_sawing", true, "button",
-                        sink, manager, wood);
-                createRecipeIfNotNull("oak_door_from_oak_logs_sawing", true, "door",
-                        sink, manager, wood);
-                createRecipeIfNotNull("oak_fence_from_oak_logs_sawing", true, "fence",
-                        sink, manager, wood);
-                createRecipeIfNotNull("oak_fence_gate_from_oak_logs_sawing", true, "fence_gate",
-                        sink, manager, wood);
-                createRecipeIfNotNull("oak_pressure_plate_from_oak_logs_sawing", true, "pressure_plate",
-                        sink, manager, wood);
-                createRecipeIfNotNull("oak_sign_from_oak_logs_sawing", true, "sign",
-                        sink, manager, wood);
-                createRecipeIfNotNull("oak_slab_from_oak_logs_sawing", true, "slab",
-                        sink, manager, wood);
-                createRecipeIfNotNull("oak_stairs_from_oak_logs_sawing", true, "stairs",
-                        sink, manager, wood);
-                createRecipeIfNotNull("oak_trapdoor_from_oak_logs_sawing", true, "trapdoor",
-                        sink, manager, wood);
-
-                // - from PLANKS
-                sawmillRecipe("oak_boards_from_oak_planks_sawing", wood.planks.asItem(), boards.items.get(wood),
-                        sink, manager, wood);
-                sawmillRecipe("spruce_ladder_from_spruce_planks_sawing", wood.planks.asItem(), ladder,
-                        sink, manager, wood);
-                createRecipeIfNotNull("oak_button_from_oak_planks_sawing", false, "button",
-                        sink, manager, wood);
-                createRecipeIfNotNull("oak_fence_from_oak_planks_sawing", false, "fence",
-                        sink, manager, wood);
-                createRecipeIfNotNull("oak_slab_from_oak_planks_sawing", false, "slab",
-                        sink, manager, wood);
-                createRecipeIfNotNull("oak_stairs_from_oak_planks_sawing", false, "stairs",
-                        sink, manager, wood);
-            })
-        );
+            // - from PLANKS
+            createSawmillRecipe("boards", PLANKS, boards.items.get(wood), sink, manager, wood);
+            createSawmillRecipe("ladder", PLANKS, ladder, sink, manager, wood);
+            createSawmillRecipe(BUTTON, PLANKS, wood.getItemOfThis(BUTTON), sink, manager, wood);
+            createSawmillRecipe(FENCE, PLANKS, wood.getItemOfThis(FENCE), sink, manager, wood);
+            createSawmillRecipe(SLAB, PLANKS, wood.getItemOfThis(SLAB), sink, manager, wood);
+            createSawmillRecipe(STAIRS, PLANKS, wood.getItemOfThis(STAIRS), sink, manager, wood);
+        }));
     }
 
-    public void createRecipeIfNotNull(String recipeName, boolean usingLog, String output,
-                                      ResourceSink sink, ResourceManager manager, WoodType wood) {
-        Item input = (usingLog) ? wood.log.asItem() : wood.planks.asItem();
+    public void createSawmillRecipe(String typeOutput, String typeInput, Item itemOutput, ResourceSink sink, ResourceManager manager, WoodType newWoodType) {
+        if (itemOutput == null) return;
 
-        if (Objects.nonNull(wood.getItemOfThis(output))) {
-            sawmillRecipe(recipeName, input, wood.getItemOfThis(output), sink, manager, wood);
-        } else if (Objects.nonNull(wood.getBlockOfThis(output))) {
-            sawmillRecipe(recipeName, input, wood.getBlockOfThis(output).asItem(), sink, manager, wood);
-        }
-    }
+        String fromBambooType = typeInput.matches("logs") ? "blocks" : typeInput;
 
-    public void sawmillRecipe(String recipeName, Item input, Item output,
-                              ResourceSink sink, ResourceManager manager, WoodType wood) {
+        ResourceLocation recipeLocation = (IsBambooLike(newWoodType))
+                ? modRes("bamboo_" + typeOutput + "_from_bamboo_" + fromBambooType + "_sawing")
+                : modRes("acacia_" + typeOutput + "_from_acacia_" + typeInput + "_sawing");
 
-        ResourceLocation recipeLocation = modRes("recipes/" + recipeName + ".json"); // get Recipe JSON
+        if (manager.getResource(ResType.RECIPES.getPath(recipeLocation)).isEmpty()) return;
 
-        try (InputStream recipeStream = manager.getResource(recipeLocation)
-                .orElseThrow(() -> new FileNotFoundException("File Not Found: " + recipeLocation)).open()) {
-            JsonObject recipe = RPUtils.deserializeJson(recipeStream);
+        Recipe<?> recipe = RPUtils.readRecipe(manager, ResType.RECIPES.getPath(recipeLocation));
 
-            // VARIABLES
-            JsonObject foundRecipe = recipe.getAsJsonArray("recipes")
-                    .get(0).getAsJsonObject().getAsJsonObject("recipe");
+        if (recipe instanceof SawmillRecipe sawmillRecipe) {
+            boolean isIngredientModified = false;
+            Ingredient newIngredient = null;
 
-            JsonObject getIngredient = foundRecipe.getAsJsonObject("ingredient");
+            var oldIngredients = sawmillRecipe.getIngredients();
 
-            // Editing the JSON recipe
-            if (getIngredient.has("tag")) {
-                getIngredient.addProperty("tag",
-                        getATagOrCreateANew("logs", "caps", wood, sink, manager).toString());
-            } else { // getIngredient.has("item")
-                getIngredient.addProperty("item", Utils.getID(input).toString());
+            if (oldIngredients.get(0).toJson().getAsJsonObject().has("tag")) {
+                isIngredientModified = true;
+                ResourceLocation newTag = getATagOrCreateANew("logs", "blocks", newWoodType, sink, manager);
+                newIngredient = Ingredient.of(TagKey.create(Registries.ITEM, newTag));
+
             }
-            foundRecipe.addProperty("result", Utils.getID(output).toString());
+            else {
+                Item oldItem = oldIngredients.get(0).getItems()[0].getItem();
+                WoodType oldWoodType = WoodTypeRegistry.INSTANCE.getBlockTypeOf(oldItem);
+                Item newItem = BlockSetAPI.changeItemType(oldItem, oldWoodType, newWoodType);
 
-            // filenameBuilder: <woodType>_<blockType>_from_<woodType>_<logs|planks>_sawing
-            String[] nameSplit = recipeName.split("_(?!gate|plate)");
-            String filenameBuilder = "_" + nameSplit[1] + "_from_" + wood.getTypeName() + "_" + nameSplit[4] + "_sawing";
+                if (newItem != null) {
+                    newIngredient = Ingredient.of(new ItemStack(newItem));
+                    isIngredientModified = true;
+                }
+            }
 
-            sink.addJson(EveryCompat.res(this.shortenedId() + "/" + wood.getAppendableId() + filenameBuilder), recipe, ResType.RECIPES);
+            if (isIngredientModified) {
+                Item oldItem = sawmillRecipe.result.getItem();
+                int count = sawmillRecipe.result.getCount();
+                WoodType oldWoodType = WoodTypeRegistry.INSTANCE.getBlockTypeOf(oldItem);
 
-        } catch (Exception e) {
-            EveryCompat.LOGGER.error("Error while creating recipes for woodwork sawmill: ", e);
+                if (oldWoodType == VanillaWoodTypes.ACACIA || oldWoodType == VanillaWoodTypes.BAMBOO) {
+                    Item newItem = BlockSetAPI.changeItemType(oldItem, oldWoodType, newWoodType);
+                    if (newItem != null) {
+                        ItemStack newResult = new ItemStack(BuiltInRegistries.BLOCK.get(Utils.getID(newItem)), count);
+
+                        String appendedPath = recipeLocation.withPrefix(shortenedId() + "/" + newWoodType.getNamespace() + "/").getPath();
+                        String newPath = (oldWoodType == VanillaWoodTypes.ACACIA)
+                                ? appendedPath.replace("acacia", newWoodType.getTypeName())
+                                : appendedPath.replace("bamboo", newWoodType.getTypeName());
+
+                        CompatSawmillRecipe newRecipe = new CompatSawmillRecipe(EveryCompat.res(newPath), sawmillRecipe.getGroup(), newIngredient, newResult);
+
+                        sink.addJson(EveryCompat.res(newPath), newRecipe.toJson(), ResType.RECIPES);
+                    }
+                }
+            }
+
         }
-
     }
 
 
+    public class CompatSawmillRecipe extends SawmillRecipe {
+
+        public CompatSawmillRecipe(ResourceLocation id, String group, Ingredient ingredient, ItemStack result) {
+            super(id, group, ingredient, result);
+        }
+
+        public JsonObject toJson() {
+            JsonObject json = new JsonObject();
+
+            json.addProperty("type", "forge:conditional");
+            json.add("recipes", new JsonArray());
+
+            JsonArray recipes = json.getAsJsonArray("recipes");
+            recipes.add(new JsonObject());
+
+            JsonObject recipesJson = recipes.get(0).getAsJsonObject();
+            recipesJson.add("conditions", new JsonArray());
+
+            JsonArray conditions = recipesJson.getAsJsonArray("conditions");
+            conditions.add(new JsonObject());
+            JsonObject conditionsJson = conditions.get(0).getAsJsonObject();
+            conditionsJson.addProperty("type", "woodworks:config");
+            conditionsJson.addProperty("value", "sawmill");
+
+            recipesJson.add("recipe", new JsonObject());
+
+            JsonObject recipe = recipesJson.getAsJsonObject("recipe");
+            recipe.addProperty("type", "woodworks:sawmill");
+            recipe.add("ingredient", ingredient.toJson());
+            recipe.addProperty("count", result.getCount());
+            recipe.addProperty("result", Utils.getID(result.getItem()).toString());
+
+            return json;
+        }
+    }
+
+    public static class SawmillFinishedRecipe implements FinishedRecipe {
+        protected final Ingredient ingredient;
+        protected final ItemStack result;
+        protected final ResourceLocation id;
+        protected final String group;
+        private final Advancement.Builder advancement;
+        protected final ResourceLocation advancementId;
+
+        public SawmillFinishedRecipe(ResourceLocation resourceLocation, String group, Ingredient ingredient, ItemStack result) {
+            this.id = resourceLocation;
+            this.group = group;
+            this.ingredient = ingredient;
+            this.result = result;
+            this.advancement = null;
+            this.advancementId = null;
+        }
+
+        public void serializeRecipeData(@NotNull JsonObject json) {
+            if (!this.group.isEmpty()) {
+                json.addProperty("group", this.group);
+            }
+            json.addProperty("id", this.id.toString());
+
+            json.add("ingredient", ingredient.toJson());
+
+            json.addProperty("result", Utils.getID(result.getItem()).toString());
+            json.addProperty("count", result.getCount());
+        }
+
+        @Override
+        public @NotNull ResourceLocation getId() {
+            return id;
+        }
+
+        @Override
+        public @NotNull RecipeSerializer<?> getType() {
+            return WoodworksRecipes.WoodworksRecipeSerializers.SAWMILL.get();
+        }
+
+        @Nullable
+        @Override
+        public JsonObject serializeAdvancement() {
+            return advancement.serializeToJson();
+        }
+
+        @Nullable
+        @Override
+        public ResourceLocation getAdvancementId() {
+            return advancementId;
+        }
+    }
+
+    public class SawmillRecipeTemplate implements IRecipeTemplate<SawmillFinishedRecipe> {
+
+        private final List<Object> conditions = new ArrayList<>();
+
+        public final ItemStack result;
+        public final String group;
+        public final Ingredient ingredient;
+
+        public SawmillRecipeTemplate(JsonObject json) {
+            var g = json.get("group");
+            this.group = g == null ? "" : g.getAsString();
+
+            this.ingredient = Ingredient.fromJson(json.get("ingredient"));
+            String s1 = GsonHelper.getAsString(json, "result");
+            int i = GsonHelper.getAsInt(json, "count");
+            this.result = new ItemStack(BuiltInRegistries.ITEM.get(new ResourceLocation(s1)), i);
+        }
+
+        @Override
+        public <T extends BlockType> SawmillFinishedRecipe createSimilar(T oldWoodType, T newWoodType, Item unlockItem, String id) {
+            boolean isIngredientModified = false;
+            Ingredient newIngredient = null;
+
+            var oldIngredients = this.ingredient.getItems();
+            for (ItemStack oldItemStack : oldIngredients) {
+                Item oldItem = oldItemStack.getItem();
+
+                // if the recipe has Items.BARRIER, then it's using TAG as ingredient
+                if (oldItem != Items.BARRIER) {
+//                    WoodType oldWoodType = WoodTypeRegistry.INSTANCE.getBlockTypeOf(oldItem);
+                    Item newItem = BlockSetAPI.changeItemType(oldItem, oldWoodType, newWoodType);
+
+                    if (newItem != null) {
+                        newIngredient = Ingredient.of(new ItemStack(newItem));
+                        isIngredientModified = true;
+                    }
+                }
+                else {
+                    isIngredientModified = true;
+//                    ResourceLocation newTag = getATagOrCreateANew("logs", "blocks", newWoodType, sink, manager);
+//                    newIngredient = Ingredient.of(TagKey.create(Registries.ITEM, newTag));
+
+                }
+            }
+
+            ItemLike itemResult = BlockSetAPI.changeItemType(this.result.getItem(), oldWoodType, newWoodType);
+            if (itemResult == null) {
+                throw new UnsupportedOperationException(String.format("Could not convert output item %s from type %s to %s",
+                        this.result, oldWoodType, newWoodType));
+            }
+            else {
+                ItemStack newResult = new ItemStack(itemResult, this.result.getCount());
+
+                var res = new ResourceLocation(id);
+                return new SawmillFinishedRecipe(res, group, newIngredient, newResult);
+            }
+        }
+
+        @Override
+        public void addCondition(Object condition) {
+            this.conditions.add(condition);
+        }
+
+        @Override
+        public List<Object> getConditions() {
+            return conditions;
+        }
+    }
 
     // Textures
     @Override
