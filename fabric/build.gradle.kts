@@ -56,8 +56,10 @@ dependencies {
 //    modRuntimeOnly("curse.maven:trinkets-341284:5173501") // Backpacked
 //    modRuntimeOnly("curse.maven:monolib-968432:6123972") //v2.0.0 | More-Beautiful-Torches
 //    modRuntimeOnly("curse.maven:athena-841890:5176880") // Chipped
+    modRuntimeOnly("curse.maven:lithostitched-936015:8321753") // Regions-Unexplored
 
     //- OTHER LIBRARIES
+    modRuntimeOnly("de.marhali:json5-java:3.0.0")
 //    modRuntimeOnly("org.reflections:reflections:0.10.2") // Refurbished-Furniture
 //    modRuntimeOnly("com.jozufozu.flywheel:flywheel-fabric-${minecraft_version}:${flywheel_fabric_version}") // Create
 //    modRuntimeOnly("dev.isxander:yet-another-config-lib:$yacl_version-fabric") // Friends&Foes
@@ -90,7 +92,7 @@ dependencies {
     modCompileOnly("curse.maven:backpacked-352835:7500600")
     modCompileOnly("curse.maven:corail-pillar-266228:5613351")
     modCompileOnly("curse.maven:decorative-blocks-reborn-1327768:6897415")
-    modCompileOnly("curse.maven:farmers-delight-refabricated-993166:8088691")
+    modImplementation("curse.maven:farmers-delight-refabricated-993166:8088691")
     modCompileOnly("curse.maven:friends-and-foes-551364:8154503")
     modCompileOnly("curse.maven:handcrafted-538214:6330030") // Resourceful-Lib
     modCompileOnly("curse.maven:mighty-mail-902986:6542124")
@@ -159,7 +161,7 @@ dependencies {
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094") //!! NOT AVAILABLE //!! 1.20.1
     modCompileOnly("curse.maven:wooden-hoppers-406021:4796143") //!! 1.20.1
 
-    modCompileOnly("curse.maven:regions-unexplored-659110:8167272") // Forge-Config-API-Port
+    modImplementation("curse.maven:regions-unexplored-659110:8226388") // Lithostitched, json5
 
     // OTHER MAVENS
     modCompileOnly("maven.modrinth:stylish-stiles:1.1.1-1.21")
