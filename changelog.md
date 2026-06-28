@@ -12,6 +12,15 @@
 |                                                                                                                                   |
 
 ---
+## v2.9.24
+
+### FIXES:
+- **Every Compat** (C): Improved/Tweaked the texture generation for **Chipped** (Backported from 1.21) - [#1270](https://github.com/MehVahdJukaar/WoodGood/issues/1270)
+  
+### CHANGES:
+- **Woodworks** (NF): Tweaked the recipe generation to use Bamboo Recipes only for WoodType that are Bamboo-like
+
+---
 
 ## v2.9.23
 
