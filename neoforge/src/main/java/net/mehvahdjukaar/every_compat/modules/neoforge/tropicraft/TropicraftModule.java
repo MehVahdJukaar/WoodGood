@@ -43,8 +43,7 @@ public class TropicraftModule extends EveryCompatModule {
                 .addModelTransform(m -> m.replaceWithTextureFromChild("tropicraft:block/mangrove_planks",
                         "planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTab(getModTab(
-"tropicraft"))
+                .setTab(getModTab("tropicraft"))
                 .build();
         this.addEntry(boardwalks);
 
