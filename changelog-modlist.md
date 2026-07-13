@@ -92,6 +92,7 @@
 | Graveyard (finallion)                |   ❔    |
 | Just A Raft                          |   🟩   |
 | LieOnLion's More Chest Variant       |   🟩   |
+| Lepton (FORGE)                       |   🟡   |
 | Market Crates                        |   ❔    |
 | More Crafting Table For Forge        |   🟩   |
 | Mosaic Carpentry                     |   ❔    |
