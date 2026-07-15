@@ -6,7 +6,6 @@ import net.mehvahdjukaar.every_compat.EveryCompatCommon;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
-import net.mehvahdjukaar.every_compat.integration.neoforge.ECConfigSelectScreen;
 import net.mehvahdjukaar.every_compat.modules.neoforge.abnormal.BoatLoadModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.abnormal.WoodworksModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.absent_by_design.AbsentByDesignModule;
@@ -89,10 +88,6 @@ public class EveryCompatForge extends EveryCompatCommon {
 
         if (PlatHelper.getPhysicalSide().isClient()) {
             EveryCompatForgeClient.init();
-
-            if (PlatHelper.isModLoaded("configured")) {
-                ECConfigSelectScreen.registerConfigScreen(EveryCompat.MOD_ID, ECConfigSelectScreen::new);
-            }
         }
     }
 

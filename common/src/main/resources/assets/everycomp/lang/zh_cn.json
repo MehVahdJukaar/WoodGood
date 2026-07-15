@@ -5,16 +5,11 @@
   "tooltip.everycomp.wood_type": "木材种类：%s",
   "tooltip.everycomp.leaf_type": "树叶种类：%s",
   "container.everycomp.chest.name": "%s箱子",
-
   "block_type.twigs.table": "%s桌",
-
   "block_type.missingwilds.fallen_log": "倒下的%s原木",
-
   "block_type.regions_unexplored.branch": "%s树枝",
   "block_type.regions_unexplored.shrub": "%s灌木",
-
   "block_type.campchair.camp_chair": "%s野营凳",
-
   "block_type.another_furniture.table": "%s桌",
   "block_type.another_furniture.chair": "%s椅子",
   "block_type.another_furniture.shelf": "%s架子",
@@ -22,9 +17,7 @@
   "block_type.another_furniture.flower_box": "%s花箱",
   "block_type.another_furniture.drawer": "%s橱柜",
   "block_type.another_furniture.bench": "%s长椅",
-
   "block_type.barkcarpets.bark_carpet": "%s树皮地毯",
-
   "block_type.buildersaddition.arcade": "%s街机",
   "block_type.buildersaddition.bench": "%s长凳",
   "block_type.buildersaddition.bedside_table": "%s床头柜",
@@ -44,7 +37,6 @@
   "block_type.buildersaddition.support_bracket": "%s支撑架",
   "block_type.buildersaddition.table": "%s桌子",
   "block_type.buildersaddition.vertical_slab": "%s竖直台阶",
-
   "block_type.chipped.barred_door": "格栏式%s门",
   "block_type.chipped.beach_door": "海滨式%s门",
   "block_type.chipped.boarded_door": "格板式%s门",
@@ -65,7 +57,6 @@
   "block_type.chipped.tile_windowed_door": "带窗格%s门",
   "block_type.chipped.tiled_door": "方格式%s门",
   "block_type.chipped.windowed_door": "带窗%s门",
-
   "block_type.chipped.airy_trapdoor": "透窗式%s活板门",
   "block_type.chipped.barred_trapdoor": "横栏式%s活板门",
   "block_type.chipped.checkered_trapdoor": "棋盘格%s活板门",
@@ -89,7 +80,6 @@
   "block_type.chipped.warted_trapdoor": "嵌疣式%s活板门",
   "block_type.chipped.windowed_trapdoor": "带窗%s活板门",
   "block_type.chipped.woven_trapdoor": "编织式%s活板门",
-
   "block_type.chipped.bared_glass": "%s框附铁栏玻璃",
   "block_type.chipped.bordered_glass": "%s框玻璃",
   "block_type.chipped.circle_glass": "%s框圆纹玻璃",
@@ -101,7 +91,6 @@
   "block_type.chipped.snowflake_glass": "%s框雪花纹玻璃",
   "block_type.chipped.square_glass": "%s框方格纹玻璃",
   "block_type.chipped.woven_glass": "%s框编织纹玻璃",
-
   "block_type.chipped.bared_glass_pane": "%s框附铁栏玻璃板",
   "block_type.chipped.bordered_glass_pane": "%s框玻璃板",
   "block_type.chipped.circle_glass_pane": "%s框圆纹玻璃板",
@@ -113,14 +102,11 @@
   "block_type.chipped.snowflake_glass_pane": "%s框雪花纹玻璃板",
   "block_type.chipped.square_glass_pane": "%s框方格纹玻璃板",
   "block_type.chipped.woven_glass_pane": "%s框编织纹玻璃板",
-
   "block_type.chipped.barrel": "%s桶",
   "block_type.chipped.crate": "%s板条箱",
   "block_type.chipped.reinforced_crate": "%s加固板条箱",
-
   "block_type.chipped.torch": "%s火把",
   "block_type.chipped.wall_torch": "%s火把",
-
   "block_type.chipped.basket_woven_planks": "篮编纹%s板",
   "block_type.chipped.boxed_planks": "箱纹%s板",
   "block_type.chipped.brick_bond_planks": "砖式%s板",
@@ -159,7 +145,6 @@
   "block_type.chipped.vertically_railed_planks": "竖式包栏纹%s板",
   "block_type.chipped.whirlwind_planks": "风车纹%s板",
   "block_type.chipped.wickered_planks": "柳编纹%s板",
-
   "block_type.chipped.bundled_log": "捆扎%s原木",
   "block_type.chipped.center_cut_log": "中央切制%s原木",
   "block_type.chipped.damaged_log": "破损%s原木",
@@ -171,7 +156,6 @@
   "block_type.chipped.overgrown_log": "缠蔓%s原木",
   "block_type.chipped.planked_log": "饰板%s原木",
   "block_type.chipped.reinforced_log": "强化%s原木",
-
   "block_type.chipped.carved_stripped_log": "刻制去皮%s原木",
   "block_type.chipped.chipped_stripped_log": "凿制去皮%s原木",
   "block_type.chipped.d_sign_stripped_log": "D形刻记去皮%s原木",
@@ -188,9 +172,7 @@
   "block_type.chipped.sign_stripped_log": "刻记去皮%s原木",
   "block_type.chipped.stern_stripped_log": "苛刻刻徽去皮%s原木",
   "block_type.chipped.wise_stripped_log": "明智刻徽去皮%s原木",
-
   "block_type.graveyard.coffin": "%s棺材",
-
   "block_type.dawnoftimebuilder.beam": "%s梁",
   "block_type.dawnoftimebuilder.couch": "%s沙发",
   "block_type.dawnoftimebuilder.fancy_fence": "%s精致栅栏",
@@ -204,13 +186,11 @@
   "block_type.dawnoftimebuilder.support_beam": "%s带梁栈台",
   "block_type.dawnoftimebuilder.support_slab": "%s栈台",
   "block_type.dawnoftimebuilder.wall": "%s墙",
-
   "block_type.decorative_blocks.palisade": "%s实心栅栏",
   "block_type.decorative_blocks.support": "%s支架",
   "block_type.decorative_blocks.beam": "%s支撑柱",
   "block_type.decorative_blocks.seat": "%s板凳",
   "block_type.decorative_winter.snowy_palisade": "覆雪的%s实心栅栏",
-
   "block_type.dramaticdoors.short_door": "矮%s门",
   "block_type.dramaticdoors.tall_door": "高%s门",
   "block_type.dramaticdoors.tall_macaw_bark_glass_door": "高%s树皮玻璃门",
@@ -231,11 +211,8 @@
   "block_type.dramaticdoors.tall_macaw_stable_head_door": "高%s有开口马厩门",
   "block_type.dramaticdoors.tall_macaw_swamp_door": "高%s沼泽风格门",
   "block_type.dramaticdoors.tall_macaw_tropical_door": "高%s热带风格门",
-
   "block_type.farmersdelight.cabinet": "%s橱柜",
-
   "block_type.friendsandfoes.beehive": "%s蜂箱",
-
   "block_type.furnish.bedside_table": "%s床头柜",
   "block_type.furnish.bench": "%s长椅",
   "block_type.furnish.cabinet": "%s柜",
@@ -253,27 +230,22 @@
   "block_type.furnish.table": "%s桌",
   "block_type.furnish.wardrobe": "%s立柜",
   "block_type.furnish.bookshelf_chest": "%s书柜",
-
   "block_type.hearth_and_home.parquet": "%s镶木板",
   "block_type.hearth_and_home.sanded_wood": "磨砂%s",
   "block_type.hearth_and_home.trim": "%s框木板",
   "block_type.hearth_and_home.vertical_trim": "%s竖框木板",
   "block_type.hearth_and_home.lattice": "%s格栅",
-
   "block_type.mosaic_carpentry.mosaic": "%s马赛克",
   "block_type.mosaic_carpentry.mosaic_stairs": "%s马赛克楼梯",
   "block_type.mosaic_carpentry.mosaic_slab": "%s马赛克台阶",
-
   "block_type.pokecube_legends.distortic_planks": "扭曲%s板",
   "block_type.pokecube_legends.distortic_stairs": "扭曲%s楼梯",
   "block_type.pokecube_legends.distortic_slab": "扭曲%s台阶",
-
   "block_type.twilightforest.hollow_log": "空心%s原木",
   "block_type.twilightforest.hollow_log_vertical": "空心%s原木",
   "block_type.twilightforest.hollow_log_horizontal": "空心%s原木",
   "block_type.twilightforest.hollow_log_climbable": "空心%s原木",
   "block_type.twilightforest.banister": "%s栏杆",
-
   "block_type.quark.stripped_post": "去皮%s杆",
   "block_type.quark.post": "%s杆",
   "block_type.quark.hollow_log": "空心%s原木",
@@ -285,24 +257,19 @@
   "block_type.quark.bookshelf": "%s书架",
   "block_type.quark.vertical_planks": "竖纹%s板",
   "block_type.quark.vertical_slab": "%s竖直台阶",
-
   "block_type.architects_palette.railing": "%s扶手",
   "block_type.architects_palette.boards": "%s宽木板",
   "block_type.architects_palette.board_wall": "%s宽木板墙",
   "block_type.architects_palette.board_stairs": "%s宽木板楼梯",
   "block_type.architects_palette.board_slab": "%s宽木板台阶",
-
   "block_type.valhelsia_structures.cut_post": "切制%s桩",
   "block_type.valhelsia_structures.cut_stripped_post": "切制去皮%s桩",
   "block_type.valhelsia_structures.post": "%s桩",
   "block_type.valhelsia_structures.stripped_post": "去皮%s桩",
   "block_type.valhelsia_structures.bundled_posts": "%s桩捆",
   "block_type.valhelsia_structures.bundled_stripped_posts": "去皮%s桩捆",
-
   "block_type.backpacked.backpack_shelf": "%s背包架",
-
   "block_type.mctb.crafting_table": "%s工作台",
-
   "block_type.mcwbridges.rail_bridge": "%s铁轨桥",
   "block_type.mcwbridges.bridge_pier": "%s桥梁支架",
   "block_type.mcwbridges.log_bridge_middle": "%s桥",
@@ -311,7 +278,6 @@
   "block_type.mcwbridges.rope_bridge": "%s索桥",
   "block_type.mcwbridges.bridge_rope": "%s索桥",
   "block_type.mcwbridges.wired_fence": "%s铁丝栅栏",
-
   "block_type.mcwdoors.bark_glass_door": "%s树皮玻璃门",
   "block_type.mcwdoors.bamboo_door": "%s竹风门",
   "block_type.mcwdoors.barn_door": "%s谷仓门",
@@ -333,8 +299,6 @@
   "block_type.mcwdoors.tropical_door": "%s热带风格门",
   "block_type.mcwdoors.western_door": "%s西部百叶门",
   "block_type.mcwdoors.waffle_door": "%s华夫格门",
-
-
   "block_type.mcwfences.picket_fence": "%s篱栅",
   "block_type.mcwfences.stockade_fence": "%s栅栏墙",
   "block_type.mcwfences.hedge": "%s树篱",
@@ -342,7 +306,6 @@
   "block_type.mcwfences.wired_fence": "%s铁丝栅栏",
   "block_type.mcwfences.pyramid_gate": "%s斜板栅栏门",
   "block_type.mcwfences.highley_gate": "%s海利栅栏门",
-
   "block_type.mcwfurnitures.bookshelf": "%s书架",
   "block_type.mcwfurnitures.bookshelf_cupboard": "%s带橱柜书架",
   "block_type.mcwfurnitures.bookshelf_drawer": "%s带书架横排柜",
@@ -397,13 +360,10 @@
   "block_type.mcwfurnitures.table": "%s桌子",
   "block_type.mcwfurnitures.triple_drawer": "%s品字横排柜",
   "block_type.mcwfurnitures.wardrobe": "%s衣柜",
-
   "block_type.mcwlights.soul_tiki_torch": "%s灵魂提基火把",
   "block_type.mcwlights.tiki_torch": "%s提基火把",
   "block_type.mcwlights.ceiling_fan_light": "%s吊扇灯",
-
   "block_type.mcwpaths.planks_path": "%s板小径",
-
   "block_type.mcwroofs.attic_roof": "%s天窗屋顶",
   "block_type.mcwroofs.lower_roof": "%s平缓屋顶底端",
   "block_type.mcwroofs.planks_attic_roof": "%s板天窗屋顶",
@@ -418,7 +378,6 @@
   "block_type.mcwroofs.top_roof": "%s屋顶顶端",
   "block_type.mcwroofs.upper_lower_roof": "%s平缓屋顶顶端",
   "block_type.mcwroofs.upper_steep_roof": "%s陡峭屋顶顶端",
-
   "block_type.mcwtrpdoors.bark_trapdoor": "%s树皮活板门",
   "block_type.mcwtrpdoors.barn_trapdoor": "%s谷仓活板门",
   "block_type.mcwtrpdoors.barred_trapdoor": "%s栅纹活板门",
@@ -435,7 +394,6 @@
   "block_type.mcwtrpdoors.swamp_trapdoor": "%s沼泽活板门",
   "block_type.mcwtrpdoors.tropical_trapdoor": "%s热带活板门",
   "block_type.mcwtrpdoors.barrel_trapdoor": "%s桶式活板门",
-
   "block_type.mcwwindows.window": "%s可调窗户",
   "block_type.mcwwindows.window2": "%s长方格窗户",
   "block_type.mcwwindows.four_window": "%s四格窗户",
@@ -453,7 +411,6 @@
   "block_type.mcwwindows.pane_window": "%s嵌板窗户",
   "block_type.mcwwindows.stripped_pane_window": "去皮%s嵌板窗户",
   "block_type.mcwwindows.plank_pane_window": "%s板嵌板窗户",
-
   "block_type.mcwstairs.terrace_stairs": "%s单梁楼梯",
   "block_type.mcwstairs.skyline_stairs": "%s铺架楼梯",
   "block_type.mcwstairs.compact_stairs": "%s短阶楼梯",
@@ -462,10 +419,8 @@
   "block_type.mcwstairs.railing": "%s楼梯扶手",
   "block_type.mcwstairs.balcony": "%s露台扶手",
   "block_type.mcwstairs.platform": "%s平台",
-
   "block_type.create.window": "%s窗户",
   "block_type.create.window_pane": "%s窗户板",
-
   "block_type.cfm.window": "%s窗户",
   "block_type.cfm.backpack_shelf": "%s背包架",
   "block_type.cfm.bedside_cabinet": "%s床头柜",
@@ -523,9 +478,7 @@
   "block_type.cfm.upgraded_gate": "%s升级门",
   "block_type.cfm.stripped_upgraded_gate": "去皮%s升级门",
   "block_type.cfm.vertical_planks": "竖纹%s板",
-
   "block_type.mighty_mail.mail_box": "%s信箱",
-
   "block_type.refurbished_furniture.chair": "%s椅子",
   "block_type.refurbished_furniture.table": "%s桌子",
   "block_type.refurbished_furniture.storage_jar": "%s储物罐",
@@ -547,14 +500,11 @@
   "block_type.refurbished_furniture.cutting_board": "%s砧板",
   "block_type.refurbished_furniture.drawer": "%s抽屉",
   "block_type.refurbished_furniture.hedge": "%s树篱",
-
   "block_type.premium_wood.bookshelf": "%s书架",
   "block_type.premium_wood.crafting_table": "%s工作台",
   "block_type.premium_wood.framed_glass": "%s框玻璃",
-
   "block_type.productivebees.advanced_beehive": "高级%s蜂箱",
   "block_type.productivebees.expansion_box": "%s扩容盒",
-
   "block_type.projectbrazier.armrest_chair": "%s扶手椅",
   "block_type.projectbrazier.bench": "%s长凳",
   "block_type.projectbrazier.bottom_platform": "%s平台",
@@ -585,7 +535,6 @@
   "block_type.projectbrazier.top_platform_stairs": "%s台梯",
   "block_type.projectbrazier.vertical_lattice": "%s竖杆格栅",
   "block_type.projectbrazier.zipline_anchor": "%s滑索绳锚",
-
   "block_type.storagedrawers.full_drawers_1": "1x1%s抽屉",
   "block_type.storagedrawers.full_drawers_2": "1x2%s抽屉",
   "block_type.storagedrawers.full_drawers_4": "2x2%s抽屉",
@@ -593,11 +542,8 @@
   "block_type.storagedrawers.half_drawers_2": "1x2小型%s抽屉",
   "block_type.storagedrawers.half_drawers_4": "2x2小型%s抽屉",
   "block_type.storagedrawers.trim": "%s桥接方块",
-
   "block_type.shutter.shutter": "%s窗扇",
-
   "block_type.vct.crafting_table": "%s工作台",
-
   "block_type.xercamod.carved_1": "雕纹%s",
   "block_type.xercamod.carved_2": "雕纹%s",
   "block_type.xercamod.carved_3": "雕纹%s",
@@ -606,7 +552,6 @@
   "block_type.xercamod.carved_6": "雕纹%s",
   "block_type.xercamod.carved_7": "雕纹%s",
   "block_type.xercamod.carved_8": "雕纹%s",
-
   "block_type.woodworks.boards": "%s直纹板",
   "block_type.woodworks.bookshelf": "%s书架",
   "block_type.woodworks.chiseled_bookshelf": "%s雕纹书架",
@@ -615,16 +560,12 @@
   "block_type.woodworks.leaf_pile": "%s树叶堆",
   "block_type.woodworks.chest": "%s箱子",
   "block_type.woodworks.trapped_chest": "%s陷阱箱",
-
   "item_type.boatload.furnace_boat": "%s动力船",
   "item_type.boatload.large_boat": "%s大型船",
-
   "block_type.woodster.chiseled_bookshelf": "%s雕纹书架",
   "block_type.woodster.ladder": "%s梯子",
-
   "block_type.infinitybuttons.large_button": "%s大按钮",
   "block_type.infinitybuttons.plank_secret_button": "%s板隐蔽按钮",
-
   "block_type.workshop_for_handsome_adventurer.simple_table": "工作台（%s）",
   "block_type.workshop_for_handsome_adventurer.book_shelf_double": "书架（%s，双层）",
   "block_type.workshop_for_handsome_adventurer.book_shelf_minimal": "书架（%s，单层）",
@@ -637,20 +578,16 @@
   "block_type.workshop_for_handsome_adventurer.tool_rack_single": "工具架（%s，单排）",
   "block_type.workshop_for_handsome_adventurer.potion_shelf": "药水架（%s）",
   "item_type.workshop_for_handsome_adventurer.workstation_placer": "工作站（%s）",
-
   "item_type.buildersdelight.furniture_kit": "%s家具组件",
   "tooltip.everycomp.buildersdelight.furniture_kit": "放入切石机以制作家具",
-
   "block_type.buildersdelight.chair_1": "%s座椅",
   "tooltip.everycomp.buildersdelight.chair_1": "椅子",
   "block_type.buildersdelight.chair_2": "%s座椅",
   "tooltip.everycomp.buildersdelight.chair_2": "板凳",
-
   "block_type.buildersdelight.table_1": "%s桌子",
   "tooltip.everycomp.buildersdelight.table_1": "小桌",
   "block_type.buildersdelight.table_2": "%s桌子",
   "tooltip.everycomp.buildersdelight.table_2": "内嵌玻璃",
-
   "block_type.buildersdelight.planks_1": "%s板",
   "tooltip.everycomp.buildersdelight.planks_1": "竖纹",
   "block_type.buildersdelight.planks_2": "%s板",
@@ -665,7 +602,6 @@
   "tooltip.everycomp.buildersdelight.planks_6": "大型",
   "block_type.buildersdelight.planks_7": "%s板",
   "tooltip.everycomp.buildersdelight.planks_7": "扭结纹",
-
   "block_type.buildersdelight.stairs_1": "%s楼梯",
   "tooltip.everycomp.buildersdelight.stairs_1": "竖纹",
   "block_type.buildersdelight.stairs_2": "%s楼梯",
@@ -680,7 +616,6 @@
   "tooltip.everycomp.buildersdelight.stairs_6": "大型",
   "block_type.buildersdelight.stairs_7": "%s楼梯",
   "tooltip.everycomp.buildersdelight.stairs_7": "扭结纹",
-
   "block_type.buildersdelight.slab_1": "%s台阶",
   "tooltip.everycomp.buildersdelight.slab_1": "竖纹",
   "block_type.buildersdelight.slab_2": "%s台阶",
@@ -743,12 +678,9 @@
   "tooltip.everycomp.buildersdelight.glass_pane_7": "百叶窗",
   "block_type.buildersdelight.glass_pane_8": "%s框玻璃板",
   "tooltip.everycomp.buildersdelight.glass_pane_8": "绚丽",
-
   "block_type.lolmct.crafting_table": "%s工作台",
-
   "block_type.lolmcv.chest": "%s箱子",
   "block_type.lolmcv.trapped_chest": "%s陷阱箱",
-
   "block_type.variantvanillablocks.barrel": "%s桶",
   "block_type.variantvanillablocks.beehive": "%s蜂箱",
   "block_type.variantvanillablocks.bookshelf": "%s书架",
@@ -762,7 +694,6 @@
   "block_type.variantvanillablocks.lectern": "%s讲台",
   "block_type.variantvanillablocks.smithing_table": "%s锻造台",
   "block_type.variantvanillablocks.smoker": "%s烟熏炉",
-
   "block_type.handcrafted.bench": "%s长椅",
   "block_type.handcrafted.couch": "%s沙发",
   "block_type.handcrafted.chair": "%s椅子",
@@ -778,29 +709,22 @@
   "block_type.handcrafted.pillar_trim": "%s柱饰",
   "block_type.handcrafted.corner_trim": "%s檐饰",
   "block_type.handcrafted.dining_bench": "%s餐凳",
-
   "block_type.decoration_delight.counter": "%s柜台",
   "block_type.decoration_delight.counter_corner": "%s柜台角落",
   "block_type.decoration_delight.counter_bend": "%s柜台转角",
   "block_type.decoration_delight.countertop": "%s台面",
   "block_type.decoration_delight.stool": "%s凳子",
   "block_type.decoration_delight.mosaic": "%s马赛克",
-
   "block_type.absentbydesign.fence_log": "%s原木栅栏",
   "block_type.absentbydesign.wall_stripped_log": "去皮%s墙",
   "block_type.absentbydesign.wall_log": "%s墙",
   "block_type.absentbydesign.wall_planks": "%s板墙",
-
   "block_type.villagersplus.horticulturist_table": "%s花盆",
-
   "block_type.stylishstiles.stile": "%s带阶栅栏",
-
   "block_type.wilderwild.hollowed_log": "空心%s原木",
   "block_type.wilderwild.stripped_hollowed_log": "去皮空心%s原木",
-
   "block_type.beautifulcampfires.campfire": "%s营火",
   "block_type.beautifulcampfires.soul_campfire": "%s灵魂营火",
-
   "block_type.bbb.layer": "%s层板",
   "block_type.bbb.trim": "%s框沿板",
   "block_type.bbb.beam": "%s梁",
@@ -812,42 +736,31 @@
   "block_type.bbb.lantern": "%s灯笼",
   "block_type.bbb.ladder": "%s梯子",
   "block_type.bbb.wall": "%s墙",
-
   "block_type.bewitchment.poppet_shelf": "%s搁架",
   "item_type.bewitchment.bark": "%s树皮",
-
   "block_type.beautify.blinds": "%s百叶窗",
   "block_type.beautify.trellis": "%s花爬架",
   "block_type.beautify.picture_frame": "%s图片展示框",
-
   "block_type.oreberriesreplanted.vat": "%s踩莓桶",
-
   "block_type.redbits.large_button": "大型%s按钮",
-
   "block_type.woodenhoppers.hopper": "%s漏斗",
-
   "block_type.exlineawnings.awning": "%s顶棚",
   "block_type.exlineawnings.log_awning": "%s原木顶棚",
-
   "block_type.corail_pillar.pillar_log": "%s原木柱",
   "block_type.corail_pillar.small-pillar_log": "%s原木柱",
   "block_type.corail_pillar.pillar_planks": "%s板柱",
   "block_type.corail_pillar.small_pillar_planks": "%s板柱",
-
   "block_type.valhelsia_furniture.table": "%s桌子",
   "block_type.valhelsia_furniture.chair": "%s椅子",
   "block_type.valhelsia_furniture.hay_chair": "%s椅子",
   "block_type.valhelsia_furniture.stool": "%s凳子",
   "block_type.valhelsia_furniture.desk": "%s书桌",
   "block_type.valhelsia_furniture.desk_drawer": "%s带抽屉书桌",
-
   "block_type.functionalstorage.1": "%s抽屉（1x1）",
   "block_type.functionalstorage.2": "%s抽屉（1x2）",
   "block_type.functionalstorage.4": "%s抽屉（1x4）",
-
   "block_type.timber_frames.timber_frame_alpha": "%s框架",
   "block_type.timber_frames.timber_frame_beta": "%s框架",
-
   "block_type.redeco.polished_planks": "抛光%s板",
   "block_type.redeco.polished_stairs": "抛光%s楼梯",
   "block_type.redeco.polished_slab": "抛光%s台阶",
@@ -870,13 +783,11 @@
   "block_type.redeco.display_case": "%s展示柜",
   "block_type.redeco.sword_mount": "%s剑架",
   "block_type.redeco.pedestal": "%s展示台",
-
   "block_type.lightmanscurrency.auction_stand": "%s拍卖柜",
   "block_type.lightmanscurrency.bookshelf_trader": "%s书店柜",
   "block_type.lightmanscurrency.shelf": "%s货架",
   "block_type.lightmanscurrency.shelf_2x2": "%s2x2货架",
   "block_type.lightmanscurrency.card_display": "%s卡片展示柜",
-
   "block_type.clutter.mosaic": "%s马赛克",
   "block_type.clutter.mosaic_slab": "%s马赛克台阶",
   "block_type.clutter.mosaic_stairs": "%s马赛克楼梯",
@@ -892,15 +803,11 @@
   "block_type.clutter.trellis": "%s藤架",
   "block_type.clutter.wall_cupboard": "%s壁式橱柜",
   "block_type.clutter.cupboard": "%s橱柜",
-
   "block_type.tropicraft.boardwalk": "%s栈道",
-
   "item_type.justaraftmod.raft": "%s原木筏",
-
   "block_type.table_top_craft.chess": "%s棋盘",
   "block_type.table_top_craft.chess_timer": "%s棋钟",
   "block_type.table_top_craft.connect_four": "%s四子棋",
-  
   "block_type.excessive_building.crafting_table": "%s工作台",
   "block_type.excessive_building.vertical_stairs": "%s竖直楼梯",
   "block_type.excessive_building.chiseled": "雕纹%s板",
@@ -920,7 +827,6 @@
   "block_type.excessive_building.hollow_log": "空心%s原木",
   "block_type.excessive_building.hollow_stripped_log": "去皮空心%s原木",
   "block_type.excessive_building.decorative_shelf": "%s装饰架",
-  
   "block_type.more_beautiful_torches.log_torch": "%s原木火把",
   "block_type.more_beautiful_torches.log_soul_torch": "%s原木灵魂火把",
   "block_type.more_beautiful_torches.log_redstone_torch": "%s原木红石火把",
@@ -930,29 +836,19 @@
   "block_type.more_beautiful_torches.stripped_log_torch": "去皮%s原木火把",
   "block_type.more_beautiful_torches.stripped_log_soul_torch": "去皮%s原木灵魂火把",
   "block_type.more_beautiful_torches.stripped_log_redstone_torch": "去皮%s原木红石火把",
-
-
-
-
-
   "everycomp.configuration.general": "通用",
-
   "everycomp.configuration.creative_tab": "创造标签页",
   "everycomp.configuration.assets_depend_on_loaded_packs": "根据加载的资源包生成资源",
   "everycomp.configuration.save_debug_resources": "保存调试资源",
   "everycomp.configuration.mod_version_check_packet": "模组版本检查包",
   "everycomp.configuration.debug_packet": "调试包",
-
   "everycomp.configuration.tooltips": "提示文本",
-
   "everycomp.configuration.mod_origin_enabled": "启用来源模组",
   "everycomp.configuration.block_type_enabled": "启用方块种类",
   "everycomp.configuration.show_on_advanced_tooltips": "仅在启用高级提示框时显示",
-
-
-
   "everycomp.configuration.types": "材料种类",
   "everycomp.configuration.entries": "制品种类",
   "everycomp.configuration.wood_type": "木材种类",
-  "everycomp.configuration.leaves_type": "树叶种类"
+  "everycomp.configuration.leaves_type": "树叶种类",
+  "tag.items.everycomp.chipped_wooden_stuff": "Chipped Wooden Stuff"
 }

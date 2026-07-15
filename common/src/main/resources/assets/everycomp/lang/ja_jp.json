@@ -6,7 +6,6 @@
   "tooltip.everycomp.leaf_type": "葉の種類：%s",
   "gui.everycomp.error_screen.title": "Every Compatでエラーが発生しました",
   "gui.everycomp.error_screen.message": "以下の対応Modの「Every Compat」モジュールに読み込みエラーが発生しました。\nこれは通常、該当Modが最近互換性を損なう変更を含む更新を行ったため、今後の「Every Compat」の更新が必要となるか、いずれかのModのモジュールが古くなっていることを意味します。\nゲームは進行できませんが、これらの対応Modを以前のバージョンにダウングレードし、更新を待つことができます：%s",
-
   "everycomp.configuration.general": "一般",
   "everycomp.configuration.server_assets_generation_mode": "アセット生成モード",
   "everycomp.configuration.dynamic_assets_generation_mode": "アセット生成モード",
@@ -25,18 +24,11 @@
   "everycomp.configuration.module": "モジュール",
   "everycomp.configuration.other": "その他",
   "everycomp.configuration.include_all_wood_modules": "すべての木材モジュールを含める",
-
-
   "container.everycomp.chest.name": "%sチェスト",
-
-
   "block_type.twigs.table": "%sテーブル",
-
   "block_type.regions_unexplored.branch": "%s枝",
   "block_type.regions_unexplored.shrub": "%s低木",
-
   "block_type.campchair.camp_chair": "%s焚き火",
-
   "block_type.another_furniture.table": "%sテーブル",
   "block_type.another_furniture.chair": "%s椅子",
   "block_type.another_furniture.shelf": "%s棚",
@@ -44,10 +36,7 @@
   "block_type.another_furniture.flower_box": "%s花壇",
   "block_type.another_furniture.drawer": "%s引き出し",
   "block_type.another_furniture.bench": "%sベンチ",
-
   "block_type.barkcarpets.bark_carpet": "%s樹皮カーペット",
-
-
   "block_type.chipped.barred_door": "格子の%sドア",
   "block_type.chipped.beach_door": "砂浜風の%sドア",
   "block_type.chipped.boarded_door": "板張りの%sドア",
@@ -67,7 +56,6 @@
   "block_type.chipped.supported_door": "守られた%sドア",
   "block_type.chipped.tiled_door": "タイル状の%sドア",
   "block_type.chipped.windowed_door": "窓付きの%sドア",
-
   "block_type.chipped.airy_trapdoor": "風通しの良い%sトラップドア",
   "block_type.chipped.barred_trapdoor": "格子の%sトラップドア",
   "block_type.chipped.checkered_trapdoor": "市松模様の%sトラップドア",
@@ -91,7 +79,6 @@
   "block_type.chipped.warted_trapdoor": "ウォート入りの%sトラップドア",
   "block_type.chipped.windowed_trapdoor": "窓付きの%sトラップドア",
   "block_type.chipped.woven_trapdoor": "織り目模様の%sトラップドア",
-
   "block_type.chipped.bared_glass": "%s格子のガラス",
   "block_type.chipped.bordered_glass": "%s縁取りガラス",
   "block_type.chipped.circle_glass": "円形の%sガラス",
@@ -103,7 +90,6 @@
   "block_type.chipped.snowflake_glass": "%s雪の結晶のガラス",
   "block_type.chipped.square_glass": "四角い%sガラス",
   "block_type.chipped.woven_glass": "%s織り目模様のガラス",
-
   "block_type.chipped.bared_glass_pane": "%s格子のガラス板",
   "block_type.chipped.bordered_glass_pane": "%s縁取りガラス板",
   "block_type.chipped.circle_glass_pane": "円形の%sガラス板",
@@ -115,14 +101,11 @@
   "block_type.chipped.snowflake_glass_pane": "%s雪の結晶のガラス板",
   "block_type.chipped.square_glass_pane": "四角い%sガラス板",
   "block_type.chipped.woven_glass_pane": "%s織り目模様のガラス板",
-
   "block_type.chipped.barrel": "%s樽",
   "block_type.chipped.crate": "%s木箱",
   "block_type.chipped.reinforced_crate": "強化された%s樽",
-
   "block_type.chipped.torch": "%s松明",
   "block_type.chipped.wall_torch": "%s松明",
-
   "block_type.chipped.tile_windowed_door": "タイル窓付きの%sドア",
   "block_type.chipped.basket_woven_planks": "籠編み模様の%s板材",
   "block_type.chipped.boxed_planks": "箱型の%s板材",
@@ -162,7 +145,6 @@
   "block_type.chipped.vertically_railed_planks": "縦組みの%s板材",
   "block_type.chipped.whirlwind_planks": "旋風の%s板材",
   "block_type.chipped.wickered_planks": "編み込まれた%s板材",
-
   "block_type.chipped.bundled_log": "束ねられた%s原木",
   "block_type.chipped.center_cut_log": "中央を剥いだ%s原木",
   "block_type.chipped.damaged_log": "損傷した%s原木",
@@ -174,7 +156,6 @@
   "block_type.chipped.overgrown_log": "荒れ果てた%s原木",
   "block_type.chipped.planked_log": "板張りの%s原木",
   "block_type.chipped.reinforced_log": "強化された%s原木",
-
   "block_type.chipped.carved_stripped_log": "彫刻された樹皮を剥いだ%s原木",
   "block_type.chipped.chipped_stripped_log": "欠けた樹皮を剥いだ%s原木",
   "block_type.chipped.d_sign_stripped_log": "Dサイン入りの%s原木",
@@ -191,7 +172,6 @@
   "block_type.chipped.sign_stripped_log": "サイン入りの%s原木",
   "block_type.chipped.stern_stripped_log": "険しい樹皮を剥いだ%s原木",
   "block_type.chipped.wise_stripped_log": "賢い樹皮を剥いだ%s原木",
-
   "block_type.chipped.apple_leaves": "リンゴの%s葉",
   "block_type.chipped.cherry_leaves": "サクランボの%s葉",
   "block_type.chipped.frosted_leaves": "霜の降りた%s葉",
@@ -203,29 +183,22 @@
   "block_type.chipped.golden_leaves": "金の%s葉",
   "block_type.chipped.orange_leaves": "橙色の%s葉",
   "block_type.chipped.red_leaves": "赤色の%s葉",
-
   "block_type.graveyard.coffin": "%s棺桶",
-
   "block_type.decorative_blocks.palisade": "%s囲い",
   "block_type.decorative_blocks.support": "%s支え",
   "block_type.decorative_blocks.beam": "%s梁",
   "block_type.decorative_blocks.seat": "%s座席",
   "block_type.decorative_winter.snowy_palisade": "積雪した%s囲い",
-
   "block_type.farmersdelight.cabinet": "%s戸棚",
-
   "block_type.friendsandfoes.beehive": "%s養蜂箱",
-
   "block_type.mosaic_carpentry.mosaic": "%s板細工",
   "block_type.mosaic_carpentry.mosaic_stairs": "%s板細工の階段",
   "block_type.mosaic_carpentry.mosaic_slab": "%s板細工のハーフブロック",
-
   "block_type.twilightforest.hollow_log": "空洞の%s原木",
   "block_type.twilightforest.hollow_log_vertical": "空洞の%s原木",
   "block_type.twilightforest.hollow_log_horizontal": "空洞の%s原木",
   "block_type.twilightforest.hollow_log_climbable": "空洞の%s原木",
   "block_type.twilightforest.banister": "%s手すり",
-
   "block_type.quark.stripped_post": "樹皮を剥いだ%s杭",
   "block_type.quark.post": "%s杭",
   "block_type.quark.hollow_log": "空洞の%s原木",
@@ -237,9 +210,7 @@
   "block_type.quark.bookshelf": "%s本棚",
   "block_type.quark.vertical_planks": "%s縦板材",
   "block_type.quark.vertical_slab": "%s縦ハーフブロック",
-
   "block_type.mctb.crafting_table": "%s作業台",
-
   "block_type.mcwbridges.rail_bridge": "%s鉄道橋",
   "block_type.mcwbridges.bridge_pier": "%s橋脚",
   "block_type.mcwbridges.log_bridge_middle": "%s橋",
@@ -248,7 +219,6 @@
   "block_type.mcwbridges.rope_bridge": "%sロープ橋",
   "block_type.mcwbridges.bridge_rope": "%sロープ橋",
   "block_type.mcwbridges.wired_fence": "%sワイヤーフェンス",
-
   "block_type.mcwdoors.bark_glass_door": "%s樹皮のガラス戸",
   "block_type.mcwdoors.bamboo_door": "網目入りの%sドア",
   "block_type.mcwdoors.barn_door": "納屋風の%sドア",
@@ -271,7 +241,6 @@
   "block_type.mcwdoors.western_door": "西部風の%sドア",
   "block_type.mcwdoors.waffle_door": "ワッフル柄の%sドア",
   "block_type.mcwdoors.whispering_door": "ささやき声の%sドア",
-
   "block_type.mcwfences.picket_fence": "%sピケットフェンス",
   "block_type.mcwfences.stockade_fence": "%s防護柵",
   "block_type.mcwfences.hedge": "%s生け垣",
@@ -279,13 +248,10 @@
   "block_type.mcwfences.wired_fence": "%s有刺鉄線付きフェンス",
   "block_type.mcwfences.pyramid_gate": "%s三角ゲート",
   "block_type.mcwfences.highley_gate": "%sハイリーゲート",
-
   "block_type.mcwlights.soul_tiki_torch": "%s魂のティキトーチ",
   "block_type.mcwlights.tiki_torch": "%sティキトーチ",
   "block_type.mcwlights.ceiling_fan_light": "%sシーリングファンライト",
-
   "block_type.mcwpaths.planks_path": "%s板材の道",
-
   "block_type.mcwtrpdoors.bark_trapdoor": "%s樹皮のトラップドア",
   "block_type.mcwtrpdoors.barn_trapdoor": "納屋風の%sトラップドア",
   "block_type.mcwtrpdoors.barred_trapdoor": "格子状の%sトラップドア",
@@ -303,43 +269,31 @@
   "block_type.mcwtrpdoors.tropical_trapdoor": "熱帯風の%sトラップドア",
   "block_type.mcwtrpdoors.barrel_trapdoor": "樽風の%sトラップドア",
   "block_type.mcwtrpdoors.whispering_trapdoor": "ささやき声の%sトラップドア",
-
-  "block_type.mcwstairs.terrace_stairs":"%sテラスの階段",
-  "block_type.mcwstairs.skyline_stairs":"%s天空階段",
-  "block_type.mcwstairs.compact_stairs":"%s小型階段",
-  "block_type.mcwstairs.bulk_stairs":"%s嵩上げ階段",
-  "block_type.mcwstairs.loft_stairs":"%sロフトの階段",
-  "block_type.mcwstairs.railing":"%s階段の手すり",
-  "block_type.mcwstairs.balcony":"%sバルコニー",
-  "block_type.mcwstairs.platform":"%s床板",
-
+  "block_type.mcwstairs.terrace_stairs": "%sテラスの階段",
+  "block_type.mcwstairs.skyline_stairs": "%s天空階段",
+  "block_type.mcwstairs.compact_stairs": "%s小型階段",
+  "block_type.mcwstairs.bulk_stairs": "%s嵩上げ階段",
+  "block_type.mcwstairs.loft_stairs": "%sロフトの階段",
+  "block_type.mcwstairs.railing": "%s階段の手すり",
+  "block_type.mcwstairs.balcony": "%sバルコニー",
+  "block_type.mcwstairs.platform": "%s床板",
   "block_type.create.window": "%s窓",
   "block_type.create.window_pane": "%s板窓",
-
   "block_type.mighty_mail.mail_box": "%s郵便受け",
-
   "block_type.premium_wood.bookshelf": "%s本棚",
   "block_type.premium_wood.crafting_table": "%s作業台",
   "block_type.premium_wood.framed_glass": "%s枠付きガラス",
-
   "block_type.shutter.shutter": "%s雨戸",
-
   "block_type.vct.crafting_table": "%s作業台",
-
   "item_type.boatload.furnace_boat": "かまど付きの%sボート",
   "item_type.boatload.large_boat": "大きな%sボート",
-
   "block_type.woodster.chiseled_bookshelf": "%s模様入りの本棚",
   "block_type.woodster.ladder": "%sはしご",
-
   "block_type.infinitybuttons.large_button": "%s大きなボタン",
   "block_type.infinitybuttons.plank_secret_button": "%s板材の隠しボタン",
-
   "block_type.lolmct.crafting_table": "%s作業台",
-
   "block_type.lolmcv.chest": "%sチェスト",
   "block_type.lolmcv.trapped_chest": "%sトラップチェスト",
-
   "block_type.variantvanillablocks.barrel": "%s樽",
   "block_type.variantvanillablocks.beehive": "%s養蜂箱",
   "block_type.variantvanillablocks.bookshelf": "%s本棚",
@@ -353,7 +307,6 @@
   "block_type.variantvanillablocks.lectern": "%s書見台",
   "block_type.variantvanillablocks.smithing_table": "%s鍛冶台",
   "block_type.variantvanillablocks.smoker": "%s燻製器",
-
   "block_type.handcrafted.bench": "%sベンチ",
   "block_type.handcrafted.couch": "%sソファー",
   "block_type.handcrafted.chair": "%s椅子",
@@ -369,37 +322,26 @@
   "block_type.handcrafted.pillar_trim": "%s付柱",
   "block_type.handcrafted.corner_trim": "%s柱頭",
   "block_type.handcrafted.dining_bench": "%sダイニングベンチ",
-
   "block_type.absentbydesign.fence_log": "%s原木のフェンス",
   "block_type.absentbydesign.wall_stripped_log": "樹皮を剥いだ%s塀",
   "block_type.absentbydesign.wall_log": "%s木の塀",
   "block_type.absentbydesign.wall_planks": "%s塀",
-
   "block_type.villagersplus.horticulturist_table": "%s花桶",
-
   "block_type.wilderwild.hollowed_log": "空洞の%s原木",
   "block_type.wilderwild.stripped_hollowed_log": "樹皮を剥いだ空洞の%s原木",
-
   "block_type.beautifulcampfires.campfire": "%s焚き火",
   "block_type.beautifulcampfires.soul_campfire": "%s魂の焚き火",
-
   "block_type.redbits.large_button": "大きな%sボタン",
-
   "block_type.woodenhoppers.hopper": "%sホッパー",
-
   "block_type.exlineawnings.awning": "%s日除け",
   "block_type.exlineawnings.log_awning": "%s原木の日除け",
-
   "block_type.corail_pillar.pillar_log": "%s原木の柱",
   "block_type.corail_pillar.small-pillar_log": "%s原木の柱",
   "block_type.corail_pillar.pillar_planks": "%s板材の柱",
   "block_type.corail_pillar.small_pillar_planks": "%s板材の柱",
-
   "block_type.timber_frames.timber_frame_alpha": "%s木枠",
   "block_type.timber_frames.timber_frame_beta": "%s木枠",
-
   "item_type.justaraftmod.raft": "%s原木のいかだ",
-
   "block_type.excessive_building.crafting_table": "%s作業台",
   "block_type.excessive_building.vertical_stairs": "%s垂直ハーフブロック",
   "block_type.excessive_building.chiseled": "模様入りの%s板材",
@@ -419,7 +361,6 @@
   "block_type.excessive_building.hollow_log": "空洞の%s原木",
   "block_type.excessive_building.hollow_stripped_log": "空洞の樹皮を剥いだ%s原木",
   "block_type.excessive_building.decorative_shelf": "%s飾り棚",
-
   "block_type.more_beautiful_torches.log_torch": "%s原木の松明",
   "block_type.more_beautiful_torches.log_soul_torch": "%s原木の魂の松明",
   "block_type.more_beautiful_torches.log_redstone_torch": "%s原木のレッドストーントーチ",
@@ -429,7 +370,6 @@
   "block_type.more_beautiful_torches.stripped_log_torch": "樹皮を剥いだ%s原木の松明",
   "block_type.more_beautiful_torches.stripped_log_soul_torch": "樹皮を剥いだ%s原木の魂の松明",
   "block_type.more_beautiful_torches.stripped_log_redstone_torch": "樹皮を剥いだ%s原木のレッドストーントーチ",
-
   "block_type.blocksplus.cracked_planks": "ひび割れた%s板材",
   "block_type.blocksplus.mossy_planks": "苔むした%s板材",
   "block_type.blocksplus.crafting_table": "%s作業台",
@@ -444,7 +384,6 @@
   "block_type.blocksplus.cracked_mosaic": "ひび割れた%s板細工",
   "block_type.blocksplus.mossy_mosaic": "苔むした%s板細工",
   "block_type.blocksplus.mosaic_pressure_plate": "%s板細工の感圧板",
-
   "block_type.storagedelight.drawer": "%s引き出し",
   "block_type.storagedelight.drawer_with_door": "扉付きの%s引き出し",
   "block_type.storagedelight.drawer_with_books": "本棚付きの%s引き出し",
@@ -453,17 +392,14 @@
   "block_type.storagedelight.glass_cabinet": "%sガラス戸棚",
   "block_type.storagedelight.cabinet_with_glass_doors": "ガラス扉の%s戸棚",
   "block_type.storagedelight.single_door_cabinet": "%s片扉戸棚",
-
   "car_variant.%s": "%s",
   "item_type.car.license_plate_holder": "%s免許ホルダー",
   "item_type.car.bumper": "%sバンパー",
   "item_type.car.body": "%s車体",
   "item_type.car.big_body": "大きな%s車体",
-
   "block_type.youkaishomecoming.handrail": "%s手すり",
   "block_type.youkaishomecoming.dining_table": "%sダイニングテーブル",
   "block_type.youkaishomecoming.dining_chair": "%sダイニングチェアー",
-
   "block_type.blockus.herringbone_planks": "網目模様の%s板材",
   "block_type.blockus.mossy_planks": "苔むした%s板材",
   "block_type.blockus.mossy_slab": "苔むした%sハーフブロック",
@@ -480,6 +416,6 @@
   "block_type.blockus.stripped_post": "樹皮を剥いだ%s杭",
   "block_type.blockus.post": "%s杭",
   "block_type.blockus.hedge": "%s生け垣",
-
-  "block_type.copperagebackport.shelf": "%s棚"
+  "block_type.copperagebackport.shelf": "%s棚",
+  "tag.items.everycomp.chipped_wooden_stuff": "Chipped Wooden Stuff"
 }
