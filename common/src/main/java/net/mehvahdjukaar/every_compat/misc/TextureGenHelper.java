@@ -21,8 +21,8 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 
+import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.Callable;
 
 //Sprite Helper is too big
 public class TextureGenHelper {
@@ -49,7 +49,7 @@ public class TextureGenHelper {
             Palette globalPalette = Palette.empty();
 
             Multimap<ResourceLocation, TextureInfo> infoPerTextures = ArrayListMultimap.create();
-            TaskRunnerWithFaliureCollection failures = TaskRunnerWithFaliureCollection.active();
+            TaskRunnerWithFailureCollection failures = TaskRunnerWithFailureCollection.active();
 
             /// Adding multiple textures from one block into Respriter without/with mask & infoPerTextures
             for (TextureInfo textureInfo : textureInfos) {
@@ -94,9 +94,7 @@ public class TextureGenHelper {
                             }
                         }
                     }
-                } catch (UnsupportedOperationException e) {
-                    failures.record("source texture", () -> String.valueOf(textureInfo), e);
-                } catch (Exception e) {
+                } catch (IOException e) {
                     failures.record("source texture", () -> String.valueOf(textureInfo), e);
                 }
             }
@@ -120,7 +118,7 @@ public class TextureGenHelper {
 
                         /// Adding the textures to the resource
                         for (var info : infoPerTextures.get(oldTextureId)) {
-                            failures.runSafely("block texture", () -> blockId + " (" + info.texture() + ")", (Callable<Void>) () -> {
+                            failures.runSafely("block texture", () -> blockId + " (" + info.texture() + ")", () -> {
                                 // return the texture of: WoodType: Planks, StoneType: stone, LeavesType: leaves
                                 var pal = info.paletteStrategy().getPaletteAndAnimation(blockType, manager);
                                 McMetaFile targetAnimation = pal.animation();
@@ -130,7 +128,7 @@ public class TextureGenHelper {
                                 int oldSize = targetPalette.getFirst().size();
 
                                 if (oldSize != targetPalette.getFirst().size()) {
-                                    EveryCompat.LOGGER.error("TextureGenHelper Failture: {} with {}", oldTextureId, pal.id());
+                                    EveryCompat.LOGGER.error("TextureGenHelper Failure: {} with {}", oldTextureId, pal.id());
                                     throw new RuntimeException("This should not happen. A palette of size 0 was found");
                                 }
 
@@ -188,7 +186,7 @@ public class TextureGenHelper {
         try (TextureImage overlayTexture = TextureImage.open(manager, overlayLocation)) {
             TextureOps.applyOverlay(image, overlayTexture);
         } catch (Exception e) {
-            TaskRunnerWithFaliureCollection.active().record("texture overlay", overlayLocation::toString, e);
+            TaskRunnerWithFailureCollection.active().record("texture overlay", overlayLocation::toString, e);
         }
     }
 

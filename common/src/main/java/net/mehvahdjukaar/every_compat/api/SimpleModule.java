@@ -1,10 +1,10 @@
 package net.mehvahdjukaar.every_compat.api;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFaliureCollection;
 import net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
+import net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
@@ -120,7 +120,7 @@ public class SimpleModule extends CompatModule {
                 e.generateTags(this, manager, sink);
 
             } catch (Exception ex) {
-                TaskRunnerWithFaliureCollection.active().record("server entry set", () -> String.valueOf(e), ex);
+                TaskRunnerWithFailureCollection.active().record("server entry set", () -> String.valueOf(e), ex);
                 if (PlatHelper.isDev()) throw ex;
             }
         }));
@@ -135,7 +135,7 @@ public class SimpleModule extends CompatModule {
                     entry.generateModels(this, manager, sink);
 
                 } catch (Exception ex) {
-                    TaskRunnerWithFaliureCollection.active().record("client entry set", () -> String.valueOf(entry), ex);
+                    TaskRunnerWithFailureCollection.active().record("client entry set", () -> String.valueOf(entry), ex);
                     if (PlatHelper.isDev()) throw ex;
                 }
             });

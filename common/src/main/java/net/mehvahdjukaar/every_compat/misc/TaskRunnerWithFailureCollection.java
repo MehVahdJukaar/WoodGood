@@ -7,36 +7,36 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 import java.util.concurrent.Callable;
+import java.util.function.Supplier;
 
 /**
  * Collects resource-generation failures during a single generation pass.
  * Logs each distinct cause once, then summarizes repeated occurrences.
  */
-public final class TaskRunnerWithFaliureCollection {
+public final class TaskRunnerWithFailureCollection {
 
-    private static final ThreadLocal<TaskRunnerWithFaliureCollection> ACTIVE = new ThreadLocal<>();
-    private static final TaskRunnerWithFaliureCollection DUMMY = new TaskRunnerWithFaliureCollection(true);
+    private static final ThreadLocal<TaskRunnerWithFailureCollection> ACTIVE = new ThreadLocal<>();
+    private static final TaskRunnerWithFailureCollection DUMMY = new TaskRunnerWithFailureCollection(true);
 
     private final boolean disabled;
     private final Map<String, FailureGroup> groups = new LinkedHashMap<>();
 
-    private TaskRunnerWithFaliureCollection() {
+    private TaskRunnerWithFailureCollection() {
         this(false);
     }
 
-    private TaskRunnerWithFaliureCollection(boolean disabled) {
+    private TaskRunnerWithFailureCollection(boolean disabled) {
         this.disabled = disabled;
     }
 
-    public static TaskRunnerWithFaliureCollection active() {
-        TaskRunnerWithFaliureCollection collector = ACTIVE.get();
+    public static TaskRunnerWithFailureCollection active() {
+        TaskRunnerWithFailureCollection collector = ACTIVE.get();
         return collector != null ? collector : DUMMY;
     }
 
     public static void run(String passName, Runnable action) {
-        TaskRunnerWithFaliureCollection collector = new TaskRunnerWithFaliureCollection();
+        TaskRunnerWithFailureCollection collector = new TaskRunnerWithFailureCollection();
         ACTIVE.set(collector);
         try {
             action.run();

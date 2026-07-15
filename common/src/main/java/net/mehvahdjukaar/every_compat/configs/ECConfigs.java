@@ -61,12 +61,19 @@ public class ECConfigs {
                             - CACHED_ZIPPED: create a ZIP folder via .minecraft/dynamic-resource-pack-cache
                             - ALWAYS: Will always generate the assets & will be stored in memory. There will be no cache folder""")
                     .define("dynamic_assets_generation_mode", GenMode.ALWAYS);
+            USE_EXTERNAL_RESOURCE_PACK = builder.comment("""
+                        Enable Every-Compat to base textures off external Resource Packs rather than mod's default textures.
+                        ATTENTION: There are some Resource Packs that won't work well with Every-Compat, which is why this
+                        option is off by default. Disable if there are missing textures for blocks.
+                        """)
+                    .define("use_external_resource_pack", false);
             builder.pop();
 
             CLIENT_SPEC = builder.build();
             CLIENT_SPEC.forceLoad(); //manually load early
         } else {
             CLIENT_GENERATION_MODE = () -> GenMode.ALWAYS;
+            USE_EXTERNAL_RESOURCE_PACK = () -> false;
         }
 
         ConfigBuilder builder = ConfigBuilder.create(EveryCompat.MOD_ID, ConfigType.COMMON);
@@ -109,14 +116,6 @@ public class ECConfigs {
                 .define("block_type_enabled", true);
         TOOLTIPS_ADVANCED = builder.comment("Only show on advanced settings")
                 .define("show_on_advanced_tooltips", false);
-
-        USE_EXTERNAL_RESOURCE_PACK = builder.comment("""
-                        Enable Every-Compat to base textures off external Resource Packs rather than mod's default textures.
-                        ATTENTION: There are some Resource Packs that won't work well with Every-Compat, which is why this
-                        option is off by default. Disable if there are missing textures for blocks.
-                        """)
-                .define("use_external_resource_pack", false);
-
         builder.pop();
 
 

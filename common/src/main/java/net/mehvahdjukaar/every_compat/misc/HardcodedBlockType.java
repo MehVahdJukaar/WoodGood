@@ -4,6 +4,7 @@ import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+import net.mehvahdjukaar.moonlight.api.util.Utils;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -286,4 +287,8 @@ public class HardcodedBlockType {
             "oak", "spruce", "birch", "jungle", "acacia", "dark_oak", "mangrove", "cherry", "bamboo", "crimson", "warped", "azalea", "flowering_azalea"
     );
 
+    public static boolean IsBambooLike(WoodType woodType) {
+        String name = Utils.getID(woodType.log).getPath();
+        return name.contains("bamboo") || name.contains("_block");
+    }
 }

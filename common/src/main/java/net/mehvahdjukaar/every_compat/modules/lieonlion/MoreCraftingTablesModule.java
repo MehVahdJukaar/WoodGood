@@ -1,6 +1,4 @@
 package net.mehvahdjukaar.every_compat.modules.lieonlion;
-// DISABLED: More Crafting Tables (LieOnLion) has no 1.21.1 NeoForge release on CurseForge
-/*
 
 import io.github.lieonlion.lolmct.block.MoreCraftingTableBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -17,7 +15,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 
-//SUPPORT: FABRIC-v1.2.8+ | NEOFORGE-v1.2.9+
+///SUPPORT: FABRIC-v1.2.8+ | NEOFORGE-v1.2.9+
 public class MoreCraftingTablesModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> craftingTable;
@@ -43,4 +41,3 @@ public class MoreCraftingTablesModule extends EveryCompatModule {
         this.addEntry(craftingTable);
     }
 }
-*/

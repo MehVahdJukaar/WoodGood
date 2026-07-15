@@ -56,8 +56,10 @@ dependencies {
 //    modRuntimeOnly("curse.maven:trinkets-341284:5173501") // Backpacked
 //    modRuntimeOnly("curse.maven:monolib-968432:6123972") //v2.0.0 | More-Beautiful-Torches
 //    modRuntimeOnly("curse.maven:athena-841890:5176880") // Chipped
+    modRuntimeOnly("curse.maven:lithostitched-936015:8321753") // Regions-Unexplored
 
     //- OTHER LIBRARIES
+//    modRuntimeOnly("de.marhali:json5-java:3.0.0") // Regions-Unexplored
 //    modRuntimeOnly("org.reflections:reflections:0.10.2") // Refurbished-Furniture
 //    modRuntimeOnly("com.jozufozu.flywheel:flywheel-fabric-${minecraft_version}:${flywheel_fabric_version}") // Create
 //    modRuntimeOnly("dev.isxander:yet-another-config-lib:$yacl_version-fabric") // Friends&Foes
@@ -96,6 +98,7 @@ dependencies {
     modCompileOnly("curse.maven:mighty-mail-902986:6542124")
     modCompileOnly("curse.maven:missing-wilds-622590:6302231")
     modCompileOnly("curse.maven:more-chest-variants-lieonlion-858032:5476664") // Quad - LieOnLion
+    modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5473304") // Quad - LieOnLion
     modCompileOnly("curse.maven:refurbished-furniture-897116:7473565")
     modCompileOnly("curse.maven:storage-drawers-223852:6967726")
     modCompileOnly("curse.maven:table-top-craft-fabric-729535:5319819") //@RLM: exp4j //!! 1.20.1
@@ -116,7 +119,6 @@ dependencies {
 //    modRuntimeOnly("curse.maven:handcrafted-538214:5617253")
 //    modRuntimeOnly("curse.maven:hearth-and-home-849364:4828281") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:more-beautiful-torches-860325:5609745") // MonoLib
-//    modRuntimeOnly("curse.maven:more-crafting-tables-lieonlion-913586:5473304") // Quad - LieOnLion
 //    modRuntimeOnly("curse.maven:rechiseled-558998:7687483") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ]
 //    modCompileOnly("curse.maven:villagersplus-fabric-809542:4996993") //!! 1.20.1
 
@@ -159,7 +161,7 @@ dependencies {
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094") //!! NOT AVAILABLE //!! 1.20.1
     modCompileOnly("curse.maven:wooden-hoppers-406021:4796143") //!! 1.20.1
 
-    modCompileOnly("curse.maven:regions-unexplored-659110:8167272") // Forge-Config-API-Port
+    modCompileOnly("curse.maven:regions-unexplored-659110:8226388") // Lithostitched, json5
 
     // OTHER MAVENS
     modCompileOnly("maven.modrinth:stylish-stiles:1.1.1-1.21")

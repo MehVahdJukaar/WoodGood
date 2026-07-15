@@ -50,7 +50,7 @@ public class ResourcesUtils {
 
         if (blocks.isEmpty()) return;
 
-        TaskRunnerWithFaliureCollection failures = TaskRunnerWithFaliureCollection.active();
+        TaskRunnerWithFailureCollection failures = TaskRunnerWithFailureCollection.active();
 
         //finds one entry to grab the baseType equivalent (oak, stone, iron or amethyst)
         var first = blocks.entrySet().stream().findFirst().get();
@@ -142,7 +142,7 @@ public class ResourcesUtils {
 
         if (items.isEmpty()) return;
 
-        TaskRunnerWithFaliureCollection failures = TaskRunnerWithFaliureCollection.active();
+        TaskRunnerWithFailureCollection failures = TaskRunnerWithFailureCollection.active();
 
         //finds one entry. used so we can grab the oak equivalent
         var first = items.entrySet().stream().findFirst().get();
@@ -247,7 +247,7 @@ public class ResourcesUtils {
             if (ModEntriesConfigs.isEntryEnabled(wood, value)) {
                 ResourceLocation blockId = Utils.getID(value);
                 for (var res : original) {
-                    TaskRunnerWithFaliureCollection.active().runSafely("block resource", () -> blockId + " (" + res.location + ")", () -> {
+                    TaskRunnerWithFailureCollection.active().runSafely("block resource", () -> blockId + " (" + res.location + ")", () -> {
                         StaticResource newRes = modifier.transform(res, blockId, wood);
 
                         Preconditions.checkArgument(newRes.location != res.location,
@@ -294,7 +294,7 @@ public class ResourcesUtils {
 
             if (ModEntriesConfigs.isEntryEnabled(blockType, i)) {
                 ResourceLocation itemId = Utils.getID(i);
-                TaskRunnerWithFaliureCollection.active().runSafely("recipe", () -> itemId + " (" + baseRecipe + ")", () -> {
+                TaskRunnerWithFailureCollection.active().runSafely("recipe", () -> itemId + " (" + baseRecipe + ")", () -> {
                     //check for disabled ones. Will actually crash if its null since vanilla recipe builder expects a non-null one
                     ResourceLocation blockId = RecipeBuilder.getDefaultRecipeId(i);
                     String baseRecipePath = baseRecipe.getPath();

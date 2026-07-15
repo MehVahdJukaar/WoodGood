@@ -6,6 +6,20 @@ common {
     accessWidener()
 }
 
+val modId: String = property("mod_id").toString()
+val modVersion: String = property("mod_version").toString()
+tasks.named<Jar>("jar") {
+    archiveBaseName.set(modId)
+    archiveVersion.set(modVersion)
+    archiveClassifier.set("common")
+}
+tasks.named<Jar>("sourcesJar") {
+    from(sourceSets.main.get().allSource)
+    archiveBaseName.set(modId)
+    archiveVersion.set(modVersion)
+    archiveClassifier.set("common-sources")
+}
+
 //val path = System.getenv("REPOS21_1").toString()
 dependencies {
 
@@ -65,7 +79,7 @@ dependencies {
     modCompileOnly("curse.maven:mighty-mail-902986:6542124")
     modCompileOnly("curse.maven:more-beautiful-torches-860325:5609745") // MonoLib
     modCompileOnly("curse.maven:more-chest-variants-lieonlion-858032:7310871")
-    modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5330971")
+    modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5520190")
     modCompileOnly("curse.maven:refurbished-furniture-897116:7473565") // Framework
 //    modCompileOnly("curse.maven:rechiseled-558998:7687483") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ] //!! Not created yet - do not import it because fabric-loom is v1.14+
     modCompileOnly("curse.maven:storage-drawers-223852:6995432") // 1.21.1-13.11.4 NeoForge

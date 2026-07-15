@@ -4,7 +4,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
-import net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFaliureCollection;
+import net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.IProgressTracker;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicClientResourceProvider;
@@ -64,7 +64,7 @@ public class ClientDynamicResourcesHandler extends DynamicClientResourceProvider
 
     @Override
     public void regenerateDynamicAssets(Consumer<ResourceGenTask> executor) {
-        TaskRunnerWithFaliureCollection.run("Client dynamic resources generation", () -> {
+        TaskRunnerWithFailureCollection.run("Client dynamic resources generation", () -> {
             PaletteStrategies.clearCache();
 
             List<ResourceGenTask> tasks = new ArrayList<>();
@@ -76,7 +76,7 @@ public class ClientDynamicResourcesHandler extends DynamicClientResourceProvider
 
             //submit tasks in batches. to do so split that list in sizes of that batchSize then submit a task to the executor where that list is iterated and executed
             EveryCompat.LOGGER.info("Starting dynamic resources generation tasks: {} in batches of {}", tasks.size(), batchSize);
-            TaskRunnerWithFaliureCollection failures = TaskRunnerWithFaliureCollection.active();
+            TaskRunnerWithFailureCollection failures = TaskRunnerWithFailureCollection.active();
             for (int i = 0; i < tasks.size(); i += batchSize) {
                 int batchStart = i;
                 int end = Math.min(i + batchSize, tasks.size());
