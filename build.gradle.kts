@@ -1,8 +1,8 @@
 plugins {
-    id("com.possible-triangle.core")
-    id("com.possible-triangle.common") apply false
-    id("com.possible-triangle.fabric") apply false
-    id("com.possible-triangle.neoforge") apply false
+    id("com.possible-triangle.core") version "1.4.213"
+    id("com.possible-triangle.common") version "1.4.213" apply false
+    id("com.possible-triangle.fabric") version "1.4.213" apply false
+    id("com.possible-triangle.neoforge") version "1.4.213" apply false
     id("net.mehvahdjukaar.candlelight") version "1.2.1" apply false
 }
 
@@ -327,6 +327,18 @@ subprojects {
             url = uri("https://maven.jamieswhiteshirt.com/libs-release")
             content { includeGroup(("com.jamieswhiteshirt")) }
         }
-        maven("https://maven.muon.rip/releases") // Possible-Triangle Plugins
+//        maven("https://maven.muon.rip/#/releases") // Possible-Triangle Plugins
     }
+}
+
+// Local
+tasks.register("clean-build-PublishAll") {
+    group = "build"
+    description = "Runs clean, build, publish for all projects"
+
+    dependsOn(subprojects.map { it.tasks.named("clean") })
+    dependsOn(subprojects.map { it.tasks.named("build") })
+    dependsOn(subprojects.map { it.tasks.named("upload") })
+
+    finalizedBy("gitTag")
 }
