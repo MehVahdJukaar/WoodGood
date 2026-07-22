@@ -21,15 +21,21 @@ tasks.named<Jar>("sourcesJar") {
     archiveClassifier.set("neoforge-sources")
 }
 
-//val path = System.getenv("REPOS21_1").toString()
+val path = System.getenv("REPOS21_1").toString()
 dependencies {
 
 //!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
 
-    modApi("net.mehvahdjukaar:moonlight-neoforge:${property("moonlight_version")}")
+    //- LOCAL
+    if (findProperty("enable_moonlight_test").toString().toBoolean()) {
+        modApi(files(path + "\\Moonlight\\neoforge\\build\\libs\\moonlight-${property("moonlight_testVersion")}-neoforge.jar"))
+    }
+    //+ MAVEN
+    else {
+        if (findProperty("maven_backup").toString().toBoolean()) modApi("maven.modrinth:moonlight:${property("moonlight_version")}-neoforge")
+        else modApi("net.mehvahdjukaar:moonlight-neoforge:${property("moonlight_version")}") { isTransitive = false }
+    }
     accessTransformers("net.mehvahdjukaar:moonlight-neoforge:${property("moonlight_version")}")
-
-
 
 //!! TOOLS ========================================================================================================== \\
     modRuntimeOnly("dev.emi:emi-neoforge:${property("emi_version")}+${property("minecraft_version")}")

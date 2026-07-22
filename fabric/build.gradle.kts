@@ -21,12 +21,20 @@ tasks.remapSourcesJar {
     archiveClassifier.set("fabric-sources")
 }
 
-//val path = System.getenv("REPOS21_1").toString()
+val path = System.getenv("REPOS21_1").toString()
 dependencies {
 
 //!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
 
-    modApi("net.mehvahdjukaar:moonlight-fabric:${property("moonlight_version")}")
+    //- LOCAL
+    if (findProperty("enable_moonlight_test").toString().toBoolean()) {
+        modApi(files(path + "\\Moonlight\\fabric\\build\\libs\\moonlight-${property("moonlight_testVersion")}-fabric.jar"))
+    }
+    //+ MAVEN
+    else {
+        if (findProperty("maven_backup").toString().toBoolean()) modApi("maven.modrinth:moonlight:${property("moonlight_version")}-fabric")
+        else modApi("net.mehvahdjukaar:moonlight-fabric:${property("moonlight_version")}") { isTransitive = false }
+    }
 
 //!! SUPPLEMENTARIES ------------------------------------------------------------------------------------------------ \\
 //     modImplementation("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
