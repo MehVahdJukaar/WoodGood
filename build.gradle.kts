@@ -303,7 +303,7 @@ subprojects {
         maven("https://maven.ithundxr.dev/snapshots") // Registrate
         maven("https://mvn.devos.one/releases/") // Registrate, Porting Lib (releases)
         maven("https://mvn.devos.one/snapshots/") // Registrate, Porting Lib (snapshots)
-        maven("https://maven.terraformersmc.com/") // EMI
+//        maven("https://maven.terraformersmc.com/") // EMI
         maven("https://maven.saps.dev/releases") // FTB Mods
 
         maven("https://maven.theillusivec4.top/") // Curios API
