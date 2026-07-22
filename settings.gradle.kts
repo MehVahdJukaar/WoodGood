@@ -12,3 +12,5 @@ plugins {
 }
 
 include("common", "fabric", "neoforge")
+
+rootProject.name = "everycompat-multi"
