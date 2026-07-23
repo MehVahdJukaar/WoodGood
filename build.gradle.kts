@@ -1,9 +1,10 @@
+
 plugins {
-    id("com.possible-triangle.core") version "1.4.213"
-    id("com.possible-triangle.common") version "1.4.213" apply false
-    id("com.possible-triangle.fabric") version "1.4.213" apply false
-    id("com.possible-triangle.neoforge") version "1.4.213" apply false
-    id("net.mehvahdjukaar.candlelight") version "1.2.1" apply false
+    id("com.possible-triangle.core")
+    id("com.possible-triangle.common") apply false
+    id("com.possible-triangle.fabric") apply false
+    id("com.possible-triangle.neoforge") apply false
+    id("net.mehvahdjukaar.candlelight") version "1.2.4" apply false
 }
 
 mod {
@@ -27,6 +28,10 @@ subprojects {
         compileOnly("net.mehvahdjukaar:candlelight:1.2.1")
     }
 
+    /* can be added once new candle is out
+    candlelight {
+        stripLoomVersion = true
+    }*/
 
     tasks.withType<GenerateModuleMetadata> {
         enabled = true

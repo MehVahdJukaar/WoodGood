@@ -21,14 +21,16 @@ tasks.remapSourcesJar {
     archiveClassifier.set("fabric-sources")
 }
 
-val path = System.getenv("REPOS21_1").toString()
+// local dev repos root, only needed when enable_moonlight_test is on
+val localReposDir: String? = System.getenv("REPOS21_1")
 dependencies {
 
 //!! MOONLIGHT LIB (REQUIRED) --------------------------------------------------------------------------------------- \\
 
     //- LOCAL
     if (findProperty("enable_moonlight_test").toString().toBoolean()) {
-        modApi(files(path + "\\Moonlight\\fabric\\build\\libs\\moonlight-${property("moonlight_testVersion")}-fabric.jar"))
+        val repos = requireNotNull(localReposDir) { "enable_moonlight_test is on but the REPOS21_1 env var is not set" }
+        modApi(files("$repos/Moonlight/fabric/build/libs/moonlight-${property("moonlight_testVersion")}-fabric.jar"))
     }
     //+ MAVEN
     else {

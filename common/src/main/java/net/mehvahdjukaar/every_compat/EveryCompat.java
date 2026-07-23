@@ -343,6 +343,15 @@ public abstract class EveryCompat {
         return ACTIVE_MODULES.get(modId);
     }
 
+    // mod ids of every registered module, for the hazardous-config blacklist picker
+    public static List<String> getActiveModuleIds() {
+        return ACTIVE_MODULES.keySet().stream().sorted().toList();
+    }
+
+    public static Collection<CompatModule> getActiveModules() {
+        return ACTIVE_MODULES.values();
+    }
+
     private static void registerItemsToTabs(RegHelper.ItemToTabEvent event) {
         if (ECConfigs.TAB_ENABLED.get()) {
             Map<ResourceKey<CreativeModeTab>, Map<BlockType, List<Item>>> typeToEntrySet = new LinkedHashMap<>();

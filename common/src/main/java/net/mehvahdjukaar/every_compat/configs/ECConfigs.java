@@ -88,16 +88,20 @@ public class ECConfigs {
                         - ALWAYS: Will always generate the assets & will be stored in memory. No cache is used. Unintuitively, this is often the fastest method as any disk access will be slow. \nTry and see what works best for you.""")
                 .worldReload()
                 .define("server_assets_generation_mode", GenMode.ALWAYS);
-        TAB_ENABLED = builder.comment("Puts all the added items into a new Every Compat tab instead of their own mod tabs. Be warned that if disabled it could cause some issue with some mods that have custom tabs. Game Restart is required for this to take effect.")
+        TAB_ENABLED = builder
+                .comment("Puts all the added items into a new Every Compat tab instead of their own mod tabs. Be warned that if disabled it could cause some issue with some mods that have custom tabs.")
                 .gameRestart()
                 .define("creative_tab", true);
-        TAB_ITEM_SEARCH_ENABLED = builder.comment("Allow the item_search or searchBar to be visible. Game Restart is required for this to take effect.")
+        TAB_ITEM_SEARCH_ENABLED = builder
+                .comment("Allow the item_search or searchBar to be visible.")
                 .gameRestart()
                 .define("tab_item_search", true);
-        NO_MOD_CREATIVE_TAB = builder.comment("If set to true, then all of the generated items will not be put into the mod's tab. Game Restart is required for this to take effect.")
+        NO_MOD_CREATIVE_TAB = builder
+                .comment("If set to true, then all of the generated items will not be put into the mod's tab.")
                 .gameRestart()
                 .define("no_mod_creative_tab", false);
-        GENERATE_BLOCKTYPE_TAGS = builder.comment("Generate blocktype tags for every block type. This will be applied to all the mods that use the system, not just Every Compat. Can make pack a bit faster if its off. Turn off if you dont need it. Game Restart is required for this to take effect.")
+        GENERATE_BLOCKTYPE_TAGS = builder
+                .comment("Generate blocktype tags for every block type. This will be applied to all the mods that use the system, not just Every Compat. Can make pack a bit faster if its off. Turn off if you dont need it.")
                 .gameRestart()
                 .define("generate_blocktype_tags", true);
 
@@ -105,16 +109,22 @@ public class ECConfigs {
         //        .define("remap_other_mods", false);
         // REMAP_OWN = builder.comment("Clears out and remaps all blocks registered by this mod belonging to uninstalled wood types to air or oak wood")
         //         .define("remap_self", true);
-        CHECK_PACKET = builder.comment("Sends a packet to verify all dependencies mod versions are the same on connect. DIsable if it causes issues")
+        CHECK_PACKET = builder
+                .comment("Sends a packet to verify all dependencies mod versions are the same on connect. DIsable if it causes issues")
                 .define("mod_version_check_packet", true);
-        DEBUG_PACKET = builder.comment("Don't touch unless you are told to").define("debug_packet", false);
+        DEBUG_PACKET = builder
+                .comment("Don't touch unless you are told to")
+                .define("debug_packet", false);
 
         builder.push("tooltips");
-        MOD_TOOPTIP = builder.comment("Enabled tooltips showing which mod an EC item is from")
+        MOD_TOOPTIP = builder
+                .comment("Enabled tooltips showing which mod an EC item is from")
                 .define("mod_origin_enabled", true);
-        BLOCK_TYPE_TOOLTIP = builder.comment("Enabled tooltips showing which block type an EC item is made from")
+        BLOCK_TYPE_TOOLTIP = builder
+                .comment("Enabled tooltips showing which block type an EC item is made from")
                 .define("block_type_enabled", true);
-        TOOLTIPS_ADVANCED = builder.comment("Only show on advanced settings")
+        TOOLTIPS_ADVANCED = builder
+                .comment("Only show on advanced settings")
                 .define("show_on_advanced_tooltips", false);
         builder.pop();
 

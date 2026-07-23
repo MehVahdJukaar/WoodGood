@@ -1,7 +1,5 @@
 pluginManagement {
     repositories {
-        maven("https://maven.fabricmc.net/")
-        maven("https://maven.neoforged.net/releases")
         gradlePluginPortal()
         mavenLocal()
     }
@@ -12,5 +10,3 @@ plugins {
 }
 
 include("common", "fabric", "neoforge")
-
-rootProject.name = "everycompat-multi"

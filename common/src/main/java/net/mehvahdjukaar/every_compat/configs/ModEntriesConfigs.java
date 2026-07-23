@@ -7,14 +7,19 @@ import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ModConfigHolder;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
+import net.mehvahdjukaar.moonlight.api.set.BlockTypeRegistry;
+import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.function.Supplier;
 
 //loaded after registry
@@ -36,18 +41,27 @@ public class ModEntriesConfigs {
         wasInit = true;
         ConfigBuilder builder = ConfigBuilder.create(EveryCompat.res("entries"), ConfigType.COMMON);
 
-        builder.comment("Disables certain types. Note that all these configs, like in any other mod, only hide stuff from tabs and disable their recipes")
+        builder.comment("Disables whole block types. Note that all these configs, like in any other mod, only hide stuff from tabs and disable their recipes")
                 .push("types");
         for (var reg : BlockSetAPI.getRegistries()) {
-            builder.push(reg.typeName().replace(" ", "_"));
+            builder.icon(defaultIcon(reg)).push(reg.typeName().replace(" ", "_"));
+            // group by namespace so each mod gets its own sub-section instead of a flat dotted list
+            Map<String, List<BlockType>> byNamespace = new TreeMap<>();
             for (var w : reg.getValues()) {
                 if (!HardcodedBlockType.isKnownVanillaType(w)) {
-                    String key = w.toString().replace(":", ".");
-                    var config = builder.define(key, true);
-                    var map = BLOCK_TYPE_CONFIGS.computeIfAbsent(reg.getType(), s -> new HashMap<>());
-                    map.put(w.toString(), config);
+                    byNamespace.computeIfAbsent(w.getNamespace(), k -> new ArrayList<>()).add(w);
                 }
             }
+            var map = BLOCK_TYPE_CONFIGS.computeIfAbsent(reg.getType(), s -> new HashMap<>());
+            byNamespace.forEach((namespace, types) -> {
+                builder.push(namespace); // mod id sub-category, left without an icon on purpose
+                for (var w : types) {
+                    ResourceLocation icon = typeIcon(w);
+                    if (icon != null) builder.icon(icon);
+                    map.put(w.toString(), builder.feature(w.getId().getPath(), true));
+                }
+                builder.pop();
+            });
             builder.pop();
         }
         builder.pop();
@@ -55,13 +69,24 @@ public class ModEntriesConfigs {
         builder.comment("Disables specific entries")
                 .push("entries");
         for (var reg : BlockSetAPI.getRegistries()) {
-            builder.push(reg.typeName().replace(" ", "_"));
+            builder.icon(defaultIcon(reg)).push(reg.typeName().replace(" ", "_"));
+            // child keys are "modid:name" - group by that mod id
+            Map<String, List<String>> byNamespace = new TreeMap<>();
             for (var c : EveryCompat.getChildKeys(reg.getType())) {
-                String key = c.replace(":", ".");
-                var config = builder.define(key, true);
-                var map = CHILD_CONFIGS.computeIfAbsent(reg.getType(), s -> new HashMap<>());
-                map.put(c, config);
+                int i = c.indexOf(':');
+                byNamespace.computeIfAbsent(i < 0 ? "minecraft" : c.substring(0, i), k -> new ArrayList<>()).add(c);
             }
+            var map = CHILD_CONFIGS.computeIfAbsent(reg.getType(), s -> new HashMap<>());
+            byNamespace.forEach((namespace, childKeys) -> {
+                builder.push(namespace); // mod id sub-category, left without an icon on purpose
+                for (var c : childKeys) {
+                    ResourceLocation icon = entryIcon(reg, c);
+                    if (icon != null) builder.icon(icon);
+                    int i = c.indexOf(':');
+                    map.put(c, builder.feature(i < 0 ? c : c.substring(i + 1), true));
+                }
+                builder.pop();
+            });
             builder.pop();
         }
         builder.pop();
@@ -69,6 +94,28 @@ public class ModEntriesConfigs {
         SPEC = builder.build();
 
         SPEC.forceLoad(); //manually load later
+    }
+
+    // icon for a registry category: the default type's main item (e.g. oak planks for wood types)
+    private static ResourceLocation defaultIcon(BlockTypeRegistry<?> reg) {
+        return Utils.getID(reg.getDefaultType().mainChild().asItem());
+    }
+
+    // icon for a single block type: its own main item (e.g. fir planks)
+    @Nullable
+    private static ResourceLocation typeIcon(BlockType w) {
+        Item item = w.mainChild().asItem();
+        return item == null ? null : Utils.getID(item);
+    }
+
+    // icon for a child entry: the first block type that actually has that child
+    @Nullable
+    private static ResourceLocation entryIcon(BlockTypeRegistry<?> reg, String childKey) {
+        for (BlockType w : reg.getValues()) {
+            Item item = w.getItemOfThis(childKey);
+            if (item != null) return Utils.getID(item);
+        }
+        return null;
     }
 
     public static <T extends BlockType> boolean isEntryEnabled(T blockType, Object o) {
