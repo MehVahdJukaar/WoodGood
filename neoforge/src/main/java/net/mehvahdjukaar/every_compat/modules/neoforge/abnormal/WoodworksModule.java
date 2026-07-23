@@ -51,6 +51,7 @@ import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.IsBambooLike;
+import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.isKnownVanillaWood;
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.getATagOrCreateANew;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
@@ -263,33 +264,38 @@ public class WoodworksModule extends EveryCompatModule {
     // RECIPES
     public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicServerResources(executor);
-        executor.accept((manager, sink) -> bookshelves.items.forEach((wood, item) -> {
-            // The generation of ladders get skipped due to some mods already have ladders and will be used as an alt
-            Item getLadder = ladders.items.get(wood);
-            Item ladder = (getLadder != null) ? getLadder : BuiltInRegistries.ITEM.get(
-                    ResourceLocation.fromNamespaceAndPath(wood.getNamespace(), wood.getTypeName() +"_ladder"));
+        executor.accept((manager, sink) -> {
 
-            // sawmill recipes - from LOGS
-            createSawmillRecipe(PLANKS, "logs", wood.getItemOfThis(PLANKS), sink, manager, wood);
-            createSawmillRecipe("boards", "logs", boards.items.get(wood), sink, manager, wood);
-            createSawmillRecipe("ladder", "logs", ladder, sink, manager, wood);
-            createSawmillRecipe(BUTTON, "logs", wood.getItemOfThis(BUTTON), sink, manager, wood);
-            createSawmillRecipe(DOOR, "logs", wood.getItemOfThis(DOOR), sink, manager, wood);
-            createSawmillRecipe(FENCE, "logs", wood.getItemOfThis(FENCE), sink, manager, wood);
-            createSawmillRecipe(FENCE_GATE, "logs", wood.getItemOfThis(FENCE_GATE), sink, manager, wood);
-            createSawmillRecipe(SIGN, "logs", wood.getItemOfThis(SIGN), sink, manager, wood);
-            createSawmillRecipe(SLAB, "logs", wood.getItemOfThis(SLAB), sink, manager, wood);
-            createSawmillRecipe(STAIRS, "logs", wood.getItemOfThis(STAIRS), sink, manager, wood);
-            createSawmillRecipe(TRAPDOOR, "logs", wood.getItemOfThis(TRAPDOOR), sink, manager, wood);
+            for (WoodType wood : WoodTypeRegistry.INSTANCE) {
+                if (isKnownVanillaWood(wood)) continue;
 
-            // - from PLANKS
-            createSawmillRecipe("boards", PLANKS, boards.items.get(wood), sink, manager, wood);
-            createSawmillRecipe("ladder", PLANKS, ladder, sink, manager, wood);
-            createSawmillRecipe(BUTTON, PLANKS, wood.getItemOfThis(BUTTON), sink, manager, wood);
-            createSawmillRecipe(FENCE, PLANKS, wood.getItemOfThis(FENCE), sink, manager, wood);
-            createSawmillRecipe(SLAB, PLANKS, wood.getItemOfThis(SLAB), sink, manager, wood);
-            createSawmillRecipe(STAIRS, PLANKS, wood.getItemOfThis(STAIRS), sink, manager, wood);
-        }));
+                // The generation of ladders get skipped due to some mods already have ladders and will be used as an alt
+                Item getLadder = ladders.items.get(wood);
+                Item ladder = (getLadder != null) ? getLadder : BuiltInRegistries.ITEM.get(
+                        ResourceLocation.fromNamespaceAndPath(wood.getNamespace(), wood.getTypeName() +"_ladder"));
+
+                // sawmill recipes - from LOGS
+                createSawmillRecipe(PLANKS, "logs", wood.getItemOfThis(PLANKS), sink, manager, wood);
+                createSawmillRecipe("boards", "logs", boards.items.get(wood), sink, manager, wood);
+                createSawmillRecipe("ladder", "logs", ladder, sink, manager, wood);
+                createSawmillRecipe(BUTTON, "logs", wood.getItemOfThis(BUTTON), sink, manager, wood);
+                createSawmillRecipe(DOOR, "logs", wood.getItemOfThis(DOOR), sink, manager, wood);
+                createSawmillRecipe(FENCE, "logs", wood.getItemOfThis(FENCE), sink, manager, wood);
+                createSawmillRecipe(FENCE_GATE, "logs", wood.getItemOfThis(FENCE_GATE), sink, manager, wood);
+                createSawmillRecipe(SIGN, "logs", wood.getItemOfThis(SIGN), sink, manager, wood);
+                createSawmillRecipe(SLAB, "logs", wood.getItemOfThis(SLAB), sink, manager, wood);
+                createSawmillRecipe(STAIRS, "logs", wood.getItemOfThis(STAIRS), sink, manager, wood);
+                createSawmillRecipe(TRAPDOOR, "logs", wood.getItemOfThis(TRAPDOOR), sink, manager, wood);
+
+                // - from PLANKS
+                createSawmillRecipe("boards", PLANKS, boards.items.get(wood), sink, manager, wood);
+                createSawmillRecipe("ladder", PLANKS, ladder, sink, manager, wood);
+                createSawmillRecipe(BUTTON, PLANKS, wood.getItemOfThis(BUTTON), sink, manager, wood);
+                createSawmillRecipe(FENCE, PLANKS, wood.getItemOfThis(FENCE), sink, manager, wood);
+                createSawmillRecipe(SLAB, PLANKS, wood.getItemOfThis(SLAB), sink, manager, wood);
+                createSawmillRecipe(STAIRS, PLANKS, wood.getItemOfThis(STAIRS), sink, manager, wood);
+            }
+        });
     }
 
     public void createSawmillRecipe(String typeOutput, String typeInput, Item itemOutput, ResourceSink sink, ResourceManager manager, WoodType newWoodType) {
@@ -338,20 +344,15 @@ public class WoodworksModule extends EveryCompatModule {
                 WoodType oldWoodType = WoodTypeRegistry.INSTANCE.getBlockTypeOf(oldItem);
 
                 if (oldWoodType == VanillaWoodTypes.ACACIA || oldWoodType == VanillaWoodTypes.BAMBOO) {
-                    Item newItem = BlockSetAPI.changeItemType(oldItem, oldWoodType, newWoodType);
-                    if (newItem != null) {
-                        SawmillRecipe newRecipe = new SawmillRecipe(sawmillRecipe.getGroup(), newIngredient, new ItemStack(newItem, count));
 
-                        String appendedPath = recipeLocation.withPrefix(shortenedId() + "/" + newWoodType.getNamespace() + "/").getPath();
-                        String newPath = (oldWoodType == VanillaWoodTypes.ACACIA)
-                                ? appendedPath.replace("acacia", newWoodType.getTypeName())
-                                : appendedPath.replace("bamboo", newWoodType.getTypeName());
+                    SawmillRecipe newRecipe = new SawmillRecipe(sawmillRecipe.getGroup(), newIngredient, new ItemStack(itemOutput, count));
 
-                        sink.addRecipe(new RecipeHolder<>(
-                                EveryCompat.res(newPath),
-                                newRecipe)
-                        );
-                    }
+                    String appendedPath = recipeLocation.withPrefix(shortenedId() + "/" + newWoodType.getNamespace() + "/").getPath();
+                    String newPath = (oldWoodType == VanillaWoodTypes.ACACIA)
+                            ? appendedPath.replace("acacia", newWoodType.getTypeName())
+                            : appendedPath.replace("bamboo", newWoodType.getTypeName());
+
+                    sink.addRecipe(new RecipeHolder<>(EveryCompat.res(newPath), newRecipe));
                 }
             }
         }
