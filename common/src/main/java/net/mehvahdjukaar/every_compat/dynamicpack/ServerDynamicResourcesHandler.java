@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.dynamicpack;
 
+import net.mehvahdjukaar.every_compat.ECPlatStuff;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection;
@@ -65,6 +66,7 @@ public class ServerDynamicResourcesHandler extends DynamicServerResourceProvider
         TaskRunnerWithFailureCollection.run("Server dynamic resources generation", () -> {
             List<ResourceGenTask> tasks = new ArrayList<>();
             EveryCompat.forAllModules(m -> m.addDynamicServerResources(tasks::add));
+            ECPlatStuff.addPlatformServerResources(tasks::add);
 
             int minBatches = Runtime.getRuntime().availableProcessors();
             int maxBatches = tasks.size() / Runtime.getRuntime().availableProcessors();
