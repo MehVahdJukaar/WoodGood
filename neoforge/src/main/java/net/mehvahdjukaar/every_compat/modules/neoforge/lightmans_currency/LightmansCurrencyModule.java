@@ -31,12 +31,12 @@ public class LightmansCurrencyModule extends EveryCompatModule {
     public LightmansCurrencyModule(String modId) {
         super(modId, "lc");
         Supplier<CreativeModeTab> extraOrTraders = (io.github.lightman314.lightmanscurrency.common.core.variants.WoodType.hasModdedValues())
-                ? getTab(ModCreativeGroups.EXTRA_GROUP_ID)
-                : getTab(ModCreativeGroups.TRADER_GROUP_ID);
+                ? ModCreativeGroups.EXTRA_GROUP
+                : ModCreativeGroups.TRADER_GROUP;
 
         Supplier<CreativeModeTab> extraOrMachine = (io.github.lightman314.lightmanscurrency.common.core.variants.WoodType.hasModdedValues())
-                ? getTab(ModCreativeGroups.EXTRA_GROUP_ID)
-                : getTab(ModCreativeGroups.MACHINE_GROUP_ID);
+                ? ModCreativeGroups.EXTRA_GROUP
+                : ModCreativeGroups.MACHINE_GROUP;
 
         auction_stands = SimpleEntrySet.builder(WoodType.class, "", "auction_stand",
                         getModBlock("auction_stand_oak"), () -> VanillaWoodTypes.OAK,
