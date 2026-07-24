@@ -12,6 +12,32 @@
 |                                                                                                                                   |
 
 ---
+## v2.11.47
+
+### CHANGES:
+- **Every Compat** (C): 
+  - Moved USE_EXTERNAL_RESOURCE_PACK to `everycomp-client.toml` instead of `everycomp-common.toml`
+  - Removed Screen Config class for FABRIC & NEOFORGE
+
+### FIXES:
+- **Woodworks** (NF): 
+  - Corrected the chests' mask textures - [#1295](https://github.com/MehVahdJukaar/WoodGood/issues/1295)
+  - Improved Sawmill Recipe generation because there was missing recipes with some Wood mods like **Quark** - Reported by @derp_gamer22
+- **EveryCompat** (C): Fixed the loot_table generation not working correctly with **Quark**'s BOOKSHELF - [#1291](https://github.com/MehVahdJukaar/WoodGood/issues/1291)
+
+### OTHERS:
+- **Moonlight Lib v3.1.3** (C) - NOTE that issues from Every Compat are fixed below 
+  - Fixed the Environmental's LeavesType for variant Wisteria's missing Associated WoodType - [#1294](https://github.com/MehVahdJukaar/WoodGood/issues/1294)
+  - HardcodedBlockTypes:
+    - Set the following WoodTypes to be treated as BambooType - [#1250](https://github.com/MehVahdJukaar/WoodGood/issues/1250) 
+      - garden_of_the_dead:wisteria
+      - mynethersdelight:powdery
+      - dungeonsdelight:wormwood
+    - Added Shroomcraft's 4 undetected Mushroom - [#1286](https://github.com/MehVahdJukaar/WoodGood/issues/1286)
+    - Added Associated WoodType to 5 LeavesType from No Man's Land - [#1243](https://github.com/MehVahdJukaar/WoodGood/issues/1243)
+
+---
+
 ## v2.11.46
 
 ### ADDED:
