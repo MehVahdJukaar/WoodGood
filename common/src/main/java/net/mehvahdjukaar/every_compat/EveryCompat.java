@@ -111,16 +111,15 @@ public abstract class EveryCompat {
                     """;
             EveryCompat.LOGGER.error("\n\n{}", log);
             return;
-        }
-        else if (ACTIVE_MODULES.isEmpty()) {
+        } else if (ACTIVE_MODULES.isEmpty()) {
             String log = """
-                        #######################################################
-                        #                                                     #
-                        #     ATTENTION: No supported mods are installed.     #
-                        #   You dont need EveryCompat and should remove it.   #
-                        #                                                     #
-                        #######################################################
-                        """;
+                    #######################################################
+                    #                                                     #
+                    #     ATTENTION: No supported mods are installed.     #
+                    #   You dont need EveryCompat and should remove it.   #
+                    #                                                     #
+                    #######################################################
+                    """;
             EveryCompat.LOGGER.error("\n\n{}", log);
         }
 
@@ -150,8 +149,8 @@ public abstract class EveryCompat {
                         if (tab != null) {
                             tab.unwrapKey().orElseThrow(() -> new RuntimeException("The Creative Tab's ResourceLocation is outdated"));
                         } else {
-                            if (PlatHelper.isDev()){
-                                EveryCompat.LOGGER.error("Module {} had an entry set {} without a tab. Are you sure about this?", sm, ae );
+                            if (PlatHelper.isDev()) {
+                                EveryCompat.LOGGER.error("Module {} had an entry set {} without a tab. Are you sure about this?", sm, ae);
                             }
                         }
                     }
@@ -177,17 +176,7 @@ public abstract class EveryCompat {
 
     public static void forAllModules(Consumer<CompatModule> action) {
         for (var m : ACTIVE_MODULES.values()) {
-            try {
-                action.accept(m);
-            } catch (Throwable e) {
-                EveryCompat.LOGGER.error("Module for the supported mod contains errors. This could mean that the mod has been recently updated & Every Compat needs updating (try downgrading the mod) or that you are using an older version. MAIN CAUSE: {} - {}", m.getModName(), e);
-                if (canShowErrorScreen) {
-                    //if before first screen we can display an error screen
-                    addError(m, e);
-                } else {
-                    throw e;
-                }
-            }
+            executeOrFail(() -> action.accept(m), m);
         }
     }
 
@@ -196,6 +185,7 @@ public abstract class EveryCompat {
             r.run();
         } catch (Throwable e) {
             EveryCompat.LOGGER.error("Module for mod {} contains errors. This could mean that the mod has been recently updated and Every Compat needs updating (try downgrading the mod) or that you are using an older version.", Objects.requireNonNull(module).getModName(), e);
+            e.printStackTrace();
             if (canShowErrorScreen) {
                 //if before first screen we can display an error screen
                 addError(module, e);
