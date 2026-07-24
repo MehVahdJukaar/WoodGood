@@ -15,10 +15,13 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 
-//SUPPORT: v1.0.2.4+
+import java.util.function.Supplier;
+
+///SUPPORT: v1.0.2.4+
 public class LightmansCurrencyModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> shelves;
@@ -26,7 +29,7 @@ public class LightmansCurrencyModule extends EveryCompatModule {
 
     public LightmansCurrencyModule(String modId) {
         super(modId, "lc");
-        ResourceLocation tab = modRes("trading");
+        Supplier<CreativeModeTab> tab = getModTab("traders");
 
         shelves = SimpleEntrySet.builder(WoodType.class, "", "shelf",
                         getModBlock("shelf_oak"), () -> VanillaWoodTypes.OAK,
@@ -45,7 +48,7 @@ public class LightmansCurrencyModule extends EveryCompatModule {
                 .addTag(ResourceLocation.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .addTag(modRes("trader_normal"), Registries.ITEM)
                 .addTag(modRes("shelf"), Registries.ITEM)
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .defaultRecipe()
                 .setRenderType(RenderLayer.SOLID)
                 .build();
@@ -68,7 +71,7 @@ public class LightmansCurrencyModule extends EveryCompatModule {
                 .addTag(ResourceLocation.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .addTag(modRes("trader_normal"), Registries.ITEM)
                 .addTag(modRes("shelf"), Registries.ITEM)
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(card_displays);
