@@ -1,13 +1,13 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.quark;
 
 import net.mehvahdjukaar.candlelight.api.ClientOnly;
-import net.mehvahdjukaar.every_compat.ECPlatStuff;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.*;
 import net.mehvahdjukaar.every_compat.common_classes.*;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.botanypots.BotanyPotsHelper;
+import net.mehvahdjukaar.every_compat.platform.ECPlatStuffImpl;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
@@ -277,7 +277,6 @@ public class QuarkModule extends EveryCompatModule {
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
-                .addTag(ResourceLocation.parse("forge:mineable/sickle"), Registries.BLOCK)
                 .addTag(ResourceLocation.parse("mynethersdelight:resurgent_soil_plant"), Registries.BLOCK)
                 .setTab(getTab(tab))
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
@@ -315,7 +314,7 @@ public class QuarkModule extends EveryCompatModule {
     public void onModSetup() {
         posts.blocks.forEach((w, post) -> {
             Block stripped = strippedPosts.blocks.get(w);
-            if (stripped != null) ECPlatStuff.registerStripping(post, stripped);
+            if (stripped != null) ECPlatStuffImpl.registerStripping(post, stripped);
         });
         leafCarpets.blocks.forEach((w, leaf) -> ComposterBlock.COMPOSTABLES.put(leaf, 0.2F));
     }
@@ -398,6 +397,8 @@ public class QuarkModule extends EveryCompatModule {
             verticalSlabs.blocks.forEach((woodType, block) ->
                     createVertSlabRecipe(woodType, block, sink));
         });
+
+        ECPlatStuffImpl.addPlatformServerResources(executor);
     }
 
     // Hedge's recipe has a tag as an ingredient

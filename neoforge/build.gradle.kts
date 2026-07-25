@@ -170,7 +170,7 @@ dependencies {
     modCompileOnly("curse.maven:functional-storage-556861:8179577")
     modCompileOnly("curse.maven:infinity-buttons-661902:6630983") //!! 1.20.1
     modCompileOnly("curse.maven:just-a-raft-mod-274350:6945796")
-    modCompileOnly("curse.maven:lightmans-currency-fabric-472521:8133254")
+    modCompileOnly("curse.maven:lightmans-currency-472521:8366260")
     modCompileOnly("curse.maven:more-crafting-tables-for-forge-417365:6002554") //CRAFTING_TABLES for FORGE
     modCompileOnly("curse.maven:mosaic-carpentry-690226:7325187") //!! 1.20.1
     modCompileOnly("curse.maven:oreberries-replanted-454062:6123417") //!! 1.20.1

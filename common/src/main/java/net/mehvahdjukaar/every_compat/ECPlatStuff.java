@@ -18,7 +18,7 @@ public class ECPlatStuff {
     }
 
     @PlatformImpl
-    public static void registerStripping(Block post, Block stripped) {
+    public static void registerStripping(Block block, Block stripped_block) {
         throw new AssertionError();
     }
 

@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.platform;
 import com.google.gson.JsonObject;
 import com.mojang.serialization.JsonOps;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.mehvahdjukaar.every_compat.ECPlatStuff;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
@@ -21,12 +22,12 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-public class ECPlatStuffImpl {
+public class ECPlatStuffImpl extends ECPlatStuff {
 
     // neoforge strips with the neoforge:strippables data map, so we feed our entries to it through the dynamic data pack
-    private static final ResourceLocation STRIPPABLES_DATA_MAP =
-            ResourceLocation.fromNamespaceAndPath("neoforge", "data_maps/block/strippables");
+    private static final ResourceLocation STRIPPABLES_DATA_MAP_ID = ResourceLocation.fromNamespaceAndPath("neoforge", "data_maps/block/strippables");
     private static final Map<Block, Block> STRIPPABLES = new LinkedHashMap<>();
+    private static boolean wasNotInit = true;
 
     public static List<ItemStack> modifyLoot(ResourceLocation id, List<ItemStack> stacks, LootParams lootContext) {
         ItemStack[] array = stacks.toArray(ItemStack[]::new);
@@ -34,12 +35,13 @@ public class ECPlatStuffImpl {
                 (new LootContext.Builder(lootContext)).create(Optional.of(id)));
     }
 
-    public static void registerStripping(Block post, Block stripped) {
-        if (STRIPPABLES.isEmpty()) {
+    public static void registerStripping(Block block, Block stripped_block) {
+        if (!STRIPPABLES.isEmpty() && wasNotInit) {
             //packs must know their namespaces beforehand
-            ServerDynamicResourcesHandler.getInstance().addSupportedNamespaces(STRIPPABLES_DATA_MAP.getNamespace());
+            ServerDynamicResourcesHandler.getInstance().addSupportedNamespaces(STRIPPABLES_DATA_MAP_ID.getNamespace());
+            wasNotInit = false;
         }
-        STRIPPABLES.put(post, stripped);
+        STRIPPABLES.put(block, stripped_block);
     }
 
     public static void addPlatformServerResources(Consumer<ResourceGenTask> executor) {
@@ -51,7 +53,7 @@ public class ECPlatStuffImpl {
 
             JsonObject json = new JsonObject();
             json.add("values", values);
-            sink.addJson(STRIPPABLES_DATA_MAP, json, ResType.JSON);
+            sink.addJson(STRIPPABLES_DATA_MAP_ID, json, ResType.JSON);
         });
     }
 
