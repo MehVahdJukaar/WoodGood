@@ -12,6 +12,14 @@
 |                                                                                                                                   |
 
 ---
+## v2.11.48
+
+### CHANGES:
+- **Every Compat** (C): Fixed a crash with **Quark** + **Environment** or Other Wood Mods - [#1300](https://github.com/MehVahdJukaar/WoodGood/issues/1300)
+- **Lightman's Currency** (NF): Updated the outdated CreativeTab - [#1301](https://github.com/MehVahdJukaar/WoodGood/issues/1301)
+
+---
+
 ## v2.11.47
 
 ### CHANGES:
