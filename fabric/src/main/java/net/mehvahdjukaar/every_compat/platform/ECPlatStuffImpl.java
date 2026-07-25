@@ -16,8 +16,8 @@ public class ECPlatStuffImpl {
         return stacks;
     }
 
-    public static void registerStripping(Block log, Block stripped_log) {
-        StrippableBlockRegistry.register(log, stripped_log);
+    public static void registerStripping(Block block, Block stripped_block) {
+        StrippableBlockRegistry.register(block, stripped_block);
     }
 
     public static void addPlatformServerResources(Consumer<ResourceGenTask> executor) {
