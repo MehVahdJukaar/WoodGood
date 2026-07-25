@@ -4,6 +4,7 @@
   "tooltip.everycomp.mod": "Supported Mod: %s",
   "tooltip.everycomp.wood_type": "Wood Type: %s",
   "tooltip.everycomp.leaf_type": "Leaves Type: %s",
+  "gui.everycomp.blocks_added": "Every Compat added %s blocks from %s mods",
   "gui.everycomp.error_screen.title": "Every Compat encountered an Error",
   "gui.everycomp.error_screen.message": "The Every Compat Modules from the following supported mods had errors while loading. This usually means that the respective mods might have recently updated with breaking changes, requiring a future Every Compat update, or that one of the two mods' module is outdated.\n\nIf you don't want this to happen again please ask the author of said mod to CONSIDER including an Every Compat Module in their Mod instead.\nThe game can't proceed, but you can try to downgrade these supported mods to previous version & wait for an update: %s",
   "everycomp.configuration.general": "General",

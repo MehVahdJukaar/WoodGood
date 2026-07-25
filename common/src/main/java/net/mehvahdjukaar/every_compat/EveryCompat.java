@@ -98,7 +98,7 @@ public abstract class EveryCompat {
         //log registered stuff size
         int newSize = BuiltInRegistries.BLOCK.size();
         //cal
-        int myChildrenSize = ACTIVE_MODULES.values().stream().filter(Objects::nonNull).mapToInt(CompatModule::bloatAmount).sum();
+        int myChildrenSize = getRegisteredBlocksCount();
 
         if (myChildrenSize == 0 && !ACTIVE_MODULES.isEmpty()) {
             String log = """
@@ -340,6 +340,12 @@ public abstract class EveryCompat {
 
     public static Collection<CompatModule> getActiveModules() {
         return ACTIVE_MODULES.values();
+    }
+
+    /// Total amount of blocks all active modules have registered
+    public static int getRegisteredBlocksCount() {
+        return ACTIVE_MODULES.values().stream().filter(Objects::nonNull)
+                .mapToInt(CompatModule::bloatAmount).sum();
     }
 
     private static void registerItemsToTabs(RegHelper.ItemToTabEvent event) {

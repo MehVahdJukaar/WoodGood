@@ -4,6 +4,7 @@ import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.BlockCountConfigOverlay;
 import net.mehvahdjukaar.every_compat.misc.ErrorMessageScreen;
 import net.mehvahdjukaar.every_compat.misc.WoodTypeCycleItemRenderer;
 import net.mehvahdjukaar.moonlight.api.misc.EventCalled;
@@ -40,6 +41,7 @@ public class EveryCompatClient {
         ClientHelper.addItemRenderersRegistration(event -> {
             event.register(ECRegistry.ALL_WOODS.get(), new WoodTypeCycleItemRenderer());
         });
+        BlockCountConfigOverlay.register();
     }
 
     @EventCalled
