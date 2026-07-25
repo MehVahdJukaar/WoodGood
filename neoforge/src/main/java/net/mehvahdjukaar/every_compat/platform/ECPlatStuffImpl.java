@@ -27,7 +27,7 @@ public class ECPlatStuffImpl extends ECPlatStuff {
     // neoforge strips with the neoforge:strippables data map, so we feed our entries to it through the dynamic data pack
     private static final ResourceLocation STRIPPABLES_DATA_MAP_ID = ResourceLocation.fromNamespaceAndPath("neoforge", "data_maps/block/strippables");
     private static final Map<Block, Block> STRIPPABLES = new LinkedHashMap<>();
-    private static boolean wasNotInit = true;
+    private static boolean namespaceRegistered = false;
 
     public static List<ItemStack> modifyLoot(ResourceLocation id, List<ItemStack> stacks, LootParams lootContext) {
         ItemStack[] array = stacks.toArray(ItemStack[]::new);
@@ -36,10 +36,10 @@ public class ECPlatStuffImpl extends ECPlatStuff {
     }
 
     public static void registerStripping(Block block, Block stripped_block) {
-        if (!STRIPPABLES.isEmpty() && wasNotInit) {
+        if (!namespaceRegistered) {
             //packs must know their namespaces beforehand
             ServerDynamicResourcesHandler.getInstance().addSupportedNamespaces(STRIPPABLES_DATA_MAP_ID.getNamespace());
-            wasNotInit = false;
+            namespaceRegistered = true;
         }
         STRIPPABLES.put(block, stripped_block);
     }

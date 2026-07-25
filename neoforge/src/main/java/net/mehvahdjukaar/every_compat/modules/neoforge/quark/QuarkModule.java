@@ -397,8 +397,6 @@ public class QuarkModule extends EveryCompatModule {
             verticalSlabs.blocks.forEach((woodType, block) ->
                     createVertSlabRecipe(woodType, block, sink));
         });
-
-        ECPlatStuffImpl.addPlatformServerResources(executor);
     }
 
     // Hedge's recipe has a tag as an ingredient
