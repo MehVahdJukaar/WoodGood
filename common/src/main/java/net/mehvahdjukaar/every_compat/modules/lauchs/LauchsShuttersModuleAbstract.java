@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.Block;
 import java.util.List;
 import java.util.function.Supplier;
 
-//SUPPORT: v2.0.2+
+///SUPPORT: FABRIC-v2.0.2+ | NEOFORGE-v2.1.6+
 public abstract class LauchsShuttersModuleAbstract extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> shutters;
