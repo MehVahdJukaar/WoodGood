@@ -58,7 +58,7 @@ public class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends S
     @Override
     public void generateRecipes(SimpleModule module, ResourceManager manager, ResourceSink pack) {
         ZetaModule mod = zetaModule.get();
-        if (mod == null || mod.isEnabled()) {
+        if (mod == null || mod.isEnabled() || mod.disabledByOverlap()) {
             super.generateRecipes(module, manager, pack);
         }
     }

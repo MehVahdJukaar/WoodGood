@@ -7,7 +7,6 @@ import net.mehvahdjukaar.every_compat.common_classes.*;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.botanypots.BotanyPotsHelper;
-import net.mehvahdjukaar.every_compat.platform.ECPlatStuffImpl;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
@@ -36,9 +35,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
+import net.neoforged.neoforge.common.ItemAbilities;
 import org.violetmoon.quark.content.building.block.*;
 import org.violetmoon.quark.content.building.module.*;
 import org.violetmoon.zeta.block.ZetaBlock;
+import org.violetmoon.zeta.util.handler.ToolInteractionHandler;
 
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -314,7 +315,7 @@ public class QuarkModule extends EveryCompatModule {
     public void onModSetup() {
         posts.blocks.forEach((w, post) -> {
             Block stripped = strippedPosts.blocks.get(w);
-            if (stripped != null) ECPlatStuffImpl.registerStripping(post, stripped);
+            if (stripped != null) ToolInteractionHandler.registerInteraction(ItemAbilities.AXE_STRIP, post, stripped);
         });
         leafCarpets.blocks.forEach((w, leaf) -> ComposterBlock.COMPOSTABLES.put(leaf, 0.2F));
     }
