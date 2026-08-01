@@ -123,7 +123,8 @@ public class HardcodedBlockType {
         /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ INCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
         // Darker-Depths has a built-in support for Woodworks' BOARDS that caused Architects-Palette's BOARDS to be skipped
-        if (pendingInfo.isForSupportedModId("architects_palette") && pendingInfo.isForWoodTypeNamespace("darkerdepths")) return false;
+        // Windswept has BOARDS that prevent Architects-Palette's BOARDS from being registered
+        if (pendingInfo.isForSupportedModId("architects_palette") && pendingInfo.isForWoodTypeNamespace("darkerdepths|windswept")) return false;
 
         // Valhelsia-Structures' POST, STRIPPED_POST are not generated because Quark has POST and STRIPPED_POST
         if (pendingInfo.isForSupportedModId("valhelsia_structures") && pendingInfo.isForWoodTypeNamespace("quark")) return false;
