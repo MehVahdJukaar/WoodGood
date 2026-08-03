@@ -454,8 +454,8 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                     // reinforced_oak_log
                     TextureGroup.of("reinforced_oak_log", "block/ch/oak_logs/reinforced_oak_log_m",
                             "", null),
-                    TextureGroup.of("reinforced_oak_log_top", "block/ch/oak_logs/edge_cut_log_top_m",
-                            "block/ch/oak_logs/center_cut_log_top_m",
+                    TextureGroup.of("reinforced_oak_log_top", "block/ch/oak_logs/center_cut_log_top_m",
+                            "block/ch/oak_logs/center_cut_log_top_planks_m",
                             LOG_SIDE_STANDARD),
 
                     // bundled_oak_log
