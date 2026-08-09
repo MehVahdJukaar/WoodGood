@@ -6,8 +6,8 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
 public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation mask, @Nullable ResourceLocation overlay,
-                          boolean keepNamespace, boolean copyTexture, String customTexturePath,
-                          Pair<String, String> replacePath,
+                          boolean keepNamespace, boolean copyTexture, boolean noAnimation,
+                          String customTexturePath, Pair<String, String> replacePath,
                           boolean autoMask,
                           @Deprecated boolean onAtlas,
                           PaletteStrategy paletteStrategy) {
@@ -31,8 +31,8 @@ public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation m
     //remove once you remove the rest of palette madness
     @Deprecated(forRemoval = true)
     public TextureInfo cloneWithPalette(PaletteStrategy newPalette) {
-        return new TextureInfo(this.texture, this.mask, this.overlay, this.keepNamespace, this.copyTexture, this.customTexturePath,
-                replacePath, this.autoMask, this.onAtlas, newPalette);
+        return new TextureInfo(this.texture, this.mask, this.overlay, this.keepNamespace, this.copyTexture, noAnimation,
+                this.customTexturePath, replacePath, this.autoMask, this.onAtlas, newPalette);
     }
 
     public static class Builder {
@@ -41,6 +41,7 @@ public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation m
         private ResourceLocation overlay;
         private boolean keepNamespace = false;
         private boolean copyTexture = false;
+        private boolean noAnimation = false;
         private boolean autoMask = false;
         private boolean onAtlas;
         private String customTexturePath;
@@ -78,6 +79,12 @@ public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation m
             return this;
         }
 
+        // Ensure that generated textures aren't animated texture
+        public Builder noAnimation() {
+            this.noAnimation = true;
+            return this;
+        }
+
         public Builder customTexture(String customTexturePath) {
             this.customTexturePath = customTexturePath;
             return this;
@@ -103,7 +110,7 @@ public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation m
 
         public TextureInfo build() {
             return new TextureInfo(texture, mask, overlay, keepNamespace,
-                    copyTexture, customTexturePath, replacePath, autoMask, onAtlas, palette);
+                    copyTexture, noAnimation, customTexturePath, replacePath, autoMask, onAtlas, palette);
         }
     }
 
