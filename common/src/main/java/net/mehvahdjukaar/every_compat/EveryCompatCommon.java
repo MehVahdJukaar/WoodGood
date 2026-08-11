@@ -94,6 +94,17 @@ public class EveryCompatCommon {
                     List.of("autumnity", "upgrade_aquatic", "environmental", "atmospheric", "endergetic", "caverns_and_chasms"),
                     "farmersdelight");
 
+            // Bibliocraft Legacy
+            addOtherCompatMod("bibliowoods",
+                    List.of("aether_ii", "allthemodium", "arsmagicalegacy", "ecologics", "evilcraft", "forbidden_arcanus",
+                    "integrateddynamics", "occultism", "silentgear", "tropicraft"),
+                    "bibliocraft");
+
+            addOtherCompatMod("bibliobiomes",
+                    List.of("biomesoplenty", "biomeswevegone", "regions_unexplored"),
+                    "bibliocraft");
+
+
     //!! =========================================== Add Modules ==================================================== \\
             addOptionalModule("architects_palette", () -> ArchitectsPaletteModule.class);
             addOptionalModule("another_furniture", () -> AnotherFurnitureModule.class);
