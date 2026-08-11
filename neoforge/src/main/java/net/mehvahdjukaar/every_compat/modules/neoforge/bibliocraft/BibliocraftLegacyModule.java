@@ -205,7 +205,7 @@ public class BibliocraftLegacyModule extends EveryCompatModule {
                 "cobblemon", "deep_aether", "deeperdarker",
                 "eternal_starlight", "expandeddelight", "extradelight",
                 "forbidden_arcanus", "gtceu", "integrateddynamics",
-                "mynethersdelight", "occultism", "regionsunexplored",
+                "mynethersdelight", "occultism", "regions_unexplored",
                 "silentgear", "twilightforest", "undergarden",
                 "vampirism", "werewolves"
         );
