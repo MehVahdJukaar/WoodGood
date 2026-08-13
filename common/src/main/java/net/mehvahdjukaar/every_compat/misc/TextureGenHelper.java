@@ -155,7 +155,7 @@ public class TextureGenHelper {
                                 ResourceLocation finalNewId = newId;
                                 sink.addTextureIfNotPresent(manager, newId, () -> {
                                     Respriter respriter = respriterSet.getValue();
-                                    TextureImage img = respriter.recolorWithAnimation(targetPalette, targetAnimation);
+                                    TextureImage img = (info.noAnimation()) ? respriter.recolor(targetPalette) : respriter.recolorWithAnimation(targetPalette, targetAnimation);
                                     if (info.overlay() != null) getAndApplyOverlay(img, info.overlay(), manager);
                                     postProcessSpecialTexture(blockType, finalNewId, manager, img, info);
                                     return img;
