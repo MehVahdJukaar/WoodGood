@@ -45,7 +45,8 @@ dependencies {
     modCompileOnly("curse.maven:framework-549225:7530361") // +Refurbished-Furniture, Mighty-Mail, Backpacked
     modCompileOnly("curse.maven:architectury-api-419699:5786327")
     modCompileOnly("curse.maven:valhelsia-core-416935:6296775") // Valhelsia-Furniture
-//    modCompileOnly("curse.maven:supermartijn642s-core-lib-454372:7521829") // v1.1.20 | Rechiseled
+    modCompileOnly("curse.maven:supermartijn642s-config-lib-438332:5546996") // v1.1.8 | Rechiseled
+    modCompileOnly("curse.maven:supermartijn642s-core-lib-454372:7521894") // v1.1.20 | Rechiseled
 
     modCompileOnly("org.violetmoon.zeta:Zeta:1.1-40-SNAPSHOT") // Quark - @ DNU - https://maven.blamejared.com/org/violetmoon/zeta/Zeta/
 //    modCompileOnly("curse.maven:zeta-968868:7980010") // TEMP BACKUP MAVEN
@@ -91,7 +92,7 @@ dependencies {
     modCompileOnly("curse.maven:more-chest-variants-lieonlion-858032:7310871")
     modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5520190")
     modCompileOnly("curse.maven:refurbished-furniture-897116:7473565") // Framework
-//    modCompileOnly("curse.maven:rechiseled-558998:7687483") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ] //!! Not created yet - do not import it because fabric-loom is v1.14+
+    modCompileOnly("curse.maven:rechiseled-558998:8301793") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ]
     modCompileOnly("curse.maven:storage-drawers-223852:6995432") // 1.21.1-13.11.4 NeoForge
     modCompileOnly("curse.maven:table-top-craft-467136:5318681") //!! 1.20.1
     modCompileOnly("curse.maven:twigs-496913:8191595")

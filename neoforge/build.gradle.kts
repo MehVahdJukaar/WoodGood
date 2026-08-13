@@ -61,7 +61,6 @@ dependencies {
 //    modRuntimeOnly("curse.maven:cloth-config-348521:5729127") // v15.0.140 | REI
 //    modRuntimeOnly("curse.maven:fusion-connected-textures-854949:7471474") // v1.2.12 | Dawn of Time, Timber-Frame, Rechiseled
 //    modRuntimeOnly("curse.maven:supermartijn642s-config-lib-438332:5546996") // v1.1.8 | Rechiseled
-//    modRuntimeOnly("curse.maven:supermartijn642s-core-lib-454372:7521894") // v1.1.20 | Rechiseled
 //    modRuntimeOnly("maven.modrinth:midnightlib:YeePowOJ") // v1.6.3 | Building-But-Better
 //    modRuntimeOnly("curse.maven:flib-661261:5495793") // Absent-By-Design //!! 1.20.1
 //    modRuntimeOnly("curse.maven:curios-309927:5680164") // Malum //!! 1.20.1
@@ -93,6 +92,7 @@ dependencies {
 //    modCompileOnly("curse.maven:zeta-968868:7640154") // v1.1-39 | TEMP BACKUP MAVEN
 
     //+ MIRRORED FROM COMMON - Required because dependOn(common) compiles common sources with neoforge classpath
+    modCompileOnly("curse.maven:supermartijn642s-core-lib-454372:7521894") // v1.1.20 | Rechiseled
     modCompileOnly("com.teamresourceful.resourcefullib:resourcefullib-neoforge-1.21:${property("resourcefullib_version")}") // Chipped, Handcrafted, Cozy, Friends&Foes
     modCompileOnly("curse.maven:architectury-api-419699:5786327") // v13.0.8 | REI, Furnish, [Let's Do]-Meadow
 
@@ -105,6 +105,7 @@ dependencies {
     modCompileOnly("curse.maven:decorative-blocks-reborn-1327768:7926194")
     modCompileOnly("curse.maven:farmersdelight-398521:8083481")
     modCompileOnly("curse.maven:handcrafted-538214:6330030") // Resourceful-Lib
+    modCompileOnly("curse.maven:rechiseled-558998:7687594") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ]
     modCompileOnly("curse.maven:refurbished-furniture-897116:7473565")
     modCompileOnly("curse.maven:storage-drawers-223852:6995432")
     modCompileOnly("curse.maven:twigs-496913:8191595")
@@ -131,7 +132,6 @@ dependencies {
 //    modRuntimeOnly("curse.maven:more-beautiful-torches-860325:5609745") // MonoLib
 //    modRuntimeOnly("curse.maven:more-chest-variants-lieonlion-858032:5862569") // Quad - LieOnLion
 //    modRuntimeOnly("curse.maven:refurbished-furniture-897116:6272849") // Framework
-//    modRuntimeOnly("curse.maven:rechiseled-558998:7687594") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ]
 //    modRuntimeOnly("curse.maven:variant-vanilla-blocks-866509:4997060") //v1.3.6 //@ 1.20.1-NOT_AVAILABLE
 //    modRuntimeOnly("curse.maven:villagersplus-forge-817272:4996995") //!! 1.20.1
 

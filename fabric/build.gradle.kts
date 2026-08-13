@@ -62,7 +62,6 @@ dependencies {
 //    modRuntimeOnly("curse.maven:forge-config-api-port-fabric-547434:5982384") //v21.1.3 | Regions-Unexplored
 //    modRuntimeOnly("curse.maven:fusion-connected-textures-854949:5129312") // v1.1.1 | Rechiseled //!! 1.20
 //    modRuntimeOnly("curse.maven:supermartijn642s-config-lib-438332:5546988") // v1.1.8 | Rechiseled
-//    modRuntimeOnly("curse.maven:supermartijn642s-core-lib-454372:7521829") // v1.1.20 | Rechiseled
 //    modRuntimeOnly("curse.maven:trinkets-341284:5173501") // Backpacked
 //    modRuntimeOnly("curse.maven:monolib-968432:6123972") //v2.0.0 | More-Beautiful-Torches
 //    modRuntimeOnly("curse.maven:athena-841890:5176880") // Chipped
@@ -95,6 +94,9 @@ dependencies {
     modImplementation("com.electronwill.night-config:core:3.8.1")
     modImplementation("com.electronwill.night-config:toml:3.8.1")
 
+    //+ MIRRORED FROM COMMON - Required because dependOn(common) compiles common sources with fabric classpath
+//    modRuntimeOnly("curse.maven:supermartijn642s-core-lib-454372:7521829") // v1.1.20 | Rechiseled
+
 //!! =================================================== IMPORTS ==================================================== \\
     //+ MIRRORED FROM COMMON - Required because dependOn(common) compiles common sources with fabric classpath
     modCompileOnly("curse.maven:another-furniture-610492:4815126") //!! 1.20.1
@@ -109,6 +111,7 @@ dependencies {
     modCompileOnly("curse.maven:missing-wilds-622590:6302231")
     modCompileOnly("curse.maven:more-chest-variants-lieonlion-858032:5476664") // Quad - LieOnLion
     modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5473304") // Quad - LieOnLion
+//    modRuntimeOnly("curse.maven:rechiseled-558998:7687483") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ]
     modCompileOnly("curse.maven:refurbished-furniture-897116:7473565")
     modCompileOnly("curse.maven:storage-drawers-223852:6967726")
     modCompileOnly("curse.maven:table-top-craft-fabric-729535:5319819") //@RLM: exp4j //!! 1.20.1
@@ -129,7 +132,6 @@ dependencies {
 //    modRuntimeOnly("curse.maven:handcrafted-538214:5617253")
 //    modRuntimeOnly("curse.maven:hearth-and-home-849364:4828281") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:more-beautiful-torches-860325:5609745") // MonoLib
-//    modRuntimeOnly("curse.maven:rechiseled-558998:7687483") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ]
 //    modCompileOnly("curse.maven:villagersplus-fabric-809542:4996993") //!! 1.20.1
 
     //- OTHER MAVENS

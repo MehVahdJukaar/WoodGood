@@ -19,6 +19,9 @@ import net.mehvahdjukaar.every_compat.modules.more_beautiful_torches.MoreBeautif
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish.MightyMailModule;
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish.RefurbishedFurnitureModule;
+import net.mehvahdjukaar.every_compat.modules.rechiseled.RechiseledModuleBlock;
+import net.mehvahdjukaar.every_compat.modules.rechiseled.RechiseledModuleSlab;
+import net.mehvahdjukaar.every_compat.modules.rechiseled.RechiseledModuleStairs;
 import net.mehvahdjukaar.every_compat.modules.storagedrawers.StorageDrawersModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
 import net.mehvahdjukaar.every_compat.modules.valhelsia_furniture.ValhelsiaFurnitureModule;
@@ -127,6 +130,7 @@ public class EveryCompatCommon {
             addOptionalModule("missingwilds", () -> MissingWildModule.class);
             addOptionalModule("more_beautiful_torches", () -> MoreBeautifulTorches.class);
             addOptionalModule("refurbished_furniture", () -> RefurbishedFurnitureModule.class);
+            addMultipleOptional("rechiseled", () -> RechiseledModuleBlock.class, () -> RechiseledModuleSlab.class, () -> RechiseledModuleStairs.class);
             addOptionalModule("storagedrawers", () -> StorageDrawersModule.class);
 //            addOptionalModule("table_top_craft", () -> TableTopCraftModule.class); //- Not-Available-For-1.21.1
             addOptionalModule("twigs", () -> TwigsModule.class);
