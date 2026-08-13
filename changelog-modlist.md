@@ -61,7 +61,7 @@
 | MrCrayfish's Refurbished Furniture         |   🟩   |
 | Regions Unexplored                         |   🟩   |
 | Rechiseled                                 |   🟩   |
-| Storage Delight                            |   🔧   |
+| Storage Delight                            |   🟡   |
 | Storage Drawers                            |   🟩   |
 | The New Shutter aka Launch's Shutter       |   🟩   |
 | The Twilight Foreset                       |   🟩   |
