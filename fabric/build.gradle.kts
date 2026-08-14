@@ -95,7 +95,7 @@ dependencies {
     modImplementation("com.electronwill.night-config:toml:3.8.1")
 
     //+ MIRRORED FROM COMMON - Required because dependOn(common) compiles common sources with fabric classpath
-//    modRuntimeOnly("curse.maven:supermartijn642s-core-lib-454372:7521829") // v1.1.20 | Rechiseled
+    modCompileOnly("curse.maven:supermartijn642s-core-lib-454372:8623607") // v1.1.24 | Rechiseled
 
 //!! =================================================== IMPORTS ==================================================== \\
     //+ MIRRORED FROM COMMON - Required because dependOn(common) compiles common sources with fabric classpath
@@ -111,7 +111,7 @@ dependencies {
     modCompileOnly("curse.maven:missing-wilds-622590:6302231")
     modCompileOnly("curse.maven:more-chest-variants-lieonlion-858032:5476664") // Quad - LieOnLion
     modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5473304") // Quad - LieOnLion
-//    modRuntimeOnly("curse.maven:rechiseled-558998:7687483") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ]
+    modCompileOnly("curse.maven:rechiseled-558998:7687483") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ]
     modCompileOnly("curse.maven:refurbished-furniture-897116:7473565")
     modCompileOnly("curse.maven:storage-drawers-223852:6967726")
     modCompileOnly("curse.maven:table-top-craft-fabric-729535:5319819") //@RLM: exp4j //!! 1.20.1
