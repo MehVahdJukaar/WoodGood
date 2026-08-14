@@ -95,7 +95,7 @@ subprojects {
                     optional("twigs")
                     optional("valhelsia-furniture")
                     optional("variant-vanilla-blocks")
-                    optional("villagersplus-fabric")
+                    optional("villagersplus")
                     optional("wooden-hoppers")
                 } else { //!! NEOFORGE
                     optional("absent-by-design")
@@ -151,7 +151,7 @@ subprojects {
                     optional("valhelsia-furniture")
                     optional("variant-crafting-tables")
                     optional("variant-vanilla-blocks")
-                    optional("villagersplus-forge")
+                    optional("villagersplus")
                     optional("woodworks")
 //                    optional("workshop-for-handsome-adventurer")
                     optional("xercamod")
@@ -336,14 +336,3 @@ subprojects {
     }
 }
 
-// Local
-tasks.register("clean-build-PublishAll") {
-    group = "build"
-    description = "Runs clean, build, publish for all projects"
-
-    dependsOn(subprojects.map { it.tasks.named("clean") })
-    dependsOn(subprojects.map { it.tasks.named("build") })
-    dependsOn(subprojects.map { it.tasks.named("upload") })
-
-    finalizedBy("gitTag")
-}
