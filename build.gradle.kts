@@ -4,7 +4,7 @@ plugins {
     id("com.possible-triangle.common") apply false
     id("com.possible-triangle.fabric") apply false
     id("com.possible-triangle.neoforge") apply false
-    id("net.mehvahdjukaar.candlelight") version "1.2.4" apply false
+    id("net.mehvahdjukaar.candlelight") version "1.2.6" apply false
 }
 
 mod {
@@ -25,7 +25,7 @@ subprojects {
     pluginManager.apply("maven-publish")
 
     dependencies {
-        compileOnly("net.mehvahdjukaar:candlelight:1.2.1")
+        compileOnly("net.mehvahdjukaar:candlelight:1.2.6")
     }
 
     /* can be added once new candle is out
