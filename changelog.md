@@ -12,6 +12,26 @@
 |                                                                                                                                   |
 
 ---
+## v2.11.49
+
+### CHANGES:
+- **Quark** (NF): Implemented AXE_STRIP for `POST` to be stripped into `STRIPPED_POST`
+- **Every Compat (INCLUDED)**: **Architect's Palette**'s BOARDS with **Windswept** - Requested by @derp_gamer22
+- **MrCrayFish's Refurbished Furniture** (C): Set some blocks to not have an animated texture - [#1304](https://github.com/MehVahdJukaar/WoodGood/issues/1304)
+- **Regions Unexplored** (TEX): Improved the custom texture generation using `brimwood_planks` - this is related to above, please see **Refurbished Furniture**'s issue for more detail
+
+### REMOVED:
+- **Every Compat** (C): ENABLE_FRAMED_BLOCKS_BLACKLIST is no longer needed. Use `everycomp-hazardous.toml` as an alternative
+
+### ADDED:
+- **Macaw's Windows** (C): new block, `curtain_rod` - [#1307](https://github.com/MehVahdJukaar/WoodGood/issues/1307)
+- **Bibliocraft Legacy** (Compat): Added exceptions for **bibliobiomes** & **bibliowoods**
+
+### NEW:
+- **Rechiseled** (C)
+
+---
+
 ## v2.11.48
 
 ### CHANGES:
@@ -38,7 +58,7 @@
   - Fixed the Environmental's LeavesType for variant Wisteria's missing Associated WoodType - [#1294](https://github.com/MehVahdJukaar/WoodGood/issues/1294)
   - HardcodedBlockTypes:
     - Set the following WoodTypes to be treated as BambooType - [#1250](https://github.com/MehVahdJukaar/WoodGood/issues/1250) 
-      - garden_of_the_dead:wisteria
+      - garden_of_the_dead:whistlecane
       - mynethersdelight:powdery
       - dungeonsdelight:wormwood
     - Added Shroomcraft's 4 undetected Mushroom - [#1286](https://github.com/MehVahdJukaar/WoodGood/issues/1286)
