@@ -602,6 +602,7 @@
   "block_type.mcwwindows.pane_window": "%s Pane Window",
   "block_type.mcwwindows.stripped_pane_window": "Stripped %s Pane Window",
   "block_type.mcwwindows.plank_pane_window": "%s Planks Pane Window",
+  "block_type.mcwwindows.curtain_rod": "%s Curtain Rod",
 
   "block_type.mcwstairs.terrace_stairs":"%s Terrace Stairs",
   "block_type.mcwstairs.skyline_stairs":"%s Skyline Stairs",
