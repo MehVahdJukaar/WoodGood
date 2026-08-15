@@ -1,7 +1,6 @@
 package net.mehvahdjukaar.every_compat.api;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
@@ -25,8 +24,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 
 import java.util.*;
 import java.util.function.Consumer;
-
-import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.FRAMED_BLOCKS_SUFFIX;
 
 public class SimpleModule extends CompatModule {
 
@@ -260,9 +257,6 @@ public class SimpleModule extends CompatModule {
 
         String slashConvention = woodTypeFrom + "/" + blockName; // quark/blossom_chair
         String underscoreConvention = woodTypeFrom + "_" + blockName; // quark_blossom_chair
-
-        // Excude Supported-Mods' blocks that are similar to blocks from Framed-Blocks
-        if (UnsafeDisablerConfigs.ENABLE_FRAMED_BLOCKS_BLACKLIST.get() && PlatHelper.isModLoaded("framedblocks") && FRAMED_BLOCKS_SUFFIX.stream().anyMatch(blockName::contains)) return true;
 
         // Exclude blocks from a mod that are both Supported-Mod & Wood-Mod
         if (woodTypeFrom.equals(modId)) return true; //Example: quark, blossom
