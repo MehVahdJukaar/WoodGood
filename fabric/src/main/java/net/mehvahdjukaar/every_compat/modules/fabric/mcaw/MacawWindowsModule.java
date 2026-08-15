@@ -1,281 +1,53 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.mcaw;
 
-import net.kikoz.mcwwindows.MacawsWindows;
-import net.kikoz.mcwwindows.init.BlockInit;
 import net.kikoz.mcwwindows.objects.*;
-import net.mehvahdjukaar.every_compat.api.RenderLayer;
-import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
-import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
+import net.mehvahdjukaar.every_compat.modules.macaw.MacawWindowsModuleAbstract;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.MapColor;
 
-//SUPPORT: v2.2.1+
-public class MacawWindowsModule extends SimpleModule {
-
-    public final SimpleEntrySet<WoodType, Block> window;
-    public final SimpleEntrySet<WoodType, Block> window2;
-    public final SimpleEntrySet<WoodType, Block> fourWindow;
-    public final SimpleEntrySet<WoodType, Block> strippedLogWindow;
-    public final SimpleEntrySet<WoodType, Block> strippedLogWindow2;
-    public final SimpleEntrySet<WoodType, Block> strippedLogFourWindow;
-    public final SimpleEntrySet<WoodType, Block> plankWindow;
-    public final SimpleEntrySet<WoodType, Block> plankWindow2;
-    public final SimpleEntrySet<WoodType, Block> plankFourWindow;
-    public final SimpleEntrySet<WoodType, Block> paneWindow;
-    public final SimpleEntrySet<WoodType, Block> strippedPaneWindow;
-    public final SimpleEntrySet<WoodType, Block> plankPaneWindow;
-    public final SimpleEntrySet<WoodType, Block> logParapet;
-    public final SimpleEntrySet<WoodType, Block> plankParapet;
-    public final SimpleEntrySet<WoodType, Block> blinds;
-    public final SimpleEntrySet<WoodType, Block> shutter;
-    public final SimpleEntrySet<WoodType, Block> louveredShutter;
-
+//See MacawWindowsModuleAbstract's SUPPORTED VERSION
+public class MacawWindowsModule extends MacawWindowsModuleAbstract {
 
     public MacawWindowsModule(String modId) {
-        super(modId, "mcw");
-        ResourceKey<CreativeModeTab> tab = MacawsWindows.WINDOWSGROUP;
-
-        window = SimpleEntrySet.builder(WoodType.class, "window",
-                        () -> BlockInit.OAK_WINDOW, () -> VanillaWoodTypes.OAK,
-                        w -> new ConnectedWindow(Utils.copyPropertySafe(w.log))
-                )
-                //TEXTURES: log
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(BlockTags.WALLS, Registries.BLOCK)
-                .addTag(modRes("windows"), Registries.BLOCK)
-                .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                .defaultRecipe()
-                .build();
-        this.addEntry(window);
-
-        window2 = SimpleEntrySet.builder(WoodType.class, "window2",
-                        () -> BlockInit.OAK_WINDOW2, () -> VanillaWoodTypes.OAK,
-                        w -> new WindowBarred(Utils.copyPropertySafe(w.log))
-                )
-                //TEXTURES: log
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(BlockTags.WALLS, Registries.BLOCK)
-                .addTag(modRes("windows_two"), Registries.BLOCK)
-                .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                .defaultRecipe()
-                .build();
-        this.addEntry(window2);
-
-        fourWindow = SimpleEntrySet.builder(WoodType.class, "four_window",
-                        () -> BlockInit.OAK_FOUR_WINDOW, () -> VanillaWoodTypes.OAK,
-                        w -> new WindowBarred(Utils.copyPropertySafe(w.log))
-                )
-                //TEXTURES: log
-                .addTag(modRes("windows_four"), Registries.BLOCK)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                .defaultRecipe()
-                .build();
-        this.addEntry(fourWindow);
-
-        strippedLogWindow = SimpleEntrySet.builder(WoodType.class, "log_window", "stripped",
-                        () -> BlockInit.STRIPPED_OAK_LOG_WINDOW, () -> VanillaWoodTypes.OAK,
-                        w -> new ConnectedWindow(Utils.copyPropertySafe(w.log))
-                )
-                .requiresChildren("stripped_log") //REASON: textures
-                //TEXTURES: stripped_log
-                .addTag(modRes("windows"), Registries.BLOCK)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                .defaultRecipe()
-                .build();
-        this.addEntry(strippedLogWindow);
-
-        strippedLogWindow2 = SimpleEntrySet.builder(WoodType.class, "log_window2", "stripped",
-                        () -> BlockInit.STRIPPED_OAK_LOG_WINDOW2, () -> VanillaWoodTypes.OAK,
-                        w -> new WindowBarred(Utils.copyPropertySafe(w.log))
-                )
-                .requiresChildren("stripped_log") //REASON: textures
-                //TEXTURES: stripped_log
-                .addTag(modRes("windows_two"), Registries.BLOCK)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                .defaultRecipe()
-                .build();
-        this.addEntry(strippedLogWindow2);
-
-        strippedLogFourWindow = SimpleEntrySet.builder(WoodType.class, "log_four_window", "stripped",
-                        () -> BlockInit.STRIPPED_OAK_LOG_FOUR_WINDOW, () -> VanillaWoodTypes.OAK,
-                        w -> new WindowBarred(Utils.copyPropertySafe(w.log))
-                )
-                .requiresChildren("stripped_log") //REASON: textures
-                //TEXTURES: stripped_log
-                .addTag(modRes("windows_four"), Registries.BLOCK)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                .defaultRecipe()
-                .build();
-        this.addEntry(strippedLogFourWindow);
-
-        plankWindow = SimpleEntrySet.builder(WoodType.class, "plank_window",
-                        () -> BlockInit.OAK_PLANK_WINDOW, () -> VanillaWoodTypes.OAK,
-                        w -> new ConnectedWindow(Utils.copyPropertySafe(w.planks))
-                )
-                //TEXTURES: planks
-                .addTag(modRes("windows"), Registries.BLOCK)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                .defaultRecipe()
-                .build();
-        this.addEntry(plankWindow);
-
-        plankWindow2 = SimpleEntrySet.builder(WoodType.class, "plank_window2",
-                        () -> BlockInit.OAK_PLANK_WINDOW2, () -> VanillaWoodTypes.OAK,
-                        w -> new WindowBarred(Utils.copyPropertySafe(w.planks))
-                )
-                //TEXTURES: planks
-                .addTag(modRes("windows_two"), Registries.BLOCK)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                .defaultRecipe()
-                .build();
-        this.addEntry(plankWindow2);
-
-        plankFourWindow = SimpleEntrySet.builder(WoodType.class, "plank_four_window",
-                        () -> BlockInit.OAK_PLANK_FOUR_WINDOW, () -> VanillaWoodTypes.OAK,
-                        w -> new WindowBarred(Utils.copyPropertySafe(w.planks))
-                )
-                //TEXTURES: planks
-                .addTag(modRes("windows_four"), Registries.BLOCK)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                .defaultRecipe()
-                .build();
-        this.addEntry(plankFourWindow);
-
-        paneWindow = SimpleEntrySet.builder(WoodType.class, "pane_window",
-                        () -> BlockInit.OAK_PANE_WINDOW, () -> VanillaWoodTypes.OAK,
-                        w -> new Window(Utils.copyPropertySafe(w.log))
-                )
-                //TEXTURES: log
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(BlockTags.WALLS, Registries.BLOCK)
-                .addTag(modRes("pane_windows"), Registries.BLOCK)
-                .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                .defaultRecipe()
-                .build();
-        this.addEntry(paneWindow);
-
-        strippedPaneWindow = SimpleEntrySet.builder(WoodType.class, "pane_window", "stripped",
-                        () -> BlockInit.STRIPPED_OAK_PANE_WINDOW, () -> VanillaWoodTypes.OAK,
-                        w -> new Window(Utils.copyPropertySafe(w.log))
-                )
-                .requiresChildren("stripped_log") //REASON: textures
-                //TEXTURES: stripped_log
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(BlockTags.WALLS, Registries.BLOCK)
-                .addTag(modRes("pane_windows"), Registries.BLOCK)
-                .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                .defaultRecipe()
-                .build();
-        this.addEntry(strippedPaneWindow);
-
-        plankPaneWindow = SimpleEntrySet.builder(WoodType.class, "plank_pane_window",
-                        () -> BlockInit.OAK_PLANK_PANE_WINDOW, () -> VanillaWoodTypes.OAK,
-                        w -> new Window(Utils.copyPropertySafe(w.planks))
-                )
-                //TEXTURES: planks
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(BlockTags.WALLS, Registries.BLOCK)
-                .addTag(modRes("pane_windows"), Registries.BLOCK)
-                .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                .defaultRecipe()
-                .build();
-        this.addEntry(plankPaneWindow);
-
-        logParapet = SimpleEntrySet.builder(WoodType.class, "log_parapet",
-                        () -> BlockInit.OAK_LOG_PARAPET, () -> VanillaWoodTypes.OAK,
-                        w -> new Parapet(Utils.copyPropertySafe(w.log))
-                )
-                //TEXTURES: log
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
-                .defaultRecipe()
-                .build();
-        this.addEntry(logParapet);
-
-        plankParapet = SimpleEntrySet.builder(WoodType.class, "plank_parapet",
-                        () -> BlockInit.OAK_PLANK_PARAPET, () -> VanillaWoodTypes.OAK,
-                        w -> new Parapet(Utils.copyPropertySafe(w.planks))
-                )
-                //TEXTURES: planks
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
-                .defaultRecipe()
-                .build();
-        this.addEntry(plankParapet);
-
-        blinds = SimpleEntrySet.builder(WoodType.class, "blinds",
-                        () -> BlockInit.OAK_BLINDS, () -> VanillaWoodTypes.OAK,
-                        w -> new Blinds(Utils.copyPropertySafe(w.planks).noOcclusion())
-                )
-                .requiresChildren("stripped_log") //REASON: textures
-                //TEXTURES: log, stripped_log, planks
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
-                .defaultRecipe()
-                .build();
-        this.addEntry(blinds);
-
-        shutter = SimpleEntrySet.builder(WoodType.class, "shutter",
-                        () -> BlockInit.OAK_SHUTTER, () -> VanillaWoodTypes.OAK,
-                        w -> new Shutter(Utils.copyPropertySafe(w.planks))
-                )
-                .createPaletteFromPlanks(this::shutterPalette)
-                .addTexture(modRes("block/oak_shutter"))
-                .addTag(modRes("shutters"), Registries.BLOCK)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT)
-                .defaultRecipe()
-                .build();
-        this.addEntry(shutter);
-
-        louveredShutter = SimpleEntrySet.builder(WoodType.class, "louvered_shutter",
-                        () -> BlockInit.OAK_LOUVERED_SHUTTER, () -> VanillaWoodTypes.OAK,
-                        w -> new Shutter(Utils.copyPropertySafe(w.planks))
-                )
-                .createPaletteFromPlanks(this::shutterPalette)
-                .addTexture(modRes("block/oak_louvered_shutter"))
-                .addTag(modRes("shutters"), Registries.BLOCK)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT)
-                .defaultRecipe()
-                .build();
-        this.addEntry(louveredShutter);
+        super(modId);
     }
 
-    private void shutterPalette(Palette p) {
-        int leftover = p.size() - 3;
-        if (leftover > 6) {
-            p.remove(p.getLightest());
-            p.remove(p.getDarkest());
-            p.remove(p.getDarkest());
-        }
+    @Override
+    public Block newConnectedWindow(WoodType woodType) {
+        return new ConnectedWindow(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(0.6F, 1.2F));
     }
+
+    @Override
+    public Block newWindowBarred(WoodType woodType) {
+        return new WindowBarred(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(0.6F, 1.2F));
+    }
+
+    @Override
+    public Block newWindow(WoodType woodType) {
+        return new Window(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(0.6F, 1.2F));
+    }
+
+    @Override
+    public Block newParapet(WoodType woodType) {
+        return new Parapet(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(0.2F, 1.0F));
+    }
+
+    @Override
+    public Block newBlinds(WoodType woodType) {
+        return new Blinds(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(0.3F, 1.0F));
+    }
+
+    @Override
+    public Block newShutter(WoodType woodType) {
+        return new Shutter(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(0.5F, 2.0F));
+    }
+
+    @Override
+    public Block newCurtainRod(WoodType woodType) {
+        return new CurtainRod(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(0.3F, 0.7F));
+    }
+
 }
