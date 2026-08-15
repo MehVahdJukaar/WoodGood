@@ -88,26 +88,28 @@ public class RefurbishedFurnitureModule extends SimpleModule {
 
         chairs = SimpleEntrySet.builder(WoodType.class, "chair",
                         getModBlock("oak_chair"), () -> VanillaWoodTypes.OAK,
-                        w -> new ChairBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of().strength(2.0F))))
-                .addRecipe(modRes("constructing/oak_chair"))
-                .setTabKey(tab)
+                        w -> new ChairBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of().strength(2.0F)))
+                )
                 .addTexture(modRes("block/oak_chair"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("general"), Registries.ITEM)
+                .setTabKey(tab)
+                .addRecipe(modRes("constructing/oak_chair"))
                 .build();
         this.addEntry(chairs);
 
         tables = SimpleEntrySet.builder(WoodType.class, "table",
                         getModBlock("oak_table"), () -> VanillaWoodTypes.OAK,
                         w -> new TableBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of()
-                                .strength(2.0F))))
-                .addRecipe(modRes("constructing/oak_table"))
-                .setTabKey(tab)
+                                .strength(2.0F)))
+                )
                 .addTexture(modRes("block/oak_table"))
                 .addTexture(modRes("block/oak_particle"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("tuckable"), Registries.BLOCK)
                 .addTag(modRes("general"), Registries.ITEM)
+                .setTabKey(tab)
+                .addRecipe(modRes("constructing/oak_table"))
                 .build();
         this.addEntry(tables);
 
@@ -118,12 +120,12 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                                 BlockBehaviour.Properties.of().mapColor(w.planks.defaultMapColor())
                                         .strength(0.8F).sound(w.getSound()).lightLevel(CeilingFanBlock::light))
                 )
-                .addTextureM(modRes("block/oak_dark_ceiling_fan"),
-                        EveryCompat.res("block/rfm/oak_ceiling_fan_m"))
                 .addTile(ModBlockEntities.CEILING_FAN::get)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("electronics"), Registries.ITEM)
                 .addTag(modRes("bedroom"), Registries.ITEM)
+                .addNonAnimatedTextureM(modRes("block/oak_dark_ceiling_fan"),
+                        EveryCompat.res("block/rfm/oak_ceiling_fan_m"))
                 .setTabKey(tab)
                 .setRenderType(RenderLayer.TRANSLUCENT)
                 .addRecipe(modRes("constructing/oak_dark_ceiling_fan"))
@@ -140,11 +142,11 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                                         .strength(0.8F).sound(w.getSound()).lightLevel(CeilingFanBlock::light))
                 )
                 .addTile(ModBlockEntities.CEILING_FAN::get)
-                .addTextureM(modRes("block/oak_light_ceiling_fan"),
-                        EveryCompat.res("block/rfm/oak_ceiling_fan_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("electronics"), Registries.ITEM)
                 .addTag(modRes("bedroom"), Registries.ITEM)
+                .addNonAnimatedTextureM(modRes("block/oak_light_ceiling_fan"),
+                        EveryCompat.res("block/rfm/oak_ceiling_fan_m"))
                 .setTabKey(tab)
                 .setRenderType(RenderLayer.TRANSLUCENT)
                 .addRecipe(modRes("constructing/oak_light_ceiling_fan"))
@@ -157,13 +159,13 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                         getModBlock("oak_crate"), () -> VanillaWoodTypes.OAK,
                         w -> new CrateBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of()
                                 .forceSolidOn().strength(2.5F))))
-                .addRecipe(modRes("constructing/oak_crate"))
-                .setTabKey(tab)
                 .addTile(ModBlockEntities.CRATE::get)
                 .addTexture(modRes("block/oak_crate"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("storage"), Registries.ITEM)
                 .addTag(modRes("outdoors"), Registries.ITEM)
+                .setTabKey(tab)
+                .addRecipe(modRes("constructing/oak_crate"))
                 .build();
         this.addEntry(crates);
 
@@ -171,16 +173,16 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                         getModBlock("oak_mail_box"), () -> VanillaWoodTypes.OAK,
                         w -> new MailboxBlock(w.toVanillaOrOak(), addWoodPropNoFire(w, BlockBehaviour.Properties.of()
                                 .strength(2.5F))))
-                .addRecipe(modRes("constructing/oak_mail_box"))
                 .addCustomItem((woodType, block, properties) -> new MailboxItem(block, properties))
-                .setTabKey(tab)
                 .addTile(ModBlockEntities.MAIL_BOX::get)
-                .addTextureM(modRes("block/oak_mail_box"),
+                .addNonAnimatedTextureM(modRes("block/oak_mail_box"),
                         EveryCompat.res("block/rfm/oak_mail_box_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("outdoors"), Registries.ITEM)
                 .addTag(modRes("storage"), Registries.ITEM)
+                .setTabKey(tab)
                 .setRenderType(RenderLayer.CUTOUT)
+                .addRecipe(modRes("constructing/oak_mail_box"))
                 .build();
         this.addEntry(mailboxes);
 
@@ -188,15 +190,15 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                         getModBlock("oak_toilet"), () -> VanillaWoodTypes.OAK,
                         w -> new WoodenToiletBlock(w.toVanillaOrOak(), BlockBehaviour.Properties.of().mapColor(w.planks.defaultMapColor())
                                 .strength(3.5f).sound(SoundType.STONE)))
-                .addRecipe(modRes("constructing/oak_toilet"))
-                .setTabKey(tab)
                 .addTile(ModBlockEntities.TOILET::get)
-                .addTextureM(modRes("block/oak_toilet"),
+                .addNonAnimatedTextureM(modRes("block/oak_toilet"),
                         EveryCompat.res("block/rfm/oak_toilet_m"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("wooden_toilets"), Registries.ITEM)
                 .addTag(modRes("bathroom"), Registries.ITEM)
+                .setTabKey(tab)
                 .setRenderType(RenderLayer.CUTOUT)
+                .addRecipe(modRes("constructing/oak_toilet"))
                 .build();
         this.addEntry(toilets);
 
@@ -205,15 +207,15 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                         w -> new StorageJarBlock(w.toVanillaOrOak(), BlockBehaviour.Properties.of()
                                 .mapColor(w.planks.defaultMapColor())
                                 .instrument(NoteBlockInstrument.HAT).strength(1.0F).sound(SoundType.GLASS)))
-                .addRecipe(modRes("constructing/oak_storage_jar"))
-                .setTabKey(tab)
                 .addTile(ModBlockEntities.STORAGE_JAR::get)
-                .addTextureM(modRes("block/oak_storage_jar"),
+                .addNonAnimatedTextureM(modRes("block/oak_storage_jar"),
                         EveryCompat.res("block/rfm/oak_storage_jar_m"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("storage"), Registries.ITEM)
                 .addTag(modRes("kitchen"), Registries.ITEM)
+                .setTabKey(tab)
                 .setRenderType(RenderLayer.CUTOUT)
+                .addRecipe(modRes("constructing/oak_storage_jar"))
                 .build();
         this.addEntry(jars);
 
@@ -222,14 +224,14 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                         w -> new WoodenKitchenCabinetryBlock(w.toVanillaOrOak(),
                                 addWoodProp(w, BlockBehaviour.Properties.of()).forceSolidOn().strength(2.0f))
                 )
-                .addRecipe(modRes("constructing/oak_kitchen_cabinetry"))
-                .setTabKey(tab)
 //                .addTile(ModBlockEntities.STORAGE_CABINET::get)
-                .addTextureM(modRes("block/oak_kitchen_cabinetry"),
+                .addNonAnimatedTextureM(modRes("block/oak_kitchen_cabinetry"),
                         EveryCompat.res("block/rfm/oak_kitchen_cabinetry_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_kitchen_cabinetry"), Registries.ITEM)
                 .addTag(modRes("kitchen"), Registries.ITEM)
+                .setTabKey(tab)
+                .addRecipe(modRes("constructing/oak_kitchen_cabinetry"))
                 .build();
         this.addEntry(kitchen_cabinetry);
 
@@ -238,15 +240,15 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                         w -> new WoodenKitchenDrawerBlock(w.toVanillaOrOak(),
                                 addWoodProp(w, BlockBehaviour.Properties.of()).forceSolidOn().strength(2.5f))
                 )
-                .addRecipe(modRes("constructing/oak_kitchen_drawer"))
-                .setTabKey(tab)
                 .addTile(ModBlockEntities.KITCHEN_DRAWER::get)
-                .addTextureM(modRes("block/oak_kitchen_drawer"),
+                .addNonAnimatedTextureM(modRes("block/oak_kitchen_drawer"),
                         EveryCompat.res("block/rfm/oak_kitchen_drawer_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("storage"), Registries.ITEM)
                 .addTag(modRes("kitchen"), Registries.ITEM)
                 .addTag(modRes("wooden_kitchen_drawers"), Registries.ITEM)
+                .setTabKey(tab)
+                .addRecipe(modRes("constructing/oak_kitchen_drawer"))
                 .build();
         this.addEntry(kitchen_drawer);
 
@@ -255,15 +257,15 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                         w -> new WoodenKitchenSinkBlock(w.toVanillaOrOak(),
                                 addWoodProp(w, BlockBehaviour.Properties.of()).forceSolidOn().strength(2.5f))
                 )
-                .addRecipe(modRes("constructing/oak_kitchen_sink"))
-                .setTabKey(tab)
                 .addTile(ModBlockEntities.KITCHEN_SINK::get)
-                .addTextureM(modRes("block/oak_kitchen_sink"),
+                .addNonAnimatedTextureM(modRes("block/oak_kitchen_sink"),
                         EveryCompat.res("block/rfm/oak_kitchen_sink_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_kitchen_sinks"), Registries.ITEM)
                 .addTag(modRes("kitchen"), Registries.ITEM)
                 .addTag(modRes("storage"), Registries.ITEM)
+                .setTabKey(tab)
+                .addRecipe(modRes("constructing/oak_kitchen_sink"))
                 .build();
         this.addEntry(kitchen_sink);
 
@@ -272,15 +274,15 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                         w -> new WoodenKitchenStorageCabinetBlock(w.toVanillaOrOak(),
                                 addWoodProp(w, BlockBehaviour.Properties.of()).forceSolidOn().strength(2.5f))
                 )
-                .addRecipe(modRes("constructing/oak_kitchen_storage_cabinet"))
-                .setTabKey(tab)
                 .addTile(ModBlockEntities.STORAGE_CABINET::get)
-                .addTextureM(modRes("block/oak_kitchen_storage_cabinet"),
+                .addNonAnimatedTextureM(modRes("block/oak_kitchen_storage_cabinet"),
                         EveryCompat.res("block/rfm/oak_kitchen_storage_cabinet_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_kitchen_storage_cabinets"), Registries.ITEM)
                 .addTag(modRes("kitchen"), Registries.ITEM)
                 .addTag(modRes("storage"), Registries.ITEM)
+                .setTabKey(tab)
+                .addRecipe(modRes("constructing/oak_kitchen_storage_cabinet"))
                 .build();
         this.addEntry(kitchen_storage_cabinet);
 
@@ -289,8 +291,6 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                         w -> new WoodenStorageCabinetBlock(w.toVanillaOrOak(),
                                 addWoodProp(w, BlockBehaviour.Properties.of()).forceSolidOn().strength(2.5f))
                 )
-                .addRecipe(modRes("constructing/oak_storage_cabinet"))
-                .setTabKey(tab)
                 .addTile(ModBlockEntities.STORAGE_CABINET::get)
                 .addTextureM(modRes("block/oak_storage_cabinet"),
                         EveryCompat.res("block/rfm/oak_storage_cabinet_m"))
@@ -299,6 +299,8 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(modRes("bedroom"), Registries.ITEM)
                 .addTag(modRes("kitchen"), Registries.ITEM)
                 .addTag(modRes("storage"), Registries.ITEM)
+                .setTabKey(tab)
+                .addRecipe(modRes("constructing/oak_storage_cabinet"))
                 .build();
         this.addEntry(storage_cabinet);
 
@@ -309,14 +311,14 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                                 .strength(3.5f).sound(SoundType.STONE)
                         )
                 )
-                .addRecipe(modRes("constructing/oak_basin"))
-                .setTabKey(tab)
                 .addTile(ModBlockEntities.BASIN::get)
-                .addTextureM(modRes("block/oak_basin"),
+                .addNonAnimatedTextureM(modRes("block/oak_basin"),
                         EveryCompat.res("block/rfm/oak_basin_m"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("wooden_basins"), Registries.ITEM)
                 .addTag(modRes("bathroom"), Registries.ITEM)
+                .setTabKey(tab)
+                .addRecipe(modRes("constructing/oak_basin"))
                 .build();
         this.addEntry(basin);
 
@@ -327,14 +329,14 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                                 .strength(3.5f).sound(SoundType.STONE)
                         )
                 )
-                .addRecipe(modRes("constructing/oak_bath"))
-                .setTabKey(tab)
                 .addTile(ModBlockEntities.BATH::get)
-                .addTextureM(modRes("block/oak_bath"),
+                .addNonAnimatedTextureM(modRes("block/oak_bath"),
                         EveryCompat.res("block/rfm/oak_bath_m"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("bathroom"), Registries.ITEM)
                 .addTag(modRes("wooden_baths"), Registries.ITEM)
+                .setTabKey(tab)
+                .addRecipe(modRes("constructing/oak_bath"))
                 .build();
         this.addEntry(bath);
 
@@ -344,8 +346,6 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                                 .strength(2.0f).forceSolidOn())
                         )
                 )
-                .addRecipe(modRes("constructing/oak_lattice_fence"))
-                .setTabKey(tab)
                 .addTile(ModBlockEntities.STORAGE_JAR::get)
                 .addTexture(modRes("block/oak_lattice_fence"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -353,7 +353,9 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
                 .addTag(modRes("outdoors"), Registries.ITEM)
                 .addTag(BlockTags.FENCES, Registries.ITEM)
+                .setTabKey(tab)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
+                .addRecipe(modRes("constructing/oak_lattice_fence"))
                 .build();
         this.addEntry(lattice_fence);
 
@@ -363,16 +365,16 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                                 .strength(2.0f)
                         )
                 )
-                .addRecipe(modRes("constructing/oak_lattice_fence_gate"))
-                .setTabKey(tab)
                 .addTile(ModBlockEntities.STORAGE_JAR::get)
-                .addTextureM(modRes("block/oak_lattice_fence_gate"),
+                .addNonAnimatedTextureM(modRes("block/oak_lattice_fence_gate"),
                         EveryCompat.res("block/rfm/oak_lattice_fence_gate_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.FENCE_GATES, Registries.BLOCK)
                 .addTag(BlockTags.UNSTABLE_BOTTOM_CENTER, Registries.BLOCK)
                 .addTag(modRes("outdoors"), Registries.ITEM)
+                .setTabKey(tab)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
+                .addRecipe(modRes("constructing/oak_lattice_fence_gate"))
                 .build();
         this.addEntry(lattice_fence_gate);
 
@@ -382,13 +384,13 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                                 .strength(2.0f).forceSolidOn()
                         )
                 )
-                .addRecipe(modRes("constructing/oak_desk"))
-                .setTabKey(tab)
                 .addTexture(modRes("block/oak_desk"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("tuckable"), Registries.BLOCK)
                 .addTag(modRes("general"), Registries.ITEM)
                 .addTag(modRes("bedroom"), Registries.ITEM)
+                .setTabKey(tab)
+                .addRecipe(modRes("constructing/oak_desk"))
                 .build();
         this.addEntry(desk);
 
@@ -398,12 +400,12 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                                 .strength(1.5f)
                         )
                 )
-                .addRecipe(modRes("constructing/oak_cutting_board"))
-                .setTabKey(tab)
                 .addTile(ModBlockEntities.CUTTING_BOARD::get)
                 .addTexture(modRes("block/oak_cutting_board"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("kitchen"), Registries.ITEM)
+                .setTabKey(tab)
+                .addRecipe(modRes("constructing/oak_cutting_board"))
                 .build();
         this.addEntry(cutting_board);
 
@@ -413,14 +415,14 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                                 .strength(2.5f).forceSolidOn()
                         )
                 )
-                .addRecipe(modRes("constructing/oak_drawer"))
-                .setTabKey(tab)
                 .addTile(ModBlockEntities.DRAWER::get)
                 .addTexture(modRes("block/oak_drawer"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("storage"), Registries.ITEM)
                 .addTag(modRes("bedroom"), Registries.ITEM)
                 .addTag(modRes("general"), Registries.ITEM)
+                .setTabKey(tab)
+                .addRecipe(modRes("constructing/oak_drawer"))
                 .build();
         this.addEntry(drawer);
 
@@ -429,14 +431,13 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                         l -> new HedgeBlock(LeafType.OAK, BlockBehaviour.Properties.of().strength(0.5f)
                                 .sound(SoundType.AZALEA_LEAVES))
                 )
-                .requiresChildren("leaves") // Textures
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", CompatSpritesHelper.LOOKS_LIKE_LEAF_TEXTURE))
-                .addRecipe(modRes("constructing/oak_hedge"))
-                .setTabKey(tab)
                 .addTile(ModBlockEntities.DRAWER::get)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
+                .addRecipe(modRes("constructing/oak_hedge"))
                 .copyParentTint()
                 .build();
         this.addEntry(hedges);
