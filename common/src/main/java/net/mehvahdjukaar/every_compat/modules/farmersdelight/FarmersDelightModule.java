@@ -59,10 +59,10 @@ public class FarmersDelightModule extends EveryCompatModule {
                 .addTile(getModTile("cabinet"))
                 .addTextureM(modRes("block/oak_cabinet_front"),
                         EveryCompat.res("block/fd/oak_cabinet_front_m"),
-                        customPalette)
-                .addTexture(modRes("block/oak_cabinet_side"), customPalette)
-                .addTexture(modRes("block/oak_cabinet_top"), customPalette)
-                .addTexture(modRes("block/oak_cabinet_front_open"), customPalette)
+                        CUSTOM_PALETTE)
+                .addTexture(modRes("block/oak_cabinet_side"), CUSTOM_PALETTE)
+                .addTexture(modRes("block/oak_cabinet_top"), CUSTOM_PALETTE)
+                .addTexture(modRes("block/oak_cabinet_front_open"), CUSTOM_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("cabinets"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("cabinets/wooden"), Registries.BLOCK, Registries.ITEM)
@@ -75,7 +75,7 @@ public class FarmersDelightModule extends EveryCompatModule {
         this.addEntry(cabinets);
     }
 
-    public static final PaletteStrategy customPalette = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
+    public static final PaletteStrategy CUSTOM_PALETTE = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
             blockType, manager, PLANKS, null, p -> {
                 p.reduceDown();
                 if (p.size() < 9) {

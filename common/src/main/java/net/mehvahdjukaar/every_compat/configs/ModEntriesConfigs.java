@@ -31,8 +31,8 @@ public class ModEntriesConfigs {
     public static ModConfigHolder SPEC;
     private static boolean wasInit = false;
     private static boolean logOnce = false;
-    private static final ArrayList<ResourceLocation> loggedBlockType = new ArrayList<>();
-    private static final ArrayList<String> loggedChildType = new ArrayList<>();
+    private static final ArrayList<ResourceLocation> LOGGED_BLOCK_TYPE = new ArrayList<>();
+    private static final ArrayList<String> LOGGED_CHILD_TYPE = new ArrayList<>();
 
     // default as we are initializing it late
 
@@ -143,9 +143,9 @@ public class ModEntriesConfigs {
                 EveryCompat.LOGGER.warn("==> This meant you have no Supported Mod installed. <==");
                 logOnce = true;
             }
-            if (!loggedChildType.contains(childType)) {
+            if (!LOGGED_CHILD_TYPE.contains(childType)) {
                 EveryCompat.LOGGER.warn("No ChildType config map found for: {}", childType);
-                loggedChildType.add(childType);
+                LOGGED_CHILD_TYPE.add(childType);
             }
             return true;
         }
@@ -158,9 +158,9 @@ public class ModEntriesConfigs {
                 EveryCompat.LOGGER.warn("==> This meant you have no BlockType Mod (Wood, Stone, & Others) installed. <==");
                 logOnce = true;
             }
-            if (!loggedBlockType.contains(blockType.getId())) {
+            if (!LOGGED_BLOCK_TYPE.contains(blockType.getId())) {
                 EveryCompat.LOGGER.warn("No BlockType config map found for {} - {}", typeClass.getName().substring(typeClass.getName().lastIndexOf(".") + 1), blockType.getId());
-                loggedBlockType.add(blockType.getId());
+                LOGGED_BLOCK_TYPE.add(blockType.getId());
             }
             return true;
         }

@@ -64,10 +64,10 @@ public class StorageDrawersModule extends EveryCompatModule {
                 .setTab(getTab(tab))
                 .defaultRecipe()
                 .addTile(getModTile("standard_drawers_1"))
-                .addTexture(modRes("block/drawers_oak_front_1"), drawersPalette)
-                .addTexture(modRes("block/drawers_oak_side"), drawersPalette)
-                .addTexture(modRes("block/drawers_oak_sort"), drawersPalette)
-                .addTexture(modRes("block/drawers_oak_trim"), drawersPalette)
+                .addTexture(modRes("block/drawers_oak_front_1"), DRAWERS_PALETTE)
+                .addTexture(modRes("block/drawers_oak_side"), DRAWERS_PALETTE)
+                .addTexture(modRes("block/drawers_oak_sort"), DRAWERS_PALETTE)
+                .addTexture(modRes("block/drawers_oak_trim"), DRAWERS_PALETTE)
                 .build();
         this.addEntry(FULL_DRAWERS_1);
 
@@ -87,7 +87,7 @@ public class StorageDrawersModule extends EveryCompatModule {
                 .setTab(getTab(tab))
                 .defaultRecipe()
                 .addTile(getModTile("standard_drawers_2"))
-                .addTexture(modRes("block/drawers_oak_front_2"), drawersPalette)
+                .addTexture(modRes("block/drawers_oak_front_2"), DRAWERS_PALETTE)
                 .build();
         this.addEntry(FULL_DRAWERS_2);
 
@@ -107,7 +107,7 @@ public class StorageDrawersModule extends EveryCompatModule {
                 .setTab(getTab(tab))
                 .defaultRecipe()
                 .addTile(getModTile("standard_drawers_4"))
-                .addTexture(modRes("block/drawers_oak_front_4"), drawersPalette)
+                .addTexture(modRes("block/drawers_oak_front_4"), DRAWERS_PALETTE)
                 .build();
 
         this.addEntry(FULL_DRAWERS_4);
@@ -128,8 +128,8 @@ public class StorageDrawersModule extends EveryCompatModule {
                 .setTab(getTab(tab))
                 .defaultRecipe()
                 .addTile(getModTile("standard_drawers_1"))
-                .addTexture(modRes("block/drawers_oak_side_h"), drawersPalette)
-                .addTexture(modRes("block/drawers_oak_side_v"), drawersPalette)
+                .addTexture(modRes("block/drawers_oak_side_h"), DRAWERS_PALETTE)
+                .addTexture(modRes("block/drawers_oak_side_v"), DRAWERS_PALETTE)
                 .build();
         this.addEntry(HALF_DRAWERS_1);
 
@@ -179,12 +179,12 @@ public class StorageDrawersModule extends EveryCompatModule {
                 .addTag(modRes("trim"), Registries.BLOCK, Registries.ITEM)
                 .setTab(getTab(tab))
                 .defaultRecipe()
-                .addTexture(modRes("block/drawers_oak_trim"), trimPalette)
+                .addTexture(modRes("block/drawers_oak_trim"), TRIM_PALETTE)
                 .build();
         this.addEntry(TRIMS);
     }
 
-    private static final PaletteStrategy drawersPalette = registerCached((blockType, manager) ->
+    private static final PaletteStrategy DRAWERS_PALETTE = registerCached((blockType, manager) ->
             PaletteStrategies.makePaletteFromChild(blockType, manager, VanillaWoodChildKeys.PLANKS, null,
                     (p) -> {
                         p.remove(p.getLightest());
@@ -195,7 +195,7 @@ public class StorageDrawersModule extends EveryCompatModule {
                     }
             ));
 
-    private static final PaletteStrategy trimPalette = registerCached((blockType, manager) ->
+    private static final PaletteStrategy TRIM_PALETTE = registerCached((blockType, manager) ->
             PaletteStrategies.makePaletteFromChild(blockType, manager, VanillaWoodChildKeys.PLANKS, null,
                     (p) -> {
                         p.remove(p.getLightest());

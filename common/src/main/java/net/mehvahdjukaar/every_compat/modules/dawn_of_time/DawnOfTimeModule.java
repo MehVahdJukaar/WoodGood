@@ -68,7 +68,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
         PERGOLA = SimpleEntrySet.builder(WoodType.class, "pergola",
                         getModBlock("oak_pergola"), () -> VanillaWoodTypes.OAK,
                         w -> new PergolaBlock(Utils.copyPropertySafe(w.log).ignitedByLava()))
-                .addTextureM(modRes("block/oak_pergola"), EveryCompat.res("block/dot/oak_pergola_m"), dullPalette)
+                .addTextureM(modRes("block/oak_pergola"), EveryCompat.res("block/dot/oak_pergola_m"), DULL_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
@@ -90,7 +90,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
         BEAM = SimpleEntrySet.builder(WoodType.class, "beam",
                         getModBlock("oak_beam"), () -> VanillaWoodTypes.OAK,
                         w -> new BeamBlock(Utils.copyPropertySafe(w.log).ignitedByLava()))
-                .addTextureM(modRes("block/oak_beam"), EveryCompat.res("block/dot/oak_beam_m"), dullPalette)
+                .addTextureM(modRes("block/oak_beam"), EveryCompat.res("block/dot/oak_beam_m"), DULL_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
@@ -173,7 +173,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
                         w -> new SpruceLowTableBlock(Utils.copyPropertySafe(w.log).noOcclusion()
                                 .strength(2.0F, 6.0F).lightLevel(litBlockEmission(14))))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTexture(modRes("block/spruce_low_table"), dullPalette)
+                .addTexture(modRes("block/spruce_low_table"), DULL_PALETTE)
                 .addTile(getModTile("displayer"))
                 .defaultRecipe()
                 .setTab(getTab(tab))
@@ -185,7 +185,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
                         w -> new ChairBlock(Utils.copyPropertySafe(w.log).noOcclusion()
                                 .strength(2.0F, 6.0F), 3.0F,
                                 VoxelShapes.SPRUCE_LEGLESS_CHAIR_SHAPES))
-                .addTextureM(modRes("block/spruce_legless_chair"), EveryCompat.res("block/dot/spruce_legless_chair_m"), dullPalette)
+                .addTextureM(modRes("block/spruce_legless_chair"), EveryCompat.res("block/dot/spruce_legless_chair_m"), DULL_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
                 .setTab(getTab(tab))
@@ -193,7 +193,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
         this.addEntry(LEGLESS_CHAIR);
     }
 
-    private static final PaletteStrategy dullPalette = registerCached((blockType, manager) ->
+    private static final PaletteStrategy DULL_PALETTE = registerCached((blockType, manager) ->
             PaletteStrategies.makePaletteFromChild(blockType, manager, VanillaWoodChildKeys.PLANKS, null,
                     (p) -> {
                 p.add(p.increaseInner());

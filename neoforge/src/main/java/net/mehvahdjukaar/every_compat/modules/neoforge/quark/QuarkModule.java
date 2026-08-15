@@ -98,7 +98,7 @@ public class QuarkModule extends EveryCompatModule {
                 )
                 .addTextureM(EveryCompat.res("block/acacia_bookshelf"),
                         EveryCompat.res("block/acacia_bookshelf_m"),
-                        bookshelfPalette)
+                        BOOKSHELF_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ResourceLocation.parse("c:bookshelves"), Registries.BLOCK, Registries.ITEM)
                 .setTab(getTab(tab))
@@ -327,7 +327,7 @@ public class QuarkModule extends EveryCompatModule {
         CompatChestBlockRenderer.register(event, trappedChests.getTile(CompatChestBlockEntity.class), shortenedId());
     }
 
-    public static final PaletteStrategy bookshelfPalette = registerCached((blockType, manager) ->
+    public static final PaletteStrategy BOOKSHELF_PALETTE = registerCached((blockType, manager) ->
             PaletteStrategies.makePaletteFromChild(
                     blockType, manager, PLANKS, null,
                     p -> {

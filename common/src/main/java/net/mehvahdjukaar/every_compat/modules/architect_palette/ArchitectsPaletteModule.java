@@ -49,8 +49,8 @@ public class ArchitectsPaletteModule extends EveryCompatModule {
                         getModBlock("oak_boards"), () -> VanillaWoodTypes.OAK,
                         w -> new Block(Utils.copyPropertySafe(w.planks))
                 )
-                .addTexture(modRes("block/oak_boards"), customPalette)
-                .addTexture(modRes("block/oak_boards_odd"), customPalette)
+                .addTexture(modRes("block/oak_boards"), CUSTOM_PALETTE)
+                .addTexture(modRes("block/oak_boards_odd"), CUSTOM_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tab))
                 .defaultRecipe()
@@ -102,7 +102,7 @@ public class ArchitectsPaletteModule extends EveryCompatModule {
 
     }
 
-    public static final PaletteStrategy customPalette = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
+    public static final PaletteStrategy CUSTOM_PALETTE = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
             blockType, manager, PLANKS, null, p -> {
 
                 while (p.size() > 7) {

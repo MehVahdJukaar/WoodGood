@@ -26,16 +26,16 @@ import java.util.function.Predicate;
  */
 public class PaletteStrategies {
 
-    private static final Set<Cached> cachedStrategies = new HashSet<>();
+    private static final Set<Cached> CACHED_STRATEGIES = new HashSet<>();
 
     @ApiStatus.Internal
     public static void clearCache() {
-        cachedStrategies.forEach(c -> c.cache.clear());
+        CACHED_STRATEGIES.forEach(c -> c.cache.clear());
     }
 
     public synchronized static PaletteStrategy registerCached(PaletteStrategy factory) {
         Cached c = new Cached(factory);
-        cachedStrategies.add(c);
+        CACHED_STRATEGIES.add(c);
         return c;
     }
 

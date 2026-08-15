@@ -27,8 +27,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static net.mehvahdjukaar.every_compat.modules.chipped.ChippedMainModule.darkPalette;
-import static net.mehvahdjukaar.every_compat.modules.chipped.ChippedMainModule.darkerPalette;
+import static net.mehvahdjukaar.every_compat.modules.chipped.ChippedMainModule.DARK_PALETTE;
+import static net.mehvahdjukaar.every_compat.modules.chipped.ChippedMainModule.DARKER_PALETTE;
 
 //See ChippedAbstractModule's SUPPORTED VERSION
 public class ChippedDoorModule extends ChippedModuleAbstract {
@@ -127,13 +127,13 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 )
                 .addTextureM(modRes("block/oak_door/boarded_oak_door_bottom"),
                         EveryCompat.res("block/ch/doors/boarded_oak_door_bottom_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("block/oak_door/boarded_oak_door_top"),
                         EveryCompat.res("block/ch/doors/boarded_oak_door_top_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("item/oak_door/boarded_oak_door"),
                         EveryCompat.res("item/ch/doors/boarded_oak_door_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
@@ -149,13 +149,13 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 )
                 .addTextureM(modRes("block/oak_door/dual_paneled_oak_door_bottom"),
                         EveryCompat.res("block/ch/doors/dual_paneled_oak_door_bottom_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("block/oak_door/dual_paneled_oak_door_top"),
                         EveryCompat.res("block/ch/doors/dual_paneled_oak_door_top_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("item/oak_door/dual_paneled_oak_door"),
                         EveryCompat.res("item/ch/doors/dual_paneled_oak_door_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
@@ -171,13 +171,13 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 )
                 .addTextureM(modRes("block/oak_door/fortified_oak_door_bottom"),
                         EveryCompat.res("block/ch/doors/fortified_oak_door_bottom_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("block/oak_door/fortified_oak_door_top"),
                         EveryCompat.res("block/ch/doors/fortified_oak_door_top_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("item/oak_door/fortified_oak_door"),
                         EveryCompat.res("item/ch/doors/fortified_oak_door_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
@@ -193,13 +193,13 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 )
                 .addTextureM(modRes("block/oak_door/gated_oak_door_bottom"),
                         EveryCompat.res("block/ch/doors/gated_oak_door_bottom_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("block/oak_door/gated_oak_door_top"),
                         EveryCompat.res("block/ch/doors/gated_oak_door_top_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("item/oak_door/gated_oak_door"),
                         EveryCompat.res("item/ch/doors/gated_oak_door_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
@@ -231,13 +231,13 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 )
                 .addTextureM(modRes("block/oak_door/heavy_oak_door_bottom"),
                         EveryCompat.res("block/ch/doors/heavy_oak_door_bottom_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("block/oak_door/heavy_oak_door_top"),
                         EveryCompat.res("block/ch/doors/heavy_oak_door_top_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("item/oak_door/heavy_oak_door"),
                         EveryCompat.res("item/ch/doors/heavy_oak_door_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
@@ -269,13 +269,13 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 )
                 .addTextureM(modRes("block/oak_door/paneled_oak_door_bottom"),
                         EveryCompat.res("block/ch/doors/paneled_oak_door_bottom_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("block/oak_door/paneled_oak_door_top"),
                         EveryCompat.res("block/ch/doors/paneled_oak_door_top_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("item/oak_door/paneled_oak_door"),
                         EveryCompat.res("item/ch/doors/paneled_oak_door_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
@@ -291,13 +291,13 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 )
                 .addTextureM(modRes("block/oak_door/paper_oak_door_bottom"),
                         EveryCompat.res("block/ch/doors/paper_oak_door_bottom_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("block/oak_door/paper_oak_door_top"),
                         EveryCompat.res("block/ch/doors/paper_oak_door_top_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("item/oak_door/paper_oak_door"),
                         EveryCompat.res("item/ch/doors/paper_oak_door_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
@@ -313,13 +313,13 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 )
                 .addTextureM(modRes("block/oak_door/pressed_oak_door_bottom"),
                         EveryCompat.res("block/ch/doors/pressed_oak_door_bottom_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("block/oak_door/pressed_oak_door_top"),
                         EveryCompat.res("block/ch/doors/pressed_oak_door_top_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("item/oak_door/pressed_oak_door"),
                         EveryCompat.res("item/ch/doors/pressed_oak_door_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
@@ -335,13 +335,13 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 )
                 .addTextureM(modRes("block/oak_door/screen_oak_door_bottom"),
                         EveryCompat.res("block/ch/doors/screen_oak_door_bottom_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("block/oak_door/screen_oak_door_top"),
                         EveryCompat.res("block/ch/doors/screen_oak_door_top_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("item/oak_door/screen_oak_door"),
                         EveryCompat.res("item/ch/doors/screen_oak_door_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
@@ -357,13 +357,13 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 )
                 .addTextureM(modRes("block/oak_door/secret_oak_door_bottom"),
                         EveryCompat.res("block/ch/doors/secret_oak_door_bottom_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("block/oak_door/secret_oak_door_top"),
                         EveryCompat.res("block/ch/doors/secret_oak_door_top_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("item/oak_door/secret_oak_door"),
                         EveryCompat.res("item/ch/doors/secret_oak_door_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
@@ -377,13 +377,13 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                         getModBlock("shack_oak_door"), () -> VanillaWoodTypes.OAK,
                         this::makeDoor
                 )
-                .addTexture(modRes("block/oak_door/shack_oak_door_bottom"), darkPalette)
+                .addTexture(modRes("block/oak_door/shack_oak_door_bottom"), DARK_PALETTE)
                 .addTextureM(modRes("block/oak_door/shack_oak_door_top"),
                         EveryCompat.res("block/ch/doors/shack_oak_door_top_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("item/oak_door/shack_oak_door"),
                         EveryCompat.res("item/ch/doors/shack_oak_door_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
@@ -399,13 +399,13 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 )
                 .addTextureM(modRes("block/oak_door/sliding_oak_door_bottom"),
                         EveryCompat.res("block/ch/doors/sliding_oak_door_bottom_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("block/oak_door/sliding_oak_door_top"),
                         EveryCompat.res("block/ch/doors/sliding_oak_door_top_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("item/oak_door/sliding_oak_door"),
                         EveryCompat.res("item/ch/doors/sliding_oak_door_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
@@ -421,13 +421,13 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 )
                 .addTextureM(modRes("block/oak_door/supported_oak_door_bottom"),
                         EveryCompat.res("block/ch/doors/supported_oak_door_bottom_m"),
-                        darkerPalette)
+                        DARKER_PALETTE)
                 .addTextureM(modRes("block/oak_door/supported_oak_door_top"),
                         EveryCompat.res("block/ch/doors/supported_oak_door_top_m"),
-                        darkerPalette)
+                        DARKER_PALETTE)
                 .addTextureM(modRes("item/oak_door/supported_oak_door"),
                         EveryCompat.res("item/ch/doors/supported_oak_door_m"),
-                        darkerPalette)
+                        DARKER_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
@@ -443,13 +443,13 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 )
                 .addTextureM(modRes("block/oak_door/tile_windowed_oak_door_bottom"),
                         EveryCompat.res("block/ch/doors/tile_windowed_oak_door_bottom_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("block/oak_door/tile_windowed_oak_door_top"),
                         EveryCompat.res("block/ch/doors/tile_windowed_oak_door_top_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("item/oak_door/tile_windowed_oak_door"),
                         EveryCompat.res("item/ch/doors/tile_windowed_oak_door_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
@@ -465,13 +465,13 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 )
                 .addTextureM(modRes("block/oak_door/tiled_oak_door_bottom"),
                         EveryCompat.res("block/ch/doors/tiled_oak_door_bottom_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("block/oak_door/tiled_oak_door_top"),
                         EveryCompat.res("block/ch/doors/tiled_oak_door_top_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("item/oak_door/tiled_oak_door"),
                         EveryCompat.res("item/ch/doors/tiled_oak_door_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
@@ -487,13 +487,13 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 )
                 .addTextureM(modRes("block/oak_door/windowed_oak_door_bottom"),
                         EveryCompat.res("block/ch/doors/windowed_oak_door_bottom_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("block/oak_door/windowed_oak_door_top"),
                         EveryCompat.res("block/ch/doors/windowed_oak_door_top_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTextureM(modRes("item/oak_door/windowed_oak_door"),
                         EveryCompat.res("item/ch/doors/windowed_oak_door_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_DOORS, Registries.ITEM)
@@ -614,7 +614,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 )
                 .addTextureM(modRes("block/oak_trapdoor/golden_barred_oak_trapdoor"),
                         EveryCompat.res("block/ch/trapdoors/golden_barred_oak_trapdoor_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
@@ -643,7 +643,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                 )
                 .addTextureM(modRes("block/oak_trapdoor/iron_barred_oak_trapdoor"),
                         EveryCompat.res("block/ch/trapdoors/iron_barred_oak_trapdoor_m"),
-                        darkPalette)
+                        DARK_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_TRAPDOORS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_TRAPDOORS, Registries.ITEM)
