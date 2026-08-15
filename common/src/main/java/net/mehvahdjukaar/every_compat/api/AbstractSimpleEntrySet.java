@@ -463,6 +463,17 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                     .setPalette(palette));
         }
 
+        public BL addNonAnimatedTexture(ResourceLocation textureLocation) {
+            return addTexture(TextureInfo.of(textureLocation)
+                    .noAnimation());
+        }
+
+        public BL addNonAnimatedTextureM(ResourceLocation textureLocation, ResourceLocation maskLocation) {
+            return addTexture(TextureInfo.of(textureLocation)
+                    .mask(maskLocation)
+                    .noAnimation());
+        }
+
         public BL addTextureM(ResourceLocation textureLocation, ResourceLocation maskLocation) {
             return addTexture(TextureInfo.of(textureLocation)
                     .mask(maskLocation));
