@@ -1,22 +1,18 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.mcaw;
 
-import net.kikoz.mcwwindows.MacawsWindows;
 import net.kikoz.mcwwindows.objects.*;
 import net.mehvahdjukaar.every_compat.modules.macaw.MacawWindowsModuleAbstract;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 
-//SUPPORT: v2.2.1+
+//See MacawWindowsModuleAbstract's SUPPORTED VERSION
 public class MacawWindowsModule extends MacawWindowsModuleAbstract {
 
     public MacawWindowsModule(String modId) {
         super(modId);
-        ResourceKey<CreativeModeTab> tab = MacawsWindows.WINDOWSGROUP;
     }
 
     @Override
