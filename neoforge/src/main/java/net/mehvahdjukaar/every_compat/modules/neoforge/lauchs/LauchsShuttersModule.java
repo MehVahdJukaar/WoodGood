@@ -6,7 +6,7 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.world.level.block.Block;
 import net.stehschnitzel.shutter.common.blocks.Shutter;
 
-//SUPPORT: v2.0.2+
+//See LauchsShuttersModuleAbstract's SUPPORTED VERSION
 public class LauchsShuttersModule extends LauchsShuttersModuleAbstract {
 
     public LauchsShuttersModule(String modId) {

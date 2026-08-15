@@ -32,19 +32,19 @@ public class CompatChestTexture {
      *
      * @param removeDarkest 0: none removed, 1: removed once, 2: removed twice
      */
-    public static void generateChestTexture(ResourceSink handler, ResourceManager manager,
+    public static void generateChestTexture(ResourceSink sink, ResourceManager manager,
                                             String shortenedID, WoodType wood, Block block,
                                             ResourceLocation normalRLoc, ResourceLocation maskRLoc, ResourceLocation overlayRLoc,
                                             ResourceLocation trappedORLoc, int removeDarkest) {
 
-        try (TextureImage normalTexture = TextureImage.open(manager, normalRLoc);
-             TextureImage normalMask = TextureImage.open(manager, maskRLoc);
-             TextureImage normalOverlay = TextureImage.open(manager, overlayRLoc);
-             @Nullable TextureImage trapOverlay = trappedORLoc == null ? null : TextureImage.open(manager, trappedORLoc);
+        try (TextureImage texture = TextureImage.open(manager, normalRLoc);
+             TextureImage mask = TextureImage.open(manager, maskRLoc);
+             TextureImage overlay = TextureImage.open(manager, overlayRLoc);
+             @Nullable TextureImage trapOverlay = trappedORLoc == null ? null : TextureImage.open(manager, trappedORLoc)
         ) {
 
-            Respriter respriterNormal = Respriter.masked(normalTexture, normalMask);
-            Respriter respriterOverlay = Respriter.of(normalOverlay);
+            Respriter respriterNormal = Respriter.masked(texture, mask);
+            Respriter respriterOverlay = Respriter.of(overlay);
 
             String path = "entity/chest/" + shortenedID + "/" + wood.getAppendableId() + "_chest";
             String trapped_path = "entity/chest/" + shortenedID + "/" + wood.getAppendableId() + "_trapped_chest";
@@ -71,9 +71,7 @@ public class CompatChestTexture {
                     });
                 }
 
-                McMetaFile plankMeta = plankTexture.getMcMeta();
-
-                List<Palette> overlayPalette = new ArrayList<>();
+                List<Palette> modifiedPlanksPalette = new ArrayList<>();
                 for (var p : plankPalette) {
                     var d1 = p.getDarkest();
                     var d2 = p.getDarkest();
@@ -91,16 +89,18 @@ public class CompatChestTexture {
                     var n1 = new HCLColor(d1.hcl().hue(), d1.hcl().chroma() * 0.75f, d1.hcl().luminance() * 0.4f, d1.hcl().alpha());
                     var n2 = new HCLColor(d2.hcl().hue(), d2.hcl().chroma() * 0.75f, d2.hcl().luminance() * 0.6f, d2.hcl().alpha());
                     var pal = Palette.ofColors(List.of(n1, n2));
-                    overlayPalette.add(pal);
+                    modifiedPlanksPalette.add(pal);
                 }
+
+                List<Palette> overlayPalette = Palette.fromAnimatedImage(overlay);
 
                 // Generating textures
                 ResourceLocation res = EveryCompat.res(path);
-                if (!handler.alreadyHasTextureAtLocation(manager, res)) {
+                if (!sink.alreadyHasTextureAtLocation(manager, res)) {
                     ResourceLocation trappedRes = EveryCompat.res(trapped_path);
 
-                    createChestTextures(handler, respriterNormal, respriterOverlay, plankMeta,
-                            plankPalette, overlayPalette, res, trappedRes, trapOverlay, wood);
+                    createChestTextures(respriterNormal, respriterOverlay, plankTexture.getMcMeta(),
+                            modifiedPlanksPalette, overlayPalette, res, trappedRes, trapOverlay, wood, sink);
                 }
 
             } catch (Exception ex) {
@@ -111,16 +111,16 @@ public class CompatChestTexture {
         }
     }
 
-    private static void createChestTextures(ResourceSink sink,
-                                            Respriter respriter, Respriter respriterO,
-                                            McMetaFile baseMeta, List<Palette> basePalette,
+    private static void createChestTextures(Respriter respriter, Respriter respriterO,
+                                            McMetaFile baseMeta, List<Palette> planksPalette,
                                             List<Palette> overlayPalette, ResourceLocation normalRLoc,
                                             ResourceLocation trappedRLoc, TextureImage trappedOverlay,
-                                            WoodType wood) {
+                                            WoodType wood, ResourceSink sink) {
 
-        try (TextureImage recoloredBase = respriter.recolorWithAnimation(basePalette, baseMeta);
+        try (TextureImage recoloredBase = respriter.recolorWithAnimation(planksPalette, baseMeta);
              TextureImage recoloredOverlay = respriterO.recolorWithAnimation(overlayPalette, baseMeta)) {
-            TextureOps.applyOverlay(recoloredBase, recoloredOverlay);
+
+            TextureOps.applyOverlayOnExisting(recoloredBase, recoloredOverlay);
 
             if (trappedOverlay != null) {
                 TextureImage trapped = recoloredBase.makeCopy();

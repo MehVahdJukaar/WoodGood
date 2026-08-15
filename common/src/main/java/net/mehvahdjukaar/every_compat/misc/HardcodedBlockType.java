@@ -7,58 +7,12 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.Set;
 
 import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.*;
 
 // ugly mess. Too coupled with WoodTypes|LeavesTypes and too many hardcoded exceptions
 public class HardcodedBlockType {
-
-    public static final List<String> FRAMED_BLOCKS_SUFFIX = List.of(
-
-            // Slabs
-            "slab", "slab_edge", "slab_corner",
-            "divided_slab", "adj_double_slab", "adj_double_copycat_slab",
-            "centered_slab", "pyramid_slab", "checkered_slab",
-
-            // Stairs
-            "stairs", "double_stairs", "half_stairs",
-            "divided_stairs", "double_half_stairs", "sliced_stairs_panel",
-            "vertical_stairs", "vertical_double_stairs", "vertical_half_stairs",
-            "vertical_divided_stairs", "vertical_double_half_stairs", "vertical_sliced_stairs",
-            "sliced_stairs_slab", "vertical_sloped_stairs",
-
-            // Walls
-            "wall", "floor_board", "wall_board",
-
-            // Fences & Gates
-            "fence", "fence_gate", "gate", "iron_gate",
-
-            // Panels
-            "panel", "divided_panel_horizontal", "divided_panel_vertical", "centered_panel",
-
-            // Pillars & Posts
-            "pillar", "half_pillar", "post",
-            "corner_pillar", "threeway_corner_pillar", "double_threeway_corner_pillar",
-
-            // Buttons, Levers & Plates
-            "pressure_plate", "large_button", "lever",
-
-            // Torches
-            "torch", "soul_torch", "redstone_torch",
-            "wall_torch", "soul_wall_torch", "redstone_wall_torch",
-
-            // Chests & Storage
-            "chest", "secret_storage",
-
-            // Misc blocks
-            "cube", "bouncy_cube", "glowing_cube",
-            "pyramid", "bookshelf", "chiseled_bookshelf",
-            "flower_pot", "item_frame", "glowing_item_frame",
-            "ladder", "bars", "pane",
-            "horizontal_pane"
-    );
 
     @Nullable
     public static Boolean isWoodBlockAlreadyRegistered(String entrySetId, String blockName, WoodType woodType, String modThatTheBlockIsFrom) {
@@ -123,7 +77,8 @@ public class HardcodedBlockType {
         /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ INCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
         // Darker-Depths has a built-in support for Woodworks' BOARDS that caused Architects-Palette's BOARDS to be skipped
-        if (pendingInfo.isForSupportedModId("architects_palette") && pendingInfo.isForWoodTypeNamespace("darkerdepths")) return false;
+        // Windswept has BOARDS that prevent Architects-Palette's BOARDS from being registered
+        if (pendingInfo.isForSupportedModId("architects_palette") && pendingInfo.isForWoodTypeNamespace("darkerdepths|windswept")) return false;
 
         // Valhelsia-Structures' POST, STRIPPED_POST are not generated because Quark has POST and STRIPPED_POST
         if (pendingInfo.isForSupportedModId("valhelsia_structures") && pendingInfo.isForWoodTypeNamespace("quark")) return false;
