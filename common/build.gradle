@@ -34,6 +34,8 @@ dependencies {
 //!! ============================================ DEPENDENCIES ====================================================== \\
     //+ REQUIRED - The modules access libaries from below
     modCompileOnly("curse.maven:framework-549225:5911975") // v0.7.12 | Furniture Refurbished
+//    modCompileOnly("curse.maven:supermartijn642s-config-lib-438332:5546996") // v1.1.8 | Rechiseled
+    modCompileOnly("curse.maven:supermartijn642s-core-lib-454372:8623590") // v1.1.24 | Rechiseled
     modCompileOnly("curse.maven:valhelsia-core-416935:5376599") // Valhelsia-Furniture
     modCompileOnly("curse.maven:zeta-968868:6432578") // v1.0-30 | Quark
 
@@ -77,6 +79,7 @@ dependencies {
 //    modCompileOnly("curse.maven:more-beautiful-torches-860325:5263631") // MonoLib - Not really needed
     modCompileOnly("curse.maven:more-chest-variants-lieonlion-858032:5476602") // Quad - LieOnLion
     modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5330969") // Quad - LieOnLion
+    modCompileOnly("curse.maven:rechiseled-558998:8301599") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ]
     modCompileOnly("curse.maven:refurbished-furniture-897116:6272883") // Framework
     modCompileOnly("curse.maven:quark-243121:6427817")
     modCompileOnly("curse.maven:storage-drawers-223852:6994478")

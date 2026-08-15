@@ -23,6 +23,9 @@ import net.mehvahdjukaar.every_compat.modules.more_beautiful_torches.MoreBeautif
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish.RefurbishedFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
+import net.mehvahdjukaar.every_compat.modules.rechiseled.RechiseledModuleBlock;
+import net.mehvahdjukaar.every_compat.modules.rechiseled.RechiseledModuleSlab;
+import net.mehvahdjukaar.every_compat.modules.rechiseled.RechiseledModuleStairs;
 import net.mehvahdjukaar.every_compat.modules.storagedrawers.StorageDrawersModule;
 import net.mehvahdjukaar.every_compat.modules.stylish_stiles.StylishStilesModule;
 import net.mehvahdjukaar.every_compat.modules.table_top_craft.TableTopCraftModule;
@@ -127,6 +130,7 @@ public class EveryCompatCommon {
             addIfLoaded("missingwilds", () -> MissingWildModule::new);
             addIfLoaded("more_beautiful_torches", () -> MoreBeautifulTorches::new);
             addIfLoaded("quark", () -> QuarkModule::new);
+            addMultipleIfLoaded("rechiseled", () -> RechiseledModuleBlock::new, () -> RechiseledModuleSlab::new, () -> RechiseledModuleStairs::new);
             addIfLoaded("refurbished_furniture", () -> RefurbishedFurnitureModule::new);
             addIfLoaded("storagedrawers", () -> StorageDrawersModule::new);
             addIfLoaded("stylishstiles", () -> StylishStilesModule::new);

@@ -128,8 +128,8 @@ dependencies {
 //    modRuntimeOnly("curse.maven:resourceful-config-714059:6231176")  // v2.1.3 | Ad-Astra
 //    modRuntimeOnly("curse.maven:botarium-704113:5486070")  // v2.3.4 | Ad-Astra
 //    modRuntimeOnly("curse.maven:flib-661261:5495793") // Absent-By-Design
-//    modRuntimeOnly("curse.maven:supermartijn642s-core-lib-454372:5668859") // Rechiseled
-//    modRuntimeOnly("curse.maven:supermartijn642s-config-lib-438332:4715408") // Rechiseled
+//    modRuntimeOnly("curse.maven:supermartijn642s-core-lib-454372:8623499") // v1.1.24 | Rechiseled
+//    modRuntimeOnly("curse.maven:supermartijn642s-config-lib-438332:4715408") // v1.1.8 | Rechiseled
 //    modRuntimeOnly("curse.maven:rechiseled-558998:5286306") // Rechiseled @ ISN'T SUPPORTED YET
 //    modRuntimeOnly("curse.maven:curios-309927:6418456") // v5.14.1 | Malum, Aether, Ars-Nouveau
 //    modRuntimeOnly("curse.maven:lodestone-616457:5712854") // Malum
@@ -180,6 +180,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:more-beautiful-torches-860325:5263631") // Monolib
 //    modRuntimeOnly("curse.maven:more-chest-variants-lieonlion-858032:5476605") // Quad - LieOnLion
 //    modRuntimeOnly("curse.maven:more-crafting-tables-lieonlion-913586:5330971") // Quad - LieOnLion
+//    modRuntimeOnly("curse.maven:rechiseled-558998:8301383") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ]
 //    modRuntimeOnly("curse.maven:refurbished-furniture-897116:6272885") // Framework
 //    modRuntimeOnly("curse.maven:storage-drawers-223852:6994481")
 //    modRuntimeOnly("curse.maven:valhelsia-furniture-694349:5189602") // Valhelsia-Core

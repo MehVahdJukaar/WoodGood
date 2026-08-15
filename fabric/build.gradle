@@ -130,6 +130,8 @@ dependencies {
 //    modRuntimeOnly("curse.maven:athena-841890:5176880") // Chipped
 //    modRuntimeOnly("curse.maven:resourceful-lib-570073:5659872") //v2.1.29 | Chipped, Handcrafted, Cozy
 //    modRuntimeOnly("curse.maven:owo-lib-532610:4749199") //v0.11.2 | Infinity-Buttons
+//    modRuntimeOnly("curse.maven:supermartijn642s-config-lib-438332:5546996") // v1.1.8 | Rechiseled @ 1.21.1
+//    modRuntimeOnly("curse.maven:supermartijn642s-core-lib-454372:8623590") // v1.1.24 | Rechiseled
 
             //- OTHER MAVENS
 //    modRuntimeOnly("com.terraformersmc.terraform-api:terraform-wood-api-v1:7.0.3") // Blockus
@@ -176,6 +178,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:more-chest-variants-lieonlion-858032:5476602") // Quad - LieOnLion
 //    modRuntimeOnly("curse.maven:more-crafting-tables-lieonlion-913586:5330969") // Quad - LieOnLion
 //    modRuntimeOnly("curse.maven:missing-wilds-622590:5053651")
+//    modRuntimeOnly("curse.maven:rechiseled-558998:8301599") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ]
 //    modRuntimeOnly("curse.maven:refurbished-furniture-897116:6272883") // Framework
 //    modRuntimeOnly("curse.maven:villagersplus-fabric-809542:4996993")
 //    modRuntimeOnly("curse.maven:storage-drawers-223852:6994478")
