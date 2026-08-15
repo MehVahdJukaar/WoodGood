@@ -630,33 +630,62 @@ public class CompatSpritesHelper {
 
     //for Regions-Unexplored's brimwood
     private static void brimwoodGlow(TextureImage image, ResourceManager manager, ResourceLocation textureId, TextureInfo textureInfo) {
-        try (TextureImage plankTexture = TextureImage.open(manager,
-                EveryCompat.res("block/regions_unexplored/brimwood_planks"))) {
-            String toString = textureId.toString();
-            Respriter respriter;
-            if (Objects.nonNull(textureInfo.mask()))
-                respriter = Respriter.masked(image, TextureImage.open(manager, textureInfo.mask()));
-            else
-                respriter = Respriter.of(image);
 
-            try (TextureImage temp = respriter.recolorWithAnimationOf(plankTexture)) {
-                if (toString.contains("stairs") || toString.contains("planks")
-                        || toString.contains("slab") || toString.contains("beehive")
-                        || toString.contains("composter_bottom") || toString.contains("composter_side")
-                        || toString.contains("lectern_side") || toString.contains("lectern_top")
-                        || toString.contains("bookshelf_side") || toString.contains("bookshelf_top")
+        try (TextureImage baseTexture = TextureImage.open(manager, textureInfo.texture());
+             TextureImage planksTexture = TextureImage.open(manager, EveryCompat.res("block/regions_unexplored/brimwood_planks"))
+        ) {
+            Respriter respriter;
+            TextureImage maskTexture = null;
+
+            if (textureInfo.mask() != null) {
+                maskTexture = TextureImage.open(manager, textureInfo.mask());
+                respriter = Respriter.masked(baseTexture, maskTexture);
+            }
+            else respriter = Respriter.of(baseTexture);
+
+            TextureImage newImage = respriter.recolorWithAnimationOf(planksTexture);
+            TextureOps.applyOverlay(image, newImage);
+            newImage.close();
+
+            // ─────────────────────────── Applying Overlays ───────────────────────────
+            String texturePath = textureId.getPath();
+            int width = image.imageWidth();
+            int height = image.imageHeight();
+
+            /// Default
+            if (!textureInfo.noAnimation() && width == 16) {
+                try (TextureImage lavaOverlay = TextureImage.open(manager,
+                        EveryCompat.res("block/regions_unexplored/brimwood_planks_lava"))
                 ) {
-                    try (TextureImage lavaOverlay = TextureImage.open(manager,
-                            EveryCompat.res("block/regions_unexplored/brimwood_planks_lava"))) {
-                        TextureOps.applyOverlayOnExisting(image, temp, lavaOverlay);
+                    if (textureInfo.mask() != null) {
+                        TextureOps.applyMask(lavaOverlay, maskTexture);
                     }
-                } else {
-                    TextureOps.applyOverlayOnExisting(image, temp);
+
+                    TextureOps.applyOverlayOnExisting(image, lavaOverlay);
+                } catch (Exception e) {
+                    EveryCompat.LOGGER.error("Failed to process the texture@[ {} ]: {}", textureId, e);
+                }
+            }
+            /// Larger than the standard texture (16x16)
+            else if (!texturePath.contains("ceiling_fan") && (width != 16 || height != 16)) {
+                try (TextureImage lavaOverlay = TextureImage.open(manager,
+                        EveryCompat.res("block/regions_unexplored/brimwood_planks_lava_256x"))
+                ) {
+                    TextureImage overlay;
+                    overlay = TextureImage.createNew(width, height);
+                    TextureOps.applyOverlay(overlay, lavaOverlay);
+                    if (textureInfo.mask() != null) {
+                        TextureOps.applyMask(overlay, maskTexture);
+                    }
+
+                    TextureOps.applyOverlayOnExisting(image, overlay);
+                } catch (Exception e) {
+                    EveryCompat.LOGGER.error("Failed to process the texture@[ {} ]: {}", textureId, e);
                 }
             }
 
         } catch (Exception e) {
-            EveryCompat.LOGGER.error("Failed to process {}'s texture: {}", textureId, e);
+            EveryCompat.LOGGER.error("Failed to generate Brimwood's texture for {} - {}", textureInfo.texture(), e);
         }
     }
 
