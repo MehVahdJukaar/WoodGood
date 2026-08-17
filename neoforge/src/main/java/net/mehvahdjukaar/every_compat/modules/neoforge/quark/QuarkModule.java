@@ -196,8 +196,9 @@ public class QuarkModule extends EveryCompatModule {
                         HollowLogsModule.class,
                         getModBlock("hollow_oak_log"), () -> VanillaWoodTypes.OAK,
                         w -> new HollowLogBlock(shortenedId() + "/" + w.getAppendableId(),
-                                w.log, null, w.canBurn()))
-                .requiresChildren("stripped_log") // Texture
+                                w.log, null, w.canBurn())
+                )
+                .requiresChildren(STRIPPED_LOG) // Texture
                 .setTab(getTab(tab))
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
