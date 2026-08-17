@@ -94,9 +94,8 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
     @Override
     public void registerItems(SimpleModule module, Registrator<Item> registry) {
         BlockTypeRegistry<T> typeRegistry = BlockSetAPI.getTypeRegistry(this.type);
+        String childKey = makeRegisteredChildKey(module);
         for (T blockType : Objects.requireNonNull(typeRegistry).getValues()) {
-            String childKey = makeChildKey(module);
-            if (childKey.contains("minecraft")) childKey = childKey.replace("minecraft:", ""); // DO NOT remove this because it's a childKey for BlockType's children & Gems-Realm require it
             ResourceLocation id = makeFullEntryID(module, blockType);
 
             if (module.isEntryAlreadyRegistered(childKey, id, blockType, BuiltInRegistries.ITEM)) continue;
@@ -218,10 +217,8 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
         }
 
         public ItemOnlyEntrySet<T, I> build() {
-            var e = new ItemOnlyEntrySet<>(type, name, prefix, itemFactory, baseItem, baseType, tab, tabMode,
-                    palette, extraModelTransform, useMergedPalette, copyTint, condition, extraModelConfig);
-            e.recipeLocations.addAll(this.recipes);
-            e.tags.putAll(this.tags);
+            ItemOnlyEntrySet<T, I> e = finishBuild(new ItemOnlyEntrySet<>(type, name, prefix, itemFactory, baseItem, baseType, tab, tabMode,
+                    palette, extraModelTransform, useMergedPalette, copyTint, condition, extraModelConfig));
             e.textures.addAll(textures);
             return e;
         }

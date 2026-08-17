@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.api;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection;
@@ -61,6 +62,9 @@ public class SimpleModule extends CompatModule {
         this.affectedTypes.add(entrySet.getTypeClass());
         //ugly
         EveryCompat.trackChildType(entrySet.getTypeClass(), entrySet.makeChildKey(this));
+        if (entrySet instanceof AbstractSimpleEntrySet<?, ?, ?> simpleEntry && simpleEntry.getModConfigToggle() != null) {
+            ModEntriesConfigs.addModConfigToggle(simpleEntry.makeRegisteredChildKey(this), simpleEntry.getModConfigToggle());
+        }
         return entrySet;
     }
 

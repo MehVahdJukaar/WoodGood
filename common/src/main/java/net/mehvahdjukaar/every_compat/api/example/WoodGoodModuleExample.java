@@ -97,6 +97,10 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
                     ///OPTIONAL: if the recipe has a different path unlike above
                     .addRecipe(modRes("path/to/recipeFile")) // Do not use "recipes/"
 
+                    ///OPTIONAL: Follow a config of the mod we are adding blocks for. When it returns false the entries are
+                    // hidden from tabs, dropped from tags and get no recipes, same as turning them off in everycomp-entries
+                    //.requiresModConfig(() -> TwigsConfigs.TABLES_ENABLED.get())
+
                     ///OPTIONAL: Special cases
                     // Without the .copyParentDrop(), blocks will self-drop with their own loot_table by default.
                     // But some blocks like Bookshelf won't drop anything, the .copyParentDrop() can be used to ensure

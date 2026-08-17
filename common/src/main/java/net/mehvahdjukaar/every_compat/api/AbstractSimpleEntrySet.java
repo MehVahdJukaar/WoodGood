@@ -39,6 +39,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.BiFunction;
+import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -81,6 +82,9 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     protected final Consumer<BlockTypeResTransformer<T>> extraModelTransform;
 
     protected final Predicate<T> condition;
+
+    @Nullable
+    protected BooleanSupplier isEnabledInMod = null;
 
     protected final boolean copyTint;
 
@@ -187,7 +191,10 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         }
         var tabKey = tabHolder.unwrapKey().get();
         if (tabMode == TabAddMode.AFTER_ALL) {
-            event.add(tabKey, items.values().toArray(new Item[0]));
+            Item[] enabled = items.entrySet().stream()
+                    .filter(e -> ModEntriesConfigs.isEntryEnabled(e.getKey(), e.getValue()))
+                    .map(Map.Entry::getValue).toArray(Item[]::new);
+            event.add(tabKey, enabled);
         } else if (tabMode == TabAddMode.AFTER_SAME_WOOD) {
             var reg = BlockSetAPI.getBlockSet(type);
             for (var entry : items.entrySet()) {
@@ -344,6 +351,8 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         @Nullable
         protected Consumer<BlockTypeResTransformer<T>> extraModelTransform = null;
         protected Predicate<T> condition = w -> true;
+        @Nullable
+        protected BooleanSupplier isEnabledInMod = null;
         protected boolean copyTint = false;
 
         @Deprecated(forRemoval = true)
@@ -405,6 +414,26 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             this.condition = this.condition == null ? newCondition :
                     this.condition.and(newCondition);
             return (BL) this;
+        }
+
+        /**
+         * Hooks this entry set to a config of the mod we are adding blocks for. When the supplier returns false the
+         * entries are hidden from creative tabs, dropped from tags and get no recipes, exactly like turning them off
+         * in everycomp-entries. Blocks are still registered so servers and clients stay compatible.
+         */
+        public BL requiresModConfig(BooleanSupplier isEnabledInMod) {
+            BooleanSupplier old = this.isEnabledInMod;
+            this.isEnabledInMod = old == null ? isEnabledInMod :
+                    () -> old.getAsBoolean() && isEnabledInMod.getAsBoolean();
+            return (BL) this;
+        }
+
+        //copies over the builder state that isn't passed through the constructors
+        protected <E extends AbstractSimpleEntrySet<T, B, I>> E finishBuild(E entrySet) {
+            entrySet.recipeLocations.addAll(this.recipes);
+            entrySet.tags.putAll(this.tags);
+            entrySet.isEnabledInMod = this.isEnabledInMod;
+            return entrySet;
         }
 
         public BL copyParentTint() {
@@ -648,6 +677,18 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         return EntrySet.super.getItemForECTab(type);
     }
 
+
+    @Nullable
+    public BooleanSupplier getModConfigToggle() {
+        return isEnabledInMod;
+    }
+
+    //the key children are actually registered under. Gems-Realm needs the minecraft namespace stripped
+    //TODO: this should be an override of gems reals instead of here.
+    public String makeRegisteredChildKey(SimpleModule module) {
+        String childKey = makeChildKey(module);
+        return childKey.contains("minecraft") ? childKey.replace("minecraft:", "") : childKey;
+    }
 
     @NotNull
     protected String makeEntryName(T w) {

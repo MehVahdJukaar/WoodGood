@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 
 //loaded after registry
@@ -27,6 +28,8 @@ public class ModEntriesConfigs {
 
     private static final Map<Class<? extends BlockType>, Map<String, Supplier<Boolean>>> BLOCK_TYPE_CONFIGS = new HashMap<>();
     private static final Map<Class<? extends BlockType>, Map<String, Supplier<Boolean>>> CHILD_CONFIGS = new HashMap<>();
+    // entry sets that follow a config of the mod they add blocks for, keyed by child key
+    private static final Map<String, BooleanSupplier> MOD_CONFIG_TOGGLES = new HashMap<>();
 
     public static ModConfigHolder SPEC;
     private static boolean wasInit = false;
@@ -118,6 +121,12 @@ public class ModEntriesConfigs {
         return null;
     }
 
+    /// Makes an entry follow a config of the mod we are adding blocks for, on top of our own entries config.
+    /// Called by SimpleModule when an entry set built with requiresModConfig is added.
+    public static void addModConfigToggle(String childKey, BooleanSupplier isEnabledInMod) {
+        MOD_CONFIG_TOGGLES.put(childKey, isEnabledInMod);
+    }
+
     public static <T extends BlockType> boolean isEntryEnabled(T blockType, Object o) {
         if (o instanceof BlockItem bi) o = bi.getBlock();
         return isTypeEnabled(blockType, blockType.getChildKey(o));
@@ -136,6 +145,10 @@ public class ModEntriesConfigs {
 
     public static <T extends BlockType> boolean isTypeEnabled(T blockType, @Nullable String childType) {
         if (!wasInit) initEarlyButNotSuperEarly();
+        if (childType != null) {
+            BooleanSupplier modToggle = MOD_CONFIG_TOGGLES.get(childType);
+            if (modToggle != null && !modToggle.getAsBoolean()) return false;
+        }
         Class<? extends BlockType> typeClass = blockType.getClass();
         Map<String, Supplier<Boolean>> childConfigs = CHILD_CONFIGS.get(typeClass);
         if (childConfigs == null) {

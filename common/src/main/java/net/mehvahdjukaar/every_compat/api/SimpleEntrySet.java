@@ -134,8 +134,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             //?? wtf im using disabled to allow for null??
             throw new UnsupportedOperationException("Base block cant be null (" + this.typeName + " for " + module.modId + " module)");
 
-        String childKey = makeChildKey(module);
-        if (childKey.contains("minecraft")) childKey = childKey.replace("minecraft:", ""); // DO NOT remove this because it's a childKey for BlockType's children & Gems-Realm require it
+        String childKey = makeRegisteredChildKey(module);
         for (T blockType : types) {
             ResourceLocation id = makeFullEntryID(module, blockType);
 
@@ -353,12 +352,10 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             if (addToTab && tab == null && PlatHelper.isDev()) {
                 throw new IllegalStateException("Tab for: " + getEntryName() + " was null!");
             }
-            var e = new SimpleEntrySet<>(type, name, prefix, blockFactory, baseBlock, baseType, tab, tabMode, lootMode,
+            SimpleEntrySet<T, B> e = finishBuild(new SimpleEntrySet<>(type, name, prefix, blockFactory, baseBlock, baseType, tab, tabMode, lootMode,
                     itemFactory, tileHolder, renderType, null, extraModelTransform, useMergedPalette, copyTint, condition,
                     this.extraModelConfig
-            );
-            e.recipeLocations.addAll(this.recipes);
-            e.tags.putAll(this.tags);
+            ));
             for(var t : this.textures){
                 if(this.palette != null) {
                     e.textures.add(t.cloneWithPalette((blockType, manager) ->
