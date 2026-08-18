@@ -668,10 +668,10 @@ public class CompatSpritesHelper {
             /// Larger than the standard texture (16x16)
             else if (!texturePath.contains("ceiling_fan") && (width != 16 || height != 16)) {
                 try (TextureImage lavaOverlay = TextureImage.open(manager,
-                        EveryCompat.res("block/regions_unexplored/brimwood_planks_lava_256x"))
+                        EveryCompat.res("block/regions_unexplored/brimwood_planks_lava_256x"));
+                     // keep the frame count of the image we're overlaying onto, or the mask won't fit
+                     TextureImage overlay = TextureImage.createNew(width, height, image.getMcMeta())
                 ) {
-                    TextureImage overlay;
-                    overlay = TextureImage.createNew(width, height);
                     TextureOps.applyOverlay(overlay, lavaOverlay);
                     if (textureInfo.mask() != null) {
                         TextureOps.applyMask(overlay, maskTexture);

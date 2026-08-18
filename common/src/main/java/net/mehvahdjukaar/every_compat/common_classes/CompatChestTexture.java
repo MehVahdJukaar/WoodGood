@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.common_classes;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
+import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
@@ -19,6 +20,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CompatChestTexture {
+
+    // blueprint chests. mods that add wood ship them at <namespace>:textures/entity/chest/<wood>/<variant>.png
+    private static final String[] MOD_CHEST_VARIANTS = {
+            "normal", "normal_left", "normal_right",
+            "trapped", "trapped_left", "trapped_right"
+    };
+    private static final String[] CHEST_TEXTURE_SUFFIXES = {
+            "_chest", "_chest_left", "_chest_right",
+            "_trapped_chest", "_trapped_chest_left", "_trapped_chest_right"
+    };
+
+    /**
+     * Copies the chest textures that the mod adding this wood already ships onto our own chest path, so hand made
+     * art wins over a generated recolor. Only copies when the whole set is there, otherwise the trapped variants
+     * would be missing.
+     *
+     * @return false if the mod has no chest textures for this wood, meaning the caller has to generate them
+     */
+    public static boolean copyModProvidedChestTextures(ResourceSink sink, ResourceManager manager,
+                                                       String shortenedID, WoodType wood) {
+        List<ResourceLocation> sources = new ArrayList<>();
+        for (String variant : MOD_CHEST_VARIANTS) {
+            ResourceLocation from = ResourceLocation.fromNamespaceAndPath(wood.getNamespace(),
+                    "entity/chest/" + wood.getTypeName() + "/" + variant);
+            ResourceLocation fullPath = ResType.TEXTURES.getPath(from);
+            if (manager.getResource(fullPath).isEmpty()) return false;
+            sources.add(fullPath);
+        }
+
+        for (int i = 0; i < CHEST_TEXTURE_SUFFIXES.length; i++) {
+            ResourceLocation to = EveryCompat.res("entity/chest/" + shortenedID + "/" +
+                    wood.getAppendableId() + CHEST_TEXTURE_SUFFIXES[i]);
+            if (sink.alreadyHasTextureAtLocation(manager, to)) continue;
+            sink.copyResource(manager, sources.get(i), ResType.TEXTURES.getPath(to), true);
+        }
+        return true;
+    }
 
     public static void generateChestTexture(ResourceSink handler, ResourceManager manager,
                                             String shortenedID, WoodType wood, Block block,
