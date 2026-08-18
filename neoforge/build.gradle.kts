@@ -110,7 +110,7 @@ dependencies {
     modCompileOnly("curse.maven:rechiseled-558998:7687594") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ]
     modCompileOnly("curse.maven:refurbished-furniture-897116:7473565")
     modCompileOnly("curse.maven:storage-drawers-223852:6995432")
-    modImplementation("curse.maven:twigs-496913:8191595")
+    modCompileOnly("curse.maven:twigs-496913:8191595")
     modCompileOnly("curse.maven:valhelsia-furniture-694349:6341023")
     modCompileOnly("curse.maven:mighty-mail-902986:6542124")
     modCompileOnly("curse.maven:missing-wilds-622590:6302230")
@@ -182,7 +182,7 @@ dependencies {
     modCompileOnly("curse.maven:redeco-897377:6223817") //!! 1.20.1
     modCompileOnly("curse.maven:table-top-craft-fabric-467136:5318681") //!! 1.20.1
     modCompileOnly("curse.maven:the-graveyard-forge-531188:5114579") //!! 1.20.1
-    modImplementation("curse.maven:the-twilight-forest-227639:7797302")
+    modCompileOnly("curse.maven:the-twilight-forest-227639:7797302")
     modCompileOnly("curse.maven:timber-frames-606011:5372390") //!! 1.20.1
     modCompileOnly("curse.maven:tropicraft-254794:6600109")
     modCompileOnly("curse.maven:unusual-furniture-1278034:7332052")
@@ -193,7 +193,7 @@ dependencies {
     modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:7903929")
     modCompileOnly("curse.maven:xercamod-341575:4667995") //!! 1.20.1
 
-    modCompileOnly("curse.maven:regions-unexplored-659110:8167399")
+    modCompileOnly("curse.maven:regions-unexplored-659110:8167399") // Lithostitched
 
     // OTHER MAVENS
     modCompileOnly("maven.modrinth:building-but-better:2.0pre4") // MidnightLib //!! 1.20.1
