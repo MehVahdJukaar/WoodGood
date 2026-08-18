@@ -42,6 +42,7 @@ dependencies {
 //     modImplementation("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
 
 //!! TOOLS ========================================================================================================== \\
+    modRuntimeOnly("net.mehvahdjukaar:codecui-fabric:${property("codecui_version")}")
     modRuntimeOnly("dev.emi:emi-fabric:${property("emi_version")}+${property("minecraft_version")}")
     modRuntimeOnly("com.blamejared.crafttweaker:CraftTweaker-fabric-${property("minecraft_version")}:${property("crafttweaker_version")}")
     modRuntimeOnly("curse.maven:jade-324717:7545228")

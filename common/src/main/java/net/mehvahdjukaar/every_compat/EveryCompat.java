@@ -45,6 +45,8 @@ public abstract class EveryCompat {
     //TODO: figure out pack overlays to remove unneded textures when mods arent loaded
     public static final String MOD_ID = "everycomp";
     public static final Logger LOGGER = LogManager.getLogger("Every Compat");
+    /// Share of the block registry above which we start telling people they added too much
+    public static final float BLOAT_WARN_PERCENT = 25;
 
     private static final Multimap<String, CompatModule> ACTIVE_MODULES = MultimapBuilder
             .linkedHashKeys().arrayListValues().build();
@@ -124,7 +126,7 @@ public abstract class EveryCompat {
         }
 
         float percent = (myChildrenSize / (float) newSize) * 100f;
-        if (percent > 25) {
+        if (percent > BLOAT_WARN_PERCENT) {
             EveryCompat.LOGGER.warn("Registered {} compat blocks making up {}% of total blocks registered", myChildrenSize, String.format("%.2f", percent));
         } else {
             EveryCompat.LOGGER.info("Registered {} compat blocks making up {}% of total blocks registered", myChildrenSize, String.format("%.2f", percent));
@@ -346,6 +348,11 @@ public abstract class EveryCompat {
     public static int getRegisteredBlocksCount() {
         return ACTIVE_MODULES.values().stream().filter(Objects::nonNull)
                 .mapToInt(CompatModule::bloatAmount).sum();
+    }
+
+    /// How much of the block registry we take up, in percent
+    public static float getRegisteredBlocksPercentage() {
+        return (getRegisteredBlocksCount() / (float) BuiltInRegistries.BLOCK.size()) * 100f;
     }
 
     private static void registerItemsToTabs(RegHelper.ItemToTabEvent event) {

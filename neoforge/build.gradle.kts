@@ -40,6 +40,7 @@ dependencies {
     accessTransformers("net.mehvahdjukaar:moonlight-neoforge:${property("moonlight_version")}")
 
 //!! TOOLS ========================================================================================================== \\
+    modRuntimeOnly("net.mehvahdjukaar:codecui-neoforge:${property("codecui_version")}")
     modRuntimeOnly("dev.emi:emi-neoforge:${property("emi_version")}+${property("minecraft_version")}")
     modRuntimeOnly("com.blamejared.crafttweaker:CraftTweaker-neoforge-${property("minecraft_version")}:${property("crafttweaker_version")}")
     modRuntimeOnly("curse.maven:jei-238222:7420587")
@@ -108,7 +109,7 @@ dependencies {
     modCompileOnly("curse.maven:rechiseled-558998:7687594") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ]
     modCompileOnly("curse.maven:refurbished-furniture-897116:7473565")
     modCompileOnly("curse.maven:storage-drawers-223852:6995432")
-    modCompileOnly("curse.maven:twigs-496913:8191595")
+    modImplementation("curse.maven:twigs-496913:8191595")
     modCompileOnly("curse.maven:valhelsia-furniture-694349:6341023")
     modCompileOnly("curse.maven:mighty-mail-902986:6542124")
     modCompileOnly("curse.maven:missing-wilds-622590:6302230")
@@ -180,7 +181,7 @@ dependencies {
     modCompileOnly("curse.maven:redeco-897377:6223817") //!! 1.20.1
     modCompileOnly("curse.maven:table-top-craft-fabric-467136:5318681") //!! 1.20.1
     modCompileOnly("curse.maven:the-graveyard-forge-531188:5114579") //!! 1.20.1
-    modCompileOnly("curse.maven:the-twilight-forest-227639:7797302")
+    modImplementation("curse.maven:the-twilight-forest-227639:7797302")
     modCompileOnly("curse.maven:timber-frames-606011:5372390") //!! 1.20.1
     modCompileOnly("curse.maven:tropicraft-254794:6600109")
     modCompileOnly("curse.maven:unusual-furniture-1278034:7332052")

@@ -26,6 +26,8 @@ import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.SoundType;
@@ -52,12 +54,15 @@ public class FurnitureShowcaseWidget extends AbstractWidget {
         });
     }
 
-    private static final float SECONDS_PER_TURN = 9f;
+    private static final ItemStack BARRIER = Items.BARRIER.getDefaultInstance();
+
+    private static final float SECONDS_PER_TURN = 8f;
     private static final float TILT = 15f;
     private static final float BLOCK_FILL = 0.62f;
 
     private static final int CHIPS_PER_CLICK = 14;
     private static final int CHIP_SIZE = 3;
+    private static final int CHIP_DEPTH = 300;
     private static final float CHIP_GRAVITY = 260f;    // px per second squared
     private static final float MIN_CHIP_SPEED = 30f;   // px per second
     private static final float MAX_CHIP_SPEED = 90f;
@@ -89,6 +94,8 @@ public class FurnitureShowcaseWidget extends AbstractWidget {
         if (this.state != null) {
             this.spin(dt);
             this.renderBlock(graphics, this.state);
+        } else {
+            this.renderBarrier(graphics);
         }
         this.renderChips(graphics, dt);
     }
@@ -136,11 +143,10 @@ public class FurnitureShowcaseWidget extends AbstractWidget {
     }
 
     private void spin(float dt) {
-        this.yaw += dt * 360f / SECONDS_PER_TURN;
-        if (this.yaw >= 360f) {
-            this.yaw -= 360f;
-            this.pickNewFurniture();
-        }
+        float previous = this.yaw;
+        this.yaw = (this.yaw + dt * 360f / SECONDS_PER_TURN) % 360f;
+        boolean crossedHalfTurn = this.yaw < previous || (previous < 180f && this.yaw >= 180f);
+        if (crossedHalfTurn) this.pickNewFurniture();
     }
 
     private void renderBlock(GuiGraphics graphics, BlockState state) {
@@ -163,9 +169,23 @@ public class FurnitureShowcaseWidget extends AbstractWidget {
         pose.popPose();
     }
 
+    // no wood mods installed, so there's nothing to show off. same barrier the all woods item falls back to
+    private void renderBarrier(GuiGraphics graphics) {
+        int size = Math.round(Math.min(this.width, this.height) * BLOCK_FILL);
+        PoseStack pose = graphics.pose();
+        pose.pushPose();
+        pose.translate(this.getX() + (this.width - size) / 2f, this.getY() + (this.height - size) / 2f, 0);
+        pose.scale(size / 16f, size / 16f, 1);
+        graphics.renderFakeItem(BARRIER, 0, 0);
+        pose.popPose();
+    }
+
     private void renderChips(GuiGraphics graphics, float dt) {
         if (this.chips.isEmpty()) return;
         graphics.enableScissor(this.getX(), this.getY(), this.getX() + this.width, this.getY() + this.height);
+        PoseStack pose = graphics.pose();
+        pose.pushPose();
+        pose.translate(0, 0, CHIP_DEPTH); // the block is drawn at 150 and half its size deep, chips go in front of it
         Iterator<Chip> it = this.chips.iterator();
         while (it.hasNext()) {
             Chip chip = it.next();
@@ -177,6 +197,7 @@ public class FurnitureShowcaseWidget extends AbstractWidget {
             graphics.blit(tex.sprite().atlasLocation(), Mth.floor(chip.x), Mth.floor(chip.y), CHIP_SIZE, CHIP_SIZE,
                     chip.u, chip.v, tex.regionSize(), tex.regionSize(), tex.atlasWidth(), tex.atlasHeight());
         }
+        pose.popPose();
         graphics.disableScissor();
     }
 

@@ -7,7 +7,6 @@
   "gui.everycomp.blocks_added": "Every Compat added %s blocks from %s mods",
   "gui.everycomp.error_screen.title": "Every Compat encountered an Error",
   "gui.everycomp.error_screen.message": "The Every Compat Modules from the following supported mods had errors while loading. This usually means that the respective mods might have recently updated with breaking changes, requiring a future Every Compat update, or that one of the two mods' module is outdated.\n\nIf you don't want this to happen again please ask the author of said mod to CONSIDER including an Every Compat Module in their Mod instead.\nThe game can't proceed, but you can try to downgrade these supported mods to previous version & wait for an update: %s",
-
   "everycomp.configuration.general": "General",
   "everycomp.configuration.server_assets_generation_mode": "Assets Generation Mode",
   "everycomp.configuration.dynamic_assets_generation_mode": "Assets Generation Mode",
@@ -26,118 +25,81 @@
   "everycomp.configuration.module": "Module",
   "everycomp.configuration.other": "Other",
   "everycomp.configuration.include_all_wood_modules": "Include All Wood Modules",
-
   "container.everycomp.chest.name": "%s Chest",
-
   "block.everycomp.q.enderscape.hollow_celestial_log": "Hollow Celestial Stem",
   "block.everycomp.q.enderscape.hollow_murublight_log": "Hollow Murublight Stem",
   "block.everycomp.q.infernalexp.hollow_luminous_log": "Hollow Luminous Stem",
-
   "block.everycomp.q.sniffed_out.hollow_vessel_log": "Hollow Vessel Stem",
-
   "block.everycomp.q.soulfulnether.hollow_fright_log": "Hollow Fright Stem",
-
   "block.everycomp.q.netherexp.hollow_claret_log": "Hollow Cerebrage Claret Stem",
-
   "block.everycomp.q.enhanced_mushrooms.hollow_mushroom_log": "Hollow Mushroom Stem",
-
   "block.everycomp.q.mynethersdelight.hollow_powdery_log": "Hollow Powdery Cannon",
-
   "block.everycomp.q.endergetic.hollow_poise_log": "Hollow Poise Stem",
-
   "block.everycomp.q.gardens_of_the_dead.hollow_soulblight_log": "Hollow Soulblight Stem",
-
   "block.everycomp.q.outer_end.hollow_azure_log": "Hollow Azure Stem",
-
   "block.everycomp.q.endlessbiomes.hollow_penumbra_log": "Hollow Penumbra Stem",
   "block.everycomp.q.endlessbiomes.hollow_twisted_log": "Hollow Twisted Stem",
-
   "block.everycomp.q.regions_unexplored.hollow_blue_bioshroom_log": "Hollow Blue Bioshroom Stem",
   "block.everycomp.q.regions_unexplored.hollow_green_bioshroom_log": "Hollow Green Bioshroom Stem",
   "block.everycomp.q.regions_unexplored.hollow_pink_bioshroom_log": "Hollow Pink Bioshroom Stem",
   "block.everycomp.q.regions_unexplored.hollow_yellow_bioshroom_log": "Hollow Yellow Bioshroom Stem",
-
   "block.everycomp.q.aether_redux.hollow_fieldsproot_log": "Hollow Fieldsproot Stem",
   "block.everycomp.q.aether_redux.hollow_blightwillow_log": "Hollow Blightwillow Stem",
   "block.everycomp.q.aether_redux.hollow_glacia_log": "Hollow Glaica Stem",
   "block.everycomp.q.aether_redux.hollow_crystal_log": "Hollow Crystsal Stem",
   "block.everycomp.q.aether_redux.hollow_cloudcap_log": "Hollow Cloudcap Stem",
   "block.everycomp.q.aether_redux.hollow_skyroot_log": "Hollow Skyroot Stem",
-
   "block.everycomp.q.extendedmushrooms.hollow_glowshroom_log": "Hollow Glowshroom Stem",
   "block.everycomp.q.extendedmushrooms.hollow_honey_fungus_log": "Hollow Honey Fungus Stem",
   "block.everycomp.q.extendedmushrooms.hollow_mushroom_log": "Hollow Mushroom Stem",
   "block.everycomp.q.extendedmushrooms.hollow_poisonous_mushroom_log": "Hollow Poisonous Mushroom Stem",
-
   "block.everycomp.q.neu.hollow_dragon_log": "Hollow Dragon Stem",
   "block.everycomp.q.neu.hollow_elder_log": "Hollow Elder Stem",
   "block.everycomp.q.neu.hollow_frosted_log": "Hollow Frosted Stem",
-
   "block.everycomp.q.enlightened_end.hollow_cerulean_log": "Hollow Cerulean Stem",
   "block.everycomp.q.enlightened_end.hollow_indigo_log": "Hollow Indigo Stem",
-
   "block.everycomp.tf.extendedmushrooms.hollow_glowshroom_log": "Hollow Glowshroom Stem",
   "block.everycomp.tf.extendedmushrooms.hollow_honey_fungus_log": "Hollow Honey Fungus Stem",
   "block.everycomp.tf.extendedmushrooms.hollow_mushroom_log": "Hollow Mushroom Stem",
   "block.everycomp.tf.extendedmushrooms.hollow_poisonous_mushroom_log": "Hollow Poisonous Mushroom Stem",
-
   "block.everycomp.tf.neu.hollow_dragon_log": "Hollow Dragon Stem",
   "block.everycomp.tf.neu.hollow_elder_log": "Hollow Elder Stem",
   "block.everycomp.tf.neu.hollow_frosted_log": "Hollow Frosted Stem",
-
   "block.everycomp.tf.enlightened_end.hollow_cerulean_log": "Hollow Cerulean Stem",
   "block.everycomp.tf.enlightened_end.hollow_indigo_log": "Hollow Indigo Stem",
-
   "block.everycomp.tf.netherexp.hollow_claret_log": "Hollow Cerebrage Claret Stem",
-
   "block.everycomp.tf.soulfulnether.hollow_fright_log": "Hollow Fright Stem",
-
   "block.everycomp.tf.sniffed_out.hollow_vessel_log": "Hollow Vessel Stem",
-
   "block.everycomp.tf.enderscape.hollow_celestial_log": "Hollow Celestial Stem",
   "block.everycomp.tf.enderscape.hollow_murublight_log": "Hollow Murublight Stem",
   "block.everycomp.tf.infernalexp.hollow_luminous_log": "Hollow Luminous Stem",
-
-
   "wood_type.blocksplus.bamboo": "Green Bamboo",
-
   "wood_type.atlantis.atlantean": "Nymph",
   "leaves_type.atlantis.atlantean": "Nymph",
-
   "wood_type.domum_ornamentum.cactus": "Green Cactus",
   "wood_type.domum_ornamentum.cactus_extra": "Cactus",
-
   "wood_type.twilightforest.dark": "Darkwood",
   "wood_type.twilightforest.time": "Timewood",
   "wood_type.twilightforest.trans": "Transwood",
   "wood_type.twilightforest.sorting": "Sortingwood",
   "leaves_type.twilightforest.dark": "Darkwood",
-
   "wood_type.quark.ancient": "Ashen",
   "wood_type.quark.blossom": "Trumpet",
   "leaves_type.quark.ancient": "Ashen",
   "leaves_type.quark.blue_blossom": "Frosty Trumpet",
-  "leaves_type.quark.lavender_blossom":"Serene Trumpet",
+  "leaves_type.quark.lavender_blossom": "Serene Trumpet",
   "leaves_type.quark.orange_blossom": "Warm Trumpet",
   "leaves_type.quark.pink_blossom": "Sweet Trumpet",
   "leaves_type.quark.yellow_blossom": "Sunny Trumpet",
-  "leaves_type.quark.red_blossom":"Fiery Trumpet",
-
+  "leaves_type.quark.red_blossom": "Fiery Trumpet",
   "wood_type.unusualprehistory.dryo": "Dryophyllum",
   "wood_type.unusualprehistory.foxxi": "Foxii",
-
   "leaves_type.ulterlands.souldrained": "Petrified",
-
-
   "block_type.twigs.table": "%s Table",
-
   "block_type.missingwilds.fallen_log": "Fallen %s Log",
-
   "block_type.regions_unexplored.branch": "%s Branch",
   "block_type.regions_unexplored.shrub": "%s Shrub",
-
   "block_type.campchair.camp_chair": "%s Camp Chair",
-
   "block_type.another_furniture.table": "%s Table",
   "block_type.another_furniture.chair": "%s Chair",
   "block_type.another_furniture.shelf": "%s Shelf",
@@ -145,9 +107,7 @@
   "block_type.another_furniture.flower_box": "%s Flower Box",
   "block_type.another_furniture.drawer": "%s Drawer",
   "block_type.another_furniture.bench": "%s Bench",
-
   "block_type.barkcarpets.bark_carpet": "%s Bark Carpet",
-
   "block_type.buildersaddition.arcade": "%s Arcade",
   "block_type.buildersaddition.bench": "%s Bench",
   "block_type.buildersaddition.bedside_table": "%s Bedside Table",
@@ -167,8 +127,6 @@
   "block_type.buildersaddition.support_bracket": "%s Support Bracket",
   "block_type.buildersaddition.table": "%s Table",
   "block_type.buildersaddition.vertical_slab": "%s Panel",
-
-
   "block_type.chipped.barred_door": "Barred %s Door",
   "block_type.chipped.beach_door": "Beach %s Door",
   "block_type.chipped.boarded_door": "Boarded %s Door",
@@ -188,7 +146,6 @@
   "block_type.chipped.supported_door": "Supported %s Door",
   "block_type.chipped.tiled_door": "Tiled %s Door",
   "block_type.chipped.windowed_door": "Windowed %s Door",
-
   "block_type.chipped.airy_trapdoor": "Airy %s Trapdoor",
   "block_type.chipped.barred_trapdoor": "Barred %s Trapdoor",
   "block_type.chipped.checkered_trapdoor": "Checkered %s Trapdoor",
@@ -212,7 +169,6 @@
   "block_type.chipped.warted_trapdoor": "Warted %s Trapdoor",
   "block_type.chipped.windowed_trapdoor": "Windowed %s Trapdoor",
   "block_type.chipped.woven_trapdoor": "Woven %s Trapdoor",
-
   "block_type.chipped.bared_glass": "%s Barred Glass",
   "block_type.chipped.bordered_glass": "%s Bordered Glass",
   "block_type.chipped.circle_glass": "Circle %s Glass",
@@ -224,7 +180,6 @@
   "block_type.chipped.snowflake_glass": "%s Snowflake Glass",
   "block_type.chipped.square_glass": "Square %s Glass",
   "block_type.chipped.woven_glass": "%s Woven Glass",
-
   "block_type.chipped.bared_glass_pane": "%s Barred Glass Pane",
   "block_type.chipped.bordered_glass_pane": "%s Bordered Glass Pane",
   "block_type.chipped.circle_glass_pane": "Circle %s Glass Pane",
@@ -236,14 +191,11 @@
   "block_type.chipped.snowflake_glass_pane": "%s Snowflake Glass Pane",
   "block_type.chipped.square_glass_pane": "Square %s Glass Pane",
   "block_type.chipped.woven_glass_pane": "%s Woven Glass Pane",
-
   "block_type.chipped.barrel": "%s Barrel",
   "block_type.chipped.crate": "%s Crate",
   "block_type.chipped.reinforced_crate": "Reinforced %s Crate",
-
   "block_type.chipped.torch": "%s Torch",
   "block_type.chipped.wall_torch": "%s Torch",
-
   "block_type.chipped.tile_windowed_door": "Tile Windowed %s Door",
   "block_type.chipped.basket_woven_planks": "Basket Woven %s Planks",
   "block_type.chipped.boxed_planks": "Boxed %s Planks",
@@ -283,7 +235,6 @@
   "block_type.chipped.vertically_railed_planks": "Vertically Railed %s Planks",
   "block_type.chipped.whirlwind_planks": "Whirlwind %s Planks",
   "block_type.chipped.wickered_planks": "Wickered %s Planks",
-
   "block_type.chipped.bundled_log": "Bundled %s Log",
   "block_type.chipped.center_cut_log": "Center Cut %s Log",
   "block_type.chipped.damaged_log": "Damaged %s Log",
@@ -295,7 +246,6 @@
   "block_type.chipped.overgrown_log": "Overgrown %s Log",
   "block_type.chipped.planked_log": "Planked %s Log",
   "block_type.chipped.reinforced_log": "Reinforced %s Log",
-
   "block_type.chipped.carved_stripped_log": "Carved Stripped %s Log",
   "block_type.chipped.chipped_stripped_log": "Chipped Stripped %s Log",
   "block_type.chipped.d_sign_stripped_log": "D Sign Stripped %s Log",
@@ -312,7 +262,6 @@
   "block_type.chipped.sign_stripped_log": "Sign Stripped %s Log",
   "block_type.chipped.stern_stripped_log": "Stern Stripped %s Log",
   "block_type.chipped.wise_stripped_log": "Wise Stripped %s Log",
-
   "block_type.chipped.apple_leaves": "Apple %s Leaves",
   "block_type.chipped.cherry_leaves": "Cherry %s Leaves",
   "block_type.chipped.frosted_leaves": "Frosted %s Leaves",
@@ -324,10 +273,7 @@
   "block_type.chipped.golden_leaves": "Golden %s Leaves",
   "block_type.chipped.orange_leaves": "Orange %s Leaves",
   "block_type.chipped.red_leaves": "Red %s Leaves",
-
-
   "block_type.graveyard.coffin": "%s Coffin",
-
   "block_type.dawnoftimebuilder.beam": "%s Beam",
   "block_type.dawnoftimebuilder.couch": "%s Couch",
   "block_type.dawnoftimebuilder.fancy_fence": "%s Fancy Fence",
@@ -341,13 +287,11 @@
   "block_type.dawnoftimebuilder.support_beam": "%s Support Beam",
   "block_type.dawnoftimebuilder.support_slab": "%s Support Slab",
   "block_type.dawnoftimebuilder.wall": "%s Wall",
-
   "block_type.decorative_blocks.palisade": "%s Palisade",
   "block_type.decorative_blocks.support": "%s Support",
   "block_type.decorative_blocks.beam": "%s Beam",
   "block_type.decorative_blocks.seat": "%s Seat",
   "block_type.decorative_winter.snowy_palisade": "Snowy %s Palisade",
-
   "block_type.dramaticdoors.short_door": "Short %s Door",
   "block_type.dramaticdoors.tall_door": "Tall %s Door",
   "block_type.dramaticdoors.tall_macaw_bark_glass_door": "Tall %s Bark Glass Door",
@@ -368,11 +312,8 @@
   "block_type.dramaticdoors.tall_macaw_stable_head_door": "Tall %s Stable Horse Door",
   "block_type.dramaticdoors.tall_macaw_swamp_door": "Tall %s Swamp Door",
   "block_type.dramaticdoors.tall_macaw_tropical_door": "Tall %s Tropical Door",
-
   "block_type.farmersdelight.cabinet": "%s Cabinet",
-
   "block_type.friendsandfoes.beehive": "%s Beehive",
-
   "block_type.furnish.bedside_table": "%s Bedside Table",
   "block_type.furnish.bench": "%s Bench",
   "block_type.furnish.cabinet": "%s Cabinet",
@@ -390,28 +331,23 @@
   "block_type.furnish.table": "%s Table",
   "block_type.furnish.wardrobe": "%s Wardrobe",
   "block_type.furnish.bookshelf_chest": "%s Bookshelf Chest",
-
   "block_type.hearth_and_home.parquet": "%s Parquet",
   "block_type.hearth_and_home.sanded_wood": "Sanded %s Wood",
   "block_type.hearth_and_home.trim": "%s Trim",
   "block_type.hearth_and_home.vertical_trim": "%s Vertical Trim",
   "block_type.hearth_and_home.lattice": "%s Lattice",
-
   "block_type.mosaic_carpentry.mosaic": "%s Mosaic",
   "block_type.mosaic_carpentry.mosaic_stairs": "%s Mosaic Stairs",
   "block_type.mosaic_carpentry.mosaic_slab": "%s Mosaic Slab",
-
   "block_type.pokecube_legends.distortic_planks": "Distortic %s Planks",
   "block_type.pokecube_legends.distortic_stairs": "Distortic %s Stairs",
   "block_type.pokecube_legends.distortic_slab": "Distortic %s Slab",
-
   "block_type.twilightforest.hollow_log": "Hollow %s Log",
   "block_type.twilightforest.hollow_log_vertical": "Hollow %s Log",
   "block_type.twilightforest.hollow_log_horizontal": "Hollow %s Log",
   "block_type.twilightforest.hollow_log_climbable": "Hollow %s Log",
   "block_type.twilightforest.banister": "%s Banister",
   "block_type.twilightforest.drying_rack": "%s Drying Rack",
-
   "block_type.quark.stripped_post": "Stripped %s Post",
   "block_type.quark.post": "%s Post",
   "block_type.quark.hollow_log": "Hollow %s Log",
@@ -423,25 +359,19 @@
   "block_type.quark.bookshelf": "%s Bookshelf",
   "block_type.quark.vertical_planks": "Vertical %s Planks",
   "block_type.quark.vertical_slab": "%s Vertical Slab",
-
   "block_type.architects_palette.railing": "%s Railing",
   "block_type.architects_palette.boards": "%s Boards",
   "block_type.architects_palette.board_wall": "%s Board Wall",
   "block_type.architects_palette.board_stairs": "%s Board Stairs",
   "block_type.architects_palette.board_slab": "%s Board Slab",
-
   "block_type.valhelsia_structures.cut_post": "Cut %s Post",
   "block_type.valhelsia_structures.cut_stripped_post": "Cut Stripped %s Post",
   "block_type.valhelsia_structures.post": "%s Post",
   "block_type.valhelsia_structures.stripped_post": "Stripped %s Post",
   "block_type.valhelsia_structures.bundled_posts": "Bundled %s Posts",
   "block_type.valhelsia_structures.bundled_stripped_posts": "Bundled Stripped %s Posts",
-
-
   "block_type.backpacked.backpack_shelf": "%s Backpack Shelf",
-
   "block_type.mctb.crafting_table": "%s Crafting Table",
-
   "block_type.mcwbridges.rail_bridge": "%s Rail Bridge",
   "block_type.mcwbridges.bridge_pier": "%s Bridge Support",
   "block_type.mcwbridges.log_bridge_middle": "%s Bridge",
@@ -450,7 +380,6 @@
   "block_type.mcwbridges.rope_bridge": "Rope %s Bridge",
   "block_type.mcwbridges.bridge_rope": "Rope %s Bridge",
   "block_type.mcwbridges.wired_fence": "%s Wired Fence",
-
   "block_type.mcwdoors.bark_glass_door": "%s Bark Glass Door",
   "block_type.mcwdoors.bamboo_door": "%s Mesh Door",
   "block_type.mcwdoors.barn_door": "%s Barn Door",
@@ -473,8 +402,6 @@
   "block_type.mcwdoors.western_door": "%s Western Door",
   "block_type.mcwdoors.waffle_door": "%s Waffle Door",
   "block_type.mcwdoors.whispering_door": "%s Whispering Door",
-
-
   "block_type.mcwfences.picket_fence": "%s Picket Fence",
   "block_type.mcwfences.stockade_fence": "%s Stockade Fence",
   "block_type.mcwfences.hedge": "%s Hedge",
@@ -482,7 +409,6 @@
   "block_type.mcwfences.wired_fence": "%s Wired Fence",
   "block_type.mcwfences.pyramid_gate": "%s Pyramid Gate",
   "block_type.mcwfences.highley_gate": "%s Highley Gate",
-
   "block_type.mcwfurnitures.bookshelf": "%s Bookshelf",
   "block_type.mcwfurnitures.bookshelf_cupboard": "%s Cupboard Bookshelf",
   "block_type.mcwfurnitures.bookshelf_drawer": "%s Bookshelf Drawer",
@@ -545,13 +471,10 @@
   "block_type.mcwfurnitures.stripped_glass_kitchen_cabinet": "Stripped %s Glass Kitchen Cabinet",
   "block_type.mcwfurnitures.kitchen_sink": "%s Kitchen Sink",
   "block_type.mcwfurnitures.stripped_kitchen_sink": "Stripped %s Kitchen Sink",
-
   "block_type.mcwlights.soul_tiki_torch": "Soul %s Tiki Torch",
   "block_type.mcwlights.tiki_torch": "%s Tiki Torch",
   "block_type.mcwlights.ceiling_fan_light": "%s Ceiling Fan Light",
-
   "block_type.mcwpaths.planks_path": "%s Planks Path",
-
   "block_type.mcwroofs.attic_roof": "%s Attic Roof",
   "block_type.mcwroofs.lower_roof": "%s Lower Base Roof",
   "block_type.mcwroofs.planks_attic_roof": "%s Planks Attic Roof",
@@ -566,7 +489,6 @@
   "block_type.mcwroofs.top_roof": "%s Top Roof",
   "block_type.mcwroofs.upper_lower_roof": "%s Lower Top Roof",
   "block_type.mcwroofs.upper_steep_roof": "%s Steep Top Roof",
-
   "block_type.mcwtrpdoors.bark_trapdoor": "%s Bark Trapdoor",
   "block_type.mcwtrpdoors.barn_trapdoor": "%s Barn Trapdoor",
   "block_type.mcwtrpdoors.barred_trapdoor": "%s Barred Trapdoor",
@@ -584,7 +506,6 @@
   "block_type.mcwtrpdoors.tropical_trapdoor": "%s Tropical Trapdoor",
   "block_type.mcwtrpdoors.barrel_trapdoor": "%s Barrel Trapdoor",
   "block_type.mcwtrpdoors.whispering_trapdoor": "%s Whispering Trapdoor",
-
   "block_type.mcwwindows.window": "Resizeable %s Window",
   "block_type.mcwwindows.window2": "Rectangle %s Window",
   "block_type.mcwwindows.four_window": "%s Four Pane Window",
@@ -603,19 +524,16 @@
   "block_type.mcwwindows.stripped_pane_window": "Stripped %s Pane Window",
   "block_type.mcwwindows.plank_pane_window": "%s Planks Pane Window",
   "block_type.mcwwindows.curtain_rod": "%s Curtain Rod",
-
-  "block_type.mcwstairs.terrace_stairs":"%s Terrace Stairs",
-  "block_type.mcwstairs.skyline_stairs":"%s Skyline Stairs",
-  "block_type.mcwstairs.compact_stairs":"%s Compact Stairs",
-  "block_type.mcwstairs.bulk_stairs":"%s Bulk Stairs",
-  "block_type.mcwstairs.loft_stairs":"%s Loft Stairs",
-  "block_type.mcwstairs.railing":"%s Stair Railing",
-  "block_type.mcwstairs.balcony":"%s Balcony",
-  "block_type.mcwstairs.platform":"%s Platform",
-
+  "block_type.mcwstairs.terrace_stairs": "%s Terrace Stairs",
+  "block_type.mcwstairs.skyline_stairs": "%s Skyline Stairs",
+  "block_type.mcwstairs.compact_stairs": "%s Compact Stairs",
+  "block_type.mcwstairs.bulk_stairs": "%s Bulk Stairs",
+  "block_type.mcwstairs.loft_stairs": "%s Loft Stairs",
+  "block_type.mcwstairs.railing": "%s Stair Railing",
+  "block_type.mcwstairs.balcony": "%s Balcony",
+  "block_type.mcwstairs.platform": "%s Platform",
   "block_type.create.window": "%s Window",
   "block_type.create.window_pane": "%s Window Pane",
-
   "block_type.cfm.window": "%s Window",
   "block_type.cfm.backpack_shelf": "%s Backpack Shelf",
   "block_type.cfm.bedside_cabinet": "%s Bedside Cabinet",
@@ -673,9 +591,7 @@
   "block_type.cfm.upgraded_gate": "%s Upgraded Gate",
   "block_type.cfm.stripped_upgraded_gate": "Stripped %s Upgraded Gate",
   "block_type.cfm.vertical_planks": "Vertical %s Planks",
-
   "block_type.mighty_mail.mail_box": "%s Mailbox",
-
   "block_type.refurbished_furniture.chair": "%s Chair",
   "block_type.refurbished_furniture.table": "%s Table",
   "block_type.refurbished_furniture.storage_jar": "%s Storage Jar",
@@ -697,14 +613,11 @@
   "block_type.refurbished_furniture.cutting_board": "%s Cutting Board",
   "block_type.refurbished_furniture.drawer": "%s Drawer",
   "block_type.refurbished_furniture.hedge": "%s Hedge",
-
   "block_type.premium_wood.bookshelf": "%s Bookshelf",
   "block_type.premium_wood.crafting_table": "%s Crafting Table",
   "block_type.premium_wood.framed_glass": "%s Framed Glass",
-
   "block_type.productivebees.advanced_beehive": "Advanced %s Beehive",
   "block_type.productivebees.expansion_box": "%s Expansion Box",
-
   "block_type.projectbrazier.armrest_chair": "%s Armrest Chair",
   "block_type.projectbrazier.bench": "%s Bench",
   "block_type.projectbrazier.bottom_platform": "%s Platform",
@@ -735,7 +648,6 @@
   "block_type.projectbrazier.top_platform_stairs": "%s Platform Stairs",
   "block_type.projectbrazier.vertical_lattice": "%s Vertical Lattice",
   "block_type.projectbrazier.zipline_anchor": "%s Zipline Anchor",
-
   "block_type.storagedrawers.full_drawers_1": "%s Drawers 1x1",
   "block_type.storagedrawers.full_drawers_2": "%s Drawers 1x2",
   "block_type.storagedrawers.full_drawers_4": "%s Drawers 2x2",
@@ -743,11 +655,8 @@
   "block_type.storagedrawers.half_drawers_2": "%s Half Drawers 1x2",
   "block_type.storagedrawers.half_drawers_4": "%s Half Drawers 2x2",
   "block_type.storagedrawers.trim": "%s Trim",
-
   "block_type.shutter.shutter": "%s Shutter",
-
   "block_type.vct.crafting_table": "%s Crafting Table",
-
   "block_type.xercamod.carved_1": "Carved %s",
   "block_type.xercamod.carved_2": "Carved %s",
   "block_type.xercamod.carved_3": "Carved %s",
@@ -756,7 +665,6 @@
   "block_type.xercamod.carved_6": "Carved %s",
   "block_type.xercamod.carved_7": "Carved %s",
   "block_type.xercamod.carved_8": "Carved %s",
-
   "block_type.woodworks.boards": "%s Boards",
   "block_type.woodworks.bookshelf": "%s Bookshelf",
   "block_type.woodworks.chiseled_bookshelf": "Chiseled %s Bookshelf",
@@ -765,16 +673,12 @@
   "block_type.woodworks.leaf_pile": "Pile of %s Leaves",
   "block_type.woodworks.chest": "%s Chest",
   "block_type.woodworks.trapped_chest": "Trapped %s Chest",
-
   "item_type.boatload.furnace_boat": "%s Boat with Furnace",
   "item_type.boatload.large_boat": "Large %s Boat",
-
   "block_type.woodster.chiseled_bookshelf": "%s Chiseled Bookshelf",
   "block_type.woodster.ladder": "%s Ladder",
-
   "block_type.infinitybuttons.large_button": "%s Large Button",
   "block_type.infinitybuttons.plank_secret_button": "%s Plank Secret Button",
-
   "block_type.workshop_for_handsome_adventurer.simple_table": "Crafting Table (%s)",
   "block_type.workshop_for_handsome_adventurer.book_shelf_double": "Book Shelf (%s, two rows)",
   "block_type.workshop_for_handsome_adventurer.book_shelf_minimal": "Book Shelf (%s, one row)",
@@ -787,21 +691,16 @@
   "block_type.workshop_for_handsome_adventurer.tool_rack_single": "Tool Rack (%s, single)",
   "block_type.workshop_for_handsome_adventurer.potion_shelf": "Potion Shelf (%s)",
   "item_type.workshop_for_handsome_adventurer.workstation_placer": "Workstation (%s)",
-
-
   "item_type.buildersdelight.furniture_kit": "%s Furniture Kit",
   "tooltip.everycomp.buildersdelight.furniture_kit": "Place In Stonecutter To Make Furniture",
-
   "block_type.buildersdelight.chair_1": "%s Seating",
   "tooltip.everycomp.buildersdelight.chair_1": "Chair",
   "block_type.buildersdelight.chair_2": "%s Seating",
   "tooltip.everycomp.buildersdelight.chair_2": "Stool",
-
   "block_type.buildersdelight.table_1": "%s Table",
   "tooltip.everycomp.buildersdelight.table_1": "Small Table",
   "block_type.buildersdelight.table_2": "%s Table",
   "tooltip.everycomp.buildersdelight.table_2": "Glass Inlay",
-
   "block_type.buildersdelight.planks_1": "%s Planks",
   "tooltip.everycomp.buildersdelight.planks_1": "Vertical",
   "block_type.buildersdelight.planks_2": "%s Planks",
@@ -816,7 +715,6 @@
   "tooltip.everycomp.buildersdelight.planks_6": "Large",
   "block_type.buildersdelight.planks_7": "%s Planks",
   "tooltip.everycomp.buildersdelight.planks_7": "Knotted",
-
   "block_type.buildersdelight.stairs_1": "%s Stairs",
   "tooltip.everycomp.buildersdelight.stairs_1": "Vertical",
   "block_type.buildersdelight.stairs_2": "%s Stairs",
@@ -831,7 +729,6 @@
   "tooltip.everycomp.buildersdelight.stairs_6": "Large",
   "block_type.buildersdelight.stairs_7": "%s Stairs",
   "tooltip.everycomp.buildersdelight.stairs_7": "Knotted",
-
   "block_type.buildersdelight.slab_1": "%s Slab",
   "tooltip.everycomp.buildersdelight.slab_1": "Vertical",
   "block_type.buildersdelight.slab_2": "%s Slab",
@@ -894,12 +791,9 @@
   "tooltip.everycomp.buildersdelight.glass_pane_7": "Blinds",
   "block_type.buildersdelight.glass_pane_8": "%s Glass Pane",
   "tooltip.everycomp.buildersdelight.glass_pane_8": "Fancy",
-
   "block_type.lolmct.crafting_table": "%s Crafting Table",
-
   "block_type.lolmcv.chest": "%s Chest",
   "block_type.lolmcv.trapped_chest": "%s Trapped Chest",
-
   "block_type.variantvanillablocks.barrel": "%s Barrel",
   "block_type.variantvanillablocks.beehive": "%s Beehive",
   "block_type.variantvanillablocks.bookshelf": "%s Bookshelf",
@@ -913,7 +807,6 @@
   "block_type.variantvanillablocks.lectern": "%s Lectern",
   "block_type.variantvanillablocks.smithing_table": "%s Smithing Table",
   "block_type.variantvanillablocks.smoker": "%s Smoker",
-
   "block_type.handcrafted.bench": "%s Bench",
   "block_type.handcrafted.couch": "%s Couch",
   "block_type.handcrafted.chair": "%s Chair",
@@ -929,29 +822,22 @@
   "block_type.handcrafted.pillar_trim": "%s Pillar Trim",
   "block_type.handcrafted.corner_trim": "%s Corner Trim",
   "block_type.handcrafted.dining_bench": "%s Dining Bench",
-
   "block_type.decoration_delight.counter": "%s Counter",
   "block_type.decoration_delight.counter_corner": "%s Counter Corner",
   "block_type.decoration_delight.counter_bend": "%s Counter Bend",
   "block_type.decoration_delight.countertop": "%s Countertop",
   "block_type.decoration_delight.stool": "%s Stool",
   "block_type.decoration_delight.mosaic": "%s Mosaic",
-
   "block_type.absentbydesign.fence_log": "%s Log Fence",
   "block_type.absentbydesign.wall_stripped_log": "Stripped %s Wall",
   "block_type.absentbydesign.wall_log": "%s Wood Wall",
   "block_type.absentbydesign.wall_planks": "%s Wall",
-
   "block_type.villagersplus.horticulturist_table": "%s Flower Tub",
-
   "block_type.stylishstiles.stile": "%s Stile",
-
   "block_type.wilderwild.hollowed_log": "Hollowed %s Log",
   "block_type.wilderwild.stripped_hollowed_log": "Stripped Hollowed %s Log",
-
   "block_type.beautifulcampfires.campfire": "%s Campfire",
   "block_type.beautifulcampfires.soul_campfire": "%s Soul Campfire",
-
   "block_type.bbb.layer": "%s Layer",
   "block_type.bbb.trim": "%s Trim",
   "block_type.bbb.beam": "%s Beam",
@@ -963,42 +849,31 @@
   "block_type.bbb.lantern": "%s Lantern",
   "block_type.bbb.ladder": "%s Ladder",
   "block_type.bbb.wall": "%s Wall",
-
   "block_type.bewitchment.poppet_shelf": "%s Poppet Shelf",
   "item_type.bewitchment.bark": "%s Bark",
-
   "block_type.beautify.blinds": "%s Blinds",
   "block_type.beautify.trellis": "%s Lattice",
   "block_type.beautify.picture_frame": "%s Picture Frame",
-
   "block_type.oreberriesreplanted.vat": "%s Vat",
-
   "block_type.redbits.large_button": "Large %s Button",
-
   "block_type.woodenhoppers.hopper": "%s Hopper",
-
   "block_type.exlineawnings.awning": "%s Awning",
   "block_type.exlineawnings.log_awning": "%s Log Awning",
-
   "block_type.corail_pillar.pillar_log": "%s Log Pillar",
   "block_type.corail_pillar.small-pillar_log": "%s Log Pillar",
   "block_type.corail_pillar.pillar_planks": "%s Planks Pillar",
   "block_type.corail_pillar.small_pillar_planks": "%s Planks Pillar",
-
   "block_type.valhelsia_furniture.table": "%s Table",
   "block_type.valhelsia_furniture.chair": "%s Chair",
   "block_type.valhelsia_furniture.hay_chair": "%s Chair",
   "block_type.valhelsia_furniture.stool": "%s Stool",
   "block_type.valhelsia_furniture.desk": "%s Desk",
   "block_type.valhelsia_furniture.desk_drawer": "%s Desk Drawer",
-
   "block_type.functionalstorage.1": "%s Drawer (1x1)",
   "block_type.functionalstorage.2": "%s Drawer (1x2)",
   "block_type.functionalstorage.4": "%s Drawer (1x4)",
-
   "block_type.timber_frames.timber_frame_alpha": "%s Timber Frame",
   "block_type.timber_frames.timber_frame_beta": "%s Timber Frame",
-
   "block_type.redeco.polished_planks": "Polished %s Planks",
   "block_type.redeco.polished_stairs": "Polished %s Stairs",
   "block_type.redeco.polished_slab": "Polished %s Slab",
@@ -1021,13 +896,11 @@
   "block_type.redeco.display_case": "%s Display Case",
   "block_type.redeco.sword_mount": "%s Sword Mount",
   "block_type.redeco.pedestal": "%s Pedestal",
-
   "block_type.lightmanscurrency.auction_stand": "%s Auction Stand",
   "block_type.lightmanscurrency.bookshelf_trader": "%s Bookshelf Trader",
   "block_type.lightmanscurrency.shelf": "%s Shelf",
   "block_type.lightmanscurrency.shelf_2x2": "%s Double Shelf",
   "block_type.lightmanscurrency.card_display": "%s Card Display",
-
   "block_type.clutter.mosaic": "%s Mosaic",
   "block_type.clutter.mosaic_slab": "%s Mosaic Slab",
   "block_type.clutter.mosaic_stairs": "%s Mosaic Stairs",
@@ -1043,15 +916,11 @@
   "block_type.clutter.trellis": "%s Trellis",
   "block_type.clutter.wall_cupboard": "%s Wall Cupboard",
   "block_type.clutter.cupboard": "%s Cupboard",
-
   "block_type.tropicraft.boardwalk": "%s Boardwalk",
-
   "item_type.justaraftmod.raft": "%s Log Raft",
-
   "block_type.table_top_craft.chess": "%s Chess Board",
   "block_type.table_top_craft.chess_timer": "%s Chess Timer",
   "block_type.table_top_craft.connect_four": "%s Connect Four",
-
   "block_type.excessive_building.crafting_table": "%s Crafting Table",
   "block_type.excessive_building.vertical_stairs": "%s Vertical Stairs",
   "block_type.excessive_building.chiseled": "Chiseled %s Planks",
@@ -1071,7 +940,6 @@
   "block_type.excessive_building.hollow_log": "Hollow %s Log",
   "block_type.excessive_building.hollow_stripped_log": "Hollow Stripped %s Log",
   "block_type.excessive_building.decorative_shelf": "%s Decorative Shelf",
-
   "block_type.more_beautiful_torches.log_torch": "%s Log Torch",
   "block_type.more_beautiful_torches.log_soul_torch": "%s Log Soul Torch",
   "block_type.more_beautiful_torches.log_redstone_torch": "%s Log Redstone Torch",
@@ -1081,7 +949,6 @@
   "block_type.more_beautiful_torches.stripped_log_torch": "Stripped %s Log Torch",
   "block_type.more_beautiful_torches.stripped_log_soul_torch": "Stripped %s Log Soul Torch",
   "block_type.more_beautiful_torches.stripped_log_redstone_torch": "Stripped %s Log Redstone Torch",
-
   "block_type.blocksplus.cracked_planks": "Cracked %s Planks",
   "block_type.blocksplus.mossy_planks": "Mossy %s Planks",
   "block_type.blocksplus.crafting_table": "%s Crafting Table",
@@ -1096,9 +963,7 @@
   "block_type.blocksplus.cracked_mosaic": "Cracked %s Mosaic",
   "block_type.blocksplus.mossy_mosaic": "Mossy %s Mosaic",
   "block_type.blocksplus.mosaic_pressure_plate": "%s Mosaic Pressure Plate",
-
   "block_type.sob.counter": "%s Countertop",
-
   "block_type.storagedelight.drawer": "%s Drawer",
   "block_type.storagedelight.drawer_with_door": "%s Drawer With Door",
   "block_type.storagedelight.drawer_with_books": "%s Drawer With Books",
@@ -1107,22 +972,18 @@
   "block_type.storagedelight.glass_cabinet": "Glass %s Cabinet",
   "block_type.storagedelight.cabinet_with_glass_doors": "%s Cabinet With Glass Doors",
   "block_type.storagedelight.single_door_cabinet": "%s Single Door Cabinet",
-
   "block_type.nfm.chopping_board": "%s Chopping Board",
   "block_type.nfm.door_bell": "%s Door Bell",
   "block_type.nfm.stripped_door_bell": "Stripped %s Door Bell",
   "block_type.nfm.water_tank": "%s Water Tank",
-
   "car_variant.%s": "%s",
   "item_type.car.license_plate_holder": "%s License Plate Holder",
   "item_type.car.bumper": "%s Bumper",
   "item_type.car.body": "%s Body",
   "item_type.car.big_body": "Big %s Body",
-
   "block_type.youkaishomecoming.handrail": "%s Handrail",
   "block_type.youkaishomecoming.dining_table": "%s Dining Table",
   "block_type.youkaishomecoming.dining_chair": "%s Dining Chair",
-
   "block_type.unusual_furniture.carved": "Carved %s",
   "block_type.unusual_furniture.table": "%s Table",
   "block_type.unusual_furniture.coffee_table": "%s Coffee Table",
@@ -1135,7 +996,6 @@
   "block_type.unusual_furniture.railing": "%s Railing",
   "block_type.unusual_furniture.beam": "%s Beam",
   "block_type.unusual_furniture.shelf": "%s Shelf",
-
   "block_type.blockus.herringbone_planks": "Herringbone %s Planks",
   "block_type.blockus.mossy_planks": "Mossy %s Planks",
   "block_type.blockus.mossy_slab": "Mossy %s Slab",
@@ -1152,9 +1012,7 @@
   "block_type.blockus.stripped_post": "Stripped %s Post",
   "block_type.blockus.post": "%s Post",
   "block_type.blockus.hedge": "%s Hedge",
-
   "block_type.copperagebackport.shelf": "%s Shelf",
-
   "block_type.bibliocraft.bookcase": "%s Bookcase",
   "block_type.bibliocraft.fancy_armor_stand": "%s Fancy Armor Stand",
   "block_type.bibliocraft.fancy_clock": "%s Fancy Clock",
@@ -1166,9 +1024,7 @@
   "block_type.bibliocraft.shelf": "%s Shelf",
   "block_type.bibliocraft.table": "%s Table",
   "block_type.bibliocraft.tool_rack": "%s Tool Rack",
-
   "block_type.curiosities.fancied_planks": "Fancied %s Planks",
-
   "_comment-block": "──────────────────────────────── RECHISELED BLOCKS ────────────────────────────────",
   "block_type.rechiseled.planks_beams": "%s Plank Beams",
   "block_type.rechiseled.planks_beams_connecting": "%s Plank Beams",
@@ -1282,5 +1138,44 @@
   "block_type.rechiseled.planks_wavy_stairs": "Wavy %s Planks Stairs",
   "block_type.rechiseled.planks_wavy_stairs_connecting": "Wavy %s Planks Stairs",
   "block_type.rechiseled.planks_woven_stairs": "Woven %s Planks Stairs",
-  "block_type.rechiseled.planks_woven_stairs_connecting": "Woven %s Planks Stairs"
+  "block_type.rechiseled.planks_woven_stairs_connecting": "Woven %s Planks Stairs",
+  "everycomp.configuration.general.dynamic_assets_generation_mode": "Dynamic Assets Generation Mode",
+  "everycomp.configuration.general.dynamic_assets_generation_mode.description": "\nHow dynamic assets are generated. If cached the cache will regenerate once any mod or pack changes\n- NEVER: This mod will never attempt to generate the cache folder. The assets will be put in memory\n- RUN_ONCE: Will generate once & the assets will be stored in memory every time you launched.\n- CACHED: create a CACHE folder via .minecraft/dynamic-resource-pack-cache\n- CACHED_ZIPPED: create a ZIP folder via .minecraft/dynamic-resource-pack-cache\n- ALWAYS: Will always generate the assets & will be stored in memory. There will be no cache folder",
+  "everycomp.configuration.general.use_external_resource_pack": "Use External Resource Pack",
+  "everycomp.configuration.general.use_external_resource_pack.description": "Enable Every-Compat to base textures off external Resource Packs rather than mod's default textures.\nATTENTION: There are some Resource Packs that won't work well with Every-Compat, which is why this\noption is off by default. Disable if there are missing textures for blocks.\n",
+  "everycomp.configuration.general.server_assets_generation_mode": "Server Assets Generation Mode",
+  "everycomp.configuration.general.server_assets_generation_mode.description": "\nHow dynamic assets are generated.\n- NEVER: No asset will be generated. Use this if you have an external pack that adds assets for the block, otherwise you'll get missing assets everywhere\n- RUN_ONCE: Assets will be generated once every session. Subsequent reloads of resource/data pack will not regenerate them even if assets might have changed as a consequence\n- CACHED: Generate the assets on first boot and saves them to a cache folder in .minecraft/dynamic-data-pack-cache. If mods or packs change it will regenerate the cache. If not, subsequent reload won't generate anything and just read the cached ones as a normal pack.\n- CACHED_ZIPPED: Generate the assets on first boot and saves them to a cache zip file in .minecraft/dynamic-data-pack-cache. If mods or packs change it will regenerate the cache. If not, subsequent reload won't generate anything and just read the cached ones as a normal pack.\n- ALWAYS: Will always generate the assets & will be stored in memory. No cache is used. Unintuitively, this is often the fastest method as any disk access will be slow. \nTry and see what works best for you.",
+  "everycomp.configuration.general.creative_tab": "Creative Tab",
+  "everycomp.configuration.general.creative_tab.description": "Puts all the added items into a new Every Compat tab instead of their own mod tabs. Be warned that if disabled it could cause some issue with some mods that have custom tabs.",
+  "everycomp.configuration.general.tab_item_search": "Tab Item Search",
+  "everycomp.configuration.general.tab_item_search.description": "Allow the item_search or searchBar to be visible.",
+  "everycomp.configuration.general.no_mod_creative_tab": "No Mod Creative Tab",
+  "everycomp.configuration.general.no_mod_creative_tab.description": "If set to true, then all of the generated items will not be put into the mod's tab.",
+  "everycomp.configuration.general.generate_blocktype_tags": "Generate Blocktype Tags",
+  "everycomp.configuration.general.generate_blocktype_tags.description": "Generate blocktype tags for every block type. This will be applied to all the mods that use the system, not just Every Compat. Can make pack a bit faster if its off. Turn off if you dont need it.",
+  "everycomp.configuration.general.mod_version_check_packet": "Mod Version Check Packet",
+  "everycomp.configuration.general.mod_version_check_packet.description": "Sends a packet to verify all dependencies mod versions are the same on connect. DIsable if it causes issues",
+  "everycomp.configuration.general.debug_packet": "Debug Packet",
+  "everycomp.configuration.general.debug_packet.description": "Don't touch unless you are told to",
+  "everycomp.configuration.tooltips.mod_origin_enabled": "Mod Origin Enabled",
+  "everycomp.configuration.tooltips.mod_origin_enabled.description": "Enabled tooltips showing which mod an EC item is from",
+  "everycomp.configuration.tooltips.block_type_enabled": "Block Type Enabled",
+  "everycomp.configuration.tooltips.block_type_enabled.description": "Enabled tooltips showing which block type an EC item is made from",
+  "everycomp.configuration.tooltips.show_on_advanced_tooltips": "Show On Advanced Tooltips",
+  "everycomp.configuration.tooltips.show_on_advanced_tooltips.description": "Only show on advanced settings",
+  "everycomp.configuration.woodtype": "Woodtype",
+  "everycomp.configuration.woodtype.blacklist": "Blacklist",
+  "everycomp.configuration.woodtype.blacklist.description": "Exclude WoodType from all of Modules\n    EXAMPLE: blacklist = [\n        \"forestry:.*fireproof.*\",\t\tCOMMENT: .* is an RegEx, it exclude all of WoodType containing \"fireproof\" from Forestry\n        \"biomesoplenty:.*\",\t\t\tCOMMENT: .* is an RegEx, it exclude all of WoodType from Wood Mod for any Module\n        \"biomesoplenty:redwood\"\t\tCOMMENT: exclude redwood from Wood Mod for any module\n    ]\n",
+  "everycomp.configuration.leavestype": "Leavestype",
+  "everycomp.configuration.leavestype.blacklist": "Blacklist",
+  "everycomp.configuration.leavestype.blacklist.description": "Exclude LeavesType from all of Modules\n\tThe example is same as WoodType's",
+  "everycomp.configuration.block": "Block",
+  "everycomp.configuration.block.blacklist": "Blacklist",
+  "everycomp.configuration.block.blacklist.description": "Exclude a specific WoodType/LeavesType block\n    This is only applied to Wood-Good.\n    EXAMPLE: blacklist = [\n        \"chipped/biomesoplenty/checkered_redwood_trapdoor\",\tCOMMENT: excluded a checkered_trapdoor from Chipped with Biomes-O'-Plenty's redwood\n        \"variantvanillablocks/biomesoplenty/fir_chest\",\t\tCOMMENT: excluded a chest from Variant-Vanilla-Blocks with Biomes-O'-Plenty's fir\n        \".*/biomesoplenty/fir_chest\",\t\t\t\t\t\t\tCOMMENT: .* is an RegEx, so it exclude fir_chest from any Supported-Mods with just Biomes-O'-Plenty (Wood-Mods)\n        \"chipped/.*/fir_chest\",\t\t\t\t\t\t\t\tCOMMENT: .* is an RegEx, so it exclude fir_chest from any Wood-Mods with just chipped (Supported-Mod)\n        \".*fir_chest\",\t\t\t\t\t\t\t\t\t\t\tCOMMENT: .* is an RegEx, so it exclude fir_chest from any Supported-Mods & Wood-Mods\n    ]\n",
+  "everycomp.configuration.entryset.blacklist": "Blacklist",
+  "everycomp.configuration.entryset.blacklist.description": "Exclude EntrySet from the module for All of WoodType or LeavesType\n    This is only applied to Wood-Good.\n    EXAMPLE: blacklist = [\n        \"chipped:checkered_trapdoor\",\t\tCOMMENT: chipped:checkered_oak_trapdoor without \"oak\"\n        \"variantvanillablocks:chest\",\t\tCOMMENT: variantvanillablocks:oak_chest without \"oak\"\n        \"chipped:.*\"\t\t\t\t\t\tCOMMENT: .* is an regex which will exclude all of EntrySets from one Module - Wood-Good ONLY\n    ]\n    NOTE: This excluded one entryset from all WoodTypes/LeavesTypes\n",
+  "everycomp.configuration.module.blacklist": "Blacklist",
+  "everycomp.configuration.module.blacklist.description": "Exclude Module From Wood-Good, Stone-Zone & Gems-Realm\n    EXAMPLE: blacklist = [\n        \"chipped\",\n        \"variantvanillablocks\"\n    ]\n",
+  "everycomp.configuration.other.include_all_wood_modules": "Include All Wood Modules",
+  "everycomp.configuration.other.include_all_wood_modules.description": "Disable all of Supported Mods on EveryCompat's side. This feature is same as Library-Section which do not have any Wood Modules.\nWARNING: If the config between CLIENT & SERVER are not the same, then you won't able to join a server"
 }
