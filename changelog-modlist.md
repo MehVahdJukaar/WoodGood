@@ -104,7 +104,7 @@
 | Productive Bees                      |   🟥   |
 | Quark                                |   🟩   |
 | Re: Deco                             |   ❔   |
-| Timber Frame                         |   ❔   |
+| Timber Frame                         |   🟠   |
 | Tropicraft                           |   🟩   |
 | Ultimate Car Mod                     |   🔧   |
 | Unusual End                          |   🟡   |
@@ -123,6 +123,7 @@
 - 🟩 - AVAILABLE
 - 🟥 - NOT AVAILABLE
 - 🟡 - Built-in Module within the mod, not Every Compat's
+- 🟠 - Older version will only supported & Will be removed in the future (Use "Find" to search "LIMITED" via Changelog for details)
 - ❔ - Don't know when it will be update to 1.21.1
 - 🔧 - Will be added later
 - NF - only available in NEOFORGE, Will be moved into COMMON later
