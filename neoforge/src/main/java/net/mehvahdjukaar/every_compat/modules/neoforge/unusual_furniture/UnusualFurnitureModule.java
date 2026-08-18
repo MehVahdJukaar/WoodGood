@@ -136,7 +136,7 @@ public class UnusualFurnitureModule extends EveryCompatModule {
                 .requiresFromMap(carved.blocks) //REASON: textures
                 .addTile(ufCellingLampBlockEntity::new)
                 //TEXTURES: carved_oak
-                .addTexture(modRes("block/oak_celling_lamp"))
+                .addTextureM(modRes("block/oak_celling_lamp"), EveryCompat.res("block/uf/oak_celling_lamp_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("ceiling_lamp"), Registries.BLOCK)
                 .setTab(getTab(tab))
@@ -166,7 +166,7 @@ public class UnusualFurnitureModule extends EveryCompatModule {
                 .requiresFromMap(carved.blocks) //REASON: textures
                 .addTile(ufBenchBlockEntity::new)
                 //TEXTURES: carved_oak
-                .addTexture(modRes("block/bench_oak"))
+                .addTextureM(modRes("block/bench_oak"), EveryCompat.res("block/uf/bench_oak_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("bench"), Registries.BLOCK)
                 .addTag(ResourceLocation.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
