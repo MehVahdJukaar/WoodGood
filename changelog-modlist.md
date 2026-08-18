@@ -113,7 +113,7 @@
 | Variant Crafting Tables (Kitteh6660) |   ❔   |
 | Villagers Plus (NEOFORGE)            |   ❔   |
 | Woodster                             |   🟩   |
-| Workshop For Handsome Adventure      |   🟩   |
+| Workshop For Handsome Adventure      |   🟥   |
 | Xerca Mod                            |   ❔   |
 |                                      |        |
 
