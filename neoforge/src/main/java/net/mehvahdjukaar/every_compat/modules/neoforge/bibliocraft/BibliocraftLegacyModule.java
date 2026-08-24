@@ -70,6 +70,7 @@ public class BibliocraftLegacyModule extends EveryCompatModule {
                 .addTag(modRes("fancy_armor_stands/wood"), Registries.BLOCK, Registries.ITEM)
                 .setTab(getTab(tab))
                 .addRecipe(modRes("wood/oak/fancy_armor_stand"))
+                .copyParentDrop()
                 .build();
         this.addEntry(fancy_armor_stand);
 
@@ -124,6 +125,7 @@ public class BibliocraftLegacyModule extends EveryCompatModule {
                 .addTag(modRes("grandfather_clocks"), Registries.BLOCK, Registries.ITEM)
                 .setTab(getTab(tab))
                 .addRecipe(modRes("wood/oak/grandfather_clock"))
+                .copyParentDrop()
                 .build();
         this.addEntry(grandfather_clock);
 
