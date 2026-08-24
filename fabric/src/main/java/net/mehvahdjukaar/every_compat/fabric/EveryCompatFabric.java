@@ -79,7 +79,7 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
 //            addOptionalModule("create", () -> CreateModule.class); // ONLY TEMP until FABRIC v6.0.0 is out
 
             // Load if The-New-Shutters is loaded, not Vanilla-Shutters
-            if (PlatHelper.isModLoaded("shutters")) {
+            if (PlatHelper.isModLoaded("shutter")) {
                 Class<?> modClass = null;
                 try {
                     modClass = Class.forName("net.stehschnitzel.shutter.ShutterMain");
