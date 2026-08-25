@@ -207,7 +207,7 @@ dependencies {
     modCompileOnly("blocks_plus:blocks+1.20.1-1.7")
 
         // MACAW's
-    modCompileOnly("curse.maven:macaws-bridges-351725:5240518")
+    modCompileOnly("curse.maven:macaws-bridges-351725:7627954")
     modCompileOnly("curse.maven:macaws-doors-378646:7618714")
     modCompileOnly("curse.maven:macaws-fences-and-walls-453925:7308423")
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:5450327")

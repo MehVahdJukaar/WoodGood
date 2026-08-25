@@ -1,120 +1,41 @@
 package net.mehvahdjukaar.every_compat.modules.forge.mcaw;
 
-import com.mcwbridges.kikoz.init.BlockInit;
 import com.mcwbridges.kikoz.objects.*;
-import net.mehvahdjukaar.every_compat.api.RenderLayer;
-import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
+import net.mehvahdjukaar.every_compat.modules.macaw.MacawBridgesModuleAbstract;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
-// SUPPORT: v3.0.0+
-public class MacawBridgesModule extends SimpleModule {
-
-    public final SimpleEntrySet<WoodType, Block> bridgePiers;
-    public final SimpleEntrySet<WoodType, Block> bridgeMiddles;
-    public final SimpleEntrySet<WoodType, Block> ropeBridges;
-    public final SimpleEntrySet<WoodType, Block> railBridges;
-    public final SimpleEntrySet<WoodType, Block> bridgeStairs;
-    public final SimpleEntrySet<WoodType, Block> ropeStairs;
+//See MacawBridgesModuleAbstract's SUPPORTED VERSION
+public class MacawBridgesModule extends MacawBridgesModuleAbstract {
 
     public MacawBridgesModule(String modId) {
-        super(modId, "mcb");
-        ResourceLocation tab = modRes(modId);
-
-        bridgePiers = SimpleEntrySet.builder(WoodType.class, "bridge_pier",
-                        BlockInit.OAK_BRIDGE_PIER, () -> VanillaWoodTypes.OAK,
-                        w -> new Bridge_Support(Utils.copyPropertySafe(w.planks))
-                )
-                .requiresChildren("fence") //REASON: recieps
-                //TEXTURES: log, planks
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("wooden_piers"), Registries.BLOCK)
-                .setTabKey(tab)
-                .defaultRecipe()
-                .build();
-        this.addEntry(bridgePiers);
-
-        ropeBridges = SimpleEntrySet.builder(WoodType.class, "bridge", "rope",
-                        BlockInit.ROPE_OAK_BRIDGE, () -> VanillaWoodTypes.OAK,
-                        w -> new Bridge_Block_Rope(Utils.copyPropertySafe(w.planks))
-                )
-                .requiresChildren("slab") //REASON: recieps
-                //TEXTURES: log, planks
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("rope_bridges"), Registries.BLOCK)
-                .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                .defaultRecipe()
-                .build();
-        this.addEntry(ropeBridges);
-
-        bridgeMiddles = SimpleEntrySet.builder(WoodType.class, "log_bridge_middle",
-                        BlockInit.OAK_LOG_BRIDGE_MIDDLE, () -> VanillaWoodTypes.OAK,
-                        w -> new Log_Bridge(Utils.copyPropertySafe(w.planks))
-                )
-                .requiresChildren("slab", "fence") //REASON: recieps
-                //TEXTURES: log, planks
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("log_bridges"), Registries.BLOCK)
-                .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                .defaultRecipe()
-                .build();
-        this.addEntry(bridgeMiddles);
-
-
-        railBridges = SimpleEntrySet.builder(WoodType.class, "rail_bridge",
-                        BlockInit.OAK_RAIL_BRIDGE, () -> VanillaWoodTypes.OAK,
-                        w -> new Rail_Bridge(Utils.copyPropertySafe(w.planks).noOcclusion())
-                )
-                .requiresChildren("slab", "fence") //REASON: recieps
-                //TEXTURES: log, planks
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("rail_bridges"), Registries.BLOCK)
-                .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                .defaultRecipe()
-                .build();
-        this.addEntry(railBridges);
-
-
-        bridgeStairs = SimpleEntrySet.builder(WoodType.class, "log_bridge_stair",
-                        BlockInit.OAK_LOG_BRIDGE_STAIR, () -> VanillaWoodTypes.OAK,
-                        w -> new Bridge_Stairs(Utils.copyPropertySafe(w.planks))
-                )
-                .requiresFromMap(bridgeMiddles.blocks) //REASON: recipes
-                //TEXTURES: log, planks
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("log_stairs"), Registries.BLOCK)
-                .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                .defaultRecipe()
-                .build();
-        this.addEntry(bridgeStairs);
-
-        ropeStairs = SimpleEntrySet.builder(WoodType.class, "rope_bridge_stair",
-                        BlockInit.OAK_ROPE_BRIDGE_STAIR, () -> VanillaWoodTypes.OAK,
-                        w -> new Bridge_Stairs(Utils.copyPropertySafe(w.planks))
-                )
-                .requiresFromMap(ropeBridges.blocks) //REASON: recipes
-                //TEXTURES: log, planks
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(modRes("rope_stairs"), Registries.BLOCK)
-                .setTabKey(tab)
-                .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                .defaultRecipe()
-                .addRecipe(modRes("oak_rope_bridge_stair_recycle"))
-                .build();
-        this.addEntry(ropeStairs);
-
-
+        super(modId);
     }
 
+    @Override
+    public Block newBridge_Support(WoodType woodType) {
+        return new Bridge_Support(Utils.copyPropertySafe(woodType.planks));
+    }
+
+    @Override
+    public Block newBridge_Block_Rope(WoodType woodType) {
+        return new Bridge_Block_Rope(Utils.copyPropertySafe(woodType.planks));
+    }
+
+    @Override
+    public Block newLog_Bridge(WoodType woodType) {
+        return new Log_Bridge(Utils.copyPropertySafe(woodType.planks));
+    }
+
+    @Override
+    public Block newRail_Bridge(WoodType woodType) {
+        return new Rail_Bridge(Utils.copyPropertySafe(woodType.planks).noOcclusion());
+    }
+
+    @Override
+    public Block newBridge_Stairs(WoodType woodType) {
+        return new Bridge_Stairs(Utils.copyPropertySafe(woodType.planks));
+    }
 
 }
