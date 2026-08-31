@@ -147,7 +147,6 @@ public class EveryCompatForge extends EveryCompatCommon {
             addIfLoaded("shutter", () -> LauchsShuttersModule::new);
             addIfLoaded("sob", () -> SmidgeonOBlissModule::new);
             addIfLoaded("storagedelight", () -> StorageDelightModule::new);
-            addIfLoaded("timber_frames", () -> TimberFramesModule::new);
             addIfLoaded("tropicraft", () -> TropicraftModule::new);
             addIfLoaded("twilightforest", () -> TwilightForestModule::new);
             addIfLoaded("unusual_furniture", () -> UnusualFurnitureModule::new);
@@ -161,6 +160,10 @@ public class EveryCompatForge extends EveryCompatCommon {
 
             if (PlatHelper.isModLoaded("mcwdoors")) addIfLoaded("dramaticdoors", () -> DramaticDoorsMacawModule::new);
 
+            // REMOVE this later as timber_frame is not needed beacuse it has internal code that support WoodType
+            if (PlatHelper.isModLoaded("timber_frames") && !PlatHelper.getModVersion("timber_frames").matches("3[.\\d]{4}.*")) {
+                addIfLoaded("timber_frames", () -> TimberFramesModule::new);
+            }
         }
 
 // ============================================== DISABLED FOR A REASON ============================================= \\
