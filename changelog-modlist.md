@@ -1,49 +1,118 @@
 <h1><div style="text-align: center; margin-bottom: 10px; color: yellow">SUPPORTED MODLIST</div></h1>
 
-| FABRIC                     | STATUS | **COMMON**                                 | STATUS | **FORGE**                              | STATUS |
-|----------------------------|:------:|--------------------------------------------|:------:|----------------------------------------|:------:|
-| Beautify Refabricated      |   🟡   | Another Furniture                          |   🟩   | Abnormal's Boatload                    |   🟩   |
-| Bewitchment                |   🟦   | Beauitful Campfires                        |   🟩   | Abnormal's Woodworks                   |   🟩   |
-| Blockus                    |   🟦   | Botany Pot                                 |   🟩   | Absent By Design                       |   🟩   |
-| Clutter                    |   🟦   | Building But Better                        |   🟩   | Architect's Palette                    |   🟩   |
-| Create Fabric              |   🟩   | Camp Chair                                 |   🟩   | Beautify                               |   🟩   |
-| Exline's Awning            |   🟦   | Carpentry & Chisels                        |   🟡   | Bibliocraft Legacy                     |   🟩   |
-| Exline's Bark Carpet       |   🟦   | Chipped                                    |   🟩   | Blocks +                               |   🟩   |
-| Lightman's Currency Fabric |   🟩   | Copper Age Backport                        |   🟩   | Builder's Crafts & Additions           |   🟩   |
-| Red Bits                   |   🟦   | Dawn Of Time                               |   🟩   | Builder's Delight                      |   🟩   |
-| Villagers Plus (FABRIC)    |   🟩   | Decorative Blocks                          |   🟩   | Corail Pillar                          |   🟩   |
-| Wilder Wild                |   🟦   | Dramatic Doors                             |   🟩   | Corail Woodcutter                      |   🟩   |
-| Wooden Hoppers             |   🟦   | Dramatic Doors' <br>Supported Macaw's Door |   🟩   | Create v6.0+                           |   🟩   |
-|                            |        | Farmer's Delight                           |   🟩   | Decoration Delight: Refurbished        |   🟩   |
-|                            |        | Friends & Foes                             |   🟩   | Excessive Building                     |   🟩   |
-|                            |        | Furnish                                    |   🟩   | Ex Nihilo Sequentia                    |   🟡   |
-|                            |        | Guita's Woodworks                          |   🟡   | Functional Storage                     |   🟩   |
-|                            |        | Handcrafted                                |   🟩   | Graveyard (FORGE/NEOFORGE) (finallion) |   🟩   |
-|                            |        | Hearth And Home                            |   🟩   | Just A Raft                            |   🟩   |
-|                            |        | Infinity Buttons                           |   🟩   | LieOnLion's More Chest Variant         |   🟩   |
-|                            |        | LieOnLion's More Chest Variant             |   🟩   | Market Crates                          |   ❔    |
-|                            |        | LieOnLion's More Crafting Tables           |   🟩   | More Crafting Table For Forge          |   🟩   |
-|                            |        | Macaw's Mods                               |   🟩   | Mosaic Carpentry                       |   ❔    |
-|                            |        | Missing Wilds                              |   🟩   | Nosiphus Furniture Mod                 |   🟩   |
-|                            |        | More Beautiful Torches                     |   🟩   | Oreberries Replanted                   |   🟩   |
-|                            |        | MrCrayfish's Backpacked                    |   🟩   | Pokecube AIO                           |   🟩   |
-|                            |        | MrCrayfish's Mighty Mail                   |   🟩   | Premium Wood                           |   🟩   |
-|                            |        | MrCrayfish's Refurbished Furniture         |   🟩   | Productive Bees                        |   🟥   |
-|                            |        | Regions Unexplored                         |   🟩   | Quark                                  |   🟩   |
-|                            |        | Storage Delight                            |   🟩   | Re: Deco                               |   🟩   |
-|                            |        | Storage Drawers                            |   🟩   | Smidgeon O' Bliss (FORGE)              |   🟩   |
-|                            |        | Stylish Stiles                             |   🟩   | Timber Frame                           |   🟩   |
-|                            |        | The New Shutter aka Launch's Shutter       |   🟩   | Tropicraft                             |   🟩   |
-|                            |        | The Twilight Foreset                       |   🟩   | Ultimate Car Mod                       |   🟩   |
-|                            |        | Top Table Crafting (FORGE) or (FABRIC)     |   🟩   | Unusual End                            |   🟡   |
-|                            |        | Twigs                                      |   🟩   | Unusual Furniture                      |   🟩   |
-|                            |        | Unusual End                                |   🟡   | Valhelsia Structure                    |   🟩   |
-|                            |        | Valhelsia Furniture                        |   🟩   | Variant Crafting Tables (Kitteh6660)   |   🟩   |
-|                            |        | Variant Vanilla Blocks (XanthianZ)         |   🟩   | Villagers Plus (FORGE)                 |   🟩   |
-|                            |        |                                            |        | Woodster                               |   🟩   |
-|                            |        |                                            |        | Workshop For Handsome Adventure        |   🟩   |
-|                            |        |                                            |        | Xerca Mod                              |   🟩   |
-|                            |        |                                            |        | Youkai's Homecoming                    |   🟩   |
+<table>
+<tr><th>FABRIC</th><th>COMMON</th><th>FORGE</th> </tr>
+<tr><td valign="top">
+
+| MODS                       | STATUS |
+|----------------------------|:------:|
+| Beautify Refabricated      |   🟡   | 
+| Bewitchment                |   🟦   | 
+| Blockus                    |   🟦   | 
+| Clutter                    |   🟦   | 
+| Create (Fabric)            |   🟩   |
+| Exline's Awning            |   🟦   | 
+| Exline's Bark Carpet       |   🟦   | 
+| Lightman's Currency Fabric |   🟩   | 
+| Red Bits                   |   🟦   | 
+| Villagers Plus (FABRIC)    |   🟩   | 
+| Wilder Wild                |   🟦   | 
+| Wooden Hoppers             |   🟦   | 
+|                            |        |
+
+</td><td valign="top">
+
+| MODS                                       | STATUS |
+|--------------------------------------------|:------:|
+| Another Furniture                          |   🟩   | 
+| Beauitful Campfires                        |   🟩   | 
+| Botany Pot                                 |   🟩   | 
+| Building But Better                        |   🟩   | 
+| Camp Chair                                 |   🟩   | 
+| Carpentry & Chisels                        |   🟡   | 
+| Chipped                                    |   🟩   | 
+| Copper Age Backport                        |   🟩   | 
+| Dawn Of Time                               |   🟩   | 
+| Decorative Blocks                          |   🟩   | 
+| Dramatic Doors                             |   🟩   | 
+| Dramatic Doors' <br>Supported Macaw's Door |   🟩   | 
+| Excessive Building                         |   🟩   |
+| Farmer's Delight                           |   🟩   |
+| Friends & Foes                             |   🟩   |
+| Furnish                                    |   🟩   |
+| Guita's Woodworks                          |   🟡   |
+| Handcrafted                                |   🟩   |
+| Hearth And Home                            |   🟩   |
+| Infinity Buttons                           |   🟩   |
+| LieOnLion's More Chest Variant             |   🟩   |
+| LieOnLion's More Crafting Tables           |   🟩   |
+| Macaw's Mods                               |   🟩   |
+| Missing Wilds                              |   🟩   |
+| More Beautiful Torches                     |   🟩   |
+| MrCrayfish's Backpacked                    |   🟩   |
+| MrCrayfish's Mighty Mail                   |   🟩   |
+| MrCrayfish's Refurbished Furniture         |   🟩   |
+| Rechiseled                                 |   🟩   |
+| Regions Unexplored                         |   🟩   |
+| Storage Delight                            |   🟩   |
+| Storage Drawers                            |   🟩   |
+| Stylish Stiles                             |   🟩   |
+| The New Shutter aka Launch's Shutter       |   🟩   |
+| The Twilight Foreset                       |   🟩   |
+| Top Table Crafting (FORGE) or (FABRIC)     |   🟩   |
+| Twigs                                      |   🟩   |
+| Unusual End                                |   🟡   |
+| Valhelsia Furniture                        |   🟩   |
+| Variant Vanilla Blocks (XanthianZ)         |   🟩   |
+|                                            |        |
+
+</td><td valign="top">
+
+| MODS                                   | STATUS |
+|----------------------------------------|:------:|
+| Abnormal's Boatload                    |   🟩   |
+| Abnormal's Woodworks                   |   🟩   |
+| Absent By Design                       |   🟩   |
+| Architect's Palette                    |   🟩   |
+| Beautify                               |   🟩   |
+| Bibliocraft Legacy                     |   🟩   |
+| Blocks +                               |   🟩   |
+| Builder's Crafts & Additions           |   🟩   |
+| Builder's Delight                      |   🟩   |
+| Corail Pillar                          |   🟩   |
+| Corail Woodcutter                      |   🟩   |
+| Create v6.0+                           |   🟩   |
+| Decoration Delight: Refurbished        |   🟩   |
+| Ex Nihilo Sequentia                    |   🟡   |
+| Functional Storage                     |   🟩   |
+| Graveyard (FORGE/NEOFORGE) (finallion) |   🟩   |
+| Just A Raft                            |   🟩   |
+| LieOnLion's More Chest Variant         |   🟩   |
+| Market Crates                          |   ❔   |
+| More Crafting Table For Forge          |   🟩   |
+| Mosaic Carpentry                       |   ❔   |
+| Nosiphus Furniture Mod                 |   🟩   |
+| Oreberries Replanted                   |   🟩   |
+| Pokecube AIO                           |   🟩   |
+| Premium Wood                           |   🟩   |
+| Productive Bees                        |   🟥   |
+| Quark                                  |   🟩   |
+| Re: Deco                               |   🟩   |
+| Smidgeon O' Bliss (FORGE)              |   🟩   |
+| Timber Frame                           |   🟩   |
+| Tropicraft                             |   🟩   |
+| Ultimate Car Mod                       |   🟩   |
+| Unusual End                            |   🟡   |
+| Unusual Furniture                      |   🟩   |
+| Valhelsia Structure                    |   🟩   |
+| Variant Crafting Tables (Kitteh6660)   |   🟩   |
+| Villagers Plus (FORGE)                 |   🟩   |
+| Woodster                               |   🟩   |
+| Workshop For Handsome Adventure        |   🟩   |
+| Xerca Mod                              |   🟩   |
+| Youkai's Homecoming                    |   🟩   |
+
+</td></tr> </table>
 
 ## LEGENDS:
 - 🟩 - AVAILABLE
