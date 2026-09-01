@@ -36,12 +36,9 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import net.minecraft.world.level.material.MapColor;
 import org.violetmoon.quark.base.QuarkClient;
 import org.violetmoon.quark.content.building.block.*;
 import org.violetmoon.quark.content.building.client.render.be.VariantChestRenderer;
@@ -171,12 +168,7 @@ public class QuarkModule extends SimpleModule {
                         w -> {
                             String name = shortenedId() + "/" + w.getVariantId("planks", "vertical");
                             return new ZetaBlock(name, null,
-                                    BlockBehaviour.Properties.of()
-                                            .mapColor(MapColor.WOOD)
-                                            .ignitedByLava()
-                                            .instrument(NoteBlockInstrument.BASS)
-                                            .strength(2.0F, 3.0F)
-                                            .sound(SoundType.WOOD)
+                                    Utils.copyPropertySafe(w.planks).sound(w.planks.defaultBlockState().getSoundType())
                             );
                         }
                 )
@@ -227,7 +219,8 @@ public class QuarkModule extends SimpleModule {
                         () -> VanillaWoodTypes.OAK,
                         w -> new CompatChestBlock(w,
                                 shortenedId() + "/" + w.getAppendableId(),
-                                Utils.copyPropertySafe(Blocks.CHEST)))
+                                Utils.copyPropertySafe(Blocks.CHEST)
+                                        .sound(w.planks.defaultBlockState().getSoundType())))
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addTag(new ResourceLocation("forge:chests/wooden"), Registries.BLOCK, Registries.ITEM)
@@ -248,7 +241,9 @@ public class QuarkModule extends SimpleModule {
                                     || w.getNamespace().equals("blue_skies");
                             if (!chests.blocks.containsKey(w) && !isNamespaceLoaded) return null;
                             String name = shortenedId() + "/" + w.getAppendableId();
-                            return new CompatTrappedChestBlock(w, name, Utils.copyPropertySafe(Blocks.TRAPPED_CHEST));
+                            return new CompatTrappedChestBlock(w, name,
+                                    Utils.copyPropertySafe(Blocks.TRAPPED_CHEST)
+                                            .sound(w.planks.defaultBlockState().getSoundType()));
                         })
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
