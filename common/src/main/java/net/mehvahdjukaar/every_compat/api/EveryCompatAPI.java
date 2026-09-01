@@ -19,16 +19,27 @@ import java.util.function.Supplier;
 public class EveryCompatAPI {
 
     /**
+     * @deprecated Must change to {@link EveryCompatAPI#registerOptionalModule(String, Supplier)}
+     * <br>
+     * REASON: registerModule doesn't follow the blacklist rule but registerOptionalModule follows blacklist rule
+     * <br><br>
      * Register a new compat module for your modded blocks
      *
      * @param module your module instance. Can be a custom implementation
      *               <p>
      *               Take a look at {@link WoodGoodAddonExample} for an example module
      */
+    @Deprecated
     public static synchronized void registerModule(CompatModule module) {
         EveryCompat.addModule(module);
     }
 
+    /**
+     * Register a new compat module for your modded blocks
+     * @param moduleClass example: WoodGoodModuleExample.class
+     *                    <p>
+     *                    Take a look at {@link WoodGoodAddonExample} for an example module
+     */
     public static synchronized void registerOptionalModule(String modId, Supplier<Class<? extends CompatModule>> moduleClass) {
         EveryCompat.addOptionalModule(modId, moduleClass);
     }

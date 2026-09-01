@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.api.example;
 
+import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.EveryCompatAPI;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys;
@@ -16,7 +17,7 @@ public final class WoodGoodAddonExample {
     private static void onModInit() {
 
         // Register out module
-        EveryCompatAPI.registerModule(new WoodGoodModuleExample());
+        EveryCompatAPI.registerOptionalModule(EveryCompat.MOD_ID, () -> WoodGoodModuleExample.class);
 
 
         // Only add if you need to add non-detected WoodTypes or LeavesTypes
