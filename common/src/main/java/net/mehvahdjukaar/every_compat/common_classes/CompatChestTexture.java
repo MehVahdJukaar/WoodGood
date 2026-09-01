@@ -44,16 +44,18 @@ public class CompatChestTexture {
         for (String variant : MOD_CHEST_VARIANTS) {
             ResourceLocation from = ResourceLocation.fromNamespaceAndPath(wood.getNamespace(),
                     "entity/chest/" + wood.getTypeName() + "/" + variant);
-            ResourceLocation fullPath = ResType.TEXTURES.getPath(from);
-            if (manager.getResource(fullPath).isEmpty()) return false;
-            sources.add(fullPath);
+            ResourceLocation textureId = ResType.TEXTURES.getPath(from);
+
+            if (manager.getResource(textureId).isEmpty()) return false;
+            sources.add(textureId);
         }
 
-        for (int i = 0; i < CHEST_TEXTURE_SUFFIXES.length; i++) {
+        for (int idx = 0; idx < CHEST_TEXTURE_SUFFIXES.length; idx++) {
             ResourceLocation to = EveryCompat.res("entity/chest/" + shortenedID + "/" +
-                    wood.getAppendableId() + CHEST_TEXTURE_SUFFIXES[i]);
+                    wood.getAppendableId() + CHEST_TEXTURE_SUFFIXES[idx]);
+
             if (sink.alreadyHasTextureAtLocation(manager, to)) continue;
-            sink.copyResource(manager, sources.get(i), ResType.TEXTURES.getPath(to), true);
+            sink.copyResource(manager, sources.get(idx), ResType.TEXTURES.getPath(to), true);
         }
         return true;
     }
