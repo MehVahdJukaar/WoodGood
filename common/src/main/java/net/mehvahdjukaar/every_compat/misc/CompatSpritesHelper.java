@@ -6,10 +6,7 @@ import net.mehvahdjukaar.moonlight.api.client.TextureCache;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
-import net.mehvahdjukaar.moonlight.api.resources.textures.TextureCollager;
-import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
-import net.mehvahdjukaar.moonlight.api.resources.textures.TextureOps;
+import net.mehvahdjukaar.moonlight.api.resources.textures.*;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -652,8 +649,18 @@ public class CompatSpritesHelper {
             int width = image.imageWidth();
             int height = image.imageHeight();
 
+            // Skip the texture that don't need the overlay
+            if (texturePath.contains("item/") || texturePath.contains("ceiling_fan") || texturePath.contains("ladder"))
+                return;
+
+            // This is to turn maskTexture into an animated texture so it can match the new animation texture
+            if (textureInfo.mask() != null && image.getMcMeta() != null) {
+                int stripLength = Math.max(Palette.fromAnimatedImage(image).size(), image.getMcMeta().requiredFrameCount());
+                maskTexture = TextureOps.createSingleFrameAnimation(maskTexture, stripLength, image.getMcMeta());
+            }
+
             /// Default
-            if (!textureInfo.noAnimation() && width == 16) {
+            if (!textureInfo.noAnimation() && width == 16 && height == 32) {
                 try (TextureImage lavaOverlay = TextureImage.open(manager,
                         EveryCompat.res("block/regions_unexplored/brimwood_planks_lava"))
                 ) {
@@ -667,12 +674,12 @@ public class CompatSpritesHelper {
                 }
             }
             /// Larger than the standard texture (16x16)
-            else if (!texturePath.contains("ceiling_fan") && (width != 16 || height != 16)) {
+            else if (width != 16 || height != 16) {
                 try (TextureImage lavaOverlay = TextureImage.open(manager,
-                        EveryCompat.res("block/regions_unexplored/brimwood_planks_lava_256x"))
+                        EveryCompat.res("block/regions_unexplored/brimwood_planks_lava_256x"));
+                     // keep the frame count of the image we're overlaying onto, or the mask won't fit
+                     TextureImage overlay = TextureImage.createNew(width, height, image.getMcMeta())
                 ) {
-                    TextureImage overlay;
-                    overlay = TextureImage.createNew(width, height);
                     TextureOps.applyOverlay(overlay, lavaOverlay);
                     if (textureInfo.mask() != null) {
                         TextureOps.applyMask(overlay, maskTexture);
