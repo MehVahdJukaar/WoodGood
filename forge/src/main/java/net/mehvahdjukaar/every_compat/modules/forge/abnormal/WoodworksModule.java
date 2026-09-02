@@ -326,12 +326,14 @@ public class WoodworksModule extends SimpleModule {
     private class abwwChestBlockEntity extends CompatChestBlockEntity {
         public abwwChestBlockEntity(BlockPos pos, BlockState state) {
             super(chests.getTile(), pos, state);
+            noWoodTypeName();
         }
     }
 
     private class abwwTrappedBlockEntity extends CompatChestBlockEntity {
         public abwwTrappedBlockEntity(BlockPos pos, BlockState state) {
             super(trappedChests.getTile(), pos, state);
+            noWoodTypeName();
         }
     }
 
