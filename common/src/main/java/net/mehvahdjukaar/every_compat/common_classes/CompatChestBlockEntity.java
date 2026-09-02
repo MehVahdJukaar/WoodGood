@@ -10,10 +10,12 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 public class CompatChestBlockEntity extends ChestBlockEntity {
     private final WoodType woodType;
     private final boolean trapped;
+    protected boolean useWoodTypeName = true;
 
     public CompatChestBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState state) {
         super(blockEntityType, pos, state);
@@ -40,8 +42,14 @@ public class CompatChestBlockEntity extends ChestBlockEntity {
         return trapped;
     }
 
+    protected void noWoodTypeName() {
+        this.useWoodTypeName = false;
+    }
+
     @Override
-    protected Component getDefaultName() {
-        return Component.translatable("container.everycomp.chest.name", Component.translatable(woodType.getTranslationKey()).getString());
+    protected @NotNull Component getDefaultName() {
+        return (useWoodTypeName)
+                ? Component.translatable("container.everycomp.chest.name", Component.translatable(woodType.getTranslationKey()).getString())
+                : Component.translatable("container.chest");
     }
 }
