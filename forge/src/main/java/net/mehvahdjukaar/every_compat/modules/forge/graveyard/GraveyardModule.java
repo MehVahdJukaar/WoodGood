@@ -1,7 +1,6 @@
 
 package net.mehvahdjukaar.every_compat.modules.forge.graveyard;
 
-import com.finallion.graveyard.TheGraveyard;
 import com.finallion.graveyard.blockentities.SarcophagusBlockEntity;
 import com.finallion.graveyard.blocks.SarcophagusBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -33,16 +32,15 @@ public class GraveyardModule extends SimpleModule {
 
         COFFINS = SimpleEntrySet.builder(WoodType.class, "coffin",
                         getModBlock("oak_coffin"), () -> VanillaWoodTypes.OAK,
-                        w -> new CompatCoffinfBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion(), w))
+                        w -> new CompatCoffinfBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion(), w)
+                )
                 .addTag(modRes("coffins"), Registries.BLOCK)
                 .addTag(modRes("coffins"), Registries.ITEM)
                 .defaultRecipe()
-                .setTab(() -> TheGraveyard.GROUP)
+                .setTabKey(modRes("graveyard_group"))
                 .addTile(CompatCoffinBlockTile::new)
-                .addTextureM(modRes("block/oak_coffin"), EveryCompat.res("model/oak_coffin_m"))
-
+                .addTextureM(modRes("block/oak_coffin"), EveryCompat.res("block/gy/oak_coffin_m"))
                 .build();
-
         this.addEntry(COFFINS);
 
     }
