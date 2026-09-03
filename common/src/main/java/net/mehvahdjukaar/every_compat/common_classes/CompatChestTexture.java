@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.common_classes;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
+import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.resources.textures.*;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -12,6 +13,7 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CompatChestTexture {
@@ -22,6 +24,68 @@ public class CompatChestTexture {
     public static void setSuffix(String normalSuffix, String trappedSuffix) {
         NormalSuffix = normalSuffix;
         TrappedSuffix = trappedSuffix;
+    }
+
+    // blueprint chests. mods that add wood ship them at <namespace>:textures/entity/chest/<wood>/<variant>.png
+    private static final String[] MOD_CHEST_VARIANTS = {
+            "normal", "normal_left", "normal_right",
+            "trapped", "trapped_left", "trapped_right"
+    };
+    private static final String[] CHEST_TEXTURE_SUFFIXES = {
+            "_chest", "_chest_left", "_chest_right",
+            "_trapped_chest", "_trapped_chest_left", "_trapped_chest_right"
+    };
+
+    /**
+     * Copies the chest textures that the mod adding this wood already ships onto our own chest path, so hand made
+     * art wins over a generated recolor. Only copies when the whole set is there, otherwise the trapped variants
+     * would be missing.
+     *
+     * @return false if the mod has no chest textures for this wood, meaning the caller has to generate them
+     */
+    public static boolean copyModProvidedChestTextures(ResourceSink sink, ResourceManager manager,
+                                                       String shortenedID, WoodType wood) {
+        List<ResourceLocation> sources = new ArrayList<>();
+        for (String variant : MOD_CHEST_VARIANTS) {
+            ResourceLocation from = new ResourceLocation(wood.getNamespace(),
+                    "entity/chest/" + wood.getTypeName() + "/" + variant);
+            ResourceLocation textureId = ResType.TEXTURES.getPath(from);
+
+            if (manager.getResource(textureId).isEmpty()) return false;
+            sources.add(textureId);
+        }
+
+        for (int idx = 0; idx < CHEST_TEXTURE_SUFFIXES.length; idx++) {
+            ResourceLocation to = EveryCompat.res("entity/chest/" + shortenedID + "/" +
+                    wood.getAppendableId() + CHEST_TEXTURE_SUFFIXES[idx]);
+
+            if (sink.alreadyHasTextureAtLocation(manager, to)) continue;
+            sink.copyResource(manager, sources.get(idx), ResType.TEXTURES.getPath(to), true);
+        }
+        return true;
+    }
+
+
+    public static boolean copyHandmadeChestTextures(ResourceSink sink, ResourceManager manager,
+                                                    String fromShortenedId, String toShortenedID, WoodType wood) {
+        List<ResourceLocation> sources = new ArrayList<>();
+        for (int idx = 0; idx < CHEST_TEXTURE_SUFFIXES.length; idx++) {
+            ResourceLocation from = EveryCompat.res("entity/chest/" + fromShortenedId + "/" +
+                    wood.getAppendableId() + CHEST_TEXTURE_SUFFIXES[idx]);
+            ResourceLocation textureId = ResType.TEXTURES.getPath(from);
+
+            if (manager.getResource(textureId).isEmpty()) return false;
+            sources.add(textureId);
+        }
+
+        for (int idx = 0; idx < CHEST_TEXTURE_SUFFIXES.length; idx++) {
+            ResourceLocation to = EveryCompat.res("entity/chest/" + toShortenedID + "/" +
+                    wood.getAppendableId() + CHEST_TEXTURE_SUFFIXES[idx]);
+
+            if (sink.alreadyHasTextureAtLocation(manager, to)) continue;
+            sink.copyResource(manager, sources.get(idx), ResType.TEXTURES.getPath(to), true);
+        }
+        return true;
     }
 
     public static void generateChestTexture(ResourceSink handler, ResourceManager manager,

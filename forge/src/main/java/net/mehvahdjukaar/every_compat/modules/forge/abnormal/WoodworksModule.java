@@ -22,6 +22,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.common_classes.*;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
@@ -58,8 +59,7 @@ import net.minecraftforge.common.Tags;
 
 import java.util.function.Consumer;
 
-import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
-import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.setSuffix;
+import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.*;
 import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.isBambooLike;
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.getATagOrCreateANew;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
@@ -487,6 +487,12 @@ public class WoodworksModule extends SimpleModule {
 
         executor.accept((manager, sink) ->
             trappedChests.blocks.forEach((wood, block) -> {
+                // mods like environmental already ship chest textures for their own wood. reuse those over a recolor
+                if (copyModProvidedChestTextures(sink, manager, shortenedId(), wood)) return;
+
+                if (PlatHelper.isModLoaded("quark")
+                        && copyHandmadeChestTextures(sink, manager, "q", shortenedId(), wood)) return;
+
                 // SINGLE
                 generateChestTexture(sink, manager, shortenedId(), wood, block,
                         modRes("entity/chest/oak/normal"),
