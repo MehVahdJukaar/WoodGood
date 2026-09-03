@@ -739,11 +739,11 @@ public class ChippedMainModule extends ChippedModuleAbstract {
 
     public static final PaletteStrategy POLISHED_PALETTE = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
             blockType, manager, PLANKS, null, p -> {
+                PaletteColor darker = p.getDarkest(1); // 2nd darkest after 1st darkest
                 p.reduceDown();
-                PaletteColor darker = p.getDarkest(); // 2nd darkest after 1st darkest
                 p.reduceDown();
-                p.matchLuminanceStep(0.030F);
                 p.matchSize(11);
+                p.matchLuminanceStep(p.getAverageLuminanceStep() * 0.75F);
                 p.add(darker);
             })
     );
