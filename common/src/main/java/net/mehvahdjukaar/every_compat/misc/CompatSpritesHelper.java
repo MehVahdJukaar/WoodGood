@@ -71,6 +71,20 @@ public class CompatSpritesHelper {
         addOptional("minecraft:mushroom_stem", "_side", "minecraft:block/mushroom_stem");
         addOptional("minecraft:mushroom_stem", "_top", "minecraft:block/mushroom_stem");
 
+
+        // -------------------- Echovoids
+
+        addOptional("echovoids", "nillow_log", "_side", "block/image11");
+        addOptional("echovoids", "nillow_log", "_top", "block/blue_nillow_log_top");
+        addOptional("echovoids", "stripped_nillow_log", "_side", "block/stripped_nillow_log_side");
+        addOptional("echovoids", "stripped_nillow_log", "_top", "block/stripped_nillow_log");
+
+        // Planks
+        addOptional("echovoids", "nillow_planks", "all", "block/nillow_boards");
+
+        // Leaves
+        addOptional("echovoids", "nillow_leaves", "all", "block/image5");
+
         // -------------------- Marvelous Menagerie Paradoxical
         addOptional("marvelous_menagerie", "calamites_log", "_side", "block/calamites_log"); // is a 8x8 log
         addOptional("marvelous_menagerie", "calamites_log", "_top", "block/calamites_log"); // is a 8x8 log
