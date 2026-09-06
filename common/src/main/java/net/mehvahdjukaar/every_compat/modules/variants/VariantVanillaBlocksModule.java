@@ -376,24 +376,24 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         executor.accept((manager, sink) -> {
             chests.blocks.forEach((wood, block) -> {
                 // SINGLE
-                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/acacia_chest"),
-                        EveryCompat.res("model/oak_chest_normal_m"),
-                        EveryCompat.res("model/oak_chest_normal_o"),
+                        EveryCompat.res("quark_variant_chests/oak_chest_normal_m"),
+                        EveryCompat.res("quark_variant_chests/oak_chest_normal_o"),
                         null
                 );
                 // LEFT
-                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/acacia_chest_left"),
-                        EveryCompat.res("model/oak_chest_left_m"),
-                        EveryCompat.res("model/oak_chest_left_o"),
+                        EveryCompat.res("quark_variant_chests/oak_chest_left_m"),
+                        EveryCompat.res("quark_variant_chests/oak_chest_left_o"),
                         null
                 );
                 // RIGHT
-                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/acacia_chest_right"),
-                        EveryCompat.res("model/oak_chest_right_m"),
-                        EveryCompat.res("model/oak_chest_right_o"),
+                        EveryCompat.res("quark_variant_chests/oak_chest_right_m"),
+                        EveryCompat.res("quark_variant_chests/oak_chest_right_o"),
                         null
                 );
 

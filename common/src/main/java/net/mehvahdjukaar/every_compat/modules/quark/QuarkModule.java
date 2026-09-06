@@ -210,7 +210,8 @@ public class QuarkModule extends SimpleModule {
                         VariantChestsModule.class,
                         getModBlock("oak_chest"),
                         () -> VanillaWoodTypes.OAK,
-                        w -> new CompatChestBlock(this::getChestTile, Utils.copyPropertySafe(Blocks.CHEST))
+                        w -> new CompatChestBlock(this::getChestTile,
+                                Utils.copyPropertySafe(Blocks.CHEST).sound(w.getSound()))
                 )
                 .addTile(qChestBlockEntity::new)
                 .addTag(new ResourceLocation("forge:chests/wooden"), Registries.BLOCK, Registries.ITEM)
@@ -232,8 +233,8 @@ public class QuarkModule extends SimpleModule {
                             boolean isNamespaceLoaded = w.getNamespace().equals("twilightforest")
                                     || w.getNamespace().equals("blue_skies");
                             if (!chests.blocks.containsKey(w) && !isNamespaceLoaded) return null;
-                            String name = shortenedId() + "/" + w.getAppendableId();
-                            return new CompatTrappedChestBlock(this::getTrappedTile, Utils.copyPropertySafe(Blocks.TRAPPED_CHEST));
+                            return new CompatTrappedChestBlock(this::getTrappedTile,
+                                    Utils.copyPropertySafe(Blocks.TRAPPED_CHEST).sound(w.getSound()));
                         })
                 .addTile(qTrappedBlockEntity::new)
                 .addTag(new ResourceLocation("forge:chests/trapped"), Registries.BLOCK, Registries.ITEM)
@@ -305,15 +306,13 @@ public class QuarkModule extends SimpleModule {
     // BlockEntity -----------------------------------------------------------------------------------------------------------
     private class qChestBlockEntity extends CompatChestBlockEntity {
         public qChestBlockEntity(BlockPos pos, BlockState state) {
-            super(chests.getTile(), pos, state);
-            noWoodTypeName();
+            super(false, chests.getTile(), pos, state);
         }
     }
 
     private class qTrappedBlockEntity extends CompatChestBlockEntity {
         public qTrappedBlockEntity(BlockPos pos, BlockState state) {
-            super(trappedChests.getTile(), pos, state);
-            noWoodTypeName();
+            super(false, trappedChests.getTile(), pos, state);
         }
     }
 
@@ -322,6 +321,7 @@ public class QuarkModule extends SimpleModule {
         posts.blocks.forEach((w, post) -> {
             Block stripped = strippedPosts.blocks.get(w);
             if (stripped != null) ECPlatformStuff.registerStripping(post, stripped);
+
         });
         leafCarpets.blocks.forEach((w, leaf) -> ComposterBlock.COMPOSTABLES.put(leaf, 0.2F));
     }
@@ -367,25 +367,25 @@ public class QuarkModule extends SimpleModule {
             if (copyModProvidedChestTextures(sink, manager, shortenedId(), wood)) return;
 
             // SINGLE
-            generateChestTexture(sink, manager, shortenedId(), wood, block,
+            generateChestTexture(sink, manager, shortenedId(), wood,
                     modRes("quark_variant_chests/oak/normal"),
-                    EveryCompat.res("model/oak_chest_normal_m"),
-                    EveryCompat.res("model/oak_chest_normal_o"),
-                    EveryCompat.res("model/trapped_chest_normal")
+                    EveryCompat.res("quark_variant_chests/oak_chest_normal_m"),
+                    EveryCompat.res("quark_variant_chests/oak_chest_normal_o"),
+                    EveryCompat.res("quark_variant_chests/trapped_chest_normal")
             );
             // LEFT
-            generateChestTexture(sink, manager, shortenedId(), wood, block,
+            generateChestTexture(sink, manager, shortenedId(), wood,
                     modRes("quark_variant_chests/oak/left"),
-                    EveryCompat.res("model/oak_chest_left_m"),
-                    EveryCompat.res("model/oak_chest_left_o"),
-                    EveryCompat.res("model/trapped_chest_left")
+                    EveryCompat.res("quark_variant_chests/oak_chest_left_m"),
+                    EveryCompat.res("quark_variant_chests/oak_chest_left_o"),
+                    EveryCompat.res("quark_variant_chests/trapped_chest_left")
             );
             // RIGHT
-            generateChestTexture(sink, manager, shortenedId(), wood, block,
+            generateChestTexture(sink, manager, shortenedId(), wood,
                     modRes("quark_variant_chests/oak/right"),
-                    EveryCompat.res("model/oak_chest_right_m"),
-                    EveryCompat.res("model/oak_chest_right_o"),
-                    EveryCompat.res("model/trapped_chest_right")
+                    EveryCompat.res("quark_variant_chests/oak_chest_right_m"),
+                    EveryCompat.res("quark_variant_chests/oak_chest_right_o"),
+                    EveryCompat.res("quark_variant_chests/trapped_chest_right")
             );
         });
     }

@@ -4,9 +4,11 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
-import net.mehvahdjukaar.moonlight.api.resources.textures.*;
+import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
+import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
+import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
+import net.mehvahdjukaar.moonlight.api.resources.textures.TextureOps;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.util.math.colors.HCLColor;
 import net.mehvahdjukaar.moonlight.core.misc.McMetaFile;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -20,10 +22,14 @@ public class CompatChestTexture {
 
     private static String NormalSuffix = "";
     private static String TrappedSuffix = "";
+    private static boolean useCustomSuffix = false;
 
     public static void setSuffix(String normalSuffix, String trappedSuffix) {
         NormalSuffix = normalSuffix;
         TrappedSuffix = trappedSuffix;
+    }
+    public static void useCustomSuffix() {
+        useCustomSuffix = true;
     }
 
     // blueprint chests. mods that add wood ship them at <namespace>:textures/entity/chest/<wood>/<variant>.png
@@ -69,13 +75,16 @@ public class CompatChestTexture {
     public static boolean copyHandmadeChestTextures(ResourceSink sink, ResourceManager manager,
                                                     String fromShortenedId, String toShortenedID, WoodType wood) {
         List<ResourceLocation> sources = new ArrayList<>();
-        for (int idx = 0; idx < CHEST_TEXTURE_SUFFIXES.length; idx++) {
+        List<ResourceLocation> sourcesMCMETA = new ArrayList<>();
+        for (String chestTextureSuffix : CHEST_TEXTURE_SUFFIXES) {
             ResourceLocation from = EveryCompat.res("entity/chest/" + fromShortenedId + "/" +
-                    wood.getAppendableId() + CHEST_TEXTURE_SUFFIXES[idx]);
+                    wood.getAppendableId() + chestTextureSuffix);
             ResourceLocation textureId = ResType.TEXTURES.getPath(from);
+            ResourceLocation mcmetaId = ResType.MCMETA.getPath(from);
 
             if (manager.getResource(textureId).isEmpty()) return false;
             sources.add(textureId);
+            if (manager.getResource(mcmetaId).isPresent()) sourcesMCMETA.add(mcmetaId);
         }
 
         for (int idx = 0; idx < CHEST_TEXTURE_SUFFIXES.length; idx++) {
@@ -84,40 +93,45 @@ public class CompatChestTexture {
 
             if (sink.alreadyHasTextureAtLocation(manager, to)) continue;
             sink.copyResource(manager, sources.get(idx), ResType.TEXTURES.getPath(to), true);
+            if (idx < sourcesMCMETA.size()) sink.copyResource(manager, sourcesMCMETA.get(idx), ResType.MCMETA.getPath(to), true);
         }
         return true;
     }
 
     public static void generateChestTexture(ResourceSink handler, ResourceManager manager,
-                                            String shortenedID, WoodType wood, Block block,
+                                            String shortenedID, WoodType wood,
                                             ResourceLocation normalRLoc, ResourceLocation maskRLoc, ResourceLocation overlayRLoc,
-                                            ResourceLocation trappedORLoc) {
-        generateChestTexture(handler, manager, shortenedID, wood, block, normalRLoc, maskRLoc, overlayRLoc, trappedORLoc, 2, false);
+                                            ResourceLocation trappedORLoc,
+                                            int darkControl
+    ) {
+        generateChestTexture(handler, manager, shortenedID, wood, normalRLoc, maskRLoc, overlayRLoc, trappedORLoc,
+                darkControl, 0);
     }
 
     public static void generateChestTexture(ResourceSink handler, ResourceManager manager,
-                                            String shortenedID, WoodType wood, Block block,
+                                            String shortenedID, WoodType wood,
                                             ResourceLocation normalRLoc, ResourceLocation maskRLoc, ResourceLocation overlayRLoc,
-                                            ResourceLocation trappedORLoc, boolean useCUstomSuffix) {
-        generateChestTexture(handler, manager, shortenedID, wood, block, normalRLoc, maskRLoc, overlayRLoc, trappedORLoc, 2, useCUstomSuffix);
-    }
-
-    public static void generateChestTexture(ResourceSink handler, ResourceManager manager,
-                                            String shortenedID, WoodType wood, Block block,
-                                            ResourceLocation normalRLoc, ResourceLocation maskRLoc, ResourceLocation overlayRLoc,
-                                            ResourceLocation trappedORLoc, int removeDarkest) {
-        generateChestTexture(handler, manager, shortenedID, wood, block, normalRLoc, maskRLoc, overlayRLoc, trappedORLoc, removeDarkest, false);
+                                            ResourceLocation trappedORLoc
+    ) {
+        generateChestTexture(handler, manager, shortenedID, wood, normalRLoc, maskRLoc, overlayRLoc, trappedORLoc,
+                0, 0);
     }
 
     /**
      * Generate a texture for chest and trapped_chest
      *
-     * @param removeDarkest 0: none removed, 1: removed once, 2: removed twice
+     * @param darkControl
+     * <li>
+     *     <ol>1: Darkening 2nd darkest & 3rd darkest by 10% - OPTIONAL: darkestOffset can offset</ol>
+     *     <ol>2: Modifying Planks' texture to have Average Contrast</ol>
+     * </li>
+     *
+     * OPTIONAL: {@link useCustomSuffix()} change the suffix of Texture's ResourceLocation. Default are "_chest" or "_trapped_chest"
+     * Example: See WoodworksModule's addDynamicClientResources() where one of CompatChestTexture are using useCustomSuffix()
      */
-    public static void generateChestTexture(ResourceSink sink, ResourceManager manager,
-                                            String shortenedID, WoodType wood, Block block,
+    public static void generateChestTexture(ResourceSink sink, ResourceManager manager, String shortenedID, WoodType wood,
                                             ResourceLocation normalRLoc, ResourceLocation maskRLoc, ResourceLocation overlayRLoc,
-                                            ResourceLocation trappedORLoc, int removeDarkest, boolean useCustomSuffix) {
+                                            ResourceLocation trappedORLoc, int darkControl, int darkestOffset) {
 
         try (TextureImage texture = TextureImage.open(manager, normalRLoc);
              @Nullable TextureImage mask = (maskRLoc == null) ? null : TextureImage.open(manager, maskRLoc);
@@ -157,37 +171,25 @@ public class CompatChestTexture {
                 }
 
                 plankPalette.forEach(palette -> {
-                    PaletteColor darkest = palette.getDarkest();
-                    PaletteColor darker = palette.getDarkest(1);
-                    PaletteColor lightest = palette.getLightest();
+                    int plankSize = plankPalette.size();
+                    Palette texturePalette = Palette.fromAnimatedImage(texture, mask).get(0);
+                    int amount = texturePalette.size();
+
+                    if (plankSize != amount) {
+                        palette.matchSize(amount);
+                    }
 
                     // brimwood_chest need to retain their darkness
                     if (!wood.getId().toString().equals("regions_unexplored:brimwood")) {
-                        HCLColor newHCL;
-                        HCLColor newHCL2;
-                        HCLColor newLight;
-
-                        switch (removeDarkest) {
-                            case 2 -> {
-                                palette.reduceDown();
-                                palette.reduceDown();
-
-                                newHCL = new HCLColor(darkest.hcl().hue(), darkest.hcl().chroma() * 1.10F, darkest.hcl().luminance(), darkest.hcl().alpha());
-                                newHCL2 = new HCLColor(darker.hcl().hue(), darker.hcl().chroma() * 1.10F, darker.hcl().luminance(), darker.hcl().alpha());
-                                newLight = new HCLColor(lightest.hcl().hue(), lightest.hcl().chroma() * 1.15F, lightest.hcl().luminance(), lightest.hcl().alpha());
-
-                                palette.add(new PaletteColor(newHCL));
-                                palette.add(new PaletteColor(newHCL2));
-                                palette.add(new PaletteColor(newLight));
+                        switch (darkControl) {
+                            case 2: {
+                                palette.multiplyContrast(0.5F);
+                                break;
                             }
-                            case 1 -> {
-                                palette.reduceDown();
-
-                                newHCL = new HCLColor(darkest.hcl().hue(), darkest.hcl().chroma() * 1.10F, darkest.hcl().luminance(), darkest.hcl().alpha());
-                                newLight = new HCLColor(lightest.hcl().hue(), lightest.hcl().chroma() * 1.15F, lightest.hcl().luminance(), lightest.hcl().alpha());
-
-                                palette.add(new PaletteColor(newHCL));
-                                palette.add(new PaletteColor(newLight));
+                            case 1: {
+                                palette.getDarkest(1 + darkestOffset).getDarkened();
+                                palette.getDarkest(2 + darkestOffset).getDarkened();
+                                break;
                             }
                         }
                     }
@@ -206,7 +208,7 @@ public class CompatChestTexture {
                 }
 
             } catch (Exception ex) {
-                EveryCompat.LOGGER.error("Failed to generate Chest block texture for for: {} - {}", block, ex);
+                EveryCompat.LOGGER.error("Failed to generate Chest block texture for for: {} - {}", texture, ex);
             }
         } catch (Exception ex) {
             EveryCompat.LOGGER.error("Could not generate any Chest block texture: ", ex);
@@ -235,4 +237,30 @@ public class CompatChestTexture {
         }
     }
 
+
+    //      ┌──────────────────────────────────────────────────────────┐
+    //      │                    MARKED FOR REMOVAL                    │
+    //      └──────────────────────────────────────────────────────────┘
+
+    /// {@link CompatChestTexture#generateChestTexture(ResourceSink, ResourceManager, String, WoodType, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)}
+    /// <br>Simply by remove the parameter, Block
+    @Deprecated(forRemoval = true)
+    public static void generateChestTexture(ResourceSink handler, ResourceManager manager,
+                                            String shortenedID, WoodType wood, Block block,
+                                            ResourceLocation normalRLoc, ResourceLocation maskRLoc, ResourceLocation overlayRLoc,
+                                            ResourceLocation trappedORLoc) {
+        generateChestTexture(handler, manager, shortenedID, wood, normalRLoc, maskRLoc, overlayRLoc, trappedORLoc,
+                0, 0);
+    }
+
+    /// Use {@link CompatChestTexture#generateChestTexture(ResourceSink, ResourceManager, String, WoodType, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)}
+    /// <br>Simply by remove the parameter, Block
+    @Deprecated(forRemoval = true)
+    public static void generateChestTexture(ResourceSink handler, ResourceManager manager,
+                                            String shortenedID, WoodType wood, Block block,
+                                            ResourceLocation normalRLoc, ResourceLocation maskRLoc, ResourceLocation overlayRLoc,
+                                            ResourceLocation trappedORLoc, int darkControl) {
+        generateChestTexture(handler, manager, shortenedID, wood, normalRLoc, maskRLoc, overlayRLoc, trappedORLoc,
+                darkControl, 0);
+    }
 }

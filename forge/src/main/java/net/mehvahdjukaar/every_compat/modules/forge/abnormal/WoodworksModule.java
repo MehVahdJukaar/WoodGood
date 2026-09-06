@@ -325,15 +325,13 @@ public class WoodworksModule extends SimpleModule {
     // BlockEntity -----------------------------------------------------------------------------------------------------------
     private class abwwChestBlockEntity extends CompatChestBlockEntity {
         public abwwChestBlockEntity(BlockPos pos, BlockState state) {
-            super(chests.getTile(), pos, state);
-            noWoodTypeName();
+            super(false, chests.getTile(), pos, state);
         }
     }
 
     private class abwwTrappedBlockEntity extends CompatChestBlockEntity {
         public abwwTrappedBlockEntity(BlockPos pos, BlockState state) {
-            super(trappedChests.getTile(), pos, state);
-            noWoodTypeName();
+            super(false, trappedChests.getTile(), pos, state);
         }
     }
 
@@ -494,25 +492,25 @@ public class WoodworksModule extends SimpleModule {
                         && copyHandmadeChestTextures(sink, manager, "q", shortenedId(), wood)) return;
 
                 // SINGLE
-                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/oak/normal"),
                         EveryCompat.res("block/abnww/chest/oak/normal_m"),
                         EveryCompat.res("block/abnww/chest/oak/normal_o"),
-                        EveryCompat.res("block/abnww/chest/oak/trapped_o")
+                        EveryCompat.res("block/abnww/chest/oak/trapped_o"), 1
                 );
                 // LEFT
-                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/oak/normal_left"),
                         EveryCompat.res("block/abnww/chest/oak/left_m"),
                         EveryCompat.res("block/abnww/chest/oak/left_o"),
-                        EveryCompat.res("block/abnww/chest/oak/trapped_left_o")
+                        EveryCompat.res("block/abnww/chest/oak/trapped_left_o"), 1
                 );
                 // RIGHT
-                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/oak/normal_right"),
                         EveryCompat.res("block/abnww/chest/oak/right_m"),
                         EveryCompat.res("block/abnww/chest/oak/right_o"),
-                        EveryCompat.res("block/abnww/chest/oak/trapped_right_o")
+                        EveryCompat.res("block/abnww/chest/oak/trapped_right_o"), 1
                 );
             })
         );
@@ -520,30 +518,28 @@ public class WoodworksModule extends SimpleModule {
         executor.accept((manager, sink) ->
             trappedCloset.blocks.forEach((wood, block) -> {
                 setSuffix("/normal", "/trapped");
+                useCustomSuffix();
 
                 // SINGLE
-                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/bamboo/normal"),
                         EveryCompat.res("block/abnww/chest/bamboo/normal_m"),
                         EveryCompat.res("block/abnww/chest/bamboo/normal_o"),
-                        EveryCompat.res("block/abnww/chest/bamboo/trapped_o"),
-                        true
+                        EveryCompat.res("block/abnww/chest/bamboo/trapped_o"), 2
                 );
                 // LEFT
-                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/bamboo/normal_left"),
                         EveryCompat.res("block/abnww/chest/bamboo/normal_left_m"),
                         EveryCompat.res("block/abnww/chest/bamboo/normal_left_o"),
-                        EveryCompat.res("block/abnww/chest/bamboo/trapped_left_o"),
-                        true
+                        EveryCompat.res("block/abnww/chest/bamboo/trapped_left_o"), 2
                 );
                 // RIGHTdamn
-                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/bamboo/normal_right"),
                         EveryCompat.res("block/abnww/chest/bamboo/normal_right_m"),
                         EveryCompat.res("block/abnww/chest/bamboo/normal_right_o"),
-                        EveryCompat.res("block/abnww/chest/bamboo/trapped_right_o"),
-                        true
+                        EveryCompat.res("block/abnww/chest/bamboo/trapped_right_o"), 2
                 );
             })
         );

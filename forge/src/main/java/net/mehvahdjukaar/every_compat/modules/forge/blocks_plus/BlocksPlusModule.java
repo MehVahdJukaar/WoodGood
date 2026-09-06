@@ -10,7 +10,6 @@ import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -283,25 +282,25 @@ public class BlocksPlusModule extends SimpleModule {
         executor.accept((manager, sink) ->
             trapped_chest.blocks.forEach((wood, block) -> {
                 // SINGLE
-                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/acacia/acacia"),
                         EveryCompat.res("entity/bp/chest_normal_m"),
-                        EveryCompat.res("model/oak_chest_normal_o"),
-                        EveryCompat.res("model/trapped_chest_normal")
+                        EveryCompat.res("quark_variant_chests/oak_chest_normal_o"),
+                        EveryCompat.res("quark_variant_chests/trapped_chest_normal")
                 );
                 // LEFT
-                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/acacia/left"),
                         EveryCompat.res("entity/bp/chest_left_m"),
-                        EveryCompat.res("model/oak_chest_left_o"),
-                        EveryCompat.res("model/trapped_chest_left")
+                        EveryCompat.res("quark_variant_chests/oak_chest_left_o"),
+                        EveryCompat.res("quark_variant_chests/trapped_chest_left")
                 );
                 // RIGHT
-                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/acacia/right"),
                         EveryCompat.res("entity/bp/chest_right_m"),
-                        EveryCompat.res("model/oak_chest_right_o"),
-                        EveryCompat.res("model/trapped_chest_right")
+                        EveryCompat.res("quark_variant_chests/oak_chest_right_o"),
+                        EveryCompat.res("quark_variant_chests/trapped_chest_right")
                 );
             })
         );
