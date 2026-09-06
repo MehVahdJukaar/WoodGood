@@ -154,6 +154,7 @@ public class EveryCompatForge extends EveryCompatCommon {
             addOptionalModule("buildersaddition", () -> BuildersAdditionModule.class);
             addOptionalModule("bbb", () -> BuildingButBetterModule.class);
             addOptionalModule("buildersdelight", () -> BuildersDelightModule.class);
+            addOptionalModule("create", () -> CreateModule.class);
             addOptionalModule("curiosities", () -> CuriositiesModule.class);
             addOptionalModule("decoration_delight", () -> DecorationDelightModule.class);
             addOptionalModule("dramaticdoors", () -> DramaticDoorsModule.class);
@@ -170,7 +171,6 @@ public class EveryCompatForge extends EveryCompatCommon {
             addOptionalModule("redeco", () -> ReDecoModule.class);
             addOptionalModule("regions_unexplored", () -> RegionsUnexploredModule.class);
             addOptionalModule("shutter", () -> LauchsShuttersModule.class);
-            addOptionalModule("timber_frames", () -> TimberFramesModule.class);
             addOptionalModule("tropicraft", () -> TropicraftModule.class);
             addOptionalModule("twilightforest", () -> TwilightForestModule.class);
             addOptionalModule("unusual_furniture", () -> UnusualFurnitureModule.class);
@@ -197,7 +197,11 @@ public class EveryCompatForge extends EveryCompatCommon {
                 addOptionalModule("dramaticdoors", () -> DramaticDoorsMacawModule.class);
             }
 
-            addOptionalModule("create", () -> CreateModule.class);
+            // REMOVE this later as timber_frame is not needed beacuse it has internal code that support WoodType
+            if (PlatHelper.isModLoaded("timber_frames") && !PlatHelper.getModVersion("timber_frames").matches("3[.\\d]{4}.*")) {
+                addOptionalModule("timber_frames", () -> TimberFramesModule.class);
+            }
+
         }
 
 // ============================================== DISABLED FOR A REASON ============================================= \\

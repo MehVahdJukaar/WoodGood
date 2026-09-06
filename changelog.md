@@ -3,15 +3,29 @@
 | \- **(C)**: FORGE & FABRIC                                                                                                        |
 | - **(FB)**: FABRIC                                                                                                                |
 | - **(NF)**: NEOFORGE                                                                                                              |
-| - **(IT)**: Included Texture — added the ResourceLocation of the missing textures required for blocks or generating a new texture |
+| - **(IT)**: Included Texture - added the ResourceLocation of the missing textures required for blocks or generating a new texture |
 | - **(TEX)**: hand-made textures to improve the way a block looks                                                                  |
 | - **(COMPAT)**: Create an exception for a compat mod. EveryCompat won't include the Supported Mod and the Wood Mod                |
 | - **(INCLUDED)**: The block is not generated because a Wood Mod already has the same block as the supported mod will be generated |
 | - **(EXCLUDED)**: The block is generated BUT it shouldn't be generated for a reason                                               |
 | - **(UDBT)**: Undetected BlockTypes will be manually added                                                                        |
+| - **(LIMITED)**: The mod will be only limited to specific version so it is still supported but newer version won't be supported   |
 |                                                                                                                                   |
 
 ---
+## v2.11.50
+
+### CHANGES:
+- **Timber Frame** (LIMITED): WIll be no longer supported from v3.0.0 onward because it has an internal code that handle all of WoodTypes
+- **Every Compat** (C): 
+  - Updated its code for new config screen
+  - Added a new method for Chests' texture where it can copy textures that is already shipped via mod that add `CHESTS` - [#1312](https://github.com/MehVahdJukaar/WoodGood/issues/1312)
+    - NOTE: this mean Every Compat will not generate a new texture for CHESTS if a texture for it already exist via **Quark**'s ASSET or **Woodworks**' ASSET 
+- **Regions Unexplored** (TEX): Further improvement for mask texture via custom texture generation using `brimwood_plank` to fit with animated textures - [#1310](https://github.com/MehVahdJukaar/WoodGood/issues/1310)
+- **Quark** (NF): Fixed where the config that disable blocks like `HOLLOW_LOG` but **Every Compat** still generate `HOLLOW_LOG`
+
+---
+
 ## v2.11.49
 
 ### CHANGES:
