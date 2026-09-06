@@ -15,13 +15,22 @@ import org.jetbrains.annotations.NotNull;
 public class CompatChestBlockEntity extends ChestBlockEntity {
     private final WoodType woodType;
     private final boolean trapped;
-    protected boolean useWoodTypeName = true;
+    private final boolean useWoodTypeName;
+
+    public CompatChestBlockEntity(boolean useWoodTypeName, BlockEntityType<?> blockEntityType, BlockPos pos, BlockState state) {
+        super(blockEntityType, pos, state);
+        var w = WoodTypeRegistry.INSTANCE.getBlockTypeOf(state.getBlock());
+        this.woodType = w == null ? VanillaWoodTypes.OAK : w;
+        this.trapped = state.getBlock() instanceof CompatTrappedChestBlock;
+        this.useWoodTypeName = useWoodTypeName;
+    }
 
     public CompatChestBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState state) {
         super(blockEntityType, pos, state);
         var w = WoodTypeRegistry.INSTANCE.getBlockTypeOf(state.getBlock());
         this.woodType = w == null ? VanillaWoodTypes.OAK : w;
         this.trapped = state.getBlock() instanceof CompatTrappedChestBlock;
+        this.useWoodTypeName = true;
     }
 
     public WoodType getWoodType() {
@@ -42,14 +51,10 @@ public class CompatChestBlockEntity extends ChestBlockEntity {
         return trapped;
     }
 
-    protected void noWoodTypeName() {
-        this.useWoodTypeName = false;
-    }
-
     @Override
     protected @NotNull Component getDefaultName() {
-        return (useWoodTypeName)
-                ? Component.translatable("container.everycomp.chest.name", Component.translatable(woodType.getTranslationKey()).getString())
-                : Component.translatable("container.chest");
+        if (this.useWoodTypeName)
+            return Component.translatable("container.everycomp.chest.name", Component.translatable(woodType.getTranslationKey()).getString());
+        return Component.translatable("container.chest");
     }
 }
