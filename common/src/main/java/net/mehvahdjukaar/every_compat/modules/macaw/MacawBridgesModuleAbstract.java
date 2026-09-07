@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.macaw;
 
-import net.kikoz.mcwbridges.init.BlockInit;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -32,7 +31,7 @@ public abstract class MacawBridgesModuleAbstract extends SimpleModule {
                 : modRes(modId);
 
         bridgePiers = SimpleEntrySet.builder(WoodType.class, "bridge_pier",
-                        () -> BlockInit.OAK_BRIDGE_PIER, () -> VanillaWoodTypes.OAK,
+                        getModBlock("oak_bridge_pier"), () -> VanillaWoodTypes.OAK,
                         this::newBridge_Support
     )
                 .requiresChildren(FENCE) //REASON: recieps
@@ -45,7 +44,7 @@ public abstract class MacawBridgesModuleAbstract extends SimpleModule {
         this.addEntry(bridgePiers);
 
         ropeBridges = SimpleEntrySet.builder(WoodType.class, "bridge", "rope",
-                        () -> BlockInit.ROPE_OAK_BRIDGE, () -> VanillaWoodTypes.OAK,
+                        getModBlock("rope_oak_bridge"), () -> VanillaWoodTypes.OAK,
                         this::newBridge_Block_Rope
                 )
                 .requiresChildren(SLAB) //REASON: recieps
@@ -59,7 +58,7 @@ public abstract class MacawBridgesModuleAbstract extends SimpleModule {
         this.addEntry(ropeBridges);
 
         bridgeMiddles = SimpleEntrySet.builder(WoodType.class, "log_bridge_middle",
-                        () -> BlockInit.OAK_LOG_BRIDGE_MIDDLE, () -> VanillaWoodTypes.OAK,
+                        getModBlock("oak_log_bridge_middle"), () -> VanillaWoodTypes.OAK,
                         this::newLog_Bridge
                 )
                 .requiresChildren(SLAB, FENCE) //REASON: recieps
@@ -74,7 +73,7 @@ public abstract class MacawBridgesModuleAbstract extends SimpleModule {
 
 
         railBridges = SimpleEntrySet.builder(WoodType.class, "rail_bridge",
-                        () -> BlockInit.OAK_RAIL_BRIDGE, () -> VanillaWoodTypes.OAK,
+                        getModBlock("oak_rail_bridge"), () -> VanillaWoodTypes.OAK,
                         this::newRail_Bridge
                 )
                 .requiresChildren(SLAB, FENCE) //REASON: recieps
@@ -89,7 +88,7 @@ public abstract class MacawBridgesModuleAbstract extends SimpleModule {
 
 
         bridgeStairs = SimpleEntrySet.builder(WoodType.class, "log_bridge_stair",
-                        () -> BlockInit.OAK_LOG_BRIDGE_STAIR, () -> VanillaWoodTypes.OAK,
+                        getModBlock("oak_log_bridge_stair"), () -> VanillaWoodTypes.OAK,
                         this::newBridge_Stairs
                 )
                 .requiresFromMap(bridgeMiddles.blocks) //REASON: recipes
@@ -103,7 +102,7 @@ public abstract class MacawBridgesModuleAbstract extends SimpleModule {
         this.addEntry(bridgeStairs);
 
         ropeStairs = SimpleEntrySet.builder(WoodType.class, "rope_bridge_stair",
-                        () -> BlockInit.OAK_ROPE_BRIDGE_STAIR, () -> VanillaWoodTypes.OAK,
+                        getModBlock("oak_rope_bridge_stair"), () -> VanillaWoodTypes.OAK,
                         this::newBridge_Stairs
                 )
                 .requiresFromMap(ropeBridges.blocks) //REASON: recipes
