@@ -1,8 +1,7 @@
 plugins {
     id "architectury-plugin" version "3.4-SNAPSHOT"
     id "dev.architectury.loom" version "1.10.+" apply false
-    id "me.modmuss50.mod-publish-plugin" version "0.8.+" apply false
-    id "com.modrinth.minotaur" version "2.+"
+    id "me.modmuss50.mod-publish-plugin" version "2.2.0" apply false
     id 'com.gradleup.shadow' version '8.3.6' apply false
 }
 
@@ -82,7 +81,6 @@ allprojects {
 subprojects {
     apply plugin: "dev.architectury.loom"
     apply plugin: "me.modmuss50.mod-publish-plugin"
-    apply plugin: "com.modrinth.minotaur"
     apply plugin: "com.gradleup.shadow"
     apply plugin: "maven-publish"
 
@@ -124,277 +122,283 @@ subprojects {
     var changelogFile = rootProject.file("changelog.md")
     var changelogText = changelogFile.exists() ? changelogFile.text : ""
 
-    var versions = listGameVersions(minecraft_min_version, minecraft_version)
+//    var versions = listGameVersions(minecraft_min_version, minecraft_version)
 
-    if (env.MODRINTH_TOKEN) {
-        modrinth {
-            projectId = "${modrinth_id}"
-            uploadFile = tasks.remapJar
-            additionalFiles.add(tasks.remapSourcesJar)
-            gameVersions = versions
-            loaders = [modLoader]
-            changelog = changelogText
-            versionNumber = mod_version +"-"+ modLoader
-            versionType = release_type
+    publishMods {
+        dryRun = false
+        file = tasks.remapJar.archiveFile
+        changelog = changelogText
+        version = mod_version + "-" + modLoader
+        type = release_type == "beta" ? BETA : (release_type == "alpha" ? ALPHA : STABLE)
+        displayName = mod_id + "-" + mod_version + "-" + modLoader
+        modLoaders.add(modLoader)
 
-            if (modLoader == "fabric") {
-                dependencies {
-                    required.project "fabric-api"
-                    required.project "moonlight"
-                    optional.project("another-furniture")
-                    optional.project("architects-palette-fabric")
-//                    optional.project("backpacked")
-                    optional.project("guitas-woodworks")
-                    optional.project("building-but-better")
-                    optional.project("camp-chair")
-                    optional.project("chipped")
-                    optional.project("clutter")
-//                    optional.project("corail-pillar")
-                    optional.project("create-fabric")
-                    optional.project("dawn-of-time")
-                    optional.project("decorative-blocks")
-                    optional.project("dramatic-doors")
-                    optional.project("exlines-awnings")
-                    optional.project("bark-carpets")
-                    optional.project("excessive-building")
-                    optional.project("farmers-delight-fabric")
-                    optional.project("farmers-delight-refabricated")
-                    optional.project("friends-and-foes")
-                    optional.project("furnish")
-                    optional.project("handcrafted")
-                    optional.project("hearth-and-home")
-                    optional.project("infinitybuttons")
-                    optional.project("lightmans-currency")
-                    optional.project("macaws-bridges")
-                    optional.project("macaws-doors")
-                    optional.project("macaws-fences-and-walls")
-                    optional.project("macaws-furniture")
-                    optional.project("macaws-lights-and-lamps")
-                    optional.project("macaws-paths-and-pavings")
-                    optional.project("macaws-roofs")
-                    optional.project("macaws-trapdoors")
-                    optional.project("macaws-windows")
-//                    optional.project("mighty-mail-fabric")
-                    optional.project("missing-wilds")
-                    optional.project("more-beautiful-torches")
-                    optional.project("more-crafting-tables-lieonlion")
-                    optional.project("quark")
-                    optional.project("regions-unexplored")
-//                    optional.project("the-twilight-forest") //NOT AVAILABLE
-                    optional.project("table-top-craft")
-                    optional.project("twigs")
-                    optional.project("valhelsia-furniture")
-                    optional.project("variant-vanilla-blocks")
-                    optional.project("villagersplus")
-                    optional.project("wooden-hoppers")
+        if (env.MODRINTH_TOKEN) {
+            modrinth {
+                accessToken = env.MODRINTH_TOKEN
+                projectId = "${modrinth_id}"
+                environment = CLIENT_AND_SERVER
+                minecraftVersionRange {
+                    start = "${minecraft_min_version}"
+                    end = "${minecraft_version}"
                 }
-            } else {
-                dependencies {
-                    required.project "moonlight"
-                    optional.project("sawmill")
-                    optional.project("absent-by-design")
-                    optional.project("another-furniture")
-                    optional.project("architects-palette")
-                    optional.project("bibliocraft-legacy")
-                    optional.project("boatload")
-                    optional.project("guitas-woodworks")
-                    optional.project("buildersaddition")
-                    optional.project("building-but-better")
-                    optional.project("camp-chair")
-                    optional.project("chipped")
-//                    optional.project("corail-pillar")
-                    optional.project("create")
-                    optional.project("decorative-blocks")
-//                    optional.project("decoration-delight")
-//                    optional.project("domum-ornamentum")
-                    optional.project("dramatic-doors")
-                    optional.project("bark-carpets")
-                    optional.project("excessive-building")
-                    optional.project("farmers-delight")
-                    optional.project("friends-and-foes-forge")
-                    optional.project("functional-storage")
-                    optional.project("furnish")
-                    optional.project("handcrafted")
-                    optional.project("hearth-and-home")
-                    optional.project("infinitybuttons")
-                    optional.project("just-a-raft-mod")
-                    optional.project("lightmans-currency")
-                    optional.project("macaws-bridges")
-                    optional.project("macaws-doors")
-                    optional.project("macaws-fences-and-walls")
-                    optional.project("macaws-furniture")
-                    optional.project("macaws-lights-and-lamps")
-                    optional.project("macaws-paths-and-pavings")
-                    optional.project("macaws-roofs")
-                    optional.project("macaws-trapdoors")
-                    optional.project("macaws-windows")
-//                    optional.project("mighty-mail")
-                    optional.project("missing-wilds")
-                    optional.project("more-beautiful-torches")
-                    optional.project("more-chest-variants-lieonlion")
-//                    optional.project("more-crafting-tables-for-forge")
-                    optional.project("more-crafting-tables-lieonlion")
-                    optional.project("mosaic-carpentry")
-//                    optional.project("pokecube-aoi")
-                    optional.project("premium-wood")
-//                    optional.project("productivebees")
-                    optional.project("quark")
-                    optional.project("redeco")
-                    optional.project("regions-unexplored")
-                    optional.project("storage-drawers")
-                    optional.project("timber-frames")
-                    optional.project("the-graveyard-forge")
-                    optional.project("the-twilight-forest")
-                    optional.project("table-top-craft")
-                    optional.project("tropicraft")
-                    optional.project("twigs")
-                    optional.project("valhelsia-furniture")
-                    optional.project("variant-crafting-tables")
-                    optional.project("variant-vanilla-blocks")
-                    optional.project("villagersplus")
-                    optional.project("woodworks")
-                    optional.project("workshop-for-handsome-adventurer")
-                    optional.project("xercamod")
+                additionalFile(tasks.remapSourcesJar.archiveFile) {
+                    type = SOURCES_JAR
+                }
+
+                if (modLoader == "fabric") {
+                    dependencies {
+                        requires("fabric-api")
+                        requires("moonlight")
+                        optional("another-furniture")
+                        optional("architects-palette-fabric")
+    //                    optional("backpacked")
+                        optional("guitas-woodworks")
+                        optional("building-but-better")
+                        optional("camp-chair")
+                        optional("chipped")
+                        optional("clutter")
+    //                    optional("corail-pillar")
+                        optional("create-fabric")
+                        optional("dawn-of-time")
+                        optional("decorative-blocks")
+                        optional("dramatic-doors")
+                        optional("exlines-awnings")
+                        optional("bark-carpets")
+                        optional("excessive-building")
+                        optional("farmers-delight-fabric")
+                        optional("farmers-delight-refabricated")
+                        optional("friends-and-foes")
+                        optional("furnish")
+                        optional("handcrafted")
+                        optional("hearth-and-home")
+                        optional("infinitybuttons")
+                        optional("lightmans-currency")
+                        optional("macaws-bridges")
+                        optional("macaws-doors")
+                        optional("macaws-fences-and-walls")
+                        optional("macaws-furniture")
+                        optional("macaws-lights-and-lamps")
+                        optional("macaws-paths-and-pavings")
+                        optional("macaws-roofs")
+                        optional("macaws-trapdoors")
+                        optional("macaws-windows")
+    //                    optional("mighty-mail-fabric")
+                        optional("missing-wilds")
+                        optional("more-beautiful-torches")
+                        optional("more-crafting-tables-lieonlion")
+                        optional("quark")
+                        optional("regions-unexplored")
+    //                    optional("the-twilight-forest") //NOT AVAILABLE
+                        optional("table-top-craft")
+                        optional("twigs")
+                        optional("valhelsia-furniture")
+                        optional("variant-vanilla-blocks")
+                        optional("villagersplus")
+                        optional("wooden-hoppers")
+                    }
+                } else {
+                    dependencies {
+                        requires("moonlight")
+                        optional("sawmill")
+                        optional("absent-by-design")
+                        optional("another-furniture")
+                        optional("architects-palette")
+                        optional("bibliocraft-legacy")
+                        optional("boatload")
+                        optional("guitas-woodworks")
+                        optional("buildersaddition")
+                        optional("building-but-better")
+                        optional("camp-chair")
+                        optional("chipped")
+    //                    optional("corail-pillar")
+                        optional("create")
+                        optional("decorative-blocks")
+    //                    optional("decoration-delight")
+    //                    optional("domum-ornamentum")
+                        optional("dramatic-doors")
+                        optional("bark-carpets")
+                        optional("excessive-building")
+                        optional("farmers-delight")
+                        optional("friends-and-foes-forge")
+                        optional("functional-storage")
+                        optional("furnish")
+                        optional("handcrafted")
+                        optional("hearth-and-home")
+                        optional("infinitybuttons")
+                        optional("just-a-raft-mod")
+                        optional("lightmans-currency")
+                        optional("macaws-bridges")
+                        optional("macaws-doors")
+                        optional("macaws-fences-and-walls")
+                        optional("macaws-furniture")
+                        optional("macaws-lights-and-lamps")
+                        optional("macaws-paths-and-pavings")
+                        optional("macaws-roofs")
+                        optional("macaws-trapdoors")
+                        optional("macaws-windows")
+    //                    optional("mighty-mail")
+                        optional("missing-wilds")
+                        optional("more-beautiful-torches")
+                        optional("more-chest-variants-lieonlion")
+    //                    optional("more-crafting-tables-for-forge")
+                        optional("more-crafting-tables-lieonlion")
+                        optional("mosaic-carpentry")
+    //                    optional("pokecube-aoi")
+                        optional("premium-wood")
+    //                    optional("productivebees")
+                        optional("quark")
+                        optional("redeco")
+                        optional("regions-unexplored")
+                        optional("storage-drawers")
+                        optional("timber-frames")
+                        optional("the-graveyard-forge")
+                        optional("the-twilight-forest")
+                        optional("table-top-craft")
+                        optional("tropicraft")
+                        optional("twigs")
+                        optional("valhelsia-furniture")
+                        optional("variant-crafting-tables")
+                        optional("variant-vanilla-blocks")
+                        optional("villagersplus")
+                        optional("woodworks")
+                        optional("workshop-for-handsome-adventurer")
+                        optional("xercamod")
+                    }
                 }
             }
         }
-    }
 
-    if (env.CURSEFORGE_TOKEN) {
-        publishMods {
-            file = tasks.remapJar.archiveFile
-            changelog = changelogText
-            version = mod_version + "-" + modLoader
-            displayName = mod_id + "-" + mod_version + "-" + modLoader
-            type = release_type == "beta" ? BETA : (release_type == "alpha" ? ALPHA : STABLE)
-            modLoaders.add(modLoader)
-
+        if (env.CURSEFORGE_TOKEN) {
             curseforge {
-                projectId = curseforge_id
                 accessToken = env.CURSEFORGE_TOKEN
-                minecraftVersions.add(minecraft_version)
+                projectId = curseforge_id
+                minecraftVersionRange {
+                    start = "${minecraft_min_version}"
+                    end = "${minecraft_version}"
+                }
                 clientRequired = true
                 serverRequired = true
 
                 if (modLoader == "fabric") {
-                    requires { slug = "fabric-api" }
-                    requires { slug = "selene" }
-                    optional { slug = "another-furniture" }
-                    optional { slug = "architects-palette-fabric" }
-                    optional { slug = "backpacked" }
-                    optional { slug = "branches" }
-                    optional { slug = "building-but-better" }
-                    optional { slug = "camp-chair" }
-                    optional { slug = "carpentry-chisels" }
-                    optional { slug = "chipped" }
-                    optional { slug = "clutter" }
-                    optional { slug = "create-fabric" }
-                    optional { slug = "decorative-blocks" }
-                    optional { slug = "dramatic-doors" }
-                    optional { slug = "exlines-awnings" }
-                    optional { slug = "exlines-bark-carpets" }
-                    optional { slug = "excessive-building" }
-                    optional { slug = "farmers-delight-fabric" }
-                    optional { slug = "farmers-delight-refabricated" }
-                    optional { slug = "friends-and-foes" }
-                    optional { slug = "furnish" }
-                    optional { slug = "handcrafted" }
-                    optional { slug = "hearth-and-home" }
-                    optional { slug = "infinitybuttons" }
-                    optional { slug = "lightmans-currency-fabric" }
-                    optional { slug = "macaws-bridges" }
-                    optional { slug = "macaws-doors" }
-                    optional { slug = "macaws-fences-and-walls" }
-                    optional { slug = "macaws-furniture" }
-                    optional { slug = "macaws-lights-and-lamps" }
-                    optional { slug = "macaws-paths-and-pavings" }
-                    optional { slug = "macaws-roofs" }
-                    optional { slug = "macaws-trapdoors" }
-                    optional { slug = "macaws-windows" }
-                    optional { slug = "mighty-mail-fabric" }
-                    optional { slug = "missing-wilds" }
-                    optional { slug = "more-beautiful-torches" }
-                    optional { slug = "more-crafting-tables-lieonlion" }
-                    optional { slug = "quark" }
-                    optional { slug = "regions-unexplored" }
-//                        optional { slug = "the-twilight-forest" } // NOT AVAILABLE
-                    optional { slug = "table-top-craft-fabric" }
-                    optional { slug = "twigs" }
-                    optional { slug = "valhelsia-furniture" }
-                    optional { slug = "variant-vanilla-blocks" }
-                    optional { slug = "villagersplus-fabric" }
-                    optional { slug = "wooden-hoppers" }
-                } else {
-                    incompatible { slug = "vminus" }
-                    requires { slug = "selene" }
-                    optional { slug = "sawmill" }
-                    optional { slug = "absent-by-design" }
-                    optional { slug = "another-furniture" }
-                    optional { slug = "architects-palette" }
-                    optional { slug = "backpacked" }
-                    optional { slug = "boatload" }
-                    optional { slug = "branches" }
-                    optional { slug = "buildersaddition" }
-                    optional { slug = "building-but-better" }
-                    optional { slug = "camp-chair" }
-                    optional { slug = "carpentry-chisels" }
-                    optional { slug = "chipped" }
-                    optional { slug = "corail-pillar" }
-                    optional { slug = "create" }
-                    optional { slug = "dawn-of-time" }
-                    optional { slug = "decorative-blocks" }
-                    optional { slug = "decoration-delight" }
-                    optional { slug = "domum-ornamentum" }
-                    optional { slug = "dramatic-doors" }
-                    optional { slug = "exlines-bark-carpets" }
-                    optional { slug = "excessive-building" }
-                    optional { slug = "farmers-delight" }
-                    optional { slug = "friends-and-foes-forge" }
-                    optional { slug = "functional-storage" }
-                    optional { slug = "furnish" }
-                    optional { slug = "handcrafted" }
-                    optional { slug = "hearth-and-home" }
-                    optional { slug = "infinitybuttons" }
-                    optional { slug = "just-a-raft-mod" }
-                    optional { slug = "lightmans-currency" }
-                    optional { slug = "macaws-bridges" }
-                    optional { slug = "macaws-doors" }
-                    optional { slug = "macaws-fences-and-walls" }
-                    optional { slug = "macaws-furniture" }
-                    optional { slug = "macaws-lights-and-lamps" }
-                    optional { slug = "macaws-paths-and-pavings" }
-                    optional { slug = "macaws-roofs" }
-                    optional { slug = "macaws-trapdoors" }
-                    optional { slug = "macaws-windows" }
-                    optional { slug = "mighty-mail" }
-                    optional { slug = "missing-wilds-forge" }
-                    optional { slug = "more-beautiful-torches" }
-                    optional { slug = "more-chest-variants-lieonlion" }
-                    optional { slug = "more-crafting-tables-for-forge" }
-                    optional { slug = "more-crafting-tables-lieonlion" }
-                    optional { slug = "mosaic-carpentry" }
-                    optional { slug = "mrcrayfish-furniture-mod" }
-                    optional { slug = "pokecube-aoi" }
-                    optional { slug = "premium-wood" }
-//                        optional { slug = "productivebees" }
-                    optional { slug = "quark" }
-                    optional { slug = "redeco" }
-                    optional { slug = "regions-unexplored" }
-                    optional { slug = "smidgeon-o-bliss-remastered" }
-                    optional { slug = "storage-drawers" }
-                    optional { slug = "timber-frames" }
-                    optional { slug = "the-graveyard-forge" }
-                    optional { slug = "the-twilight-forest" }
-                    optional { slug = "table-top-craft" }
-                    optional { slug = "tropicraft" }
-                    optional { slug = "twigs" }
-                    optional { slug = "valhelsia-furniture" }
-                    optional { slug = "variant-crafting-tables" }
-                    optional { slug = "variant-vanilla-blocks" }
-                    optional { slug = "villagersplus-forge" }
-                    optional { slug = "woodworks" }
-                    optional { slug = "workshop-for-handsome-adventurer" }
-                    optional { slug = "xercamod" }
+                    requires("fabric-api")
+                    requires("selene")
+                    optional("another-furniture")
+                    optional("architects-palette-fabric")
+                    optional("backpacked")
+                    optional("branches")
+                    optional("building-but-better")
+                    optional("camp-chair")
+                    optional("carpentry-chisels")
+                    optional("chipped")
+                    optional("clutter")
+                    optional("create-fabric")
+                    optional("decorative-blocks")
+                    optional("dramatic-doors")
+                    optional("exlines-awnings")
+                    optional("exlines-bark-carpets")
+                    optional("excessive-building")
+                    optional("farmers-delight-fabric")
+                    optional("farmers-delight-refabricated")
+                    optional("friends-and-foes")
+                    optional("furnish")
+                    optional("handcrafted")
+                    optional("hearth-and-home")
+                    optional("infinitybuttons")
+                    optional("lightmans-currency-fabric")
+                    optional("macaws-bridges")
+                    optional("macaws-doors")
+                    optional("macaws-fences-and-walls")
+                    optional("macaws-furniture")
+                    optional("macaws-lights-and-lamps")
+                    optional("macaws-paths-and-pavings")
+                    optional("macaws-roofs")
+                    optional("macaws-trapdoors")
+                    optional("macaws-windows")
+                    optional("mighty-mail-fabric")
+                    optional("missing-wilds")
+                    optional("more-beautiful-torches")
+                    optional("more-crafting-tables-lieonlion")
+                    optional("quark")
+                    optional("regions-unexplored")
+    //                        optional("the-twilight-forest" } // NOT AVAILAB)
+                    optional("table-top-craft-fabric")
+                    optional("twigs")
+                    optional("valhelsia-furniture")
+                    optional("variant-vanilla-blocks")
+                    optional("wooden-hoppers")
+                }
+                else {
+                    incompatible("vminus")
+                    requires("selene")
+                    optional("sawmill")
+                    optional("absent-by-design")
+                    optional("another-furniture")
+                    optional("architects-palette")
+                    optional("backpacked")
+                    optional("boatload")
+                    optional("branches")
+                    optional("buildersaddition")
+                    optional("building-but-better")
+                    optional("camp-chair")
+                    optional("carpentry-chisels")
+                    optional("chipped")
+                    optional("corail-pillar")
+                    optional("create")
+                    optional("dawn-of-time")
+                    optional("decorative-blocks")
+                    optional("decoration-delight")
+                    optional("domum-ornamentum")
+                    optional("dramatic-doors")
+                    optional("exlines-bark-carpets")
+                    optional("excessive-building")
+                    optional("farmers-delight")
+                    optional("friends-and-foes-forge")
+                    optional("functional-storage")
+                    optional("furnish")
+                    optional("handcrafted")
+                    optional("hearth-and-home")
+                    optional("infinitybuttons")
+                    optional("just-a-raft-mod")
+                    optional("lightmans-currency")
+                    optional("macaws-bridges")
+                    optional("macaws-doors")
+                    optional("macaws-fences-and-walls")
+                    optional("macaws-furniture")
+                    optional("macaws-lights-and-lamps")
+                    optional("macaws-paths-and-pavings")
+                    optional("macaws-roofs")
+                    optional("macaws-trapdoors")
+                    optional("macaws-windows")
+                    optional("mighty-mail")
+                    optional("missing-wilds-forge")
+                    optional("more-beautiful-torches")
+                    optional("more-chest-variants-lieonlion")
+                    optional("more-crafting-tables-for-forge")
+                    optional("more-crafting-tables-lieonlion")
+                    optional("mosaic-carpentry")
+                    optional("mrcrayfish-furniture-mod")
+                    optional("pokecube-aoi")
+                    optional("premium-wood")
+    //                        optional("productivebees")
+                    optional("quark")
+                    optional("redeco")
+                    optional("regions-unexplored")
+                    optional("smidgeon-o-bliss-remastered")
+                    optional("storage-drawers")
+                    optional("timber-frames")
+                    optional("the-graveyard-forge")
+                    optional("the-twilight-forest")
+                    optional("table-top-craft")
+                    optional("tropicraft")
+                    optional("twigs")
+                    optional("valhelsia-furniture")
+                    optional("variant-crafting-tables")
+                    optional("variant-vanilla-blocks")
+                    optional("villagersplus-forge")
+                    optional("woodworks")
+                    optional("workshop-for-handsome-adventurer")
+                    optional("xercamod")
                 }
             }
         }
@@ -447,10 +451,8 @@ tasks.register('buildAndPublishAll') {
     dependsOn ':fabric:clean'
     dependsOn ':forge:clean'
     dependsOn ':build'
-    dependsOn ':forge:publishCurseforge'
-    dependsOn ':forge:modrinth'
-    dependsOn ':fabric:publishCurseforge'
-    dependsOn ':fabric:modrinth'
+    dependsOn ':fabric:publishMods'
+    dependsOn ':forge:publishMods'
     dependsOn ':publish'
     finalizedBy 'gitTag'
 
