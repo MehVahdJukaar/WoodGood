@@ -3,7 +3,7 @@
 | - **(C)**: FORGE & FABRIC                                                                                                         |
 | - **(FB)**: FABRIC                                                                                                                |
 | - **(FG)**: FORGE                                                                                                                 |
-| - **(IT)**: Included Texture — added the ResourceLocation of the missing textures required for blocks or generating a new texture |
+| - **(IT)**: Included Texture - added the ResourceLocation of the missing textures required for blocks or generating a new texture |
 | - **(TEX)**: hand-made textures to improve the way a block looks                                                                  |
 | - **(COMPAT)**: Create an exception for a compat mod. EveryCompat won't include the Supported Mod and the Wood Mod                |
 | - **(INCLUDED)**: The block is not generated because a Wood Mod already has the same block as the supported mod will be generated |
@@ -12,6 +12,32 @@
 |                                                                                                                                   |
 
 ---
+
+## v2.9.25
+
+### CHANGES:
+- **Every Compat** (C):
+  - en_us (LANG) for **Rechiseled**, **Macaw's Windows**' CURTAIN_ROD, **Twilight Forest**'s dry_racking, hollow_log for WoodType (StemType) - Backported from 1.21.1
+  - **Architect's Palette** (INCLUDED): BOARDS with **Windswept** - Requested by @derp_gamer22
+  - Improved Texture Generation for Chests: Corrected Chests' texture from being too dark - [#1313](https://github.com/MehVahdJukaar/WoodGood/issues/1313)
+- **MrCrayFish's Refurbished Furniture** (C): Set some blocks to not have an animated texture - [#1304](https://github.com/MehVahdJukaar/WoodGood/issues/1304)
+- **Regions Unexplored** (TEX): Improved the custom texture generation using `brimwood_planks` - this is related to above, please see **Refurbished Furniture**'s issue for more detail
+- **Timber Frames** (C): Is disabled from v3.0.0 onward and only support older version from v2.0.0 to v2.9.9 - [#1317](https://github.com/MehVahdJukaar/WoodGood/issues/1317)
+- **Chipped** (C): Improved `POLISHED_OAK_PLANKS`' texture generation to have a better looks - [#1120](https://github.com/MehVahdJukaar/WoodGood/issues/1120)
+
+### ADDED:
+- **Macaw's Windows** (C): Added new block `CURTAIN_ROD`
+- **Woodworks** (FG): Added `CLOSET` & `TRAPPED_CLOSET` for BambooLike WoodTypes.
+  - NOTE: These WoodType that aren't BambooType will use `CHEST` & `TRAPPED_CHEST`
+
+### REMOVED:
+- **Every Compat** (C): ENABLE_FRAMED_BLOCKS_BLACKLIST is no longer needed. Use `everycomp-hazardous.toml` as an alternative
+
+### NEW:
+- **Rechiseled** (C)
+
+---
+
 ## v2.9.24
 
 ### FIXES:
