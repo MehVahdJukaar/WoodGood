@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.Block;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.FENCE;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.SLAB;
 
-/// SUPPORT: v3.1.2+
+///SUPPORT: v3.1.2+
 public abstract class MacawBridgesModuleAbstract extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> bridgePiers;

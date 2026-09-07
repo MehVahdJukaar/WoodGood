@@ -16,7 +16,7 @@ import net.minecraft.world.level.material.MapColor;
 
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
-//SUPPORT: v1.0.1+
+///SUPPORT: v1.0.1+
 public abstract class MacawStairsModuleAbstract extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> terrace_stairs;

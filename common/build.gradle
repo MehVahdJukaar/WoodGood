@@ -48,16 +48,16 @@ dependencies {
     //+ REQUIRED - The modules access libaries from below
 
     // MACAW's
-    modCompileOnly("curse.maven:macaws-bridges-351725:5240495") // ABSTRACT not created yet
+//    modCompileOnly("curse.maven:macaws-bridges-351725:5240495") //- It's fine without the import
 //    modCompileOnly("curse.maven:macaws-doors-378646:6146455") //- It's fine without the import
-    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:6363061") // ABSTRACT not created yet
-    modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:5450302") // ABSTRACT not created yet
-    modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:5054857") // ABSTRACT not created yet
-    modCompileOnly("curse.maven:macaws-roofs-352039:4590013") // ABSTRACT not created yet
+//    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:6363061") //- It's fine without the import
+//    modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:5450302") //- It's fine without the import
+//    modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:5054857") //- It's fine without the import
+//    modCompileOnly("curse.maven:macaws-roofs-352039:4590013") //- It's fine without the import
 //    modCompileOnly("curse.maven:macaws-trapdoors-400933:5977711") //- It's fine without the import
-    modCompileOnly("curse.maven:macaws-windows-363569:4750644") // ABSTRACT not created yet
+//    modCompileOnly("curse.maven:macaws-windows-363569:4750644") //- It's fine without the import
     modCompileOnly("curse.maven:macaws-furniture-359540:7197865")
-    modCompileOnly("curse.maven:macaws-stairs-1119394:6155218") // ABSTRACT not created yet
+//    modCompileOnly("curse.maven:macaws-stairs-1119394:6155218") //- It's fine without the import
 
     //+ GENERAL
     modCompileOnly("curse.maven:another-furniture-610492:4815126")

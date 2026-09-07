@@ -16,7 +16,6 @@ import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.PLANKS_REMOVE
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.PLANKS_REMOVE_DARKEST;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
-
 ///SUPPORT: v1.1.4+
 public abstract class MacawTrapdoorsModuleAbstract extends SimpleModule {
 
