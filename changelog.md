@@ -13,6 +13,14 @@
 
 ---
 
+## v2.9.26
+
+### FIXED:
+- **Every Compat** (C): Cleaned some codes in few modules
+- **Macaw's Bridges** (C): Crash on startup - [#1321](https://github.com/MehVahdJukaar/WoodGood/issues/1321)
+
+---
+
 ## v2.9.25
 
 ### CHANGES:
