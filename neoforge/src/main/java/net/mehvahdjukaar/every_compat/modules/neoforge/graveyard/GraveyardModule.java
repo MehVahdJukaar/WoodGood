@@ -39,10 +39,9 @@ public class GraveyardModule extends EveryCompatModule {
                         w -> new CompatCoffinfBlock(Utils.copyPropertySafe(Blocks.OAK_PLANKS).noOcclusion(), w)
                 )
                 .addTile(TGBlockEntities.SARCOPHAGUS_BLOCK_ENTITY)
-                .addTextureM(modRes("block/oak_coffin"), EveryCompat.res("model/oak_coffin_m"))
+                .addTextureM(modRes("block/oak_coffin"), EveryCompat.res("block/gy/oak_coffin_m"))
                 .addTag(modRes("coffins"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getModTab(
-"graveyard_group"))
+                .setTab(getModTab("graveyard_group"))
                 .defaultRecipe()
                 .build();
         this.addEntry(COFFINS);
