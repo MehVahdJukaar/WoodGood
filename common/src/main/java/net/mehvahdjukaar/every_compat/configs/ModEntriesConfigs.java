@@ -1,6 +1,11 @@
 package net.mehvahdjukaar.every_compat.configs;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.CompatModule;
+import net.mehvahdjukaar.every_compat.api.EntrySet;
+import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
+import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigBuilder;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;
@@ -12,7 +17,10 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -71,6 +79,7 @@ public class ModEntriesConfigs {
 
         builder.comment("Disables specific entries")
                 .push("entries");
+        Map<String, ResourceLocation> entryIcons = entryIcons();
         for (var reg : BlockSetAPI.getRegistries()) {
             builder.icon(defaultIcon(reg)).push(reg.typeName().replace(" ", "_"));
             // child keys are "modid:name" - group by that mod id
@@ -83,7 +92,7 @@ public class ModEntriesConfigs {
             byNamespace.forEach((namespace, childKeys) -> {
                 builder.push(namespace); // mod id sub-category, left without an icon on purpose
                 for (var c : childKeys) {
-                    ResourceLocation icon = entryIcon(reg, c);
+                    ResourceLocation icon = entryIcons.get(c);
                     if (icon != null) builder.icon(icon);
                     int i = c.indexOf(':');
                     map.put(c, builder.feature(i < 0 ? c : c.substring(i + 1), true));
@@ -111,12 +120,30 @@ public class ModEntriesConfigs {
         return item == null ? null : Utils.getID(item);
     }
 
-    // icon for a child entry: the first block type that actually has that child
+    private static Map<String, ResourceLocation> entryIcons() {
+        Map<String, ResourceLocation> map = new HashMap<>();
+        for (CompatModule module : EveryCompat.getActiveModules()) {
+            if (!(module instanceof SimpleModule simpleModule)) continue;
+            for (EntrySet<?> entry : simpleModule.getEntries()) {
+                ResourceLocation icon = baseIcon(entry);
+                if (icon != null) map.put(entry.makeChildKey(simpleModule), icon);
+            }
+        }
+        return map;
+    }
+
     @Nullable
-    private static ResourceLocation entryIcon(BlockTypeRegistry<?> reg, String childKey) {
-        for (BlockType w : reg.getValues()) {
-            Item item = w.getItemOfThis(childKey);
-            if (item != null) return Utils.getID(item);
+    private static ResourceLocation baseIcon(EntrySet<?> entry) {
+        try {
+            if (entry instanceof SimpleEntrySet<?, ?> s) {
+                Block b = s.getBaseBlock();
+                if (b != null && b != Blocks.AIR) return Utils.getID(b);
+            } else if (entry instanceof ItemOnlyEntrySet<?, ?> s) {
+                Item i = s.getBaseItem();
+                if (i != null && i != Items.AIR) return Utils.getID(i);
+            }
+        } catch (Exception ignored) {
+            //base block supplier can blow up if the mod changed stuff. not worth failing a config over an icon
         }
         return null;
     }
