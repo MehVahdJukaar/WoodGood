@@ -148,7 +148,7 @@ dependencies {
     //modCompileOnly("local-giacomos_bookshelf-neoforge:giacomos_bookshelf-1.20.1-1.3.9") // WIP
 
     // MACAW's
-    modImplementation("curse.maven:macaws-bridges-351725:7627896")
+    modCompileOnly("curse.maven:macaws-bridges-351725:7627896")
     modCompileOnly("curse.maven:macaws-doors-378646:7618651")
     modCompileOnly("curse.maven:macaws-fences-and-walls-453925:7308338")
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:7304075")
