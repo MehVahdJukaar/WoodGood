@@ -28,7 +28,7 @@ import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 
-//SUPPORT: FABRIC-v2.1+ | NEOFORGE-NOT_AVAILABLE
+///SUPPORT: FABRIC-v2.1+ | NEOFORGE-NOT_AVAILABLE
 public class VariantVanillaBlocksModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> barrel;

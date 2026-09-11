@@ -359,25 +359,25 @@ public class QuarkModule extends EveryCompatModule {
             if (copyModProvidedChestTextures(sink, manager, shortenedId(), wood)) return;
 
             // SINGLE
-            generateChestTexture(sink, manager, shortenedId(), wood, block,
+            generateChestTexture(sink, manager, shortenedId(), wood,
                     modRes("quark_variant_chests/oak/normal"),
-                    EveryCompat.res("model/oak_chest_normal_m"),
-                    EveryCompat.res("model/oak_chest_normal_o"),
-                    EveryCompat.res("model/trapped_chest_normal")
+                    EveryCompat.res("quark_variant_chests/oak_chest_normal_m"),
+                    EveryCompat.res("quark_variant_chests/oak_chest_normal_o"),
+                    EveryCompat.res("quark_variant_chests/trapped_chest_normal")
             );
             // LEFT
-            generateChestTexture(sink, manager, shortenedId(), wood, block,
+            generateChestTexture(sink, manager, shortenedId(), wood,
                     modRes("quark_variant_chests/oak/left"),
-                    EveryCompat.res("model/oak_chest_left_m"),
-                    EveryCompat.res("model/oak_chest_left_o"),
-                    EveryCompat.res("model/trapped_chest_left")
+                    EveryCompat.res("quark_variant_chests/oak_chest_left_m"),
+                    EveryCompat.res("quark_variant_chests/oak_chest_left_o"),
+                    EveryCompat.res("quark_variant_chests/trapped_chest_left")
             );
             // RIGHT
-            generateChestTexture(sink, manager, shortenedId(), wood, block,
+            generateChestTexture(sink, manager, shortenedId(), wood,
                     modRes("quark_variant_chests/oak/right"),
-                    EveryCompat.res("model/oak_chest_right_m"),
-                    EveryCompat.res("model/oak_chest_right_o"),
-                    EveryCompat.res("model/trapped_chest_right")
+                    EveryCompat.res("quark_variant_chests/oak_chest_right_m"),
+                    EveryCompat.res("quark_variant_chests/oak_chest_right_o"),
+                    EveryCompat.res("quark_variant_chests/trapped_chest_right")
             );
         });
     }
