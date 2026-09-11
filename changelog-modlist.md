@@ -45,6 +45,7 @@
 | Decorative Blocks Reborn                   |   🟩   | 
 | Dramatic Doors                             |   🟩   | 
 | Dramatic Doors' <br>Supported Macaw's Door |   🟩   |
+| Envelope                                   |   🟡   |
 | Farmer's Delight                           |   🟩   |
 | Friends & Foes                             |   🟩   |
 | Furnish                                    |   🟩   |
