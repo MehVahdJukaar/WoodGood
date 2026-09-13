@@ -66,6 +66,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.registries.MissingMappingsEvent;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import static net.mehvahdjukaar.every_compat.EveryCompat.addIfLoaded;
@@ -125,7 +126,6 @@ public class EveryCompatForge extends EveryCompatCommon {
             addIfLoaded("buildersaddition", () -> BuildersAdditionModule::new);
             addIfLoaded("buildersdelight", () -> BuildersDelightModule::new);
             addIfLoaded("car", () -> UltimateCarModule::new);
-            addIfLoaded("cfm", () -> MrCrayfishFurnitureModule::new);
             addIfLoaded("corail_pillar", () -> CorailPillarModule::new);
             addIfLoaded("create", () -> CreateModule::new);
             addIfLoaded("decoration_delight", () -> DecorationDelightModule::new);
@@ -138,7 +138,6 @@ public class EveryCompatForge extends EveryCompatCommon {
             addIfLoaded("mctb", () -> MoreCraftingTablesForForgeModule::new);
             addIfLoaded("mighty_mail", () -> MightyMailModule::new);
             addIfLoaded("mosaic_carpentry", () -> MosaicCarpentryModule::new);
-            addIfLoaded("nfm", () -> NosiphusFurnitureModule::new);
             addIfLoaded("oreberriesreplanted", () -> OreberriesReplantedModule::new);
             addIfLoaded("pokecube_legends", () -> PokecubeAIOModule::new);
             addIfLoaded("premium_wood", () -> PremiumWoodModule::new);
@@ -161,9 +160,18 @@ public class EveryCompatForge extends EveryCompatCommon {
             if (PlatHelper.isModLoaded("mcwdoors")) addIfLoaded("dramaticdoors", () -> DramaticDoorsMacawModule::new);
 
             // REMOVE this later as timber_frame is not needed beacuse it has internal code that support WoodType
-            if (PlatHelper.isModLoaded("timber_frames") && !PlatHelper.getModVersion("timber_frames").matches("3[.\\d]{4}.*")) {
+            if (PlatHelper.isModLoaded("timber_frames") && !Objects.requireNonNull(PlatHelper.getModVersion("timber_frames")).matches("3[.\\d]{4}.*")) {
                 addIfLoaded("timber_frames", () -> TimberFramesModule::new);
             }
+
+            // MrCrayFish's Furntiure Mod is merged into Nosiphus's Furniture Mod - See #1324 for more detail
+            if (PlatHelper.isModLoaded("cfm") && Objects.requireNonNull(PlatHelper.getModVersion("cfm")).matches("7.0.0-pre36")) {
+                addIfLoaded("cfm", () -> MrCrayfishFurnitureModule::new);
+            }
+            if (PlatHelper.isModLoaded("nfm") && Objects.requireNonNull(PlatHelper.getModVersion("nfm")).matches("2026.01.30")) {
+                addIfLoaded("nfm", () -> NosiphusFurnitureModule::new);
+            }
+
         }
 
 // ============================================== DISABLED FOR A REASON ============================================= \\
