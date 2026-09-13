@@ -6,6 +6,7 @@ import net.mehvahdjukaar.every_compat.api.PaletteStrategy;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.block.ModStairBlock;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.textures.PaletteColor;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -17,6 +18,8 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.WallBlock;
+
+import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.PLANKS;
@@ -52,6 +55,7 @@ public class ArchitectsPaletteModule extends EveryCompatModule {
                 .addTexture(modRes("block/oak_boards"), CUSTOM_PALETTE)
                 .addTexture(modRes("block/oak_boards_odd"), CUSTOM_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("boards"), Registries.BLOCK, Registries.ITEM)
                 .setTab(getTab(tab))
                 .defaultRecipe()
                 .build();
@@ -125,5 +129,14 @@ public class ArchitectsPaletteModule extends EveryCompatModule {
 
             })
     );
+
+    @Override
+    public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicServerResources(executor);
+
+        executor.accept((manager, sink) -> {
+            // Code...
+        });
+    }
 
 }
