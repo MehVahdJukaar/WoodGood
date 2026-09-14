@@ -461,7 +461,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
                     // bundled_oak_log
                     TextureGroup.of("bundled_oak_log", "block/ch/oak_logs/bundled_log_m",
                             "block/ch/oak_logs/bundled_log_planks_m",
-                            LOG_SIDE_REMOVE_2_DARKEST),
+                            PaletteStrategies.removeDarkestBy(2, LOG, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)),
                     TextureGroup.of("bundled_oak_log_top", xLogTopM, xLogTopPlanksM,
                             PaletteStrategies.removeDarkestBy(2, LOG, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)),
 

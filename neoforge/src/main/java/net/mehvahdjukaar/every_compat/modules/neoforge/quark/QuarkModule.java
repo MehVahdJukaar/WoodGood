@@ -93,8 +93,7 @@ public class QuarkModule extends EveryCompatModule {
 
         bookshelves = QuarkSimpleEntrySet.builder(WoodType.class, "bookshelf",
                         VariantBookshelvesModule.class,
-                        getModBlock("acacia_bookshelf"),
-                        () -> VanillaWoodTypes.ACACIA,
+                        getModBlock("acacia_bookshelf"), () -> VanillaWoodTypes.ACACIA,
                         w -> new VariantBookshelfBlock(shortenedId() + "/" + w.getAppendableId(),
                                 null, w.canBurn(), w.getSound())
                 )
@@ -141,7 +140,7 @@ public class QuarkModule extends EveryCompatModule {
                                     shortenedId() + "/" + w.getNamespace() + "/stripped_",
                                     Objects.requireNonNull(fence).defaultBlockState().getSoundType());
                         })
-                .requiresChildren("fence", "stripped_log", "stripped_wood") //REASON: textures, recipes
+                .requiresChildren(FENCE, STRIPPED_LOG, STRIPPED_WOOD) //REASON: textures, recipes
                 //TEXTURES: stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("posts"), Registries.BLOCK, Registries.ITEM)
@@ -211,7 +210,8 @@ public class QuarkModule extends EveryCompatModule {
         chests = QuarkSimpleEntrySet.builder(WoodType.class, "chest",
                         VariantChestsModule.class,
                         getModBlock("oak_chest"), () -> VanillaWoodTypes.OAK,
-                        w -> new CompatChestBlock(this::getChestTile, Utils.copyPropertySafe(Blocks.CHEST))
+                        w -> new CompatChestBlock(this::getChestTile,
+                                Utils.copyPropertySafe(Blocks.CHEST).sound(w.getSound()))
                 )
                 .addTile(qChestBlockEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -232,8 +232,9 @@ public class QuarkModule extends EveryCompatModule {
                             boolean isNamespaceLoaded = w.getNamespace().equals("twilightforest")
                                     || w.getNamespace().equals("blue_skies");
                             if (!chests.blocks.containsKey(w) && !isNamespaceLoaded) return null;
-                            String name = shortenedId() + "/" + w.getAppendableId();
-                            return new CompatTrappedChestBlock(this::getTrappedTile, Utils.copyPropertySafe(Blocks.TRAPPED_CHEST));
+
+                            return new CompatTrappedChestBlock(this::getTrappedTile,
+                                    Utils.copyPropertySafe(Blocks.TRAPPED_CHEST).sound(w.getSound()));
                         })
                 .addTile(qTrappedBlockEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -250,9 +251,20 @@ public class QuarkModule extends EveryCompatModule {
                         HedgesModule.class,
                         getModBlock("oak_hedge"),
                         () -> VanillaLeavesTypes.OAK,
-                        leavesType -> new HedgeBlock("", null, Blocks.OAK_FENCE, leavesType.leaves)
+                        leavesType -> {
+                            WoodType woodType = leavesType.getAssociatedWoodType();
+                            Block fence;
+
+                            if (woodType != null && woodType.getBlockOfThis(FENCE) != null)
+                                fence = woodType.getBlockOfThis(FENCE);
+                            else
+                                fence = Blocks.OAK_FENCE;
+
+                            return new HedgeBlock("", null, Objects.requireNonNull(fence), leavesType.leaves);
+                        }
                 )
-                .addCondition(l-> l.getBlockOfThis(LOG) != null) // Reason: RECIPES. Yes leaves have log too.
+                //.requiresChildren(LOG) // Reason: RECIPES. Leaves are required to have WoodType & LOG
+                .addCondition(leavesType-> leavesType.getAssociatedWoodType() != null)
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", CompatSpritesHelper.LOOKS_LIKE_LEAF_TEXTURE))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -265,7 +277,6 @@ public class QuarkModule extends EveryCompatModule {
                 .copyParentTint()
                 .build();
         this.addEntry(hedges);
-
 
         //doing it this way because for some reason its nuking whatever block item I throw in here
         leafCarpets = QuarkSimpleEntrySet.builder(LeavesType.class, "leaf_carpet",
@@ -359,25 +370,25 @@ public class QuarkModule extends EveryCompatModule {
             if (copyModProvidedChestTextures(sink, manager, shortenedId(), wood)) return;
 
             // SINGLE
-            generateChestTexture(sink, manager, shortenedId(), wood, block,
+            generateChestTexture(sink, manager, shortenedId(), wood,
                     modRes("quark_variant_chests/oak/normal"),
-                    EveryCompat.res("model/oak_chest_normal_m"),
-                    EveryCompat.res("model/oak_chest_normal_o"),
-                    EveryCompat.res("model/trapped_chest_normal")
+                    EveryCompat.res("quark_variant_chests/oak_chest_normal_m"),
+                    EveryCompat.res("quark_variant_chests/oak_chest_normal_o"),
+                    EveryCompat.res("quark_variant_chests/trapped_chest_normal")
             );
             // LEFT
-            generateChestTexture(sink, manager, shortenedId(), wood, block,
+            generateChestTexture(sink, manager, shortenedId(), wood,
                     modRes("quark_variant_chests/oak/left"),
-                    EveryCompat.res("model/oak_chest_left_m"),
-                    EveryCompat.res("model/oak_chest_left_o"),
-                    EveryCompat.res("model/trapped_chest_left")
+                    EveryCompat.res("quark_variant_chests/oak_chest_left_m"),
+                    EveryCompat.res("quark_variant_chests/oak_chest_left_o"),
+                    EveryCompat.res("quark_variant_chests/trapped_chest_left")
             );
             // RIGHT
-            generateChestTexture(sink, manager, shortenedId(), wood, block,
+            generateChestTexture(sink, manager, shortenedId(), wood,
                     modRes("quark_variant_chests/oak/right"),
-                    EveryCompat.res("model/oak_chest_right_m"),
-                    EveryCompat.res("model/oak_chest_right_o"),
-                    EveryCompat.res("model/trapped_chest_right")
+                    EveryCompat.res("quark_variant_chests/oak_chest_right_m"),
+                    EveryCompat.res("quark_variant_chests/oak_chest_right_o"),
+                    EveryCompat.res("quark_variant_chests/trapped_chest_right")
             );
         });
     }

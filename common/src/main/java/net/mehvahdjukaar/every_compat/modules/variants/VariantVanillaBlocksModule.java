@@ -28,7 +28,7 @@ import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 
-//SUPPORT: FABRIC-v2.1+ | NEOFORGE-NOT_AVAILABLE
+///SUPPORT: FABRIC-v2.1+ | NEOFORGE-NOT_AVAILABLE
 public class VariantVanillaBlocksModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> barrel;
@@ -328,24 +328,24 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
         executor.accept((manager, sink) -> {
             chests.blocks.forEach((wood, block) -> {
                 // SINGLE
-                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/acacia_chest"),
                         EveryCompat.res("entity/vvb/oak_chest_m"),
-                        EveryCompat.res("model/oak_chest_normal_o"),
+                        EveryCompat.res("quark_variant_chests/oak_chest_normal_o"),
                         null
                 );
                 // LEFT
-                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/acacia_chest_left"),
                         EveryCompat.res("entity/vvb/oak_chest_left_m"),
-                        EveryCompat.res("model/oak_chest_left_o"),
+                        EveryCompat.res("quark_variant_chests/oak_chest_left_o"),
                         null
                 );
                 // RIGHT
-                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/acacia_chest_right"),
                         EveryCompat.res("entity/vvb/oak_chest_right_m"),
-                        EveryCompat.res("model/oak_chest_right_o"),
+                        EveryCompat.res("quark_variant_chests/oak_chest_right_o"),
                         null
                 );
 
@@ -353,5 +353,5 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
 
         });
     }
-    
+
 }

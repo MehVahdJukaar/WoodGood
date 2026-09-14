@@ -25,7 +25,6 @@ import org.violetmoon.zeta.module.ZetaModule;
 
 import java.util.function.*;
 
-@SuppressWarnings("DataFlowIssue")
 public class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends SimpleEntrySet<T, B> {
 
     private final Supplier<ZetaModule> zetaModule;

@@ -15,7 +15,6 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
@@ -28,10 +27,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 
-//SUPPORT: FABRIC-v1.5.8+ | NEOFORGE-v1.5.9+
+///SUPPORT: FABRIC-v1.5.8+ | NEOFORGE-v1.5.9+
 public class MoreChestVariantsModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> chests;
@@ -39,8 +39,8 @@ public class MoreChestVariantsModule extends EveryCompatModule {
 
     public MoreChestVariantsModule(String modID) {
         super(modID, "mcv");
-        ResourceKey<CreativeModeTab> functionalTab = CreativeModeTabs.FUNCTIONAL_BLOCKS;
-        ResourceKey<CreativeModeTab> redstoneTab = CreativeModeTabs.REDSTONE_BLOCKS;
+        Supplier<CreativeModeTab> functionalTab = getTab(CreativeModeTabs.FUNCTIONAL_BLOCKS);
+        Supplier<CreativeModeTab> redstoneTab = getTab(CreativeModeTabs.REDSTONE_BLOCKS);
 
 
         chests = SimpleEntrySet.builder(WoodType.class, "chest",
@@ -60,7 +60,7 @@ public class MoreChestVariantsModule extends EveryCompatModule {
                 .addTag(ResourceLocation.parse("lieonstudio:chests/normal"), Registries.BLOCK, Registries.ITEM)
                 .addTag(ResourceLocation.parse("quad:cats_on_blocks/sit"), Registries.BLOCK)
                 .addTag(ResourceLocation.parse("quad:fuel/wood"), Registries.ITEM)
-                .setTabKey(functionalTab)
+                .setTab(functionalTab)
                 .defaultRecipe()
                 .build();
         this.addEntry(chests);
@@ -81,7 +81,7 @@ public class MoreChestVariantsModule extends EveryCompatModule {
                 .addTag(ResourceLocation.parse("lieonstudio:chests/wooden"), Registries.BLOCK, Registries.ITEM)
                 .addTag(ResourceLocation.parse("lieonstudio:chests/trapped"), Registries.BLOCK, Registries.ITEM)
                 .addTag(ResourceLocation.parse("quad:fuel/wood"), Registries.ITEM)
-                .setTabKey(redstoneTab)
+                .setTab(redstoneTab)
                 .defaultRecipe()
                 .build();
         this.addEntry(trappedChests);
@@ -127,25 +127,25 @@ public class MoreChestVariantsModule extends EveryCompatModule {
         executor.accept((manager, sink) -> {
             trappedChests.blocks.forEach((wood, block) -> {
                 // SINGLE
-                generateChestTexture(sink, manager, shortenedId(), wood, block,
-                        modRes("entity/chest/oak"),
-                        EveryCompat.res("entity/mcv_chest_normal_m"),
-                        EveryCompat.res("entity/mcv_chest_normal_o"),
-                        EveryCompat.res("entity/mcv_trapped_normal_o"), 0
+                generateChestTexture(sink, manager, shortenedId(), wood,
+                        modRes("entity/chest/acacia_chest"),
+                        EveryCompat.res("quark_variant_chests/oak_chest_normal_m"),
+                        EveryCompat.res("quark_variant_chests/oak_chest_normal_o"),
+                        null
                 );
                 // LEFT
-                generateChestTexture(sink, manager, shortenedId(), wood, block,
-                        modRes("entity/chest/oak_left"),
-                        EveryCompat.res("entity/mcv_chest_left_m"),
-                        EveryCompat.res("entity/mcv_chest_left_o"),
-                        EveryCompat.res("entity/mcv_trapped_left_o"), 0
+                generateChestTexture(sink, manager, shortenedId(), wood,
+                        modRes("entity/chest/acacia_chest_left"),
+                        EveryCompat.res("quark_variant_chests/oak_chest_left_m"),
+                        EveryCompat.res("quark_variant_chests/oak_chest_left_o"),
+                        null
                 );
                 // RIGHT
-                generateChestTexture(sink, manager, shortenedId(), wood, block,
-                        modRes("entity/chest/oak_right"),
-                        EveryCompat.res("entity/mcv_chest_right_m"),
-                        EveryCompat.res("entity/mcv_chest_right_o"),
-                        EveryCompat.res("entity/mcv_trapped_right_o"), 0
+                generateChestTexture(sink, manager, shortenedId(), wood,
+                        modRes("entity/chest/acacia_chest_right"),
+                        EveryCompat.res("quark_variant_chests/oak_chest_right_m"),
+                        EveryCompat.res("quark_variant_chests/oak_chest_right_o"),
+                        null
                 );
 
             });

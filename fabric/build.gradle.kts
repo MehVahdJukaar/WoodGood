@@ -116,7 +116,7 @@ dependencies {
     modCompileOnly("curse.maven:refurbished-furniture-897116:7473565")
     modCompileOnly("curse.maven:storage-drawers-223852:6967726")
     modCompileOnly("curse.maven:table-top-craft-fabric-729535:5319819") //@RLM: exp4j //!! 1.20.1
-    modCompileOnly("curse.maven:twigs-496913:4605097")
+    modCompileOnly("curse.maven:twigs-496913:6782788")
     modCompileOnly("curse.maven:valhelsia-furniture-694349:6334936")
     modCompileOnly("curse.maven:variant-vanilla-blocks-866509:5703471")
     // OTHER MAVENs

@@ -1,8 +1,11 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.abnormal;
 
+import com.teamabnormals.blueprint.client.BlueprintChestMaterials;
 import com.teamabnormals.blueprint.common.block.BlueprintBeehiveBlock;
 import com.teamabnormals.blueprint.common.block.BlueprintChiseledBookShelfBlock;
 import com.teamabnormals.blueprint.common.block.LeafPileBlock;
+import com.teamabnormals.woodworks.common.block.ClosetBlock;
+import com.teamabnormals.woodworks.common.block.TrappedClosetBlock;
 import com.teamabnormals.woodworks.common.item.crafting.SawmillRecipe;
 import com.teamabnormals.woodworks.core.registry.WoodworksBlocks;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -12,6 +15,7 @@ import net.mehvahdjukaar.every_compat.api.TabAddMode;
 import net.mehvahdjukaar.every_compat.common_classes.*;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
@@ -26,7 +30,6 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
@@ -48,28 +51,28 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.common.Tags;
 
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
-import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.copyModProvidedChestTextures;
-import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
+import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.*;
 import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.IsBambooLike;
 import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.isKnownVanillaWood;
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.getATagOrCreateANew;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
-//SUPPORT: v4.0.2+
+///SUPPORT: v4.0.2+
 public class WoodworksModule extends EveryCompatModule {
     public final SimpleEntrySet<WoodType, Block> bookshelves;
     public final SimpleEntrySet<WoodType, Block> chiseled_bookshelves;
     public final SimpleEntrySet<WoodType, Block> boards;
     public final SimpleEntrySet<WoodType, Block> ladders;
     public final SimpleEntrySet<WoodType, Block> beehives;
-    public final SimpleEntrySet<WoodType, Block> chests;
-    public final SimpleEntrySet<WoodType, Block> trappedChests;
+    public final SimpleEntrySet<WoodType, Block> chests, trappedChests; // WoodType
+    public final SimpleEntrySet<WoodType, Block> closet, trappedCloset; // BambooType
     public final SimpleEntrySet<LeavesType, Block> leafPiles;
 
     public WoodworksModule(String modId) {
         super(modId, "abnww");
-        ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
+        Supplier<CreativeModeTab> tab = getTab(CreativeModeTabs.BUILDING_BLOCKS);
 
         bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf",
                         getModBlock("acacia_bookshelf"),
@@ -85,7 +88,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTag(Tags.Blocks.BOOKSHELVES, Registries.BLOCK)
                 .addTag(Tags.Items.BOOKSHELVES, Registries.ITEM)
                 .addTag(ResourceLocation.parse("blueprint:wooden_bookshelves"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .defaultRecipe()
                 .copyParentDrop()
@@ -109,7 +112,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTag(Tags.Blocks.BOOKSHELVES, Registries.BLOCK)
                 .addTag(Tags.Items.BOOKSHELVES, Registries.ITEM)
                 .addTag(ResourceLocation.parse("blueprint:wooden_chiseled_bookshelves"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .defaultRecipe()
                 .copyParentDrop()
@@ -125,7 +128,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTexture(modRes("block/oak_boards"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_boards"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .defaultRecipe()
                 .build();
@@ -145,7 +148,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .addTag(ResourceLocation.parse("quark:ladders"), Registries.BLOCK, Registries.ITEM)
                 .addTag(ResourceLocation.parse("blueprint:wooden_ladders"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .defaultRecipe()
                 .build();
@@ -166,7 +169,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.BEEHIVES, Registries.BLOCK)
                 .addTag(ResourceLocation.parse("blueprint:wooden_beehives"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .defaultRecipe()
                 .build();
@@ -178,12 +181,13 @@ public class WoodworksModule extends EveryCompatModule {
                                 Utils.copyPropertySafe(woodType.planks).strength(2.5F)
                         )
                 )
+                .addCondition(woodType -> !woodType.isBambooLike())
                 .addTile(abwwChestBlockEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ResourceLocation.parse("blueprint:wooden_chests"), Registries.BLOCK, Registries.ITEM)
                 .addTag(ResourceLocation.parse("quark:revertable_chests"), Registries.ITEM)
                 .addTag(ResourceLocation.parse("quark:boatable_chests"), Registries.ITEM)
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .defaultRecipe()
                 .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
@@ -196,16 +200,74 @@ public class WoodworksModule extends EveryCompatModule {
                                 Utils.copyPropertySafe(woodType.planks).strength(2.5F)
                         )
                 )
+                .addCondition(woodType -> !woodType.isBambooLike())
                 .addTile(abwwTrappedBlockEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ResourceLocation.parse("blueprint:wooden_trapped_chests"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .defaultRecipe()
                 .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
                 .build();
         this.addEntry(trappedChests);
 
+        closet = SimpleEntrySet.builder(WoodType.class, "closet",
+                        getModBlock("bamboo_closet"), () -> VanillaWoodTypes.BAMBOO,
+                        woodType -> {
+                            String name = BlueprintChestMaterials.registerMaterials(EveryCompat.MOD_ID,
+                                    woodType.createPathWith(shortenedId(), ""), false
+                            );
+
+                            return new ClosetBlock(name,
+                                    Utils.copyPropertySafe(woodType.planks).strength(2.5F).sound(woodType.getSound())
+                            );
+                        }
+                )
+                .addCondition(WoodType::isBambooLike)
+                .addTile(getModTile("closet"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
+                .addTag(Tags.Blocks.CHESTS, Registries.BLOCK)
+                .addTag(Tags.Blocks.CHESTS_WOODEN, Registries.BLOCK)
+                .addTag(Tags.Items.CHESTS, Registries.ITEM)
+                .addTag(Tags.Items.CHESTS_WOODEN, Registries.ITEM)
+                .addTag(ResourceLocation.parse("blueprint:wooden_chests"), Registries.ITEM, Registries.BLOCK)
+                .addTag(ResourceLocation.parse("quark:revertable_chests"), Registries.ITEM)
+                .addTag(ResourceLocation.parse("quark:boatable_chests"), Registries.ITEM)
+                .setTab(tab)
+                .defaultRecipe()
+                .addCustomItem((w, block, properties) -> new BlockItem(block, new Item.Properties()))
+                .build();
+        this.addEntry(closet);
+
+        trappedCloset = SimpleEntrySet.builder(WoodType.class, "closet", "trapped",
+                        getModBlock("trapped_bamboo_closet"), () -> VanillaWoodTypes.BAMBOO,
+                        woodType -> {
+                            String name = BlueprintChestMaterials.registerMaterials(EveryCompat.MOD_ID,
+                                    woodType.createPathWith(shortenedId(), ""), true
+                            );
+
+                            return new TrappedClosetBlock(name,
+                                    Utils.copyPropertySafe(woodType.planks).strength(2.5F).sound(woodType.getSound())
+                            );
+                        }
+                )
+                .addCondition(WoodType::isBambooLike)
+                .addTile(getModTile("trapped_closet"))
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
+                .addTag(Tags.Blocks.CHESTS, Registries.BLOCK)
+                .addTag(Tags.Blocks.CHESTS_WOODEN, Registries.BLOCK)
+                .addTag(Tags.Blocks.CHESTS_TRAPPED, Registries.BLOCK)
+                .addTag(ResourceLocation.parse("blueprint:wooden_trapped_chests"), Registries.BLOCK, Registries.ITEM)
+                .addTag(Tags.Items.CHESTS, Registries.ITEM)
+                .addTag(Tags.Items.CHESTS_WOODEN, Registries.ITEM)
+                .addTag(Tags.Items.CHESTS_TRAPPED, Registries.ITEM)
+                .setTab(tab)
+                .defaultRecipe()
+                .addCustomItem((w, block, properties) -> new BlockItem(block, new Item.Properties()))
+                .build();
+        this.addEntry(trappedCloset);
 
         leafPiles = SimpleEntrySet.builder(LeavesType.class, "leaf_pile",
                         WoodworksBlocks.OAK_LEAF_PILE, () -> VanillaLeavesTypes.OAK,
@@ -220,7 +282,7 @@ public class WoodworksModule extends EveryCompatModule {
                         "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(modRes("leaf_piles"), Registries.BLOCK, Registries.ITEM)
-                .setTab(getTab(tab))
+                .setTab(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
@@ -368,26 +430,58 @@ public class WoodworksModule extends EveryCompatModule {
                 // mods like environmental already ship chest textures for their own wood. reuse those over a recolor
                 if (copyModProvidedChestTextures(sink, manager, shortenedId(), wood)) return;
 
+                if (PlatHelper.isModLoaded("quark")
+                        && copyHandmadeChestTextures(sink, manager, "q", shortenedId(), wood)) return;
+
                 // SINGLE
-                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/oak/normal"),
                         EveryCompat.res("block/abnww/chest/oak/normal_m"),
                         EveryCompat.res("block/abnww/chest/oak/normal_o"),
-                        EveryCompat.res("block/abnww/chest/oak/trapped_o")
+                        EveryCompat.res("block/abnww/chest/oak/trapped_o"), 1
                 );
                 // LEFT
-                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/oak/normal_left"),
                         EveryCompat.res("block/abnww/chest/oak/left_m"),
                         EveryCompat.res("block/abnww/chest/oak/left_o"),
-                        EveryCompat.res("block/abnww/chest/oak/trapped_left_o")
+                        EveryCompat.res("block/abnww/chest/oak/trapped_left_o"), 1
                 );
                 // RIGHT
-                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/oak/normal_right"),
                         EveryCompat.res("block/abnww/chest/oak/right_m"),
                         EveryCompat.res("block/abnww/chest/oak/right_o"),
-                        EveryCompat.res("block/abnww/chest/oak/trapped_right_o")
+                        EveryCompat.res("block/abnww/chest/oak/trapped_right_o"), 1
+                );
+            })
+        );
+
+        executor.accept((manager, sink) ->
+            trappedCloset.blocks.forEach((wood, block) -> {
+                setSuffix("/normal", "/trapped");
+                useCustomSuffix();
+
+                // SINGLE
+                generateChestTexture(sink, manager, shortenedId(), wood,
+                        modRes("entity/chest/bamboo/normal"),
+                        EveryCompat.res("block/abnww/chest/bamboo/normal_m"),
+                        EveryCompat.res("block/abnww/chest/bamboo/normal_o"),
+                        EveryCompat.res("block/abnww/chest/bamboo/trapped_o"), 2
+                );
+                // LEFT
+                generateChestTexture(sink, manager, shortenedId(), wood,
+                        modRes("entity/chest/bamboo/normal_left"),
+                        EveryCompat.res("block/abnww/chest/bamboo/normal_left_m"),
+                        EveryCompat.res("block/abnww/chest/bamboo/normal_left_o"),
+                        EveryCompat.res("block/abnww/chest/bamboo/trapped_left_o"), 2
+                );
+                // RIGHTdamn
+                generateChestTexture(sink, manager, shortenedId(), wood,
+                        modRes("entity/chest/bamboo/normal_right"),
+                        EveryCompat.res("block/abnww/chest/bamboo/normal_right_m"),
+                        EveryCompat.res("block/abnww/chest/bamboo/normal_right_o"),
+                        EveryCompat.res("block/abnww/chest/bamboo/trapped_right_o"), 2
                 );
             })
         );
