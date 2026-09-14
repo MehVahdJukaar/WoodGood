@@ -13,6 +13,26 @@
 |                                                                                                                                   |
 
 ---
+## v2.11.51
+
+### FIXED:
+- **Twigs** (FB): Updated ID for Creative_mode_tab - [#1318](https://github.com/MehVahdJukaar/WoodGood/issues/1318)
+  - NOTE: Fabric do not have the same ID regarding Creative_mode_tab as Neoforge's
+
+### CHANGES:
+- **Every Compat** (C):
+  - en_us (LANG) for **Rechiseled**, **Macaw's Windows**' CURTAIN_ROD, **Twilight Forest**'s dry_racking, hollow_log for WoodType (StemType) - Backported from 1.21.1
+  - Improved Texture Generation for Chests: Corrected Chests' texture from being too dark - [#1313](https://github.com/MehVahdJukaar/WoodGood/issues/1313)
+- **Chipped** (C): Improved `POLISHED_OAK_PLANKS`' texture generation to have a better looks - [#1120](https://github.com/MehVahdJukaar/WoodGood/issues/1120)
+- **Architect's Palette** (C): Added the tag, `#architects_palette:boards` to boards
+- **Oh Biomes We've Gone** (TEX): Moved textures from `byg` to `biomeswevegone`
+
+### ADDED:
+- **Woodworks** (FG): Added `CLOSET` & `TRAPPED_CLOSET` for BambooLike WoodTypes.
+  - NOTE: These WoodType that aren't BambooType will use `CHEST` & `TRAPPED_CHEST`
+
+---
+
 ## v2.11.50
 
 ### CHANGES:
