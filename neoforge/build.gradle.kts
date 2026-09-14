@@ -76,7 +76,7 @@ dependencies {
 //    modRuntimeOnly("quark-biolith:biolith-neoforge-3.0.10") // Quark
 
     //- OTHER MAVENs
-//    forgeRuntimeLibrary("com.teamresourceful:bytecodecs:1.0.2") // Chipped, Resourceful-Lib
+//    modRuntimeOnly("com.teamresourceful:bytecodecs:1.0.2") // Chipped, Resourceful-Lib
 //    modRuntimeOnly("dev.engine-room.flywheel:flywheel-neoforge-${minecraft_version}:${flywheel_version}") // Create
 //    modRuntimeOnly("net.createmod.ponder:Ponder-NeoForge-${minecraft_version}:${ponder_version}") // Create
 //    modRuntimeOnly("dev.isxander:yet-another-config-lib:$yacl_version-neoforge") // Friends&Foes
@@ -139,7 +139,7 @@ dependencies {
 
     //- OTHER MAVENS
 //    modRuntimeOnly("maven.modrinth:stylish-stiles:l9FFA4BK") //!! 1.20.1
-//    modRuntimeOnly("earth.terrarium.chipped:chipped-neoforge-${minecraft_version}:4.0.2") //INCLUDED: Athena, Resourceful-Lib, REQUIRED: +Bytecodecs
+//    modRuntimeOnly("earth.terrarium.chipped:chipped-neoforge-${property("minecraft_version")}:4.0.2") //INCLUDED: Athena, Resourceful-Lib, REQUIRED: +Bytecodecs
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN NEOFORGE
     // ~/forge/mods LOCAL
