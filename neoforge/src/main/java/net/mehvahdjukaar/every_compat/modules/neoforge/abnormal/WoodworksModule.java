@@ -15,6 +15,7 @@ import net.mehvahdjukaar.every_compat.api.TabAddMode;
 import net.mehvahdjukaar.every_compat.common_classes.*;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
@@ -428,6 +429,9 @@ public class WoodworksModule extends EveryCompatModule {
             trappedChests.blocks.forEach((wood, block) -> {
                 // mods like environmental already ship chest textures for their own wood. reuse those over a recolor
                 if (copyModProvidedChestTextures(sink, manager, shortenedId(), wood)) return;
+
+                if (PlatHelper.isModLoaded("quark")
+                        && copyHandmadeChestTextures(sink, manager, "q", shortenedId(), wood)) return;
 
                 // SINGLE
                 generateChestTexture(sink, manager, shortenedId(), wood,
