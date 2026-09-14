@@ -134,6 +134,12 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             //?? wtf im using disabled to allow for null??
             throw new UnsupportedOperationException("Base block cant be null (" + this.typeName + " for " + module.modId + " module)");
 
+        //assets and loot tables get their names from this scheme, a base block that doesnt follow it generates everything under the wrong name
+        String expectedBaseName = makeEntryName(baseType.get());
+        if (!Utils.getID(base).getPath().equals(expectedBaseName))
+            throw new UnsupportedOperationException("Base block " + Utils.getID(base) + " of " + this.typeName + " (" + module.modId +
+                    " module) doesnt match the entry name scheme, expected '" + expectedBaseName + "'. Use the builder overload with a prefix if the base block has one");
+
         String childKey = makeRegisteredChildKey(module);
         for (T blockType : types) {
             ResourceLocation id = makeFullEntryID(module, blockType);
