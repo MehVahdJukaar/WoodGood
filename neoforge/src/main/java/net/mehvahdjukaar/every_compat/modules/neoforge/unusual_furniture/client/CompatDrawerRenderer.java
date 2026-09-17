@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.mehvahdjukaar.every_compat.modules.neoforge.unusual_furniture.compat_entity.CompatDrawerBlockEntity;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -31,7 +30,7 @@ public class CompatDrawerRenderer implements BlockEntityRenderer<CompatDrawerBlo
         private final CustomHierarchicalModel model;
 //        private final ResourceLocation texture;
 
-        public CompatDrawerRenderer(BlockEntityRendererProvider.Context context, WoodType woodType, String shortenedId) {
+        public CompatDrawerRenderer(BlockEntityRendererProvider.Context context) {
             super();
             this.model = new CustomHierarchicalModel(context.bakeLayer(Modeljavadrawer.LAYER_LOCATION));
 //            String textureLocation = woodType.createFullIdWith(EveryCompat.MOD_ID, "textures/block", shortenedId, "java_drawer", ".png");

@@ -61,7 +61,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
     public ChippedLogModule(String modId) {
         super(modId);
-        ResourceLocation tab = modRes(tabPath);
+        ResourceLocation tab = modRes(TAB_PATH);
         setBlockType("Log");
 
         BundledLog = SimpleEntrySet.builder(WoodType.class, "log", "bundled",

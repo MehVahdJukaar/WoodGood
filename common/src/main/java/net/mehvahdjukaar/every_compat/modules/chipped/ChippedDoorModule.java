@@ -80,7 +80,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
 
     public ChippedDoorModule(String modId) {
         super(modId);
-        ResourceLocation tab = modRes(tabPath);
+        ResourceLocation tab = modRes(TAB_PATH);
         setBlockType("Door");
 
         barredDoor = SimpleEntrySet.builder(WoodType.class, "door", "barred",

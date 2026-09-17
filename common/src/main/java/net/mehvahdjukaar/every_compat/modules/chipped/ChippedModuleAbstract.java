@@ -19,7 +19,7 @@ import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 ///SUPPORT: v4.0.2+
 public class ChippedModuleAbstract extends EveryCompatModule {
 
-    public static String tabPath = "main";
+    protected static final String TAB_PATH = "main";
 
     public ChippedModuleAbstract(String modId) {
         super(modId, "ch");

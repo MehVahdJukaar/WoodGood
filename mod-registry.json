@@ -759,6 +759,19 @@
       "notes": "Separate CurseForge project from Fabric version (565956)",
       "mc_version": "1.21.1"
     },
+    "the-block-box": {
+      "name": "The Block Box",
+      "curse_project_id": 1199971,
+      "curse_files": {
+        "common": "8089815"
+      },
+      "modrinth_id": "the-block-box",
+      "modrinth_versions": {
+        "neoforge": "k6KEg6tp"
+      },
+      "mc_version": "1.21.1",
+      "_last_checked": "2026-09-14"
+    },
     "the-graveyard-forge": {
       "name": "The Graveyard (NeoForge)",
       "mc_version": "1.20.1",

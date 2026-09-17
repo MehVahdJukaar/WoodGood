@@ -1,5 +1,8 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.unusual_furniture.compat_entity;
 
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
+import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -22,14 +25,16 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 import java.util.stream.IntStream;
 
-import static net.mehvahdjukaar.every_compat.modules.neoforge.unusual_furniture.UnusualFurnitureModule.CompatBenchBlock.woodType;
 import static org.apache.commons.lang3.StringUtils.capitalize;
 
 public class CompatBenchBlockEntity extends RandomizableContainerBlockEntity implements WorldlyContainer {
     private NonNullList<ItemStack> stacks;
+    private final WoodType woodType;
 
     public CompatBenchBlockEntity(BlockPos position, BlockState state, BlockEntityType entityType) {
         super(entityType, position, state);
+        WoodType w = WoodTypeRegistry.INSTANCE.getBlockTypeOf(state.getBlock());
+        this.woodType = w == null ? VanillaWoodTypes.OAK : w;
         this.stacks = NonNullList.withSize(9, ItemStack.EMPTY);
     }
 

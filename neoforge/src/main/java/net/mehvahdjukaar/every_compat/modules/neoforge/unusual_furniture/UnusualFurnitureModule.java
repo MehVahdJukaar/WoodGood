@@ -257,11 +257,8 @@ public class UnusualFurnitureModule extends EveryCompatModule {
 
 // ───────────────────────────────── Compat Block ──────────────────────────────────
     public class CompatTableBlock extends OakTableBlock {
-        public static WoodType woodType;
-
         public CompatTableBlock(WoodType woodType) {
             super();
-            CompatCoffeeTableBlock.woodType = woodType;
         }
 
         public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
@@ -270,11 +267,8 @@ public class UnusualFurnitureModule extends EveryCompatModule {
     }
 
     public class CompatCoffeeTableBlock extends OakCoffeeTableBlock {
-        public static WoodType woodType;
-
         public CompatCoffeeTableBlock(WoodType woodType) {
             super();
-            CompatCoffeeTableBlock.woodType = woodType;
         }
 
         public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
@@ -283,11 +277,8 @@ public class UnusualFurnitureModule extends EveryCompatModule {
     }
 
     public class CompatCellingLampBlock extends OakCellingLampBlock {
-        public static WoodType woodType;
-
         public CompatCellingLampBlock(WoodType woodType) {
             super();
-            CompatCellingLampBlock.woodType = woodType;
         }
 
         public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
@@ -296,11 +287,8 @@ public class UnusualFurnitureModule extends EveryCompatModule {
     }
 
     public class CompatDrawerBlock extends JungleDrawerBlock {
-        public static WoodType woodType;
-
         public CompatDrawerBlock(WoodType woodType) {
             super();
-            CompatDrawerBlock.woodType = woodType;
             BLOCK_TO_TEXTURE_MAP.put(this, ResourceLocation.parse(
                     woodType.createFullIdWith(EveryCompat.MOD_ID, "textures/block",
                             shortenedId, "java_drawer", ".png")
@@ -314,11 +302,8 @@ public class UnusualFurnitureModule extends EveryCompatModule {
     }
 
     public class CompatBenchBlock extends OakBenchBlock {
-        public static WoodType woodType;
-
         public CompatBenchBlock(WoodType woodType) {
             super();
-            CompatBenchBlock.woodType = woodType;
         }
 
         public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
@@ -364,6 +349,6 @@ public class UnusualFurnitureModule extends EveryCompatModule {
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         super.registerBlockEntityRenderers(event);
 
-        event.register(getDrawerTile(), context -> new CompatDrawerRenderer(context, CompatDrawerBlock.woodType, shortenedId()));
+        event.register(getDrawerTile(), CompatDrawerRenderer::new);
     }
 }

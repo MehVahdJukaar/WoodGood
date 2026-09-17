@@ -1,6 +1,9 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.unusual_furniture.compat_entity;
 
 import io.netty.buffer.Unpooled;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
+import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -25,16 +28,18 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 import java.util.stream.IntStream;
 
-import static net.mehvahdjukaar.every_compat.modules.neoforge.unusual_furniture.UnusualFurnitureModule.CompatDrawerBlock.woodType;
 import static org.apache.commons.lang3.StringUtils.capitalize;
 
 public class CompatDrawerBlockEntity  extends RandomizableContainerBlockEntity implements WorldlyContainer {
     private NonNullList<ItemStack> stacks;
+    private final WoodType woodType;
     public final AnimationState animationState0;
     public final AnimationState animationState1;
 
     public CompatDrawerBlockEntity(BlockPos position, BlockState state, BlockEntityType entityType) {
         super(entityType, position, state);
+        WoodType w = WoodTypeRegistry.INSTANCE.getBlockTypeOf(state.getBlock());
+        this.woodType = w == null ? VanillaWoodTypes.OAK : w;
         this.stacks = NonNullList.withSize(27, ItemStack.EMPTY);
         this.animationState0 = new AnimationState();
         this.animationState1 = new AnimationState();
