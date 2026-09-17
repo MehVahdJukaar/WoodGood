@@ -13,10 +13,15 @@
 |                                                                                                                                   |
 
 ---
-
 ## v2.11.52
 
-Fixed some issues with bamboo like blocks causing missing models
+### FIXES: 
+- **Woodworks** (C): Added missing LANG & Missing BlockItem for `closet` & `trapped_closet` - [#1326](https://github.com/MehVahdJukaar/WoodGood/issues/1326)
+- **Every Compat** (C): 
+  - Improved Chest texture generation so it will re-generate textures when "F3 + T" is used
+  - Fixed some issues with bamboo like blocks causing missing models
+
+---
 
 ## v2.11.51
 
