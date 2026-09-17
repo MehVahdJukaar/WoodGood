@@ -104,7 +104,7 @@ public class ResourcesUtils {
                 });
             });
         } catch (Exception e) {
-            EveryCompat.LOGGER.error("Could not find blockstate definition for {}", baseId);
+            EveryCompat.LOGGER.error("Could not find blockstate definition for {}", baseId, e);
         }
 
     }
@@ -185,7 +185,7 @@ public class ResourcesUtils {
                 });
             });
         } catch (Exception e) {
-            EveryCompat.LOGGER.error("Could not find item model for {}", oakItem);
+            EveryCompat.LOGGER.error("Could not find item model for {}", oakItem, e);
         }
 
 

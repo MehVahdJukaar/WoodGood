@@ -54,6 +54,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.*;
+import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.IsBambooLike;
 import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.isKnownVanillaWood;
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.getATagOrCreateANew;
@@ -329,8 +330,8 @@ public class WoodworksModule extends EveryCompatModule {
         super.addDynamicServerResources(executor);
         executor.accept((manager, sink) -> {
 
-            for (WoodType wood : WoodTypeRegistry.INSTANCE) {
-                if (isKnownVanillaWood(wood)) continue;
+            forEachSafely("sawmill recipe", WoodTypeRegistry.INSTANCE, wood -> {
+                if (isKnownVanillaWood(wood)) return;
 
                 // The generation of ladders get skipped due to some mods already have ladders and will be used as an alt
                 Item getLadder = ladders.items.get(wood);
@@ -357,7 +358,7 @@ public class WoodworksModule extends EveryCompatModule {
                 createSawmillRecipe(FENCE, PLANKS, wood.getItemOfThis(FENCE), sink, manager, wood);
                 createSawmillRecipe(SLAB, PLANKS, wood.getItemOfThis(SLAB), sink, manager, wood);
                 createSawmillRecipe(STAIRS, PLANKS, wood.getItemOfThis(STAIRS), sink, manager, wood);
-            }
+            });
         });
     }
 
@@ -426,7 +427,7 @@ public class WoodworksModule extends EveryCompatModule {
     public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicClientResources(executor);
         executor.accept((manager, sink) ->
-            trappedChests.blocks.forEach((wood, block) -> {
+            forEachSafely("chest texture", trappedChests.blocks, (wood, block) -> {
                 // mods like environmental already ship chest textures for their own wood. reuse those over a recolor
                 if (copyModProvidedChestTextures(sink, manager, shortenedId(), wood)) return;
 
@@ -458,7 +459,7 @@ public class WoodworksModule extends EveryCompatModule {
         );
 
         executor.accept((manager, sink) ->
-            trappedCloset.blocks.forEach((wood, block) -> {
+            forEachSafely("closet texture", trappedCloset.blocks, (wood, block) -> {
                 // SINGLE
                 generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/bamboo/normal"),

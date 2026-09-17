@@ -26,12 +26,12 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import xerca.xercamod.common.block.BlockCarvedLog;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
+import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 
 //SUPPORT: NOT-AVAILABLE
 public class XercaModule extends EveryCompatModule {
@@ -205,7 +205,7 @@ public class XercaModule extends EveryCompatModule {
 
         executor.accept((manager, sink) -> {
 
-            carved1.items.forEach((wood, item) -> {
+            forEachSafely("carving recipe", carved1.items, (wood, item) -> {
                 Block strippedLog = wood.getBlockOfThis("stripped_log");
 
                 if (Objects.nonNull(strippedLog))
@@ -244,8 +244,11 @@ public class XercaModule extends EveryCompatModule {
         // pathBuilder: carving/x/namespace/
         String pathBuilder = this.shortenedId() + "/" + wood.getNamespace() + "/";
         String recipeName = wood.getTypeName() + "_log_from_" + wood.getTypeName() + "_log_carving";
+        if (output == null) return;
+        //not all woods have one
+        Item strippedLog = wood.getItemOfThis("stripped_log");
 
-        if (output == Objects.requireNonNull(wood.getBlockOfThis("stripped_log")).asItem()) {
+        if (output == strippedLog) {
             recipeName += "stripped_" + recipeName;
         }
         else {
@@ -253,7 +256,7 @@ public class XercaModule extends EveryCompatModule {
             recipeName += "carved_" + wood.getTypeName() + "_" + num;
 
             // IF statement
-            recipeName += (input == Objects.requireNonNull(wood.getBlockOfThis("stripped_log")).asItem())
+            recipeName += (input == strippedLog)
                     ? "_from_stripped_" + wood.getTypeName() + "_log_carving"
                     : "_from_" + wood.getTypeName() + "_log_carving";
         }
@@ -310,7 +313,7 @@ public class XercaModule extends EveryCompatModule {
                     underTextures.addProperty("particle",  woodType.getNamespace() + log_topPath);
 
                     sink.addJson(EveryCompat.res("block/carved_wood/" + filenameBuilder), model, ResType.MODELS);
-                } catch (IOException e) {
+                } catch (Exception e) {
                     EveryCompat.LOGGER.error("Failed to get MODEL file @ {} : {}",modelLocation, e);
                 }
             }

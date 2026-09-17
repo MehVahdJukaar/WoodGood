@@ -4,6 +4,7 @@ import net.mehvahdjukaar.every_compat.ECPlatStuff;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection;
+import net.mehvahdjukaar.moonlight.api.misc.IProgressTracker;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicServerResourceProvider;
@@ -12,6 +13,7 @@ import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
@@ -62,71 +64,73 @@ public class ServerDynamicResourcesHandler extends DynamicServerResourceProvider
     }
 
     @Override
+    public void reload(ResourceManager manager, IProgressTracker reporter) {
+        TaskRunnerWithFailureCollection.run("Server dynamic resources generation", () -> super.reload(manager, reporter));
+    }
+
+    @Override
     public void regenerateDynamicAssets(Consumer<ResourceGenTask> executor) {
-        TaskRunnerWithFailureCollection.run("Server dynamic resources generation", () -> {
-            List<ResourceGenTask> tasks = new ArrayList<>();
-            EveryCompat.forAllModules(m -> m.addDynamicServerResources(tasks::add));
-            ECPlatStuff.addPlatformServerResources(tasks::add);
+        List<ResourceGenTask> tasks = new ArrayList<>();
+        EveryCompat.forAllModules(m -> m.addDynamicServerResources(tasks::add));
+        ECPlatStuff.addPlatformServerResources(tasks::add);
 
-            int minBatches = Runtime.getRuntime().availableProcessors();
-            int maxBatches = tasks.size() / Runtime.getRuntime().availableProcessors();
-            int batchSize = Math.max(minBatches, maxBatches);
+        int cores = Runtime.getRuntime().availableProcessors();
+        int batchSize = Math.max(1, (tasks.size() + cores - 1) / cores);
 
-            //submit tasks in batches. to do so split that list in sizes of that batchSize then submit a task to the executor where that list is iterated and executed
-            EveryCompat.LOGGER.info("Every Compat is starting dynamic server resources generation tasks: {} in batches of {}", tasks.size(), batchSize);
-            TaskRunnerWithFailureCollection failures = TaskRunnerWithFailureCollection.active();
-            for (int i = 0; i < tasks.size(); i += batchSize) {
-                int batchStart = i;
-                int end = Math.min(i + batchSize, tasks.size());
-                var subList = tasks.subList(i, end);
-                executor.accept((resourceManager, resourceSink) -> {
-                    for (int j = 0; j < subList.size(); j++) {
-                        ResourceGenTask task = subList.get(j);
-                        int taskIndex = batchStart + j;
-                        failures.runSafely("server resource task", () -> "task #" + taskIndex,
-                                () -> task.accept(resourceManager, resourceSink));
+        //submit tasks in batches. to do so split that list in sizes of that batchSize then submit a task to the executor where that list is iterated and executed
+        EveryCompat.LOGGER.info("Every Compat is starting dynamic server resources generation tasks: {} in batches of {}", tasks.size(), batchSize);
+        TaskRunnerWithFailureCollection failures = TaskRunnerWithFailureCollection.active();
+        for (int i = 0; i < tasks.size(); i += batchSize) {
+            int batchStart = i;
+            int end = Math.min(i + batchSize, tasks.size());
+            var subList = tasks.subList(i, end);
+            executor.accept((resourceManager, resourceSink) -> failures.runAttached(() -> {
+                for (int j = 0; j < subList.size(); j++) {
+                    ResourceGenTask task = subList.get(j);
+                    int taskIndex = batchStart + j;
+                    failures.runSafely("server resource task", () -> "task #" + taskIndex,
+                            () -> task.accept(resourceManager, resourceSink));
+                }
+            }));
+        }
+
+        if (ECConfigs.GENERATE_BLOCKTYPE_TAGS.get()) {
+            executor.accept((resourceManager, resourceSink) -> {
+                for (var r : BlockSetAPI.getRegistries()) {
+                    String typeName = r.typeName();
+                    for (BlockType blockType : r.getValues()) {
+                        failures.runSafely("block type tag", blockType.getId()::toString, () -> {
+                            ResourceLocation tagId = blockType.getId().withPrefix(typeName + "/");
+                            SimpleTagBuilder itemTag = SimpleTagBuilder.of(tagId);
+                            SimpleTagBuilder blockTag = SimpleTagBuilder.of(tagId);
+                            boolean isItemAddedToTag = false;
+                            boolean isBlockAddedToTag = false;
+                            for (Map.Entry<String, Object> entrySet : blockType.getChildren()) {
+                                String key = entrySet.getKey();
+                                if (key.equals("diagonalfences:fence")) continue; //dumb. if these are tagged their mod crashes
+
+                                Block block = blockType.getBlockOfThis(key);
+                                if (block != null) {
+                                    isBlockAddedToTag = true;
+                                    blockTag.addEntry(block);
+                                }
+                                Item item = blockType.getItemOfThis(key);
+                                if (item != null) {
+                                    isItemAddedToTag = true;
+                                    itemTag.addEntry(item);
+                                }
+                            }
+                            if (isBlockAddedToTag) {
+                                resourceSink.addTag(blockTag, Registries.BLOCK);
+                            }
+                            if (isItemAddedToTag) {
+                                resourceSink.addTag(itemTag, Registries.ITEM);
+                            }
+                        });
                     }
-                });
-            }
-
-            if (ECConfigs.GENERATE_BLOCKTYPE_TAGS.get()) {
-                executor.accept((resourceManager, resourceSink) -> {
-                    for (var r : BlockSetAPI.getRegistries()) {
-                        String typeName = r.typeName();
-                        for (BlockType blockType : r.getValues()) {
-                            failures.runSafely("block type tag", blockType.getId()::toString, () -> {
-                                ResourceLocation tagId = blockType.getId().withPrefix(typeName + "/");
-                                SimpleTagBuilder itemTag = SimpleTagBuilder.of(tagId);
-                                SimpleTagBuilder blockTag = SimpleTagBuilder.of(tagId);
-                                boolean isItemAddedToTag = false;
-                                boolean isBlockAddedToTag = false;
-                                for (Map.Entry<String, Object> entrySet : blockType.getChildren()) {
-                                    String key = entrySet.getKey();
-                                    if (key.equals("diagonalfences:fence")) continue; //dumb. if these are tagged their mod crashes
-
-                                    Block block = blockType.getBlockOfThis(key);
-                                    if (block != null) {
-                                        isBlockAddedToTag = true;
-                                        blockTag.addEntry(block);
-                                    }
-                                    Item item = blockType.getItemOfThis(key);
-                                    if (item != null) {
-                                        isItemAddedToTag = true;
-                                        itemTag.addEntry(item);
-                                    }
-                                }
-                                if (isBlockAddedToTag) {
-                                    resourceSink.addTag(blockTag, Registries.BLOCK);
-                                }
-                                if (isItemAddedToTag) {
-                                    resourceSink.addTag(itemTag, Registries.ITEM);
-                                }
-                            });
-                        }
-                    }
-                });
-            }
-        });
+                }
+            });
+        }
     }
 
 }

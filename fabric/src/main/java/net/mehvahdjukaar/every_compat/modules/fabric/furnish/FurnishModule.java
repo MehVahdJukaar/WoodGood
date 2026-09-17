@@ -26,6 +26,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import java.util.List;
 import java.util.function.Consumer;
 
+import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.TRAPDOOR;
 
@@ -304,8 +305,8 @@ public class FurnishModule extends EveryCompatModule {
 
         executor.accept((manager, handler) -> {
 
-            for (WoodType woodType : WoodTypeRegistry.INSTANCE) {
-                if (HardcodedBlockType.isKnownVanillaWood(woodType)) continue;
+            forEachSafely("furniture tag", WoodTypeRegistry.INSTANCE, woodType -> {
+                if (HardcodedBlockType.isKnownVanillaWood(woodType)) return;
 
                 boolean isTagCreated = false;
                 SimpleTagBuilder itemTag = SimpleTagBuilder.of(modRes(woodType.getTypeName() + "_" + "furniture"));
@@ -321,7 +322,7 @@ public class FurnishModule extends EveryCompatModule {
                     handler.addTag(itemTag, Registries.ITEM);
                     handler.addTag(itemTag, Registries.BLOCK);
                 }
-            }
+            });
         });
     }
 

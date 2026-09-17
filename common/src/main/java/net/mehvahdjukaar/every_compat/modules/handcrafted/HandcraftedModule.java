@@ -25,6 +25,8 @@ import net.minecraft.world.level.block.Blocks;
 import java.io.FileNotFoundException;
 import java.util.function.Consumer;
 
+import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
+
 //SUPPORT: v4.0.2+
 public class HandcraftedModule extends EveryCompatModule {
 
@@ -333,7 +335,7 @@ public class HandcraftedModule extends EveryCompatModule {
 
         executor.accept((manager, sink) -> {
 
-            counter.blocks.forEach((woodType, block) -> {
+            forEachSafely("counter model", counter.blocks, (woodType, block) -> {
                 for (int num = 1; num < 4; num++) {
 
                     //ID: everycomp:block/ shortenedId / namespace / counter/ TYPE_ counter_ num

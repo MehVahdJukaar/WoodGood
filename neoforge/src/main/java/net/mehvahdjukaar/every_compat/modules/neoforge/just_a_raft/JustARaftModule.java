@@ -19,7 +19,6 @@ import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -85,7 +84,7 @@ public class JustARaftModule extends EveryCompatModule {
 
                     sink.addJson(EveryCompat.res(newRecipeLoc), recipe, ResType.RECIPES);
 
-                } catch (IOException e) {
+                } catch (Exception e) {
                     EveryCompat.LOGGER.error("Failed to generate recipes for {} : {}", item, e);
                 }
             });

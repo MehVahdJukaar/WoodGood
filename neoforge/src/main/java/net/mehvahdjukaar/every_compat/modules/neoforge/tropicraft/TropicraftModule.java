@@ -18,7 +18,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.tropicraft.core.common.block.BoardwalkBlock;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -72,7 +71,7 @@ public class TropicraftModule extends EveryCompatModule {
 
                     sink.addJson(EveryCompat.res(newPath), recipe, ResType.RECIPES);
 
-                } catch (IOException e) {
+                } catch (Exception e) {
                     EveryCompat.LOGGER.error("Failed to generate the boardwalk recipe for {}: {}", wood.getId(), e);
                 }
             });

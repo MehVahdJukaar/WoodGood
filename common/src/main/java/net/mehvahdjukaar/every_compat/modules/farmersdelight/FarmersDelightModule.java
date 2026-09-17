@@ -40,6 +40,7 @@ import java.util.function.Consumer;
 import static java.util.Map.entry;
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
 import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.IsBambooLike;
+import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
 ///SUPPORT: FABRIC-v3.3.3+ | NEOFORGE-v1.3.2+
@@ -97,8 +98,8 @@ public class FarmersDelightModule extends EveryCompatModule {
 
         executor.accept((manager, sink) -> {
             // Creating cutting_board recipes
-            for (WoodType woodType : WoodTypeRegistry.INSTANCE) {
-                if (HardcodedBlockType.isKnownVanillaWood(woodType)) continue;
+            forEachSafely("cutting recipe", WoodTypeRegistry.INSTANCE, woodType -> {
+                if (HardcodedBlockType.isKnownVanillaWood(woodType)) return;
 
                 // Skip if one of Farmer's-Cutting compat mods is installed
                 String shortenedRecipeId = COMPAT_RECIPE_MODS.getOrDefault(woodType.getNamespace(), "none");
@@ -117,14 +118,14 @@ public class FarmersDelightModule extends EveryCompatModule {
                     createSalvagingRecipe("furniture", woodType, sink, manager);
                     createSalvagingRecipe(CHEST_BOAT, woodType, sink, manager);
                 }
-            }
+            });
         });
     }
 
     public void createCuttingRecipe(String recipeType, Block input, Block output,
                                     WoodType targetType, ResourceSink sink, ResourceManager manager) {
 
-        if ((input == null && output == null) || IsBambooLike(targetType)) return;
+        if (input == null || output == null || IsBambooLike(targetType)) return;
 
         String recipeLocation = (IsBambooLike(targetType))
                 ? modRes("cutting/bamboo_block").toString()

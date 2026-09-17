@@ -31,6 +31,7 @@ import java.nio.file.FileSystemNotFoundException;
 import java.util.Objects;
 import java.util.function.Consumer;
 
+import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
 //SUPPORT: v1.20-8
@@ -89,7 +90,7 @@ public class BewitchmentModule extends EveryCompatModule {
                         JsonObject recipe_1 = RPUtils.deserializeJson(recipeStream_1);
                         JsonObject recipe_2 = RPUtils.deserializeJson(recipeStream_2);
 
-                        bark.items.forEach((wood, item) -> {
+                        forEachSafely("athame stripping recipe", bark.items, (wood, item) -> {
                             // Replacing "oak" in the path
                             String prefix = shortenedId() + "/" + wood.getNamespace() + "/";
 

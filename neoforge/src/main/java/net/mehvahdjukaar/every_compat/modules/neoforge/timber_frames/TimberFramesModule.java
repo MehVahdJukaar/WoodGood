@@ -28,7 +28,6 @@ import net.rasanovum.timberframes.block.OakTimberFrameBetaBlock;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
@@ -139,7 +138,7 @@ public class TimberFramesModule extends EveryCompatModule {
                         String newPath = shortenedId() + "/" + wood.getAppendableId() + path;
 
                         sink.addJson(EveryCompat.res(newPath), mcmeta, ResType.BLOCK_MCMETA);
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         EveryCompat.LOGGER.error("Failed to get {}'s MCMETA : {}", resLoc.toString(), e);
                     }
                 }

@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.IsBambooLike;
+import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.getATagOrCreateANew;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.PLANKS;
 
@@ -68,11 +69,11 @@ public class CuriositiesModule extends EveryCompatModule {
 
         if (PlatHelper.isModLoaded("woodworks")) {
             executor.accept((manager, sink) -> {
-                for (WoodType woodType : fancied_planks.blocks.keySet()) {
+                forEachSafely("sawmill recipe", fancied_planks.blocks.keySet(), woodType -> {
 
                     createSawmillRecipe(PLANKS, "logs", sink, manager, woodType);
                     createSawmillRecipe(PLANKS, PLANKS, sink, manager, woodType);
-                }
+                });
             });
         }
     }

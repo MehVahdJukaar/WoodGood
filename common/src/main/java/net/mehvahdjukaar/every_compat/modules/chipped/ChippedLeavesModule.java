@@ -392,7 +392,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
 
                     if (!(width == 16) || !(height == 16)) {
                         EveryCompat.LOGGER.error("ChippedLeavesModule - {}'s texture is a {}x{} for {}", Utils.getID(leavesType.leaves), leavesTexture.imageWidth(), leavesTexture.imageHeight(), targetResLoc.getPath());
-                        return;
+                        continue;
                     }
                 }
                 else currentTexture = leavesTexture;
@@ -444,7 +444,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
 
                     if (!(width == 16) || !(height == 16)) {
                         EveryCompat.LOGGER.error("ChippedLeavesModule - {}'s texture is a {}x{} for frosted_oak_leaves_top", Utils.getID(leavesType.leaves), leavesTexture.imageWidth(), leavesTexture.imageHeight());
-                        return;
+                        continue;
                     }
                 }
                 else currentTexture = leavesTexture;

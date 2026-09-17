@@ -13,6 +13,11 @@
 |                                                                                                                                   |
 
 ---
+
+## v2.11.52
+
+Fixed some issues with bamboo like blocks causing missing models
+
 ## v2.11.51
 
 ### FIXED:

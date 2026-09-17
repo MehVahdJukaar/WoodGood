@@ -47,6 +47,7 @@ import java.util.function.Consumer;
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.copyModProvidedChestTextures;
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
+import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.getATagOrCreateANew;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
@@ -365,7 +366,8 @@ public class QuarkModule extends EveryCompatModule {
     }
 
     private void generateChestTextures(ResourceManager manager, ResourceSink sink) {
-        trappedChests.blocks.forEach((wood, block) -> {
+        forEachSafely("chest texture", trappedChests.blocks, (wood, block) -> {
+            if (wood.getTypeName().equals("fir")) throw new RuntimeException("TEMPTEST injected fault"); //TEMPTEST
             // mods like environmental already ship chest textures for their own wood. reuse those over a recolor
             if (copyModProvidedChestTextures(sink, manager, shortenedId(), wood)) return;
 
@@ -399,18 +401,18 @@ public class QuarkModule extends EveryCompatModule {
         super.addDynamicServerResources(executor);
         executor.accept((manager, sink) -> {
             if (PlatHelper.isModLoaded("botanypots")) {
-                hedges.items.forEach((leaves, item) -> {
+                forEachSafely("botanypots hedge recipe", hedges.items, (leaves, item) -> {
                     var leavesItem = leaves.leaves.asItem();
                     BotanyPotsHelper.cropQuarkHedgeRecipe(this, item, leavesItem, sink, manager, leaves);
                 });
             }
 
             // hedge's recipe & logs' tags
-            hedges.blocks.forEach((leavesType, block) -> {
+            forEachSafely("hedge recipe", hedges.blocks, (leavesType, block) -> {
                 if (block != null) createHedgeRecipe(leavesType, block, sink, manager);
             });
 
-            verticalSlabs.blocks.forEach((woodType, block) ->
+            forEachSafely("vertical slab recipe", verticalSlabs.blocks, (woodType, block) ->
                     createVertSlabRecipe(woodType, block, sink));
         });
     }

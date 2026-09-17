@@ -28,12 +28,12 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.PushReaction;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.createAndAddCustomTags;
 
 ///SUPPORT: v0.6+
@@ -127,16 +127,14 @@ public abstract class RegionsUnexploredModuleAbstract extends EveryCompatModule 
                 //Tagging the planks as ingredient to get painted_planks
                 createAndAddCustomTags(ResourceLocation.withDefaultNamespace("planks"), sink, woodType.planks);
                 createAndAddCustomTags(ResourceLocation.parse("forge:planks"), sink, woodType.planks);
-
-                branches.blocks.forEach((wt, block) -> {
-                    String newRecipe = recipe.replace("[BRANCH]", Utils.getID(block).toString());
-
-                    sink.addBytes(EveryCompat.res(wt.createPathWith(shortenedId(), "stick_from", "branch")),
-                            newRecipe.getBytes(), ResType.RECIPES);
-
-                });
             }
 
+            forEachSafely("branch recipe", branches.blocks, (wt, block) -> {
+                String newRecipe = recipe.replace("[BRANCH]", Utils.getID(block).toString());
+
+                sink.addBytes(EveryCompat.res(wt.createPathWith(shortenedId(), "stick_from", "branch")),
+                        newRecipe.getBytes(), ResType.RECIPES);
+            });
         });
 
     }
@@ -177,11 +175,11 @@ public abstract class RegionsUnexploredModuleAbstract extends EveryCompatModule 
                             return recoloredITEM;
                         });
 
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         EveryCompat.LOGGER.error("Failed to get Log Texture for {} : {}", block, e);
                     }
                 });
-            } catch (IOException e) {
+            } catch (Exception e) {
                 EveryCompat.LOGGER.error("Failed to get Branch Item Texture for ", e);
             }
 
@@ -227,11 +225,11 @@ public abstract class RegionsUnexploredModuleAbstract extends EveryCompatModule 
                                 return respriterMiddle.recolor(logSidePalette);
                             }
                         });
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         EveryCompat.LOGGER.error("Failed to get texture for {} : {}", block.toString(), e.getMessage());
                     }
                 });
-            } catch (IOException e) {
+            } catch (Exception e) {
                 EveryCompat.LOGGER.error("Failed to open textures for: {}", e.getMessage());
             }
 

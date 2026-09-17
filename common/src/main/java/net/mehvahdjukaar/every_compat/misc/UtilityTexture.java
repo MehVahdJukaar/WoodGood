@@ -119,7 +119,7 @@ public class UtilityTexture {
                         if (!(width == 16) || !(height == 16)) {
                             EveryCompat.LOGGER.error("ChippedLogModule - {}'s texture is a {}x{} for {}", Utils.getID(woodType.log), logTexture.imageWidth(), logTexture.imageHeight(), baseTextureLoc.getPath());
                             sink.addTextureIfNotPresent(manager, newPath, baseTexture::makeCopy);
-                            return;
+                            continue;
                         }
                     }
                     else currentLogTexture = logTexture;
@@ -178,7 +178,7 @@ public class UtilityTexture {
                         if (!(width == 16) || !(height == 16)) {
                             EveryCompat.LOGGER.error("ChippedLogModule - {}'s texture is a {}x{} for {}", Utils.getID(woodType.log), logTexture.imageWidth(), logTexture.imageHeight(), baseTextureLoc.getPath());
                             sink.addTextureIfNotPresent(manager, newResLoc, baseTexture::makeCopy);
-                            return;
+                            continue;
                         }
                     }
                     else currentLogOverlay = logTexture.makeCopy();

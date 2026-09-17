@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.function.Consumer;
 
+import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 import static net.mehvahdjukaar.every_compat.misc.UtilityMisc.doChildrenExistFor;
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.createAndAddCustomTags;
 
@@ -142,7 +143,7 @@ public class WilderWildModule extends EveryCompatModule {
         super.addDynamicServerResources(executor);
 
         executor.accept((manager, sink) -> {
-            hollow_logs.blocks.forEach((wood, block) -> {
+            forEachSafely("hollowed log recipe", hollow_logs.blocks, (wood, block) -> {
                 // Variables
                 ResourceLocation recipeLoc = ResType.RECIPES.getPath("wilderwild:oak_planks_from_hollowed");
                 ResourceLocation newRecipeLoc = EveryCompat.res(wood.getTypeName() + "_planks_from_hollowed");

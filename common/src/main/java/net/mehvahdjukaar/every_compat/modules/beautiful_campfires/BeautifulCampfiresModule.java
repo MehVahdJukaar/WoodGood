@@ -42,6 +42,7 @@ import java.io.InputStream;
 import java.util.function.Consumer;
 import java.util.function.ToIntFunction;
 
+import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.getATagOrCreateANew;
 
 //SUPPORT: v1.0.2+
@@ -114,10 +115,10 @@ public class BeautifulCampfiresModule extends EveryCompatModule {
             ResourceLocation campfireLoc = modRes("acacia_campfire");
             ResourceLocation soulCampfireLoc = modRes("acacia_soul_campfire");
 
-            campfires.blocks.forEach((wood, block) ->{
+            forEachSafely("campfire recipe", campfires.blocks, (wood, block) ->{
+                Block soulCampfire = soul_campfires.blocks.get(wood);
                 createRecipe("campfire", wood, block, campfireLoc, sink, manager);
-                createRecipe("soul_campfire", wood, soul_campfires.blocks.get(wood), soulCampfireLoc,
-                        sink, manager);
+                if (soulCampfire != null) createRecipe("soul_campfire", wood, soulCampfire, soulCampfireLoc, sink, manager);
 
                 if (PlatHelper.isModLoaded("toughasnails")) {
                     SimpleTagBuilder warmingTag = SimpleTagBuilder.of(ResourceLocation.parse("toughasnails:heating_blocks"));
@@ -127,9 +128,11 @@ public class BeautifulCampfiresModule extends EveryCompatModule {
                     sink.addTag(warmingTag, Registries.BLOCK);
                     sink.addTag(warmingTag, Registries.ITEM);
 
-                    coolingTag.addEntry(soul_campfires.blocks.get(wood));
-                    sink.addTag(coolingTag, Registries.BLOCK);
-                    sink.addTag(coolingTag, Registries.ITEM);
+                    if (soulCampfire != null) {
+                        coolingTag.addEntry(soulCampfire);
+                        sink.addTag(coolingTag, Registries.BLOCK);
+                        sink.addTag(coolingTag, Registries.ITEM);
+                    }
                 }
             });
 
@@ -154,7 +157,7 @@ public class BeautifulCampfiresModule extends EveryCompatModule {
             // Adding to resources
             sink.addJson(EveryCompat.res(woodType.createPathWith(shortenedId(), recipeName)), recipe, ResType.RECIPES);
         }
-        catch (IOException e) {
+        catch (Exception e) {
             EveryCompat.LOGGER.error("Failed to generate the {} recipe for {} : {}", recipeName, woodType.getId(), e);
         }
 
@@ -200,7 +203,7 @@ public class BeautifulCampfiresModule extends EveryCompatModule {
                         }
                     });
 
-                } catch (IOException e) {
+                } catch (Exception e) {
                     EveryCompat.LOGGER.error("Failed to open log/plank texture file: ", e);
                 }
             });

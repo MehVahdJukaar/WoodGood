@@ -2,12 +2,15 @@ package net.mehvahdjukaar.every_compat.misc;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.api.set.BlockType;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 /**
@@ -46,7 +49,18 @@ public final class TaskRunnerWithFailureCollection {
         }
     }
 
-    public void record(String context, Supplier<String> item, Throwable error) {
+    public void runAttached(Runnable action) {
+        TaskRunnerWithFailureCollection previous = ACTIVE.get();
+        ACTIVE.set(this);
+        try {
+            action.run();
+        } finally {
+            if (previous == null) ACTIVE.remove();
+            else ACTIVE.set(previous);
+        }
+    }
+
+    public synchronized void record(String context, Supplier<String> item, Throwable error) {
         if (disabled) {
             EveryCompat.LOGGER.error("[{}] {}: {}", context, item.get(), error.getMessage(), error);
             if (PlatHelper.isDev()) {
@@ -64,9 +78,21 @@ public final class TaskRunnerWithFailureCollection {
 
         if (group.count == 1) {
             EveryCompat.LOGGER.error("[{}] {}: {}", context, item.get(), error.getMessage(), error);
-            if (PlatHelper.isDev()) {
+            if (false && PlatHelper.isDev()) { //TEMPTEST
                 throw error instanceof RuntimeException re ? re : new RuntimeException(error);
             }
+        }
+    }
+
+    public static <T extends BlockType, V> void forEachSafely(String context, Map<T, V> entries, BiConsumer<T, V> action) {
+        TaskRunnerWithFailureCollection failures = active();
+        entries.forEach((type, v) -> failures.runSafely(context, type.getId()::toString, () -> action.accept(type, v)));
+    }
+
+    public static <T extends BlockType> void forEachSafely(String context, Iterable<T> types, Consumer<T> action) {
+        TaskRunnerWithFailureCollection failures = active();
+        for (T type : types) {
+            failures.runSafely(context, type.getId()::toString, () -> action.accept(type));
         }
     }
 

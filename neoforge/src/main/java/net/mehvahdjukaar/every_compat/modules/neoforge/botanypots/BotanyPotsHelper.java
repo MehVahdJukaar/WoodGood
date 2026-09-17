@@ -35,6 +35,7 @@ public class BotanyPotsHelper {
 
         } catch (Exception e) {
             EveryCompat.LOGGER.error("{BotanyPots Helper} crop_quarkhedge_recipe(): {}", String.valueOf(e));
+            return;
         }
 
         String filenameBuilder = "_from_quark_hedge_crop";
