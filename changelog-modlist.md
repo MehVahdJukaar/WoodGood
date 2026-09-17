@@ -26,52 +26,53 @@
 
 </td><td valign="top">
 
-| MODS                                       | STATUS |
-|--------------------------------------------|:------:|
-| Another Furniture                          |   🟩   | 
-| Architect's Palette                        |   🟩   |
-| Beauitful Campfires                        |   🟩   | 
-| Botany Pot                                 |   🟩   | 
-| Bountiful Fares                            |   🟡   |
-| Building But Better                        |   ❔   |
-| Camp Chair                                 |   ❔   |
-| Carved Wood                                |   🟡   | 
-| Carpentry & Chisels                        |   🟡   | 
-| Chipped                                    |   🟩   | 
-| Coail Pillar                               |   🟩   | 
-| Chopper's Delight                          |   🟡   | 
-| Corail Pillar                              |  🟩NF  | 
-| Dawn Of Time                               |   🟩   |
-| Decorative Blocks Reborn                   |   🟩   | 
-| Dramatic Doors                             |   🟩   | 
-| Dramatic Doors' <br>Supported Macaw's Door |   🟩   |
-| Envelope                                   |   🟡   |
-| Farmer's Delight                           |   🟩   |
-| Friends & Foes                             |   🟩   |
-| Furnish                                    |   🟩   |
-| Guita's Woodworks                          |   🟡   |
-| Handcrafted                                |   🟩   |
-| Hearth And Home                            |   ❔   |
-| Infinity Buttons                           |   ❔   |
-| LieOnLion's More Crafting Tables           |   🟩   |
-| LieOnLion's More Chest Variant             |   🟩   |
-| Macaw's Mods                               |   🟩   |
-| More Beautiful Torches                     |   🟩   |
-| MrCrayfish's Backpacked                    |   🟩   |
-| MrCrayfish's Mighty Mail                   |   🟩   |
-| MrCrayfish's Refurbished Furniture         |   🟩   |
-| Regions Unexplored                         |   🟩   |
-| Rechiseled                                 |   🟩   |
-| Storage Delight                            |   🟡   |
-| Storage Drawers                            |   🟩   |
-| The New Shutter aka Launch's Shutter       |   🟩   |
-| The Twilight Foreset                       |   🟩   |
-| Top Table Crafting                         |   ❔   |
-| Twigs                                      |   🟩   |
-| Unusual End                                |   🟡   |
-| Valhelsia Furniture                        |   🟩   |
-| \[Let's Do] Hearth & Timber                |   🟡   |
-|                                            |        |
+| MODS                                                | STATUS |
+|-----------------------------------------------------|:------:|
+| Another Furniture                                   |   🟩   | 
+| Architect's Palette                                 |   🟩   |
+| Beauitful Campfires                                 |   🟩   | 
+| Botany Pot                                          |   🟩   | 
+| Bountiful Fares                                     |   🟡   |
+| Building But Better                                 |   ❔   |
+| Camp Chair                                          |   ❔   |
+| Carved Wood                                         |   🟡   | 
+| Carpentry & Chisels                                 |   🟡   | 
+| Chipped                                             |   🟩   | 
+| Coail Pillar                                        |   🟩   | 
+| Chopper's Delight                                   |   🟡   | 
+| Corail Pillar                                       |  🟩NF  | 
+| Dawn Of Time                                        |   🟩   |
+| Decorative Blocks Reborn                            |   🟩   | 
+| Dramatic Doors                                      |   🟩   | 
+| Dramatic Doors' <br>Supported Macaw's Door          |   🟩   |
+| Envelope                                            |   🟡   |
+| Farmer's Delight                                    |   🟩   |
+| Friends & Foes                                      |   🟩   |
+| Furnish                                             |   🟩   |
+| Guita's Woodworks                                   |   🟡   |
+| Handcrafted                                         |   🟩   |
+| Hearth And Home                                     |   ❔   |
+| Infinity Buttons                                    |   ❔   |
+| LieOnLion's More Crafting Tables                    |   🟩   |
+| LieOnLion's More Chest Variant                      |   🟩   |
+| Macaw's Mods                                        |   🟩   |
+| More Beautiful Torches                              |   🟩   |
+| MrCrayfish's Backpacked                             |   🟩   |
+| MrCrayfish's Mighty Mail                            |   🟩   |
+| MrCrayfish's Refurbished Furniture                  |   🟩   |
+| Nosiphus Furniture Mod + MrCrayFish's Furniture Mod |   🟡   |
+| Regions Unexplored                                  |   🟩   |
+| Rechiseled                                          |   🟩   |
+| Storage Delight                                     |   🟡   |
+| Storage Drawers                                     |   🟩   |
+| The New Shutter aka Launch's Shutter                |   🟩   |
+| The Twilight Foreset                                |   🟩   |
+| Top Table Crafting                                  |   ❔   |
+| Twigs                                               |   🟩   |
+| Unusual End                                         |   🟡   |
+| Valhelsia Furniture                                 |   🟩   |
+| \[Let's Do] Hearth & Timber                         |   🟡   |
+|                                                     |        |
 
 </td><td valign="top">
 
