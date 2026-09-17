@@ -459,29 +459,26 @@ public class WoodworksModule extends EveryCompatModule {
 
         executor.accept((manager, sink) ->
             trappedCloset.blocks.forEach((wood, block) -> {
-                setSuffix("/normal", "/trapped");
-                useCustomSuffix();
-
                 // SINGLE
                 generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/bamboo/normal"),
                         EveryCompat.res("block/abnww/chest/bamboo/normal_m"),
                         EveryCompat.res("block/abnww/chest/bamboo/normal_o"),
-                        EveryCompat.res("block/abnww/chest/bamboo/trapped_o"), 2
+                        EveryCompat.res("block/abnww/chest/bamboo/trapped_o"), 2, 0, "/normal", "/trapped"
                 );
                 // LEFT
                 generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/bamboo/normal_left"),
                         EveryCompat.res("block/abnww/chest/bamboo/normal_left_m"),
                         EveryCompat.res("block/abnww/chest/bamboo/normal_left_o"),
-                        EveryCompat.res("block/abnww/chest/bamboo/trapped_left_o"), 2
+                        EveryCompat.res("block/abnww/chest/bamboo/trapped_left_o"), 2, 0, "/normal", "/trapped"
                 );
                 // RIGHTdamn
                 generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/bamboo/normal_right"),
                         EveryCompat.res("block/abnww/chest/bamboo/normal_right_m"),
                         EveryCompat.res("block/abnww/chest/bamboo/normal_right_o"),
-                        EveryCompat.res("block/abnww/chest/bamboo/trapped_right_o"), 2
+                        EveryCompat.res("block/abnww/chest/bamboo/trapped_right_o"), 2, 0, "/normal", "/trapped"
                 );
             })
         );
