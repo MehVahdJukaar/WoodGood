@@ -367,7 +367,6 @@ public class QuarkModule extends EveryCompatModule {
 
     private void generateChestTextures(ResourceManager manager, ResourceSink sink) {
         forEachSafely("chest texture", trappedChests.blocks, (wood, block) -> {
-            if (wood.getTypeName().equals("fir")) throw new RuntimeException("TEMPTEST injected fault"); //TEMPTEST
             // mods like environmental already ship chest textures for their own wood. reuse those over a recolor
             if (copyModProvidedChestTextures(sink, manager, shortenedId(), wood)) return;
 

@@ -78,7 +78,7 @@ public final class TaskRunnerWithFailureCollection {
 
         if (group.count == 1) {
             EveryCompat.LOGGER.error("[{}] {}: {}", context, item.get(), error.getMessage(), error);
-            if (false && PlatHelper.isDev()) { //TEMPTEST
+            if (PlatHelper.isDev()) {
                 throw error instanceof RuntimeException re ? re : new RuntimeException(error);
             }
         }
