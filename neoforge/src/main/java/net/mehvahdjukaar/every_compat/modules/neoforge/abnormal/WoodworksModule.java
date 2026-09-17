@@ -1,19 +1,24 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.abnormal;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.teamabnormals.blueprint.client.BlueprintChestMaterials;
 import com.teamabnormals.blueprint.common.block.BlueprintBeehiveBlock;
 import com.teamabnormals.blueprint.common.block.BlueprintChiseledBookShelfBlock;
 import com.teamabnormals.blueprint.common.block.LeafPileBlock;
 import com.teamabnormals.woodworks.common.block.ClosetBlock;
 import com.teamabnormals.woodworks.common.block.TrappedClosetBlock;
+import com.teamabnormals.woodworks.common.block.entity.ClosetBlockEntity;
 import com.teamabnormals.woodworks.common.item.crafting.SawmillRecipe;
 import com.teamabnormals.woodworks.core.registry.WoodworksBlocks;
+import net.mehvahdjukaar.candlelight.api.ClientOnly;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.TabAddMode;
 import net.mehvahdjukaar.every_compat.common_classes.*;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
+import net.mehvahdjukaar.moonlight.api.client.ICustomItemRendererProvider;
+import net.mehvahdjukaar.moonlight.api.client.ItemStackRenderer;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
@@ -27,6 +32,9 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -49,6 +57,7 @@ import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.common.Tags;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -225,7 +234,7 @@ public class WoodworksModule extends EveryCompatModule {
                         }
                 )
                 .addCondition(WoodType::isBambooLike)
-                .addTile(getModTile("closet"))
+//                .addTile(getModTile("closet"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
                 .addTag(Tags.Blocks.CHESTS, Registries.BLOCK)
@@ -237,7 +246,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTag(ResourceLocation.parse("quark:boatable_chests"), Registries.ITEM)
                 .setTab(tab)
                 .defaultRecipe()
-                .addCustomItem((w, block, properties) -> new BlockItem(block, new Item.Properties()))
+                .addCustomItem((w, block, properties) -> new CompatClosetItem(block, new Item.Properties()))
                 .build();
         this.addEntry(closet);
 
@@ -254,7 +263,7 @@ public class WoodworksModule extends EveryCompatModule {
                         }
                 )
                 .addCondition(WoodType::isBambooLike)
-                .addTile(getModTile("trapped_closet"))
+//                .addTile(getModTile("trapped_closet"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
                 .addTag(Tags.Blocks.CHESTS, Registries.BLOCK)
@@ -266,7 +275,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTag(Tags.Items.CHESTS_TRAPPED, Registries.ITEM)
                 .setTab(tab)
                 .defaultRecipe()
-                .addCustomItem((w, block, properties) -> new BlockItem(block, new Item.Properties()))
+                .addCustomItem((w, block, properties) -> new CompatClosetItem(block, new Item.Properties()))
                 .build();
         this.addEntry(trappedCloset);
 
@@ -465,24 +474,57 @@ public class WoodworksModule extends EveryCompatModule {
                         modRes("entity/chest/bamboo/normal"),
                         EveryCompat.res("block/abnww/chest/bamboo/normal_m"),
                         EveryCompat.res("block/abnww/chest/bamboo/normal_o"),
-                        EveryCompat.res("block/abnww/chest/bamboo/trapped_o"), 2, 0, "/normal", "/trapped"
+                        EveryCompat.res("block/abnww/chest/bamboo/trapped_o"), 2, 0,
+                        "/normal", "/trapped"
                 );
                 // LEFT
                 generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/bamboo/normal_left"),
                         EveryCompat.res("block/abnww/chest/bamboo/normal_left_m"),
                         EveryCompat.res("block/abnww/chest/bamboo/normal_left_o"),
-                        EveryCompat.res("block/abnww/chest/bamboo/trapped_left_o"), 2, 0, "/normal", "/trapped"
+                        EveryCompat.res("block/abnww/chest/bamboo/trapped_left_o"), 2, 0,
+                        "/normal", "/trapped"
                 );
                 // RIGHTdamn
                 generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/bamboo/normal_right"),
                         EveryCompat.res("block/abnww/chest/bamboo/normal_right_m"),
                         EveryCompat.res("block/abnww/chest/bamboo/normal_right_o"),
-                        EveryCompat.res("block/abnww/chest/bamboo/trapped_right_o"), 2, 0, "/normal", "/trapped"
+                        EveryCompat.res("block/abnww/chest/bamboo/trapped_right_o"), 2, 0,
+                        "/normal", "/trapped"
                 );
             })
         );
+    }
+
+    public class CompatClosetItem extends BlockItem implements ICustomItemRendererProvider {
+
+        public CompatClosetItem(Block block, Properties properties) {
+            super(block, properties);
+        }
+
+        @Override
+        @ClientOnly
+        public Supplier<ItemStackRenderer> getRendererFactory() {
+            return () -> ClientProxy.getItemStackRenderer(this);
+        }
+
+        private static class ClientProxy {
+            public static @NotNull ItemStackRenderer getItemStackRenderer(CompatClosetItem ClosetItem) {
+                ClosetBlock block = (ClosetBlock) ClosetItem.getBlock();
+                return new ItemStackRenderer() {
+                    final BlockEntityRenderDispatcher renderer = Minecraft.getInstance().getBlockEntityRenderDispatcher();
+                    final ClosetBlockEntity dummy = (ClosetBlockEntity) block
+                            .newBlockEntity(BlockPos.ZERO, block.defaultBlockState());
+
+                    @Override
+                    public void renderByItem(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int i1) {
+                        renderer.renderItem(dummy, poseStack, multiBufferSource, i, i1);
+                    }
+                };
+            }
+        }
+
     }
 
 }
