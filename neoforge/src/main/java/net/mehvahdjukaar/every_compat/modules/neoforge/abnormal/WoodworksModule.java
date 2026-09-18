@@ -63,9 +63,9 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.*;
-import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.IsBambooLike;
 import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.isKnownVanillaWood;
+import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.getATagOrCreateANew;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
@@ -497,7 +497,7 @@ public class WoodworksModule extends EveryCompatModule {
         );
     }
 
-    public class CompatClosetItem extends BlockItem implements ICustomItemRendererProvider {
+    public static class CompatClosetItem extends BlockItem implements ICustomItemRendererProvider {
 
         public CompatClosetItem(Block block, Properties properties) {
             super(block, properties);
