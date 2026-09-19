@@ -42,7 +42,7 @@ public class TextureGenHelper {
 
         try (TextureImage oakPlanksTexture = TextureImage.open(manager,
                 RPUtils.findFirstBlockTextureLocation(manager, mainChildBlock))) {
-            Palette oakPlanksPalette = Palette.fromImage(oakPlanksTexture);
+//            Palette oakPlanksPalette = Palette.fromImage(oakPlanksTexture);
 
             Map<ResourceLocation, Respriter> respriters = new HashMap<>();
             Map<ResourceLocation, TextureImage> partialRespriters = new HashMap<>();
@@ -68,14 +68,15 @@ public class TextureGenHelper {
 
                         if (maskId != null) {
                             TextureImage mask;
-                            if (textureInfo.autoMask()) {
-                                if (mergePalette) {
-                                    globalPalette.addAll(oakPlanksPalette);
-                                    partialRespriters.put(textureId, main);
-                                } else {
-                                    respriters.put(textureId, Respriter.ofPalette(main, oakPlanksPalette));
-                                }
-                            } else {
+                            /// Disabled for now because autoMask() is not being used...
+//                            if (textureInfo.autoMask()) {
+//                                if (mergePalette) {
+//                                    globalPalette.addAll(oakPlanksPalette);
+//                                    partialRespriters.put(textureId, main);
+//                                } else {
+//                                    respriters.put(textureId, Respriter.ofPalette(main, oakPlanksPalette));
+//                                }
+//                            } else {
                                 mask = TextureImage.open(manager, maskId);
                                 if (mergePalette) {
                                     globalPalette.addAll(Palette.fromImage(main, mask, 0));
@@ -83,7 +84,7 @@ public class TextureGenHelper {
                                 } else {
                                     respriters.put(textureId, Respriter.masked(main, mask));
                                 }
-                            }
+//                            }
 
                         } else {
                             if (mergePalette) {
