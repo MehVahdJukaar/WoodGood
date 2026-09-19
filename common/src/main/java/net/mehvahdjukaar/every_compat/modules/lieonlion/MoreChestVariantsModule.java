@@ -30,6 +30,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
+import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 
 ///SUPPORT: FABRIC-v1.5.8+ | NEOFORGE-v1.5.9+
 public class MoreChestVariantsModule extends EveryCompatModule {
@@ -124,33 +125,32 @@ public class MoreChestVariantsModule extends EveryCompatModule {
     public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicClientResources(executor);
 
-        executor.accept((manager, sink) -> {
-            trappedChests.blocks.forEach((wood, block) -> {
+        executor.accept((manager, sink) ->
+            forEachSafely("mcv's chest texture", trappedChests.blocks, (wood, block) -> {
                 // SINGLE
                 generateChestTexture(sink, manager, shortenedId(), wood,
-                        modRes("entity/chest/acacia_chest"),
+                        modRes("entity/chest/acacia"),
                         EveryCompat.res("quark_variant_chests/oak_chest_normal_m"),
                         EveryCompat.res("quark_variant_chests/oak_chest_normal_o"),
                         null
                 );
                 // LEFT
                 generateChestTexture(sink, manager, shortenedId(), wood,
-                        modRes("entity/chest/acacia_chest_left"),
+                        modRes("entity/chest/acacia_left"),
                         EveryCompat.res("quark_variant_chests/oak_chest_left_m"),
                         EveryCompat.res("quark_variant_chests/oak_chest_left_o"),
                         null
                 );
                 // RIGHT
                 generateChestTexture(sink, manager, shortenedId(), wood,
-                        modRes("entity/chest/acacia_chest_right"),
+                        modRes("entity/chest/acacia_right"),
                         EveryCompat.res("quark_variant_chests/oak_chest_right_m"),
                         EveryCompat.res("quark_variant_chests/oak_chest_right_o"),
                         null
                 );
+            })
 
-            });
-
-        });
+        );
     }
 
 }
