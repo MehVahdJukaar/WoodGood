@@ -125,8 +125,7 @@ public class BewitchmentModule extends EveryCompatModule {
             } catch (IOException e) {
                 EveryCompat.LOGGER.error("Failed to open the recipe: ", e);
             }
-
-
         });
     }
+
 }
