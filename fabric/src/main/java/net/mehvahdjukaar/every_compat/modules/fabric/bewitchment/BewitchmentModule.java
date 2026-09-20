@@ -75,58 +75,58 @@ public class BewitchmentModule extends EveryCompatModule {
     @Override
     // RECIPES
     public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
-            super.addDynamicServerResources(executor);
-            executor.accept((manager, sink) -> {
-                        String recipePath_1 = "athame_stripping/oak_bark_from_oak_log";
-                    String recipePath_2 = "athame_stripping/oak_bark_from_oak_wood";
+        super.addDynamicServerResources(executor);
+        executor.accept((manager, sink) -> {
+            String recipePath_1 = "athame_stripping/oak_bark_from_oak_log";
+            String recipePath_2 = "athame_stripping/oak_bark_from_oak_wood";
 
-                    try (InputStream recipeStream_1 = manager.getResource(ResType.RECIPES.getPath(modRes(recipePath_1)))
-                            .orElseThrow(() -> new FileSystemNotFoundException(
-                                    "Failed to get recipe at location: " + recipePath_1)).open();
-                         InputStream recipeStream_2 = manager.getResource(ResType.RECIPES.getPath(modRes(recipePath_2)))
-                                 .orElseThrow(() -> new FileSystemNotFoundException(
-                                         "Failed to get recipe at location: " + recipePath_2)).open()
-                    ) {
-                        JsonObject recipe_1 = RPUtils.deserializeJson(recipeStream_1);
-                        JsonObject recipe_2 = RPUtils.deserializeJson(recipeStream_2);
+            try (InputStream recipeStream_1 = manager.getResource(ResType.RECIPES.getPath(modRes(recipePath_1)))
+                    .orElseThrow(() -> new FileSystemNotFoundException(
+                            "Failed to get recipe at location: " + recipePath_1)).open();
+                 InputStream recipeStream_2 = manager.getResource(ResType.RECIPES.getPath(modRes(recipePath_2)))
+                         .orElseThrow(() -> new FileSystemNotFoundException(
+                                 "Failed to get recipe at location: " + recipePath_2)).open()
+            ) {
+                JsonObject recipe_1 = RPUtils.deserializeJson(recipeStream_1);
+                JsonObject recipe_2 = RPUtils.deserializeJson(recipeStream_2);
 
-                        forEachSafely("athame stripping recipe", bark.items, (wood, item) -> {
-                            // Replacing "oak" in the path
-                            String prefix = shortenedId() + "/" + wood.getNamespace() + "/";
+                forEachSafely("bewitchment's stripping recipe", bark.items, (wood, item) -> {
+                    // Replacing "oak" in the path
+                    String prefix = shortenedId() + "/" + wood.getNamespace() + "/";
 
-                            String newPath_1 = prefix + recipePath_1.replace("oak", wood.getTypeName());
-                            String newPath_2 = prefix + recipePath_2.replace("oak", wood.getTypeName());
+                    String newPath_1 = prefix + recipePath_1.replace("oak", wood.getTypeName());
+                    String newPath_2 = prefix + recipePath_2.replace("oak", wood.getTypeName());
 
-                            // Editing recipe_1
-                            recipe_1.addProperty("log",
-                                    Utils.getID(wood.log).toString());
-                            recipe_1.addProperty("stripped_log",
-                                    Utils.getID(Objects.requireNonNull(wood.getBlockOfThis(STRIPPED_LOG))).toString());
-                            recipe_1.getAsJsonObject("result").addProperty("item",
-                                    Utils.getID(item).toString());
+                    // Editing recipe_1
+                    recipe_1.addProperty("log",
+                            Utils.getID(wood.log).toString());
+                    recipe_1.addProperty("stripped_log",
+                            Utils.getID(Objects.requireNonNull(wood.getBlockOfThis(STRIPPED_LOG))).toString());
+                    recipe_1.getAsJsonObject("result").addProperty("item",
+                            Utils.getID(item).toString());
 
-                            // Adding to Resources
-                            sink.addJson(EveryCompat.res(newPath_1), recipe_1, ResType.RECIPES);
+                    // Adding to Resources
+                    sink.addJson(EveryCompat.res(newPath_1), recipe_1, ResType.RECIPES);
 
-                            // Null check for wood - some wood mods doesn't include <type>_wood
-                            if (Objects.nonNull(wood.getBlockOfThis("wood"))) {
-                                // Editing recipe_2
-                                recipe_2.addProperty("log",
-                                        Utils.getID(Objects.requireNonNull(wood.getBlockOfThis(WOOD))).toString());
-                                recipe_2.addProperty("stripped_log",
-                                        Utils.getID(Objects.requireNonNull(wood.getBlockOfThis(STRIPPED_LOG))).toString());
-                                recipe_2.getAsJsonObject("result").addProperty("item",
-                                        Utils.getID(item).toString());
+                    // Null check for wood - some wood mods doesn't include <type>_wood
+                    if (wood.getBlockOfThis(WOOD) != null) {
+                        // Editing recipe_2
+                        recipe_2.addProperty("log",
+                                Utils.getID(Objects.requireNonNull(wood.getBlockOfThis(WOOD))).toString());
+                        recipe_2.addProperty("stripped_log",
+                                Utils.getID(Objects.requireNonNull(wood.getBlockOfThis(STRIPPED_LOG))).toString());
+                        recipe_2.getAsJsonObject("result").addProperty("item",
+                                Utils.getID(item).toString());
 
-                                // Adding to Resources
-                                sink.addJson(EveryCompat.res(newPath_2), recipe_2, ResType.RECIPES);
-                            }
-                        });
-                    } catch (IOException e) {
-                        EveryCompat.LOGGER.error("Failed to open the recipe: ", e);
+                        // Adding to Resources
+                        sink.addJson(EveryCompat.res(newPath_2), recipe_2, ResType.RECIPES);
                     }
+                });
+            } catch (IOException e) {
+                EveryCompat.LOGGER.error("Failed to open the recipe: ", e);
+            }
 
 
-            });
-        }
+        });
+    }
 }
