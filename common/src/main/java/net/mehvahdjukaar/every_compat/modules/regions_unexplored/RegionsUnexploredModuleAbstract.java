@@ -41,6 +41,10 @@ public abstract class RegionsUnexploredModuleAbstract extends SimpleModule {
                         this::newBranchBlock
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK)
+                .addTag(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE, Registries.BLOCK)
+                .addTag(BlockTags.LOGS_THAT_BURN, Registries.BLOCK)
+                .addTag(BlockTags.PARROTS_SPAWNABLE_ON, Registries.BLOCK)
                 .addTag(modRes("branches_can_survive_on"), Registries.BLOCK)
                 .addTag(modRes("branches"), Registries.BLOCK)
                 .addTag(modRes("branches"), Registries.ITEM)

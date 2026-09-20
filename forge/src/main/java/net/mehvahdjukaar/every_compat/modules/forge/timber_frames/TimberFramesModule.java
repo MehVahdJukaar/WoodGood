@@ -28,11 +28,12 @@ import net.rasanovum.timberframes.block.OakTimberFrameBetaBlock;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
+
+import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 
 //SUPPORT: v2.0+
 public class TimberFramesModule extends SimpleModule {
@@ -117,9 +118,8 @@ public class TimberFramesModule extends SimpleModule {
     // MCMETA
     public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicClientResources(executor);
-        executor.accept((manager, sink) -> {
-            frame_alpha.blocks.forEach((wood, block) -> {
-
+        executor.accept((manager, sink) ->
+            forEachSafely("TimbrFrames' mcmeta files", frame_alpha.blocks, (woodType, block) -> {
                 String[] types = {
                         "cross", "filler", "blank", "diagonal_left", "diagonal_right"
                 };
@@ -135,15 +135,15 @@ public class TimberFramesModule extends SimpleModule {
                         JsonObject mcmeta = RPUtils.deserializeJson(mcmetaStream);
 
                         // Copying MCMETA file to the resources
-                        String newPath = shortenedId() + "/" + wood.getAppendableId() + path;
+                        String newPath = shortenedId() + "/" + woodType.getAppendableId() + path;
 
                         sink.addJson(EveryCompat.res(newPath), mcmeta, ResType.BLOCK_MCMETA);
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         EveryCompat.LOGGER.error("Failed to get {}'s MCMETA : {}", resLoc.toString(), e);
                     }
                 }
-            });
-
-        });
+            })
+        );
     }
+
 }

@@ -10,15 +10,15 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
+import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
+import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.TemplateRecipeManager;
-import net.mehvahdjukaar.moonlight.api.resources.textures.TextureCollager;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
@@ -47,6 +47,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+
+import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 
 // SUPPORT: v24+
 public class FurnishModule extends SimpleModule {
@@ -316,28 +318,31 @@ public class FurnishModule extends SimpleModule {
     }
 
     @Override
+    // TAGS
     public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicServerResources(executor);
 
-        executor.accept((manager, handler) -> {
+        executor.accept((manager, handler) ->
 
-            for (var w : WoodTypeRegistry.INSTANCE) {
-                boolean hasSomething = false;
-                SimpleTagBuilder itemTag = SimpleTagBuilder.of(modRes(w.getTypeName() + "_" + "furniture"));
+            forEachSafely("Furnish's furniture tag", WoodTypeRegistry.INSTANCE, woodType -> {
+                if (HardcodedBlockType.isKnownVanillaWood(woodType)) return;
+
+                boolean isTagCreated = false;
+                SimpleTagBuilder itemTag = SimpleTagBuilder.of(modRes(woodType.getTypeName() + "_" + "furniture"));
 
                 for (var entry : this.getEntries()) {
-                    Item b = ((SimpleEntrySet<?, ?>) entry).items.get(w);
+                    Item b = ((SimpleEntrySet<?, ?>) entry).items.get(woodType);
                     if (b != null) {
-                        hasSomething = true;
+                        isTagCreated = true;
                         itemTag.addEntry(b);
                     }
                 }
-                if (hasSomething) {
+                if (isTagCreated) {
                     handler.addTag(itemTag, Registries.ITEM);
                     handler.addTag(itemTag, Registries.BLOCK);
                 }
-            }
-        });
+            })
+        );
     }
 
     @Override

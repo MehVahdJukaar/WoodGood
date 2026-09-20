@@ -364,7 +364,7 @@ public abstract class EveryCompat {
                             return modName != null ? modName : "UNKNOWN MOD";
                         },
                         entry -> {
-                            var message = entry.getValue().getMessage();
+                            var message = entry.getValue().toString();
                             var cause = entry.getValue().getCause();
 
                             if (message != null) return message;

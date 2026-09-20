@@ -33,6 +33,7 @@ import java.util.function.Consumer;
 
 import static java.util.Map.entry;
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
+import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
 // SUPPORT: FABRIC-v2.4.0+ | FORGE-v1.2.8+
@@ -52,10 +53,10 @@ public class FarmersDelightModule extends SimpleModule {
                 .addTile(getModTile("cabinet"))
                 .addTextureM(modRes("block/oak_cabinet_front"),
                         EveryCompat.res("block/fd/oak_cabinet_front_m"),
-                        customPalette)
-                .addTexture(modRes("block/oak_cabinet_side"), customPalette)
-                .addTexture(modRes("block/oak_cabinet_top"), customPalette)
-                .addTexture(modRes("block/oak_cabinet_front_open"), customPalette)
+                        CUSTOM_PALETTE)
+                .addTexture(modRes("block/oak_cabinet_side"), CUSTOM_PALETTE)
+                .addTexture(modRes("block/oak_cabinet_top"), CUSTOM_PALETTE)
+                .addTexture(modRes("block/oak_cabinet_front_open"), CUSTOM_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("cabinets/wooden"), Registries.ITEM)
                 .setTabKey(modRes("farmersdelight"))
@@ -65,7 +66,7 @@ public class FarmersDelightModule extends SimpleModule {
         this.addEntry(cabinets);
     }
 
-    public static final PaletteStrategy customPalette = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
+    public static final PaletteStrategy CUSTOM_PALETTE = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
             blockType, manager, PLANKS, null, p -> {
                 p.reduceDown();
                 if (p.size() < 9) {
@@ -87,8 +88,8 @@ public class FarmersDelightModule extends SimpleModule {
 
         executor.accept((manager, sink) -> {
             // Creating cutting_board recipes
-            for (WoodType woodType : WoodTypeRegistry.INSTANCE) {
-                if (HardcodedBlockType.isKnownVanillaWood(woodType)) continue;
+            forEachSafely("cutting recipe", WoodTypeRegistry.INSTANCE, woodType -> {
+                if (HardcodedBlockType.isKnownVanillaWood(woodType)) return;
 
                 // Skip if one of Farmer's-Cutting compat mods is installed
                 String namespaceRegex = COMPAT_RECIPE_MODS.getOrDefault(woodType.getNamespace(), "none");
@@ -103,7 +104,7 @@ public class FarmersDelightModule extends SimpleModule {
                     createSalvagingRecipe("furniture", woodType, sink, manager);
                     createSalvagingRecipe(CHEST_BOAT, woodType, sink, manager);
                 }
-            }
+            });
         });
     }
 

@@ -22,8 +22,6 @@ public class ModDrawersGeometry {
         if (geometryDataLoaded)
             return;
 
-        geometryDataLoaded = true;
-
         populateGeometryData(modLoc("models/block/geometry/full_drawers_icon_area_1.json"),
                 modLoc("models/block/geometry/full_drawers_count_area_1.json"),
                 modLoc("models/block/geometry/full_drawers_ind_area_1.json"),
@@ -85,6 +83,8 @@ public class ModDrawersGeometry {
                 modLoc("models/block/geometry/half_comp_drawers_indbase_area_3.json"), manager,
                 module.getDrawersOfTypeAndSizeAndDepth(BlockCompDrawers.class, 3, true).toArray(BlockDrawers[]::new)
         );
+        //set last so a failed load gets retried on next reload
+        geometryDataLoaded = true;
     }
 
     //FORGE use StorageDrawers.rl() and FABRIC use ModConstants.loc()
@@ -132,8 +132,6 @@ public class ModDrawersGeometry {
         Resource iresource;
         Reader reader = null;
         try {
-//            iresource = Minecraft.getInstance().getResourceManager().getResourceOrThrow(location);
-//            reader = new InputStreamReader(iresource.open(), StandardCharsets.UTF_8);
             iresource =  manager.getResourceOrThrow(location);
             reader = new InputStreamReader(iresource.open(), StandardCharsets.UTF_8);
             return BlockModel.fromStream(reader);

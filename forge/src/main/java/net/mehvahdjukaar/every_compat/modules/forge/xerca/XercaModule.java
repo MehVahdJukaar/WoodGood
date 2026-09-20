@@ -2,15 +2,16 @@ package net.mehvahdjukaar.every_compat.modules.forge.xerca;
 
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
+import net.mehvahdjukaar.every_compat.api.PaletteStrategy;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
+import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -24,6 +25,9 @@ import xerca.xercamod.common.block.Blocks;
 
 import java.util.Objects;
 import java.util.function.Consumer;
+
+import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
+import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 
 //SUPPORT: v1.0.0+
 public class XercaModule extends SimpleModule {
@@ -46,9 +50,8 @@ public class XercaModule extends SimpleModule {
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log))
                 )
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
-                .createPaletteFromPlanks(this::darkestPalette)
-                .addTexture(modRes("block/carved_wood/carved_warped_1_top"))
-                .addTexture(modRes("block/carved_wood/carved_warped_1_side_abcd"))
+                .addTexture(modRes("block/carved_wood/carved_warped_1_top"), DARKER_PALETTE)
+                .addTexture(modRes("block/carved_wood/carved_warped_1_side_abcd"), DARKER_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 //RECIPES: manually created via addDynamicServerResource()
                 .setTabKey(tab)
@@ -60,9 +63,8 @@ public class XercaModule extends SimpleModule {
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log))
                 )
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
-                .createPaletteFromPlanks(this::darkestestPalette)
-                .addTexture(modRes("block/carved_wood/carved_warped_2_top"))
-                .addTexture(modRes("block/carved_wood/carved_warped_2_side_abcd"))
+                .addTexture(modRes("block/carved_wood/carved_warped_2_top"), DARKEST_PALETTE)
+                .addTexture(modRes("block/carved_wood/carved_warped_2_side_abcd"), DARKEST_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 //RECIPES: manually created via addDynamicServerResource()
                 .setTabKey(tab)
@@ -74,9 +76,8 @@ public class XercaModule extends SimpleModule {
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log))
                 )
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
-                .createPaletteFromPlanks(this::darkestestPalette)
-                .addTexture(modRes("block/carved_wood/carved_warped_3_top"))
-                .addTexture(modRes("block/carved_wood/carved_warped_3_side_abcd"))
+                .addTexture(modRes("block/carved_wood/carved_warped_3_top"), DARKEST_PALETTE)
+                .addTexture(modRes("block/carved_wood/carved_warped_3_side_abcd"), DARKEST_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 //RECIPES: manually created via addDynamicServerResource()
                 .setTabKey(tab)
@@ -88,9 +89,8 @@ public class XercaModule extends SimpleModule {
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log))
                 )
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
-                .createPaletteFromPlanks(this::darkestestPalette)
-                .addTexture(modRes("block/carved_wood/carved_warped_4_top"))
-                .addTexture(modRes("block/carved_wood/carved_warped_4_side_abcd"))
+                .addTexture(modRes("block/carved_wood/carved_warped_4_top"), DARKEST_PALETTE)
+                .addTexture(modRes("block/carved_wood/carved_warped_4_side_abcd"), DARKEST_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 //RECIPES: manually created via addDynamicServerResource()
                 .setTabKey(tab)
@@ -102,10 +102,9 @@ public class XercaModule extends SimpleModule {
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log))
                 )
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
-                .createPaletteFromPlanks(this::darkestestPalette)
-                .addTexture(modRes("block/carved_wood/carved_warped_5_top"))
-                .addTexture(modRes("block/carved_wood/carved_warped_5_side_ab"))
-                .addTexture(modRes("block/carved_wood/carved_warped_5_side_cd"))
+                .addTexture(modRes("block/carved_wood/carved_warped_5_top"), DARKEST_PALETTE)
+                .addTexture(modRes("block/carved_wood/carved_warped_5_side_ab"), DARKEST_PALETTE)
+                .addTexture(modRes("block/carved_wood/carved_warped_5_side_cd"), DARKEST_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 //RECIPES: manually created via addDynamicServerResource()
                 .setTabKey(tab)
@@ -117,13 +116,12 @@ public class XercaModule extends SimpleModule {
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log))
                 )
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
-                .createPaletteFromPlanks(this::darkerPalette)
-                .addTexture(modRes("block/carved_wood/carved_warped_6_top"))
-                .addTexture(modRes("block/carved_wood/carved_warped_6_bottom"))
-                .addTexture(modRes("block/carved_wood/carved_warped_6_side_a"))
-                .addTexture(modRes("block/carved_wood/carved_warped_6_side_b"))
-                .addTexture(modRes("block/carved_wood/carved_warped_6_side_c"))
-                .addTexture(modRes("block/carved_wood/carved_warped_6_side_d"))
+                .addTexture(modRes("block/carved_wood/carved_warped_6_top"), DARK_PALETTE)
+                .addTexture(modRes("block/carved_wood/carved_warped_6_bottom"), DARK_PALETTE)
+                .addTexture(modRes("block/carved_wood/carved_warped_6_side_a"), DARK_PALETTE)
+                .addTexture(modRes("block/carved_wood/carved_warped_6_side_b"), DARK_PALETTE)
+                .addTexture(modRes("block/carved_wood/carved_warped_6_side_c"), DARK_PALETTE)
+                .addTexture(modRes("block/carved_wood/carved_warped_6_side_d"), DARK_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 //RECIPES: manually created via addDynamicServerResource()
                 .setTabKey(tab)
@@ -135,10 +133,9 @@ public class XercaModule extends SimpleModule {
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log))
                 )
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
-                .createPaletteFromPlanks(this::nuetralPalette)
-                .addTexture(modRes("block/carved_wood/carved_warped_7_top"))
-                .addTexture(modRes("block/carved_wood/carved_warped_7_side_a"))
-                .addTexture(modRes("block/carved_wood/carved_warped_7_side_bcd"))
+                .addTexture(modRes("block/carved_wood/carved_warped_7_top"), NEUTRAL_PALETTE)
+                .addTexture(modRes("block/carved_wood/carved_warped_7_side_a"), NEUTRAL_PALETTE)
+                .addTexture(modRes("block/carved_wood/carved_warped_7_side_bcd"), NEUTRAL_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 //RECIPES: manually created via addDynamicServerResource()
                 .setTabKey(tab)
@@ -150,9 +147,8 @@ public class XercaModule extends SimpleModule {
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log))
                 )
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
-                .createPaletteFromPlanks(this::nuetralPalette)
-                .addTexture(modRes("block/carved_wood/carved_warped_8_top"))
-                .addTexture(modRes("block/carved_wood/carved_warped_8_side_abcd"))
+                .addTexture(modRes("block/carved_wood/carved_warped_8_top"), NEUTRAL_PALETTE)
+                .addTexture(modRes("block/carved_wood/carved_warped_8_side_abcd"), NEUTRAL_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 //RECIPES: manually created via addDynamicServerResource()
                 .setTabKey(tab)
@@ -160,35 +156,43 @@ public class XercaModule extends SimpleModule {
         this.addEntry(carved8);
     }
 
-    private void nuetralPalette(Palette p) {
-        p.add(p.increaseInner());
-        p.remove(p.getDarkest());
-        p.remove(p.getLightest());
-    }
+    public static final PaletteStrategy NEUTRAL_PALETTE = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
+            blockType, manager, VanillaWoodChildKeys.PLANKS, null, p -> {
+                p.add(p.increaseInner());
+                p.reduceDown();
+                p.reduceUp();
+            })
+    );
 
-    private void darkerPalette(Palette p) {
-        p.add(p.increaseInner());
-        p.remove(p.getDarkest());
-        p.remove(p.getLightest());
-        p.remove(p.getLightest());
-    }
+    public static final PaletteStrategy DARK_PALETTE = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
+            blockType, manager, VanillaWoodChildKeys.PLANKS, null, p -> {
+                p.add(p.increaseInner());
+                p.reduceDown();
+                p.reduceUp();
+                p.reduceUp();
+            })
+    );
 
-    private void darkestPalette(Palette p) {
-        p.add(p.increaseInner());
-        p.remove(p.getDarkest());
-        p.remove(p.getLightest());
-        p.remove(p.getLightest());
-        p.remove(p.getLightest());
-    }
+    public static final PaletteStrategy DARKER_PALETTE = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
+            blockType, manager, VanillaWoodChildKeys.PLANKS, null, p -> {
+                p.add(p.increaseInner());
+                p.reduceDown();
+                p.reduceUp();
+                p.reduceUp();
+                p.reduceUp();
+            })
+    );
 
-    private void darkestestPalette(Palette p) {
-        p.add(p.increaseInner());
-        p.remove(p.getDarkest());
-        p.remove(p.getDarkest());
-        p.remove(p.getLightest());
-        p.remove(p.getLightest());
-        p.remove(p.getLightest());
-    }
+    public static final PaletteStrategy DARKEST_PALETTE = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
+            blockType, manager, VanillaWoodChildKeys.PLANKS, null, p -> {
+                p.add(p.increaseInner());
+                p.reduceDown();
+                p.reduceDown();
+                p.reduceUp();
+                p.reduceUp();
+                p.reduceUp();
+            })
+    );
 
     @Override
     // RECIPES
@@ -197,7 +201,7 @@ public class XercaModule extends SimpleModule {
 
         executor.accept((manager, sink) -> {
 
-            carved1.items.forEach((wood, item) -> {
+            forEachSafely("XercaMod's carving recipe", carved1.items, (wood, item) -> {
                 Block strippedLog = wood.getBlockOfThis("stripped_log");
 
                 if (Objects.nonNull(strippedLog))
@@ -236,8 +240,10 @@ public class XercaModule extends SimpleModule {
         // pathBuilder: carving/x/namespace/
         String pathBuilder = this.shortenedId() + "/" + wood.getNamespace() + "/";
         String recipeName = wood.getTypeName() + "_log_from_" + wood.getTypeName() + "_log_carving";
+        //not all woods have one
+        Item strippedLog = wood.getItemOfThis("stripped_log");
 
-        if (output == Objects.requireNonNull(wood.getBlockOfThis("stripped_log")).asItem()) {
+        if (output == strippedLog) {
             recipeName += "stripped_" + recipeName;
         }
         else {
@@ -245,7 +251,7 @@ public class XercaModule extends SimpleModule {
             recipeName += "carved_" + wood.getTypeName() + "_" + num;
 
             // IF statement
-            recipeName += (input == Objects.requireNonNull(wood.getBlockOfThis("stripped_log")).asItem())
+            recipeName += (input == strippedLog)
                     ? "_from_stripped_" + wood.getTypeName() + "_log_carving"
                     : "_from_" + wood.getTypeName() + "_log_carving";
         }

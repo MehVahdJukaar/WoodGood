@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.Block;
 import java.util.Objects;
 import java.util.function.Consumer;
 
+import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
 
@@ -539,7 +540,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         executor.accept((manager, sink) ->
 
-                        oak_planks_beams.blocks.forEach((woodType, block) -> {
+                        forEachSafely("chiseling recipe", oak_planks_beams.blocks, (woodType, block) -> {
                             JsonArray entriesArray = new JsonArray();
 
                             // Adding all supported-blocks of a StoneType to Array

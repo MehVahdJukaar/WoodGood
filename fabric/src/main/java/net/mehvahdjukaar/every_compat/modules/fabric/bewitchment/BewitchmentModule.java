@@ -31,6 +31,9 @@ import java.nio.file.FileSystemNotFoundException;
 import java.util.Objects;
 import java.util.function.Consumer;
 
+import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
+
 //SUPPORT: v1.20-8
 public class BewitchmentModule extends SimpleModule {
 
@@ -48,7 +51,7 @@ public class BewitchmentModule extends SimpleModule {
                                 .nonOpaque()
                         )
                 )
-                .requiresChildren("slab") // Recipes
+                .requiresChildren(SLAB) // Recipes
                 .addTile(() -> BWBlockEntityTypes.POPPET_SHELF)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
@@ -60,7 +63,7 @@ public class BewitchmentModule extends SimpleModule {
                         () -> BWObjects.OAK_BARK, () -> VanillaWoodTypes.OAK,
                         w -> new Item(new Item.Properties())
                 )
-                .requiresChildren("stripped_log") // Recipes
+                .requiresChildren(STRIPPED_LOG) // Recipes
                 .addTexture(modRes("item/oak_bark"), PaletteStrategies.LOG_SIDE_STANDARD)
                 .addTag(BWTags.BARKS, Registries.ITEM)
                 .setTabKey(tab)
@@ -89,7 +92,7 @@ public class BewitchmentModule extends SimpleModule {
                 JsonObject recipe_1 = RPUtils.deserializeJson(recipeStream_1);
                 JsonObject recipe_2 = RPUtils.deserializeJson(recipeStream_2);
 
-                bark.items.forEach((wood, item) -> {
+                forEachSafely("Bewitchment's stripping recipe", bark.items, (wood, item) -> {
                     // Replacing "oak" in the path
                     String prefix = shortenedId() + "/" + wood.getNamespace() + "/";
 
@@ -108,12 +111,12 @@ public class BewitchmentModule extends SimpleModule {
                     sink.addJson(EveryCompat.res(newPath_1), recipe_1, ResType.RECIPES);
 
                     // Null check for wood - some wood mods doesn't include <type>_wood
-                    if (Objects.nonNull(wood.getBlockOfThis("wood"))) {
+                    if (wood.getBlockOfThis(WOOD) != null) {
                         // Editing recipe_2
                         recipe_2.addProperty("log",
-                                Utils.getID(wood.getBlockOfThis("wood")).toString());
+                                Utils.getID(Objects.requireNonNull(wood.getBlockOfThis(WOOD))).toString());
                         recipe_2.addProperty("stripped_log",
-                                Utils.getID(wood.getBlockOfThis("stripped_wood")).toString());
+                                Utils.getID(Objects.requireNonNull(wood.getBlockOfThis(STRIPPED_LOG))).toString());
                         recipe_2.getAsJsonObject("result").addProperty("item",
                                 Utils.getID(item).toString());
 
@@ -124,8 +127,7 @@ public class BewitchmentModule extends SimpleModule {
             } catch (IOException e) {
                 EveryCompat.LOGGER.error("Failed to open the recipe: ", e);
             }
-
         });
-
     }
+
 }

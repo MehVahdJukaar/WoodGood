@@ -2,7 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.quark;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.mehvahdjukaar.every_compat.ECPlatformStuff;
+import net.mehvahdjukaar.every_compat.ECPlatStuff;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.*;
 import net.mehvahdjukaar.every_compat.common_classes.*;
@@ -45,6 +45,7 @@ import java.util.function.Consumer;
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.copyModProvidedChestTextures;
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
+import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.getATagOrCreateANew;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
@@ -320,7 +321,7 @@ public class QuarkModule extends SimpleModule {
     public void onModSetup() {
         posts.blocks.forEach((w, post) -> {
             Block stripped = strippedPosts.blocks.get(w);
-            if (stripped != null) ECPlatformStuff.registerStripping(post, stripped);
+            if (stripped != null) ECPlatStuff.registerStripping(post, stripped);
 
         });
         leafCarpets.blocks.forEach((w, leaf) -> ComposterBlock.COMPOSTABLES.put(leaf, 0.2F));
@@ -362,7 +363,8 @@ public class QuarkModule extends SimpleModule {
     }
 
     private void generateChestTextures(ResourceManager manager, ResourceSink sink) {
-        trappedChests.blocks.forEach((wood, block) -> {
+        forEachSafely("Quark's chest texture", trappedChests.blocks, (wood, block) -> {
+
             // mods like environmental already ship chest textures for their own wood. reuse those over a recolor
             if (copyModProvidedChestTextures(sink, manager, shortenedId(), wood)) return;
 
@@ -396,18 +398,18 @@ public class QuarkModule extends SimpleModule {
         super.addDynamicServerResources(executor);
         executor.accept((manager, sink) -> {
             if (PlatHelper.isModLoaded("botanypots")) {
-                hedges.items.forEach((leaves, item) -> {
+                forEachSafely("botanypots' hedge recipe", hedges.items, (leaves, item) -> {
                     var leavesItem = leaves.leaves.asItem();
                     BotanyPotsHelper.cropQuarkHedgeRecipe(this, item, leavesItem, sink, manager, leaves);
                 });
             }
 
             // hedge's recipe & logs' tags
-            hedges.blocks.forEach((leavesType, block) -> {
+            forEachSafely("Quark's hedge recipe", hedges.blocks, (leavesType, block) -> {
                 if (block != null) createHedgeRecipe(leavesType, block, sink, manager);
             });
 
-            verticalSlabs.blocks.forEach((woodType, block) ->
+            forEachSafely("Quark's vertical slab recipe", verticalSlabs.blocks, (woodType, block) ->
                     createVertSlabRecipe(woodType, block, sink));
         });
     }

@@ -28,6 +28,8 @@ import net.minecraft.world.level.block.Block;
 import java.util.Objects;
 import java.util.function.Consumer;
 
+import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
+
 //SUPPORT: DramaticDoors v3.3.1+ | Macaw's Door v1.1.1+
 //NOTE: The library of FABRIC & FORGE are not the same, must be in separated folders
 public class DramaticDoorsMacawModule extends SimpleModule {
@@ -586,8 +588,8 @@ public class DramaticDoorsMacawModule extends SimpleModule {
         """;
 
         executor.accept((manager, sink) -> {
-            for (WoodType woodType : WoodTypeRegistry.INSTANCE) {
-                if (HardcodedBlockType.isKnownVanillaWood(woodType)) continue;
+            forEachSafely("DramaticDoorsMacaw's tall door recipe", WoodTypeRegistry.INSTANCE, woodType -> {
+                if (HardcodedBlockType.isKnownVanillaWood(woodType)) return;
 
                 for (var entry : this.getEntries()) {
                     String newRecipe = recipe;
@@ -608,8 +610,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                         sink.addBytes(newResLoc, newRecipe.getBytes(), ResType.RECIPES);
                     }
                 }
-            }
-
+            });
         });
     }
 }

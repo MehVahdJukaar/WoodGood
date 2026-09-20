@@ -1,0 +1,161 @@
+package net.mehvahdjukaar.every_compat.misc;
+
+import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.api.set.BlockType;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+
+/**
+ * Collects resource-generation failures during a single generation pass.
+ * Logs each distinct cause once, then summarizes repeated occurrences.
+ */
+public final class TaskRunnerWithFailureCollection {
+
+    private static final ThreadLocal<TaskRunnerWithFailureCollection> ACTIVE = new ThreadLocal<>();
+    private static final TaskRunnerWithFailureCollection DUMMY = new TaskRunnerWithFailureCollection(true);
+
+    private final boolean disabled;
+    private final Map<String, FailureGroup> groups = new LinkedHashMap<>();
+
+    private TaskRunnerWithFailureCollection() {
+        this(false);
+    }
+
+    private TaskRunnerWithFailureCollection(boolean disabled) {
+        this.disabled = disabled;
+    }
+
+    public static TaskRunnerWithFailureCollection active() {
+        TaskRunnerWithFailureCollection collector = ACTIVE.get();
+        return collector != null ? collector : DUMMY;
+    }
+
+    public static void run(String passName, Runnable action) {
+        TaskRunnerWithFailureCollection collector = new TaskRunnerWithFailureCollection();
+        ACTIVE.set(collector);
+        try {
+            action.run();
+        } finally {
+            collector.finish(passName);
+            ACTIVE.remove();
+        }
+    }
+
+    public void runAttached(Runnable action) {
+        TaskRunnerWithFailureCollection previous = ACTIVE.get();
+        ACTIVE.set(this);
+        try {
+            action.run();
+        } finally {
+            if (previous == null) ACTIVE.remove();
+            else ACTIVE.set(previous);
+        }
+    }
+
+    public synchronized void record(String context, Supplier<String> item, Throwable error) {
+        if (disabled) {
+            EveryCompat.LOGGER.error("[{}] {}: {}", context, item.get(), error.getMessage(), error);
+            if (PlatHelper.isDev()) {
+                throw error instanceof RuntimeException re ? re : new RuntimeException(error);
+            }
+            return;
+        }
+
+        String key = context + "|" + rootMessage(error);
+        FailureGroup group = groups.computeIfAbsent(key, k -> new FailureGroup(context, error));
+        group.count++;
+        if (group.samples.size() < 3) {
+            group.samples.add(item.get());
+        }
+
+        if (group.count == 1) {
+            EveryCompat.LOGGER.error("[{}] {}: {}", context, item.get(), error.getMessage(), error);
+            if (PlatHelper.isDev()) {
+                throw error instanceof RuntimeException re ? re : new RuntimeException(error);
+            }
+        }
+    }
+
+    public static <T extends BlockType, V> void forEachSafely(String context, Map<T, V> entries, BiConsumer<T, V> action) {
+        TaskRunnerWithFailureCollection failures = active();
+        entries.forEach((type, v) -> failures.runSafely(context, type.getId()::toString, () -> action.accept(type, v)));
+    }
+
+    public static <T extends BlockType> void forEachSafely(String context, Iterable<T> types, Consumer<T> action) {
+        TaskRunnerWithFailureCollection failures = active();
+        for (T type : types) {
+            failures.runSafely(context, type.getId()::toString, () -> action.accept(type));
+        }
+    }
+
+    public void runSafely(String context, Supplier<String> item, Runnable action) {
+        runSafely(context, item, () -> {
+            action.run();
+            return null;
+        });
+    }
+
+    public void runSafely(String context, Supplier<String> item, Callable<Void> action) {
+        try {
+            action.call();
+        } catch (Exception e) {
+            record(context, item, e);
+        }
+    }
+
+    private void finish(String passName) {
+        if (disabled || groups.isEmpty()) {
+            return;
+        }
+
+        int total = 0;
+        for (FailureGroup group : groups.values()) {
+            total += group.count;
+            if (group.count > 1) {
+                EveryCompat.LOGGER.warn(
+                        "[{}] {} additional failures with the same cause ({}). Examples: {}",
+                        group.context,
+                        group.count - 1,
+                        rootMessage(group.error),
+                        String.join(", ", group.samples)
+                );
+            }
+        }
+
+        EveryCompat.LOGGER.warn(
+                "{} completed with {} failure(s) across {} distinct cause(s)",
+                passName,
+                total,
+                groups.size()
+        );
+    }
+
+    private static String rootMessage(Throwable error) {
+        Throwable current = error;
+        while (current.getCause() != null && current.getCause() != current) {
+            current = current.getCause();
+        }
+        String message = current.getMessage();
+        return current.getClass().getSimpleName() + (message == null || message.isBlank() ? "" : ": " + message);
+    }
+
+    private static final class FailureGroup {
+        private final String context;
+        private final Throwable error;
+        private int count;
+        private final List<String> samples = new ArrayList<>();
+
+        private FailureGroup(String context, Throwable error) {
+            this.context = context;
+            this.error = error;
+        }
+    }
+}

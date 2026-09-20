@@ -19,10 +19,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.function.Consumer;
 
+import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.getATagOrCreateANew;
 
 //SUPPORT: v3.1.0+
@@ -68,29 +68,28 @@ public class JustARaftModule extends SimpleModule {
         super.addDynamicServerResources(executor);
         ResourceLocation recipeLoc = ResType.RECIPES.getPath(modRes("oak_raft"));
 
-        executor.accept((manager, sink) -> {
-            rafts.items.forEach((wood, item) -> {
+        executor.accept((manager, sink) ->
+            forEachSafely("Just A Raft's recipes", rafts.items, (woodType, item) -> {
+
                 try (InputStream recipeStrem = manager.getResource(recipeLoc)
                         .orElseThrow(() -> new FileNotFoundException("Failed to open the recipe @ " + recipeLoc)).open()) {
                     JsonObject recipe = RPUtils.deserializeJson(recipeStrem);
 
                     // Editing the recipe
                     recipe.getAsJsonObject("key").getAsJsonObject("L")
-                            .addProperty("tag", getATagOrCreateANew("logs", "caps", wood, sink, manager).toString());
+                            .addProperty("tag", getATagOrCreateANew("logs", "caps", woodType, sink, manager).toString());
 
                     recipe.getAsJsonObject("result").addProperty("item", Utils.getID(item).toString());
 
                     // Adding to the resources
-                    String newRecipeLoc = shortenedId() + "/" + wood.getAppendableId() + "_raft";
+                    String newRecipeLoc = shortenedId() + "/" + woodType.getAppendableId() + "_raft";
 
                     sink.addJson(EveryCompat.res(newRecipeLoc), recipe, ResType.RECIPES);
 
-                } catch (IOException e) {
+                } catch (Exception e) {
                     EveryCompat.LOGGER.error("Failed to generate recipes for {} : {}", item, e);
                 }
-            });
-
-        });
+            })
+        );
     }
-
 }

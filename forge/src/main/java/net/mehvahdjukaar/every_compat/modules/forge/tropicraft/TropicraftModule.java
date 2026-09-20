@@ -18,11 +18,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.tropicraft.core.common.block.BoardwalkBlock;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 import java.util.function.Consumer;
 
+import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.SLAB;
 
 //SUPPORT: v9.6.3+
@@ -53,9 +53,8 @@ public class TropicraftModule extends SimpleModule {
     // RECIPES
     public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
         ResourceLocation recipePath = modRes("mangrove_boardwalk");
-        executor.accept((manager, sink) -> {
-            boardwalks.blocks.forEach((wood, block) -> {
-
+        executor.accept((manager, sink) ->
+            forEachSafely("Tropicraft's recipes", boardwalks.blocks, (woodType, block) -> {
                 try (InputStream recipeStream = manager.getResource(ResType.RECIPES.getPath(recipePath))
                         .orElseThrow(() -> new FileNotFoundException("Failed to open the recipe @ " + recipePath)).open()) {
 
@@ -64,19 +63,19 @@ public class TropicraftModule extends SimpleModule {
                     JsonObject underKey = recipe.getAsJsonObject("key").getAsJsonObject("X");
 
                     // Editing the JSON
-                    underKey.addProperty("item", Utils.getID(Objects.requireNonNull(wood.getBlockOfThis(SLAB))).toString());
+                    underKey.addProperty("item", Utils.getID(Objects.requireNonNull(woodType.getBlockOfThis(SLAB))).toString());
                     recipe.getAsJsonObject("result").addProperty("item", Utils.getID(block).toString());
 
                     // Adding to the resource
-                    String newPath = shortenedId() + "/" + wood.getAppendableId() + "_boardwalk";
+                    String newPath = shortenedId() + "/" + woodType.getAppendableId() + "_boardwalk";
 
                     sink.addJson(EveryCompat.res(newPath), recipe, ResType.RECIPES);
 
-                } catch (IOException e) {
-                    EveryCompat.LOGGER.error("Failed to generate the boardwalk recipe for {}: {}", wood.getId(), e);
+                } catch (Exception e) {
+                    EveryCompat.LOGGER.error("Failed to generate the boardwalk recipe for {}: {}", woodType.getId(), e);
                 }
-            });
-
-        });
+            })
+        );
     }
+
 }

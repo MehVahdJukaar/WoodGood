@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.chipped;
 
-import com.mojang.blaze3d.platform.NativeImage;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
@@ -27,6 +26,7 @@ import java.util.Set;
 import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.isKnownVanillaLeaves;
+import static net.mehvahdjukaar.every_compat.misc.UtilityTexture.shrinkTextureTo16;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.LEAVES;
 
 //See ChippedAbstractModule's SUPPORTED VERSION
@@ -68,6 +68,12 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                 )
                 //TEXTURES: See addDynamicClientResources (below)
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
+                .addTag(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE, Registries.BLOCK)
+                .addTag(BlockTags.REPLACEABLE_BY_TREES, Registries.BLOCK)
+                .addTag(BlockTags.PARROTS_SPAWNABLE_ON, Registries.BLOCK)
+                .addTag(BlockTags.LEAVES, Registries.BLOCK, Registries.ITEM)
+                .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK, Registries.ITEM)
+                .addTag(BlockTags.SWORD_EFFICIENT, Registries.BLOCK)
                 .setTabKey(tab)
                 .copyParentTint()
                 .build();
@@ -93,6 +99,12 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                 )
                 //TEXTURES: See addDynamicClientResources (below)
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
+                .addTag(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE, Registries.BLOCK)
+                .addTag(BlockTags.REPLACEABLE_BY_TREES, Registries.BLOCK)
+                .addTag(BlockTags.PARROTS_SPAWNABLE_ON, Registries.BLOCK)
+                .addTag(BlockTags.LEAVES, Registries.BLOCK, Registries.ITEM)
+                .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK, Registries.ITEM)
+                .addTag(BlockTags.SWORD_EFFICIENT, Registries.BLOCK)
                 .setTabKey(tab)
                 .copyParentTint()
                 .build();
@@ -121,6 +133,12 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                 )
                 //TEXTURES: See addDynamicClientResources (below)
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
+                .addTag(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE, Registries.BLOCK)
+                .addTag(BlockTags.REPLACEABLE_BY_TREES, Registries.BLOCK)
+                .addTag(BlockTags.PARROTS_SPAWNABLE_ON, Registries.BLOCK)
+                .addTag(BlockTags.LEAVES, Registries.BLOCK, Registries.ITEM)
+                .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK, Registries.ITEM)
+                .addTag(BlockTags.SWORD_EFFICIENT, Registries.BLOCK)
                 .setTabKey(tab)
                 .copyParentTint()
                 .build();
@@ -146,6 +164,12 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                 )
                 //TEXTURES: See addDynamicClientResources (below)
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
+                .addTag(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE, Registries.BLOCK)
+                .addTag(BlockTags.REPLACEABLE_BY_TREES, Registries.BLOCK)
+                .addTag(BlockTags.PARROTS_SPAWNABLE_ON, Registries.BLOCK)
+                .addTag(BlockTags.LEAVES, Registries.BLOCK, Registries.ITEM)
+                .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK, Registries.ITEM)
+                .addTag(BlockTags.SWORD_EFFICIENT, Registries.BLOCK)
                 .setTabKey(tab)
                 .copyParentTint()
                 .build();
@@ -171,6 +195,12 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                 )
                 //TEXTURES: See addDynamicClientResources (below)
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
+                .addTag(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE, Registries.BLOCK)
+                .addTag(BlockTags.REPLACEABLE_BY_TREES, Registries.BLOCK)
+                .addTag(BlockTags.PARROTS_SPAWNABLE_ON, Registries.BLOCK)
+                .addTag(BlockTags.LEAVES, Registries.BLOCK, Registries.ITEM)
+                .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK, Registries.ITEM)
+                .addTag(BlockTags.SWORD_EFFICIENT, Registries.BLOCK)
                 .setTabKey(tab)
                 .copyParentTint()
                 .build();
@@ -196,6 +226,12 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                 )
                 //TEXTURES: See addDynamicClientResources (below)
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
+                .addTag(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE, Registries.BLOCK)
+                .addTag(BlockTags.REPLACEABLE_BY_TREES, Registries.BLOCK)
+                .addTag(BlockTags.PARROTS_SPAWNABLE_ON, Registries.BLOCK)
+                .addTag(BlockTags.LEAVES, Registries.BLOCK, Registries.ITEM)
+                .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK, Registries.ITEM)
+                .addTag(BlockTags.SWORD_EFFICIENT, Registries.BLOCK)
                 .setTabKey(tab)
                 .copyParentTint()
                 .build();
@@ -221,6 +257,12 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                 )
                 //TEXTURES: See addDynamicClientResources (below)
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
+                .addTag(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE, Registries.BLOCK)
+                .addTag(BlockTags.REPLACEABLE_BY_TREES, Registries.BLOCK)
+                .addTag(BlockTags.PARROTS_SPAWNABLE_ON, Registries.BLOCK)
+                .addTag(BlockTags.LEAVES, Registries.BLOCK, Registries.ITEM)
+                .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK, Registries.ITEM)
+                .addTag(BlockTags.SWORD_EFFICIENT, Registries.BLOCK)
                 .setTabKey(tab)
                 .copyParentTint()
                 .build();
@@ -232,6 +274,12 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                 )
                 //TEXTURES: See addDynamicClientResources (below)
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
+                .addTag(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE, Registries.BLOCK)
+                .addTag(BlockTags.REPLACEABLE_BY_TREES, Registries.BLOCK)
+                .addTag(BlockTags.PARROTS_SPAWNABLE_ON, Registries.BLOCK)
+                .addTag(BlockTags.LEAVES, Registries.BLOCK, Registries.ITEM)
+                .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK, Registries.ITEM)
+                .addTag(BlockTags.SWORD_EFFICIENT, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
         this.addEntry(dead);
@@ -242,6 +290,12 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                 )
                 //TEXTURES: See addDynamicClientResources (below)
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
+                .addTag(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE, Registries.BLOCK)
+                .addTag(BlockTags.REPLACEABLE_BY_TREES, Registries.BLOCK)
+                .addTag(BlockTags.PARROTS_SPAWNABLE_ON, Registries.BLOCK)
+                .addTag(BlockTags.LEAVES, Registries.BLOCK, Registries.ITEM)
+                .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK, Registries.ITEM)
+                .addTag(BlockTags.SWORD_EFFICIENT, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
         this.addEntry(golden);
@@ -252,6 +306,12 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                 )
                 //TEXTURES: See addDynamicClientResources (below)
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
+                .addTag(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE, Registries.BLOCK)
+                .addTag(BlockTags.REPLACEABLE_BY_TREES, Registries.BLOCK)
+                .addTag(BlockTags.PARROTS_SPAWNABLE_ON, Registries.BLOCK)
+                .addTag(BlockTags.LEAVES, Registries.BLOCK, Registries.ITEM)
+                .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK, Registries.ITEM)
+                .addTag(BlockTags.SWORD_EFFICIENT, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
         this.addEntry(orange);
@@ -262,6 +322,12 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                 )
                 //TEXTURES: See addDynamicClientResources (below)
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
+                .addTag(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE, Registries.BLOCK)
+                .addTag(BlockTags.REPLACEABLE_BY_TREES, Registries.BLOCK)
+                .addTag(BlockTags.PARROTS_SPAWNABLE_ON, Registries.BLOCK)
+                .addTag(BlockTags.LEAVES, Registries.BLOCK, Registries.ITEM)
+                .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK, Registries.ITEM)
+                .addTag(BlockTags.SWORD_EFFICIENT, Registries.BLOCK)
                 .setTabKey(tab)
                 .build();
         this.addEntry(red);
@@ -320,17 +386,15 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
 
                 // Shrink the texture to a 16x16
                 if (!(height == 16) && Objects.nonNull(leavesTexture.getMcMeta())) {
-                    NativeImage standardSize = new NativeImage(16, 16, false);
-                    standardSize.copyFrom(leavesTexture.getImage());
-                    currentTexture = TextureImage.of(standardSize);
+                    currentTexture = shrinkTextureTo16(leavesTexture);
                     height = currentTexture.imageHeight();
+
+                    if (!(width == 16) || !(height == 16)) {
+                        EveryCompat.LOGGER.error("ChippedLeavesModule - {}'s texture is a {}x{} for {}", Utils.getID(leavesType.leaves), leavesTexture.imageWidth(), leavesTexture.imageHeight(), targetResLoc.getPath());
+                        continue;
+                    }
                 }
                 else currentTexture = leavesTexture;
-
-                if (!(width == 16) || !(height == 16)) {
-                    EveryCompat.LOGGER.error("ChippedLeavesModule - {}'s texture is a {}x{} for {}", Utils.getID(leavesType.leaves), width, height, targetResLoc.getPath());
-                    return;
-                }
 
                 sink.addTextureIfNotPresent(manager, newPath, () -> {
                     Respriter respriter = Respriter.of(currentTexture);
@@ -373,17 +437,16 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
 
                 // Shrink the texture to a 16x16
                 if (!(height == 16) && Objects.nonNull(leavesTexture.getMcMeta())) {
-                    NativeImage standardSize = new NativeImage(16, 16, false);
-                    standardSize.copyFrom(leavesTexture.getImage());
-                    currentTexture = TextureImage.of(standardSize);
+                    currentTexture = shrinkTextureTo16(leavesTexture);
                     height = currentTexture.imageHeight();
+
+                    if (!(width == 16) || !(height == 16)) {
+                        EveryCompat.LOGGER.error("ChippedLeavesModule - {}'s texture is a {}x{} for frosted_oak_leaves_top", Utils.getID(leavesType.leaves), width, height);
+                        return;
+                    }
                 }
                 else currentTexture = leavesTexture;
 
-                if (!(width == 16) || !(height == 16)) {
-                    EveryCompat.LOGGER.error("ChippedLeavesModule - {}'s texture is a {}x{} for frosted_oak_leaves_top", Utils.getID(leavesType.leaves), width, height);
-                    return;
-                }
                 Respriter respriter = Respriter.of(currentTexture);
                 TextureImage frostedTexture = respriter.recolorWithAnimationOf(targetTexture);
                 TextureImage overlayTexture = frostedTexture.makeCopy();

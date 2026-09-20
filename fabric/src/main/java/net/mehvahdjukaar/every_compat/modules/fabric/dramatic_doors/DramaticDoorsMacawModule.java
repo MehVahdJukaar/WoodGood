@@ -28,28 +28,30 @@ import net.minecraft.world.level.block.Block;
 import java.util.Objects;
 import java.util.function.Consumer;
 
+import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
+
 //SUPPORT: DramaticDoors v3.3.1+ | Macaw's Door v1.1.1+
 //NOTE: The library of FABRIC & FORGE are not the same, must be in separated folders
 public class DramaticDoorsMacawModule extends SimpleModule {
 
-    public final SimpleEntrySet<WoodType, Block> tallBarkGlassDoors;
-    public final SimpleEntrySet<WoodType, Block> tallBarnDoors;
-    public final SimpleEntrySet<WoodType, Block> tallBarnGlassDoors;
-    public final SimpleEntrySet<WoodType, Block> tallBeachDoors;
-    public final SimpleEntrySet<WoodType, Block> tallCottageDoors;
-    public final SimpleEntrySet<WoodType, Block> tallClassicDoors;
-    public final SimpleEntrySet<WoodType, Block> tallGlassDoors;
-    public final SimpleEntrySet<WoodType, Block> tallFourPanelDoors;
-    public final SimpleEntrySet<WoodType, Block> tallModernDoors;
-    public final SimpleEntrySet<WoodType, Block> tallMysticDoors;
-    public final SimpleEntrySet<WoodType, Block> tallNetherDoors;
-    public final SimpleEntrySet<WoodType, Block> tallPaperDoors;
-    public final SimpleEntrySet<WoodType, Block> tallShojiDoors;
-    public final SimpleEntrySet<WoodType, Block> tallShojiWholeDoors;
-    public final SimpleEntrySet<WoodType, Block> tallStableDoors;
-    public final SimpleEntrySet<WoodType, Block> tallStableHeadDoors;
-    public final SimpleEntrySet<WoodType, Block> tallSwampDoors;
-    public final SimpleEntrySet<WoodType, Block> tallTropicalDoors;
+    public final SimpleEntrySet<WoodType, Block> tallBarkGlassDoors,
+            tallBarnDoors,
+            tallBarnGlassDoors,
+            tallBeachDoors,
+            tallCottageDoors,
+            tallClassicDoors,
+            tallGlassDoors,
+            tallFourPanelDoors,
+            tallModernDoors,
+            tallMysticDoors,
+            tallNetherDoors,
+            tallPaperDoors,
+            tallShojiDoors,
+            tallShojiWholeDoors,
+            tallStableDoors,
+            tallStableHeadDoors,
+            tallSwampDoors,
+            tallTropicalDoors;
 
     public DramaticDoorsMacawModule(String modId) {
         super(modId, "ddm");
@@ -586,8 +588,8 @@ public class DramaticDoorsMacawModule extends SimpleModule {
         """;
 
         executor.accept((manager, sink) -> {
-            for (WoodType woodType : WoodTypeRegistry.INSTANCE) {
-                if (HardcodedBlockType.isKnownVanillaWood(woodType)) continue;
+            forEachSafely("DramaticDoorsMacaw's tall door recipe", WoodTypeRegistry.INSTANCE, woodType -> {
+                if (HardcodedBlockType.isKnownVanillaWood(woodType)) return;
 
                 for (var entry : this.getEntries()) {
                     String newRecipe = recipe;
@@ -608,8 +610,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                         sink.addBytes(newResLoc, newRecipe.getBytes(), ResType.RECIPES);
                     }
                 }
-            }
-
+            });
         });
     }
 }

@@ -119,7 +119,7 @@ public class UtilityTexture {
                         if (!(width == 16) || !(height == 16)) {
                             EveryCompat.LOGGER.error("ChippedLogModule - {}'s texture is a {}x{} for {}", Utils.getID(woodType.log), logTexture.imageWidth(), logTexture.imageHeight(), baseTextureLoc.getPath());
                             sink.addTextureIfNotPresent(manager, newPath, baseTexture::makeCopy);
-                            return;
+                            continue;
                         }
                     }
                     else currentLogTexture = logTexture;
@@ -178,7 +178,7 @@ public class UtilityTexture {
                         if (!(width == 16) || !(height == 16)) {
                             EveryCompat.LOGGER.error("ChippedLogModule - {}'s texture is a {}x{} for {}", Utils.getID(woodType.log), logTexture.imageWidth(), logTexture.imageHeight(), baseTextureLoc.getPath());
                             sink.addTextureIfNotPresent(manager, newPath, baseTexture::makeCopy);
-                            return;
+                            continue;
                         }
                     }
                     else currentLogOverlay = logTexture.makeCopy();
@@ -243,7 +243,8 @@ public class UtilityTexture {
                         RPUtils.findFirstBlockTextureLocation(manager, woodType.planks))) {
                         Palette targetPalette = Palette.fromImage(plankTexture);
 
-                        return respriter.recolor(targetPalette);
+                        Respriter copiedRespriter = respriter;
+                        return copiedRespriter.recolor(targetPalette);
 
                     } catch (Exception e) {
                         EveryCompat.LOGGER.error("Failed to get planks texture for {} - {}", woodType.getId(), e);
@@ -308,4 +309,5 @@ public class UtilityTexture {
         }
         return newImage;
     }
+
 }

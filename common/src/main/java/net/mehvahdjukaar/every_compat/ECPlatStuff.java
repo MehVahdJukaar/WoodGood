@@ -1,16 +1,30 @@
 package net.mehvahdjukaar.every_compat;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootParams;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class ECPlatStuff {
 
     @ExpectPlatform
     public static List<ItemStack> modifyLoot(ResourceLocation id, List<ItemStack> stacks, LootParams lootContext) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static void registerStripping(Block block, Block stripped_block) {
+        throw new AssertionError();
+    }
+
+    /// Extra loader specific stuff that has to go in our dynamic data pack
+    @ExpectPlatform
+    public static void addPlatformServerResources(Consumer<ResourceGenTask> executor) {
         throw new AssertionError();
     }
 }

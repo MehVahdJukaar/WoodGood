@@ -5,10 +5,7 @@ import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.misc.ColoringUtils;
-import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
-import net.mehvahdjukaar.every_compat.misc.TextureGenHelper;
-import net.mehvahdjukaar.every_compat.misc.UtilityTag;
+import net.mehvahdjukaar.every_compat.misc.*;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
@@ -30,6 +27,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -269,8 +267,8 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                 true, true, sink, "\\w+_ladder");
     }
 
-    public Map<T, ?> getDefaultEntries() {
-        return blocks;
+    public Map<T, ItemLike> getDefaultEntries() {
+        return (Map) blocks;
     }
 
     @Override
@@ -293,8 +291,11 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             TextureGenHelper.generateDefault(sink, manager, module.modId, textures, getBaseType(),
                     mergePalette, this.getDefaultEntries());
         } catch (Exception e) {
-            EveryCompat.LOGGER.error("Could not generate any block texture for entry set {}: {}",
-                    module == null ? "dummy" : module.modRes(this.getName()), e);
+            TaskRunnerWithFailureCollection.active().record(
+                    "entry set textures",
+                    () -> module == null ? getName() : module.modRes(getName()).toString(),
+                    e
+            );
         }
     }
 

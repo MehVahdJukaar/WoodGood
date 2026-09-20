@@ -39,10 +39,10 @@ import org.jetbrains.annotations.NotNull;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.ToIntFunction;
 
+import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.getATagOrCreateANew;
 
 //SUPPORT: v1.0.0+
@@ -109,50 +109,36 @@ public class BeautifulCampfiresModule extends SimpleModule {
     // RECIPES
     public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicServerResources(executor);
-
         executor.accept((manager, sink) -> {
             ResourceLocation campfireLoc = modRes("acacia_campfire");
             ResourceLocation soulCampfireLoc = modRes("acacia_soul_campfire");
 
-            campfires.blocks.forEach((wood, block) -> {
+            forEachSafely("campfire recipe", campfires.blocks, (wood, block) ->{
+                Block soulCampfire = soul_campfires.blocks.get(wood);
                 createRecipe("campfire", wood, block, campfireLoc, sink, manager);
-                createRecipe("soul_campfire", wood, soul_campfires.blocks.get(wood), soulCampfireLoc,
-                        sink, manager);
+                if (soulCampfire != null) createRecipe("soul_campfire", wood, soulCampfire, soulCampfireLoc, sink, manager);
+
+                if (PlatHelper.isModLoaded("toughasnails")) {
+                    SimpleTagBuilder warmingTag = SimpleTagBuilder.of(new ResourceLocation("toughasnails:heating_blocks"));
+                    SimpleTagBuilder coolingTag = SimpleTagBuilder.of(new ResourceLocation("toughasnails:cooling_blocks"));
+
+                    warmingTag.addEntry(block);
+                    sink.addTag(warmingTag, Registries.BLOCK);
+                    sink.addTag(warmingTag, Registries.ITEM);
+
+                    if (soulCampfire != null) {
+                        coolingTag.addEntry(soulCampfire);
+                        sink.addTag(coolingTag, Registries.BLOCK);
+                        sink.addTag(coolingTag, Registries.ITEM);
+                    }
+                }
             });
 
         });
-
-        if (PlatHelper.isModLoaded("toughasnails")) {
-            executor.accept((manager, sink) -> {
-
-                boolean isTagFilled = false;
-                SimpleTagBuilder warmingTag = null;
-                SimpleTagBuilder coolingTag = null;
-
-                for (Map.Entry<WoodType, CampfireBlock> entry : campfires.blocks.entrySet()) {
-                    WoodType wood = entry.getKey();
-                    CampfireBlock block = entry.getValue();
-                    var soulBlock = soul_campfires.blocks.get(wood);
-                    warmingTag = SimpleTagBuilder.of(new ResourceLocation("toughasnails:heating_blocks"));
-                    coolingTag = SimpleTagBuilder.of(new ResourceLocation("toughasnails:cooling_blocks"));
-
-                    if (block != null) warmingTag.addEntry(block);
-                    if (soulBlock != null) coolingTag.addEntry(soulBlock);
-                    if (block != null || soulBlock != null) isTagFilled = true;
-                }
-
-                if (isTagFilled) {
-                    sink.addTag(warmingTag, Registries.BLOCK);
-                    sink.addTag(warmingTag, Registries.ITEM);
-                    sink.addTag(coolingTag, Registries.BLOCK);
-                    sink.addTag(coolingTag, Registries.ITEM);
-                }
-            });
-        }
     }
 
     public void createRecipe(String recipeName, WoodType woodType, Block output, ResourceLocation recipeLoc,
-                             ResourceSink handler, ResourceManager manager) {
+                             ResourceSink sink, ResourceManager manager) {
 
         try (InputStream recipeStream = manager.getResource(ResType.RECIPES.getPath(recipeLoc))
                 .orElseThrow(() -> new FileNotFoundException("File not found @ " + recipeLoc)).open()) {
@@ -161,18 +147,19 @@ public class BeautifulCampfiresModule extends SimpleModule {
 
             // Editing the recipe
             recipe.getAsJsonObject("key").getAsJsonObject("L")
-                    .addProperty("tag", getATagOrCreateANew("logs", "caps", woodType, handler, manager).toString());
+                    .addProperty("tag", getATagOrCreateANew("logs", "caps", woodType, sink, manager).toString());
 
             recipe.getAsJsonObject("result").addProperty("item", Utils.getID(output).toString());
 
             // Adding to resources
-            handler.addJson(
-                    EveryCompat.res(shortenedId() + "/" + woodType.getAppendableId() + "_" + recipeName),
+            sink.addJson(
+                    EveryCompat.res(woodType.createPathWith(shortenedId(), recipeName)),
                     recipe,
                     ResType.RECIPES
             );
 
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             EveryCompat.LOGGER.error("Failed to generate the {} recipe for {} : {}", recipeName, woodType.getId(), e);
         }
 
@@ -218,7 +205,7 @@ public class BeautifulCampfiresModule extends SimpleModule {
                         }
                     });
 
-                } catch (IOException e) {
+                } catch (Exception e) {
                     EveryCompat.LOGGER.error("Failed to open log/plank texture file: ", e);
                 }
             });

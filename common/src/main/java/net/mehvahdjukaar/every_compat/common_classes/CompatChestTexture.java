@@ -20,18 +20,6 @@ import java.util.List;
 
 public class CompatChestTexture {
 
-    private static String NormalSuffix = "";
-    private static String TrappedSuffix = "";
-    private static boolean useCustomSuffix = false;
-
-    public static void setSuffix(String normalSuffix, String trappedSuffix) {
-        NormalSuffix = normalSuffix;
-        TrappedSuffix = trappedSuffix;
-    }
-    public static void useCustomSuffix() {
-        useCustomSuffix = true;
-    }
-
     // blueprint chests. mods that add wood ship them at <namespace>:textures/entity/chest/<wood>/<variant>.png
     private static final String[] MOD_CHEST_VARIANTS = {
             "normal", "normal_left", "normal_right",
@@ -125,22 +113,24 @@ public class CompatChestTexture {
      *     <ol>1: Darkening 2nd darkest & 3rd darkest by 10% - OPTIONAL: darkestOffset can offset</ol>
      *     <ol>2: Modifying Planks' texture to have Average Contrast</ol>
      * </li>
-     *
-     * OPTIONAL: {@link useCustomSuffix()} change the suffix of Texture's ResourceLocation. Default are "_chest" or "_trapped_chest"
-     * Example: See WoodworksModule's addDynamicClientResources() where one of CompatChestTexture are using useCustomSuffix()
      */
     public static void generateChestTexture(ResourceSink sink, ResourceManager manager, String shortenedID, WoodType wood,
                                             ResourceLocation normalRLoc, ResourceLocation maskRLoc, ResourceLocation overlayRLoc,
                                             ResourceLocation trappedORLoc, int darkControl, int darkestOffset) {
+        generateChestTexture(sink, manager, shortenedID, wood, normalRLoc, maskRLoc, overlayRLoc, trappedORLoc,
+                darkControl, darkestOffset, "_chest", "_trapped_chest");
+    }
+
+    public static void generateChestTexture(ResourceSink sink, ResourceManager manager, String shortenedID, WoodType wood,
+                                            ResourceLocation normalRLoc, ResourceLocation maskRLoc, ResourceLocation overlayRLoc,
+                                            ResourceLocation trappedORLoc, int darkControl, int darkestOffset,
+                                            String normalSuffix, String trappedSuffix) {
 
         try (TextureImage texture = TextureImage.open(manager, normalRLoc);
              @Nullable TextureImage mask = (maskRLoc == null) ? null : TextureImage.open(manager, maskRLoc);
              TextureImage overlay = TextureImage.open(manager, overlayRLoc);
              @Nullable TextureImage trapOverlay = (trappedORLoc == null) ? null : TextureImage.open(manager, trappedORLoc);
         ) {
-
-            String normalSuffix = (useCustomSuffix && !NormalSuffix.isEmpty()) ? NormalSuffix : "_chest";
-            String trappedSuffix = (useCustomSuffix && !TrappedSuffix.isEmpty()) ? TrappedSuffix : "_trapped_chest";
 
             Respriter respriterNormal = (mask == null) ? Respriter.of(texture) : Respriter.masked(texture, mask);
             Respriter respriterOverlay = Respriter.of(overlay);
