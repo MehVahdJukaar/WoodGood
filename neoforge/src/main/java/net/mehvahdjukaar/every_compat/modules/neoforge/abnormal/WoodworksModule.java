@@ -287,7 +287,6 @@ public class WoodworksModule extends EveryCompatModule {
                                 .pushReaction(PushReaction.DESTROY)
                         )
                 )
-                .requiresChildren(LOG) //REASON:
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
@@ -296,6 +295,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
+                .addRecipe(modRes("oak_leaves_from_oak_leaf_pile"))
                 .copyParentTint()
                 .copyParentDrop()
                 .build();
