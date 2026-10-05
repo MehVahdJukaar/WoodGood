@@ -133,22 +133,6 @@ public class CompatSpritesHelper {
         addOptional("naturaldecormod:saguaro_log", "_side", "naturaldecormod:block/aguaroogew");
         addOptional("naturaldecormod:saguaro_log", "_top", "naturaldecormod:block/aguaroogewop");
 
-        // -------------------- Luminous Nether
-        addOptional("luminous_nether:withered_log", "_side", "luminous_nether:block/ashenlogside");
-        addOptional("luminous_nether:withered_log", "_top", "luminous_nether:block/ashenlogtop");
-        addOptional("luminous_nether:stripped_withered_log", "_side", "luminous_nether:block/strippedwitheredlogside");
-        addOptional("luminous_nether:stripped_withered_log", "_top", "luminous_nether:block/strippedwitheredlogtop");
-        // Planks
-        addOptional("luminous_nether:withered_planks", "all", "luminous_nether:block/ashplanks");
-
-        // golden_stem aka "Mushroom Stipe"
-        // log
-        addOptional("luminous_nether:goldenstem", "_side", "luminous_nether:block/stembase");
-        addOptional("luminous_nether:goldenstem", "_top", "luminous_nether:block/mushroominside");
-        // stripped_log - Shredded Mushroom Stipe
-        addOptional("luminous_nether:shredded_stem", "_side", "luminous_nether:block/mushroomblockside");
-        addOptional("luminous_nether:shredded_stem", "_top", "luminous_nether:block/mushroomstemtop");
-
         // -------------------- Mofu's Better End
         addOptional("mofus_better_end_:weepingstar_log", "_side", "mofus_better_end_:block/weepingstarlogside");
         addOptional("mofus_better_end_:weepingstar_log", "_top", "mofus_better_end_:block/weepingstarlogup");
