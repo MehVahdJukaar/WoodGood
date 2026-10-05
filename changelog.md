@@ -12,6 +12,17 @@
 |                                                                                                                                   |
 
 ---
+## v2.9.27
+
+### CHANGES:
+- **MrCrayFish's Furniture (CFM)** & **Nopsiphus' Furniture (NFM)** - [#1324](https://github.com/MehVahdJukaar/WoodGood/issues/1324)
+  - **CFM**: will be only supported if the version is 7.0.0-pre36
+  - **NFM**: will be only supported if the version is 2026.01.30 or older
+  - REASON: newer version of **NFM** included **CFM**. You can think this as 2 mod into 1 mod (**NFM**).
+  - EveryCompat's **module for CFM & NFM** is nwo built-in via **NFM**
+- **Luminous Nether** (IT): Removed `withered` & `mushroom`'s ResourceLocation. They no longer need (IT) - [#1335](https://github.com/MehVahdJukaar/WoodGood/issues/1335) 
+
+---
 
 ## v2.9.26
 
