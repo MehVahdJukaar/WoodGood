@@ -143,16 +143,19 @@ public abstract class EveryCompat {
         }
 
         forAllModules(m -> {
-            if (m instanceof SimpleModule sm) {
-                for (EntrySet<?> e : sm.getEntries()) {
+            if (m instanceof SimpleModule simpleModule) {
+                for (EntrySet<?> entrySet : simpleModule.getEntries()) {
                     //verify tabs existence and crash early if they aren't there
-                    if (e instanceof AbstractSimpleEntrySet<?, ?, ?> ae) {
-                        Holder<CreativeModeTab> tab = ae.getTab();
+                    if (entrySet instanceof AbstractSimpleEntrySet<?, ?, ?> abstractEntrySet) {
+                        Holder<CreativeModeTab> tab = abstractEntrySet.getTab();
                         if (tab != null) {
                             tab.unwrapKey().orElseThrow(() -> new RuntimeException("The Creative Tab's ResourceLocation is outdated"));
-                        } else {
+                        }
+                        else {
                             if (PlatHelper.isDev()) {
-                                EveryCompat.LOGGER.error("Module {} had an entry set {} without a tab. Are you sure about this?", sm, ae);
+                                String prefix_ = abstractEntrySet.prefix == null ? "" : abstractEntrySet.prefix + "_";
+                                String baseBlockId = prefix_ +"x_"+ abstractEntrySet.postfix;
+                                EveryCompat.LOGGER.error("Module[ {} ] had an EntrySet[ {} ] without a tab. Are you sure about this?", simpleModule.getModName(), baseBlockId);
                             }
                         }
                     }
