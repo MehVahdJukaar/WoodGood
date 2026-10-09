@@ -107,9 +107,7 @@ public class ClutterModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tab))
                 .defaultRecipe()
-                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
-                .excludeBlockTypes("deeperdarker", "bloom")
-                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(tables);
 
@@ -124,9 +122,7 @@ public class ClutterModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tab))
                 .defaultRecipe()
-                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
-                .excludeBlockTypes("deeperdarker", "bloom")
-                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(stripped_tables);
 
@@ -142,9 +138,7 @@ public class ClutterModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tab))
                 .defaultRecipe()
-                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
-                .excludeBlockTypes("deeperdarker", "bloom")
-                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(chairs);
 
@@ -159,9 +153,7 @@ public class ClutterModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tab))
                 .defaultRecipe()
-                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
-                .excludeBlockTypes("deeperdarker", "bloom")
-                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(stripped_chairs);
 
@@ -206,9 +198,7 @@ public class ClutterModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tab))
                 .defaultRecipe()
-                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
-                .excludeBlockTypes("deeperdarker", "bloom")
-                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(shelves);
 
@@ -240,9 +230,7 @@ public class ClutterModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tab))
                 .defaultRecipe()
-                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
-                .excludeBlockTypes("deeperdarker", "bloom")
-                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(benches);
 
@@ -257,9 +245,7 @@ public class ClutterModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tab))
                 .defaultRecipe()
-                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
-                .excludeBlockTypes("deeperdarker", "bloom")
-                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(stripped_benches);
 

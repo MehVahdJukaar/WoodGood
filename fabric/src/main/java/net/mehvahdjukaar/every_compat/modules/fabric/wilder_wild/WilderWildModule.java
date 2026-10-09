@@ -71,8 +71,7 @@ public class WilderWildModule extends EveryCompatModule {
                 .addTag(ItemTags.LOGS, Registries.ITEM)
                 .addTag(ItemTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.ITEM)
                 .addRecipe(modRes("oak_wood_from_hollowed"))
-                //REASON: The top texture is not a standard 16x16. Take a look, you'll see why
-                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(hollow_logs);
 
@@ -107,8 +106,7 @@ public class WilderWildModule extends EveryCompatModule {
                 .addTag(ItemTags.LOGS, Registries.ITEM)
                 .addTag(ItemTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.ITEM)
                 .addRecipe(modRes("stripped_oak_wood_from_hollowed"))
-                //REASON: The top texture is not a standard 16x16. Take a look, you'll see why
-                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(stripped_hollow_logs);
 

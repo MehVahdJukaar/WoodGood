@@ -53,9 +53,7 @@ public class TwilightForestModule extends EveryCompatModule {
                 .addTag(modRes("hollow_logs_horizontal"), Registries.BLOCK)
                 .noItem().noTab() //REASON: it's using the hollowLogsVertical's tab/item as the main
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                //REASON: Take a look @ their's logs|stripped_logs' non-standard 16x16 texture, you'll get why
-                .excludeBlockTypes("deeperdarker", "bloom")
-                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(hollowLogsHorizontal);
 

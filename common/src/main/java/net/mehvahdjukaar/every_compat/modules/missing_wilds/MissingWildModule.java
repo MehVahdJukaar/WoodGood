@@ -25,8 +25,7 @@ public class MissingWildModule extends EveryCompatModule {
                 .setTab(getModTab("items"))
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
-                //REASON: The top texture is not a standard 16x16. Take a look, you'll see why
-                .excludeBlockTypes("terrestria", "(yucca_palm|sakura)")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(fallenLogs);
     }

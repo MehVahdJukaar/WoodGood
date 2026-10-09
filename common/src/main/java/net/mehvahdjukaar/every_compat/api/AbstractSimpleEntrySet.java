@@ -5,10 +5,7 @@ import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.misc.ColoringUtils;
-import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
-import net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection;
-import net.mehvahdjukaar.every_compat.misc.TextureGenHelper;
+import net.mehvahdjukaar.every_compat.misc.*;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
@@ -38,11 +35,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
-import java.util.function.BiFunction;
-import java.util.function.BooleanSupplier;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
+import java.util.function.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -385,6 +378,13 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         //exclusive with addCondition
         public BL requiresFromMap(Map<T, ?> entrySet) {
             this.addCondition(blockType -> !Objects.isNull(entrySet.get(blockType)));
+            return (BL) this;
+        }
+
+        /// WoodType's log or stripped_log that has ALPHA and is not a full 16x16. It should be excluded.<br>
+        /// The link will help you understand why. @see <a href=https://github.com/KyaniteMods/DeeperAndDarker/blob/neoforge-1.21/src/main/resources/assets/deeperdarker/textures/block/blooming_stem.png>deeperdarker:bloom's texture</a>
+        public BL excludedWoodTypes() {
+            this.addCondition(blockType -> !CompatSpritesHelper.EXCLUDED_WOODTYPES.contains(blockType.getId().toString()));
             return (BL) this;
         }
 

@@ -32,9 +32,7 @@ public abstract class BeautifyModuleAbstract extends EveryCompatModule {
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .setTab(tab)
                 .defaultRecipe()
-                //REASON: take a look at their //TEXTURES, you'll see why.
-                .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
-                .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(tellis);
 
