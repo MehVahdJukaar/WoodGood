@@ -79,6 +79,11 @@ public class CompatSpritesHelper {
         addOptional("minecraft:mushroom_stem", "_side", "minecraft:block/mushroom_stem");
         addOptional("minecraft:mushroom_stem", "_top", "minecraft:block/mushroom_stem");
 
+        // -------------------- Resonant End
+        // Leaves
+        addOptional("resonantend", "yellow_chorus_leaves", "leaves", "block/yellow_chorus_vines");
+        addOptional("resonantend", "chorus_blossom_leaves", "leaves", "block/thick_chorus_blossom_vines");
+
         // -------------------- Marvelous Menagerie Paradoxical
         addOptional("marvelous_menagerie", "calamites_log", "_side", "block/calamites_log"); // is a 8x8 log
         addOptional("marvelous_menagerie", "calamites_log", "_top", "block/calamites_log"); // is a 8x8 log
