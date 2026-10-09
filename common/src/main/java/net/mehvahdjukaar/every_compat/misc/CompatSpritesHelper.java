@@ -59,7 +59,8 @@ public class CompatSpritesHelper {
     public static final List<String> EXCLUDED_WOODTYPES = List.of(
             "deeperdarker:bloom",
             "terrestria:yucca_palm", "terrestria:sakura",
-            "betternether:nether_mushroom", "betternether:nether_reed"
+            "betternether:nether_mushroom", "betternether:nether_reed",
+            "antarchy:truffalo"
     );
 
     public static void addHardcodedSprites() {
