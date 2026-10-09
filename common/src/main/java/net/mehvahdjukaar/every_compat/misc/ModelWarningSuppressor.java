@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.misc;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.HashSet;
@@ -19,18 +20,18 @@ public class ModelWarningSuppressor {
     }
 
     public static void report() {
-        if (missingTextures > 0) {
-            EveryCompat.LOGGER.info("Suppressed 'missing textures in model' warnings for {} of our generated models " +
-                    "(they reference textures not provided by the target mod; vanilla missing texture is used as fallback).",
+        if (missingTextures > 0 && !PlatHelper.isDev()) {
+            EveryCompat.LOGGER.warn("Suppressed 'missing textures in model' warnings for {} of our generated models " +
+                    "(they reference textures not provided by the target mod; vanilla texture is used as fallback).",
                     missingTextures);
         }
         if (!missingVariantBlockstates.isEmpty()) {
             EveryCompat.LOGGER.error("{} of our blockstates have states with no model (blockstate json missing or pointing to models that were never generated). First few: {}",
-                    missingVariantBlockstates.size(), missingVariantBlockstates.stream().limit(5).toList());
+                    missingVariantBlockstates.size(), missingVariantBlockstates.stream().limit(8).toList());
         }
         if (!unloadableModels.isEmpty()) {
             EveryCompat.LOGGER.error("{} of our models could not be loaded (json missing or broken). First few: {}",
-                    unloadableModels.size(), unloadableModels.stream().limit(5).toList());
+                    unloadableModels.size(), unloadableModels.stream().limit(8).toList());
         }
     }
 }
