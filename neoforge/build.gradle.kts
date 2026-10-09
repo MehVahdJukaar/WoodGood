@@ -40,7 +40,6 @@ dependencies {
     accessTransformers("net.mehvahdjukaar:moonlight-neoforge:${property("moonlight_version")}")
 
 //!! TOOLS ========================================================================================================== \\
-    modRuntimeOnly("net.mehvahdjukaar:codecui-neoforge:${property("codecui_version")}")
     modRuntimeOnly("dev.emi:emi-neoforge:${property("emi_version")}+${property("minecraft_version")}")
     modRuntimeOnly("com.blamejared.crafttweaker:CraftTweaker-neoforge-${property("minecraft_version")}:${property("crafttweaker_version")}")
     modRuntimeOnly("curse.maven:jei-238222:7420587")
@@ -53,6 +52,8 @@ dependencies {
 //!! ================================================ DEPENDENCIES ================================================== \\
     //@ IMPORTANT: RLM - "REQUIRED LOCAL MOD" - You need to get the mod and put it in ~/forge/run/mods/....
     //@ IMPORTANT: DNU - "DO NOT USE" the modRunTimeOnly because it can cause issues in production
+
+    modRuntimeOnly("net.mehvahdjukaar:codecui-neoforge:${property("minecraft_version")}-${property("codecui_version")}") // +Moonlight-Lib
 
     //- Only For TESTING - can be commented out or enabled
     modRuntimeOnly("curse.maven:terrablender-neoforge-940057:6054947") // BOP, Regions-Unexplored
@@ -217,14 +218,8 @@ dependencies {
 //    modRuntimeOnly("curse.maven:strata-forge-edition-387296:4989643") // STONE-TYPES //!! 1.20.1
 //    modRuntimeOnly("curse.maven:endless-biomes-667688:5109705") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:blue-skies-312918:5010316") // structure-gel-api //!! 1.20.1
-    modRuntimeOnly("curse.maven:biomes-o-plenty-220318:7251965") // Terrablender, GlitchCore
-    modRuntimeOnly("curse.maven:blueprint-382216:8048607") // TEMP chest repro
-    modRuntimeOnly("curse.maven:woodworks-543610:7118286") // TEMP chest repro
-    modRuntimeOnly("org.violetmoon.zeta:Zeta:1.1-40-SNAPSHOT") // TEMP chest repro
-    modRuntimeOnly("org.violetmoon.quark:Quark:4.1-482-SNAPSHOT") // TEMP chest repro
-    modRuntimeOnly("quark-biolith:biolith-neoforge-3.0.10") // TEMP chest repro
-    modRuntimeOnly("maven.modrinth:gardens-of-the-dead:YfbXE0Lc") // TEMP chest repro
-    modRuntimeOnly("curse.maven:architectury-api-419699:5786327") // TEMP chest repro
+//    modRuntimeOnly("curse.maven:biomes-o-plenty-220318:7251965") // Terrablender, GlitchCore
+//    modRuntimeOnly("maven.modrinth:gardens-of-the-dead:YfbXE0Lc")
 //    modRuntimeOnly("curse.maven:upgrade-aquatic-326895:6969604") // Blueprint
 //    modRuntimeOnly("curse.maven:autumnity-365045:7118591") // Blueprint
 //    modRuntimeOnly("curse.maven:the-outer-end-430404:5043937") // Blueprint //!! 1.20.1
