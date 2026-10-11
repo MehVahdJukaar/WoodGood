@@ -20,7 +20,6 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.decoration_delight.Decora
 import net.mehvahdjukaar.every_compat.modules.neoforge.dramaticdoors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.dramaticdoors.DramaticDoorsModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.functional_storage.FunctionalStorageModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.just_a_raft.JustARaftModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.lauchs.LauchsShuttersModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.lightmans_currency.LightmansCurrencyModule;
@@ -159,7 +158,6 @@ public class EveryCompatForge extends EveryCompatCommon {
             addOptionalModule("decoration_delight", () -> DecorationDelightModule.class);
             addOptionalModule("dramaticdoors", () -> DramaticDoorsModule.class);
             addOptionalModule("functionalstorage", () -> FunctionalStorageModule.class);
-            addOptionalModule("infinitybuttons", () -> InfinityButtonsModule.class);
             addOptionalModule("justaraftmod", () -> JustARaftModule.class);
             addOptionalModule("mctb", () -> MoreCraftingTablesForForgeModule.class);
             addOptionalModule("mosaic_carpentry", () -> MosaicCarpentryModule.class);

@@ -603,8 +603,6 @@
   "item_type.boatload.large_boat": "Barco grande de %s",
   "block_type.woodster.chiseled_bookshelf": "Librería cinselada de %s",
   "block_type.woodster.ladder": "Escalera de %s",
-  "block_type.infinitybuttons.large_button": "Botón grande de %s",
-  "block_type.infinitybuttons.plank_secret_button": "Botón secreto de tablón de %s",
   "block_type.workshop_for_handsome_adventurer.simple_table": "Mesa de crafteo (%s)",
   "block_type.workshop_for_handsome_adventurer.book_shelf_double": "Librería (%s, dos filas)",
   "block_type.workshop_for_handsome_adventurer.book_shelf_minimal": "Librería (%s, una fila)",
