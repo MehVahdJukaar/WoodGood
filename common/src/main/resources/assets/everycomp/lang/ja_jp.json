@@ -289,8 +289,6 @@
   "item_type.boatload.large_boat": "大きな%sボート",
   "block_type.woodster.chiseled_bookshelf": "%s模様入りの本棚",
   "block_type.woodster.ladder": "%sはしご",
-  "block_type.infinitybuttons.large_button": "%s大きなボタン",
-  "block_type.infinitybuttons.plank_secret_button": "%s板材の隠しボタン",
   "block_type.lolmct.crafting_table": "%s作業台",
   "block_type.lolmcv.chest": "%sチェスト",
   "block_type.lolmcv.trapped_chest": "%sトラップチェスト",
