@@ -52,7 +52,7 @@
 | Guita's Woodworks                                   |   🟡   |
 | Handcrafted                                         |   🟩   |
 | Hearth And Home                                     |   ❔   |
-| Infinity Buttons                                    |   ❔   |
+| Infinity Buttons                                    |   🟡   |
 | LieOnLion's More Crafting Tables                    |   🟩   |
 | LieOnLion's More Chest Variant                      |   🟩   |
 | Macaw's Mods                                        |   🟩   |
