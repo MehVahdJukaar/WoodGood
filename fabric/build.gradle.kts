@@ -167,7 +167,6 @@ dependencies {
     modCompileOnly("curse.maven:dramatic-doors-380617:6479044")
     modCompileOnly("curse.maven:excessive-building-845097:6075987") // v3.3.10
     modCompileOnly("curse.maven:exlines-awnings-526698:5478883")
-    modCompileOnly("curse.maven:infinity-buttons-661902:5409967") //!! 1.20.1
     modCompileOnly("curse.maven:lightmans-currency-fabric-724119:5544643") //!! Not maintained since 1.20.1
     modCompileOnly("curse.maven:mighty-mail-fabric-904097:4750271") //!! 1.20.1
     modCompileOnly("curse.maven:missing-wilds-622590:6302231")
