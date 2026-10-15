@@ -16,7 +16,6 @@ import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys;
-import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.core.misc.McMetaFile;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -58,6 +57,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
     protected final Supplier<T> baseType;
 
+    ///return prefix_postfix
     public final String typeName;
 
     public final String postfix;
@@ -81,6 +81,9 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
     protected final boolean copyTint;
 
+    /// Use this instead of HardcodedBlockType for blocks to be generated for all BlockTypes
+    public static boolean useDuplicationCheck;
+
     protected AbstractSimpleEntrySet(Class<T> type,
                                      String name, @Nullable String prefix,
                                      Supplier<T> baseType,
@@ -98,6 +101,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         this.baseType = baseType;
         this.type = type;
         this.copyTint = copyTint;
+        useDuplicationCheck = true;
 
         this.extraModelTransform = extraTransform;
         this.mergePalette = mergePalette;
@@ -377,7 +381,13 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
         //exclusive with addCondition
         public BL requiresFromMap(Map<T, ?> entrySet) {
-            this.addCondition(blockType -> !Objects.isNull(entrySet.get(blockType)));
+            this.addCondition(blockType -> entrySet.get(blockType) != null);
+            return (BL) this;
+        }
+
+        /// Use this instead of using HardcodedBlockType for blocks to be generated for all BlockTypes
+        public BL skipDuplicationCheck() {
+            useDuplicationCheck = false;
             return (BL) this;
         }
 
@@ -670,13 +680,18 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             }
         } catch (Exception e) {
             if (PlatHelper.isDev()) throw e;
-            EveryCompat.LOGGER.error("Failed to get creative tab for EntrySet - {} : {}", Utils.getID(this.getBaseType()).toString(), e);
+            EveryCompat.LOGGER.error("Failed to get creative tab for EntrySet - {} : {}", getTabItem(), e);
             return null;
         }
 
         return EntrySet.super.getItemForECTab(type);
     }
 
+    /// for logging which EntrySet's tab being null or having incorrect Id
+    // Overriden by SimpleEntrySet & ItemOnlyEntrySet
+    public String getTabItem() {
+        return "Unknown";
+    }
 
     @Nullable
     public BooleanSupplier getModConfigToggle() {
