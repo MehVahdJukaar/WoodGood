@@ -14,7 +14,6 @@ import net.mehvahdjukaar.moonlight.api.set.BlockTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.CreativeModeTab;
@@ -73,6 +72,12 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
 
     public I getBaseItem() {
         return baseItem.get();
+    }
+
+    @Override
+    // for logging which EntrySet's tab being null or having incorrect Id
+    public String getTabItem() {
+        return Utils.getID(getBaseItem()).toString();
     }
 
     @Override
