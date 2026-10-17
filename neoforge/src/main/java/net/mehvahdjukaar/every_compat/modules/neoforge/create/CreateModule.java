@@ -45,7 +45,7 @@ public class CreateModule extends EveryCompatModule {
 
         windowPanes = SimpleEntrySet.builder(WoodType.class, "window_pane",
                         getModBlock("oak_window_pane"), () -> VanillaWoodTypes.OAK,
-                        s -> new ConnectedGlassPaneBlock(Utils.copyPropertySafe(Blocks.GLASS_PANE))
+                        (Function<WoodType, Block>) this::makeWindowPane
                 )
                 .requiresFromMap(windows.blocks) //REASON: textures
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.BLOCK, Registries.ITEM)
@@ -62,6 +62,10 @@ public class CreateModule extends EveryCompatModule {
         return new WindowBlock(Utils.copyPropertySafe(Blocks.GLASS)
                 .isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false), false);
+    }
+
+    private ConnectedGlassPaneBlock makeWindowPane(WoodType w) {
+        return new ConnectedGlassPaneBlock(Utils.copyPropertySafe(Blocks.GLASS_PANE));
     }
 
     @Override
