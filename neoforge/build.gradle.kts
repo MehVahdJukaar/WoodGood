@@ -104,7 +104,6 @@ dependencies {
     modCompileOnly("curse.maven:another-furniture-610492:7355747")
     modCompileOnly("curse.maven:architects-palette-433862:6861008") //@ BETA
     modCompileOnly("curse.maven:backpacked-352835:7866688")
-    modCompileOnly("curse.maven:the-block-box-1199971:8089815")
     modCompileOnly("curse.maven:corail-pillar-266228:5669131")
     modCompileOnly("curse.maven:decorative-blocks-reborn-1327768:7926194")
     modCompileOnly("curse.maven:farmersdelight-398521:8083481")
@@ -127,7 +126,7 @@ dependencies {
 
     //- ONLY FOR TESTING - can be commented out or enabled
 //    modRuntimeOnly("curse.maven:beautiful-campfires-1085950:6162194")
-    modRuntimeOnly("curse.maven:the-block-box-1199971:8089815")
+//    modRuntimeOnly("curse.maven:the-block-box-1199971:8089815")
 //    modRuntimeOnly("curse.maven:camp-chair-531744:4579679") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:dawn-of-time-312359:7029195") // Fusion-Connected-Texture //@ Use Local mods blc Distribution is not allowed
 //    modRuntimeOnly("curse.maven:exlines-bark-carpets-527296:4094399") //!! 1.20.1
@@ -229,6 +228,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:lets-do-meadow-821483:7672847") // Architectury
 
 //    modImplementation("curse.maven:terrafirmacraft-302973:7024199") // patchouli
+//    modRuntimeOnly("net.mehvahdjukaar:stonezone-neoforge:1.21-2.11.19") { isTransitive = false }
 
 }
 
