@@ -109,10 +109,10 @@ public class CompatChestTexture {
      * Generate a texture for chest and trapped_chest
      *
      * @param darkControl
-     * <li>
-     *     <ol>1: Darkening 2nd darkest & 3rd darkest by 10% - OPTIONAL: darkestOffset can offset</ol>
-     *     <ol>2: Modifying Planks' texture to have Average Contrast</ol>
-     * </li>
+     * <Ol>
+     *     <li>1: Darkening 2nd darkest and 3rd darkest by 10% - OPTIONAL: darkestOffset can offset</li>
+     *     <li>2: Modifying Planks' texture to have Average Contrast</li>
+     * </ol>
      */
     public static void generateChestTexture(ResourceSink sink, ResourceManager manager, String shortenedID, WoodType wood,
                                             ResourceLocation normalRLoc, ResourceLocation maskRLoc, ResourceLocation overlayRLoc,

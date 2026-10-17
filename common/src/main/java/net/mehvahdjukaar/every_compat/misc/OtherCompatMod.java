@@ -4,7 +4,7 @@ import java.util.List;
 
 //TODO: rename modId to compatModId, woodsFrom to blockTypeFromModId, blocksFrom to supportedModId
 /**
- * @param modId Id of COMPAT-MOD that support the SUPPORTED-MOD & mods that add new BlockTypes
+ * @param modId Id of COMPAT-MOD that support the SUPPORTED-MOD and mods that add new BlockTypes
  * @param woodsFrom Id of mods that add new BlockTypes
  * @param blocksFrom id of SUPPORTED-MOD
  */

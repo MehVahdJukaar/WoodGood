@@ -38,7 +38,7 @@ public class UtilityTexture {
     }
 
     /**
-     * The Log's texture has 2 parts: planks & log_side. This method focus on recolor 1 of 2 parts using the correct
+     * The Log's texture has 2 parts: planks and log_side. This method focus on recolor 1 of 2 parts using the correct
      * palettes and then use the other palettes to recolor the other part.
      * @param logMaskLoc exclude the logs part from being recolored
      * @param planksMaskLoc exclude the planks part from being recolored
