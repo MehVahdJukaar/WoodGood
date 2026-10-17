@@ -282,7 +282,10 @@ public class WoodworksModule extends EveryCompatModule {
         leafPiles = SimpleEntrySet.builder(LeavesType.class, "leaf_pile",
                         WoodworksBlocks.OAK_LEAF_PILE, () -> VanillaLeavesTypes.OAK,
                         leavesType -> new LeafPileBlock(Utils.copyPropertySafe(leavesType.leaves)
+                                .noCollission()
                                 .strength(0.2F)
+                                .sound(leavesType.getSound())
+                                .noOcclusion()
                                 .ignitedByLava()
                                 .pushReaction(PushReaction.DESTROY)
                         )
