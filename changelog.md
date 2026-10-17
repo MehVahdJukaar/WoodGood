@@ -13,6 +13,16 @@
 |                                                                                                                                   |
 
 ---
+## v2.11.54
+
+### FIXES:
+- **Woodworks** (NF): Added `.noCollision()` to LEAF_PILE - [#1341](https://github.com/MehVahdJukaar/WoodGood/issues/1341)
+- **Regions Unexplored** (C): Added RenderType.CUTOUT to BRANCH & SHRUB - [#1336](https://github.com/MehVahdJukaar/WoodGood/issues/1336)
+
+### REMOVED:
+- **Infinity Buttons** (C): No longer needed because the mod now has the module built-in. - [PR from Mod's author](https://github.com/MehVahdJukaar/WoodGood/pull/1339)
+
+---
 
 ## v2.11.53
 
