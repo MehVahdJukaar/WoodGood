@@ -321,7 +321,7 @@ public abstract class EveryCompat {
         return module;
     }
 
-
+    /// Use {@link net.mehvahdjukaar.every_compat.api.SimpleModule#getOtherCompatMods()} since this method is marked as ApiStatus.Internal
     public static Collection<OtherCompatMod> getCompatMods() {
         return COMPAT_MODS;
     }

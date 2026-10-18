@@ -4,6 +4,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
+import net.mehvahdjukaar.every_compat.misc.OtherCompatMod;
 import net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
@@ -255,4 +256,8 @@ public class SimpleModule extends CompatModule {
         return false;
     }
 
+    /// @return Collection of OtherCompatMods
+    public static Collection<OtherCompatMod> getOtherCompatMods() {
+        return EveryCompat.getCompatMods();
+    }
 }
