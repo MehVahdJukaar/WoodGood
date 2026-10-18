@@ -72,6 +72,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:monolib-968432:6123990") //v2.0.0 | More-Beautiful-Torches
 //    modRuntimeOnly("curse.maven:quad-932715:5900860") // v1.2.9 | More-Chest-Variants, More-Crafting-Table
 //    modRuntimeOnly("curse.maven:lithostitched-936015:8660310") // v1.8.0+beta4 | Regions-Unexplored
+//    modRuntimeOnly("curse.maven:platform-997634:8075942") // v1.3.3 | Vanilla-Backport
 
     //- ~/neoforge/mods LOCAL
 //    modRuntimeOnly("quark-biolith:biolith-neoforge-3.0.10") // Quark
@@ -144,7 +145,7 @@ dependencies {
 //    modRuntimeOnly("earth.terrarium.chipped:chipped-neoforge-${property("minecraft_version")}:4.0.2") //INCLUDED: Athena, Resourceful-Lib, REQUIRED: +Bytecodecs
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN NEOFORGE
-    // ~/forge/mods LOCAL
+    // ~/neoforge/mods LOCAL
     modCompileOnly("local-shutter-neoforge:shutter-2.1.6-neoforge-1.21.1")
     modCompileOnly("local-buildersdelight-neoforge:BuildersDelight-1.20.1-v.1.3")
     //modCompileOnly("local-giacomos_bookshelf-neoforge:giacomos_bookshelf-1.20.1-1.3.9") // WIP
@@ -226,6 +227,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:frightful-winter-1241289:6447798")
 //    modRuntimeOnly("curse.maven:natures-spirit-1044992:6962784") // Tinted LeavesType
 //    modRuntimeOnly("curse.maven:lets-do-meadow-821483:7672847") // Architectury
+//    modRuntimeOnly("curse.maven:vanillabackport-417430:8229724") // Platform
 
 //    modImplementation("curse.maven:terrafirmacraft-302973:7024199") // patchouli
 //    modRuntimeOnly("net.mehvahdjukaar:stonezone-neoforge:1.21-2.11.19") { isTransitive = false }
