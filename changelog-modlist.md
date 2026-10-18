@@ -106,6 +106,7 @@
 | Productive Bees                      |   🟥   |
 | Quark                                |   🟩   |
 | Re: Deco                             |   ❔   |
+| Shutter Up!                          |   🟡   |
 | Timber Frame                         |   🟠   |
 | Tropicraft                           |   🟩   |
 | Ultimate Car Mod                     |   🔧   |
