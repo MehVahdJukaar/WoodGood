@@ -22,6 +22,7 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.dramaticdoors.DramaticDoo
 import net.mehvahdjukaar.every_compat.modules.neoforge.functional_storage.FunctionalStorageModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.just_a_raft.JustARaftModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.lauchs.LauchsShuttersModule;
+import net.mehvahdjukaar.every_compat.modules.neoforge.legends_missing_blocks.LegendsMissingBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.lightmans_currency.LightmansCurrencyModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.neoforge.more.MoreCraftingTablesForForgeModule;
@@ -160,6 +161,7 @@ public class EveryCompatForge extends EveryCompatCommon {
             addOptionalModule("functionalstorage", () -> FunctionalStorageModule.class);
             addOptionalModule("justaraftmod", () -> JustARaftModule.class);
             addOptionalModule("mctb", () -> MoreCraftingTablesForForgeModule.class);
+            addOptionalModule("missing_blocks", () -> LegendsMissingBlocksModule.class);
             addOptionalModule("mosaic_carpentry", () -> MosaicCarpentryModule.class);
             addOptionalModule("oreberriesreplanted", () -> OreberriesReplantedModule.class);
             addOptionalModule("lightmanscurrency", () -> LightmansCurrencyModule.class);

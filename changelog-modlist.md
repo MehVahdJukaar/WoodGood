@@ -95,6 +95,7 @@
 | Graveyard (finallion)                |   ❔   |
 | Just A Raft                          |   🟩   |
 | LieOnLion's More Chest Variant       |   🟩   |
+| Legend's Missing Blocks              |   🟩   |
 | Lepton (FORGE)                       |   🟡   |
 | Market Crates                        |   ❔   |
 | More Crafting Table For Forge        |   🟩   |

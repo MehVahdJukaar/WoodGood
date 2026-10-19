@@ -1315,5 +1315,10 @@
   "block_type.rechiseled.planks_wavy_stairs": "Wavy %s Planks Stairs",
   "block_type.rechiseled.planks_wavy_stairs_connecting": "Wavy %s Planks Stairs",
   "block_type.rechiseled.planks_woven_stairs": "Woven %s Planks Stairs",
-  "block_type.rechiseled.planks_woven_stairs_connecting": "Woven %s Planks Stairs"
+  "block_type.rechiseled.planks_woven_stairs_connecting": "Woven %s Planks Stairs",
+
+  "_comment-missing_blocks": "───────────────────────────── Legends' Missing Blocks ─────────────────────────────",
+  "block_type.missing_blocks.carved": "Carved %s Wood"
+
+
 }
