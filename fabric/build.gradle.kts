@@ -174,7 +174,7 @@ dependencies {
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094") //!! NOT AVAILABLE //!! 1.20.1
     modCompileOnly("curse.maven:wooden-hoppers-406021:4796143") //!! 1.20.1
 
-    modCompileOnly("curse.maven:regions-unexplored-659110:8226388") // Lithostitched, json5
+    modCompileOnly("curse.maven:regions-unexplored-659110:9252520") // Lithostitched, json5
 
     // OTHER MAVENS
     modCompileOnly("maven.modrinth:stylish-stiles:1.1.1-1.21")

@@ -195,7 +195,7 @@ dependencies {
     modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:7903929")
     modCompileOnly("curse.maven:xercamod-341575:4667995") //!! 1.20.1
 
-    modCompileOnly("curse.maven:regions-unexplored-659110:8167399") // Lithostitched
+    modCompileOnly("curse.maven:regions-unexplored-659110:9252522") // Lithostitched
 
     // OTHER MAVENS
     modCompileOnly("maven.modrinth:building-but-better:2.0pre4") // MidnightLib //!! 1.20.1
