@@ -36,6 +36,7 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.regions_unexplored.Region
 import net.mehvahdjukaar.every_compat.modules.neoforge.timber_frames.TimberFramesModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.tropicraft.TropicraftModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.twilightforest.TwilightForestModule;
+import net.mehvahdjukaar.every_compat.modules.neoforge.ultimate_car.UltimateCarModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.unusual_furniture.UnusualFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.valhelsia.ValhelsiaStructuresModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.variants.VariantCraftingTablesModule;
@@ -154,6 +155,7 @@ public class EveryCompatForge extends EveryCompatCommon {
             addOptionalModule("buildersaddition", () -> BuildersAdditionModule.class);
             addOptionalModule("bbb", () -> BuildingButBetterModule.class);
             addOptionalModule("buildersdelight", () -> BuildersDelightModule.class);
+            addOptionalModule("car", () -> UltimateCarModule.class);
             addOptionalModule("create", () -> CreateModule.class);
             addOptionalModule("curiosities", () -> CuriositiesModule.class);
             addOptionalModule("decoration_delight", () -> DecorationDelightModule.class);

@@ -10,7 +10,7 @@
 | Bewitchment                        |   ❔   |
 | Blockus                            |   🟩   |
 | Clutter                            |   🟩   |
-| Create (FABRIC)                    |   ❔   |
+| Create (FABRIC)                    |   🟥   |
 | Excessive Building                 |   🟩   |
 | Exline's Awning                    |   🟩   |
 | Exline's Bark Carpet               |   🟩   |
@@ -19,7 +19,7 @@
 | Red Bits                           |   🟩   |
 | Stylish Stiles                     |   🟩   |
 | Variant Vanilla Blocks (XanthianZ) |   🟩   |
-| Villagers Plus (FABRIC)            |   ❔   |
+| Villagers Plus (FABRIC)            |   🟩   |
 | Wilder Wild                        |   🟩   |
 | More Barrier Variants              |   🟡   |
 |                                    |        |
@@ -110,12 +110,12 @@
 | Shutter Up!                          |   🟡   |
 | Timber Frame                         |   🟠   |
 | Tropicraft                           |   🟩   |
-| Ultimate Car Mod                     |   🔧   |
+| Ultimate Car Mod                     |   🟩   |
 | Unusual End                          |   🟡   |
 | Unusual Furniture                    |   🟩   |
 | Valhelsia Structure                  |   🟩   |
 | Variant Crafting Tables (Kitteh6660) |   ❔   |
-| Villagers Plus (NEOFORGE)            |   ❔   |
+| Villagers Plus (NEOFORGE)            |   🟩   |
 | Woodster                             |   🟩   |
 | Workshop For Handsome Adventure      |   🟥   |
 | Xerca Mod                            |   ❔   |
