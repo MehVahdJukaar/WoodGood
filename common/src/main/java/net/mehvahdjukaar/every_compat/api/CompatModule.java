@@ -56,18 +56,18 @@ public abstract class CompatModule {
         }
         //yeah, bad api but doesn't matter if we use wood or other types
         //called here so we get right bus since module construction is delegated
-        BlockSetAPI.addDynamicRegistration(myNamespace, (r) -> {
+        BlockSetAPI.addDynamicRegistration(myNamespace, (regBlock) -> {
             EveryCompat.executeOrFail(() -> {
-                for (var t : this.getAffectedTypes()) {
-                    this.registerBlocks(t, r);
+                for (Class<? extends BlockType> typeClass : this.getAffectedTypes()) {
+                    this.registerBlocks(typeClass, regBlock);
                 }
             }, this);
         }, BuiltInRegistries.BLOCK);
 
-        BlockSetAPI.addDynamicRegistration(myNamespace, (r) -> {
+        BlockSetAPI.addDynamicRegistration(myNamespace, (regItem) -> {
             EveryCompat.executeOrFail(() -> {
                 this.registerItems((resourceLocation, item) -> {
-                    r.register(resourceLocation, item);
+                    regItem.register(resourceLocation, item);
                     EveryCompat.addItemToModuleMapping(item, this);
                 });
             }, this);
