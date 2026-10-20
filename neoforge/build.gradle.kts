@@ -146,6 +146,7 @@ dependencies {
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN NEOFORGE
     // ~/neoforge/mods LOCAL
+    modCompileOnly("local-blocks_plus:blocks+1.21.1-1.8")
     modCompileOnly("local-shutter-neoforge:shutter-2.1.6-neoforge-1.21.1")
     modCompileOnly("local-buildersdelight-neoforge:BuildersDelight-1.20.1-v.1.3")
     //modCompileOnly("local-giacomos_bookshelf-neoforge:giacomos_bookshelf-1.20.1-1.3.9") // WIP

@@ -84,6 +84,7 @@
 | Beautify! (Beautify Decorate)        |   🟩   |
 | Beautify Refoxed                     |   🟩   |
 | Bibliocraft Legacy                   |   🟩   | 
+| Shadow_x_os's Blocks +               |   🟩   |
 | Builder's Crafts & Additions         |   🟩   | 
 | Builder's Delight                    |   ❔   |
 | Corail Woodcutter                    |   🟩   | 
