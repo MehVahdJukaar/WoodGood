@@ -13,6 +13,18 @@
 |                                                                                                                                   |
 
 ---
+## v2.11.55
+
+### FIXES:
+- **Regions Unexplored** (C): Update the missing Class, ShrubBlock - [#1343](https://github.com/MehVahdJukaar/WoodGood/issues/1343)
+
+### ADDED:
+- **Legend's Missing Blocks** (NF)
+- **Ultimate Car** (NF): Ported from 1.20.1
+- **Shadow_x_os's Blocks +** (NF): Ported from 1.20.1 - [Blocks +](https://www.curseforge.com/minecraft/mc-mods/shadow-x-blocks-plus) - if you are wondering which mod is it. 
+
+---
+
 ## v2.11.54
 
 ### FIXES:
