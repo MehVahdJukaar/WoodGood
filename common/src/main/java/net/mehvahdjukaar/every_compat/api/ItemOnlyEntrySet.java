@@ -124,7 +124,6 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
         //populate default ones
     }
 
-
     @Override
     public void registerTiles(SimpleModule module, Registrator<BlockEntityType<?>> registry) {
         Item base = getBaseItem();

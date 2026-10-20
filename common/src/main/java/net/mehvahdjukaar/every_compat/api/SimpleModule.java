@@ -82,6 +82,7 @@ public class SimpleModule extends CompatModule {
         getEntries().forEach(e -> e.addTranslations(this, lang));
     }
 
+    //TODO: move the blockCount / bloat to registerItems
     public <T extends BlockType> void registerBlocks(Class<T> typeClass,
                                                      Registrator<Block> registry, Collection<T> types) {
         int blockCount = 0;
