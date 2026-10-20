@@ -120,13 +120,11 @@ public final class TaskRunnerWithFailureCollection {
         for (FailureGroup group : groups.values()) {
             total += group.count;
             if (group.count > 1) {
-                EveryCompat.LOGGER.warn(
-                        "[{}] {} additional failures with the same cause ({}). Examples: {}",
-                        group.context,
-                        group.count - 1,
-                        rootMessage(group.error),
-                        String.join(", ", group.samples)
-                );
+                String message = String.format("[%s] %s additional failures with the same cause (See below):\n\t(%s). Examples:\n\t\t- %s",
+                        group.context, group.count - 1,
+                        rootMessage(group.error), String.join("\n\t\t- ", group.samples));
+
+                EveryCompat.LOGGER.warn(message);
             }
         }
 
