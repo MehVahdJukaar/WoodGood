@@ -290,8 +290,10 @@ public class WoodworksModule extends EveryCompatModule {
                                 .pushReaction(PushReaction.DESTROY)
                         )
                 )
-                .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
-                        "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
+                .addModelTransform(m ->
+                        m.replaceWithTextureFromChild("minecraft:block/oak_leaves", LEAVES,
+                                s -> !s.contains("/snow") && !s.contains("_snow"))
+                )
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(modRes("leaf_piles"), Registries.BLOCK, Registries.ITEM)
                 .setTab(tab)
