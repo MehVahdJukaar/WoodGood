@@ -71,7 +71,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:structure-gel-api-378802:5188368") // Blue-Skies //!! 1.20.1
 //    modRuntimeOnly("curse.maven:monolib-968432:6123990") //v2.0.0 | More-Beautiful-Torches
 //    modRuntimeOnly("curse.maven:quad-932715:5900860") // v1.2.9 | More-Chest-Variants, More-Crafting-Table
-//    modRuntimeOnly("curse.maven:lithostitched-936015:8660310") // v1.8.0+beta4 | Regions-Unexplored
+//    modRuntimeOnly("curse.maven:lithostitched-936015:9170709") // v1.8.1 | Regions-Unexplored
 //    modRuntimeOnly("curse.maven:platform-997634:8075942") // v1.3.3 | Vanilla-Backport
 
     //- ~/neoforge/mods LOCAL
