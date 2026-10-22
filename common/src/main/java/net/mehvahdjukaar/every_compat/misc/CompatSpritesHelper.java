@@ -449,13 +449,8 @@ public class CompatSpritesHelper {
         addOptionalInEC("regions_unexplored:eucalyptus_log", "_side", "block/regions_unexplored/eucalyptus_log");
 
         // Leaves
-        addOptional("regions_unexplored:alpha_leaves", "_leaves", "regions_unexplored:block/alpha_oak_leaves");
-        addOptional("regions_unexplored:apple_oak_leaves", "_leaves", "regions_unexplored:block/apple_oak_leaves_stage_0");
-        addOptional("regions_unexplored:flowering_leaves", "_leaves", "regions_unexplored:item/flowering_leaves");
+        addOptional("regions_unexplored:flowering_leaves", "_leaves", "minecraft:block/oak_leaves");
         addOptional("regions_unexplored:palm_leaves", "_leaves", "regions_unexplored:block/palm_leaves_side");
-        addOptional("regions_unexplored:enchanted_birch_leaves", "_leaves", "regions_unexplored:item/enchanted_birch_leaves");
-        addOptional("regions_unexplored:silver_birch_leaves", "_leaves", "regions_unexplored:item/silver_birch_leaves");
-        addOptional("regions_unexplored:small_oak_leaves", "_leaves", "minecraft:block/oak_leaves");
 
         // -------------------- Endless Biomes
         addOptional("endlessbiomes:twisted_stem", "_side", "endlessbiomes:block/twistedlogsidetest");
@@ -498,9 +493,10 @@ public class CompatSpritesHelper {
     }
 
     /// @param ec_texturePath everycomp will be used as namespace
+    @SuppressWarnings("SameParameterValue")
     private static void addOptionalInEC(String blockId, String textureId, String ec_texturePath) {
         BuiltInRegistries.BLOCK.getOptional(ResourceLocation.parse(blockId))
-                .ifPresent(b -> TextureCache.registerSpecialTextureForBlock(b, textureId, ResourceLocation.fromNamespaceAndPath(EveryCompat.MOD_ID, ec_texturePath)));
+                .ifPresent(b -> TextureCache.registerSpecialTextureForBlock(b, textureId, EveryCompat.res(ec_texturePath)));
     }
 
     private static void addOptional(String modId, String blockPath, String textureId, String texturePath) {
@@ -573,15 +569,17 @@ public class CompatSpritesHelper {
 
     //ugly hardcoded wood post-processing
     private static final Supplier<WoodType> FLOWERING_AZALEA = WoodTypeRegistry.INSTANCE.makeFutureHolder(
-            ResourceLocation.fromNamespaceAndPath("ecologics", "flowering_azalea"));
+            ResourceLocation.parse("ecologics:flowering_azalea"));
     private static final Supplier<WoodType> AZALEA = WoodTypeRegistry.INSTANCE.makeFutureHolder(
-            ResourceLocation.fromNamespaceAndPath("ecologics", "azalea"));
+            ResourceLocation.parse("ecologics:azalea"));
     private static final Supplier<WoodType> BRIMWOOD = WoodTypeRegistry.INSTANCE.makeFutureHolder(
-            ResourceLocation.fromNamespaceAndPath("regions_unexplored", "brimwood"));
+            ResourceLocation.parse("regions_unexplored:brimwood"));
     private static final Supplier<WoodType> STRANGEWOOD = WoodTypeRegistry.INSTANCE.makeFutureHolder(
-            ResourceLocation.fromNamespaceAndPath("aoa", "strangewood"));
+            ResourceLocation.parse("aoa:strangewood"));
 
-    public static void maybePostProcessWoodTexture(WoodType wood, ResourceLocation newId, ResourceManager manager, TextureImage textureSupplier, TextureInfo textureInfo) {
+    // ─────────────────────────────────── Woodtype ────────────────────────────────────
+    public static void maybePostProcessWoodTexture(WoodType wood, ResourceLocation newId, ResourceManager manager,
+                                                   TextureImage textureSupplier, TextureInfo textureInfo) {
         // Ecologics
         if (wood == FLOWERING_AZALEA.get()) {
             flowerAzalea(textureSupplier, manager, newId, textureInfo);
