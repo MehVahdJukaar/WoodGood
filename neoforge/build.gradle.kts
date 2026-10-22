@@ -113,7 +113,7 @@ dependencies {
     modCompileOnly("curse.maven:refurbished-furniture-897116:7473565")
     modCompileOnly("curse.maven:storage-drawers-223852:6995432")
     modCompileOnly("curse.maven:twigs-496913:8191595")
-    modCompileOnly("curse.maven:valhelsia-furniture-694349:6341023")
+    modCompileOnly("curse.maven:valhelsia-furniture-694349:6341023") // Valhelsia-Core
     modCompileOnly("curse.maven:mighty-mail-902986:6542124")
     modCompileOnly("curse.maven:missing-wilds-622590:6302230")
     modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5520190") // Quad - LieOnLion
