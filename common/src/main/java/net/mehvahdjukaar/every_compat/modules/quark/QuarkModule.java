@@ -253,7 +253,17 @@ public class QuarkModule extends SimpleModule {
         hedges = QuarkSimpleEntrySet.builder(LeavesType.class, "hedge",
                         HedgesModule.class,
                         getModBlock("oak_hedge"), () -> VanillaLeavesTypes.OAK,
-                        leavesType -> new HedgeBlock("", null, Blocks.OAK_FENCE, leavesType.leaves)
+                        leavesType -> {
+                            WoodType woodType = leavesType.getAssociatedWoodType();
+                            Block fence;
+
+                            if (woodType != null && woodType.getBlockOfThis(FENCE) != null)
+                                fence = woodType.getBlockOfThis(FENCE);
+                            else
+                                fence = Blocks.OAK_FENCE;
+
+                            return new HedgeBlock("", null, fence, leavesType.leaves);
+                        }
                 )
                 //.requiresChildren(LOG) // Reason: RECIPES. Leaves are required to have WoodType & LOG
                 .addCondition(leavesType -> leavesType.getAssociatedWoodType() != null)
