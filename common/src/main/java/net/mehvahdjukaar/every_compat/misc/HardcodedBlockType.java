@@ -180,26 +180,38 @@ public class HardcodedBlockType {
         return null;
     }
 
+    //      ┌──────────────────────────────────────────────────────────┐
+    //      │                          Record                          │
+    //      └──────────────────────────────────────────────────────────┘
     protected record PendingBlockInfo(String modThatTheBlockIsFrom, String woodNamespace, String woodFullId, String blockName) {
 
         public static PendingBlockInfo of(String modThatTheBlockIsFrom, String woodNamespace, String woodFullId, String blockName) {
             return new PendingBlockInfo(modThatTheBlockIsFrom, woodNamespace, woodFullId, blockName);
         }
 
+        /// Id of mod that supported-block is from
         public boolean isForSupportedModId(String modId) {
             return this.modThatTheBlockIsFrom.matches(modId);
         }
 
+        /// The mod that new WoodType/LeavesType is from
         public boolean isForWoodTypeNamespace(String namespace) {
             return this.woodNamespace.matches(namespace);
         }
 
+        /// Full Id of BlockType (WoodType, LeavesType)
         public boolean isForWoodTypeFullId(String fullId) {
             return this.woodFullId.matches(fullId);
         }
 
-        public boolean isForBlockName(String blockName) {
-            return this.blockName.matches(blockName);
+        /**
+         * @param blockNameOrKeyword keyword or Regex or Block Name
+         *                                  <br>Example (keyword): "chair"
+         *                                  <br>Example (Blockname): "redwood_chair"
+         *                                  <br>Example (regex): "\\w+_chair"
+         */
+        public boolean isForBlockName(String blockNameOrKeyword) {
+            return this.blockName.matches(blockNameOrKeyword) || this.blockName.contains(blockNameOrKeyword);
         }
         
     }
