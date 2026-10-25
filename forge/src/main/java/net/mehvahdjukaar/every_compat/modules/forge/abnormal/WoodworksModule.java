@@ -300,6 +300,7 @@ public class WoodworksModule extends SimpleModule {
                 .setTabKey(tab)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
+                .addRecipe(modRes("oak_leaves_from_oak_leaf_pile"))
                 .copyParentDrop()
                 .copyParentTint()
                 .build();
