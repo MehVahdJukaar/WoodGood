@@ -140,30 +140,26 @@ public class MoreChestVariantsModule extends SimpleModule {
         executor.accept((manager, sink) -> {
             trappedChests.blocks.forEach((wood, block) -> {
                 // SINGLE
-                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/oak"),
                         EveryCompat.res("entity/mcv_chest_normal_m"),
                         EveryCompat.res("entity/mcv_chest_normal_o"),
                         EveryCompat.res("entity/mcv_trapped_normal_o"), 0
                 );
                 // LEFT
-                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/oak_left"),
                         EveryCompat.res("entity/mcv_chest_left_m"),
                         EveryCompat.res("entity/mcv_chest_left_o"),
                         EveryCompat.res("entity/mcv_trapped_left_o"), 0
                 );
                 // RIGHT
-                generateChestTexture(sink, manager, shortenedId(), wood, block,
+                generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/oak_right"),
                         EveryCompat.res("entity/mcv_chest_right_m"),
                         EveryCompat.res("entity/mcv_chest_right_o"),
                         EveryCompat.res("entity/mcv_trapped_right_o"), 0
                 );
-
-                // MODEL BLOCK
-                String path = shortenedId() + "/" + wood.getAppendableId() + "_chest";
-                String trapped_path = shortenedId() + "/" + wood.getAppendableId() + "_trapped_chest";
 
             });
 
