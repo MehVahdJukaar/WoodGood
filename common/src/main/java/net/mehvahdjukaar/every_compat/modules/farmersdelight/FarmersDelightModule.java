@@ -27,16 +27,17 @@ import vectorwing.farmersdelight.common.block.CabinetBlock;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.function.Consumer;
 
 import static java.util.Map.entry;
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
+import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.isBambooLike;
 import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
-// SUPPORT: FABRIC-v2.4.0+ | FORGE-v1.2.8+
+// SUPPORT: FABRIC-v2.5.7+ | FORGE-v1.3.4+
 public class FarmersDelightModule extends SimpleModule {
 //NOTE: the new version has a reworked recipe system since (FB)-v3.3.0+ or (FG)-v1.3.0+
 
@@ -88,7 +89,7 @@ public class FarmersDelightModule extends SimpleModule {
 
         executor.accept((manager, sink) -> {
             // Creating cutting_board recipes
-            forEachSafely("cutting recipe", WoodTypeRegistry.INSTANCE, woodType -> {
+            forEachSafely("FarmersDelight's recipes", WoodTypeRegistry.INSTANCE, woodType -> {
                 if (HardcodedBlockType.isKnownVanillaWood(woodType)) return;
 
                 // Skip if one of Farmer's-Cutting compat mods is installed
@@ -96,23 +97,30 @@ public class FarmersDelightModule extends SimpleModule {
                 boolean isRecipeModNotInstalled = !PlatHelper.getInstalledMods().contains(namespaceRegex);
                 boolean isCollectionModNotInstalled = !PlatHelper.getInstalledMods().contains("mr_farmers_cuttingcollection")
                         && !COMPAT_RECIPE_MODS.containsKey(woodType.getNamespace());
+                boolean isNotAlreadySupportedMods = !getAlreadySupportedMods().contains(woodType.getNamespace());
 
-                if (isRecipeModNotInstalled && isCollectionModNotInstalled) {
-                    createCuttingRecipe(LOG, woodType, sink, manager);
-                    createCuttingRecipe(WOOD, woodType, sink, manager);
+                if (isRecipeModNotInstalled && isCollectionModNotInstalled && isNotAlreadySupportedMods) {
+                    createCuttingRecipe(LOG, woodType.getBlockOfThis(LOG), woodType.getBlockOfThis(STRIPPED_LOG),
+                            woodType, sink, manager);
+                    createCuttingRecipe(WOOD, woodType.getBlockOfThis(WOOD), woodType.getBlockOfThis(STRIPPED_WOOD),
+                            woodType, sink, manager);
 
                     createSalvagingRecipe("furniture", woodType, sink, manager);
-                    createSalvagingRecipe(CHEST_BOAT, woodType, sink, manager);
+                    if (woodType.getItemOfThis(CHEST_BOAT) != null) createSalvagingRecipe(CHEST_BOAT, woodType, sink, manager);
                 }
             });
         });
     }
 
-    public void createCuttingRecipe(String recipeType, WoodType woodType, ResourceSink sink, ResourceManager manager) {
+    public void createCuttingRecipe(String recipeType, Block input, Block output, WoodType woodType, ResourceSink sink, ResourceManager manager) {
 
-        if (Objects.isNull(woodType.getBlockOfThis(recipeType))) return;
+        if (input == null || output == null || isBambooLike(woodType)) return;
 
-        ResourceLocation recipeLocation = ResType.RECIPES.getPath(modRes("cutting/oak_"+recipeType));
+        String location = (isBambooLike(woodType))
+                ? modRes("cutting/bamboo_block").toString()
+                : modRes("cutting/oak_" + recipeType).toString();
+
+        ResourceLocation recipeLocation = ResType.RECIPES.getPath(location);
 
         try (InputStream recipeStream = manager.getResource(recipeLocation)
                 .orElseThrow(() -> new FileNotFoundException(recipeLocation.toString())).open()) {
@@ -132,7 +140,17 @@ public class FarmersDelightModule extends SimpleModule {
 
     public void createSalvagingRecipe(String recipeType, WoodType woodType, ResourceSink sink, ResourceManager manager) {
 
-        ResourceLocation recipeLocation = ResType.RECIPES.getPath(modRes("salvaging/oak_"+recipeType));
+        // default
+        String location = modRes("salvaging/oak_" + recipeType).toString();;
+
+        if (isBambooLike(woodType)) {
+                if (recipeType.equals("furniture"))
+                    location = modRes("salvaging/bamboo_furniture").toString();
+                else if (recipeType.equals(CHEST_BOAT))
+                    location = modRes("salvaging/bamboo_chest_raft").toString();
+        }
+
+        ResourceLocation recipeLocation = ResType.RECIPES.getPath(location);
 
         try (InputStream recipeStream = manager.getResource(recipeLocation)
                 .orElseThrow(() -> new FileNotFoundException(recipeLocation.toString())).open()) {
@@ -154,6 +172,8 @@ public class FarmersDelightModule extends SimpleModule {
 
         if (object instanceof JsonObject jsonObject) {
             for (String key : jsonObject.keySet()) {
+                if (key.matches("type|tool|sound")) continue;
+
                 switch (key) {
                     case "ingredients" -> {
                         if (jsonObject.get(key).isJsonArray())
@@ -177,25 +197,34 @@ public class FarmersDelightModule extends SimpleModule {
                     parseAndModifyRecipe(jsonArray.get(idx).getAsJsonArray(), woodType);
                 }
                 else if (jsonArray.get(idx).isJsonObject()) {
-                    convertItemType(jsonArray.get(idx).getAsJsonObject(), woodType, "item");
+                    boolean isNotConverted = convertItemType(jsonArray.get(idx).getAsJsonObject(), woodType, "item");
+                    if (isNotConverted) {
+                        jsonArray.remove(idx);
+                        idx -= 1;
+                    }
+
                 }
             }
         }
     }
 
-    public static void convertItemType(JsonObject jsonObject, WoodType woodType, String jsonKey) {
+    public static boolean convertItemType(JsonObject jsonObject, WoodType woodType, String jsonKey) {
         ResourceLocation baseItemId = new ResourceLocation(jsonObject.get(jsonKey).getAsString());
         Item baseItem = BuiltInRegistries.ITEM.get(baseItemId);
         WoodType originalType = WoodTypeRegistry.INSTANCE.getBlockTypeOf(baseItem);
+        boolean isNotConverted = false;
 
-        if (originalType == VanillaWoodTypes.OAK) {
+        if (originalType == VanillaWoodTypes.OAK || originalType == VanillaWoodTypes.BAMBOO) {
             Item newItem = BlockSetAPI.changeItemType(baseItem, originalType, woodType);
 
-            if (newItem != null)
+            if (newItem != null) {
                 jsonObject.addProperty(jsonKey, Utils.getID(newItem).toString());
+            }
             else
-                jsonObject.remove(jsonKey);
+                isNotConverted = true;
         }
+
+        return isNotConverted;
     }
 
 
@@ -217,4 +246,9 @@ public class FarmersDelightModule extends SimpleModule {
         entry("terrestria", "fcterrestria"),
         entry("twilightforest", "fctf")
     );
+
+    @Override
+    public List<String> getAlreadySupportedMods() {
+        return List.of("mynethersdelight", "verdance");
+    }
 }
