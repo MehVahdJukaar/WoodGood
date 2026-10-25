@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.modules.regions_unexplored;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
@@ -50,6 +51,7 @@ public abstract class RegionsUnexploredModuleAbstract extends SimpleModule {
                 .addTag(modRes("branches"), Registries.ITEM)
                 .setTabKey(tab)
                 .addRecipe(modRes("oak_branch_from_oak_log"))
+                .setRenderType(RenderLayer.CUTOUT)
                 .build();
         this.addEntry(branches);
 
@@ -72,6 +74,7 @@ public abstract class RegionsUnexploredModuleAbstract extends SimpleModule {
                 .addRecipe(modRes("dark_oak_shrub"))
                 .copyParentDrop()
                 .copyParentTint()
+                .setRenderType(RenderLayer.CUTOUT)
                 .build();
         this.addEntry(shrubs);
     }
