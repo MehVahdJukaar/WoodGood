@@ -52,7 +52,7 @@ public class CompatSpritesHelper {
     };
     public static final @NotNull Predicate<String> LOOKS_LIKE_LEAF_TEXTURE = (s) -> {
         s = normalizeLabel(s);
-        return !s.contains("_top") && !s.contains("_bushy") && !s.contains("_snow") && !s.contains("_overlay") && !s.contains("/snow");
+        return !s.contains("_top") && !s.contains("_bushy") && !s.contains("_snow") && !s.contains("_overlay") && !s.contains("/snow") && s.contains("_leaves");
     };
 
     public static void addHardcodedSprites() {
@@ -73,7 +73,6 @@ public class CompatSpritesHelper {
 
 
         // -------------------- Echovoids
-
         addOptional("echovoids", "nillow_log", "_side", "block/image11");
         addOptional("echovoids", "nillow_log", "_top", "block/blue_nillow_log_top");
         addOptional("echovoids", "stripped_nillow_log", "_side", "block/stripped_nillow_log_side");
