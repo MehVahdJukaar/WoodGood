@@ -70,6 +70,8 @@ public class UtilityRecipe {
 
         if (object instanceof JsonObject jsonObject) {
             for (String key : jsonObject.keySet()) {
+                if (key.matches("type|category|pattern")) continue;
+
                 switch (key) {
                     case "ingredients", "ingredient", "results" -> {
                         if (jsonObject.get(key).isJsonArray())
