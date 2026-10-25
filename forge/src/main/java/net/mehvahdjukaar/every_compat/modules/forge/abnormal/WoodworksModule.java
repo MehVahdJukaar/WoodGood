@@ -8,7 +8,6 @@ import com.teamabnormals.blueprint.common.block.LeafPileBlock;
 import com.teamabnormals.blueprint.common.item.BEWLRBlockItem;
 import com.teamabnormals.blueprint.common.item.BEWLRFuelBlockItem;
 import com.teamabnormals.blueprint.core.registry.BlueprintBlockEntityTypes;
-import com.teamabnormals.woodworks.client.renderer.block.DrawerBlockEntityRenderer;
 import com.teamabnormals.woodworks.client.renderer.block.DrawerBlockEntityWithoutLevelRenderer;
 import com.teamabnormals.woodworks.common.block.ClosetBlock;
 import com.teamabnormals.woodworks.common.block.TrappedClosetBlock;
@@ -345,8 +344,6 @@ public class WoodworksModule extends SimpleModule {
         CompatChestBlockRenderer.register(event, chests.getTile(CompatChestBlockEntity.class), shortenedId());
         CompatChestBlockRenderer.register(event, trappedChests.getTile(CompatChestBlockEntity.class), shortenedId());
 
-        event.register(closet.getTile(ClosetBlockEntity.class), DrawerBlockEntityRenderer::new);
-
     }
 
     @Override
@@ -529,21 +526,24 @@ public class WoodworksModule extends SimpleModule {
                         modRes("entity/chest/bamboo/normal"),
                         EveryCompat.res("block/abnww/chest/bamboo/normal_m"),
                         EveryCompat.res("block/abnww/chest/bamboo/normal_o"),
-                        EveryCompat.res("block/abnww/chest/bamboo/trapped_o"), 2
+                        EveryCompat.res("block/abnww/chest/bamboo/trapped_o"), 2, 0,
+                        "/normal", "/trapped"
                 );
                 // LEFT
                 generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/bamboo/normal_left"),
                         EveryCompat.res("block/abnww/chest/bamboo/normal_left_m"),
                         EveryCompat.res("block/abnww/chest/bamboo/normal_left_o"),
-                        EveryCompat.res("block/abnww/chest/bamboo/trapped_left_o"), 2
+                        EveryCompat.res("block/abnww/chest/bamboo/trapped_left_o"), 2, 0,
+                        "/normal", "/trapped"
                 );
                 // RIGHTdamn
                 generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/bamboo/normal_right"),
                         EveryCompat.res("block/abnww/chest/bamboo/normal_right_m"),
                         EveryCompat.res("block/abnww/chest/bamboo/normal_right_o"),
-                        EveryCompat.res("block/abnww/chest/bamboo/trapped_right_o"), 2
+                        EveryCompat.res("block/abnww/chest/bamboo/trapped_right_o"), 2, 0,
+                        "/normal", "/trapped"
                 );
             })
         );
