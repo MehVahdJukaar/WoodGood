@@ -89,6 +89,7 @@ public class EveryCompatForge extends EveryCompatCommon {
             EveryCompatForgeClient.init();
         }
 
+        //noinspection removal
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         LegacyRemapper.init(modBus);
     }
