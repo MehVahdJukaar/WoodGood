@@ -43,9 +43,7 @@ public abstract class MacawStairsModuleAbstract extends SimpleModule {
                 .setTabKey(tab)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
-                //REASON: take a look at their textures, you'll see why.
-                .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
-                .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(terrace_stairs);
 
@@ -60,9 +58,7 @@ public abstract class MacawStairsModuleAbstract extends SimpleModule {
                 .setTabKey(tab)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
-                //REASON: take a look at their textures, you'll see why.
-                .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
-                .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(skyline_stairs);
 
@@ -77,9 +73,7 @@ public abstract class MacawStairsModuleAbstract extends SimpleModule {
                 .setTabKey(tab)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
-                //REASON: take a look at their textures, you'll see why.
-                .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
-                .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(compact_stairs);
 
@@ -94,9 +88,7 @@ public abstract class MacawStairsModuleAbstract extends SimpleModule {
                 .setTabKey(tab)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
-                //REASON: take a look at their textures, you'll see why.
-                .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
-                .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(bulk_stairs);
 
@@ -111,9 +103,7 @@ public abstract class MacawStairsModuleAbstract extends SimpleModule {
                 .setTabKey(tab)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
-                //REASON: take a look at their textures, you'll see why.
-                .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
-                .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(loft_stairs);
 
@@ -129,9 +119,7 @@ public abstract class MacawStairsModuleAbstract extends SimpleModule {
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .noDrops() //REASON: Has no loot_table file so the block will self-drop just fine
                 .defaultRecipe()
-                //REASON: take a look at their textures, you'll see why.
-                .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
-                .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(balconies);
 
@@ -147,9 +135,7 @@ public abstract class MacawStairsModuleAbstract extends SimpleModule {
                 .setTabKey(tab)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
-                //REASON: take a look at their textures, you'll see why.
-                .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
-                .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(railings);
 
@@ -164,9 +150,7 @@ public abstract class MacawStairsModuleAbstract extends SimpleModule {
                 .setTabKey(tab)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
-                //REASON: take a look at their textures, you'll see why.
-                .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
-                .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(platforms);
 

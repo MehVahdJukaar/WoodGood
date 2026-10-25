@@ -351,6 +351,13 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return (BL) this;
         }
 
+        /// WoodType's log or stripped_log that has ALPHA and is not a full 16x16. It should be excluded.<br>
+        /// The link will help you understand why. @see <a href=https://github.com/KyaniteMods/DeeperAndDarker/blob/neoforge-1.21/src/main/resources/assets/deeperdarker/textures/block/blooming_stem.png>deeperdarker:bloom's texture</a>
+        public BL excludedWoodTypes() {
+            this.addCondition(blockType -> !CompatSpritesHelper.EXCLUDED_WOODTYPES.contains(blockType.getId().toString()));
+            return (BL) this;
+        }
+
         // Exclude Leaves | Wood | Stone | Other BlockTypes - exclusive with addCondition
         public BL excludeBlockTypes(String regEx) {
             this.addCondition(blockType -> !blockType.getId().toString().matches(regEx));

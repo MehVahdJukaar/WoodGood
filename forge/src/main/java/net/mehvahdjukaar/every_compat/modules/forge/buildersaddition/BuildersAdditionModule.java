@@ -252,7 +252,7 @@ public class BuildersAdditionModule extends SimpleModule {
                 .setTabKey(tab)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
-//                .excludeBlockTypes("", "")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(hedges);
     }

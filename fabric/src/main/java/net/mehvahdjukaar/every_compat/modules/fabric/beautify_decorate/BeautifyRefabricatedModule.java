@@ -7,9 +7,7 @@ import io.github.suel_ki.beautify.core.init.BlockInit;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
-import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
@@ -43,9 +41,7 @@ public class BeautifyRefabricatedModule extends SimpleModule {
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .defaultRecipe()
                 .setTabKey(tab)
-                //REASON: take a look at their //TEXTURES, you'll see why.
-                .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
-                .excludeBlockTypes("betternether:(nether_mushroom|nether_reed)")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(tellis);
 

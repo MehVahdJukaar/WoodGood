@@ -222,7 +222,7 @@ public class QuarkModule extends SimpleModule {
                 .setTabKey(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
-                .excludeBlockTypes("twilightforest", "dark")
+                .excludeBlockTypes("twilightforest", "dark") //REASON: ???
                 .build();
         this.addEntry(chests);
 

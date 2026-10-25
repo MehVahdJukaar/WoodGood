@@ -105,8 +105,7 @@ public class ClutterModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: Take a look at their //TEXTURES, you'll see why. Excluded!
-                .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(tables);
 
@@ -121,8 +120,7 @@ public class ClutterModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: Take a look at their //TEXTURES, you'll see why. Excluded!
-                .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(stripped_tables);
 
@@ -138,8 +136,7 @@ public class ClutterModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: Take a look at their //TEXTURES, you'll see why. Excluded!
-                .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(chairs);
 
@@ -154,8 +151,7 @@ public class ClutterModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: Take a look at their //TEXTURES, you'll see why. Excluded!
-                .excludeBlockTypes("terrestria:(sakura|yucca_palm)|betternether:(nether_mushroom|nether_reed)")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(stripped_chairs);
 
@@ -200,8 +196,7 @@ public class ClutterModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: Take a look at their //TEXTURES, you'll see why. Excluded!
-                .excludeBlockTypes("terrestria:(sakura|yucca_palm)")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(shelves);
 
@@ -233,8 +228,7 @@ public class ClutterModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: Take a look at their //TEXTURES, you'll see why. Excluded!
-                .excludeBlockTypes("terrestria:(sakura|yucca_palm)")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(benches);
 
@@ -249,8 +243,7 @@ public class ClutterModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTabKey(tab)
                 .defaultRecipe()
-                //REASON: Take a look at their //TEXTURES, you'll see why. Excluded!
-                .excludeBlockTypes("terrestria:(sakura|yucca_palm)")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(stripped_benches);
 

@@ -20,6 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -54,6 +55,15 @@ public class CompatSpritesHelper {
         s = normalizeLabel(s);
         return !s.contains("_top") && !s.contains("_bushy") && !s.contains("_snow") && !s.contains("_overlay") && !s.contains("/snow") && s.contains("_leaves");
     };
+
+    ///REASON: WoodType's log that has ALPHA and is not a full 16x16. It should be excluded.<br>
+    /// The link will help you understand why. @see <a href=https://github.com/KyaniteMods/DeeperAndDarker/blob/neoforge-1.21/src/main/resources/assets/deeperdarker/textures/block/blooming_stem.png>deeperdarker:bloom's texture</a>
+    public static final List<String> EXCLUDED_WOODTYPES = List.of(
+            "deeperdarker:bloom",
+            "terrestria:yucca_palm", "terrestria:sakura",
+            "betternether:nether_mushroom", "betternether:nether_reed",
+            "antarchy:truffalo"
+    );
 
     public static void addHardcodedSprites() {
 
