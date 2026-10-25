@@ -12,6 +12,21 @@
 |                                                                                                                                   |
 
 ---
+## v2.9.28
+
+### CHANGES
+- **Farmer's Delight** (C): Updated the cutting/salvaging recipes to include recipes for BambooType (partially backported from 1.21)
+
+### FIXES: 
+- **Every Compat** (C): Fixed a rare case with **Quark** & **Spawn** where hedges' files wasn't generated due to incorrect resourcelocation for date_leaves' texture which was `#side` - [#1348](https://github.com/MehVahdJukaar/WoodGood/issues/1348)
+- **Woodworks** (NF): Closet's missing textures - [#1337](https://github.com/MehVahdJukaar/WoodGood/issues/1337)
+- **Farmer's Delight** (C): Fixed a rare case where salvaging recipe don't work due to error parsing
+
+### ADDED:
+- **Resonant End** (IT): Added the ResourceLocation of 2 leaves' correct texture - [#1328](https://github.com/MehVahdJukaar/WoodGood/issues/1328) 
+
+---
+
 ## v2.9.27
 
 ### CHANGES:
