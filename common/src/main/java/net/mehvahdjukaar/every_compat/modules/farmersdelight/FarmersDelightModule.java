@@ -164,7 +164,7 @@ public class FarmersDelightModule extends SimpleModule {
 
             sink.addJson(EveryCompat.res(newPath), recipe, ResType.RECIPES);
         } catch (IOException e) {
-            EveryCompat.LOGGER.error("Failed to generate the cutting recipe for {} - {}", recipeLocation.toString(), e);
+            EveryCompat.LOGGER.error("Failed to generate the salvaging recipe for {} - {}", recipeLocation.toString(), e);
         }
     }
 
