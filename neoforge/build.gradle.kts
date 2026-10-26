@@ -101,29 +101,6 @@ dependencies {
     modCompileOnly("curse.maven:architectury-api-419699:5786327") // v13.0.8 | REI, Furnish, [Let's Do]-Meadow
 
 //!! =================================================== IMPORTS ==================================================== \\
-    //+ MIRRORED FROM COMMON - Required because dependOn(common) compiles common sources with neoforge classpath
-    modCompileOnly("curse.maven:another-furniture-610492:7355747")
-    modCompileOnly("curse.maven:architects-palette-433862:6861008") //@ BETA
-    modCompileOnly("curse.maven:backpacked-352835:7866688")
-    modCompileOnly("curse.maven:corail-pillar-266228:5669131")
-    modCompileOnly("curse.maven:decorative-blocks-reborn-1327768:7926194")
-    modCompileOnly("curse.maven:farmersdelight-398521:8083481")
-    modCompileOnly("curse.maven:handcrafted-538214:6330030") // Resourceful-Lib
-    modCompileOnly("curse.maven:rechiseled-558998:7687594") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ]
-    modCompileOnly("curse.maven:refurbished-furniture-897116:7473565")
-    modCompileOnly("curse.maven:storage-drawers-223852:6995432")
-    modCompileOnly("curse.maven:twigs-496913:8191595")
-    modCompileOnly("curse.maven:valhelsia-furniture-694349:6341023") // Valhelsia-Core
-    modCompileOnly("curse.maven:mighty-mail-902986:6542124")
-    modCompileOnly("curse.maven:missing-wilds-622590:6302230")
-    modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5520190") // Quad - LieOnLion
-    // OTHER MAVENs
-
-    // ~/neoforge/mods LOCAL
-    modCompileOnly("local-copper-age-neoforge:copperagebackport-neoforge-1.21.1-0.1.4")
-    modCompileOnly("local-dawnoftimebuilder:dawnoftimebuilder-neoforge-1.21.1-1.6.6")
-
-// ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
     //- ONLY FOR TESTING - can be commented out or enabled
 //    modRuntimeOnly("curse.maven:beautiful-campfires-1085950:6162194")
@@ -206,6 +183,29 @@ dependencies {
 
     modCompileOnly("org.violetmoon.quark:Quark:4.1-482-SNAPSHOT") // Zeta, Biolith @ https://maven.blamejared.com/org/violetmoon/quark/Quark/
 //    modCompileOnly("curse.maven:quark-243121:7640331") // v4.1.474 | TEMP BACKUP MAVEN
+
+    //+ MIRRORED FROM COMMON - Required because dependOn(common) compiles common sources with neoforge classpath
+    modCompileOnly("curse.maven:another-furniture-610492:7355747")
+    modCompileOnly("curse.maven:architects-palette-433862:6861008") //@ BETA
+    modCompileOnly("curse.maven:backpacked-352835:7866688")
+    modCompileOnly("curse.maven:corail-pillar-266228:5669131")
+    modCompileOnly("curse.maven:decorative-blocks-reborn-1327768:7926194")
+    modCompileOnly("curse.maven:farmersdelight-398521:8083481")
+    modCompileOnly("curse.maven:handcrafted-538214:6330030") // Resourceful-Lib
+    modCompileOnly("curse.maven:rechiseled-558998:7687594") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ]
+    modCompileOnly("curse.maven:refurbished-furniture-897116:7473565")
+    modCompileOnly("curse.maven:storage-drawers-223852:6995432")
+    modCompileOnly("curse.maven:twigs-496913:8191595")
+    modCompileOnly("curse.maven:valhelsia-furniture-694349:6341023") // Valhelsia-Core
+    modCompileOnly("curse.maven:mighty-mail-902986:6542124")
+    modCompileOnly("curse.maven:missing-wilds-622590:6302230")
+    modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5520190") // Quad - LieOnLion
+
+    // OTHER MAVENs
+
+    // ~/neoforge/mods LOCAL
+    modCompileOnly("local-copper-age-neoforge:copperagebackport-neoforge-1.21.1-0.1.4")
+    modCompileOnly("local-dawnoftimebuilder:dawnoftimebuilder-neoforge-1.21.1-1.6.6")
 
 //!! ========================================== DISABLED FOR A REASON =============================================== \\
 

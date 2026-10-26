@@ -100,31 +100,6 @@ dependencies {
     modCompileOnly("curse.maven:supermartijn642s-core-lib-454372:8623607") // v1.1.24 | Rechiseled
 
 //!! =================================================== IMPORTS ==================================================== \\
-    //+ MIRRORED FROM COMMON - Required because dependOn(common) compiles common sources with fabric classpath
-    modCompileOnly("curse.maven:another-furniture-610492:4815126") //!! 1.20.1
-    modCompileOnly("curse.maven:architects-palette-433862:6861002") // Forge-Config-API-Port @ BETA
-    modCompileOnly("curse.maven:backpacked-352835:7500600")
-    modCompileOnly("curse.maven:corail-pillar-266228:5613351")
-    modCompileOnly("curse.maven:decorative-blocks-reborn-1327768:6897415")
-    modCompileOnly("curse.maven:farmers-delight-refabricated-993166:8088691")
-    modCompileOnly("curse.maven:friends-and-foes-551364:8154503")
-    modCompileOnly("curse.maven:handcrafted-538214:6330030") // Resourceful-Lib
-    modCompileOnly("curse.maven:mighty-mail-902986:6542124")
-    modCompileOnly("curse.maven:missing-wilds-622590:6302231")
-    modCompileOnly("curse.maven:more-chest-variants-lieonlion-858032:5476664") // Quad - LieOnLion
-    modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5473304") // Quad - LieOnLion
-    modCompileOnly("curse.maven:rechiseled-558998:7687483") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ]
-    modCompileOnly("curse.maven:refurbished-furniture-897116:7473565")
-    modCompileOnly("curse.maven:storage-drawers-223852:6967726")
-    modCompileOnly("curse.maven:table-top-craft-fabric-729535:5319819") //@RLM: exp4j //!! 1.20.1
-    modCompileOnly("curse.maven:twigs-496913:6782788")
-    modCompileOnly("curse.maven:valhelsia-furniture-694349:6334936")
-    modCompileOnly("curse.maven:variant-vanilla-blocks-866509:5703471")
-    // OTHER MAVENs
-    modCompileOnly("maven.modrinth:furnish-furniture:29")
-    // ~/fabric/mods LOCAL
-    modCompileOnly("local-copper-age-neoforge:copperagebackport-fabric-1.21.1-0.1.4")
-    modCompileOnly("local-dawnoftimebuilder:Dawn Of Time-fabric-1.21.1-1.6.6")
 
     //- ONLY FOR TESTING - can be commented out or enabled
 //    modRuntimeOnly("curse.maven:beautiful-campfires-1085950:6828158")
@@ -180,6 +155,34 @@ dependencies {
     modCompileOnly("maven.modrinth:stylish-stiles:1.1.1-1.21")
     modCompileOnly("maven.modrinth:wilder-wild:4.2.1-mc1.21.1") // Frozen-Lib
 //    modCompileOnly("com.simibubi.create:create-fabric-1.20.1:$create_fabric_version") // Registrate, Flywheel //!! Need to update maven to get other libraries & the old maven are outdated
+
+    //+ MIRRORED FROM COMMON - Required because dependOn(common) compiles common sources with fabric classpath
+    modCompileOnly("curse.maven:another-furniture-610492:4815126") //!! 1.20.1
+    modCompileOnly("curse.maven:architects-palette-433862:6861002") // Forge-Config-API-Port @ BETA
+    modCompileOnly("curse.maven:backpacked-352835:7500600")
+    modCompileOnly("curse.maven:corail-pillar-266228:5613351")
+    modCompileOnly("curse.maven:decorative-blocks-reborn-1327768:6897415")
+    modCompileOnly("curse.maven:farmers-delight-refabricated-993166:8088691")
+    modCompileOnly("curse.maven:friends-and-foes-551364:8154503")
+    modCompileOnly("curse.maven:handcrafted-538214:6330030") // Resourceful-Lib
+    modCompileOnly("curse.maven:mighty-mail-902986:6542124")
+    modCompileOnly("curse.maven:missing-wilds-622590:6302231")
+    modCompileOnly("curse.maven:more-chest-variants-lieonlion-858032:5476664") // Quad - LieOnLion
+    modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5473304") // Quad - LieOnLion
+    modCompileOnly("curse.maven:rechiseled-558998:7687483") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ]
+    modCompileOnly("curse.maven:refurbished-furniture-897116:7473565")
+    modCompileOnly("curse.maven:storage-drawers-223852:6995424")
+    modCompileOnly("curse.maven:table-top-craft-fabric-729535:5319819") //@RLM: exp4j //!! 1.20.1
+    modCompileOnly("curse.maven:twigs-496913:6782788")
+    modCompileOnly("curse.maven:valhelsia-furniture-694349:6334936")
+    modCompileOnly("curse.maven:variant-vanilla-blocks-866509:5703471")
+
+    // OTHER MAVENs
+    modCompileOnly("maven.modrinth:furnish-furniture:29")
+
+    // ~/fabric/mods LOCAL
+    modCompileOnly("local-copper-age-neoforge:copperagebackport-fabric-1.21.1-0.1.4")
+    modCompileOnly("local-dawnoftimebuilder:Dawn Of Time-fabric-1.21.1-1.6.6")
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
 
