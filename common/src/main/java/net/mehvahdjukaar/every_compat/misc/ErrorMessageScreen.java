@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.misc;
 
+import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -68,7 +69,8 @@ public class ErrorMessageScreen extends Screen {
 
     @Override
     public void onClose() {
-        throw new RuntimeException("Every Compat encountered an error loading a module. Look at error below: ");
+        EveryCompat.LOGGER.error("Every Compat encountered an error loading a module. Look at error below: \n{}", getErrorMessages().getString());
+        throw new RuntimeException();
     }
 
     // static stuff
@@ -86,6 +88,18 @@ public class ErrorMessageScreen extends Screen {
         });
         return new ErrorMessageScreen(screen, 40, TITLE,
                 Component.translatable("gui.everycomp.error_screen.message", errorMessage));
+    }
+
+    public MutableComponent getErrorMessages() {
+        MutableComponent errorMessage = Component.literal("\n");
+        EveryCompat.getModulesThatErrored().forEach((mod, error) -> {
+            MutableComponent line = Component.literal("- ")
+                    .append(Component.literal(mod).withStyle(ChatFormatting.GOLD))
+                    .append(Component.literal(" : ").withStyle(ChatFormatting.WHITE))
+                    .append(Component.literal(error).withStyle(ChatFormatting.RED));
+            errorMessage.append(line).append(Component.literal("\n"));
+        });
+        return errorMessage;
     }
 
 }

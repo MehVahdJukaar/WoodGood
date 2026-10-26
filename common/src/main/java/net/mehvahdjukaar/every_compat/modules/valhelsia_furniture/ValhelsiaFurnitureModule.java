@@ -1,13 +1,11 @@
 package net.mehvahdjukaar.every_compat.modules.valhelsia_furniture;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.every_compat.misc.UtilityTag;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
-import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
-import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -49,7 +47,7 @@ public class ValhelsiaFurnitureModule extends EveryCompatModule {
                 )
                 .setRenderType(RenderLayer.CUTOUT)
                 .addTexture(modRes("block/table/oak/oak_table"))
-                .addTexture(modRes("block/table/oak/oak_table_connected"), PaletteStrategies.PLANKS_REMOVE_DARKEST)
+                .addTexture(modRes("block/table/oak/oak_table_connected"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(ModTags.Blocks.TABLES, Registries.BLOCK)
                 .defaultRecipe()
@@ -141,46 +139,18 @@ public class ValhelsiaFurnitureModule extends EveryCompatModule {
     public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicServerResources(executor);
 
-        executor.accept((manager, sink)-> {
-            createTagFor("desks", desks, desk_drawers, sink);
-            createTagFor("chairs", chairs, hay_chairs, sink);
-            for (var w : tables.blocks.keySet()) {
-                boolean isTagFull = false;
-                SimpleTagBuilder tag = SimpleTagBuilder.of(EveryCompat.res(w.getAppendableId() + "_tables"));
+        executor.accept((manager, sink)->
 
-                Block block = tables.blocks.get(w);
-                if (block != null) {
-                    isTagFull = true;
-                    tag.addEntry(block);
-                }
-                if (isTagFull) {
-                    sink.addTag(tag, Registries.ITEM);
-                    sink.addTag(tag, Registries.BLOCK);
-                }
-            }
-        });
-    }
+            desks.blocks.forEach((woodType, block) -> {
+                UtilityTag.createAndAddCustomTags(EveryCompat.res(woodType.createPathWith("", "desks")), sink,
+                        block, desk_drawers.blocks.get(woodType));
+                UtilityTag.createAndAddCustomTags(EveryCompat.res(woodType.createPathWith("", "chairs")), sink,
+                        chairs.blocks.get(woodType), hay_chairs.blocks.get(woodType));
+                UtilityTag.createAndAddCustomTags(EveryCompat.res(woodType.createPathWith("", "tables")), sink,
+                        tables.blocks.get(woodType));
+            })
 
-    public void createTagFor(String blockType, SimpleEntrySet<?,?> firstBlock, SimpleEntrySet<?,?> secondBlock, ResourceSink handler) {
-        for (var w : firstBlock.blocks.keySet()) {
-            boolean isTagFull = false;
-            SimpleTagBuilder tag = SimpleTagBuilder.of(EveryCompat.res(w.getAppendableId() + "_" + blockType));
-            Block firstB = firstBlock.blocks.get(w);
-            Block secondB = secondBlock.blocks.get(w);
-
-            if (firstB != null) {
-                isTagFull = true;
-                tag.addEntry(firstB);
-            }
-            if (secondB != null) {
-                isTagFull = true;
-                tag.addEntry(secondB);
-            }
-            if (isTagFull) {
-                handler.addTag(tag, Registries.ITEM);
-                handler.addTag(tag, Registries.BLOCK);
-            }
-        }
+        );
     }
 
     //REASON: Had to create this because of appendHoverText, "Hay Seat" is showing up on both chairs & hay_chairs

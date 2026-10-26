@@ -53,6 +53,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                 .setTab(getTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(window);
 
@@ -67,6 +68,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                 .setTab(getTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(window2);
 
@@ -81,6 +83,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                 .setTab(getTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(fourWindow);
 
@@ -96,6 +99,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                 .setTab(getTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(strippedLogWindow);
 
@@ -111,6 +115,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                 .setTab(getTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(strippedLogWindow2);
 
@@ -126,6 +131,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                 .setTab(getTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(strippedLogFourWindow);
 
@@ -182,6 +188,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                 .setTab(getTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(paneWindow);
 
@@ -197,6 +204,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                 .setTab(getTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(strippedPaneWindow);
 
@@ -224,6 +232,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                 .setTab(getTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(logParapet);
 
@@ -249,6 +258,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                 .addTag(modRes("blinds"), Registries.BLOCK)
                 .setTab(getTab(tab))
                 .defaultRecipe()
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(blinds);
 
@@ -289,6 +299,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                 .setTab(getTab(tab))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(curtain_rod);
     }

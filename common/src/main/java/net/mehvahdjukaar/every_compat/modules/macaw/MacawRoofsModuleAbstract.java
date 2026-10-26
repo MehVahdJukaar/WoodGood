@@ -45,9 +45,10 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
                 )
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTab(tab)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
-                .setTab(tab)
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(ATTIC_ROOFS);
 
@@ -57,9 +58,10 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
                 )
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTab(tab)
                 .setRenderType(RenderLayer.SOLID)
                 .defaultRecipe()
-                .setTab(tab)
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(LOWER_ROOFS);
 
@@ -69,9 +71,10 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
                 )
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTab(tab)
                 .setRenderType(RenderLayer.SOLID)
                 .defaultRecipe()
-                .setTab(tab)
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(ROOFS);
 
@@ -81,9 +84,10 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
                 )
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTab(tab)
                 .setRenderType(RenderLayer.SOLID)
                 .defaultRecipe()
-                .setTab(tab)
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(STEEP_ROOFS);
 
@@ -93,9 +97,10 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
                 )
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTab(tab)
                 .setRenderType(RenderLayer.SOLID)
                 .defaultRecipe()
-                .setTab(tab)
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(TOP_ROOFS);
 
@@ -105,9 +110,10 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
                 )
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTab(tab)
                 .setRenderType(RenderLayer.SOLID)
                 .defaultRecipe()
-                .setTab(tab)
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(UPPER_LOWER_ROOFS);
 
@@ -117,9 +123,10 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
                 )
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTab(tab)
                 .setRenderType(RenderLayer.SOLID)
                 .defaultRecipe()
-                .setTab(tab)
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(UPPER_STEEP_ROOFS);
 
@@ -129,9 +136,9 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
                 )
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTab(tab)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
-                .setTab(tab)
                 .build();
         this.addEntry(PLANKS_ATTIC_ROOFS);
 
@@ -141,9 +148,9 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
                 )
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTab(tab)
                 .setRenderType(RenderLayer.SOLID)
                 .defaultRecipe()
-                .setTab(tab)
                 .build();
         this.addEntry(PLANKS_LOWER_ROOFS);
 
@@ -153,9 +160,9 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
                 )
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTab(tab)
                 .setRenderType(RenderLayer.SOLID)
                 .defaultRecipe()
-                .setTab(tab)
                 .build();
         this.addEntry(PLANKS_ROOFS);
 
@@ -165,9 +172,9 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
                 )
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTab(tab)
                 .setRenderType(RenderLayer.SOLID)
                 .defaultRecipe()
-                .setTab(tab)
                 .build();
         this.addEntry(PLANKS_STEEP_ROOFS);
 
@@ -177,9 +184,9 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
                 )
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTab(tab)
                 .setRenderType(RenderLayer.SOLID)
                 .defaultRecipe()
-                .setTab(tab)
                 .build();
         this.addEntry(PLANKS_TOP_ROOFS);
 
@@ -189,9 +196,9 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
                 )
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTab(tab)
                 .setRenderType(RenderLayer.SOLID)
                 .defaultRecipe()
-                .setTab(tab)
                 .build();
         this.addEntry(PLANKS_UPPER_LOWER_ROOFS);
 
@@ -201,9 +208,9 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
                 )
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTab(tab)
                 .setRenderType(RenderLayer.SOLID)
                 .defaultRecipe()
-                .setTab(tab)
                 .build();
         this.addEntry(PLANKS_UPPER_STEEP_ROOFS);
     }

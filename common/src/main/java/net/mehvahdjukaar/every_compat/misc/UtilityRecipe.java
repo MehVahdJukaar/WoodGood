@@ -66,37 +66,34 @@ public class UtilityRecipe {
     }
 
     /// Parsing the recipe and modifying elements
-    public static void parseAndModifyRecipe(Object object, String oldIngredient, String newIngredien, String newResult, ResourceLocation recipeId) {
+    public static void parseAndModifyRecipe(Object object, String oldIngredient, String newIngredien, String newOutput, ResourceLocation recipeId) {
 
         if (object instanceof JsonObject jsonObject) {
             for (String key : jsonObject.keySet()) {
+                if (key.matches("type|category|pattern")) continue;
+
                 switch (key) {
-                    case "ingredients", "ingredient", "results" -> {
-                        if (jsonObject.get(key).isJsonArray())
-                            parseAndModifyRecipe(jsonObject.getAsJsonArray(key), oldIngredient, newIngredien, newResult, recipeId);
-                        else if (jsonObject.get(key).isJsonObject())
-                            parseAndModifyRecipe(jsonObject.getAsJsonObject(key), oldIngredient, newIngredien, newResult, recipeId);
-                        else
-                            EveryCompat.LOGGER.error("Failed to modify [ingredients, ingredient, or results] via recipe: {}", recipeId);
-                    }
-                    // modifying
+                    /// Modifying
                     case "result" -> {
                         if (jsonObject.getAsJsonObject(key).has("id"))
-                            jsonObject.getAsJsonObject(key).addProperty("id", newResult);
+                            jsonObject.getAsJsonObject(key).addProperty("id", newOutput);
                         else
                             EveryCompat.LOGGER.error("Failed to modify 'result' via recipe: {}", recipeId);
                     }
                     case "tag" -> {
                         if (jsonObject.get("tag").getAsString().equals(oldIngredient))
                             jsonObject.addProperty("tag", newIngredien);
-                        else
-                            EveryCompat.LOGGER.error("Failed to modify 'tag' via recipe: {}", recipeId);
                     }
                     case "item" -> {
                         if (jsonObject.get("item").getAsString().equals(oldIngredient))
                             jsonObject.addProperty("item", newIngredien);
-                        else
-                            EveryCompat.LOGGER.error("Failed to modify 'item' via recipe: {}", recipeId);
+                    }
+                    /// Parsing the recipe
+                    default -> {
+                        if (jsonObject.get(key).isJsonArray())
+                            parseAndModifyRecipe(jsonObject.getAsJsonArray(key), oldIngredient, newIngredien, newOutput, recipeId);
+                        else if (jsonObject.get(key).isJsonObject())
+                            parseAndModifyRecipe(jsonObject.getAsJsonObject(key), oldIngredient, newIngredien, newOutput, recipeId);
                     }
                 }
             }
@@ -112,7 +109,7 @@ public class UtilityRecipe {
                     jsonObject.addProperty("item", newIngredien);
                 }
                 else if (jsonObject.has("id")) {
-                    jsonObject.addProperty("id", newResult);
+                    jsonObject.addProperty("id", newOutput);
                 }
             }
         }

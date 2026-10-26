@@ -5,10 +5,7 @@ import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.misc.ColoringUtils;
-import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
-import net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection;
-import net.mehvahdjukaar.every_compat.misc.TextureGenHelper;
+import net.mehvahdjukaar.every_compat.misc.*;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
@@ -19,7 +16,6 @@ import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys;
-import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.core.misc.McMetaFile;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -38,11 +34,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
-import java.util.function.BiFunction;
-import java.util.function.BooleanSupplier;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
+import java.util.function.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -65,6 +57,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
     protected final Supplier<T> baseType;
 
+    ///return prefix_postfix
     public final String typeName;
 
     public final String postfix;
@@ -88,6 +81,9 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
     protected final boolean copyTint;
 
+    /// Use this instead of HardcodedBlockType for blocks to be generated for all BlockTypes
+    public static boolean useDuplicationCheck;
+
     protected AbstractSimpleEntrySet(Class<T> type,
                                      String name, @Nullable String prefix,
                                      Supplier<T> baseType,
@@ -105,6 +101,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         this.baseType = baseType;
         this.type = type;
         this.copyTint = copyTint;
+        useDuplicationCheck = true;
 
         this.extraModelTransform = extraTransform;
         this.mergePalette = mergePalette;
@@ -384,7 +381,20 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
 
         //exclusive with addCondition
         public BL requiresFromMap(Map<T, ?> entrySet) {
-            this.addCondition(blockType -> !Objects.isNull(entrySet.get(blockType)));
+            this.addCondition(blockType -> entrySet.get(blockType) != null);
+            return (BL) this;
+        }
+
+        /// Use this instead of using HardcodedBlockType for blocks to be generated for all BlockTypes
+        public BL skipDuplicationCheck() {
+            useDuplicationCheck = false;
+            return (BL) this;
+        }
+
+        /// WoodType's log or stripped_log that has ALPHA and is not a full 16x16. It should be excluded.<br>
+        /// The link will help you understand why. @see <a href=https://github.com/KyaniteMods/DeeperAndDarker/blob/neoforge-1.21/src/main/resources/assets/deeperdarker/textures/block/blooming_stem.png>deeperdarker:bloom's texture</a>
+        public BL excludedWoodTypes() {
+            this.addCondition(blockType -> !CompatSpritesHelper.EXCLUDED_WOODTYPES.contains(blockType.getId().toString()));
             return (BL) this;
         }
 
@@ -646,7 +656,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         /**
          * @deprecated USE .addTexture(ResourceLocation, PaletteStrategy) or .addTextureM(ResourceLocation, ResourceLocation, PaletteStrategy),
          * the last parameter is PaletteStrategy<br>
-         * Take a look at {@link PaletteStrategies} & Look for the FIELD which can be used as an argument for the last
+         * Take a look at {@link PaletteStrategies} and Look for the FIELD which can be used as an argument for the last
          * parameter
          **/
         @Deprecated(forRemoval = true)
@@ -670,13 +680,18 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             }
         } catch (Exception e) {
             if (PlatHelper.isDev()) throw e;
-            EveryCompat.LOGGER.error("Failed to get creative tab for EntrySet - {} : {}", Utils.getID(this.getBaseType()).toString(), e);
+            EveryCompat.LOGGER.error("Failed to get creative tab for EntrySet - {} : {}", getTabItem(), e);
             return null;
         }
 
         return EntrySet.super.getItemForECTab(type);
     }
 
+    /// for logging which EntrySet's tab being null or having incorrect Id
+    // Overriden by SimpleEntrySet & ItemOnlyEntrySet
+    public String getTabItem() {
+        return "Unknown";
+    }
 
     @Nullable
     public BooleanSupplier getModConfigToggle() {

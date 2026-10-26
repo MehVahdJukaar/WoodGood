@@ -123,6 +123,12 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         return baseBlock.get();
     }
 
+    @Override
+    // for logging which EntrySet's tab being null or having incorrect Id
+    public String getTabItem() {
+        return Utils.getID(getBaseBlock()).toString();
+    }
+
     public void addTranslations(SimpleModule module, AfterLanguageLoadEvent lang) {
         blocks.forEach((w, v) -> LangBuilder.addDynamicEntry(lang, "block_type." + module.getModId() + "." + typeName, w, v));
     }
@@ -299,7 +305,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     }
 
     protected BlockTypeResTransformer<T> makeBlockStateTransformer(SimpleModule module, ResourceManager manager) {
-        BlockTypeResTransformer<T> blockstateTransformer = BlockTypeResTransformer.<T>create(module.modId, manager);
+        BlockTypeResTransformer<T> blockstateTransformer = BlockTypeResTransformer.create(module.modId, manager);
         String oldTypeName = baseType.get().getTypeName();
         if (extraModelTransform != null) extraModelTransform.accept(blockstateTransformer);
 
@@ -333,7 +339,9 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         return new Builder<>(type, name, prefix, baseType, baseBlock, blockSupplier);
     }
 
-    //!! SUBCLASS
+    //      ┌──────────────────────────────────────────────────────────┐
+    //      │                         SUBCLASS                         │
+    //      └──────────────────────────────────────────────────────────┘
     public static class Builder<T extends BlockType, B extends Block> extends AbstractSimpleEntrySet.Builder<Builder<T, B>, T, B, Item> {
         protected final Supplier<@Nullable B> baseBlock;
         protected LootTableMode lootMode = LootTableMode.DROP_SELF;
@@ -355,7 +363,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         }
 
         public SimpleEntrySet<T, B> build() {
-            if (addToTab && tab == null && PlatHelper.isDev()) {
+            if (this.addToTab && tab == null) {
                 throw new IllegalStateException("Tab for: " + getEntryName() + " was null!");
             }
             SimpleEntrySet<T, B> e = finishBuild(new SimpleEntrySet<>(type, name, prefix, blockFactory, baseBlock, baseType, tab, tabMode, lootMode,
@@ -440,12 +448,12 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         }
 
         public Builder<T, B> defaultBlockTexture() {
-            this.textures.add(TextureInfo.<T>of(Utils.getID(Objects.requireNonNull(this.baseBlock.get())).withPrefix("block/")).build());
+            this.textures.add(TextureInfo.of(Utils.getID(Objects.requireNonNull(this.baseBlock.get())).withPrefix("block/")).build());
             return this;
         }
 
         public Builder<T, B> defaultItemTexture() {
-            this.textures.add(TextureInfo.<T>of(Utils.getID(Objects.requireNonNull(this.baseBlock.get())).withPrefix("item/")).build());
+            this.textures.add(TextureInfo.of(Utils.getID(Objects.requireNonNull(this.baseBlock.get())).withPrefix("item/")).build());
             return this;
         }
 

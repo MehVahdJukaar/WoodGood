@@ -40,9 +40,7 @@ public abstract class MacawFencesModuleAbstract extends EveryCompatModule {
                 .setTab(getTab(tab))
                 .defaultRecipe()
                 .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
-                //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
-                .excludeBlockTypes("terrestria", "sakura", "yucca_palm")
-                .excludeBlockTypes("betternether", "nether_mushroom", "nether_reed")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(picketFences);
 
@@ -57,9 +55,7 @@ public abstract class MacawFencesModuleAbstract extends EveryCompatModule {
                 .setTab(getTab(tab))
                 .defaultRecipe()
                 .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
-                //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
-                .excludeBlockTypes("terrestria", "sakura", "yucca_palm")
-                .excludeBlockTypes("betternether", "nether_mushroom", "nether_reed")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(stockadeFences);
 
@@ -75,9 +71,7 @@ public abstract class MacawFencesModuleAbstract extends EveryCompatModule {
                 .setTab(getTab(tab))
                 .defaultRecipe()
                 .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
-                //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
-                .excludeBlockTypes("terrestria", "sakura", "yucca_palm")
-                .excludeBlockTypes("betternether", "nether_mushroom", "nether_reed")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(horseFences);
 
@@ -93,9 +87,7 @@ public abstract class MacawFencesModuleAbstract extends EveryCompatModule {
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT)
                 .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
-                //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
-                .excludeBlockTypes("terrestria", "sakura", "yucca_palm")
-                .excludeBlockTypes("betternether", "nether_mushroom", "nether_reed")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(wiredFences);
 
@@ -110,9 +102,7 @@ public abstract class MacawFencesModuleAbstract extends EveryCompatModule {
                 .setTab(getTab(tab))
                 .defaultRecipe()
                 .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
-                //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
-                .excludeBlockTypes("terrestria", "sakura", "yucca_palm")
-                .excludeBlockTypes("betternether", "nether_mushroom", "nether_reed")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(pyramidGates);
 
@@ -127,9 +117,7 @@ public abstract class MacawFencesModuleAbstract extends EveryCompatModule {
                 .setTab(getTab(tab))
                 .defaultRecipe()
                 .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
-                //REASON: take a look at their //TEXTURES, you'll see why. Excluded!
-                .excludeBlockTypes("terrestria", "sakura", "yucca_palm")
-                .excludeBlockTypes("betternether", "nether_mushroom", "nether_reed")
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(highleyGates);
 
@@ -150,8 +138,7 @@ public abstract class MacawFencesModuleAbstract extends EveryCompatModule {
                         "leaves", CompatSpritesHelper.LOOKS_LIKE_LEAF_TEXTURE))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .copyParentDrop() //REASON: ensure blocks's dropping when Diagonal Fences is installed
-                //REASON: Below have no leave texture
-                .excludeBlockTypes("regions_unexplored", "flowering")
+                .excludeBlockTypes("regions_unexplored:flowering") //REASON: Below have no leave texture
                 .build();
         this.addEntry(hedges);
     }

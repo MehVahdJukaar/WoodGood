@@ -4,6 +4,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
+import net.mehvahdjukaar.every_compat.misc.OtherCompatMod;
 import net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
@@ -81,6 +82,7 @@ public class SimpleModule extends CompatModule {
         getEntries().forEach(e -> e.addTranslations(this, lang));
     }
 
+    //TODO: move the blockCount / bloat to registerItems
     public <T extends BlockType> void registerBlocks(Class<T> typeClass,
                                                      Registrator<Block> registry, Collection<T> types) {
         int blockCount = 0;
@@ -255,4 +257,8 @@ public class SimpleModule extends CompatModule {
         return false;
     }
 
+    /// @return Collection of OtherCompatMods
+    public static Collection<OtherCompatMod> getOtherCompatMods() {
+        return EveryCompat.getCompatMods();
+    }
 }

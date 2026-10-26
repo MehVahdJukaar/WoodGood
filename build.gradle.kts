@@ -1,10 +1,10 @@
 
 plugins {
-    id("com.possible-triangle.core")
-    id("com.possible-triangle.common") apply false
-    id("com.possible-triangle.fabric") apply false
-    id("com.possible-triangle.neoforge") apply false
-    id("net.mehvahdjukaar.candlelight") version "1.2.4" apply false
+    id("com.possible-triangle.core") version "1.4.252"
+    id("com.possible-triangle.common") version "1.4.252" apply false
+    id("com.possible-triangle.fabric") version "1.4.252" apply false
+    id("com.possible-triangle.neoforge") version "1.4.252" apply false
+    id("net.mehvahdjukaar.candlelight") version "1.2.6" apply false
 }
 
 mod {
@@ -25,7 +25,7 @@ subprojects {
     pluginManager.apply("maven-publish")
 
     dependencies {
-        compileOnly("net.mehvahdjukaar:candlelight:1.2.4")
+        compileOnly("net.mehvahdjukaar:candlelight:1.2.6")
     }
 
     /* can be added once new candle is out
@@ -336,3 +336,51 @@ subprojects {
     }
 }
 
+tasks.register<Delete>("cleanFiles") {
+    group = "build"
+    description = "Delete Files"
+
+    // Logs
+    delete(
+        fileTree(rootDir.resolve("neoforge/run/logs"))
+            .matching { include("**/*.gz") },
+        fileTree(rootDir.resolve("fabric/run/logs"))
+            .matching { include("**/*.gz") },
+
+        // *.bak
+        fileTree(rootDir.resolve("neoforge/run/config"))
+            .matching { include("**/*.bak") },
+        fileTree(rootDir.resolve("fabric/run/config"))
+            .matching { include("**/*.bak") },
+    )
+}
+
+tasks.register<Delete>("cleanFolders") {
+    group = "build"
+    description = "Clean logs & Delete folders of Debug"
+
+    delete(
+        // Logs
+        fileTree(rootDir.resolve("neoforge/run/logs"))
+            .matching { include("**/*.gz") },
+        fileTree(rootDir.resolve("fabric/run/logs"))
+            .matching { include("**/*.gz") },
+
+        // *.bak
+        fileTree(rootDir.resolve("neoforge/run/config"))
+            .matching { include("**/*.bak") },
+        fileTree(rootDir.resolve("fabric/run/config"))
+            .matching { include("**/*.bak") },
+
+        // Debug
+        rootDir.resolve("fabric/run/debug"),
+        rootDir.resolve("neoforge/run/debug"),
+        // Datapack Cache
+        rootDir.resolve("fabric/run/dynamic-data-pack-cache"),
+        rootDir.resolve("neoforge/run/dynamic-data-pack-cache"),
+        // Resource Pack Cache
+        rootDir.resolve("fabric/run/dynamic-resource-pack-cache"),
+        rootDir.resolve("neoforge/run/dynamic-resource-pack-cache")
+    )
+
+}

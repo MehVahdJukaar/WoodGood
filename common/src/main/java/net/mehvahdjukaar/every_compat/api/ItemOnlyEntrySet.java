@@ -14,7 +14,6 @@ import net.mehvahdjukaar.moonlight.api.set.BlockTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.CreativeModeTab;
@@ -76,6 +75,12 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
     }
 
     @Override
+    // for logging which EntrySet's tab being null or having incorrect Id
+    public String getTabItem() {
+        return Utils.getID(getBaseItem()).toString();
+    }
+
+    @Override
     public void addTranslations(SimpleModule module, AfterLanguageLoadEvent lang) {
         items.forEach((blockType, item) -> LangBuilder.addDynamicEntry(lang, "item_type." + module.getModId() + "." + typeName, blockType, item));
     }
@@ -118,7 +123,6 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
         }
         //populate default ones
     }
-
 
     @Override
     public void registerTiles(SimpleModule module, Registrator<BlockEntityType<?>> registry) {

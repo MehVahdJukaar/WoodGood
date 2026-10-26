@@ -42,6 +42,7 @@ public abstract class MacawBridgesModuleAbstract extends EveryCompatModule {
                 .addTag(modRes("wooden_piers"), Registries.BLOCK)
                 .setTab(tab)
                 .defaultRecipe()
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(bridgePiers);
 
@@ -56,6 +57,7 @@ public abstract class MacawBridgesModuleAbstract extends EveryCompatModule {
                 .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .defaultRecipe()
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(ropeBridges);
 
@@ -70,6 +72,7 @@ public abstract class MacawBridgesModuleAbstract extends EveryCompatModule {
                 .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .defaultRecipe()
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(bridgeMiddles);
 
@@ -85,6 +88,7 @@ public abstract class MacawBridgesModuleAbstract extends EveryCompatModule {
                 .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .defaultRecipe()
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(railBridges);
 
@@ -100,6 +104,7 @@ public abstract class MacawBridgesModuleAbstract extends EveryCompatModule {
                 .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .defaultRecipe()
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(bridgeStairs);
 
@@ -114,6 +119,7 @@ public abstract class MacawBridgesModuleAbstract extends EveryCompatModule {
                 .setRenderType(RenderLayer.CUTOUT)
                 .setTab(tab)
                 .defaultRecipe()
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(ropeStairs);
 

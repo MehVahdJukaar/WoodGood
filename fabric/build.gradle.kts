@@ -42,7 +42,6 @@ dependencies {
 //     modImplementation("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
 
 //!! TOOLS ========================================================================================================== \\
-    modRuntimeOnly("net.mehvahdjukaar:codecui-fabric:${property("codecui_version")}")
     modRuntimeOnly("dev.emi:emi-fabric:${property("emi_version")}+${property("minecraft_version")}")
     modRuntimeOnly("com.blamejared.crafttweaker:CraftTweaker-fabric-${property("minecraft_version")}:${property("crafttweaker_version")}")
     modRuntimeOnly("curse.maven:jade-324717:7545228")
@@ -54,6 +53,8 @@ dependencies {
 //!! ================================================ DEPENDENCIES ================================================== \\
     //@ IMPORTANT: RLM - "REQUIRED LOCAL MOD" - You need to get the mod and put it in ~/fabric/run/mods/....
     //@ IMPORTANT: DNU - "DO NOT USE" the modRunTimeOnly because it can cause issues in production
+
+    modRuntimeOnly("net.mehvahdjukaar:codecui-fabric:${property("minecraft_version")}-${property("codecui_version")}") // +Moonlight-Lib
 
     //- Only For TESTING - can be commented out or enabled
     modRuntimeOnly("curse.maven:terrablender-fabric-565956:6054948") // Regions-Unexplored, Biomes-O'-Plenty
@@ -166,7 +167,6 @@ dependencies {
     modCompileOnly("curse.maven:dramatic-doors-380617:6479044")
     modCompileOnly("curse.maven:excessive-building-845097:6075987") // v3.3.10
     modCompileOnly("curse.maven:exlines-awnings-526698:5478883")
-    modCompileOnly("curse.maven:infinity-buttons-661902:5409967") //!! 1.20.1
     modCompileOnly("curse.maven:lightmans-currency-fabric-724119:5544643") //!! Not maintained since 1.20.1
     modCompileOnly("curse.maven:mighty-mail-fabric-904097:4750271") //!! 1.20.1
     modCompileOnly("curse.maven:missing-wilds-622590:6302231")
@@ -174,7 +174,7 @@ dependencies {
     modCompileOnly("curse.maven:the-twilight-forest-227639:4389094") //!! NOT AVAILABLE //!! 1.20.1
     modCompileOnly("curse.maven:wooden-hoppers-406021:4796143") //!! 1.20.1
 
-    modCompileOnly("curse.maven:regions-unexplored-659110:8226388") // Lithostitched, json5
+    modCompileOnly("curse.maven:regions-unexplored-659110:9252520") // Lithostitched, json5
 
     // OTHER MAVENS
     modCompileOnly("maven.modrinth:stylish-stiles:1.1.1-1.21")

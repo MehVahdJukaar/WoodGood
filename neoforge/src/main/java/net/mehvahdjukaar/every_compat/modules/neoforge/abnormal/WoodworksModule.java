@@ -63,9 +63,9 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.*;
-import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.IsBambooLike;
 import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.isKnownVanillaWood;
+import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.getATagOrCreateANew;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
@@ -282,20 +282,25 @@ public class WoodworksModule extends EveryCompatModule {
         leafPiles = SimpleEntrySet.builder(LeavesType.class, "leaf_pile",
                         WoodworksBlocks.OAK_LEAF_PILE, () -> VanillaLeavesTypes.OAK,
                         leavesType -> new LeafPileBlock(Utils.copyPropertySafe(leavesType.leaves)
+                                .noCollission()
                                 .strength(0.2F)
+                                .sound(leavesType.getSound())
+                                .noOcclusion()
                                 .ignitedByLava()
                                 .pushReaction(PushReaction.DESTROY)
                         )
                 )
-                .requiresChildren(LOG) //REASON:
-                .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
-                        "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
+                .addModelTransform(m ->
+                        m.replaceWithTextureFromChild("minecraft:block/oak_leaves", LEAVES,
+                                s -> !s.contains("/snow") && !s.contains("_snow"))
+                )
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(modRes("leaf_piles"), Registries.BLOCK, Registries.ITEM)
                 .setTab(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .defaultRecipe()
+                .addRecipe(modRes("oak_leaves_from_oak_leaf_pile"))
                 .copyParentTint()
                 .copyParentDrop()
                 .build();
@@ -497,7 +502,7 @@ public class WoodworksModule extends EveryCompatModule {
         );
     }
 
-    public class CompatClosetItem extends BlockItem implements ICustomItemRendererProvider {
+    public static class CompatClosetItem extends BlockItem implements ICustomItemRendererProvider {
 
         public CompatClosetItem(Block block, Properties properties) {
             super(block, properties);

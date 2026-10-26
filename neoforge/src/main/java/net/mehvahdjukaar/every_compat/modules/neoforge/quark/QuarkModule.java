@@ -205,6 +205,7 @@ public class QuarkModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("hollow_logs"), Registries.BLOCK, Registries.ITEM)
                 .addRecipe(modRes("building/crafting/hollowlogs/hollow_oak_log"))
+                .excludedWoodTypes() //REASON: look at its javadoc for the reason
                 .build();
         this.addEntry(hollowLogs);
 
@@ -222,7 +223,7 @@ public class QuarkModule extends EveryCompatModule {
                 .addRecipe(modRes("building/crafting/chests/oak_chest"))
                 .addRecipe(modRes("building/chests/oak_chest_wood"))
                 .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
-                .excludeBlockTypes("twilightforest", "dark")
+                .excludeBlockTypes("twilightforest", "dark") //REASON: ???
                 .build();
         this.addEntry(chests);
 

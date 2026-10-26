@@ -40,7 +40,6 @@ dependencies {
     accessTransformers("net.mehvahdjukaar:moonlight-neoforge:${property("moonlight_version")}")
 
 //!! TOOLS ========================================================================================================== \\
-    modRuntimeOnly("net.mehvahdjukaar:codecui-neoforge:${property("codecui_version")}")
     modRuntimeOnly("dev.emi:emi-neoforge:${property("emi_version")}+${property("minecraft_version")}")
     modRuntimeOnly("com.blamejared.crafttweaker:CraftTweaker-neoforge-${property("minecraft_version")}:${property("crafttweaker_version")}")
     modRuntimeOnly("curse.maven:jei-238222:7420587")
@@ -53,6 +52,8 @@ dependencies {
 //!! ================================================ DEPENDENCIES ================================================== \\
     //@ IMPORTANT: RLM - "REQUIRED LOCAL MOD" - You need to get the mod and put it in ~/forge/run/mods/....
     //@ IMPORTANT: DNU - "DO NOT USE" the modRunTimeOnly because it can cause issues in production
+
+    modRuntimeOnly("net.mehvahdjukaar:codecui-neoforge:${property("minecraft_version")}-${property("codecui_version")}") // +Moonlight-Lib
 
     //- Only For TESTING - can be commented out or enabled
     modRuntimeOnly("curse.maven:terrablender-neoforge-940057:6054947") // BOP, Regions-Unexplored
@@ -70,7 +71,8 @@ dependencies {
 //    modRuntimeOnly("curse.maven:structure-gel-api-378802:5188368") // Blue-Skies //!! 1.20.1
 //    modRuntimeOnly("curse.maven:monolib-968432:6123990") //v2.0.0 | More-Beautiful-Torches
 //    modRuntimeOnly("curse.maven:quad-932715:5900860") // v1.2.9 | More-Chest-Variants, More-Crafting-Table
-//    modRuntimeOnly("curse.maven:lithostitched-936015:8660310") // v1.8.0+beta4 | Regions-Unexplored
+//    modRuntimeOnly("curse.maven:lithostitched-936015:9170709") // v1.8.1 | Regions-Unexplored
+//    modRuntimeOnly("curse.maven:platform-997634:8075942") // v1.3.3 | Vanilla-Backport
 
     //- ~/neoforge/mods LOCAL
 //    modRuntimeOnly("quark-biolith:biolith-neoforge-3.0.10") // Quark
@@ -103,7 +105,6 @@ dependencies {
     modCompileOnly("curse.maven:another-furniture-610492:7355747")
     modCompileOnly("curse.maven:architects-palette-433862:6861008") //@ BETA
     modCompileOnly("curse.maven:backpacked-352835:7866688")
-    modCompileOnly("curse.maven:the-block-box-1199971:8089815")
     modCompileOnly("curse.maven:corail-pillar-266228:5669131")
     modCompileOnly("curse.maven:decorative-blocks-reborn-1327768:7926194")
     modCompileOnly("curse.maven:farmersdelight-398521:8083481")
@@ -112,7 +113,7 @@ dependencies {
     modCompileOnly("curse.maven:refurbished-furniture-897116:7473565")
     modCompileOnly("curse.maven:storage-drawers-223852:6995432")
     modCompileOnly("curse.maven:twigs-496913:8191595")
-    modCompileOnly("curse.maven:valhelsia-furniture-694349:6341023")
+    modCompileOnly("curse.maven:valhelsia-furniture-694349:6341023") // Valhelsia-Core
     modCompileOnly("curse.maven:mighty-mail-902986:6542124")
     modCompileOnly("curse.maven:missing-wilds-622590:6302230")
     modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5520190") // Quad - LieOnLion
@@ -126,7 +127,7 @@ dependencies {
 
     //- ONLY FOR TESTING - can be commented out or enabled
 //    modRuntimeOnly("curse.maven:beautiful-campfires-1085950:6162194")
-    modRuntimeOnly("curse.maven:the-block-box-1199971:8089815")
+//    modRuntimeOnly("curse.maven:the-block-box-1199971:8089815")
 //    modRuntimeOnly("curse.maven:camp-chair-531744:4579679") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:dawn-of-time-312359:7029195") // Fusion-Connected-Texture //@ Use Local mods blc Distribution is not allowed
 //    modRuntimeOnly("curse.maven:exlines-bark-carpets-527296:4094399") //!! 1.20.1
@@ -144,7 +145,8 @@ dependencies {
 //    modRuntimeOnly("earth.terrarium.chipped:chipped-neoforge-${property("minecraft_version")}:4.0.2") //INCLUDED: Athena, Resourceful-Lib, REQUIRED: +Bytecodecs
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN NEOFORGE
-    // ~/forge/mods LOCAL
+    // ~/neoforge/mods LOCAL
+    modCompileOnly("local-blocks_plus:blocks+1.21.1-1.8")
     modCompileOnly("local-shutter-neoforge:shutter-2.1.6-neoforge-1.21.1")
     modCompileOnly("local-buildersdelight-neoforge:BuildersDelight-1.20.1-v.1.3")
     //modCompileOnly("local-giacomos_bookshelf-neoforge:giacomos_bookshelf-1.20.1-1.3.9") // WIP
@@ -172,7 +174,6 @@ dependencies {
     modCompileOnly("curse.maven:domum-ornamentum-527361:7812603")
     modCompileOnly("curse.maven:dramatic-doors-380617:6479044")
     modCompileOnly("curse.maven:functional-storage-556861:8179577")
-    modCompileOnly("curse.maven:infinity-buttons-661902:6630983") //!! 1.20.1
     modCompileOnly("curse.maven:just-a-raft-mod-274350:6945796")
     modCompileOnly("curse.maven:lightmans-currency-472521:8366260")
     modCompileOnly("curse.maven:more-crafting-tables-for-forge-417365:6002554") //CRAFTING_TABLES for FORGE
@@ -188,6 +189,7 @@ dependencies {
     modCompileOnly("curse.maven:timber-frames-606011:5372390") //!! 1.20.1
     modCompileOnly("curse.maven:tropicraft-254794:6600109")
     modCompileOnly("curse.maven:unusual-furniture-1278034:7332052")
+    modCompileOnly("curse.maven:ultimate-car-mod-267458:7518005")
     modCompileOnly("curse.maven:valhelsia-structures-347488:6814480") // Valhelsia-Core
     modCompileOnly("curse.maven:variant-crafting-tables-565095:4585921") //!! 1.20.1
     modCompileOnly("curse.maven:woodster-869951:6732058")
@@ -195,10 +197,11 @@ dependencies {
     modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:7903929")
     modCompileOnly("curse.maven:xercamod-341575:4667995") //!! 1.20.1
 
-    modCompileOnly("curse.maven:regions-unexplored-659110:8167399") // Lithostitched
+    modCompileOnly("curse.maven:regions-unexplored-659110:9252522") // Lithostitched
 
     // OTHER MAVENS
     modCompileOnly("maven.modrinth:building-but-better:2.0pre4") // MidnightLib //!! 1.20.1
+    modCompileOnly("maven.modrinth:legends-missing-blocks:2.0.0") //
     modCompileOnly("com.simibubi.create:create-${property("minecraft_version")}:${property("create_version")}:slim") { isTransitive = false } // Registrate, Flywheel, Ponder
 
     modCompileOnly("org.violetmoon.quark:Quark:4.1-482-SNAPSHOT") // Zeta, Biolith @ https://maven.blamejared.com/org/violetmoon/quark/Quark/
@@ -217,14 +220,8 @@ dependencies {
 //    modRuntimeOnly("curse.maven:strata-forge-edition-387296:4989643") // STONE-TYPES //!! 1.20.1
 //    modRuntimeOnly("curse.maven:endless-biomes-667688:5109705") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:blue-skies-312918:5010316") // structure-gel-api //!! 1.20.1
-    modRuntimeOnly("curse.maven:biomes-o-plenty-220318:7251965") // Terrablender, GlitchCore
-    modRuntimeOnly("curse.maven:blueprint-382216:8048607") // TEMP chest repro
-    modRuntimeOnly("curse.maven:woodworks-543610:7118286") // TEMP chest repro
-    modRuntimeOnly("org.violetmoon.zeta:Zeta:1.1-40-SNAPSHOT") // TEMP chest repro
-    modRuntimeOnly("org.violetmoon.quark:Quark:4.1-482-SNAPSHOT") // TEMP chest repro
-    modRuntimeOnly("quark-biolith:biolith-neoforge-3.0.10") // TEMP chest repro
-    modRuntimeOnly("maven.modrinth:gardens-of-the-dead:YfbXE0Lc") // TEMP chest repro
-    modRuntimeOnly("curse.maven:architectury-api-419699:5786327") // TEMP chest repro
+//    modRuntimeOnly("curse.maven:biomes-o-plenty-220318:7251965") // Terrablender, GlitchCore
+//    modRuntimeOnly("maven.modrinth:gardens-of-the-dead:YfbXE0Lc")
 //    modRuntimeOnly("curse.maven:upgrade-aquatic-326895:6969604") // Blueprint
 //    modRuntimeOnly("curse.maven:autumnity-365045:7118591") // Blueprint
 //    modRuntimeOnly("curse.maven:the-outer-end-430404:5043937") // Blueprint //!! 1.20.1
@@ -233,8 +230,10 @@ dependencies {
 //    modRuntimeOnly("curse.maven:frightful-winter-1241289:6447798")
 //    modRuntimeOnly("curse.maven:natures-spirit-1044992:6962784") // Tinted LeavesType
 //    modRuntimeOnly("curse.maven:lets-do-meadow-821483:7672847") // Architectury
+//    modRuntimeOnly("curse.maven:vanillabackport-417430:8229724") // Platform
 
 //    modImplementation("curse.maven:terrafirmacraft-302973:7024199") // patchouli
+//    modRuntimeOnly("net.mehvahdjukaar:stonezone-neoforge:1.21-2.11.19") { isTransitive = false }
 
 }
 

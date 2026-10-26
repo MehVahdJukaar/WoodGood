@@ -809,8 +809,6 @@
   "block_type.woodster.chiseled_bookshelf": "%s Chiseled Bookshelf",
   "block_type.woodster.ladder": "%s Ladder",
 
-  "block_type.infinitybuttons.large_button": "%s Large Button",
-  "block_type.infinitybuttons.plank_secret_button": "%s Plank Secret Button",
 
   "block_type.workshop_for_handsome_adventurer.simple_table": "Crafting Table (%s)",
   "block_type.workshop_for_handsome_adventurer.book_shelf_double": "Book Shelf (%s, two rows)",
@@ -1317,5 +1315,10 @@
   "block_type.rechiseled.planks_wavy_stairs": "Wavy %s Planks Stairs",
   "block_type.rechiseled.planks_wavy_stairs_connecting": "Wavy %s Planks Stairs",
   "block_type.rechiseled.planks_woven_stairs": "Woven %s Planks Stairs",
-  "block_type.rechiseled.planks_woven_stairs_connecting": "Woven %s Planks Stairs"
+  "block_type.rechiseled.planks_woven_stairs_connecting": "Woven %s Planks Stairs",
+
+  "_comment-missing_blocks": "───────────────────────────── Legends' Missing Blocks ─────────────────────────────",
+  "block_type.missing_blocks.carved": "Carved %s Wood"
+
+
 }

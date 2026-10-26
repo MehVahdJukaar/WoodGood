@@ -11,6 +11,7 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.abnormal.WoodworksModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.absent_by_design.AbsentByDesignModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.beautify_decorate.BeautifyDecorateModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.bibliocraft.BibliocraftLegacyModule;
+import net.mehvahdjukaar.every_compat.modules.neoforge.blocks_plus.BlocksPlusModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.builders_delight.BuildersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.buildersaddition.BuildersAdditionModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.building_but_better.BuildingButBetterModule;
@@ -20,9 +21,9 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.decoration_delight.Decora
 import net.mehvahdjukaar.every_compat.modules.neoforge.dramaticdoors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.dramaticdoors.DramaticDoorsModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.functional_storage.FunctionalStorageModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.just_a_raft.JustARaftModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.lauchs.LauchsShuttersModule;
+import net.mehvahdjukaar.every_compat.modules.neoforge.legends_missing_blocks.LegendsMissingBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.lightmans_currency.LightmansCurrencyModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.neoforge.more.MoreCraftingTablesForForgeModule;
@@ -36,6 +37,7 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.regions_unexplored.Region
 import net.mehvahdjukaar.every_compat.modules.neoforge.timber_frames.TimberFramesModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.tropicraft.TropicraftModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.twilightforest.TwilightForestModule;
+import net.mehvahdjukaar.every_compat.modules.neoforge.ultimate_car.UltimateCarModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.unusual_furniture.UnusualFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.valhelsia.ValhelsiaStructuresModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.variants.VariantCraftingTablesModule;
@@ -150,18 +152,20 @@ public class EveryCompatForge extends EveryCompatCommon {
             // ========================================= GENERAL ======================================================== \\
             addOptionalModule("absentbydesign", () -> AbsentByDesignModule.class);
             addOptionalModule("bibliocraft", () -> BibliocraftLegacyModule.class);
+            addOptionalModule("blocksplus", () -> BlocksPlusModule.class);
             addOptionalModule("boatload", () -> BoatLoadModule.class);
             addOptionalModule("buildersaddition", () -> BuildersAdditionModule.class);
             addOptionalModule("bbb", () -> BuildingButBetterModule.class);
             addOptionalModule("buildersdelight", () -> BuildersDelightModule.class);
+            addOptionalModule("car", () -> UltimateCarModule.class);
             addOptionalModule("create", () -> CreateModule.class);
             addOptionalModule("curiosities", () -> CuriositiesModule.class);
             addOptionalModule("decoration_delight", () -> DecorationDelightModule.class);
             addOptionalModule("dramaticdoors", () -> DramaticDoorsModule.class);
             addOptionalModule("functionalstorage", () -> FunctionalStorageModule.class);
-            addOptionalModule("infinitybuttons", () -> InfinityButtonsModule.class);
             addOptionalModule("justaraftmod", () -> JustARaftModule.class);
             addOptionalModule("mctb", () -> MoreCraftingTablesForForgeModule.class);
+            addOptionalModule("missing_blocks", () -> LegendsMissingBlocksModule.class);
             addOptionalModule("mosaic_carpentry", () -> MosaicCarpentryModule.class);
             addOptionalModule("oreberriesreplanted", () -> OreberriesReplantedModule.class);
             addOptionalModule("lightmanscurrency", () -> LightmansCurrencyModule.class);
