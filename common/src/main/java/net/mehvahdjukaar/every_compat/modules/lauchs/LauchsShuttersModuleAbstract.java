@@ -50,8 +50,9 @@ public abstract class LauchsShuttersModuleAbstract extends EveryCompatModule {
     @Override
     public List<String> getAlreadySupportedMods() {
         return List.of(
-                "ecologics", "quark", "twigs",
-                "autumnity", "environments", "goodending"
+                "autumnity", "beachparty", "caverns_and_chasms", "ecologics",
+                "environments", "goodending", "natures_spirit", "quark",
+                "snowyspirit", "twigs", "upgrade_aquatic"
         );
     }
 }
