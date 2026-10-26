@@ -65,6 +65,7 @@
 | Rechiseled                                          |   🟩   |
 | Storage Delight                                     |   🟡   |
 | Storage Drawers                                     |   🟩   |
+| Shutter Up!                                         |   🟡   |
 | The New Shutter aka Launch's Shutter                |   🟩   |
 | The Twilight Foreset                                |   🟩   |
 | Top Table Crafting                                  |   ❔   |
@@ -108,7 +109,6 @@
 | Productive Bees                      |   🟥   |
 | Quark                                |   🟩   |
 | Re: Deco                             |   ❔   |
-| Shutter Up!                          |   🟡   |
 | Timber Frame                         |   🟠   |
 | Tropicraft                           |   🟩   |
 | Ultimate Car Mod                     |   🟩   |
