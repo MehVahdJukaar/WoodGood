@@ -13,6 +13,18 @@
 |                                                                                                                                   |
 
 ---
+## v2.11.56
+
+### FIXES:
+- **Regions unexplored** (C): Removed Leaves' "Included Textures via (IT)" because they are not needed anymore since they are in the correct ResourceLocation
+- **Valhelsia Furniture** (C): Tweaked the table's connected_textures to be consistent with texture - [#1346](https://github.com/MehVahdJukaar/WoodGood/issues/1346)
+- **Storage Drawers** (C): 
+  - Fixed DRAWERS' front not showing the empty slot when drawer is detached - [#1033](https://github.com/MehVahdJukaar/WoodGood/issues/1033)
+  - Updated texture generation for DRAWERS and TRIM by replacing the deprecated methods
+- **Every Compat** (C): Fixed a rare case with **Quark** & **Spawn** where hedges' files wasn't generated due to incorrect resourcelocation for date_leaves' texture which was `#side` - [#1348](https://github.com/MehVahdJukaar/WoodGood/issues/1348)
+
+---
+
 ## v2.11.55
 
 ### FIXES:
