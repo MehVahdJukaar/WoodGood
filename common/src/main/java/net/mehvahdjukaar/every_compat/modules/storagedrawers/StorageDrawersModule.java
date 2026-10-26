@@ -246,6 +246,12 @@ public class StorageDrawersModule extends EveryCompatModule {
         executor.accept((manager, s) -> ModDrawersGeometry.loadGeometryData(this, manager));
     }
 
+    @Override
+    public void onClientInit() {
+        super.onClientInit();
+        ModDrawersModels.registerDrawerModelDecoration(this);
+    }
+
     private <B extends Block> Stream<B> getBlocksOfType(Class<B> blockClass) {
         Stream<Block> allBlocks = this.getEntries().stream().map(e -> ((SimpleEntrySet<?, B>) e)
                 .blocks.values()).flatMap(Collection::stream);
