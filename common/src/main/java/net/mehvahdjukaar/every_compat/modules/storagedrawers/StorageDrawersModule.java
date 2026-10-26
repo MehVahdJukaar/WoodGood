@@ -12,10 +12,12 @@ import net.mehvahdjukaar.every_compat.api.PaletteStrategy;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
+import net.mehvahdjukaar.moonlight.api.resources.textures.PaletteColor;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.mehvahdjukaar.moonlight.api.util.math.colors.HCLColor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -34,7 +36,7 @@ import java.util.stream.Stream;
 
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
 
-//SUPPORT: v12.14.3+
+///SUPPORT: v12.14.3+
 public class StorageDrawersModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, BlockStandardDrawers> FULL_DRAWERS_1;
@@ -59,10 +61,10 @@ public class StorageDrawersModule extends SimpleModule {
                         }
                 )
                 .addTile(getModTile("standard_drawers_1"))
-                .addTexture(modRes("block/drawers_oak_front_1"), drawersPalette)
-                .addTexture(modRes("block/drawers_oak_side"), drawersPalette)
-                .addTexture(modRes("block/drawers_oak_sort"), drawersPalette)
-                .addTexture(modRes("block/drawers_oak_trim"), drawersPalette)
+                .addTexture(modRes("block/drawers_oak_front_1"), DRAWERS_PALETTE)
+                .addTexture(modRes("block/drawers_oak_side"), DRAWERS_PALETTE)
+                .addTexture(modRes("block/drawers_oak_sort"), DRAWERS_PALETTE)
+                .addTexture(modRes("block/drawers_oak_trim"), DRAWERS_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("drawers"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("full_drawers"), Registries.BLOCK, Registries.ITEM)
@@ -82,7 +84,7 @@ public class StorageDrawersModule extends SimpleModule {
                         }
                 )
                 .addTile(getModTile("standard_drawers_2"))
-                .addTexture(modRes("block/drawers_oak_front_2"), drawersPalette)
+                .addTexture(modRes("block/drawers_oak_front_2"), DRAWERS_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("drawers"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("full_drawers"), Registries.BLOCK, Registries.ITEM)
@@ -102,7 +104,7 @@ public class StorageDrawersModule extends SimpleModule {
                         }
                 )
                 .addTile(getModTile("standard_drawers_4"))
-                .addTexture(modRes("block/drawers_oak_front_4"), drawersPalette)
+                .addTexture(modRes("block/drawers_oak_front_4"), DRAWERS_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("drawers"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("full_drawers"), Registries.BLOCK, Registries.ITEM)
@@ -123,8 +125,8 @@ public class StorageDrawersModule extends SimpleModule {
                         }
                 )
                 .addTile(getModTile("standard_drawers_1"))
-                .addTexture(modRes("block/drawers_oak_side_h"), drawersPalette)
-                .addTexture(modRes("block/drawers_oak_side_v"), drawersPalette)
+                .addTexture(modRes("block/drawers_oak_side_h"), DRAWERS_PALETTE)
+                .addTexture(modRes("block/drawers_oak_side_v"), DRAWERS_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("drawers"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("half_drawers"), Registries.BLOCK, Registries.ITEM)
@@ -176,7 +178,7 @@ public class StorageDrawersModule extends SimpleModule {
                         getModBlock("oak_trim", BlockTrim.class), () -> VanillaWoodTypes.OAK,
                         w -> new BlockTrim(Utils.copyPropertySafe(getModBlock("oak_trim").get()))
                 )
-                .addTexture(modRes("block/drawers_oak_trim"), trimPalette)
+                .addTexture(modRes("block/drawers_oak_trim"), TRIM_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("trim"), Registries.BLOCK, Registries.ITEM)
                 .setTabKey(tab)
@@ -185,23 +187,28 @@ public class StorageDrawersModule extends SimpleModule {
         this.addEntry(TRIMS);
     }
 
-    private static final PaletteStrategy drawersPalette = registerCached((blockType, manager) ->
+    private static final PaletteStrategy DRAWERS_PALETTE = registerCached((blockType, manager) ->
             PaletteStrategies.makePaletteFromChild(blockType, manager, VanillaWoodChildKeys.PLANKS, null,
                     (p) -> {
-                        p.remove(p.getLightest());
-                        p.increaseInner();
-                        p.increaseInner();
-                        p.increaseInner();
-                        p.increaseUp();
+                        p.reduceDown();
+                        p.reduceDown();
+                        float averageStep = p.getAverageLuminanceStep();
+                        p.matchLuminanceStep(averageStep * 0.5f);
                     }
             ));
 
-    private static final PaletteStrategy trimPalette = registerCached((blockType, manager) ->
+    private static final PaletteStrategy TRIM_PALETTE = registerCached((blockType, manager) ->
             PaletteStrategies.makePaletteFromChild(blockType, manager, VanillaWoodChildKeys.PLANKS, null,
                     (p) -> {
-                        p.remove(p.getLightest());
-                        p.increaseInner();
-                        p.increaseUp();
+                        float averageStep = p.getAverageLuminanceStep();
+                        //lower step = lower contrast. Tweak as needed
+                        p.matchLuminanceStep(averageStep * 0.5f);
+                        p.reduceDown();
+                        for (int idx = 0; idx < p.size(); idx++) {
+                            PaletteColor paletteColor = p.get(idx);
+                            HCLColor color = paletteColor.hcl().withLuminance(paletteColor.luminance() * 0.80F);
+                            p.set(idx, new PaletteColor(color));
+                        }
                     }
             ));
 
@@ -232,6 +239,10 @@ public class StorageDrawersModule extends SimpleModule {
         return false;
     }
 
+    //      ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+    //      │                                      Dynamic Resources                                       │
+    //      └──────────────────────────────────────────────────────────────────────────────────────────────┘
+
     @Override
     // DATA
     public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
@@ -247,6 +258,10 @@ public class StorageDrawersModule extends SimpleModule {
         Objects.requireNonNull(blockClass);
         return allBlocks.map(blockClass::cast);
     }
+
+    //      ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+    //      │                                  ModDrawersGeometry methods                                  │
+    //      └──────────────────────────────────────────────────────────────────────────────────────────────┘
 
     public <BD extends BlockDrawers> Stream<BD> getDrawersOfType(Class<BD> drawerClass) {
         return getBlocksOfType(drawerClass);
