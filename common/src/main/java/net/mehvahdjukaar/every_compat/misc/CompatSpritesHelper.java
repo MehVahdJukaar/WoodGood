@@ -51,7 +51,7 @@ public class CompatSpritesHelper {
     };
     public static final @NotNull Predicate<String> LOOKS_LIKE_LEAF_TEXTURE = (s) -> {
         s = normalizeLabel(s);
-        return !s.contains("_top") && !s.contains("_bushy") && !s.contains("_snow") && !s.contains("_overlay") && !s.contains("/snow");
+        return !s.contains("_top") && !s.contains("_bushy") && !s.contains("_snow") && !s.contains("_overlay") && !s.contains("/snow") && s.contains("_leaves");
     };
 
     ///REASON: WoodType's log that has ALPHA and is not a full 16x16. It should be excluded.<br>
