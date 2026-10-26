@@ -77,6 +77,10 @@ public class HardcodedBlockType {
 
         /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ INCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+        // A rare case with Shutter's WISTERIA_SHUTTER that prevent Regions-Unexplored's WISTERIA from being generated
+        //NOTE: Shutterhas built-in support for Environments' WISTERIA and others. It doesn't use isModLoaded() to check if Environments is installed or not, it will still register WISTERIA_SHUTTER
+        if (pendingInfo.isForSupportedModId("shutter") && pendingInfo.isForWoodTypeFullId("regions_unexplored:(wisteria|willow|maple|cypress)")) return false;
+
         // Darker-Depths has a built-in support for Woodworks' BOARDS that caused Architects-Palette's BOARDS to be skipped
         // Windswept has BOARDS that prevent Architects-Palette's BOARDS from being registered
         if (pendingInfo.isForSupportedModId("architects_palette") && pendingInfo.isForWoodTypeNamespace("darkerdepths|windswept")) return false;
