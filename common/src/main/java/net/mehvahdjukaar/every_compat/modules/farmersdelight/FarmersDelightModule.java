@@ -212,8 +212,6 @@ public class FarmersDelightModule extends EveryCompatModule {
 
                 sink.addRecipe(new RecipeHolder<>(EveryCompat.res(newPath), newRecipe));
             }
-            else
-                EveryCompat.LOGGER.warn("SalvagingRecipe - Skipping due to no ingredients being modified for {}", newWoodType.getId());
         }
     }
 
