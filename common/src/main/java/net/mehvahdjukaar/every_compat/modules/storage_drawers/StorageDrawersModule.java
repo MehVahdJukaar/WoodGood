@@ -7,17 +7,16 @@ import com.jaquadro.minecraft.storagedrawers.block.BlockStandardDrawers;
 import com.jaquadro.minecraft.storagedrawers.block.BlockTrim;
 import com.jaquadro.minecraft.storagedrawers.config.ModCommonConfig;
 import com.jaquadro.minecraft.storagedrawers.item.ItemDrawers;
+import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategy;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
-import net.mehvahdjukaar.moonlight.api.resources.textures.PaletteColor;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.mehvahdjukaar.moonlight.api.util.math.colors.HCLColor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -61,9 +60,18 @@ public class StorageDrawersModule extends SimpleModule {
                         }
                 )
                 .addTile(getModTile("standard_drawers_1"))
-                .addTexture(modRes("block/drawers_oak_front_1"), DRAWERS_PALETTE)
-                .addTexture(modRes("block/drawers_oak_side"), DRAWERS_PALETTE)
-                .addTexture(modRes("block/drawers_oak_sort"), DRAWERS_PALETTE)
+                .addTextureMM(modRes("block/drawers_oak_front_1"),
+                        EveryCompat.res("block/sd/drawers_front_1_log_m"), PLANKS_CUSTOM_PALETTE,
+                        EveryCompat.res("block/sd/drawers_front_1_planks_m"), TRIM_PALETTE
+                )
+                .addTextureMM(modRes("block/drawers_oak_side"),
+                        EveryCompat.res("block/common_log_top_outer_m"), PLANKS_CUSTOM_PALETTE,
+                        EveryCompat.res("block/common_log_top_inner_m"), TRIM_PALETTE
+                )
+                .addTextureMM(modRes("block/drawers_oak_sort"),
+                        EveryCompat.res("block/sd/drawers_sort_log_m"), PLANKS_CUSTOM_PALETTE,
+                        EveryCompat.res("block/sd/drawers_sort_planks_m"), TRIM_PALETTE
+                )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("drawers"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("full_drawers"), Registries.BLOCK, Registries.ITEM)
@@ -83,7 +91,10 @@ public class StorageDrawersModule extends SimpleModule {
                         }
                 )
                 .addTile(getModTile("standard_drawers_2"))
-                .addTexture(modRes("block/drawers_oak_front_2"), DRAWERS_PALETTE)
+                .addTextureMM(modRes("block/drawers_oak_front_2"),
+                        EveryCompat.res("block/sd/drawers_front_2_log_m"), PLANKS_CUSTOM_PALETTE,
+                        EveryCompat.res("block/sd/drawers_x_2_planks_m"), TRIM_PALETTE
+                )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("drawers"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("full_drawers"), Registries.BLOCK, Registries.ITEM)
@@ -103,7 +114,10 @@ public class StorageDrawersModule extends SimpleModule {
                         }
                 )
                 .addTile(getModTile("standard_drawers_4"))
-                .addTexture(modRes("block/drawers_oak_front_4"), DRAWERS_PALETTE)
+                .addTextureMM(modRes("block/drawers_oak_front_4"),
+                        EveryCompat.res("block/sd/drawers_front_4_log_m"), PLANKS_CUSTOM_PALETTE,
+                        EveryCompat.res("block/sd/drawers_front_4_planks_m"), TRIM_PALETTE
+                )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("drawers"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("full_drawers"), Registries.BLOCK, Registries.ITEM)
@@ -124,8 +138,14 @@ public class StorageDrawersModule extends SimpleModule {
                         }
                 )
                 .addTile(getModTile("standard_drawers_1"))
-                .addTexture(modRes("block/drawers_oak_side_h"), DRAWERS_PALETTE)
-                .addTexture(modRes("block/drawers_oak_side_v"), DRAWERS_PALETTE)
+                .addTextureMM(modRes("block/drawers_oak_side_h"),
+                        EveryCompat.res("block/sd/drawers_side_h_log_m"), PLANKS_CUSTOM_PALETTE,
+                        EveryCompat.res("block/sd/drawers_x_2_planks_m"), TRIM_PALETTE
+                )
+                .addTextureMM(modRes("block/drawers_oak_side_v"),
+                        EveryCompat.res("block/sd/drawers_side_v_log_m"), PLANKS_CUSTOM_PALETTE,
+                        EveryCompat.res("block/sd/drawers_side_v_planks_m"), TRIM_PALETTE
+                )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("drawers"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("half_drawers"), Registries.BLOCK, Registries.ITEM)
@@ -186,28 +206,25 @@ public class StorageDrawersModule extends SimpleModule {
         this.addEntry(TRIMS);
     }
 
-    private static final PaletteStrategy DRAWERS_PALETTE = registerCached((blockType, manager) ->
+    private static final PaletteStrategy PLANKS_CUSTOM_PALETTE = registerCached((blockType, manager) ->
             PaletteStrategies.makePaletteFromChild(blockType, manager, VanillaWoodChildKeys.PLANKS, null,
                     (p) -> {
                         p.reduceDown();
                         p.reduceDown();
-                        float averageStep = p.getAverageLuminanceStep();
-                        p.matchLuminanceStep(averageStep * 0.5f);
+                        p.matchLuminanceStep(p.getAverageLuminanceStep() * 0.4f);
                     }
             ));
 
+    /// The TRIM's palette is between PLANKS and LOG where the colors are darker than PLANKS' but lighter than LOG
     private static final PaletteStrategy TRIM_PALETTE = registerCached((blockType, manager) ->
             PaletteStrategies.makePaletteFromChild(blockType, manager, VanillaWoodChildKeys.PLANKS, null,
                     (p) -> {
-                        float averageStep = p.getAverageLuminanceStep();
-                        //lower step = lower contrast. Tweak as needed
-                        p.matchLuminanceStep(averageStep * 0.5f);
-                        p.reduceDown();
-                        for (int idx = 0; idx < p.size(); idx++) {
-                            PaletteColor paletteColor = p.get(idx);
-                            HCLColor color = paletteColor.hcl().withLuminance(paletteColor.luminance() * 0.80F);
-                            p.set(idx, new PaletteColor(color));
-                        }
+                        p.reduceUp();
+                        p.reduceUp();
+                        p.reduceUp();
+                        p.increaseDown();
+                        p.increaseDown();
+                        p.matchLuminanceStep(p.getAverageLuminanceStep() * 0.4f);
                     }
             ));
 
