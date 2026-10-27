@@ -66,6 +66,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.registries.MissingMappingsEvent;
 
+import java.lang.ref.WeakReference;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -78,20 +79,21 @@ import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.INCLU
  */
 @Mod(EveryCompat.MOD_ID)
 public class EveryCompatForge extends EveryCompatCommon {
+    private static WeakReference<IEventBus> BUS = new WeakReference<>(null);
 
     public EveryCompatForge() {
+        //noinspection removal
+        BUS = new WeakReference<>(FMLJavaModLoadingContext.get().getModEventBus());
         this.initialize();
 
-        CraftingHelper.register(new BlockTypeEnabledCondition.Serializer());
         MinecraftForge.EVENT_BUS.register(this);
+        CraftingHelper.register(new BlockTypeEnabledCondition.Serializer());
 
         if (PlatHelper.getPhysicalSide().isClient()) {
             EveryCompatForgeClient.init();
         }
 
-        //noinspection removal
-        IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
-        LegacyRemapper.init(modBus);
+        LegacyRemapper.init(BUS.get());
     }
 
     @Override
@@ -181,6 +183,9 @@ public class EveryCompatForge extends EveryCompatCommon {
 
     }
 
+    public static IEventBus getModEventBus() {
+        return BUS.get();
+    }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void itemTooltipEvent(ItemTooltipEvent event) {
@@ -191,7 +196,8 @@ public class EveryCompatForge extends EveryCompatCommon {
             );
         }
 
-        EveryCompatClient.onItemTooltip(event.getItemStack(), event.getFlags(), event.getToolTip());
+        if (PlatHelper.getPhysicalSide().isClient())
+            EveryCompatClient.onItemTooltip(event.getItemStack(), event.getFlags(), event.getToolTip());
     }
 
     @SubscribeEvent

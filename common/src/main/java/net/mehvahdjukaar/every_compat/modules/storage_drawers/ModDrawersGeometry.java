@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.storagedrawers;
+package net.mehvahdjukaar.every_compat.modules.storage_drawers;
 
 import com.jaquadro.minecraft.storagedrawers.block.BlockCompDrawers;
 import com.jaquadro.minecraft.storagedrawers.block.BlockDrawers;

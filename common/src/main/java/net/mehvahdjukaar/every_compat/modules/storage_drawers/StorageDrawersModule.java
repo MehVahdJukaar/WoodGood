@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.storagedrawers;
+package net.mehvahdjukaar.every_compat.modules.storage_drawers;
 
 import com.jaquadro.minecraft.storagedrawers.ModConstants;
 import com.jaquadro.minecraft.storagedrawers.api.config.IDrawerConfig;
@@ -36,7 +36,7 @@ import java.util.stream.Stream;
 
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
 
-///SUPPORT: v12.14.3+
+///SUPPORT: v12.15.1+
 public class StorageDrawersModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, BlockStandardDrawers> FULL_DRAWERS_1;
@@ -64,7 +64,6 @@ public class StorageDrawersModule extends SimpleModule {
                 .addTexture(modRes("block/drawers_oak_front_1"), DRAWERS_PALETTE)
                 .addTexture(modRes("block/drawers_oak_side"), DRAWERS_PALETTE)
                 .addTexture(modRes("block/drawers_oak_sort"), DRAWERS_PALETTE)
-                .addTexture(modRes("block/drawers_oak_trim"), DRAWERS_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("drawers"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("full_drawers"), Registries.BLOCK, Registries.ITEM)
@@ -250,6 +249,20 @@ public class StorageDrawersModule extends SimpleModule {
         executor.accept((manager, s) -> ModDrawersGeometry.loadGeometryData(this, manager));
     }
 
+    //      ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+    //      │                                           OnClient                                           │
+    //      └──────────────────────────────────────────────────────────────────────────────────────────────┘
+
+    @Override
+    public void onClientInit() {
+        super.onClientInit();
+        ModDrawersModels.registerDrawerModelDecoration(this);
+    }
+
+    //      ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+    //      │                                  ModDrawersGeometry methods                                  │
+    //      └──────────────────────────────────────────────────────────────────────────────────────────────┘
+
     private <B extends Block> Stream<B> getBlocksOfType(Class<B> blockClass) {
         Stream<Block> allBlocks = this.getEntries().stream().map(e -> ((SimpleEntrySet<?, B>) e)
                 .blocks.values()).flatMap(Collection::stream);
@@ -258,10 +271,6 @@ public class StorageDrawersModule extends SimpleModule {
         Objects.requireNonNull(blockClass);
         return allBlocks.map(blockClass::cast);
     }
-
-    //      ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
-    //      │                                  ModDrawersGeometry methods                                  │
-    //      └──────────────────────────────────────────────────────────────────────────────────────────────┘
 
     public <BD extends BlockDrawers> Stream<BD> getDrawersOfType(Class<BD> drawerClass) {
         return getBlocksOfType(drawerClass);
