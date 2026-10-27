@@ -26,7 +26,7 @@ import net.mehvahdjukaar.every_compat.modules.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.rechiseled.RechiseledModuleBlock;
 import net.mehvahdjukaar.every_compat.modules.rechiseled.RechiseledModuleSlab;
 import net.mehvahdjukaar.every_compat.modules.rechiseled.RechiseledModuleStairs;
-import net.mehvahdjukaar.every_compat.modules.storagedrawers.StorageDrawersModule;
+import net.mehvahdjukaar.every_compat.modules.storage_drawers.StorageDrawersModule;
 import net.mehvahdjukaar.every_compat.modules.stylish_stiles.StylishStilesModule;
 import net.mehvahdjukaar.every_compat.modules.table_top_craft.TableTopCraftModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
