@@ -1,7 +1,7 @@
 plugins {
     id "architectury-plugin" version "3.4-SNAPSHOT"
     id "dev.architectury.loom" version "1.10.+" apply false
-    id "me.modmuss50.mod-publish-plugin" version "2.2.0" apply false
+    id "me.modmuss50.mod-publish-plugin" version "2.2.1" apply false
     id 'com.gradleup.shadow' version '8.3.6' apply false
 }
 
@@ -277,8 +277,8 @@ subprojects {
                     start = "${minecraft_min_version}"
                     end = "${minecraft_version}"
                 }
-                clientRequired = true
-                serverRequired = true
+                client = true
+                server = true
 
                 if (modLoader == "fabric") {
                     requires("fabric-api")
