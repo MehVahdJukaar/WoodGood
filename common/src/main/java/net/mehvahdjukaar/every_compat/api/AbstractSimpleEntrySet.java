@@ -505,6 +505,61 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
                     .mask(maskLocation));
         }
 
+        /**
+         * ONLY for WOODTYPE
+         * This is used for swapping out planks with planks' paletteColor and log with log's paletteColor<br>
+         *
+         * @param banLogMaskLoc    target the log's palette of the texture to be excluded from recoloring with planks
+         * @param planksPalette     Planks' PaletteStrategy
+         * @param banPlanksMaskLoc target the planks' palette of the texture to be excluded from recoloring with Log
+         * @param logPalette        Log's PaletteStrategy
+         */
+        public BL addTextureMM(ResourceLocation textureLocation,
+                               ResourceLocation banLogMaskLoc, PaletteStrategy planksPalette,
+                               ResourceLocation banPlanksMaskLoc, PaletteStrategy logPalette) {
+            return addTexture(TextureInfo.of(textureLocation)
+                    .mask(banLogMaskLoc)
+                    .setPalette(planksPalette)
+                    .extraMask(banPlanksMaskLoc)
+                    .setExtraPalette(logPalette)
+            );
+        }
+
+        /**
+         * ONLY for WOODTYPE
+         * This is used for swapping out planks with planks' paletteColor and log with log's paletteColor<br>
+         *
+         * @param banLogMaskLoc    - target the log's palette of the texture to be excluded from recoloring with planks
+         * @param banPlanksMaskLoc - target the planks' palette of the texture to be excluded from recoloring with log
+         * @param logPalette        - PaletteStrategy for log
+         */
+        public BL addTextureMM(ResourceLocation textureLocation, ResourceLocation banLogMaskLoc, ResourceLocation banPlanksMaskLoc, PaletteStrategy logPalette) {
+            return addTexture(TextureInfo.of(textureLocation)
+                    .mask(banLogMaskLoc)
+                    .extraMask(banPlanksMaskLoc)
+                    .setExtraPalette(logPalette)
+            );
+        }
+
+        /**
+         * ONLY for WOODTYPE
+         * This is used for swapping out planks with planks' paletteColor and log with log's paletteColor<br>
+         * The default for PaletteStrategy are following:
+         * <ul>
+         *     <li>Planks: PaletteStrategy.MAIN_CHILD</li>
+         *     <li>LOG: PaletteStrategy.LOG_SIDE_STANDARD</li>
+         * </ul>
+         *
+         * @param banLogMaskLoc    - target the log's palette of the texture to be excluded from recoloring with planks
+         * @param banPlanksMaskLoc - target the planks' palette of the texture to be excluded from recoloring with log
+         */
+        public BL addTextureMM(ResourceLocation textureLocation, ResourceLocation banLogMaskLoc, ResourceLocation banPlanksMaskLoc) {
+            return addTexture(TextureInfo.of(textureLocation)
+                    .mask(banLogMaskLoc)
+                    .extraMask(banPlanksMaskLoc)
+            );
+        }
+
         public BL addTextureM(ResourceLocation textureLocation, ResourceLocation maskLocation, ResourceLocation overlayLocation) {
             return addTexture(TextureInfo.of(textureLocation)
                     .mask(maskLocation)
