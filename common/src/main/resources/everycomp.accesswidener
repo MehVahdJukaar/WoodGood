@@ -3,18 +3,6 @@ accessWidener   v2  official
 accessible field net/minecraft/world/level/block/entity/BlockEntityType validBlocks Ljava/util/Set;
 mutable field net/minecraft/world/level/block/entity/BlockEntityType validBlocks Ljava/util/Set;
 
-## chest renderer stuff
-
-accessible field net/minecraft/client/renderer/blockentity/ChestRenderer doubleLeftLid Lnet/minecraft/client/model/geom/ModelPart;
-accessible field net/minecraft/client/renderer/blockentity/ChestRenderer doubleRightLid Lnet/minecraft/client/model/geom/ModelPart;
-accessible field net/minecraft/client/renderer/blockentity/ChestRenderer doubleLeftLock Lnet/minecraft/client/model/geom/ModelPart;
-accessible field net/minecraft/client/renderer/blockentity/ChestRenderer doubleRightLock Lnet/minecraft/client/model/geom/ModelPart;
-accessible field net/minecraft/client/renderer/blockentity/ChestRenderer doubleLeftBottom Lnet/minecraft/client/model/geom/ModelPart;
-accessible field net/minecraft/client/renderer/blockentity/ChestRenderer doubleRightBottom Lnet/minecraft/client/model/geom/ModelPart;
-accessible field net/minecraft/client/renderer/blockentity/ChestRenderer lid Lnet/minecraft/client/model/geom/ModelPart;
-accessible field net/minecraft/client/renderer/blockentity/ChestRenderer bottom Lnet/minecraft/client/model/geom/ModelPart;
-accessible field net/minecraft/client/renderer/blockentity/ChestRenderer lock Lnet/minecraft/client/model/geom/ModelPart;
-
 #remove when updating ML
 accessible method net/minecraft/world/entity/ai/village/poi/PoiTypes registerBlockStates (Lnet/minecraft/core/Holder;Ljava/util/Set;)V
 

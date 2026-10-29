@@ -321,9 +321,9 @@
       "name": "FrozenLib",
       "modrinth_id": "frozenlib",
       "modrinth_versions": {
-        "fabric": "2.2.4-mc1.21.1"
+        "fabric": "2.4.4-mc26.1"
       },
-      "mc_version": "1.21.1"
+      "mc_version": "26.1.2"
     },
     "functional-storage": {
       "name": "Functional Storage",
@@ -889,9 +889,9 @@
       "name": "Wilder Wild",
       "modrinth_id": "wilder-wild",
       "modrinth_versions": {
-        "fabric": "4.2.1-mc1.21.1"
+        "fabric": "4.2.9-mc26.1"
       },
-      "mc_version": "1.21.1"
+      "mc_version": "26.1.2"
     },
     "wooden-hoppers": {
       "name": "Wooden Hoppers",

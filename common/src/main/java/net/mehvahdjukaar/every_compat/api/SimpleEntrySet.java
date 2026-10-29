@@ -211,12 +211,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         return null;
     }
 
-    @Deprecated(forRemoval = true)
-    @NotNull
-    public String getBlockName(T w) {
-        return makeEntryName(w);
-    }
-
     @Override
     public void registerItems(SimpleModule module, Registrator<Item> registry) {
         blocks.forEach((blockType, value) -> {
@@ -370,14 +364,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                     itemFactory, tileHolder, renderType, null, extraModelTransform, useMergedPalette, copyTint, condition,
                     this.extraModelConfig
             ));
-            for(var t : this.textures){
-                if(this.palette != null) {
-                    e.textures.add(t.cloneWithPalette((blockType, manager) ->
-                            this.palette.apply((T) blockType, manager)));
-                }else{
-                    e.textures.add(t);
-                }
-            }
+            e.textures.addAll(this.textures);
             return e;
         }
 
@@ -487,50 +474,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
         /// Include mod's models/item files to a List so it can be generated - REASON: Some files did not get generated
         public Builder<T, B> includeModelsItem(boolean includeInGeneration, ResourceLocation... resourceLocations) {
-            if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
-                this.extraModelConfig = ExtraModelConfiguration.createNew(includeInGeneration);
-            }
-            this.extraModelConfig.addModelsItem(resourceLocations);
-            return this;
-        }
-
-        @Deprecated(forRemoval = true, since = "v2.11.29")
-        /// Add models/block files so it can be generated - Only MINECRAFT's
-        /// Use {@link Builder#includeModelsBlock(ResourceLocation...)} & Will be removed in v2.11.29
-        public Builder<T, B> generateBlockModels(ResourceLocation... resourceLocations) {
-            if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
-                this.extraModelConfig = ExtraModelConfiguration.createNew();
-            }
-            this.extraModelConfig.addModelsBlock(resourceLocations);
-            return this;
-        }
-
-        @Deprecated(forRemoval = true, since = "v2.11.29")
-        /// Add mod's models/block files to a List so it can be generated - REASON: Some files did not get generated
-        /// Use {@link Builder#includeModelsBlock(boolean, ResourceLocation...)} & Will be removed in v2.11.29
-        public Builder<T, B> generateBlockModels(boolean includeInGeneration, ResourceLocation... resourceLocations) {
-            if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
-                this.extraModelConfig = ExtraModelConfiguration.createNew(includeInGeneration);
-            }
-            this.extraModelConfig.addModelsBlock(resourceLocations);
-            return this;
-        }
-
-        @Deprecated(forRemoval = true, since = "v2.11.29")
-        /// Add models/item files so it can be generated - Only MINECRAFT's
-        /// Use {@link Builder#includeModelsItem(ResourceLocation...)} & Will be removed in v2.11.29
-        public Builder<T, B> generateItemModels(ResourceLocation... resourceLocations) {
-            if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
-                this.extraModelConfig = ExtraModelConfiguration.createNew();
-            }
-            this.extraModelConfig.addModelsItem(resourceLocations);
-            return this;
-        }
-
-        @Deprecated(forRemoval = true, since = "v2.11.29")
-        /// Add models/item files to a List so it can be generated BUT Minecraft is excluded
-        /// Use {@link Builder#includeModelsItem(boolean, ResourceLocation...)} & Will be removed in v2.11.29
-        public Builder<T, B> generateItemModels(boolean includeInGeneration, ResourceLocation... resourceLocations) {
             if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
                 this.extraModelConfig = ExtraModelConfiguration.createNew(includeInGeneration);
             }

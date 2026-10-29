@@ -5,7 +5,6 @@ import net.mehvahdjukaar.every_compat.api.example.WoodGoodAddonExample;
 import net.mehvahdjukaar.every_compat.misc.OtherCompatMod;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Supplier;
@@ -42,12 +41,6 @@ public class EveryCompatAPI {
      */
     public static synchronized void registerOptionalModule(String modId, Supplier<Class<? extends CompatModule>> moduleClass) {
         EveryCompat.addOptionalModule(modId, moduleClass);
-    }
-
-    //no need for this
-    @Deprecated(forRemoval = true)
-    public static Collection<CompatModule> getModule(String modId) {
-        return EveryCompat.getModulesOfMod(modId);
     }
 
     public static void addIfLoaded(String modId, Supplier<Class<? extends CompatModule>> moduleClassSupplier) {

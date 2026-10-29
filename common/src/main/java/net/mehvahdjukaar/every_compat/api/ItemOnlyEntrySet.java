@@ -90,12 +90,6 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
 
     }
 
-    @Deprecated(forRemoval = true)
-    /// @deprecated USE {@link AbstractSimpleEntrySet#makeEntryName(BlockType)}
-    public String getItemName(T w) {
-        return makeEntryName(w);
-    }
-
     @Override
     public void registerItems(SimpleModule module, Registrator<Item> registry) {
         BlockTypeRegistry<T> typeRegistry = BlockSetAPI.getTypeRegistry(this.type);
@@ -142,7 +136,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
         var possibleNamespaces = alreadySupportedMods.toArray(String[]::new);
         for (var w : Objects.requireNonNull( BlockSetAPI.getTypeRegistry(this.getTypeClass())).getValues() ) {
             if (!items.containsKey(w)) {
-                String path = getItemName(w);
+                String path = makeEntryName(w);
                 Item item = getOptionalItem(path, w.getNamespace());
                 if (item == null) item = getOptionalItem(path, possibleNamespaces);
                 if (item != null) w.addChild(childKey, item);
@@ -222,7 +216,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
 
         public ItemOnlyEntrySet<T, I> build() {
             ItemOnlyEntrySet<T, I> e = finishBuild(new ItemOnlyEntrySet<>(type, name, prefix, itemFactory, baseItem, baseType, tab, tabMode,
-                    palette, extraModelTransform, useMergedPalette, copyTint, condition, extraModelConfig));
+                    null, extraModelTransform, useMergedPalette, copyTint, condition, extraModelConfig));
             e.textures.addAll(textures);
             return e;
         }
@@ -249,31 +243,5 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
             this.extraModelConfig.addModelsItem(resourceLocations);
             return this;
         }
-
-//      ┌──────────────────────────────────────────────────────────┐
-//      │                    MARKED FOR REMOVAL                    │
-//      └──────────────────────────────────────────────────────────┘
-
-        @Deprecated(forRemoval = true, since = "v2.11.29")
-        /// Add models/block files so it can be generated - Only MINECRAFT's
-        public Builder<T, I> generateBlockModels(ResourceLocation... blockModels) {
-            if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
-                this.extraModelConfig = ExtraModelConfiguration.createNew();
-            }
-            this.extraModelConfig.addModelsBlock(blockModels);
-            return this;
-        }
-
-        @Deprecated(forRemoval = true, since = "v2.11.29")
-        /// Add models/item files so it can be generated - Only MINECRAFT's
-        /// Use {@link Builder#includeModelsItem(ResourceLocation...)} & Will be removed in v2.11.29
-        public Builder<T, I> generateItemModels(ResourceLocation... itemModels) {
-            if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
-                this.extraModelConfig = ExtraModelConfiguration.createNew();
-            }
-            this.extraModelConfig.addModelsItem(itemModels);
-            return this;
-        }
-
     }
 }
