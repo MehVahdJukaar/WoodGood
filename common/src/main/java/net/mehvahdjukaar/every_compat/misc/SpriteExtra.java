@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.misc;
 
-import static net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper.spriteExtraSet;
+import net.mehvahdjukaar.moonlight.api.client.TextureCache;
+import net.minecraft.resources.ResourceLocation;
 
 // ┌──────────────────────────────────────────────────────────┐
 // │ Used by addons like StoneZone or GemsRealms, so their    │
@@ -8,6 +9,7 @@ import static net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper.spriteExtr
 // │ "findFirstBlockTextureLocation()"                        │
 // │ See EveryCompat's SpriteHelper for details               │
 // └──────────────────────────────────────────────────────────┘
+@Deprecated(forRemoval = true) //use TextureCache.registerSpecialTextureForBlock with the block id
 public record SpriteExtra(String blockId, String textureKey, String resLocTexture) {
 
     @SuppressWarnings("unused") // Being used by StoneZone & GemRealms
@@ -28,9 +30,8 @@ public record SpriteExtra(String blockId, String textureKey, String resLocTextur
         }
 
         public SpriteExtra build() {
-            var info = new SpriteExtra(blockId, textureKey, resLocTexture);
-            spriteExtraSet.add(info);
-            return info;
+            TextureCache.registerSpecialTextureForBlock(ResourceLocation.parse(blockId), textureKey, ResourceLocation.parse(resLocTexture));
+            return new SpriteExtra(blockId, textureKey, resLocTexture);
         }
     }
 

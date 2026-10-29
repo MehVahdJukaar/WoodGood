@@ -11,11 +11,9 @@ import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -32,6 +30,8 @@ import java.util.function.Supplier;
 // └───────────────────────────────────────────────────────────────┘
 public class CompatSpritesHelper {
 
+    //only filled by addons that write to it directly, SpriteExtra skips it
+    @Deprecated(forRemoval = true)
     public static final Set<SpriteExtra> spriteExtraSet = new HashSet<>();
 
     private static String normalizeLabel(String s) {
@@ -65,15 +65,13 @@ public class CompatSpritesHelper {
 
     public static void addHardcodedSprites() {
 
-        if (!spriteExtraSet.isEmpty()) {
-            for (SpriteExtra currentSprite : spriteExtraSet) {
-                addOptional(currentSprite.blockId(), currentSprite.textureKey(), currentSprite.resLocTexture());
-            }
+        for (SpriteExtra currentSprite : spriteExtraSet) {
+            addOptional(currentSprite.blockId(), currentSprite.textureKey(), currentSprite.resLocTexture());
         }
 
         // -------------------- Minecraft
-        TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "cactus_log", EveryCompat.res("block/cactus_side"));
-        TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "cactus_log_top", EveryCompat.res("block/cactus_top"));
+        TextureCache.registerSpecialTextureForBlock(ResourceLocation.withDefaultNamespace("cactus"), "cactus_log", EveryCompat.res("block/cactus_side"));
+        TextureCache.registerSpecialTextureForBlock(ResourceLocation.withDefaultNamespace("cactus"), "cactus_log_top", EveryCompat.res("block/cactus_top"));
 //            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS"stripped_cactus_log", res("block/stripped_cactus_side"));
 //            TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS"stripped_cactus_log_top", res("block/stripped_cactus_top"));
         addOptional("minecraft:mushroom_stem", "_side", "minecraft:block/mushroom_stem");
@@ -462,20 +460,17 @@ public class CompatSpritesHelper {
     }
 
     private static void addOptional(String blockId, String textureId, String texturePath) {
-        BuiltInRegistries.BLOCK.getOptional(ResourceLocation.parse(blockId))
-                .ifPresent(b -> TextureCache.registerSpecialTextureForBlock(b, textureId, ResourceLocation.parse(texturePath)));
+        TextureCache.registerSpecialTextureForBlock(ResourceLocation.parse(blockId), textureId, ResourceLocation.parse(texturePath));
     }
 
     /// @param ec_texturePath everycomp will be used as namespace
     @SuppressWarnings("SameParameterValue")
     private static void addOptionalInEC(String blockId, String textureId, String ec_texturePath) {
-        BuiltInRegistries.BLOCK.getOptional(ResourceLocation.parse(blockId))
-                .ifPresent(b -> TextureCache.registerSpecialTextureForBlock(b, textureId, EveryCompat.res(ec_texturePath)));
+        TextureCache.registerSpecialTextureForBlock(ResourceLocation.parse(blockId), textureId, EveryCompat.res(ec_texturePath));
     }
 
     private static void addOptional(String modId, String blockPath, String textureId, String texturePath) {
-        BuiltInRegistries.BLOCK.getOptional(ResourceLocation.parse(modId + ":" + blockPath))
-                .ifPresent(b -> TextureCache.registerSpecialTextureForBlock(b, textureId, ResourceLocation.parse(modId + ":" + texturePath)));
+        TextureCache.registerSpecialTextureForBlock(ResourceLocation.fromNamespaceAndPath(modId, blockPath), textureId, ResourceLocation.fromNamespaceAndPath(modId, texturePath));
     }
 
     // ┌──────────────────────────────────────────────────────────┐

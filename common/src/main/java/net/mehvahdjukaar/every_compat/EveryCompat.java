@@ -112,7 +112,6 @@ public abstract class EveryCompat {
                     ##########################################################################################################
                     """;
             EveryCompat.LOGGER.error("\n\n{}", log);
-            return;
         } else if (ACTIVE_MODULES.isEmpty()) {
             String log = """
                     #######################################################
@@ -190,7 +189,6 @@ public abstract class EveryCompat {
             r.run();
         } catch (Throwable e) {
             EveryCompat.LOGGER.error("Module for mod {} contains errors. This could mean that the mod has been recently updated and Every Compat needs updating (try downgrading the mod) or that you are using an older version.", Objects.requireNonNull(module).getModName(), e);
-            e.printStackTrace();
             if (canShowErrorScreen) {
                 //if before first screen we can display an error screen
                 addError(module, e);
@@ -247,10 +245,12 @@ public abstract class EveryCompat {
         }
     }
 
-    public synchronized static void addOptionalModule(String modId, Supplier<Class<? extends CompatModule>> moduleClass) {
-        boolean isModuleNotBlacklisted = !(MODULES_BLACKLIST.get().contains(modId) || ENTRY_SETS_BLACKLIST.get().contains(modId + ":.*"));
+    private static boolean isModuleBlacklisted(String modId) {
+        return MODULES_BLACKLIST.get().contains(modId) || ENTRY_SETS_BLACKLIST.get().contains(modId + ":.*");
+    }
 
-        if (PlatHelper.isModLoaded(modId) && isModuleNotBlacklisted) {
+    public synchronized static void addOptionalModule(String modId, Supplier<Class<? extends CompatModule>> moduleClass) {
+        if (PlatHelper.isModLoaded(modId) && !isModuleBlacklisted(modId)) {
             try {
                 Class<? extends CompatModule> klazz = moduleClass.get();
 
@@ -258,29 +258,15 @@ public abstract class EveryCompat {
 
                 addModule(module);
             } catch (Throwable t) {
-                addError(new EveryCompatModule(modId, modId) {
-                    @Override
-                    public int bloatAmount() {
-                        return 0;
-                    }
-
-                    @Override
-                    public Collection<Class<? extends BlockType>> getAffectedTypes() {
-                        return List.of();
-                    }
-                }, t);
+                addError(createDummyModule(modId), t);
             }
         }
     }
 
     @SafeVarargs
     public static void addMultipleOptional(String modId, Supplier<Class<? extends CompatModule>>... klazzes) {
-        boolean isModuleNotBlacklisted = !(MODULES_BLACKLIST.get().contains(modId) || ENTRY_SETS_BLACKLIST.get().contains(modId + ":.*"));
-
-        if (PlatHelper.isModLoaded(modId) && isModuleNotBlacklisted) {
-            for (var klazz : klazzes) {
-                addOptionalModule(modId, klazz);
-            }
+        for (var klazz : klazzes) {
+            addOptionalModule(modId, klazz);
         }
     }
 
@@ -288,20 +274,24 @@ public abstract class EveryCompat {
         if (module == null) {
             EveryCompat.LOGGER.error("Tried to log an error for a null module", t);
             //add dummy module instead. idk how this could even happen but if it does i want a nice error screen still
-            module = new EveryCompatModule(EveryCompat.MOD_ID, "ec") {
-                @Override
-                public int bloatAmount() {
-                    return 0;
-                }
-
-                @Override
-                public Collection<Class<? extends BlockType>> getAffectedTypes() {
-                    return List.of();
-                }
-            };
+            module = createDummyModule(EveryCompat.MOD_ID);
         }
         ERRORED.put(Preconditions.checkNotNull(module, "Module cannot be null"),
                 Preconditions.checkNotNull(t, "Throwable cannot be null"));
+    }
+
+    private static CompatModule createDummyModule(String modId) {
+        return new EveryCompatModule(modId, modId) {
+            @Override
+            public int bloatAmount() {
+                return 0;
+            }
+
+            @Override
+            public Collection<Class<? extends BlockType>> getAffectedTypes() {
+                return List.of();
+            }
+        };
     }
 
     private static @NotNull CompatModule instantiateModuleClass(String modId, Class<? extends CompatModule> klazz)
@@ -397,7 +387,9 @@ public abstract class EveryCompat {
                             if (message != null) return message;
                             else if (cause != null) return cause.toString();
                             else return "Failed to get error message";
-                        }
+                        },
+                        (a, b) -> a + "\n" + b,
+                        LinkedHashMap::new
                 ));
     }
 
@@ -407,9 +399,7 @@ public abstract class EveryCompat {
     }
 
     public static void addOtherCompatMod(String compatModId, String fromModId, String... supportedModId) {
-        List<String> list = new ArrayList<>();
-        Collections.addAll(list, supportedModId);
-        addCompatMod(compatModId, List.of(fromModId), list);
+        addCompatMod(compatModId, List.of(fromModId), List.of(supportedModId));
     }
 
     public static void addOtherCompatMod(String compatModId, List<String> fromModId, String supportedModId) {
@@ -417,9 +407,7 @@ public abstract class EveryCompat {
     }
 
     public static void addOtherCompatMod(String compatModId, List<String> fromModId, String... supportedModId) {
-        List<String> list = new ArrayList<>();
-        Collections.addAll(list, supportedModId);
-        addCompatMod(compatModId, fromModId, list);
+        addCompatMod(compatModId, fromModId, List.of(supportedModId));
     }
 
 // ─────────────────────────────────────── Deprecated & Marked-for-removal ───────────────────────────────────────
@@ -432,18 +420,7 @@ public abstract class EveryCompat {
                 CompatModule module = moduleFactory.get().apply(modId);
                 addModule(module);
             } catch (Throwable e) {
-                addError(new CompatModule(modId, modId, EveryCompat.MOD_ID) {
-
-                    @Override
-                    public int bloatAmount() {
-                        return 0;
-                    }
-
-                    @Override
-                    public Collection<Class<? extends BlockType>> getAffectedTypes() {
-                        return List.of();
-                    }
-                }, e);
+                addError(createDummyModule(modId), e);
             }
         }
     }
