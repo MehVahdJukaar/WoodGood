@@ -164,9 +164,6 @@ public abstract class CompatModule {
     public void registerBlockColors(ClientHelper.BlockColorEvent event) {
     }
 
-    public void registerItemColors(ClientHelper.ItemColorEvent event) {
-    }
-
     public void registerItemsToExistingTabs(RegHelper.ItemToTabEvent event) {
     }
 

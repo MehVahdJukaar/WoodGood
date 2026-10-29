@@ -165,16 +165,6 @@ public class SimpleModule extends CompatModule {
     }
 
     @Override
-    public void registerItemColors(ClientHelper.ItemColorEvent event) {
-        getEntries().forEach(e -> e.registerItemColors(event));
-    }
-
-    @Override
-    public void onClientSetup() {
-        getEntries().forEach(EntrySet::setRenderLayer);
-    }
-
-    @Override
     public void onModSetup() {
         getEntries().forEach(EntrySet::setupExistingTiles);
     }

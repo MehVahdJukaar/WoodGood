@@ -141,11 +141,6 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
     }
 
     @Override
-    public void setRenderLayer() {
-
-    }
-
-    @Override
     public void generateLootTables(SimpleModule module, ResourceManager manager, ResourceSink sink) {
 
     }

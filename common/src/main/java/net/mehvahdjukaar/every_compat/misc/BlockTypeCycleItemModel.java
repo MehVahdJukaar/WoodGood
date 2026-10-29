@@ -1,20 +1,20 @@
 package net.mehvahdjukaar.every_compat.misc;
 
-import com.mojang.blaze3d.platform.Lighting;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.mehvahdjukaar.candlelight.api.ClientOnly;
-import net.mehvahdjukaar.moonlight.api.client.ItemStackRenderer;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.BlockTypeRegistry;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.item.ItemModel;
+import net.minecraft.client.renderer.item.ItemModelResolver;
+import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.util.Util;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.world.entity.ItemOwner;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,7 +25,7 @@ import static net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs.getBlockT
 import static net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs.getChildConfigs;
 
 @ClientOnly
-public abstract class BlockTypeCycleItemRenderer<T extends BlockType> extends ItemStackRenderer {
+public abstract class BlockTypeCycleItemModel<T extends BlockType> implements ItemModel {
 
     private final List<String> childKeys = new ArrayList<>();
     private final List<T> moddedBlockTypes = new ArrayList<>();
@@ -36,8 +36,7 @@ public abstract class BlockTypeCycleItemRenderer<T extends BlockType> extends It
     private int typeIndex = 0;
     private boolean initialized;
 
-    public BlockTypeCycleItemRenderer(Class<T> tClass) {
-        super();
+    public BlockTypeCycleItemModel(Class<T> tClass) {
         this.typeClass = tClass;
     }
 
@@ -61,31 +60,15 @@ public abstract class BlockTypeCycleItemRenderer<T extends BlockType> extends It
     }
 
     @Override
-    public void renderByItem(ItemStack stack, ItemDisplayContext transformType,
-                             PoseStack matrixStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
-
+    public void update(ItemStackRenderState output, ItemStack stack, ItemModelResolver resolver, ItemDisplayContext displayContext,
+                       @Nullable ClientLevel level, @Nullable ItemOwner owner, int seed) {
         if (!this.initialized) {
             this.initialize();
             this.initialized = true;
         }
-        ItemStack item = getAnyItem();
-
-        var itemRenderer = Minecraft.getInstance().getItemRenderer();
-
-        matrixStack.pushPose();
-        matrixStack.translate(0.5D, 0.5D, 0.5D);
-        BakedModel bakedmodel = itemRenderer.getModel(item, null, null, 0);
-        itemRenderer.render(item, transformType, false, matrixStack, buffer, combinedLight, combinedOverlay, bakedmodel);
-        if (!bakedmodel.isGui3d()) Lighting.setupForFlatItems();
-        //forces rendering now with flat lighting
-        if (buffer instanceof MultiBufferSource.BufferSource bu) {
-            bu.endBatch();
-        }
-        Lighting.setupFor3DItems();
-        matrixStack.popPose();
-
+        output.appendModelIdentityElement(this);
+        resolver.appendItemLayers(output, getAnyItem(), displayContext, level, owner, seed);
     }
-
 
     public ItemStack getAnyItem() {
         int size = childKeys.size();

@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.misc;
 
 import com.google.common.base.Preconditions;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -27,6 +28,7 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.ByteArrayInputStream;
 import java.util.*;
@@ -163,6 +165,7 @@ public class ResourcesUtils {
                     ResType.ITEM_MODELS.getPath(Utils.getID(oakItem)));
 
             if (oakItemModel == null) return;
+            JsonArray oakTints = getItemDefinitionTints(manager, Utils.getID(oakItem));
             JsonObject json = RPUtils.deserializeJson(new ByteArrayInputStream(oakItemModel.data));
             //adds models/item references from here. not recursive
             modelsLoc.addAll(RPUtils.findAllResourcesInJsonRecursive(json, s -> s.equals("model") || s.equals("parent")));
@@ -182,6 +185,7 @@ public class ResourcesUtils {
                     Preconditions.checkArgument(newRes.location != oakItemModel.location,
                             "ids cant be the same: " + newRes.location);
                     sink.addResourceIfNotPresent(manager, newRes);
+                    addItemDefinition(manager, sink, id, newRes.location, oakTints);
                 });
             });
         } catch (Exception e) {
@@ -206,6 +210,33 @@ public class ResourcesUtils {
                 }
             }
         });
+    }
+
+    //items/ definition pointing at the generated models/item json. tints come from the oak one
+    private static void addItemDefinition(ResourceManager manager, ResourceSink sink, Identifier itemId,
+                                          Identifier modelLocation, @Nullable JsonArray tints) {
+        Identifier modelId = modelLocation.withPath(p -> p.substring("models/".length(), p.length() - ".json".length()));
+        sink.addJsonUnlessPresent(manager, ResType.ITEMS.getPath(itemId), () -> {
+            JsonObject model = new JsonObject();
+            model.addProperty("type", "minecraft:model");
+            model.addProperty("model", modelId.toString());
+            if (tints != null) model.add("tints", tints);
+            JsonObject definition = new JsonObject();
+            definition.add("model", model);
+            return definition;
+        });
+    }
+
+    @Nullable
+    private static JsonArray getItemDefinitionTints(ResourceManager manager, Identifier itemId) {
+        var resource = manager.getResource(ResType.ITEMS.getPath(itemId));
+        if (resource.isEmpty()) return null;
+        try (var stream = resource.get().open()) {
+            JsonObject model = RPUtils.deserializeJson(stream).getAsJsonObject("model");
+            return model != null && model.has("tints") ? model.getAsJsonArray("tints") : null;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @NotNull

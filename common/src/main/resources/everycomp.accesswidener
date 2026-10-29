@@ -21,3 +21,6 @@ accessible field net/minecraft/client/Minecraft blockModelResolver Lnet/minecraf
 
 # showcase widget chip colors
 accessible field net/minecraft/client/renderer/texture/SpriteContents originalImage Lcom/mojang/blaze3d/platform/NativeImage;
+
+# all_woods item model
+accessible field net/minecraft/client/renderer/item/ItemModels ID_MAPPER Lnet/minecraft/util/ExtraCodecs$LateBoundIdMapper;

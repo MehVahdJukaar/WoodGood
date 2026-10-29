@@ -9,7 +9,11 @@ import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.client.color.block.BlockTintSource;
+import net.minecraft.client.color.block.BlockTintSources;
 import net.minecraft.client.renderer.BiomeColors;
+import net.minecraft.client.renderer.block.BlockAndTintGetter;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
@@ -19,6 +23,8 @@ import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 import twilightforest.block.*;
@@ -26,6 +32,8 @@ import twilightforest.enums.HollowLogVariants;
 import twilightforest.init.TFBlocks;
 import twilightforest.item.HollowLogItem;
 
+import java.util.List;
+import java.util.Set;
 import java.util.function.Supplier;
 
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.SLAB;
@@ -144,15 +152,24 @@ public class TwilightForestModule extends EveryCompatModule {
 
     @Override
     public void registerBlockColors(ClientHelper.@NotNull BlockColorEvent event) {
-        event.register(
-                (s, l, pos, i) -> s.getValue(ClimbableHollowLogBlock.VARIANT) != HollowLogVariants.Climbable.VINE ? -1 :
-                        l != null && pos != null ?
-                                BiomeColors.getAverageFoliageColor(l, pos) : FoliageColor.getDefaultColor(),
-                hollow_log_climbable.blocks.values().toArray(Block[]::new));
-        event.register(
-                (s, l, pos, i) -> l != null && pos != null ?
-                        BiomeColors.getAverageGrassColor(l, pos) : -1,
-                hollow_log_horizontal.blocks.values().toArray(Block[]::new));
+        BlockTintSource vineFoliage = new BlockTintSource() {
+            @Override
+            public int color(BlockState state) {
+                return state.getValue(ClimbableHollowLogBlock.VARIANT) != HollowLogVariants.Climbable.VINE ? -1 : FoliageColor.FOLIAGE_DEFAULT;
+            }
+
+            @Override
+            public int colorInWorld(BlockState state, BlockAndTintGetter level, BlockPos pos) {
+                return state.getValue(ClimbableHollowLogBlock.VARIANT) != HollowLogVariants.Climbable.VINE ? -1 : BiomeColors.getAverageFoliageColor(level, pos);
+            }
+
+            @Override
+            public Set<Property<?>> relevantProperties() {
+                return Set.of(ClimbableHollowLogBlock.VARIANT);
+            }
+        };
+        event.register(List.of(vineFoliage), hollow_log_climbable.blocks.values().toArray(Block[]::new));
+        event.register(List.of(BlockTintSources.sugarCane()), hollow_log_horizontal.blocks.values().toArray(Block[]::new));
     }
 
     @SuppressWarnings("DataFlowIssue")

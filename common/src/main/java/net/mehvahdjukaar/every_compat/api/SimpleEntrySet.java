@@ -2,7 +2,6 @@ package net.mehvahdjukaar.every_compat.api;
 
 import com.google.common.base.Preconditions;
 import net.mehvahdjukaar.candlelight.api.ClientOnly;
-import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.misc.ExtraModelConfiguration;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
@@ -229,16 +228,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     public void setupExistingTiles() {
         if (tileHolder instanceof ExistingTileHolder<?> et) {
             SimpleModule.appendTileEntityBlocks(et.get(), blocks.values());
-        }
-    }
-
-    @Override
-    public void setRenderLayer() {
-        for (var e : blocks.entrySet()) {
-            var w = e.getKey();
-            var v = e.getValue();
-            if (renderType != null || w.toString().equals("rats:pirat"))
-                EveryCompatClient.registerRenderType(v, w, renderType);
         }
     }
 

@@ -36,8 +36,6 @@ public interface EntrySet<T extends BlockType> {
 
     void registerTiles(SimpleModule module, Registrator<BlockEntityType<?>> registry);
 
-    void setRenderLayer();
-
     void generateTags(SimpleModule module,  ResourceManager manager, ResourceSink pack);
 
     void generateLootTables(SimpleModule module,  ResourceManager manager, ResourceSink pack);
@@ -57,8 +55,6 @@ public interface EntrySet<T extends BlockType> {
     default Item getItemOf(T type) {
         return null;
     }
-
-    void registerItemColors(ClientHelper.ItemColorEvent event);
 
     void registerBlockColors(ClientHelper.BlockColorEvent event);
 
