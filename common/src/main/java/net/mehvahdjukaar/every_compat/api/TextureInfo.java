@@ -5,12 +5,14 @@ import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.Nullable;
 
-public record TextureInfo(Identifier texture, @Nullable Identifier mask, @Nullable Identifier overlay,
+public record TextureInfo(Identifier texture, @Nullable Identifier mask, @Nullable Identifier extraMask, @Nullable Identifier overlay,
                           boolean keepNamespace, boolean copyTexture, boolean noAnimation,
                           String customTexturePath, Pair<String, String> replacePath,
                           boolean autoMask,
                           @Deprecated boolean onAtlas,
-                          PaletteStrategy paletteStrategy) {
+                          PaletteStrategy paletteStrategy,
+                          @Nullable PaletteStrategy extraPaletteStrategy
+) {
 
     public static Builder of(Identifier res) {
         return new Builder(res);
@@ -31,6 +33,7 @@ public record TextureInfo(Identifier texture, @Nullable Identifier mask, @Nullab
     public static class Builder {
         private final Identifier texture;
         private Identifier mask;
+        private Identifier extraMask;
         private Identifier overlay;
         private boolean keepNamespace = false;
         private boolean copyTexture = false;
@@ -40,6 +43,7 @@ public record TextureInfo(Identifier texture, @Nullable Identifier mask, @Nullab
         private String customTexturePath;
         private Pair<String, String> replacePath;
         private PaletteStrategy palette = PaletteStrategies.MAIN_CHILD;
+        private PaletteStrategy extraPalette = PaletteStrategies.LOG_SIDE_STANDARD;
 
         public Builder(Identifier texture) {
             this.texture = texture;
@@ -48,6 +52,11 @@ public record TextureInfo(Identifier texture, @Nullable Identifier mask, @Nullab
 
         public Builder mask(Identifier mask) {
             this.mask = mask;
+            return this;
+        }
+
+        public Builder extraMask(Identifier extraMask) {
+            this.extraMask = extraMask;
             return this;
         }
 
@@ -99,11 +108,17 @@ public record TextureInfo(Identifier texture, @Nullable Identifier mask, @Nullab
             this.palette = paletteProvider;
             return this;
         }
+        //a bit of abuse of type here, should be PaletteStrategy but i want to enforce them being cached
+        public Builder setExtraPalette(PaletteStrategy extraPaletteProvider) {
+            this.extraPalette = extraPaletteProvider;
+            return this;
+        }
 
 
         public TextureInfo build() {
-            return new TextureInfo(texture, mask, overlay, keepNamespace,
-                    copyTexture, noAnimation, customTexturePath, replacePath, autoMask, onAtlas, palette);
+            return new TextureInfo(texture, mask, extraMask, overlay, keepNamespace,
+                    copyTexture, noAnimation, customTexturePath, replacePath, autoMask, onAtlas,
+                    palette, extraPalette);
         }
     }
 
