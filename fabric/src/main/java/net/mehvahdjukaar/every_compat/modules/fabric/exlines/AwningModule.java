@@ -37,7 +37,7 @@ public class AwningModule extends EveryCompatModule {
                 )
                 //TEXTURES: planks
                 .requiresChildren(STAIRS)
-                .setTabKey(ExlineAwningsMain.FURNITURE_GROUP)
+                .setTab(getTab(ExlineAwningsMain.FURNITURE_GROUP))
                 .addRecipe(modRes("oak_awning_recipe"))
                 .build();
         this.addEntry(awnings);
@@ -57,7 +57,7 @@ public class AwningModule extends EveryCompatModule {
                 //REASON:  Take a look @ Terrestria's logs' non-standard 16x16 texture, you'll get why
                 //EXCLUDED: sakura
                 .addCondition(w -> !w.getId().toString().equals("terrestria:sakura"))
-                .setTabKey(ExlineAwningsMain.FURNITURE_GROUP)
+                .setTab(getTab(ExlineAwningsMain.FURNITURE_GROUP))
                 .addRecipe(modRes("oak_log_awning_recipe"))
                 .build();
         this.addEntry(awnings_log);

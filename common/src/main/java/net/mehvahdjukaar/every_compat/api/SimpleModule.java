@@ -32,11 +32,6 @@ public class SimpleModule extends CompatModule {
 
     protected int bloat = 0;
 
-    @Deprecated(forRemoval = true)
-    public SimpleModule(String modId, String shortId) {
-        super(modId, shortId);
-    }
-
     public SimpleModule(String modId, String shortId, String myNamespace) {
         super(modId, shortId, myNamespace);
     }

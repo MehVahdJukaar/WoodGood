@@ -117,14 +117,7 @@ public class QuarkSimpleEntrySet<T extends BlockType, B extends Block> extends S
                     itemFactory, tileHolder, renderType, null, extraModelTransform, useMergedPalette, copyTint, condition,
                     extraModelConfig
             ));
-            for(var t : this.textures){
-                if(this.palette != null) {
-                    e.textures.add(t.cloneWithPalette((blockType, manager) ->
-                            this.palette.apply((T) blockType, manager)));
-                }else{
-                    e.textures.add(t);
-                }
-            }
+            e.textures.addAll(this.textures);
             return e;
         }
     }

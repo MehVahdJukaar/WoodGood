@@ -31,7 +31,7 @@ public class WoodenHoppersModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(WoodenHoppersBlockTags.WOODEN_HOPPERS, Registries.BLOCK)
                 .addTag(WoodenHoppersItemTags.WOODEN_HOPPERS, Registries.ITEM)
-                .setTabKey(CreativeModeTabs.FUNCTIONAL_BLOCKS)
+                .setTab(getTab(CreativeModeTabs.FUNCTIONAL_BLOCKS))
                 .defaultRecipe()
                 .build();
         this.addEntry(hoppers);

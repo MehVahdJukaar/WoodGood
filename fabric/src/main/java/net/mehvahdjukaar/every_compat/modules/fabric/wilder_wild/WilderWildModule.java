@@ -52,8 +52,7 @@ public class WilderWildModule extends EveryCompatModule {
                         "wilderwild:block/hollowed_oak_log", "log",
                         CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE
                 ))
-//-                .createPaletteFromChild("log", SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)
-//-                .addTexture(modRes("block/hollowed_oak_log"))
+//-                .addTexture(modRes("block/hollowed_oak_log"), PaletteStrategies.LOG_SIDE_STANDARD)
                 .setRenderType(RenderLayer.CUTOUT)
                 .setTab(getTab(tab))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -86,8 +85,7 @@ public class WilderWildModule extends EveryCompatModule {
                         "wilderwild:block/stripped_hollowed_oak_log", "stripped_log",
                         CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE
                 ))
-//-                .createPaletteFromChild("stripped_log", SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)
-//-                .addTexture(modRes("block/stripped_hollowed_oak_log"))
+//-                .addTexture(modRes("block/stripped_hollowed_oak_log"), PaletteStrategies.STRIPPED_LOG_SIDE_STANDARD)
                 .setRenderType(RenderLayer.CUTOUT)
                 .setTab(getTab(tab))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)

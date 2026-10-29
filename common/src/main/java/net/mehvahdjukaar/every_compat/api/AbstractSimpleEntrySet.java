@@ -1,7 +1,6 @@
 package net.mehvahdjukaar.every_compat.api;
 
 import com.google.common.base.Suppliers;
-import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
@@ -12,11 +11,8 @@ import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
-import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
-import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys;
-import net.mehvahdjukaar.moonlight.core.misc.McMetaFile;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -352,9 +348,6 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         protected BooleanSupplier isEnabledInMod = null;
         protected boolean copyTint = false;
 
-        @Deprecated(forRemoval = true)
-        protected BiFunction<T, ResourceManager, PaletteStrategy.PaletteAndAnimation> palette = null;
-
         protected Builder(Class<T> type, String name, @Nullable String prefix, Supplier<T> baseType) {
             this.baseType = baseType;
             this.name = name;
@@ -460,31 +453,6 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         public BL noTab() {
             this.tab = null;
             this.addToTab = false;
-            return (BL) this;
-        }
-
-        /// Use {@link net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet.Builder#setTab(java.util.function.Supplier)}
-        /// with EveryCompatModule#getTab(ResourceLocation)
-        @Deprecated(forRemoval = true)
-        public BL setTabKey(ResourceLocation res) {
-            ResourceKey<CreativeModeTab> key = ResourceKey.create(Registries.CREATIVE_MODE_TAB, res);
-            this.setTabKey(key);
-            return (BL) this;
-        }
-
-        /// Use {@link net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet.Builder#setTab(java.util.function.Supplier)}
-        /// with EveryCompatModule#getTab(ResourceKey)
-        @Deprecated(forRemoval = true)
-        public BL setTabKey(Supplier<ResourceKey<CreativeModeTab>> tab) {
-            this.tab = () -> BuiltInRegistries.CREATIVE_MODE_TAB.getHolderOrThrow(tab.get());
-            return (BL) this;
-        }
-
-        /// Use {@link net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet.Builder#setTab(java.util.function.Supplier)}
-        /// with EveryCompatModule#getTab(ResourceKey)
-        @Deprecated(forRemoval = true)
-        public BL setTabKey(ResourceKey<CreativeModeTab> key) {
-            this.setTabKey(() -> key);
             return (BL) this;
         }
 
@@ -603,68 +571,6 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         public BL useMergedPalette() {
             this.useMergedPalette = true;
             return (BL) this;
-        }
-
-
-        //by default, they all use planks palette
-
-        /// @deprecated Use {@link PaletteStrategies} to create a new strategies instead of setPalette()
-        @Deprecated(forRemoval = true)
-        public BL setPalette(BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable McMetaFile>> paletteProvider) {
-            this.palette = (t, m) -> {
-                var old = paletteProvider.apply(t, m);
-                return PaletteStrategy.PaletteAndAnimation.of(old.getFirst(), old.getSecond());
-            };
-            return (BL) this;
-        }
-
-        //only works for oak type. Will fail if its used on leaves
-
-        /// @deprecated Look at javadoc: {@link Builder#createPaletteFromChild(Consumer, String, Predicate)}
-        @Deprecated(forRemoval = true)
-        public BL createPaletteFromPlanks(Consumer<Palette> paletteTransform) {
-            return createPaletteFromChild(paletteTransform, VanillaWoodChildKeys.PLANKS);
-        }
-
-        /// @deprecated Look at javadoc: {@link Builder#createPaletteFromChild(Consumer, String, Predicate)}
-        @Deprecated(forRemoval = true)
-        public BL createPaletteFromPlanks() {
-            return createPaletteFromPlanks(p -> {
-            });
-        }
-
-        /// @deprecated Look at javadoc: {@link Builder#createPaletteFromChild(Consumer, String, Predicate)}
-        @Deprecated(forRemoval = true)
-        public BL createPaletteFromChild(Consumer<Palette> paletteTransform, String childKey) {
-            return createPaletteFromChild(paletteTransform, childKey, null);
-        }
-
-        /// @deprecated Look at javadoc: {@link Builder#createPaletteFromChild(Consumer, String, Predicate)}
-        @Deprecated(forRemoval = true)
-        public BL createPaletteFromChild(String childKey, Predicate<String> whichSide) {
-            return createPaletteFromChild(p -> {
-            }, childKey, whichSide);
-        }
-
-        /// @deprecated Look at javadoc: {@link Builder#createPaletteFromChild(Consumer, String, Predicate)}
-        @Deprecated(forRemoval = true)
-        public BL createPaletteFromChild(String childKey) {
-            return createPaletteFromChild(p -> {
-            }, childKey, null);
-        }
-
-        /**
-         * @deprecated USE .addTexture(ResourceLocation, PaletteStrategy) or .addTextureM(ResourceLocation, ResourceLocation, PaletteStrategy),
-         * the last parameter is PaletteStrategy<br>
-         * Take a look at {@link PaletteStrategies} and Look for the FIELD which can be used as an argument for the last
-         * parameter
-         **/
-        @Deprecated(forRemoval = true)
-        public BL createPaletteFromChild(Consumer<Palette> paletteTransform, String childKey, Predicate<String> whichSide) {
-            return this.setPalette((blockType, m) -> {
-                var p = PaletteStrategies.makePaletteFromChild(blockType, m, childKey, whichSide, paletteTransform);
-                return Pair.of(p.palette(), p.animation());
-            });
         }
     }
 

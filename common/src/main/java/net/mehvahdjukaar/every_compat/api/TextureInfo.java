@@ -28,13 +28,6 @@ public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation m
         return new Builder(res).customTexture(customTexturePath);
     }
 
-    //remove once you remove the rest of palette madness
-    @Deprecated(forRemoval = true)
-    public TextureInfo cloneWithPalette(PaletteStrategy newPalette) {
-        return new TextureInfo(this.texture, this.mask, this.overlay, this.keepNamespace, this.copyTexture, noAnimation,
-                this.customTexturePath, replacePath, this.autoMask, this.onAtlas, newPalette);
-    }
-
     public static class Builder {
         private final ResourceLocation texture;
         private ResourceLocation mask;

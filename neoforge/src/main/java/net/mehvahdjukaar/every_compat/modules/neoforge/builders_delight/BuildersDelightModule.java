@@ -55,7 +55,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                         getModItem("oak_furniture_kit"), () -> VanillaWoodTypes.OAK,
                         w -> new CustomBdFurnitureKit(new Item.Properties().stacksTo(64),"furniture_kit")
                 )
-                .setTabKey(tabMater)
+                .setTab(getTab(tabMater))
                 .addTextureM(modRes("item/oak_furniture_kit"), EveryCompat.res("item/bdl/furniture_kit_mask"),
                         PaletteStrategies.WOOD_ITEM)
                 // manual recipe below
@@ -69,9 +69,8 @@ public class BuildersDelightModule extends EveryCompatModule {
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("chair"), Registries.ITEM)
-                .setTabKey(tabDeco)
-                .addTexture(modRes("block/decoration/seating/oak/oak_chair_1"))
-                .createPaletteFromPlanks(this::lessContrastPalette)
+                .setTab(getTab(tabDeco))
+                .addTexture(modRes("block/decoration/seating/oak/oak_chair_1"), PaletteStrategies.PLANKS_LOW_CONTRAST)
                 .addRecipe(ResourceLocation.tryParse("minecraft:oak_chair_1"))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .addCustomItem((woodType, block, properties) -> new BDBlockItem(block, properties, "chair_1"))
@@ -84,10 +83,9 @@ public class BuildersDelightModule extends EveryCompatModule {
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("chair"), Registries.ITEM)
-                .addTexture(modRes("block/decoration/seating/oak/oak_chair_2"))
-                .createPaletteFromPlanks(this::lessContrastPalette)
+                .addTexture(modRes("block/decoration/seating/oak/oak_chair_2"), PaletteStrategies.PLANKS_LOW_CONTRAST)
                 .addRecipe(ResourceLocation.tryParse("minecraft:oak_chair_2"))
-                .setTabKey(tabDeco)
+                .setTab(getTab(tabDeco))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "chair_2"))
                 .build();
@@ -102,7 +100,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("table"), Registries.ITEM)
-                .setTabKey(tabDeco)
+                .setTab(getTab(tabDeco))
                 .addTexture(modRes("block/decoration/tables/oak/oak_table_1"))
                 .addRecipe(ResourceLocation.tryParse("minecraft:oak_table_1"))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
@@ -116,7 +114,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("table"), Registries.ITEM)
-                .setTabKey(tabDeco)
+                .setTab(getTab(tabDeco))
                 .addTexture(modRes("block/decoration/tables/oak/oak_table_2"))
                 .addRecipe(ResourceLocation.tryParse("minecraft:oak_table_2"))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
@@ -131,9 +129,8 @@ public class BuildersDelightModule extends EveryCompatModule {
                         w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tabBlock)
-                .addTexture(modRes("block/oak_planks_1"))
-                .createPaletteFromPlanks(this::lessContrastPalette)
+                .setTab(getTab(tabBlock))
+                .addTexture(modRes("block/oak_planks_1"), PaletteStrategies.PLANKS_LOW_CONTRAST)
                 .addRecipe(modRes("oak_planks_1"))
                 .setRenderType(RenderLayer.SOLID)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "planks_1"))
@@ -145,9 +142,8 @@ public class BuildersDelightModule extends EveryCompatModule {
                         w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tabBlock)
-                .addTexture(modRes("block/oak_planks_2"))
-                .createPaletteFromPlanks(this::lessContrastPalette)
+                .setTab(getTab(tabBlock))
+                .addTexture(modRes("block/oak_planks_2"), PaletteStrategies.PLANKS_LOW_CONTRAST)
                 .addRecipe(modRes("oak_planks_2"))
                 .setRenderType(RenderLayer.SOLID)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "planks_2"))
@@ -159,9 +155,8 @@ public class BuildersDelightModule extends EveryCompatModule {
                         w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tabBlock)
-                .addTexture(modRes("block/oak_planks_3"))
-                .createPaletteFromPlanks(this::lessContrastPalette)
+                .setTab(getTab(tabBlock))
+                .addTexture(modRes("block/oak_planks_3"), PaletteStrategies.PLANKS_LOW_CONTRAST)
                 .addRecipe(modRes("oak_planks_3"))
                 .setRenderType(RenderLayer.SOLID)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "planks_3"))
@@ -173,9 +168,8 @@ public class BuildersDelightModule extends EveryCompatModule {
                         w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tabBlock)
-                .addTexture(modRes("block/oak_planks_4"))
-                .createPaletteFromPlanks(this::lessContrastPalette)
+                .setTab(getTab(tabBlock))
+                .addTexture(modRes("block/oak_planks_4"), PaletteStrategies.PLANKS_LOW_CONTRAST)
                 .addRecipe(modRes("oak_planks_4"))
                 .setRenderType(RenderLayer.SOLID)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "planks_4"))
@@ -187,9 +181,8 @@ public class BuildersDelightModule extends EveryCompatModule {
                         w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tabBlock)
-                .addTexture(modRes("block/oak_planks_5"))
-                .createPaletteFromPlanks(this::lessContrastPalette)
+                .setTab(getTab(tabBlock))
+                .addTexture(modRes("block/oak_planks_5"), PaletteStrategies.PLANKS_LOW_CONTRAST)
                 .addRecipe(modRes("oak_planks_5"))
                 .setRenderType(RenderLayer.SOLID)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "planks_5"))
@@ -201,9 +194,8 @@ public class BuildersDelightModule extends EveryCompatModule {
                         w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tabBlock)
-                .addTexture(modRes("block/oak_planks_6"))
-                .createPaletteFromPlanks(this::lessContrastPalette)
+                .setTab(getTab(tabBlock))
+                .addTexture(modRes("block/oak_planks_6"), PaletteStrategies.PLANKS_LOW_CONTRAST)
                 .addRecipe(modRes("oak_planks_6"))
                 .setRenderType(RenderLayer.SOLID)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "planks_6"))
@@ -215,9 +207,8 @@ public class BuildersDelightModule extends EveryCompatModule {
                         w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tabBlock)
-                .addTexture(modRes("block/oak_planks_7"))
-                .createPaletteFromPlanks(this::lessContrastPalette)
+                .setTab(getTab(tabBlock))
+                .addTexture(modRes("block/oak_planks_7"), PaletteStrategies.PLANKS_LOW_CONTRAST)
                 .addRecipe(modRes("oak_planks_7"))
                 .setRenderType(RenderLayer.SOLID)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "planks_7"))
@@ -231,7 +222,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                         w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .requiresChildren("stairs")
                 // using the same textures from planks
                 .addRecipe(modRes("oak_stairs_1"))
@@ -245,7 +236,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                         w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .requiresChildren("stairs")
                 // using the same textures from planks
                 .addRecipe(modRes("oak_stairs_2"))
@@ -259,7 +250,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                         w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .requiresChildren("stairs")
                 // using the same textures from planks
                 .addRecipe(modRes("oak_stairs_3"))
@@ -273,7 +264,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                         w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .requiresChildren("stairs")
                 // using the same textures from planks
                 .addRecipe(modRes("oak_stairs_4"))
@@ -287,7 +278,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                         w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .requiresChildren("stairs")
                 // using the same textures from planks
                 .addRecipe(modRes("oak_stairs_5"))
@@ -301,7 +292,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                         w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .requiresChildren("stairs")
                 // using the same textures from planks
                 .addRecipe(modRes("oak_stairs_6"))
@@ -315,7 +306,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                         w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .requiresChildren("stairs")
                 // using the same textures from planks
                 .addRecipe(modRes("oak_stairs_7"))
@@ -332,7 +323,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .requiresChildren("slab")
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 // using the same textures from planks
                 .addRecipe(modRes("oak_slab_1"))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
@@ -345,7 +336,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                         w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .requiresChildren("slab")
                 // using the same textures from planks
                 .addRecipe(modRes("oak_slab_2"))
@@ -359,7 +350,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                         w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .requiresChildren("slab")
                 // using the same textures from planks
                 .addRecipe(modRes("oak_slab_3"))
@@ -373,7 +364,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                         w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .requiresChildren("slab")
                 // using the same textures from planks
                 .addRecipe(modRes("oak_slab_4"))
@@ -387,7 +378,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                         w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .requiresChildren("slab")
                 // using the same textures from planks
                 .addRecipe(modRes("oak_slab_5"))
@@ -401,7 +392,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                         w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .requiresChildren("slab")
                 // using the same textures from planks
                 .addRecipe(modRes("oak_slab_6"))
@@ -415,7 +406,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                         w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .requiresChildren("slab")
                 // using the same textures from planks
                 .addRecipe(modRes("oak_slab_7"))
@@ -432,7 +423,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_1"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .addTexture(modRes("block/oak_frame_1"),
                         PaletteStrategies.PLANKS_LOW_CONTRAST)
                 // custom recipe below
@@ -447,7 +438,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_2"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("frame"), Registries.ITEM)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .addTexture(modRes("block/oak_frame_2"),
                         PaletteStrategies.PLANKS_LOW_CONTRAST)
                 // ChiselRecipe
@@ -462,7 +453,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_3"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("frame"), Registries.ITEM)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .addTexture(modRes("block/oak_frame_3"),
                         PaletteStrategies.PLANKS_LOW_CONTRAST)
                 // ChiselRecipe
@@ -477,7 +468,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_4"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("frame"), Registries.ITEM)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .addTexture(modRes("block/oak_frame_4"),
                         PaletteStrategies.PLANKS_LOW_CONTRAST)
                 // ChiselRecipe
@@ -492,7 +483,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_5"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("frame"), Registries.ITEM)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .addTexture(modRes("block/oak_frame_5"),
                         PaletteStrategies.PLANKS_LOW_CONTRAST)
                 // ChiselRecipe
@@ -507,7 +498,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_6"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("frame"), Registries.ITEM)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .addTexture(modRes("block/oak_frame_6"),
                         PaletteStrategies.PLANKS_LOW_CONTRAST)
                 // ChiselRecipe
@@ -522,7 +513,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_7"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("frame"), Registries.ITEM)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .addTexture(modRes("block/oak_frame_7"),
                         PaletteStrategies.PLANKS_LOW_CONTRAST)
                 // ChiselRecipe
@@ -537,7 +528,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "frame_8"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("frame"), Registries.ITEM)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .addTexture(modRes("block/oak_frame_8"),
                         PaletteStrategies.PLANKS_LOW_CONTRAST)
                 // ChiselRecipe
@@ -553,7 +544,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_1"))
                 .addTag(Tags.Blocks.GLASS_BLOCKS_BLOCKS, Registries.BLOCK)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .addTextureM(modRes("block/oak_glass_1"), EveryCompat.res("block/bdl/oak_glass_x_l_mask"),
                         PaletteStrategies.PLANKS_LOW_CONTRAST)
                 // custom recipe below
@@ -567,7 +558,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_2"))
                 .addTag(Tags.Blocks.GLASS_BLOCKS, Registries.BLOCK)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .addTextureM(modRes("block/oak_glass_2"), EveryCompat.res("block/bdl/oak_glass_2_mask"),
                         PaletteStrategies.PLANKS_LOW_CONTRAST)
                 .addTextureM(modRes("block/oak_glass_2_top"), EveryCompat.res("block/bdl/oak_glass_x_l_mask"),
@@ -583,7 +574,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_3"))
                 .addTag(Tags.Blocks.GLASS_BLOCKS, Registries.BLOCK)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .addTexture(modRes("block/oak_glass_3"),
                         PaletteStrategies.PLANKS_LOW_CONTRAST)
                 .addTexture(modRes("block/oak_glass_3_top"),
@@ -599,7 +590,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_4"))
                 .addTag(Tags.Blocks.GLASS_BLOCKS, Registries.BLOCK)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .addTextureM(modRes("block/oak_glass_4"), EveryCompat.res("block/bdl/oak_glass_4_mask"),
                         PaletteStrategies.PLANKS_LOW_CONTRAST)
                 // ChiselRecipe
@@ -613,7 +604,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_5"))
                 .addTag(Tags.Blocks.GLASS_BLOCKS, Registries.BLOCK)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .addTextureM(modRes("block/oak_glass_5"), EveryCompat.res("block/bdl/oak_glass_5_mask"),
                         PaletteStrategies.PLANKS_LOW_CONTRAST)
                 .addTextureM(modRes("block/oak_glass_5_top"), EveryCompat.res("block/bdl/oak_glass_x_s_mask"),
@@ -629,7 +620,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_6"))
                 .addTag(Tags.Blocks.GLASS_BLOCKS, Registries.BLOCK)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .addTextureM(modRes("block/oak_glass_6"), EveryCompat.res("block/bdl/oak_glass_x_s_mask"),
                         PaletteStrategies.PLANKS_LOW_CONTRAST)
                 .addTextureM(modRes("block/oak_glass_6_top"), EveryCompat.res("block/bdl/oak_glass_x_s_mask"),
@@ -645,7 +636,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_7"))
                 .addTag(Tags.Blocks.GLASS_BLOCKS, Registries.BLOCK)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .addTextureM(modRes("block/oak_glass_7"), EveryCompat.res("block/bdl/oak_glass_x_s_mask"),
                         PaletteStrategies.PLANKS_LOW_CONTRAST)
                 .addTextureM(modRes("block/oak_glass_7_top"), EveryCompat.res("block/bdl/oak_glass_x_s_mask"),
@@ -661,7 +652,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_8"))
                 .addTag(Tags.Blocks.GLASS_BLOCKS, Registries.BLOCK)
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .addTextureM(modRes("block/oak_glass_8"), EveryCompat.res("block/bdl/oak_glass_x_s_mask"),
                         PaletteStrategies.PLANKS_LOW_CONTRAST)
                 // ChiselRecipe
@@ -676,7 +667,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                         w -> new IronBarsBlock(Utils.copyPropertySafe(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_1"))
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .addTexture(modRes("block/oak_glass_pane_1_top"))
                 // Using the same texture added from GLASS_X
                 .addRecipe(modRes("oak_glass_pane_1"))
@@ -689,7 +680,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                         w -> new IronBarsBlock(Utils.copyPropertySafe(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_2"))
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .addTexture(modRes("block/oak_glass_pane_2_top"))
                 // Using the same texture added from GLASS_X
                 .addRecipe(modRes("oak_glass_pane_2"))
@@ -702,7 +693,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                         w -> new IronBarsBlock(Utils.copyPropertySafe(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_3"))
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .addTexture(modRes("block/oak_glass_pane_3_top"))
                 // Using the same texture added from GLASS_X
                 .addRecipe(modRes("oak_glass_pane_3"))
@@ -715,7 +706,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                         w -> new IronBarsBlock(Utils.copyPropertySafe(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_4"))
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .addTexture(modRes("block/oak_glass_pane_4_top"))
                 // Using the same texture added from GLASS_X
                 .addRecipe(modRes("oak_glass_pane_4"))
@@ -728,7 +719,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                         w -> new IronBarsBlock(Utils.copyPropertySafe(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_5"))
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .addTexture(modRes("block/oak_glass_pane_5_top"))
                 // Using the same texture added from GLASS_X
                 .addRecipe(modRes("oak_glass_pane_5"))
@@ -741,7 +732,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                         w -> new IronBarsBlock(Utils.copyPropertySafe(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_6"))
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .addTexture(modRes("block/oak_glass_pane_6_top"))
                 // Using the same texture added from GLASS_X
                 .addRecipe(modRes("oak_glass_pane_6"))
@@ -754,7 +745,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                         w -> new IronBarsBlock(Utils.copyPropertySafe(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_7"))
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .addTexture(modRes("block/oak_glass_pane_7_top"))
                 // Using the same texture added from GLASS_X
                 .addRecipe(modRes("oak_glass_pane_7"))
@@ -767,7 +758,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                         w -> new IronBarsBlock(Utils.copyPropertySafe(Blocks.GLASS))
                 )
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_8"))
-                .setTabKey(tabBlock)
+                .setTab(getTab(tabBlock))
                 .addTexture(modRes("block/oak_glass_pane_8_top"))
                 // Using the same texture added from GLASS_X
                 .addRecipe(modRes("oak_glass_pane_8"))
