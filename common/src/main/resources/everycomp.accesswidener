@@ -17,3 +17,4 @@ accessible method net/minecraft/world/level/block/RedstoneTorchBlock <init> (Lne
 
 # For Woodworks' SawmillRecipe
 accessible field net/minecraft/world/item/crafting/SingleItemRecipe result Lnet/minecraft/world/item/ItemStack;
+accessible field net/minecraft/client/Minecraft blockModelResolver Lnet/minecraft/client/renderer/block/BlockModelResolver;

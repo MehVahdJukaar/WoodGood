@@ -1,7 +1,7 @@
 package net.mehvahdjukaar.every_compat;
 
 import net.mehvahdjukaar.every_compat.api.CompatModule;
-import net.mehvahdjukaar.every_compat.modules.chipped.*;
+//import net.mehvahdjukaar.every_compat.modules.chipped.*;
 import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
 import net.mehvahdjukaar.every_compat.modules.lieonlion.MoreChestVariantsModule;
@@ -100,7 +100,7 @@ public class EveryCompatCommon {
 //            addOptionalModule("barkcarpets", () -> BarkCarpetsModule.class); //- Not-Available-For-1.21.1
 //            addOptionalModule("beautifulcampfires", () -> BeautifulCampfiresModule.class);
 //            addOptionalModule("campchair", () -> CampChairModule.class); //- Not-Available-For-1.21.1
-            addMultipleOptional("chipped", () -> ChippedMainModule.class, () -> ChippedLogModule.class, () -> ChippedDoorModule.class, () -> ChippedGlassModule.class, () -> ChippedLeavesModule.class);
+//            addMultipleOptional("chipped", () -> ChippedMainModule.class, () -> ChippedLogModule.class, () -> ChippedDoorModule.class, () -> ChippedGlassModule.class, () -> ChippedLeavesModule.class);
 //            addOptionalModule("copperagebackport", () -> CopperAgeBackportModule.class);
 //            addOptionalModule("corail_pillar", () -> CorailPillarModule.class);
 //            addOptionalModule("dawnoftimebuilder", () -> DawnOfTimeModule.class);

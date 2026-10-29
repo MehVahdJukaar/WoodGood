@@ -1,36 +1,32 @@
 package net.mehvahdjukaar.every_compat.misc;
 
-import com.mojang.blaze3d.platform.Lighting;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.BufferUploader;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.blaze3d.vertex.VertexFormat;
-import com.mojang.math.Axis;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.api.EntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.client.gui.ConfigScreenExtensions;
+import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.minecraft.Util;
+import net.minecraft.util.Util;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Tooltip;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.gui.navigation.ScreenRectangle;
+import net.minecraft.client.gui.render.TextureSetup;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.LightTexture;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.renderer.state.gui.BlitRenderState;
+import net.minecraft.client.renderer.texture.AbstractTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
@@ -40,7 +36,8 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
-import org.joml.Matrix4f;
+import org.joml.Matrix3x2f;
+import org.joml.Matrix3x2fStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +45,7 @@ import java.util.List;
 public class FurnitureShowcaseWidget extends AbstractWidget {
 
     public static void register() {
+        ClientHelper.addPictureInPictureRendererRegistration(event -> event.register(ShowcaseBlockRenderer.State.class, ShowcaseBlockRenderer::new));
         ConfigScreenExtensions.registerShowcase(EveryCompat.MOD_ID, new ConfigScreenExtensions.Showcase() {
             @Override
             public AbstractWidget create(String modId, int x, int y, int width, int maxHeight) {
@@ -70,7 +68,6 @@ public class FurnitureShowcaseWidget extends AbstractWidget {
     private static final int TEXTURE_PIXELS = 16;
     private static final int CHIPS_PER_CLICK = 14;
     private static final int CHIP_SIZE = 3;
-    private static final int CHIP_DEPTH = 300;
     private static final float CHIP_FADE = 0.25f;      // last fraction of the life spent fading out
     private static final float CHIP_GRAVITY = 260f;    // px per second squared
     private static final float MIN_CHIP_SPEED = 30f;   // px per second
@@ -93,7 +90,7 @@ public class FurnitureShowcaseWidget extends AbstractWidget {
     }
 
     @Override
-    protected void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+    protected void extractWidgetRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
         if (this.woodSets == null) this.collectWoodSets();
 
         long now = Util.getMillis();
@@ -145,7 +142,7 @@ public class FurnitureShowcaseWidget extends AbstractWidget {
 
     private void setBlock(Block block) {
         this.state = block.defaultBlockState();
-        this.chipSprite = Minecraft.getInstance().getBlockRenderer().getBlockModel(this.state).getParticleIcon();
+        this.chipSprite = Minecraft.getInstance().getModelManager().getBlockStateModelSet().getParticleMaterial(this.state).sprite();
         this.setMessage(block.getName());
         this.setTooltip(Tooltip.create(block.getName()));
     }
@@ -157,62 +154,40 @@ public class FurnitureShowcaseWidget extends AbstractWidget {
         if (crossedHalfTurn) this.pickNewFurniture();
     }
 
-    private void renderBlock(GuiGraphics graphics, BlockState state) {
+    private void renderBlock(GuiGraphicsExtractor graphics, BlockState state) {
         float size = Math.min(this.width, this.height) * BLOCK_FILL;
-
-        PoseStack pose = graphics.pose();
-        pose.pushPose();
-        pose.translate(this.getX() + this.width / 2f, this.getY() + this.height / 2f, 150);
-        pose.scale(size, -size, size);
-        pose.mulPose(Axis.XP.rotationDegrees(TILT));
-        pose.mulPose(Axis.YP.rotationDegrees(this.yaw));
-        pose.translate(-0.5f, -0.5f, -0.5f); // the block renderer starts from the block corner
-
-        Lighting.setupFor3DItems();
-        MultiBufferSource.BufferSource buffer = graphics.bufferSource();
-        Minecraft.getInstance().getBlockRenderer().renderSingleBlock(state, pose, buffer,
-                LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY);
-
-        graphics.flush();
-        pose.popPose();
+        graphics.guiRenderState.addPicturesInPictureState(new ShowcaseBlockRenderer.State(state, this.yaw, TILT,
+                this.getX(), this.getY(), this.getX() + this.width, this.getY() + this.height, size, graphics.scissorStack.peek()));
     }
 
     // no wood mods installed, so there's nothing to show off. same barrier the all woods item falls back to
-    private void renderBarrier(GuiGraphics graphics) {
+    private void renderBarrier(GuiGraphicsExtractor graphics) {
         int size = Math.round(Math.min(this.width, this.height) * BLOCK_FILL);
-        PoseStack pose = graphics.pose();
-        pose.pushPose();
-        pose.translate(this.getX() + (this.width - size) / 2f, this.getY() + (this.height - size) / 2f, 0);
-        pose.scale(size / 16f, size / 16f, 1);
-        graphics.renderFakeItem(BARRIER, 0, 0);
-        pose.popPose();
+        Matrix3x2fStack pose = graphics.pose();
+        pose.pushMatrix();
+        pose.translate(this.getX() + (width - size) / 2f, this.getY() + (this.height - size) / 2f);
+        pose.scale(size / 16f, size / 16f);
+        graphics.fakeItem(BARRIER, 0, 0);
+        pose.popMatrix();
     }
 
-    private void renderChips(GuiGraphics graphics, float dt) {
+    private void renderChips(GuiGraphicsExtractor graphics, float dt) {
         this.chips.removeIf(chip -> !chip.move(dt));
         if (this.chips.isEmpty()) return;
 
-        PoseStack pose = graphics.pose();
-        pose.pushPose();
-        pose.translate(0, 0, CHIP_DEPTH); // the block is drawn at 150 and half its size deep, chips go in front of it
         graphics.enableScissor(this.getX(), this.getY(), this.getX() + this.width, this.getY() + this.height);
 
-        // all chips are one quad off the block atlas, so they batch into a single draw. blit is no good here: it wants
-        // uvs in atlas pixels, which means dividing the sprite's own uvs by the atlas size and multiplying them back
-        RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
-        RenderSystem.setShaderTexture(0, this.chips.getFirst().sprite.atlasLocation());
-        RenderSystem.enableBlend();
-        RenderSystem.defaultBlendFunc();
-        Matrix4f matrix = pose.last().pose();
-        BufferBuilder buffer = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
+        //blit is no good here: it wants uvs in atlas pixels, chips already have the sprites normalized ones
+        AbstractTexture atlas = Minecraft.getInstance().getTextureManager().getTexture(this.chips.getFirst().sprite.atlasLocation());
+
+        TextureSetup texture = TextureSetup.singleTexture(atlas.getTextureView(), atlas.getSampler());
+        Matrix3x2f pose = new Matrix3x2f(graphics.pose());
+        ScreenRectangle scissor = graphics.scissorStack.peek();
         for (Chip chip : this.chips) {
-            chip.addQuad(buffer, matrix);
+            graphics.guiRenderState.addGuiElement(chip.makeBlit(texture, pose, scissor));
         }
-        BufferUploader.drawWithShader(buffer.buildOrThrow());
-        RenderSystem.disableBlend();
 
         graphics.disableScissor();
-        pose.popPose();
     }
 
     private void spawnChips() {
@@ -240,7 +215,7 @@ public class FurnitureShowcaseWidget extends AbstractWidget {
     }
 
     @Override
-    public void onClick(double mouseX, double mouseY) {
+    public void onClick(MouseButtonEvent event, boolean doubleClick) {
         if (this.state == null) return;
         this.pickNewWood();
         this.spawnChips();
@@ -287,16 +262,12 @@ public class FurnitureShowcaseWidget extends AbstractWidget {
             return true;
         }
 
-        private void addQuad(BufferBuilder buffer, Matrix4f matrix) {
-            float left = Mth.floor(this.x);
-            float top = Mth.floor(this.y);
-            float right = left + CHIP_SIZE;
-            float bottom = top + CHIP_SIZE;
+        private BlitRenderState makeBlit(TextureSetup texture, Matrix3x2f pose, @Nullable ScreenRectangle scissor) {
+            int left = Mth.floor(this.x);
+            int top = Mth.floor(this.y);
             float alpha = Math.min(1f, (1f - this.age / this.life) / CHIP_FADE);
-            buffer.addVertex(matrix, left, top, 0).setUv(this.u0, this.v0).setColor(1f, 1f, 1f, alpha);
-            buffer.addVertex(matrix, left, bottom, 0).setUv(this.u0, this.v1).setColor(1f, 1f, 1f, alpha);
-            buffer.addVertex(matrix, right, bottom, 0).setUv(this.u1, this.v1).setColor(1f, 1f, 1f, alpha);
-            buffer.addVertex(matrix, right, top, 0).setUv(this.u1, this.v0).setColor(1f, 1f, 1f, alpha);
+            return new BlitRenderState(RenderPipelines.GUI_TEXTURED, texture, pose, left, top, left + CHIP_SIZE, top + CHIP_SIZE,
+                    this.u0, this.u1, this.v0, this.v1, ARGB.white(alpha), scissor);
         }
     }
 }
