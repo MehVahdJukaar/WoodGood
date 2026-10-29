@@ -355,8 +355,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         }
 
         public BL addCondition(Predicate<T> newCondition) {
-            this.condition = this.condition == null ? newCondition :
-                    this.condition.and(newCondition);
+            this.condition = this.condition.and(newCondition);
             return (BL) this;
         }
 
@@ -550,6 +549,15 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     public String makeRegisteredChildKey(SimpleModule module) {
         String childKey = makeChildKey(module);
         return childKey.contains("minecraft") ? childKey.replace("minecraft:", "") : childKey;
+    }
+
+    protected BlockTypeResTransformer<T> makeModelTransformer(SimpleModule module, ResourceManager manager) {
+        BlockTypeResTransformer<T> modelTransformer = BlockTypeResTransformer.create(module.modId, manager);
+        if (extraModelTransform != null) extraModelTransform.accept(modelTransformer);
+
+        ResourcesUtils.addBuiltinModelTransformer(modelTransformer, baseType.get());
+
+        return modelTransformer;
     }
 
     @NotNull

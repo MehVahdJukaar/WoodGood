@@ -114,8 +114,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
             //?? wtf im using disabled to allow for null??
             throw new UnsupportedOperationException("Base Item cant be null (" + this.typeName + " for " + module.modId + " module)");
 
-        String childKey = makeChildKey(module);
-        if (childKey.contains("minecraft")) childKey = childKey.replace("minecraft:", ""); // DO NOT remove this because it's a childKey for BlockType's children & Gems-Realm require it
+        String childKey = makeRegisteredChildKey(module);
 
         baseType.get().addChild(childKey, base);
 
@@ -155,16 +154,6 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
     public void generateModels(SimpleModule module, ResourceManager manager, ResourceSink handler) {
         ResourcesUtils.generateStandardItemModels(manager, handler, items, baseType.get(),
                 makeModelTransformer(module, manager), modelConfig);
-    }
-
-    // items models
-    protected BlockTypeResTransformer<T> makeModelTransformer(SimpleModule module, ResourceManager manager) {
-        BlockTypeResTransformer<T> modelTransformer = BlockTypeResTransformer.create(module.modId, manager);
-        if (extraModelTransform != null) extraModelTransform.accept(modelTransformer);
-
-        ResourcesUtils.addBuiltinModelTransformer(modelTransformer, baseType.get());
-
-        return modelTransformer;
     }
 
     @Override

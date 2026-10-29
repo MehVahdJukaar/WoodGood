@@ -270,16 +270,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         );
     }
 
-    // items and blocks
-    protected BlockTypeResTransformer<T> makeModelTransformer(SimpleModule module, ResourceManager manager) {
-        BlockTypeResTransformer<T> modelTransformer = BlockTypeResTransformer.create(module.modId, manager);
-        if (extraModelTransform != null) extraModelTransform.accept(modelTransformer);
-
-        ResourcesUtils.addBuiltinModelTransformer(modelTransformer, baseType.get());
-
-        return modelTransformer;
-    }
-
     protected BlockTypeResTransformer<T> makeBlockStateTransformer(SimpleModule module, ResourceManager manager) {
         BlockTypeResTransformer<T> blockstateTransformer = BlockTypeResTransformer.create(module.modId, manager);
         String oldTypeName = baseType.get().getTypeName();
@@ -356,7 +346,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             return prefix_ + name;
         }
 
-        public <H extends BlockEntity> Builder<T, B> addTile(String idTile) {
+        public Builder<T, B> addTile(String idTile) {
             BlockEntityType<?> entityType = BuiltInRegistries.BLOCK_ENTITY_TYPE.getOptional(Identifier.parse(idTile))
                     .orElseThrow(() -> new NoSuchElementException("BlockEntityType's ID: " + idTile + " not found! ID must be wrong!"));
 
