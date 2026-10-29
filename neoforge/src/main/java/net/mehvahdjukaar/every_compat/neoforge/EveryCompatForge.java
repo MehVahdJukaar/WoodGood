@@ -6,43 +6,18 @@ import net.mehvahdjukaar.every_compat.EveryCompatCommon;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
-import net.mehvahdjukaar.every_compat.modules.neoforge.abnormal.BoatLoadModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.abnormal.WoodworksModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.absent_by_design.AbsentByDesignModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.beautify_decorate.BeautifyDecorateModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.bibliocraft.BibliocraftLegacyModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.blocks_plus.BlocksPlusModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.builders_delight.BuildersDelightModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.buildersaddition.BuildersAdditionModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.building_but_better.BuildingButBetterModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.create.CreateModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.curiosities.CuriositiesModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.decoration_delight.DecorationDelightModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.dramaticdoors.DramaticDoorsMacawModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.dramaticdoors.DramaticDoorsModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.functional_storage.FunctionalStorageModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.just_a_raft.JustARaftModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.lauchs.LauchsShuttersModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.legends_missing_blocks.LegendsMissingBlocksModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.lightmans_currency.LightmansCurrencyModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.mcaw.*;
-import net.mehvahdjukaar.every_compat.modules.neoforge.more.MoreCraftingTablesForForgeModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.mosaic_carpentry.MosaicCarpentryModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.oreberries_replanted.OreberriesReplantedModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.pokecube.PokecubeAIOModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.premium_wood.PremiumWoodModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.quark.QuarkModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.redeco.ReDecoModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.regions_unexplored.RegionsUnexploredModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.timber_frames.TimberFramesModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.tropicraft.TropicraftModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.ultimate_car.UltimateCarModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.unusual_furniture.UnusualFurnitureModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.valhelsia.ValhelsiaStructuresModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.variants.VariantCraftingTablesModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.woodster.WoodsterModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.xerca.XercaModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.BlockPos;
@@ -152,38 +127,38 @@ public class EveryCompatForge extends EveryCompatCommon {
             // ========================================= GENERAL ======================================================== \\
             addOptionalModule("absentbydesign", () -> AbsentByDesignModule.class);
             addOptionalModule("bibliocraft", () -> BibliocraftLegacyModule.class);
-            addOptionalModule("blocksplus", () -> BlocksPlusModule.class);
-            addOptionalModule("boatload", () -> BoatLoadModule.class);
-            addOptionalModule("buildersaddition", () -> BuildersAdditionModule.class);
-            addOptionalModule("bbb", () -> BuildingButBetterModule.class);
-            addOptionalModule("buildersdelight", () -> BuildersDelightModule.class);
+//            addOptionalModule("blocksplus", () -> BlocksPlusModule.class);
+//            addOptionalModule("boatload", () -> BoatLoadModule.class);
+//            addOptionalModule("buildersaddition", () -> BuildersAdditionModule.class);
+//            addOptionalModule("bbb", () -> BuildingButBetterModule.class);
+//            addOptionalModule("buildersdelight", () -> BuildersDelightModule.class);
             addOptionalModule("car", () -> UltimateCarModule.class);
-            addOptionalModule("create", () -> CreateModule.class);
-            addOptionalModule("curiosities", () -> CuriositiesModule.class);
-            addOptionalModule("decoration_delight", () -> DecorationDelightModule.class);
-            addOptionalModule("dramaticdoors", () -> DramaticDoorsModule.class);
+//            addOptionalModule("create", () -> CreateModule.class);
+//            addOptionalModule("curiosities", () -> CuriositiesModule.class);
+//            addOptionalModule("decoration_delight", () -> DecorationDelightModule.class);
+//            addOptionalModule("dramaticdoors", () -> DramaticDoorsModule.class);
             addOptionalModule("functionalstorage", () -> FunctionalStorageModule.class);
             addOptionalModule("justaraftmod", () -> JustARaftModule.class);
-            addOptionalModule("mctb", () -> MoreCraftingTablesForForgeModule.class);
-            addOptionalModule("missing_blocks", () -> LegendsMissingBlocksModule.class);
-            addOptionalModule("mosaic_carpentry", () -> MosaicCarpentryModule.class);
+//            addOptionalModule("mctb", () -> MoreCraftingTablesForForgeModule.class);
+//            addOptionalModule("missing_blocks", () -> LegendsMissingBlocksModule.class);
+//            addOptionalModule("mosaic_carpentry", () -> MosaicCarpentryModule.class);
             addOptionalModule("oreberriesreplanted", () -> OreberriesReplantedModule.class);
             addOptionalModule("lightmanscurrency", () -> LightmansCurrencyModule.class);
-            addOptionalModule("pokecube_legends", () -> PokecubeAIOModule.class);
+//            addOptionalModule("pokecube_legends", () -> PokecubeAIOModule.class);
             addOptionalModule("premium_wood", () -> PremiumWoodModule.class);
-            addOptionalModule("quark", () -> QuarkModule.class);
-            addOptionalModule("redeco", () -> ReDecoModule.class);
+//            addOptionalModule("quark", () -> QuarkModule.class);
+//            addOptionalModule("redeco", () -> ReDecoModule.class);
             addOptionalModule("regions_unexplored", () -> RegionsUnexploredModule.class);
-            addOptionalModule("shutter", () -> LauchsShuttersModule.class);
+//            addOptionalModule("shutter", () -> LauchsShuttersModule.class);
             addOptionalModule("tropicraft", () -> TropicraftModule.class);
             addOptionalModule("twilightforest", () -> TwilightForestModule.class);
-            addOptionalModule("unusual_furniture", () -> UnusualFurnitureModule.class);
-            addOptionalModule("valhelsia_structures", () -> ValhelsiaStructuresModule.class);
-            addOptionalModule("vct", () -> VariantCraftingTablesModule.class);
-            addOptionalModule("woodster", () -> WoodsterModule.class);
-            addOptionalModule("woodworks", () -> WoodworksModule.class);
+//            addOptionalModule("unusual_furniture", () -> UnusualFurnitureModule.class);
+//            addOptionalModule("valhelsia_structures", () -> ValhelsiaStructuresModule.class);
+//            addOptionalModule("vct", () -> VariantCraftingTablesModule.class);
+//            addOptionalModule("woodster", () -> WoodsterModule.class);
+//            addOptionalModule("woodworks", () -> WoodworksModule.class);
 //            addOptionalModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule.class); //REASON: Not 100% compatible & CreativeTab key is outdated but even it's correct & will still crash
-            addOptionalModule("xercamod", () -> XercaModule.class);
+//            addOptionalModule("xercamod", () -> XercaModule.class);
 
             //REASON: There are 2 mods with the same modId but has different group_id. only Beautify! (Beautify Decorate) is applied
             // Beautify Refoxed has the built-in module
@@ -194,16 +169,16 @@ public class EveryCompatForge extends EveryCompatCommon {
                 } catch (Exception ignored) {
                 }
 
-                if (Objects.nonNull(modClass)) addOptionalModule("beautify", () -> BeautifyDecorateModule.class);
+//                if (Objects.nonNull(modClass)) addOptionalModule("beautify", () -> BeautifyDecorateModule.class);
             }
 
             if (PlatHelper.isModLoaded("mcwdoors")) {
-                addOptionalModule("dramaticdoors", () -> DramaticDoorsMacawModule.class);
+//                addOptionalModule("dramaticdoors", () -> DramaticDoorsMacawModule.class);
             }
 
             // REMOVE this later as timber_frame is not needed beacuse it has internal code that support WoodType
             if (PlatHelper.isModLoaded("timber_frames") && !PlatHelper.getModVersion("timber_frames").matches("3[.\\d]{4}.*")) {
-                addOptionalModule("timber_frames", () -> TimberFramesModule.class);
+//                addOptionalModule("timber_frames", () -> TimberFramesModule.class);
             }
 
         }

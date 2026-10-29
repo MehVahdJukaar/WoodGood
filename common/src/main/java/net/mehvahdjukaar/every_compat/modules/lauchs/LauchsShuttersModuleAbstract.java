@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.lauchs;
+/*
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
@@ -55,3 +56,4 @@ public abstract class LauchsShuttersModuleAbstract extends EveryCompatModule {
         );
     }
 }
+*/

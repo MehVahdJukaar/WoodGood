@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.table_top_craft;
+/*
 
 import andrews.table_top_craft.objects.blocks.ChessBlock;
 import andrews.table_top_craft.objects.blocks.ChessTimerBlock;
@@ -57,3 +58,4 @@ public class TableTopCraftModule extends EveryCompatModule {
         this.addEntry(connectFours);
     }
 }
+*/

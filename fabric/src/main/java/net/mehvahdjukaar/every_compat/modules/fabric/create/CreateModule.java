@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.create;
+/*
 
 import com.simibubi.create.content.decoration.palettes.WindowBlock;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
@@ -30,7 +31,7 @@ public class CreateModule extends EveryCompatModule {
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
         this.addEntry(windows);
-*/
+* /
 
 //        windowPanes = SimpleEntrySet.builder(WoodType.class, "window_pane",
 //                        getModBlock("oak_window_pane"), () -> VanillaWoodTypes.OAK,
@@ -60,3 +61,4 @@ public class CreateModule extends EveryCompatModule {
     }
 
 }
+*/

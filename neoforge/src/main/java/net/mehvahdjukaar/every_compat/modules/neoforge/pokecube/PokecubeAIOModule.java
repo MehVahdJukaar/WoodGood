@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.pokecube;
+/*
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -123,3 +124,4 @@ public class PokecubeAIOModule extends EveryCompatModule {
     }
 
 }
+*/

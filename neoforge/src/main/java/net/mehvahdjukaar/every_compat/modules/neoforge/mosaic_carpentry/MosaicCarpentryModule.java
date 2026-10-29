@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.mosaic_carpentry;
+/*
 
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
@@ -62,3 +63,4 @@ public class MosaicCarpentryModule extends EveryCompatModule {
         this.addEntry(mosaicSlabs);
     }
 }
+*/

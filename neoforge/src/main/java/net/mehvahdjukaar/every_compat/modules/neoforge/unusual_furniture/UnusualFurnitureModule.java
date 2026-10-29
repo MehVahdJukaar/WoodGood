@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.unusual_furniture;
+/*
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -352,3 +353,4 @@ public class UnusualFurnitureModule extends EveryCompatModule {
         event.register(getDrawerTile(), CompatDrawerRenderer::new);
     }
 }
+*/

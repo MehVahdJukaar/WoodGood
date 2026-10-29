@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.valhelsia_furniture;
+/*
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
@@ -173,3 +174,4 @@ public class ValhelsiaFurnitureModule extends EveryCompatModule {
         }
     }
 }
+*/

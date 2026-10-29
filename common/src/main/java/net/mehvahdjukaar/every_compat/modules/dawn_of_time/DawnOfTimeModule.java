@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.dawn_of_time;
+/*
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.*;
@@ -209,3 +210,4 @@ public class DawnOfTimeModule extends EveryCompatModule {
         return (state) -> (Boolean)state.getValue(BlockStateProperties.LIT) ? lightValue : 0;
     }
 }
+*/

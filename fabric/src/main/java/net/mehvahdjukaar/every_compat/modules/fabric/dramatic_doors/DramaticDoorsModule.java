@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.dramatic_doors;
+/*
 
 import com.fizzware.dramaticdoors.fabric.blocks.ShortDoorBlock;
 import com.fizzware.dramaticdoors.fabric.blocks.TallDoorBlock;
@@ -96,3 +97,4 @@ public class DramaticDoorsModule extends EveryCompatModule {
         );
     }
 }
+*/

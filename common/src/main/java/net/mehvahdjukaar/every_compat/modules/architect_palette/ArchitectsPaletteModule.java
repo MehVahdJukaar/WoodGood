@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.architect_palette;
+/*
 
 import architectspalette.content.blocks.RailingBlock;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
@@ -140,3 +141,4 @@ public class ArchitectsPaletteModule extends EveryCompatModule {
     }
 
 }
+*/

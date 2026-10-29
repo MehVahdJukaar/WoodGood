@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.variants;
+/*
 
 import net.mehvahdjukaar.candlelight.api.ClientOnly;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -316,7 +317,7 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
         ClientProxy.shutUpClassVerifier(event, chests.getTile(CompatChestBlockEntity.class), shortenedId());
         this is so dumb and IDK why it's needed. that class should never be loaded since it has environment annotation
         I tried everything, lambdas, double lambdas, anonymous classes...
-        */
+        * /
         CompatChestBlockRenderer.register(event, chests.getTile(CompatChestBlockEntity.class), shortenedId());
     }
 
@@ -355,3 +356,4 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
     }
 
 }
+*/

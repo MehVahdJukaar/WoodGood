@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.chipped;
+/*
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
@@ -336,7 +337,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
                         getModBlock("herringbone_oak_planks"), () -> VanillaWoodTypes.OAK,
                         w -> new Block(Utils.copyPropertySafe(w.planks))
                 )
-                .addTexture(modRes("block/oak_planks/herringbone_oak_planks")/*, DULL_PALETTE*/)
+                .addTexture(modRes("block/oak_planks/herringbone_oak_planks")/*, DULL_PALETTE* /)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
@@ -766,3 +767,4 @@ public class ChippedMainModule extends ChippedModuleAbstract {
         });
     }
 }
+*/

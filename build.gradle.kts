@@ -4,7 +4,7 @@ plugins {
     id("com.possible-triangle.common") version "1.4.252" apply false
     id("com.possible-triangle.fabric") version "1.4.252" apply false
     id("com.possible-triangle.neoforge") version "1.4.252" apply false
-    id("net.mehvahdjukaar.candlelight") version "1.2.6" apply false
+    id("net.mehvahdjukaar.candlelight") version "1.2.4" apply false
 }
 
 mod {
@@ -25,7 +25,7 @@ subprojects {
     pluginManager.apply("maven-publish")
 
     dependencies {
-        compileOnly("net.mehvahdjukaar:candlelight:1.2.6")
+        compileOnly("net.mehvahdjukaar:candlelight:1.2.4")
     }
 
     /* can be added once new candle is out
@@ -297,7 +297,7 @@ subprojects {
         maven("https://www.cursemaven.com")
         maven("https://jitpack.io")
 
-//        maven("https://maven.neoforged.net/releases")
+        maven("https://maven.neoforged.net/releases")
         maven("https://maven.architectury.dev")
         maven("https://maven.parchmentmc.org")
 
@@ -308,7 +308,7 @@ subprojects {
         maven("https://maven.ithundxr.dev/snapshots") // Registrate
         maven("https://mvn.devos.one/releases/") // Registrate, Porting Lib (releases)
         maven("https://mvn.devos.one/snapshots/") // Registrate, Porting Lib (snapshots)
-//        maven("https://maven.terraformersmc.com/") // EMI
+        maven("https://maven.terraformersmc.com/releases") // Mod Menu, EMI
         maven("https://maven.saps.dev/releases") // FTB Mods
 
         maven("https://maven.theillusivec4.top/") // Curios API

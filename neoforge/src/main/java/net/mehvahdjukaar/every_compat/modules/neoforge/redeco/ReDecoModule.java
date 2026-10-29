@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.redeco;
+/*
 
 import com.delta.redeco.CrateRenderer;
 import com.delta.redeco.DisplayCaseRenderer;
@@ -358,7 +359,7 @@ public class ReDecoModule extends EveryCompatModule {
 
     /**
      * @return Properties of planks, strength and SoundType
-     */
+     * /
     public BlockBehaviour.Properties copyProperties(WoodType woodType, float strength) {
         return Utils.copyPropertySafe(woodType.planks).strength(strength).sound(SoundType.WOOD);
     }
@@ -382,3 +383,4 @@ public class ReDecoModule extends EveryCompatModule {
     }
 
 }
+*/

@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.unusual_furniture.client;
+/*
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -113,3 +114,4 @@ public class CompatDrawerRenderer implements BlockEntityRenderer<CompatDrawerBlo
             }
         }
     }
+*/

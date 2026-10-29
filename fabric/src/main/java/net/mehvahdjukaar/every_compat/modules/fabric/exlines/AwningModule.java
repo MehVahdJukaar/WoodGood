@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.exlines;
+/*
 
 import com.exline.exlineawnings.ExlineAwningsMain;
 import com.exline.exlineawnings.block.AwningBlock;
@@ -68,3 +69,4 @@ public class AwningModule extends EveryCompatModule {
         return false;
     }
 }
+*/

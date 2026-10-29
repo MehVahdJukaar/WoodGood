@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.quark;
+/*
 
 import net.mehvahdjukaar.candlelight.api.ClientOnly;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -502,3 +503,4 @@ public class QuarkModule extends EveryCompatModule {
     }
 
 }
+*/

@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.beautify_decorate;
+/*
 
 import com.github.Pandarix.beautify.Beautify;
 import com.github.Pandarix.beautify.common.block.Blinds;
@@ -48,3 +49,4 @@ public class BeautifyDecorateModule extends BeautifyModuleAbstract {
         );
     }
 }
+*/

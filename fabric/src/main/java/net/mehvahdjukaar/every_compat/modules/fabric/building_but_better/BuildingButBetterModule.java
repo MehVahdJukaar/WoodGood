@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.building_but_better;
+/*
 
 import com.starfish_studios.bbb.block.*;
 import com.starfish_studios.bbb.item.DescriptionBlockItem;
@@ -241,3 +242,4 @@ public class BuildingButBetterModule extends EveryCompatModule {
         this.addEntry(walls);
     }
 }
+*/

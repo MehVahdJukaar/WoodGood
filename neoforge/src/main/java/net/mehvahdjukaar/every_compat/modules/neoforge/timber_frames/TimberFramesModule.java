@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.timber_frames;
+/*
 
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -92,7 +93,7 @@ public class TimberFramesModule extends EveryCompatModule {
     /*
     * When the BETA is broken, you will get a drop of ALPHA instead of BETA
     * BETA doesn't have a lootable file. Below will explain everything.
-    */
+    * /
     public static class CompatTimberFrameBetaBlock extends OakTimberFrameBetaBlock {
         public final Block alpha;
 
@@ -147,3 +148,4 @@ public class TimberFramesModule extends EveryCompatModule {
         });
     }
 }
+*/

@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.builders_delight;
+/*
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -40,7 +41,7 @@ public class BuildersDelightModule extends EveryCompatModule {
     public final SimpleEntrySet<WoodType, Block> GLASS_1, GLASS_2, GLASS_3, GLASS_4, GLASS_5, GLASS_6, GLASS_7, GLASS_8;
 
     public final SimpleEntrySet<WoodType, Block> GLASS_PANE_1, GLASS_PANE_2, GLASS_PANE_3, GLASS_PANE_4, GLASS_PANE_5, GLASS_PANE_6, GLASS_PANE_7, GLASS_PANE_8;
-*/
+* /
 
 
     @SuppressWarnings("DataFlowIssue") // <- already has null check
@@ -773,7 +774,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                 .setRenderType(RenderLayer.TRANSLUCENT)
                 .build();
         this.addEntry(GLASS_PANE_8);
-*/
+* /
     }
 
     /*private static class BDBlockItem extends BlockItem {
@@ -789,7 +790,7 @@ public class BuildersDelightModule extends EveryCompatModule {
         public void appendHoverText(@NotNull ItemStack pStack, Level pLevel, List<Component> pTooltip, @NotNull TooltipFlag pFlag) {
             pTooltip.add(tooltip);
         }
-    }*/
+    }* /
 
 /*    public static class CustomBdFurnitureKit extends Item {
         private final Component tooltip;
@@ -803,7 +804,7 @@ public class BuildersDelightModule extends EveryCompatModule {
         public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltip, @NotNull TooltipFlag pFlag) {
             pTooltip.add(tooltip);
         }
-    }*/
+    }* /
 
 /*    @Override
     public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
@@ -874,7 +875,7 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         });
 
-    }*/
+    }* /
 
     public void craftingWithTagsRecipe(String baseName, String input, Item output, WoodType wood, ResourceSink sink, ResourceManager manager) {
         // bdl/namespace/<type>_glass_1;
@@ -925,3 +926,4 @@ public class BuildersDelightModule extends EveryCompatModule {
     }
 
 }
+*/

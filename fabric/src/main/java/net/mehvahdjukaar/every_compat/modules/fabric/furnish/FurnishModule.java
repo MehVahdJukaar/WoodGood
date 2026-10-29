@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.furnish;
+/*
 
 import io.github.wouink.furnish.block.*;
 import io.github.wouink.furnish.recipe.FurnitureRecipe;
@@ -327,3 +328,4 @@ public class FurnishModule extends EveryCompatModule {
     }
 
 }
+*/

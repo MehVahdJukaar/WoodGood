@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.lightmans_currency;
+/*
 
 import io.github.lightman314.lightmanscurrency.client.renderer.blockentity.ItemTraderBlockEntityRenderer;
 import io.github.lightman314.lightmanscurrency.common.blockentity.trader.ItemTraderBlockEntity;
@@ -85,3 +86,4 @@ public class LightmansCurrencyModule extends EveryCompatModule {
     }
 
 }
+*/

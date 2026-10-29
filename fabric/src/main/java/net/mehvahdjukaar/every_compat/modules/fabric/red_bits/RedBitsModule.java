@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.red_bits;
+/*
 
 import net.darktree.redbits.blocks.LargeButtonBlock;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -36,3 +37,4 @@ public class RedBitsModule extends EveryCompatModule {
         this.addEntry(large_buttons);
     }
 }
+*/

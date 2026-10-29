@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.handcrafted;
+/*
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -320,7 +321,7 @@ public class HandcraftedModule extends EveryCompatModule {
         /*
          * Creating a new model file to replace the acacia_counter_acacia_planks_X because the "top" is using incorrect
          * texture. The "top" shouldn't be modified but there is no solution
-        */
+        * /
         String modelFile = """
             {
               "parent": "handcrafted:block/counter",
@@ -369,3 +370,4 @@ public class HandcraftedModule extends EveryCompatModule {
 
     }
 }
+*/

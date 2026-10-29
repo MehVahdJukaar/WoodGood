@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.buildersaddition;
+/*
 
 import github.mrh0.buildersaddition2.blocks.arcade.ArcadeBlock;
 import github.mrh0.buildersaddition2.blocks.bedside_table.BedsideTableBlock;
@@ -350,3 +351,4 @@ public class BuildersAdditionModule extends EveryCompatModule {
     }
 
 }
+*/

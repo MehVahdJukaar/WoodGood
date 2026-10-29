@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.bewitchment;
+/*
 
 import com.google.gson.JsonObject;
 import moriyashiine.bewitchment.api.block.PoppetShelfBlock;
@@ -129,3 +130,4 @@ public class BewitchmentModule extends EveryCompatModule {
     }
 
 }
+*/

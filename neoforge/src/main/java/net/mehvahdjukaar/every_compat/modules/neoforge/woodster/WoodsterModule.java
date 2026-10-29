@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.woodster;
+/*
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
@@ -65,3 +66,4 @@ public class WoodsterModule extends EveryCompatModule {
         this.addEntry(ladders);
     }
 }
+*/

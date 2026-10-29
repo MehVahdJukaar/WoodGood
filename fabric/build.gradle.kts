@@ -9,12 +9,12 @@ fabric {
 
 val modId: String = property("mod_id").toString()
 val modVersion: String = property("mod_version").toString()
-tasks.remapJar {
+tasks.named<Jar>("jar") {
     archiveBaseName.set(modId)
     archiveVersion.set(modVersion)
     archiveClassifier.set("fabric")
 }
-tasks.remapSourcesJar {
+tasks.named<Jar>("sourcesJar") {
     from(sourceSets.main.get().allSource)
     archiveBaseName.set(modId)
     archiveVersion.set(modVersion)
@@ -42,13 +42,13 @@ dependencies {
 //     modImplementation("net.mehvahdjukaar:supplementaries-fabric:${project.supplementaries_version}")
 
 //!! TOOLS ========================================================================================================== \\
-    modRuntimeOnly("dev.emi:emi-fabric:${property("emi_version")}+${property("minecraft_version")}")
-    modRuntimeOnly("com.blamejared.crafttweaker:CraftTweaker-fabric-${property("minecraft_version")}:${property("crafttweaker_version")}")
-    modRuntimeOnly("curse.maven:jade-324717:7545228")
+//    modRuntimeOnly("dev.emi:emi-fabric:${property("emi_version")}+${property("minecraft_version")}")
+//    modRuntimeOnly("com.blamejared.crafttweaker:CraftTweaker-fabric-${property("minecraft_version")}:${property("crafttweaker_version")}")
+    modRuntimeOnly("curse.maven:jade-324717:8652624")
 //    modRuntimeOnly("curse.maven:worldedit-225608:5830452") // required loom 1.7.410
 
     //+ REQUIRED
-    modImplementation("curse.maven:configured-457570:7276575")
+    modImplementation("curse.maven:configured-457570:7943179")
 
 //!! ================================================ DEPENDENCIES ================================================== \\
     //@ IMPORTANT: RLM - "REQUIRED LOCAL MOD" - You need to get the mod and put it in ~/fabric/run/mods/....
@@ -57,8 +57,8 @@ dependencies {
     modRuntimeOnly("net.mehvahdjukaar:codecui-fabric:${property("minecraft_version")}-${property("codecui_version")}") // +Moonlight-Lib
 
     //- Only For TESTING - can be commented out or enabled
-    modRuntimeOnly("curse.maven:terrablender-fabric-565956:6054948") // Regions-Unexplored, Biomes-O'-Plenty
-    modRuntimeOnly("curse.maven:glitchcore-955399:8109791") // Biomes-O'-Plenty
+    modRuntimeOnly("curse.maven:terrablender-fabric-565956:8384530") // Regions-Unexplored, Biomes-O'-Plenty
+    modRuntimeOnly("curse.maven:glitchcore-955399:8109769") // Biomes-O'-Plenty
 //    modRuntimeOnly("curse.maven:cloth-config-348521:4973440") // v11.1.118 | Required by: REI
 //    modRuntimeOnly("curse.maven:architectury-api-419699:5137936") // v9.2.14 | Required by: REI, Garden-Of-The-Dead
 //    modRuntimeOnly("curse.maven:forge-config-api-port-fabric-547434:5982384") //v21.1.3 | Regions-Unexplored
@@ -67,7 +67,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:trinkets-341284:5173501") // Backpacked
 //    modRuntimeOnly("curse.maven:monolib-968432:6123972") //v2.0.0 | More-Beautiful-Torches
 //    modRuntimeOnly("curse.maven:athena-841890:5176880") // Chipped
-    modRuntimeOnly("curse.maven:lithostitched-936015:8321753") // Regions-Unexplored
+    modRuntimeOnly("curse.maven:lithostitched-936015:9170253") // Regions-Unexplored
 
     //- OTHER LIBRARIES
 //    modRuntimeOnly("de.marhali:json5-java:3.0.0") // Regions-Unexplored
@@ -79,16 +79,16 @@ dependencies {
     //- OTHER MAVENS
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN FABRIC
-    modCompileOnly("curse.maven:framework-549225:7530359") // Refurbished-Furniture, +Mighty-Mail, Backpacked
-    modCompileOnly("curse.maven:quad-932715:5903633") // More-Chest-Variants, More-Crafting-Tables
-    modCompileOnly("curse.maven:valhelsia-core-416935:6296784") // Valhelsia-Furniture
-    modCompileOnly("maven.modrinth:frozenlib:2.2.4-mc1.21.1") // Wilder-Wild
+    modCompileOnly("curse.maven:framework-549225:7964503") // Refurbished-Furniture, +Mighty-Mail, Backpacked
+    modCompileOnly("curse.maven:quad-932715:8299680") // More-Chest-Variants, More-Crafting-Tables
+//    modCompileOnly("curse.maven:valhelsia-core-416935:6296784") // Valhelsia-Furniture
+    modCompileOnly("maven.modrinth:frozenlib:2.4.4-mc26.1") // Wilder-Wild
 
     //+ OTHER MAVENS
-    modCompileOnly("com.tterrag.registrate_fabric:Registrate:${property("registrate_fabric_version")}") // Create, The-Twilight-Forest
+//    modCompileOnly("com.tterrag.registrate_fabric:Registrate:${property("registrate_fabric_version")}") // Create, The-Twilight-Forest
 
     // Special dumb stuff required by TerraBlender
-    modImplementation("com.terraformersmc:modmenu:11.0.3")
+    modImplementation("com.terraformersmc:modmenu:${property("modmenu_version")}")
     modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-base:6.1.1")
     modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:6.1.1")
     // so dumber stuff requird by GlitchCore
@@ -97,34 +97,34 @@ dependencies {
     modImplementation("com.electronwill.night-config:toml:3.8.1")
 
     //+ MIRRORED FROM COMMON - Required because dependOn(common) compiles common sources with fabric classpath
-    modCompileOnly("curse.maven:supermartijn642s-core-lib-454372:8623607") // v1.1.24 | Rechiseled
+    modCompileOnly("curse.maven:supermartijn642s-core-lib-454372:9352701") // v1.1.24 | Rechiseled
 
 //!! =================================================== IMPORTS ==================================================== \\
     //+ MIRRORED FROM COMMON - Required because dependOn(common) compiles common sources with fabric classpath
-    modCompileOnly("curse.maven:another-furniture-610492:4815126") //!! 1.20.1
-    modCompileOnly("curse.maven:architects-palette-433862:6861002") // Forge-Config-API-Port @ BETA
-    modCompileOnly("curse.maven:backpacked-352835:7500600")
-    modCompileOnly("curse.maven:corail-pillar-266228:5613351")
-    modCompileOnly("curse.maven:decorative-blocks-reborn-1327768:6897415")
-    modCompileOnly("curse.maven:farmers-delight-refabricated-993166:8088691")
-    modCompileOnly("curse.maven:friends-and-foes-551364:8154503")
-    modCompileOnly("curse.maven:handcrafted-538214:6330030") // Resourceful-Lib
-    modCompileOnly("curse.maven:mighty-mail-902986:6542124")
-    modCompileOnly("curse.maven:missing-wilds-622590:6302231")
-    modCompileOnly("curse.maven:more-chest-variants-lieonlion-858032:5476664") // Quad - LieOnLion
-    modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5473304") // Quad - LieOnLion
-    modCompileOnly("curse.maven:rechiseled-558998:7687483") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ]
-    modCompileOnly("curse.maven:refurbished-furniture-897116:7473565")
-    modCompileOnly("curse.maven:storage-drawers-223852:6967726")
-    modCompileOnly("curse.maven:table-top-craft-fabric-729535:5319819") //@RLM: exp4j //!! 1.20.1
-    modCompileOnly("curse.maven:twigs-496913:6782788")
-    modCompileOnly("curse.maven:valhelsia-furniture-694349:6334936")
-    modCompileOnly("curse.maven:variant-vanilla-blocks-866509:5703471")
+//    modCompileOnly("curse.maven:another-furniture-610492:4815126") //!! 1.20.1
+//    modCompileOnly("curse.maven:architects-palette-433862:6861002") // Forge-Config-API-Port @ BETA
+    modCompileOnly("curse.maven:backpacked-352835:7943165")
+//    modCompileOnly("curse.maven:corail-pillar-266228:5613351")
+    modCompileOnly("curse.maven:decorative-blocks-reborn-1327768:8959320")
+    modCompileOnly("curse.maven:farmers-delight-refabricated-993166:9311935")
+    modCompileOnly("curse.maven:friends-and-foes-551364:9331858")
+//    modCompileOnly("curse.maven:handcrafted-538214:6330030") // Resourceful-Lib
+//    modCompileOnly("curse.maven:mighty-mail-902986:6542124")
+//    modCompileOnly("curse.maven:missing-wilds-622590:6302231")
+    modCompileOnly("curse.maven:more-chest-variants-lieonlion-858032:7858206") // Quad - LieOnLion
+//    modCompileOnly("curse.maven:more-crafting-tables-lieonlion-913586:5473304") // Quad - LieOnLion
+    modCompileOnly("curse.maven:rechiseled-558998:8875881") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ]
+    modCompileOnly("curse.maven:refurbished-furniture-897116:7943174")
+    modCompileOnly("curse.maven:storage-drawers-223852:8915905")
+//    modCompileOnly("curse.maven:table-top-craft-fabric-729535:5319819") //@RLM: exp4j //!! 1.20.1
+//    modCompileOnly("curse.maven:twigs-496913:6782788")
+//    modCompileOnly("curse.maven:valhelsia-furniture-694349:6334936")
+//    modCompileOnly("curse.maven:variant-vanilla-blocks-866509:5703471")
     // OTHER MAVENs
-    modCompileOnly("maven.modrinth:furnish-furniture:29")
+//    modCompileOnly("maven.modrinth:furnish-furniture:29")
     // ~/fabric/mods LOCAL
-    modCompileOnly("local-copper-age-neoforge:copperagebackport-fabric-1.21.1-0.1.4")
-    modCompileOnly("local-dawnoftimebuilder:Dawn Of Time-fabric-1.21.1-1.6.6")
+//    modCompileOnly("local-copper-age-neoforge:copperagebackport-fabric-1.21.1-0.1.4")
+//    modCompileOnly("local-dawnoftimebuilder:Dawn Of Time-fabric-1.21.1-1.6.6")
 
     //- ONLY FOR TESTING - can be commented out or enabled
 //    modRuntimeOnly("curse.maven:beautiful-campfires-1085950:6828158")
@@ -142,50 +142,50 @@ dependencies {
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN FABRIC
     // ~/fabric/mods LOCAL
-    modCompileOnly("local-shutter-fabric:shutter-2.0.2-1.20.1")
-    modCompileOnly("local-redbits-fabric:redbits-1.21-1.16.6")
+//    modCompileOnly("local-shutter-fabric:shutter-2.0.2-1.20.1")
+//    modCompileOnly("local-redbits-fabric:redbits-1.21-1.16.6")
 
     // MACAW's
-    modCompileOnly("curse.maven:macaws-bridges-351725:7628029")
-    modCompileOnly("curse.maven:macaws-doors-378646:7618800")
-    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:7308375")
-    modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:7304042")
-    modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:7029506")
-    modCompileOnly("curse.maven:macaws-roofs-352039:6494433")
-    modCompileOnly("curse.maven:macaws-trapdoors-400933:7256233")
-    modCompileOnly("curse.maven:macaws-windows-363569:7317646")
-    modCompileOnly("curse.maven:macaws-furniture-359540:7255687")
-    modCompileOnly("curse.maven:macaws-stairs-1119394:7317453")
+    modCompileOnly("curse.maven:macaws-bridges-351725:7810029")
+    modCompileOnly("curse.maven:macaws-doors-378646:7818306")
+    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:7818075")
+    modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:7817813")
+    modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:7818163")
+    modCompileOnly("curse.maven:macaws-roofs-352039:7819132")
+    modCompileOnly("curse.maven:macaws-trapdoors-400933:7810394")
+    modCompileOnly("curse.maven:macaws-windows-363569:7819133")
+    modCompileOnly("curse.maven:macaws-furniture-359540:7925139")
+    modCompileOnly("curse.maven:macaws-stairs-1119394:7810438")
 
     //+ GENERAL
-    modCompileOnly("curse.maven:beautify-refabricated-809311:7553989")
-    modCompileOnly("curse.maven:bewitchment-394915:5819540") //!! 1.20.1
-    modCompileOnly("curse.maven:blockus-312289:7920575")
-    modCompileOnly("curse.maven:building-but-better-989479:7627392") //!! 1.20.1
-    modCompileOnly("curse.maven:clutter-826060:7876249") //@RML: Geckolib //!! 1.20.1
-    modCompileOnly("curse.maven:create-fabric-624165:7286603") //!! 1.20.1
-    modCompileOnly("curse.maven:dramatic-doors-380617:6479044")
-    modCompileOnly("curse.maven:excessive-building-845097:6075987") // v3.3.10
-    modCompileOnly("curse.maven:exlines-awnings-526698:5478883")
-    modCompileOnly("curse.maven:lightmans-currency-fabric-724119:5544643") //!! Not maintained since 1.20.1
-    modCompileOnly("curse.maven:mighty-mail-fabric-904097:4750271") //!! 1.20.1
-    modCompileOnly("curse.maven:missing-wilds-622590:6302231")
-    modCompileOnly("curse.maven:refurbished-furniture-897116:7473562") // Framework, Reflection - @DNU
-    modCompileOnly("curse.maven:the-twilight-forest-227639:4389094") //!! NOT AVAILABLE //!! 1.20.1
-    modCompileOnly("curse.maven:wooden-hoppers-406021:4796143") //!! 1.20.1
+    modCompileOnly("curse.maven:beautify-refabricated-809311:9332478")
+//    modCompileOnly("curse.maven:bewitchment-394915:5819540") //!! 1.20.1
+    modCompileOnly("curse.maven:blockus-312289:9354730")
+//    modCompileOnly("curse.maven:building-but-better-989479:7627392") //!! 1.20.1
+//    modCompileOnly("curse.maven:clutter-826060:7876249") //@RML: Geckolib //!! 1.20.1
+//    modCompileOnly("curse.maven:create-fabric-624165:7286603") //!! 1.20.1
+//    modCompileOnly("curse.maven:dramatic-doors-380617:6479044")
+//    modCompileOnly("curse.maven:excessive-building-845097:6075987") // v3.3.10
+//    modCompileOnly("curse.maven:exlines-awnings-526698:5478883")
+//    modCompileOnly("curse.maven:lightmans-currency-fabric-724119:5544643") //!! Not maintained since 1.20.1
+//    modCompileOnly("curse.maven:mighty-mail-fabric-904097:4750271") //!! 1.20.1
+//    modCompileOnly("curse.maven:missing-wilds-622590:6302231")
+    modCompileOnly("curse.maven:refurbished-furniture-897116:7943174") // Framework, Reflection - @DNU
+    modCompileOnly("curse.maven:the-twilight-forest-227639:9217727") //!! NOT AVAILABLE //!! 1.20.1
+//    modCompileOnly("curse.maven:wooden-hoppers-406021:4796143") //!! 1.20.1
 
-    modCompileOnly("curse.maven:regions-unexplored-659110:9252520") // Lithostitched, json5
+    modCompileOnly("curse.maven:regions-unexplored-659110:9251785") // Lithostitched, json5
 
     // OTHER MAVENS
-    modCompileOnly("maven.modrinth:stylish-stiles:1.1.1-1.21")
-    modCompileOnly("maven.modrinth:wilder-wild:4.2.1-mc1.21.1") // Frozen-Lib
+//    modCompileOnly("maven.modrinth:stylish-stiles:1.1.1-1.21")
+    modCompileOnly("maven.modrinth:wilder-wild:4.2.9-mc26.1") // Frozen-Lib
 //    modCompileOnly("com.simibubi.create:create-fabric-1.20.1:$create_fabric_version") // Registrate, Flywheel //!! Need to update maven to get other libraries & the old maven are outdated
 
     // ======================================== DISABLED FOR A REASON =============================================== \\
 
 //!!=============================================== FOR TESTING ===================================================== \\
 
-    modRuntimeOnly("curse.maven:biomes-o-plenty-220318:7251967")
+    modRuntimeOnly("curse.maven:biomes-o-plenty-220318:8203355")
 //    modRuntimeOnly("curse.maven:gardens-of-the-dead-683174:4784268")
 //    modRuntimeOnly("curse.maven:terrestria-323974:5799166")
 }

@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.corail_pillar;
+/*
 
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
@@ -72,4 +73,4 @@ public class CorailPillarModule extends EveryCompatModule {
     }
 
 }
-
+*/

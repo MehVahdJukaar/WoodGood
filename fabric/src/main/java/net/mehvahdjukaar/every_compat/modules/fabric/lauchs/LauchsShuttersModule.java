@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.lauchs;
+/*
 
 import net.mehvahdjukaar.every_compat.modules.lauchs.LauchsShuttersModuleAbstract;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -18,3 +19,4 @@ public class LauchsShuttersModule extends LauchsShuttersModuleAbstract {
         return new Shutter(Utils.copyPropertySafe(woodType.planks));
     }
 }
+*/

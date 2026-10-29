@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.graveyard;
+/*
 
 import com.lion.graveyard.blockentities.SarcophagusBlockEntity;
 import com.lion.graveyard.blockentities.renders.SarcophagusBlockEntityRenderer;
@@ -43,7 +44,7 @@ public class CompatCoffinRenderer extends SarcophagusBlockEntityRenderer<Graveya
             this.render(entity, matrixStack, vertexConsumers, light, overlay, g, lidModel, true);
             this.render(entity, matrixStack, vertexConsumers, light, overlay, g, baseModel, false);
         }
-*/
+* /
     }
 
     //TODO: this uses custom item models. adding is not trivial.
@@ -96,3 +97,4 @@ public class CompatCoffinRenderer extends SarcophagusBlockEntityRenderer<Graveya
 
 
 }
+*/

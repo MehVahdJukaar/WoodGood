@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.stylish_stiles;
+/*
 
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
@@ -53,3 +54,4 @@ public class StylishStilesModule extends EveryCompatModule {
     }
 
 }
+*/

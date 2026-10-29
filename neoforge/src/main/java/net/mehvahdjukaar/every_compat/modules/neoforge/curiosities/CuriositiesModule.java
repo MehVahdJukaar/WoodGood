@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.curiosities;
+/*
 
 import com.syndicatemc.curiosities.common.block.VerticalConnectingPillarBlock;
 import com.teamabnormals.woodworks.common.item.crafting.SawmillRecipe;
@@ -160,3 +161,4 @@ public class CuriositiesModule extends EveryCompatModule {
         );
     }
 }
+*/

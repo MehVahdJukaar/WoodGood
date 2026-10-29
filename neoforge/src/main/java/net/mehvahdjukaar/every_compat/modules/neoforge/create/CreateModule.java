@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.create;
+/*
 
 import com.simibubi.create.content.decoration.palettes.ConnectedGlassPaneBlock;
 import com.simibubi.create.content.decoration.palettes.WindowBlock;
@@ -75,3 +76,4 @@ public class CreateModule extends EveryCompatModule {
     }
 
 }
+*/

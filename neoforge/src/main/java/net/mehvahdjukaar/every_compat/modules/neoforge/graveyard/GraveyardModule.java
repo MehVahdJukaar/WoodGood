@@ -1,5 +1,6 @@
 
 package net.mehvahdjukaar.every_compat.modules.neoforge.graveyard;
+/*
 
 import com.lion.graveyard.blockentities.SarcophagusBlockEntity;
 import com.lion.graveyard.blocks.SarcophagusBlock;
@@ -98,3 +99,4 @@ public class GraveyardModule extends EveryCompatModule {
         }
     }
 }
+*/

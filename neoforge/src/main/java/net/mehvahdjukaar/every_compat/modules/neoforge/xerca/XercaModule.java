@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.xerca;
+/*
 
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -321,3 +322,4 @@ public class XercaModule extends EveryCompatModule {
     }
 
 }
+*/

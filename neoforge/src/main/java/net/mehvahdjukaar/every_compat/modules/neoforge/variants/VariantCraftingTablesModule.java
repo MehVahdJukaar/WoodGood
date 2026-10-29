@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.variants;
+/*
 
 import kittehmod.vct.blocks.VCTCraftingTableBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -62,3 +63,4 @@ public class VariantCraftingTablesModule extends EveryCompatModule {
         );
     }
 }
+*/

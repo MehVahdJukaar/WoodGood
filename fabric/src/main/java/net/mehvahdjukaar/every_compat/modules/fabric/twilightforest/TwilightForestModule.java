@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.twilightforest;
+/*
 
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
@@ -86,7 +87,7 @@ public class TwilightForestModule extends EveryCompatModule {
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .build();
         this.addEntry(hollowLogsClimbable);
-*/
+* /
 
 
     }
@@ -121,7 +122,7 @@ public class TwilightForestModule extends EveryCompatModule {
             w.addChild(childKey, i);
             registry.register(EveryCompat.res(itemName), i);
         });
-    }*/
+    }* /
 
 /*    @Override
     public void registerBlockColors(ClientHelper.BlockColorEvent event) {
@@ -134,6 +135,7 @@ public class TwilightForestModule extends EveryCompatModule {
                 (s, l, pos, i) -> l != null && pos != null ?
                         BiomeColors.getAverageGrassColor(l, pos) : -1,
                 hollowLogsHorizontal.blocks.values().toArray(Block[]::new));
-    }*/
+    }* /
 
 }
+*/

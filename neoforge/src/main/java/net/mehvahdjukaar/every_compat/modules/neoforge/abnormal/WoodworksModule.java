@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.abnormal;
+/*
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.teamabnormals.blueprint.client.BlueprintChestMaterials;
@@ -533,3 +534,4 @@ public class WoodworksModule extends EveryCompatModule {
     }
 
 }
+*/

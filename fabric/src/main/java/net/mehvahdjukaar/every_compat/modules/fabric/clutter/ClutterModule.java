@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.clutter;
+/*
 
 import net.emilsg.clutter.block.ModBlockEntities;
 import net.emilsg.clutter.block.custom.*;
@@ -427,3 +428,4 @@ public class ClutterModule extends EveryCompatModule {
 
     }
 }
+*/

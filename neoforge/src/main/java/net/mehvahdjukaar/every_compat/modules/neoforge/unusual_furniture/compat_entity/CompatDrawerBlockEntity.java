@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.unusual_furniture.compat_entity;
+/*
 
 import io.netty.buffer.Unpooled;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
@@ -130,3 +131,4 @@ public class CompatDrawerBlockEntity  extends RandomizableContainerBlockEntity i
         return this.getClientUpdatePacket();
     }
 }
+*/

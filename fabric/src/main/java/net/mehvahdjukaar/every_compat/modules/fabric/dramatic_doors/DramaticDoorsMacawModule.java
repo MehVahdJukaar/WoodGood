@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.dramatic_doors;
+/*
 
 import com.fizzware.dramaticdoors.fabric.blocks.TallDoorBlock;
 import com.fizzware.dramaticdoors.fabric.blocks.TallSlidingDoorBlock;
@@ -602,3 +603,4 @@ public class DramaticDoorsMacawModule extends EveryCompatModule {
         });
     }
 }
+*/

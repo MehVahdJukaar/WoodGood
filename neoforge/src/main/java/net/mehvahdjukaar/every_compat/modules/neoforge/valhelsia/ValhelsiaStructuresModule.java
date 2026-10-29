@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.valhelsia;
+/*
 
 import com.mojang.blaze3d.platform.NativeImage;
 import com.stal111.valhelsia_structures.common.block.CutPostBlock;
@@ -407,3 +408,4 @@ public class ValhelsiaStructuresModule extends EveryCompatModule {
     }
 
 }
+*/

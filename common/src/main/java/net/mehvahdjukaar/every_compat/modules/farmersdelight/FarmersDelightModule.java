@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.farmersdelight;
+/*
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
@@ -240,3 +241,4 @@ public class FarmersDelightModule extends EveryCompatModule {
         return List.of("abundant_atmosphere", "mynethersdelight", "newworld", "verdance");
     }
 }
+*/

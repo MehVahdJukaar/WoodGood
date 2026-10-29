@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.copper_age_backport;
+/*
 
 import com.github.smallinger.copperagebackport.block.shelf.ShelfBlock;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
@@ -69,3 +70,4 @@ public class CopperAgeBackportModule extends EveryCompatModule {
 
     }
 }
+*/

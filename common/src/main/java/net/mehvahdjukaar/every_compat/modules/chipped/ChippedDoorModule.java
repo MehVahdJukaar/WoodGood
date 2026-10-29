@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.chipped;
+/*
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.EntrySet;
@@ -853,3 +854,4 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
                                                 .hasProperty(DoorBlock.HALF, DoubleBlockHalf.LOWER)))));
     }
 }
+*/

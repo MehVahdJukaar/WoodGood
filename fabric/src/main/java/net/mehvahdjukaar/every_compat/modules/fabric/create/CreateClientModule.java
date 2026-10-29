@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.create;
+/*
 
 import com.simibubi.create.CreateClient;
 import com.simibubi.create.foundation.block.connected.*;
@@ -18,8 +19,9 @@ public class CreateClientModule {
                     (model) -> new CTModel(model, new HorizontalCTBehaviour(spriteShift)));
             CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(Utils.getID(module.windowPanes.blocks.get(w)),
                     (model) -> new CTModel(model, new GlassPaneCTBehaviour(spriteShift)));
-        });*/
+        });* /
 
     }
 
 }
+*/

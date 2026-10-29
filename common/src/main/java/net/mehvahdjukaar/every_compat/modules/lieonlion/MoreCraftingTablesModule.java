@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.lieonlion;
+/*
 
 import io.github.lieonlion.lolmct.block.MoreCraftingTableBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -41,3 +42,4 @@ public class MoreCraftingTablesModule extends EveryCompatModule {
         this.addEntry(craftingTable);
     }
 }
+*/

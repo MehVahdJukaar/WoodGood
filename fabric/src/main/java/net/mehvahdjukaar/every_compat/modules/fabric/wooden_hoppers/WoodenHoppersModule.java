@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.wooden_hoppers;
+/*
 
 import io.github.haykam821.woodenhoppers.Main;
 import io.github.haykam821.woodenhoppers.block.WoodenHopperBlock;
@@ -37,3 +38,4 @@ public class WoodenHoppersModule extends EveryCompatModule {
 
     }
 }
+*/

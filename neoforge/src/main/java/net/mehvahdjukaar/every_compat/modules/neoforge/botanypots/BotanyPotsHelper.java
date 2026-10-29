@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.botanypots;
+/*
 
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -42,3 +43,4 @@ public class BotanyPotsHelper {
         sink.addJson(EveryCompat.res(module.shortenedId() + "/" + leaves.getAppendableId() + filenameBuilder), recipe, ResType.RECIPES);
     }
 }
+*/

@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.abnormal;
+/*
 
 import com.teamabnormals.boatload.common.item.FurnaceBoatItem;
 import com.teamabnormals.boatload.common.item.LargeBoatItem;
@@ -102,3 +103,4 @@ public class BoatLoadModule extends EveryCompatModule {
         );
     }
 }
+*/

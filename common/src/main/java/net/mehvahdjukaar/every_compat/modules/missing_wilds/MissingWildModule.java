@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.missing_wilds;
+/*
 
 import me.ultrusmods.missingwilds.block.FallenLogBlock;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
@@ -30,3 +31,4 @@ public class MissingWildModule extends EveryCompatModule {
         this.addEntry(fallenLogs);
     }
 }
+*/

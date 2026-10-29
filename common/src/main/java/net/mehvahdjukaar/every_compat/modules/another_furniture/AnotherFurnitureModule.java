@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.another_furniture;
+/*
 
 import com.starfish_studios.another_furniture.block.*;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -189,3 +190,4 @@ public class AnotherFurnitureModule extends EveryCompatModule {
 
     }
 }
+*/

@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.decoration_delight;
+/*
 
 import decor.delight.block.*;
 import decor.delight.block.entity.OakCounterBlockEntity;
@@ -127,3 +128,4 @@ public class DecorationDelightModule extends EveryCompatModule {
 
     }
 }
+*/

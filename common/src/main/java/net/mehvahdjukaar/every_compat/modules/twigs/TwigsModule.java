@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.twigs;
+/*
 
 import com.ninni.twigs.block.TableBlock;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
@@ -46,3 +47,4 @@ public class TwigsModule extends EveryCompatModule {
     }
 
 }
+*/

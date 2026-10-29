@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.more;
+/*
 
 import com.duart.mctb.blocks.CraftingBlock;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -60,3 +61,4 @@ public class MoreCraftingTablesForForgeModule extends EveryCompatModule {
 
     }
 }
+*/

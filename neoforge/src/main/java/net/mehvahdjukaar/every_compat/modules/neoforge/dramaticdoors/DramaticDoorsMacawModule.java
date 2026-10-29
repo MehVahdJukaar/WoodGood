@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.dramaticdoors;
+/*
 
 import com.fizzware.dramaticdoors.neoforge.blocks.TallDoorBlock;
 import com.fizzware.dramaticdoors.neoforge.blocks.TallSlidingDoorBlock;
@@ -610,3 +611,4 @@ public class DramaticDoorsMacawModule extends EveryCompatModule {
         });
     }
 }
+*/

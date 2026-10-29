@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.beautiful_campfires;
+/*
 
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -212,3 +213,4 @@ public class BeautifulCampfiresModule extends EveryCompatModule {
         }
     }
 }
+*/

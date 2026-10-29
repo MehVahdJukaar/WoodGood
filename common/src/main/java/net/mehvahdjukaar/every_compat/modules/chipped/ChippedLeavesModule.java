@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.chipped;
+/*
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -468,3 +469,4 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
         }
     }
 }
+*/

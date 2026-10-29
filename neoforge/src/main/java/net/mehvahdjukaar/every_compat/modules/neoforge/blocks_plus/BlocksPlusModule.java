@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.blocks_plus;
+/*
 
 import blocks_plus.block.*;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -305,3 +306,4 @@ public class BlocksPlusModule extends EveryCompatModule {
         );
     }
 }
+*/

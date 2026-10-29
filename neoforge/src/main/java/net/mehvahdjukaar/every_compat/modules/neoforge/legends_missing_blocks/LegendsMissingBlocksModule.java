@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.legends_missing_blocks;
+/*
 
 import net.legendstudios.missingblocks.block.CarvedAcaciaBlock;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
@@ -39,3 +40,4 @@ public class LegendsMissingBlocksModule extends EveryCompatModule {
 
     }
 }
+*/

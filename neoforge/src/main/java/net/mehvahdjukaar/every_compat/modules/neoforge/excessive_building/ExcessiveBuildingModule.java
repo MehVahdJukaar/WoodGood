@@ -1,4 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.excessive_building;
+/*
 
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.minecraft.resources.ResourceLocation;
@@ -208,8 +209,9 @@ public class ExcessiveBuildingModule extends EveryCompatModule {
                 .defaultRecipe()
                 .build();
         this.addEntry(ladders);
-*/
+* /
 
     }
 
 }
+*/
