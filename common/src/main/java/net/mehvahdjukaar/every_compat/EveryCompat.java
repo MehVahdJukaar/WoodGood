@@ -32,7 +32,6 @@ import org.jetbrains.annotations.NotNull;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -420,32 +419,6 @@ public abstract class EveryCompat {
         List<String> list = new ArrayList<>();
         Collections.addAll(list, supportedModId);
         addCompatMod(compatModId, fromModId, list);
-    }
-
-// ─────────────────────────────────────── Deprecated & Marked-for-removal ───────────────────────────────────────
-
-    @Deprecated(forRemoval = true)
-    /// @deprecated USE {@link EveryCompatAPI#addIfLoaded(String, Supplier)}
-    public static void addIfLoaded(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
-        if (PlatHelper.isModLoaded(modId)) {
-            try {
-                CompatModule module = moduleFactory.get().apply(modId);
-                addModule(module);
-            } catch (Throwable e) {
-                addError(new CompatModule(modId, modId, EveryCompat.MOD_ID) {
-
-                    @Override
-                    public int bloatAmount() {
-                        return 0;
-                    }
-
-                    @Override
-                    public Collection<Class<? extends BlockType>> getAffectedTypes() {
-                        return List.of();
-                    }
-                }, e);
-            }
-        }
     }
 
     public static void crashIfInDev(String s) {

@@ -183,11 +183,6 @@ public class SimpleModule extends CompatModule {
         return l;
     }
 
-    @Deprecated(forRemoval = true)
-    public boolean isEntryAlreadyRegistered(String entrySetId, String blockId, BlockType blockType, Registry<?> registry) {
-        return isEntryAlreadyRegistered(entrySetId, ResourceLocation.parse(blockId), blockType, registry);
-    }
-
 
     //TODO: improve
     public boolean isEntryAlreadyRegistered(String entrySetId, ResourceLocation blockId, BlockType blockType, Registry<?> registry) {

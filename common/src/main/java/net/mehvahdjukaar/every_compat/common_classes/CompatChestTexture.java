@@ -12,7 +12,6 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.core.misc.McMetaFile;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -227,30 +226,4 @@ public class CompatChestTexture {
         }
     }
 
-
-    //      ┌──────────────────────────────────────────────────────────┐
-    //      │                    MARKED FOR REMOVAL                    │
-    //      └──────────────────────────────────────────────────────────┘
-
-    /// {@link CompatChestTexture#generateChestTexture(ResourceSink, ResourceManager, String, WoodType, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)}
-    /// <br>Simply by remove the parameter, Block
-    @Deprecated(forRemoval = true)
-    public static void generateChestTexture(ResourceSink handler, ResourceManager manager,
-                                            String shortenedID, WoodType wood, Block block,
-                                            ResourceLocation normalRLoc, ResourceLocation maskRLoc, ResourceLocation overlayRLoc,
-                                            ResourceLocation trappedORLoc) {
-        generateChestTexture(handler, manager, shortenedID, wood, normalRLoc, maskRLoc, overlayRLoc, trappedORLoc,
-                0, 0);
-    }
-
-    /// Use {@link CompatChestTexture#generateChestTexture(ResourceSink, ResourceManager, String, WoodType, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)}
-    /// <br>Simply by remove the parameter, Block
-    @Deprecated(forRemoval = true)
-    public static void generateChestTexture(ResourceSink handler, ResourceManager manager,
-                                            String shortenedID, WoodType wood, Block block,
-                                            ResourceLocation normalRLoc, ResourceLocation maskRLoc, ResourceLocation overlayRLoc,
-                                            ResourceLocation trappedORLoc, int darkControl) {
-        generateChestTexture(handler, manager, shortenedID, wood, normalRLoc, maskRLoc, overlayRLoc, trappedORLoc,
-                darkControl, 0);
-    }
 }
