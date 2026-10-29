@@ -1,7 +1,6 @@
 package net.mehvahdjukaar.every_compat;
 
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
@@ -29,7 +28,6 @@ import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -47,6 +45,7 @@ public abstract class EveryCompat {
     public static final Logger LOGGER = LogManager.getLogger("Every Compat");
     /// Share of the block registry above which we start telling people they added too much
     public static final float BLOAT_WARN_PERCENT = 25;
+    public static final float BLOAT_ERROR_PERCENT = 33;
 
     private static final Multimap<String, CompatModule> ACTIVE_MODULES = MultimapBuilder
             .linkedHashKeys().arrayListValues().build();
@@ -54,7 +53,7 @@ public abstract class EveryCompat {
 
     //these are the names of the block types we add wooden variants for
     private static final Map<Class<? extends BlockType>, Set<String>> TYPES_TO_CHILD_KEYS = new Object2ObjectOpenHashMap<>();
-    private static final Map<Object, CompatModule> ITEMS_TO_MODULES = new Object2ObjectOpenHashMap<>();
+    private static final Map<Item, CompatModule> ITEMS_TO_MODULES = new Object2ObjectOpenHashMap<>();
 
     // all mod that EC directly or indirectly depends on
     private static final Set<String> DEPENDENCIES = new HashSet<>();
@@ -98,21 +97,10 @@ public abstract class EveryCompat {
             EveryCompat.LOGGER.warn("Chipped is installed. The mod on its own adds a ludicrous amount of blocks. With Every Compat this can easily explode. You have been warned");
         }
         //log registered stuff size
-        int newSize = BuiltInRegistries.BLOCK.size();
         //cal
         int myChildrenSize = getRegisteredBlocksCount();
 
-        if (myChildrenSize == 0 && !ACTIVE_MODULES.isEmpty()) {
-            String log = """
-                    ##########################################################################################################
-                    #                                                                                                        #
-                    #  ATTENTION: EVERY COMPAT REGISTERED 0 BLOCK! No Wood mods (Biomes O' Plenty or others) are installed.  #
-                    #                            You dont need EveryCompat and should remove it.                             #
-                    #                                                                                                        #
-                    ##########################################################################################################
-                    """;
-            EveryCompat.LOGGER.error("\n\n{}", log);
-        } else if (ACTIVE_MODULES.isEmpty()) {
+        if (ACTIVE_MODULES.isEmpty()) {
             String log = """
                     #######################################################
                     #                                                     #
@@ -122,23 +110,33 @@ public abstract class EveryCompat {
                     #######################################################
                     """;
             EveryCompat.LOGGER.error("\n\n{}", log);
+        } else if (myChildrenSize == 0) {
+            String log = """
+                    ##########################################################################################################
+                    #                                                                                                        #
+                    #  ATTENTION: EVERY COMPAT REGISTERED 0 BLOCK! No Wood mods (Biomes O' Plenty or others) are installed.  #
+                    #                            You dont need EveryCompat and should remove it.                             #
+                    #                                                                                                        #
+                    ##########################################################################################################
+                    """;
+            EveryCompat.LOGGER.error("\n\n{}", log);
         }
 
-        float percent = (myChildrenSize / (float) newSize) * 100f;
+        float percent = getRegisteredBlocksPercentage();
+        String percentString = String.format("%.2f", percent);
         if (percent > BLOAT_WARN_PERCENT) {
-            EveryCompat.LOGGER.warn("Registered {} compat blocks making up {}% of total blocks registered", myChildrenSize, String.format("%.2f", percent));
+            EveryCompat.LOGGER.warn("Registered {} compat blocks making up {}% of total blocks registered", myChildrenSize, percentString);
         } else {
-            EveryCompat.LOGGER.info("Registered {} compat blocks making up {}% of total blocks registered", myChildrenSize, String.format("%.2f", percent));
+            EveryCompat.LOGGER.info("Registered {} compat blocks making up {}% of total blocks registered", myChildrenSize, percentString);
         }
-        if (percent > 33) {
-            Optional<CompatModule> compatbloated = ACTIVE_MODULES.values().stream().max(Comparator.comparing(compatModule -> compatModule != null ? compatModule.bloatAmount() : 0));
-            if (compatbloated.isPresent()) {
-                CompatModule bloated = compatbloated.get();
-                EveryCompat.LOGGER.info("Registered {} compat blocks making up {}% of total blocks registered", myChildrenSize, String.format("%.2f", percent));
-                //no freaking clue why this was returned as null once
-                EveryCompat.LOGGER.error("Every Compat registered blocks make up more than one third of your registered blocks, taking up memory and load time.");
-                EveryCompat.LOGGER.error("You might want to uninstall some mods, biggest offender was {} ({} blocks)", bloated.getModName().toUpperCase(Locale.ROOT), bloated.bloatAmount());
-            }
+        if (percent > BLOAT_ERROR_PERCENT) {
+            //no freaking clue why this was returned as null once
+            ACTIVE_MODULES.values().stream().filter(Objects::nonNull)
+                    .max(Comparator.comparingInt(CompatModule::bloatAmount))
+                    .ifPresent(bloated -> {
+                        EveryCompat.LOGGER.error("Every Compat registered blocks make up more than one third of your registered blocks, taking up memory and load time.");
+                        EveryCompat.LOGGER.error("You might want to uninstall some mods, biggest offender was {} ({} blocks)", bloated.getModName().toUpperCase(Locale.ROOT), bloated.bloatAmount());
+                    });
         }
 
         forAllModules(m -> {
@@ -188,7 +186,7 @@ public abstract class EveryCompat {
         try {
             r.run();
         } catch (Throwable e) {
-            EveryCompat.LOGGER.error("Module for mod {} contains errors. This could mean that the mod has been recently updated and Every Compat needs updating (try downgrading the mod) or that you are using an older version.", Objects.requireNonNull(module).getModName(), e);
+            EveryCompat.LOGGER.error("Module for mod {} contains errors. This could mean that the mod has been recently updated and Every Compat needs updating (try downgrading the mod) or that you are using an older version.", module.getModName(), e);
             if (canShowErrorScreen) {
                 //if before first screen we can display an error screen
                 addError(module, e);
@@ -198,7 +196,7 @@ public abstract class EveryCompat {
         }
     }
 
-    public static void addItemToModuleMapping(Item item, CompatModule module) {
+    public static synchronized void addItemToModuleMapping(Item item, CompatModule module) {
         ITEMS_TO_MODULES.put(item, module);
     }
 
@@ -206,7 +204,7 @@ public abstract class EveryCompat {
         return ITEMS_TO_MODULES.get(item);
     }
 
-    public static <T extends BlockType> void trackChildType(Class<T> type, String childId) {
+    public static synchronized <T extends BlockType> void trackChildType(Class<T> type, String childId) {
         TYPES_TO_CHILD_KEYS.computeIfAbsent(type, t -> new HashSet<>()).add(childId);
     }
 
@@ -270,14 +268,8 @@ public abstract class EveryCompat {
         }
     }
 
-    private static void addError(CompatModule module, Throwable t) {
-        if (module == null) {
-            EveryCompat.LOGGER.error("Tried to log an error for a null module", t);
-            //add dummy module instead. idk how this could even happen but if it does i want a nice error screen still
-            module = createDummyModule(EveryCompat.MOD_ID);
-        }
-        ERRORED.put(Preconditions.checkNotNull(module, "Module cannot be null"),
-                Preconditions.checkNotNull(t, "Throwable cannot be null"));
+    private static synchronized void addError(CompatModule module, Throwable t) {
+        ERRORED.put(module, t);
     }
 
     private static CompatModule createDummyModule(String modId) {
@@ -295,20 +287,18 @@ public abstract class EveryCompat {
     }
 
     private static @NotNull CompatModule instantiateModuleClass(String modId, Class<? extends CompatModule> klazz)
-            throws InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-        CompatModule module;
+            throws ReflectiveOperationException {
         try {
             // Prefer (String modId) ctor if present
             var ctor = klazz.getDeclaredConstructor(String.class);
             ctor.setAccessible(true);
-            module = ctor.newInstance(modId);
+            return ctor.newInstance(modId);
         } catch (NoSuchMethodException e) {
             // Fallback to no-arg ctor
             var noArg = klazz.getDeclaredConstructor();
             noArg.setAccessible(true);
-            module = noArg.newInstance();
+            return noArg.newInstance();
         }
-        return module;
     }
 
     /// Use {@link net.mehvahdjukaar.every_compat.api.SimpleModule#getOtherCompatMods()} since this method is marked as ApiStatus.Internal
@@ -351,15 +341,15 @@ public abstract class EveryCompat {
     private static void registerItemsToTabs(RegHelper.ItemToTabEvent event) {
         if (ECConfigs.TAB_ENABLED.get()) {
             Map<ResourceKey<CreativeModeTab>, Map<BlockType, List<Item>>> typeToEntrySet = new LinkedHashMap<>();
-            for (var r : BlockSetAPI.getRegistries()) {
-                for (var type : r.getValues()) {
-                    forAllModules(m -> {
-                        typeToEntrySet.computeIfAbsent(m.getDedicatedTab(), j -> new LinkedHashMap<>())
-                                .computeIfAbsent(type, j -> new ArrayList<>())
+            forAllModules(m -> {
+                var tabItemsByType = typeToEntrySet.computeIfAbsent(m.getDedicatedTab(), j -> new LinkedHashMap<>());
+                for (var r : BlockSetAPI.getRegistries()) {
+                    for (var type : r.getValues()) {
+                        tabItemsByType.computeIfAbsent(type, j -> new ArrayList<>())
                                 .addAll(m.getAllItemsOfType(type));
-                    });
+                    }
                 }
-            }
+            });
             for (var e : typeToEntrySet.entrySet()) {
                 for (var ee : e.getValue().values()) {
                     event.add(e.getKey(), ee.toArray(ItemLike[]::new));
@@ -414,7 +404,7 @@ public abstract class EveryCompat {
 
     @Deprecated(forRemoval = true)
     /// @deprecated USE {@link EveryCompatAPI#addIfLoaded(String, Supplier)}
-    public static void addIfLoaded(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
+    public static synchronized void addIfLoaded(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
         if (PlatHelper.isModLoaded(modId)) {
             try {
                 CompatModule module = moduleFactory.get().apply(modId);
