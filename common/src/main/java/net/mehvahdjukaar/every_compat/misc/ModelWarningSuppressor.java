@@ -10,13 +10,13 @@ import java.util.Set;
 public class ModelWarningSuppressor {
 
     public static int missingTextures;
-    public static final Set<ResourceLocation> missingVariantBlockstates = new HashSet<>();
-    public static final Set<ResourceLocation> unloadableModels = new HashSet<>();
+    public static final Set<ResourceLocation> MISSING_VARIANT_BLOCKSTATES = new HashSet<>();
+    public static final Set<ResourceLocation> UNLOADABLE_MODELS = new HashSet<>();
 
     public static void reset() {
         missingTextures = 0;
-        missingVariantBlockstates.clear();
-        unloadableModels.clear();
+        MISSING_VARIANT_BLOCKSTATES.clear();
+        UNLOADABLE_MODELS.clear();
     }
 
     public static void report() {
@@ -25,13 +25,13 @@ public class ModelWarningSuppressor {
                     "(they reference textures not provided by the target mod; vanilla texture is used as fallback).",
                     missingTextures);
         }
-        if (!missingVariantBlockstates.isEmpty()) {
+        if (!MISSING_VARIANT_BLOCKSTATES.isEmpty()) {
             EveryCompat.LOGGER.error("{} of our blockstates have states with no model (blockstate json missing or pointing to models that were never generated). First few: {}",
-                    missingVariantBlockstates.size(), missingVariantBlockstates.stream().limit(8).toList());
+                    MISSING_VARIANT_BLOCKSTATES.size(), MISSING_VARIANT_BLOCKSTATES.stream().limit(8).toList());
         }
-        if (!unloadableModels.isEmpty()) {
+        if (!UNLOADABLE_MODELS.isEmpty()) {
             EveryCompat.LOGGER.error("{} of our models could not be loaded (json missing or broken). First few: {}",
-                    unloadableModels.size(), unloadableModels.stream().limit(8).toList());
+                    UNLOADABLE_MODELS.size(), UNLOADABLE_MODELS.stream().limit(8).toList());
         }
     }
 }

@@ -18,7 +18,7 @@ public class BlockStateModelLoaderMixin {
             require = 0)
     private void everycompat$suppressMissingVariantSpam(Logger logger, String message, Object blockstateFile, Object variant, Operation<Void> original) {
         if (blockstateFile instanceof ResourceLocation res && EveryCompat.isMyIdOrAddon(res.getNamespace())) {
-            ModelWarningSuppressor.missingVariantBlockstates.add(res);
+            ModelWarningSuppressor.MISSING_VARIANT_BLOCKSTATES.add(res);
             return;
         }
         original.call(logger, message, blockstateFile, variant);

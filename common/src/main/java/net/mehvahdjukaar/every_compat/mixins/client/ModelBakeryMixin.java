@@ -17,7 +17,7 @@ public class ModelBakeryMixin {
             at = @At(value = "INVOKE", target = "Lorg/slf4j/Logger;warn(Ljava/lang/String;[Ljava/lang/Object;)V"))
     private void everycompat$suppressUnableToLoadSpam(Logger logger, String message, Object[] args, Operation<Void> original) {
         if (args.length > 0 && args[0] instanceof ResourceLocation res && EveryCompat.isMyIdOrAddon(res.getNamespace())) {
-            ModelWarningSuppressor.unloadableModels.add(res);
+            ModelWarningSuppressor.UNLOADABLE_MODELS.add(res);
             return;
         }
         original.call(logger, message, args);
