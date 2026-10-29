@@ -34,7 +34,7 @@ public class UltimateCarModule extends EveryCompatModule {
     public final ItemOnlyEntrySet<WoodType, Item> body;
     public final ItemOnlyEntrySet<WoodType, Item> big_body;
 
-    public static Map<String, Identifier> mapPlanks = Map.ofEntries(
+    private static final Map<String, Identifier> mapPlanks = Map.ofEntries(
             entry("born_in_chaos_v1:scorched", Identifier.parse("born_in_chaos_v1:block/opdosk.png")),
 
             entry("luminous_nether:withered", Identifier.parse("luminous_nether:textures/block/ashplanks.png") ),
