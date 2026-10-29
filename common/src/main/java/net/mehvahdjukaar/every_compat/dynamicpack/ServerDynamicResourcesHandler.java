@@ -26,7 +26,6 @@ import java.util.function.Consumer;
 public class ServerDynamicResourcesHandler extends DynamicServerResourceProvider {
 
     private static ServerDynamicResourcesHandler INSTANCE;
-    private static ArrayList<String> namespaces = new ArrayList<>();
 
     public static ServerDynamicResourcesHandler getInstance() {
         if (INSTANCE == null) {

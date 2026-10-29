@@ -18,17 +18,21 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.regex.Pattern;
 
 public class SimpleModule extends CompatModule {
 
     private final Map<String, EntrySet<?>> entries = new LinkedHashMap<>();
     private final Set<Class<? extends BlockType>> affectedTypes = new HashSet<>();
+    private final List<BlockTypeTag> blockTypeTags = new ArrayList<>();
 
     protected int bloat = 0;
 
@@ -67,6 +71,15 @@ public class SimpleModule extends CompatModule {
             ModEntriesConfigs.addModConfigToggle(simpleEntry.makeRegisteredChildKey(this), simpleEntry.getModConfigToggle());
         }
         return entrySet;
+    }
+
+    public void addBlockTypeTag(Class<? extends BlockType> typeClass, String typeIdRegex, TagKey<?> tag) {
+        addBlockTypeTag(typeClass, typeIdRegex, null, tag);
+    }
+
+    public void addBlockTypeTag(Class<? extends BlockType> typeClass, String typeIdRegex, @Nullable String entryNameRegex, TagKey<?> tag) {
+        blockTypeTags.add(new BlockTypeTag(typeClass, Pattern.compile(typeIdRegex),
+                entryNameRegex == null ? null : Pattern.compile(entryNameRegex), tag));
     }
 
     public Collection<EntrySet<?>> getEntries() {
@@ -121,6 +134,12 @@ public class SimpleModule extends CompatModule {
                 e.generateLootTables(this, manager, sink);
                 e.generateRecipes(this, manager, sink);
                 e.generateTags(this, manager, sink);
+                //could be better
+                if (e instanceof AbstractSimpleEntrySet<?, ?, ?> simpleEntry) {
+                    for (var t : blockTypeTags){
+                        t.addTo(simpleEntry, sink);
+                    }
+                }
 
             } catch (Exception ex) {
                 TaskRunnerWithFailureCollection.active().record("server entry set", () -> String.valueOf(e), ex);

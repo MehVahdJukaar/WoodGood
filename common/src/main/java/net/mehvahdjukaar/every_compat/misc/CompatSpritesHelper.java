@@ -32,7 +32,7 @@ import java.util.function.Supplier;
 // └───────────────────────────────────────────────────────────────┘
 public class CompatSpritesHelper {
 
-    public static Set<SpriteExtra> spriteExtraSet = new HashSet<>();
+    public static final Set<SpriteExtra> spriteExtraSet = new HashSet<>();
 
     private static String normalizeLabel(String s) {
         var res = ResourceLocation.tryParse(s);
