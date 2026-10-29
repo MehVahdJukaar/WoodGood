@@ -8,6 +8,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
+import net.mehvahdjukaar.every_compat.misc.UtilityTag;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -213,6 +214,7 @@ public class BuildingButBetterModule extends EveryCompatModule {
                 .addTextureM(modRes("block/ladder/spruce/oak"), EveryCompat.res("block/bbb/spruce-oak_ladder_m"))
                 .addTexture(modRes("block/ladder/warped/oak"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(UtilityTag.LADDERS_TAG, Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("ladders"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("wooden_blocks"), Registries.BLOCK)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)

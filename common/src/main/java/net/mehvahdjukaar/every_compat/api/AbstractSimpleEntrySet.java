@@ -40,7 +40,6 @@ import java.util.regex.Pattern;
 
 import static net.mehvahdjukaar.every_compat.configs.ECConfigs.NO_MOD_CREATIVE_TAB;
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.addTagToAllBlocks;
-import static net.mehvahdjukaar.every_compat.misc.UtilityTag.platformTag;
 
 //contrary to popular belief this class is indeed not simple. Its usage however is
 //@SuppressWarnings({"unused"})
@@ -256,34 +255,6 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         addTagToAllBlocks(blocks, "(brimwood|cobalt|dead|yellow_bioshroom)", "regions_unexplored",
                 "minecraft:non_flammable_wood",
                 false, true, sink);
-
-        /// Chests
-        addTagToAllBlocks(blocks, "", "",
-                platformTag("chests/wooden").toString(),
-                true, true, sink, "^(?!trapped_)\\w+(?<!_trapped)_chest$");
-
-        addTagToAllBlocks(blocks, "", "",
-                platformTag("chests").toString(),
-                true, true, sink, "^(?!trapped_)\\w+(?<!_trapped)_chest$");
-
-        addTagToAllBlocks(blocks, "", "create", "chest_mounted_storage",
-                true, false, sink, "^(?!trapped_)\\w+(?<!_trapped)_chest$");
-
-        /// Trapped_Chests
-        addTagToAllBlocks(blocks, "", "",
-                platformTag("chests/wooden").toString(),
-                true, true, sink, "^(?:\\w+)?trapped(?:\\w+)?_chest$");
-
-        addTagToAllBlocks(blocks, "", "",
-                platformTag("chests/trapped").toString(),
-                true, true, sink, "^(?:\\w+)?trapped(?:\\w+)?_chest$");
-
-        addTagToAllBlocks(blocks, "", "create", "chest_mounted_storage",
-                true, false, sink, "^(?:\\w+)?trapped(?:\\w+)?_chest$");
-
-        /// Ladders
-        addTagToAllBlocks(blocks, "", "", "c:ladders",
-                true, true, sink, "\\w+_ladder");
     }
 
     @Nullable

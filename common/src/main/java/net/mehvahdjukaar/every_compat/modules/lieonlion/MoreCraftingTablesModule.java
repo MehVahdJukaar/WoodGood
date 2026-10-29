@@ -32,7 +32,7 @@ public class MoreCraftingTablesModule extends EveryCompatModule {
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_side"), EveryCompat.res("block/lolmct/spruce_crafting_table_side_m"))
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_top"), EveryCompat.res("block/lolmct/spruce_crafting_table_top_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(UtilityTag.fabricTag("workbench"), Registries.BLOCK, Registries.ITEM)
+                .addTag(UtilityTag.commonTag("workbench"), Registries.BLOCK, Registries.ITEM)
                 .addTag(ResourceLocation.parse("lieonstudio:crafting_tables"), Registries.BLOCK, Registries.ITEM)
                 .addTag(ResourceLocation.parse("quad:fuel/wood"), Registries.ITEM)
                 .setTab(getTab(tab))

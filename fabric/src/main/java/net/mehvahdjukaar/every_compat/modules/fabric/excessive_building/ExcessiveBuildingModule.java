@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.fabric.excessive_building;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.every_compat.misc.UtilityTag;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
@@ -177,6 +178,7 @@ public class ExcessiveBuildingModule extends EveryCompatModule {
                 .addTexture(modRes("block/crimson_ladder"))
                 .addTexture(modRes("item/crimson_ladder"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(UtilityTag.LADDERS_TAG, Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .addTag(BlockTags.FALL_DAMAGE_RESETTING, Registries.BLOCK)
                 .setTab(getTab(tab))

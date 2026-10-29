@@ -7,6 +7,7 @@ import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlock;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockEntity;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockRenderer;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestItem;
+import net.mehvahdjukaar.every_compat.misc.UtilityTag;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
@@ -131,6 +132,9 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
                         )
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(UtilityTag.CHESTS_TAG, Registries.BLOCK, Registries.ITEM)
+                .addTag(UtilityTag.WOODEN_CHESTS_TAG, Registries.BLOCK, Registries.ITEM)
+                .addTag(UtilityTag.CREATE_CHEST_STORAGE_TAG, Registries.BLOCK)
                 .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
                 .addTag(modRes("chests"), Registries.BLOCK, Registries.ITEM)
                 .setTab(getTab(tab))

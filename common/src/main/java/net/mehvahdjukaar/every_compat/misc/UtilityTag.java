@@ -209,30 +209,23 @@ public class UtilityTag {
 
     // Common tags
 
-    @SuppressWarnings("SameParameterValue")
-    /// @return c:tagPath for FABRIC or neoforge:tagPath for NEOFORGE
-    public static ResourceLocation platformTag(String tagPath) {
-        return platformTag(tagPath, tagPath);
-    }
-
     public static ResourceLocation platformTag(String fabric, String neoforge) {
-        return PlatHelper.getPlatform().isFabric() ? fabricTag(fabric) : neoforgeTag(neoforge);
+        return PlatHelper.getPlatform().isFabric() ? commonTag(fabric) : commonTag(neoforge);
     }
 
     /// @return c:tagPath
-    public static ResourceLocation fabricTag(String tagPath) {
+    public static ResourceLocation commonTag(String tagPath) {
         return ResourceLocation.fromNamespaceAndPath("c", tagPath);
     }
-
-    /// @return c:tagPath
-    public static ResourceLocation neoforgeTag(String tagPath) {
-        return ResourceLocation.fromNamespaceAndPath("c", tagPath);
-    }
-
 
 
     public static final ResourceLocation SILICA_TAG = platformTag("silica_glass", "silica");
     public static final ResourceLocation GLASS_TAG = platformTag("glass_blocks", "glass");
-    public static final ResourceLocation GLASS_PANE_TAG = platformTag("glass_panes");
+    public static final ResourceLocation GLASS_PANE_TAG = commonTag("glass_panes");
+    public static final ResourceLocation CHESTS_TAG = commonTag("chests");
+    public static final ResourceLocation WOODEN_CHESTS_TAG = commonTag("chests/wooden");
+    public static final ResourceLocation TRAPPED_CHESTS_TAG = commonTag("chests/trapped");
+    public static final ResourceLocation LADDERS_TAG = commonTag("ladders");
+    public static final ResourceLocation CREATE_CHEST_STORAGE_TAG = ResourceLocation.fromNamespaceAndPath("create", "chest_mounted_storage");
 
 }

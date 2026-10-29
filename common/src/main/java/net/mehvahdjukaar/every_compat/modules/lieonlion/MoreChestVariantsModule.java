@@ -7,6 +7,7 @@ import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlock;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockEntity;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockRenderer;
 import net.mehvahdjukaar.every_compat.common_classes.CompatTrappedChestBlock;
+import net.mehvahdjukaar.every_compat.misc.UtilityTag;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
@@ -56,6 +57,9 @@ public class MoreChestVariantsModule extends EveryCompatModule {
                 ))
                 .addTile(MoreChestBlockEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(UtilityTag.CHESTS_TAG, Registries.BLOCK, Registries.ITEM)
+                .addTag(UtilityTag.WOODEN_CHESTS_TAG, Registries.BLOCK, Registries.ITEM)
+                .addTag(UtilityTag.CREATE_CHEST_STORAGE_TAG, Registries.BLOCK)
                 .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
                 .addTag(ResourceLocation.parse("lieonstudio:chests/wooden"), Registries.BLOCK, Registries.ITEM)
                 .addTag(ResourceLocation.parse("lieonstudio:chests/normal"), Registries.BLOCK, Registries.ITEM)
@@ -78,6 +82,9 @@ public class MoreChestVariantsModule extends EveryCompatModule {
                 ))
                 .addTile(MoreTrappedBlockEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(UtilityTag.TRAPPED_CHESTS_TAG, Registries.BLOCK, Registries.ITEM)
+                .addTag(UtilityTag.WOODEN_CHESTS_TAG, Registries.BLOCK, Registries.ITEM)
+                .addTag(UtilityTag.CREATE_CHEST_STORAGE_TAG, Registries.BLOCK)
                 .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
                 .addTag(ResourceLocation.parse("lieonstudio:chests/wooden"), Registries.BLOCK, Registries.ITEM)
                 .addTag(ResourceLocation.parse("lieonstudio:chests/trapped"), Registries.BLOCK, Registries.ITEM)

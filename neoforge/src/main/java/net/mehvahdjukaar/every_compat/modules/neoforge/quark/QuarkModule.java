@@ -5,6 +5,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.*;
 import net.mehvahdjukaar.every_compat.common_classes.*;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
+import net.mehvahdjukaar.every_compat.misc.UtilityTag;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.botanypots.BotanyPotsHelper;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
@@ -185,6 +186,7 @@ public class QuarkModule extends EveryCompatModule {
                 .setTab(getTab(tab))
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(UtilityTag.LADDERS_TAG, Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .addTag(modRes("ladders"), Registries.BLOCK, Registries.ITEM)
                 .addTexture(EveryCompat.res("block/spruce_ladder"))
@@ -217,6 +219,9 @@ public class QuarkModule extends EveryCompatModule {
                 )
                 .addTile(qChestBlockEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(UtilityTag.CHESTS_TAG, Registries.BLOCK, Registries.ITEM)
+                .addTag(UtilityTag.WOODEN_CHESTS_TAG, Registries.BLOCK, Registries.ITEM)
+                .addTag(UtilityTag.CREATE_CHEST_STORAGE_TAG, Registries.BLOCK)
                 .addTag(modRes("revertable_chests"), Registries.ITEM)
                 .setTab(getTab(tab))
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
@@ -240,6 +245,9 @@ public class QuarkModule extends EveryCompatModule {
                         })
                 .addTile(qTrappedBlockEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(UtilityTag.TRAPPED_CHESTS_TAG, Registries.BLOCK, Registries.ITEM)
+                .addTag(UtilityTag.WOODEN_CHESTS_TAG, Registries.BLOCK, Registries.ITEM)
+                .addTag(UtilityTag.CREATE_CHEST_STORAGE_TAG, Registries.BLOCK)
                 .addTag(modRes("revertable_trapped_chests"), Registries.ITEM)
                 .setTab(getTab(tab))
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)

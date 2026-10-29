@@ -5,6 +5,7 @@ import io.github.wouink.furnish.recipe.FurnitureRecipe;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
+import net.mehvahdjukaar.every_compat.misc.UtilityTag;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.resources.RecipeTemplate;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
@@ -149,6 +150,7 @@ public class FurnishModule extends EveryCompatModule {
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: planks, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(UtilityTag.LADDERS_TAG, Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("wooden_furniture"), Registries.BLOCK, Registries.ITEM)
                 .addTag(modRes("ladders"), Registries.BLOCK, Registries.ITEM)
                 .addRecipe(modRes("furniture_making/oak_ladder"))
