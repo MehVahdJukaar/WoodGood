@@ -70,7 +70,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                 .addTag(Identifier.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
                 .setTab(getTab(tab))
                 .defaultRecipe()
-                .addCustomItem((w, b, p) -> new StandingAndWallBlockItem(b, log_wall_torch.blocks.get(w), p, Direction.DOWN))
+                .addCustomItem((w, b, p) -> new StandingAndWallBlockItem(b, log_wall_torch.blocks.get(w), Direction.DOWN, p))
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
         this.addEntry(log_torch);
@@ -95,7 +95,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                 .addTag(Identifier.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
                 .setTab(getTab(tab))
                 .defaultRecipe()
-                .addCustomItem((w, b, p) -> new StandingAndWallBlockItem(b, log_soul_wall_torch.blocks.get(w), p, Direction.DOWN))
+                .addCustomItem((w, b, p) -> new StandingAndWallBlockItem(b, log_soul_wall_torch.blocks.get(w), Direction.DOWN, p))
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
         this.addEntry(log_soul_torch);
@@ -119,7 +119,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                 //TEXTURES: redstone_wall_torch
                 .setTab(getTab(tab))
                 .defaultRecipe()
-                .addCustomItem((w, b, p) -> new StandingAndWallBlockItem(b, log_redstone_wall_torch.blocks.get(w), p, Direction.DOWN))
+                .addCustomItem((w, b, p) -> new StandingAndWallBlockItem(b, log_redstone_wall_torch.blocks.get(w), Direction.DOWN, p))
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
         this.addEntry(log_redstone_torch);
@@ -145,7 +145,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                 .addTag(Identifier.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
                 .setTab(getTab(tab))
                 .defaultRecipe()
-                .addCustomItem((s, b, p) -> new StandingAndWallBlockItem(b, planks_wall_torch.blocks.get(s), p, Direction.DOWN))
+                .addCustomItem((s, b, p) -> new StandingAndWallBlockItem(b, planks_wall_torch.blocks.get(s), Direction.DOWN, p))
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
         this.addEntry(planks_torch);
@@ -170,7 +170,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                 .addTag(Identifier.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
                 .setTab(getTab(tab))
                 .defaultRecipe()
-                .addCustomItem((s, b, p) -> new StandingAndWallBlockItem(b, planks_soul_wall_torch.blocks.get(s), p, Direction.DOWN))
+                .addCustomItem((s, b, p) -> new StandingAndWallBlockItem(b, planks_soul_wall_torch.blocks.get(s), Direction.DOWN, p))
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
         this.addEntry(planks_soul_torch);
@@ -194,7 +194,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                 //TEXTURES: planks_redstone_wall_torch
                 .setTab(getTab(tab))
                 .defaultRecipe()
-                .addCustomItem((w, b, p) -> new StandingAndWallBlockItem(b, planks_redstone_wall_torch.blocks.get(w), p, Direction.DOWN))
+                .addCustomItem((w, b, p) -> new StandingAndWallBlockItem(b, planks_redstone_wall_torch.blocks.get(w), Direction.DOWN, p))
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
         this.addEntry(planks_redstone_torch);
@@ -222,7 +222,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                 .addTag(Identifier.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
                 .setTab(getTab(tab))
                 .defaultRecipe()
-                .addCustomItem((s, b, p) -> new StandingAndWallBlockItem(b, stripped_wall_torch.blocks.get(s), p, Direction.DOWN))
+                .addCustomItem((s, b, p) -> new StandingAndWallBlockItem(b, stripped_wall_torch.blocks.get(s), Direction.DOWN, p))
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
         this.addEntry(stripped_torch);
@@ -249,7 +249,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                 .addTag(Identifier.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
                 .setTab(getTab(tab))
                 .defaultRecipe()
-                .addCustomItem((s, b, p) -> new StandingAndWallBlockItem(b, stripped_soul_wall_torch.blocks.get(s), p, Direction.DOWN))
+                .addCustomItem((s, b, p) -> new StandingAndWallBlockItem(b, stripped_soul_wall_torch.blocks.get(s), Direction.DOWN, p))
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
         this.addEntry(stripped_soul_torch);
@@ -275,7 +275,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
                 .setTab(getTab(tab))
                 .defaultRecipe()
-                .addCustomItem((w, b, p) -> new StandingAndWallBlockItem(b, stripped_redstone_wall_torch.blocks.get(w), p, Direction.DOWN))
+                .addCustomItem((w, b, p) -> new StandingAndWallBlockItem(b, stripped_redstone_wall_torch.blocks.get(w), Direction.DOWN, p))
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
         this.addEntry(stripped_redstone_torch);

@@ -102,7 +102,6 @@ public class BlocksPlusModule extends EveryCompatModule {
                 .addTag(modRes("chests"), Registries.ITEM)
                 .setTab(tab)
                 .defaultRecipe()
-                .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
                 .build();
         this.addEntry(chest);
 
@@ -119,7 +118,6 @@ public class BlocksPlusModule extends EveryCompatModule {
                 .addTag(modRes("chests"), Registries.ITEM)
                 .setTab(tab)
                 .defaultRecipe()
-                .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
                 .build();
         this.addEntry(trapped_chest);
 

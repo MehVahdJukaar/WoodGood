@@ -198,7 +198,7 @@ public class SimpleModule extends CompatModule {
 
         if (registry.containsKey(blockId)) {
             EveryCompat.crashIfInDev("Attempted to register a block with id: (" + blockType.getClass().getSimpleName()
-                    + ")" + blockId + " that had another one already registered in registry via " + registry.key().location() + "!"
+                    + ")" + blockId + " that had another one already registered in registry via " + registry.key().identifier() + "!"
             );
             return true;
         }

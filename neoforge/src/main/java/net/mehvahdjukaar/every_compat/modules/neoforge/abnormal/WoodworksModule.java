@@ -206,7 +206,6 @@ public class WoodworksModule extends EveryCompatModule {
                 .setTab(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .defaultRecipe()
-                .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
                 .build();
         this.addEntry(chests);
 
@@ -226,7 +225,6 @@ public class WoodworksModule extends EveryCompatModule {
                 .setTab(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .defaultRecipe()
-                .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
                 .build();
         this.addEntry(trappedChests);
 

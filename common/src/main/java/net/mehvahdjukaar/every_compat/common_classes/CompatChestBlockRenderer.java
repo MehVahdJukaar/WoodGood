@@ -1,150 +1,106 @@
 package net.mehvahdjukaar.every_compat.common_classes;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
 import net.mehvahdjukaar.candlelight.api.ClientOnly;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
-import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.model.object.chest.ChestModel;
+import net.minecraft.client.renderer.MultiblockChestResources;
 import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.blockentity.BrightnessCombiner;
 import net.minecraft.client.renderer.blockentity.ChestRenderer;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.core.Direction;
+import net.minecraft.client.renderer.blockentity.state.ChestRenderState;
+import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.resources.model.sprite.SpriteGetter;
+import net.minecraft.client.resources.model.sprite.SpriteId;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.ChestBlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.ChestType;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 @ClientOnly
 public class CompatChestBlockRenderer extends ChestRenderer<CompatChestBlockEntity> {
     public static final Identifier CHEST_SHEET = Identifier.withDefaultNamespace("textures/atlas/chest.png");
-    private final Map<WoodType, Material> single = new HashMap<>();
-    private final Map<WoodType, Material> left = new HashMap<>();
-    private final Map<WoodType, Material> right = new HashMap<>();
-    private final Map<WoodType, Material> trapped = new HashMap<>();
-    private final Map<WoodType, Material> trapped_left = new HashMap<>();
-    private final Map<WoodType, Material> trapped_right = new HashMap<>();
-    public boolean isChristmas;
-    public String shortenedId;
+    private final Map<WoodType, MultiblockChestResources<SpriteId>> regular = new HashMap<>();
+    private final Map<WoodType, MultiblockChestResources<SpriteId>> trapped = new HashMap<>();
+    private final SpriteGetter sprites;
+    private final MultiblockChestResources<ChestModel> models;
+    private final boolean isChristmas;
 
     //assumes standard naming here. Generalize if needed
     public CompatChestBlockRenderer(BlockEntityRendererProvider.Context context, String shortenedId) {
         super(context);
-
-        Calendar calendar = Calendar.getInstance();
-        if (calendar.get(2) + 1 == 12 && calendar.get(5) >= 24 && calendar.get(5) <= 26) {
-            this.isChristmas = true;
-            this.shortenedId = shortenedId;
-        }
+        this.sprites = context.sprites();
+        this.models = LAYERS.map(layer -> new ChestModel(context.bakeLayer(layer)));
+        this.isChristmas = shortenedId.equals("abnww") && xmasTextures();
 
         for (WoodType w : WoodTypeRegistry.INSTANCE) {
             if (HardcodedBlockType.isKnownVanillaWood(w)) continue; // minecraft:pale_oak is from Perfect Parity: The Garden Awakens Edition
             String path = "entity/chest/" + shortenedId + "/" + w.getAppendableId() + "_chest";
             String trapped_path = "entity/chest/" + shortenedId + "/" + w.getAppendableId() + "_trapped_chest";
 
-            single.put(w, new Material(CHEST_SHEET, EveryCompat.res(path)));
-            left.put(w, new Material(CHEST_SHEET, EveryCompat.res(path + "_left")));
-            right.put(w, new Material(CHEST_SHEET, EveryCompat.res(path + "_right")));
-            trapped.put(w, new Material(CHEST_SHEET, EveryCompat.res(trapped_path)));
-            trapped_left.put(w, new Material(CHEST_SHEET, EveryCompat.res(trapped_path + "_left")));
-            trapped_right.put(w, new Material(CHEST_SHEET, EveryCompat.res(trapped_path + "_right")));
+            regular.put(w, chestSprites(path));
+            trapped.put(w, chestSprites(trapped_path));
         }
     }
 
-    protected @NotNull Material getMaterial(CompatChestBlockEntity blockEntity, ChestType chestType) {
+    private static MultiblockChestResources<SpriteId> chestSprites(String path) {
+        return new MultiblockChestResources<>(
+                new SpriteId(CHEST_SHEET, EveryCompat.res(path)),
+                new SpriteId(CHEST_SHEET, EveryCompat.res(path + "_left")),
+                new SpriteId(CHEST_SHEET, EveryCompat.res(path + "_right")));
+    }
+
+    protected SpriteId getSprite(CompatChestBlockEntity blockEntity, ChestType chestType) {
         WoodType w = blockEntity.getWoodType();
-        if (blockEntity.isTrapped()) {
-            return switch (chestType) {
-                case LEFT -> trapped_left.get(w);
-                case RIGHT -> trapped_right.get(w);
-                default -> trapped.get(w);
-            };
-        } else {
-            if (isChristmas && shortenedId.equals("abnww")) {
-                return switch (chestType) {
-                    case LEFT -> Sheets.CHEST_XMAS_LOCATION_LEFT;
-                    case RIGHT -> Sheets.CHEST_XMAS_LOCATION_RIGHT;
-                    default -> Sheets.CHEST_XMAS_LOCATION;
-                };
-            } else {
-                return switch (chestType) {
-                    case LEFT -> left.get(w);
-                    case RIGHT -> right.get(w);
-                    default -> single.get(w);
-                };
-            }
-        }
+        if (blockEntity.isTrapped()) return trapped.get(w).select(chestType);
+        if (isChristmas) return Sheets.chooseSprite(ChestRenderState.ChestMaterialType.CHRISTMAS, chestType);
+        return regular.get(w).select(chestType);
     }
 
+    @Override
+    public ChestRenderState createRenderState() {
+        return new CompatChestRenderState();
+    }
+
+    @Override
+    public void extractRenderState(CompatChestBlockEntity blockEntity, ChestRenderState state, float partialTicks,
+                                   Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
+        super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
+        ((CompatChestRenderState) state).sprite = getSprite(blockEntity, state.type);
+    }
 
     //copy pasted from ChestRenderer
 
     @Override
-    public void render(CompatChestBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
-        Level level = blockEntity.getLevel();
-        boolean flag = level != null;
-        BlockState blockstate = flag ? blockEntity.getBlockState() : Blocks.CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.SOUTH);
-        ChestType chesttype = blockstate.hasProperty(ChestBlock.TYPE) ? blockstate.getValue(ChestBlock.TYPE) : ChestType.SINGLE;
-        Block flag1 = blockstate.getBlock();
-        if (flag1 instanceof AbstractChestBlock<?> abstractchestblock) {
-            boolean flag1x = chesttype != ChestType.SINGLE;
-            poseStack.pushPose();
-            float f = (blockstate.getValue(ChestBlock.FACING)).toYRot();
-            poseStack.translate(0.5F, 0.5F, 0.5F);
-            poseStack.mulPose(Axis.YP.rotationDegrees(-f));
-            poseStack.translate(-0.5F, -0.5F, -0.5F);
-            DoubleBlockCombiner.NeighborCombineResult<? extends ChestBlockEntity> neighborcombineresult;
-            if (flag) {
-                neighborcombineresult = abstractchestblock.combine(blockstate, level, blockEntity.getBlockPos(), true);
-            } else {
-                neighborcombineresult = DoubleBlockCombiner.Combiner::acceptNone;
-            }
-
-            float f1 = neighborcombineresult.apply(ChestBlock.opennessCombiner(blockEntity)).get(partialTick);
-            f1 = 1.0F - f1;
-            f1 = 1.0F - f1 * f1 * f1;
-            int i = neighborcombineresult.apply(new BrightnessCombiner<>()).applyAsInt(packedLight);
-            Material material = this.getMaterial(blockEntity, chesttype);
-            VertexConsumer vertexconsumer = material.buffer(buffer, RenderType::entityCutout);
-            if (flag1x) {
-                if (chesttype == ChestType.LEFT) {
-                    this.render(poseStack, vertexconsumer, this.doubleLeftLid, this.doubleLeftLock, this.doubleLeftBottom, f1, i, packedOverlay);
-                } else {
-                    this.render(poseStack, vertexconsumer, this.doubleRightLid, this.doubleRightLock, this.doubleRightBottom, f1, i, packedOverlay);
-                }
-            } else {
-                this.render(poseStack, vertexconsumer, this.lid, this.lock, this.bottom, f1, i, packedOverlay);
-            }
-
-            poseStack.popPose();
-        }
-    }
-    private void render(PoseStack poseStack, VertexConsumer consumer, ModelPart lidPart, ModelPart lockPart, ModelPart bottomPart, float lidAngle, int packedLight, int packedOverlay) {
-        lidPart.xRot = -(lidAngle * 1.5707964F);
-        lockPart.xRot = lidPart.xRot;
-        lidPart.render(poseStack, consumer, packedLight, packedOverlay);
-        lockPart.render(poseStack, consumer, packedLight, packedOverlay);
-        bottomPart.render(poseStack, consumer, packedLight, packedOverlay);
+    public void submit(ChestRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera) {
+        poseStack.pushPose();
+        poseStack.mulPose(modelTransformation(state.facing));
+        float open = state.open;
+        open = 1.0F - open;
+        open = 1.0F - open * open * open;
+        ChestModel model = this.models.select(state.type);
+        submitNodeCollector.submitModel(
+                model, open, poseStack, state.lightCoords, OverlayTexture.NO_OVERLAY, -1, ((CompatChestRenderState) state).sprite, this.sprites, 0, state.breakProgress
+        );
+        poseStack.popPose();
     }
 
     public static void register(ClientHelper.BlockEntityRendererEvent event, BlockEntityType<CompatChestBlockEntity> tile, String s) {
         event.register(tile, c -> new CompatChestBlockRenderer(c, s));
     }
 
+    public static class CompatChestRenderState extends ChestRenderState {
+        public SpriteId sprite;
+    }
 }

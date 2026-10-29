@@ -228,7 +228,6 @@ public class QuarkModule extends EveryCompatModule {
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addRecipe(modRes("building/crafting/chests/oak_chest"))
                 .addRecipe(modRes("building/chests/oak_chest_wood"))
-                .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
                 .excludeBlockTypes("twilightforest", "dark") //REASON: ???
                 .build();
         this.addEntry(chests);
@@ -253,7 +252,6 @@ public class QuarkModule extends EveryCompatModule {
                 .setTab(getTab(tab))
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addRecipe(modRes("building/chests/trapped_oak_chest"))
-                .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
                 .build();
         this.addEntry(trappedChests);
 

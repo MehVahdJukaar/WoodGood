@@ -7,7 +7,6 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlock;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockEntity;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockRenderer;
-import net.mehvahdjukaar.every_compat.common_classes.CompatChestItem;
 import net.mehvahdjukaar.every_compat.misc.UtilityTag;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
@@ -140,7 +139,6 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
                 .addTag(modRes("chests"), Registries.BLOCK, Registries.ITEM)
                 .setTab(getTab(tab))
                 .defaultRecipe()
-                .addCustomItem((w, block, properties) -> new CompatChestItem(block, properties))
                 .build();
         this.addEntry(chests);
 

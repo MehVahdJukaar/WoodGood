@@ -17,6 +17,7 @@ import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -451,7 +452,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         BlockEntityType<H> get();
 
         @ClientOnly
-        default void registerRenderer(ClientHelper.BlockEntityRendererEvent event, BlockEntityRendererProvider<BlockEntity> renderer) {
+        default <S extends BlockEntityRenderState> void registerRenderer(ClientHelper.BlockEntityRendererEvent event, BlockEntityRendererProvider<H, S> renderer) {
             event.register(get(), renderer);
         }
     }
@@ -468,7 +469,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     public static class NewTileHolder<H extends BlockEntity> implements ITileHolder<H> {
 
         protected final BiFunction<BlockPos, BlockState, H> tileFactory;
-        protected Supplier<BlockEntityRendererProvider<H>> renderer = null;
+        protected Supplier<BlockEntityRendererProvider<H, ?>> renderer = null;
         protected BlockEntityType<H> tile = null;
 
 

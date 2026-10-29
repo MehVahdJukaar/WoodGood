@@ -5,6 +5,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlock;
+import net.mehvahdjukaar.every_compat.common_classes.CompatTrappedChestBlock;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
@@ -21,6 +23,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -156,6 +159,15 @@ public class ResourcesUtils {
 
         Set<String> modelsLoc = new HashSet<>();
 
+        //oak chest might not even have a models/item json
+        items.forEach((blockType, item) -> {
+            if (item instanceof BlockItem bi && bi.getBlock() instanceof CompatChestBlock chest) {
+                Identifier id = Utils.getID(item);
+                failures.runSafely("chest item definition", id::toString,
+                        () -> addChestItemDefinition(manager, sink, id, blockType, chest));
+            }
+        });
+
         /// Models/item
         try {
             //we cant use this since it might override parent too. Custom textured items need a custom model added manually with addBlockResources
@@ -185,7 +197,7 @@ public class ResourcesUtils {
                     Preconditions.checkArgument(newRes.location != oakItemModel.location,
                             "ids cant be the same: " + newRes.location);
                     sink.addResourceIfNotPresent(manager, newRes);
-                    addItemDefinition(manager, sink, id, newRes.location, oakTints);
+                    if (!isCompatChest(item)) addItemDefinition(manager, sink, id, newRes.location, oakTints);
                 });
             });
         } catch (Exception e) {
@@ -225,6 +237,35 @@ public class ResourcesUtils {
             definition.add("model", model);
             return definition;
         });
+    }
+
+    //same texture CompatChestBlockRenderer uses
+    private static void addChestItemDefinition(ResourceManager manager, ResourceSink sink, Identifier itemId,
+                                               BlockType type, CompatChestBlock chest) {
+        String shortenedId = itemId.getPath().substring(0, itemId.getPath().indexOf('/'));
+        String suffix = chest instanceof CompatTrappedChestBlock ? "_trapped_chest" : "_chest";
+        Identifier texture = EveryCompat.res(shortenedId + "/" + type.getAppendableId() + suffix);
+
+        sink.addJsonUnlessPresent(manager, ResType.ITEMS.getPath(itemId), () -> {
+            JsonObject definition = new JsonObject();
+            definition.add("model", chestSpecialModel(texture));
+            return definition;
+        });
+    }
+
+    private static boolean isCompatChest(Item item) {
+        return item instanceof BlockItem bi && bi.getBlock() instanceof CompatChestBlock;
+    }
+
+    private static JsonObject chestSpecialModel(Identifier texture) {
+        JsonObject chest = new JsonObject();
+        chest.addProperty("type", "minecraft:chest");
+        chest.addProperty("texture", texture.toString());
+        JsonObject model = new JsonObject();
+        model.addProperty("type", "minecraft:special");
+        model.addProperty("base", "minecraft:item/chest");
+        model.add("model", chest);
+        return model;
     }
 
     @Nullable
