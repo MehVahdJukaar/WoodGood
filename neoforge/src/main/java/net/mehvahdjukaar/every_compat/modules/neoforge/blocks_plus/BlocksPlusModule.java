@@ -6,6 +6,7 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.common_classes.*;
+import net.mehvahdjukaar.every_compat.misc.UtilityTag;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
@@ -95,6 +96,9 @@ public class BlocksPlusModule extends EveryCompatModule {
                 //TEXTURES: planks
                 .addTile(bpChestBlockEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(UtilityTag.CHESTS_TAG, Registries.BLOCK, Registries.ITEM)
+                .addTag(UtilityTag.WOODEN_CHESTS_TAG, Registries.BLOCK, Registries.ITEM)
+                .addTag(UtilityTag.CREATE_CHEST_STORAGE_TAG, Registries.BLOCK)
                 .addTag(modRes("chests"), Registries.ITEM)
                 .setTab(tab)
                 .defaultRecipe()
@@ -109,6 +113,9 @@ public class BlocksPlusModule extends EveryCompatModule {
                 //TEXTURES: planks
                 .addTile(bpTrappedBlockEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(UtilityTag.TRAPPED_CHESTS_TAG, Registries.BLOCK, Registries.ITEM)
+                .addTag(UtilityTag.WOODEN_CHESTS_TAG, Registries.BLOCK, Registries.ITEM)
+                .addTag(UtilityTag.CREATE_CHEST_STORAGE_TAG, Registries.BLOCK)
                 .addTag(modRes("chests"), Registries.ITEM)
                 .setTab(tab)
                 .defaultRecipe()
@@ -146,6 +153,7 @@ public class BlocksPlusModule extends EveryCompatModule {
                 )
                 .addTexture(modRes("block/acacia_ladder"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(UtilityTag.LADDERS_TAG, Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .addTag(BlockTags.FALL_DAMAGE_RESETTING, Registries.BLOCK)
                 .setTab(tab)

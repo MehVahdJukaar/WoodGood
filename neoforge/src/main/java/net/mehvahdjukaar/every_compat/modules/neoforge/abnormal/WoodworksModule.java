@@ -17,6 +17,7 @@ import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.TabAddMode;
 import net.mehvahdjukaar.every_compat.common_classes.*;
+import net.mehvahdjukaar.every_compat.misc.UtilityTag;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.client.ICustomItemRendererProvider;
 import net.mehvahdjukaar.moonlight.api.client.ItemStackRenderer;
@@ -156,6 +157,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .addTexture(EveryCompat.res("block/spruce_ladder"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(UtilityTag.LADDERS_TAG, Registries.BLOCK, Registries.ITEM)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .addTag(Identifier.parse("quark:ladders"), Registries.BLOCK, Registries.ITEM)
                 .addTag(Identifier.parse("blueprint:wooden_ladders"), Registries.BLOCK, Registries.ITEM)
@@ -195,6 +197,9 @@ public class WoodworksModule extends EveryCompatModule {
                 .addCondition(woodType -> !woodType.isBambooLike())
                 .addTile(abwwChestBlockEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(UtilityTag.CHESTS_TAG, Registries.BLOCK, Registries.ITEM)
+                .addTag(UtilityTag.WOODEN_CHESTS_TAG, Registries.BLOCK, Registries.ITEM)
+                .addTag(UtilityTag.CREATE_CHEST_STORAGE_TAG, Registries.BLOCK)
                 .addTag(Identifier.parse("blueprint:wooden_chests"), Registries.BLOCK, Registries.ITEM)
                 .addTag(Identifier.parse("quark:revertable_chests"), Registries.ITEM)
                 .addTag(Identifier.parse("quark:boatable_chests"), Registries.ITEM)
@@ -214,6 +219,9 @@ public class WoodworksModule extends EveryCompatModule {
                 .addCondition(woodType -> !woodType.isBambooLike())
                 .addTile(abwwTrappedBlockEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(UtilityTag.TRAPPED_CHESTS_TAG, Registries.BLOCK, Registries.ITEM)
+                .addTag(UtilityTag.WOODEN_CHESTS_TAG, Registries.BLOCK, Registries.ITEM)
+                .addTag(UtilityTag.CREATE_CHEST_STORAGE_TAG, Registries.BLOCK)
                 .addTag(Identifier.parse("blueprint:wooden_trapped_chests"), Registries.BLOCK, Registries.ITEM)
                 .setTab(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
