@@ -266,7 +266,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_shutter"), () -> VanillaWoodTypes.OAK,
                         this::newShutter
                 )
-                .addTexture(modRes("block/oak_shutter"), shutterPalette)
+                .addTexture(modRes("block/oak_shutter"), SHUTTER_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("shutters"), Registries.BLOCK)
                 .setTab(getTab(tab))
@@ -279,7 +279,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_louvered_shutter"), () -> VanillaWoodTypes.OAK,
                         this::newShutter
                 )
-                .addTexture(modRes("block/oak_louvered_shutter"), shutterPalette)
+                .addTexture(modRes("block/oak_louvered_shutter"), SHUTTER_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("shutters"), Registries.BLOCK)
                 .setTab(getTab(tab))
@@ -304,7 +304,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
         this.addEntry(curtain_rod);
     }
 
-    public static final PaletteStrategy shutterPalette = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
+    public static final PaletteStrategy SHUTTER_PALETTE = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
             blockType, manager, PLANKS, null, p -> {
                 int leftover = p.size() - 3;
                 if (leftover > 6) {
