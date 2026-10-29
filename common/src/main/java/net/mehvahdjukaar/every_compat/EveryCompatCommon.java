@@ -35,6 +35,9 @@ import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.INCLU
 
 public class EveryCompatCommon {
 
+    private static final String[] MACAW_MODS = {"mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs",
+            "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows"};
+
     protected void initialize() {
         EveryCompat.init();
 
@@ -77,20 +80,13 @@ public class EveryCompatCommon {
             addOtherCompatMod("mcwfencesbyg", "biomeswevegone", "mcwfences");
             addOtherCompatMod("macawsroofsbop", "biomesoplenty", "mcwroofs");
             addOtherCompatMod("macawsroofsbyg", "biomeswevegone", "mcwroofs");
-            addOtherCompatMod("mcwbyg", List.of("biomeswevegone", "byg"),
-                    "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
-            addOtherCompatMod("mcwbiomesoplenty", "biomesoplenty",
-                    "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
-            addOtherCompatMod("mcwmoddinglegacy", List.of("blue_skies", "premium_wood"),
-                    "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
-            addOtherCompatMod("mcwabnormals", List.of("buzzier_bees", "environmental", "upgrade_aquatic", "autumnity", "endergetic", "atmospheric", "caverns_and_chasms"),
-                    "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
-            addOtherCompatMod("mcwterraformersmc", List.of("terrestria", "traverse", "cinderscape"),
-                    "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
-            addOtherCompatMod("mcwaurora", "enhanced_mushrooms",
-                    "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
-            addOtherCompatMod("mcwquark", "quark",
-                    "mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs", "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows");
+            addOtherCompatMod("mcwbyg", List.of("biomeswevegone", "byg"), MACAW_MODS);
+            addOtherCompatMod("mcwbiomesoplenty", "biomesoplenty", MACAW_MODS);
+            addOtherCompatMod("mcwmoddinglegacy", List.of("blue_skies", "premium_wood"), MACAW_MODS);
+            addOtherCompatMod("mcwabnormals", List.of("buzzier_bees", "environmental", "upgrade_aquatic", "autumnity", "endergetic", "atmospheric", "caverns_and_chasms"), MACAW_MODS);
+            addOtherCompatMod("mcwterraformersmc", List.of("terrestria", "traverse", "cinderscape"), MACAW_MODS);
+            addOtherCompatMod("mcwaurora", "enhanced_mushrooms", MACAW_MODS);
+            addOtherCompatMod("mcwquark", "quark", MACAW_MODS);
 
             // Abnormals Delight
             addOtherCompatMod("abnormals_delight",
@@ -136,9 +132,6 @@ public class EveryCompatCommon {
             addOptionalModule("twigs", () -> TwigsModule.class);
             addOptionalModule("valhelsia_furniture", () -> ValhelsiaFurnitureModule.class);
             addOptionalModule("variantvanillablocks", () -> VariantVanillaBlocksModule.class);
-
-//!! =================================================== OTHERS ===================================================== \\
-            forAllModules(m -> EveryCompat.LOGGER.info("Loaded {}", m.toString()));
         }
     }
 

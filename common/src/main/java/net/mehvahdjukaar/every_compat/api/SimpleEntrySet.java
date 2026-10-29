@@ -260,12 +260,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
     @Override
     public void setRenderLayer() {
-        for (var e : blocks.entrySet()) {
-            var w = e.getKey();
-            var v = e.getValue();
-            if (renderType != null || w.toString().equals("rats:pirat"))
-                EveryCompatClient.registerRenderType(v, w, renderType);
-        }
+        blocks.forEach((w, v) -> EveryCompatClient.registerRenderType(v, w, renderType));
     }
 
     @Override
@@ -292,16 +287,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         ResourcesUtils.generateStandardItemModels(manager, sink, items, baseType.get(),
                 makeModelTransformer(module, manager), this.modelConfiguration
         );
-    }
-
-    // items and blocks
-    protected BlockTypeResTransformer<T> makeModelTransformer(SimpleModule module, ResourceManager manager) {
-        BlockTypeResTransformer<T> modelTransformer = BlockTypeResTransformer.create(module.modId, manager);
-        if (extraModelTransform != null) extraModelTransform.accept(modelTransformer);
-
-        ResourcesUtils.addBuiltinModelTransformer(modelTransformer, baseType.get());
-
-        return modelTransformer;
     }
 
     protected BlockTypeResTransformer<T> makeBlockStateTransformer(SimpleModule module, ResourceManager manager) {
@@ -386,7 +371,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             return prefix_ + name;
         }
 
-        public <H extends BlockEntity> Builder<T, B> addTile(String idTile) {
+        public Builder<T, B> addTile(String idTile) {
             BlockEntityType<?> entityType = BuiltInRegistries.BLOCK_ENTITY_TYPE.getOptional(ResourceLocation.parse(idTile))
                     .orElseThrow(() -> new NoSuchElementException("BlockEntityType's ID: " + idTile + " not found! ID must be wrong!"));
 
