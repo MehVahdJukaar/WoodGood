@@ -23,10 +23,7 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 
-import java.util.Map;
 import java.util.function.Supplier;
-
-import static java.util.Map.entry;
 
 ///SUPPORT: v1.0.46+
 public class UltimateCarModule extends EveryCompatModule {
@@ -35,24 +32,6 @@ public class UltimateCarModule extends EveryCompatModule {
     public final ItemOnlyEntrySet<WoodType, Item> bumper;
     public final ItemOnlyEntrySet<WoodType, Item> body;
     public final ItemOnlyEntrySet<WoodType, Item> big_body;
-
-    private static final Map<String, Identifier> mapPlanks = Map.ofEntries(
-            entry("born_in_chaos_v1:scorched", Identifier.parse("born_in_chaos_v1:block/opdosk.png")),
-
-            entry("luminous_nether:withered", Identifier.parse("luminous_nether:textures/block/ashplanks.png") ),
-
-            entry("mofus_better_end_:weepingstar", Identifier.parse("mofus_better_end_:textures/block/weeoingstarplanks.png") ),
-
-            entry("promenade:sakura", Identifier.parse("promenade:textures/block/sakura/planks.png") ),
-            entry("promenade:dark_amaranth", Identifier.parse("promenade:textures/block/dark_amaranth/planks.png") ),
-            entry("promenade:palm", Identifier.parse("promenade:textures/block/palm/planks.png") ),
-            entry("promenade:maple", Identifier.parse("promenade:textures/block/maple/planks.png") ),
-
-            entry("dawnoftimebuilder:waxed_oak", Identifier.parse("dawnoftimebuilder:textures/block/waxed_oak_planks.png") ),
-            entry("dawnoftimebuilder:charred_spruce", Identifier.parse("dawnoftimebuilder:textures/block/charred_spruce_planks.png") ),
-
-            entry("shadowlands:vellium", Identifier.parse("shadowlands:textures/block/velliumplanks.png"))
-    );
 
     public UltimateCarModule(String modId) {
         super(modId, "ucm");
@@ -70,15 +49,6 @@ public class UltimateCarModule extends EveryCompatModule {
                                 planksResLoc = Identifier.withDefaultNamespace("block/oak_planks");
                                 EveryCompat.LOGGER.error("Failed to get Identifier for {} - {}", Utils.getID(w.planks), e);
                             }
-                            /*= (mapPlanks.containsKey(w.getId().toString()))
-                                    ? mapPlanks.get(w.getId().toString()).withPrefix("textures/")
-                                    : Identifier.parse(
-                                    w.createFullIdWith(
-                                            w.getNamespace(),
-                                            "textures/block", "",
-                                            "", "planks.png"
-                                    )
-                            );*/
                             return new ItemCarPart(p, new PartLicensePlateHolder(planksResLoc.withPrefix("textures/")));
                         }
                 )
@@ -111,16 +81,6 @@ public class UltimateCarModule extends EveryCompatModule {
         body = ItemOnlyEntrySet.builder(WoodType.class, "body",
                         getModItem("oak_body"), () -> VanillaWoodTypes.OAK,
                         (w, p) -> {
-//                            Identifier planksResLoc = Identifier.parse(
-//                                    w.createFullIdWith(
-//                                            EveryCompat.MOD_ID,
-//                                            "textures/entity",
-//                                            shortenedId(),
-//                                            "car_wood",
-//                                            ".png"
-//                                    )
-//
-//                            );
                             Identifier planksResLoc;
                             try {
                                 planksResLoc = RPUtils.findFirstBlockTextureLocation(manager, w.planks);
@@ -141,15 +101,6 @@ public class UltimateCarModule extends EveryCompatModule {
         big_body = ItemOnlyEntrySet.builder(WoodType.class, "body", "big",
                         getModItem("big_oak_body"), () -> VanillaWoodTypes.OAK,
                         (w, p) -> {
-//                            Identifier planksResLoc =  Identifier.parse(
-//                                    w.createFullIdWith(
-//                                            EveryCompat.MOD_ID,
-//                                            "textures/entity",
-//                                            shortenedId(),
-//                                            "car_big_wood",
-//                                            ".png"
-//                                    )
-//                            );
                             Identifier planksResLoc;
                             try {
                                 planksResLoc = RPUtils.findFirstBlockTextureLocation(manager, w.planks);
