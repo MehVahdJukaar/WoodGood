@@ -82,7 +82,7 @@ public class EntriesRemapper {
                                     String wood = se.parseWoodType(oldName);
                                     if(wood != null){
                                         for(var b : se.get.)){
-                                            ResourceLocation firstId = b.
+                                            Identifier firstId = b.
                                             mapping.remap(blockReg);
                                             return;;
                                         }

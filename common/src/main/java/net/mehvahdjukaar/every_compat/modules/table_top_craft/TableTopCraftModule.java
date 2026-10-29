@@ -9,7 +9,7 @@ import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
@@ -22,7 +22,7 @@ public class TableTopCraftModule extends EveryCompatModule {
 
     public TableTopCraftModule(String modId) {
         super(modId, "ttc");
-        ResourceLocation tab = modRes("tab");
+        Identifier tab = modRes("tab");
 
         chessBoards = SimpleEntrySet.builder(WoodType.class, "chess",
                         getModBlock("oak_chess"), () -> VanillaWoodTypes.OAK,

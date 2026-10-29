@@ -13,7 +13,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
@@ -36,7 +36,7 @@ public class ArchitectsPaletteModule extends EveryCompatModule {
 
     public ArchitectsPaletteModule(String modId) {
         super(modId, "ap");
-        ResourceLocation tab = modRes("architects_palette");
+        Identifier tab = modRes("architects_palette");
 
         railings = SimpleEntrySet.builder(WoodType.class, "railing",
                         getModBlock("oak_railing"), () -> VanillaWoodTypes.OAK,

@@ -17,7 +17,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.ai.village.poi.PoiTypes;
 import net.minecraft.world.level.block.*;
@@ -48,7 +48,7 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
 
     public VariantVanillaBlocksModule(String modId) {
         super(modId, "vvb");
-        ResourceLocation tab = modRes(modId);
+        Identifier tab = modRes(modId);
 
         barrel = SimpleEntrySet.builder(WoodType.class, "barrel",
                         getModBlock("oak_barrel"), () -> VanillaWoodTypes.OAK,
@@ -57,8 +57,8 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
                 .addTag(modRes("barrels"), Registries.BLOCK, Registries.ITEM)
-                .addTag(ResourceLocation.parse("c:barrels"), Registries.BLOCK, Registries.ITEM)
-                .addTag(ResourceLocation.parse("c:barrels_wooden"), Registries.BLOCK, Registries.ITEM)
+                .addTag(Identifier.parse("c:barrels"), Registries.BLOCK, Registries.ITEM)
+                .addTag(Identifier.parse("c:barrels_wooden"), Registries.BLOCK, Registries.ITEM)
                 .addTexture(modRes("block/oak_barrel_bottom"))
                 .addTextureM(modRes("block/oak_barrel_side"), EveryCompat.res("block/vanilla_barrel_side_m"))
                 .addTextureM(modRes("block/oak_barrel_top"), EveryCompat.res("block/vanilla_barrel_top_m"))
@@ -95,7 +95,7 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.ENCHANTMENT_POWER_PROVIDER, Registries.BLOCK)
                 .addTag(modRes("bookshelves"), Registries.BLOCK, Registries.ITEM)
-                .addTag(ResourceLocation.parse("c:bookshelves"), Registries.BLOCK, Registries.ITEM)
+                .addTag(Identifier.parse("c:bookshelves"), Registries.BLOCK, Registries.ITEM)
                 .addTextureM(modRes("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
                 .copyParentDrop()
                 .defaultRecipe()

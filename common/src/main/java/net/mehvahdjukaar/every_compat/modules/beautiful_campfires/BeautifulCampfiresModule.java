@@ -21,7 +21,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
@@ -113,8 +113,8 @@ public class BeautifulCampfiresModule extends EveryCompatModule {
     public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicServerResources(executor);
         executor.accept((manager, sink) -> {
-            ResourceLocation campfireLoc = modRes("acacia_campfire");
-            ResourceLocation soulCampfireLoc = modRes("acacia_soul_campfire");
+            Identifier campfireLoc = modRes("acacia_campfire");
+            Identifier soulCampfireLoc = modRes("acacia_soul_campfire");
 
             forEachSafely("campfire recipe", campfires.blocks, (wood, block) ->{
                 Block soulCampfire = soul_campfires.blocks.get(wood);
@@ -122,8 +122,8 @@ public class BeautifulCampfiresModule extends EveryCompatModule {
                 if (soulCampfire != null) createRecipe("soul_campfire", wood, soulCampfire, soulCampfireLoc, sink, manager);
 
                 if (PlatHelper.isModLoaded("toughasnails")) {
-                    SimpleTagBuilder warmingTag = SimpleTagBuilder.of(ResourceLocation.parse("toughasnails:heating_blocks"));
-                    SimpleTagBuilder coolingTag = SimpleTagBuilder.of(ResourceLocation.parse("toughasnails:cooling_blocks"));
+                    SimpleTagBuilder warmingTag = SimpleTagBuilder.of(Identifier.parse("toughasnails:heating_blocks"));
+                    SimpleTagBuilder coolingTag = SimpleTagBuilder.of(Identifier.parse("toughasnails:cooling_blocks"));
 
                     warmingTag.addEntry(block);
                     sink.addTag(warmingTag, Registries.BLOCK);
@@ -141,7 +141,7 @@ public class BeautifulCampfiresModule extends EveryCompatModule {
     }
 
 
-    public void createRecipe(String recipeName, WoodType woodType, Block output, ResourceLocation recipeLoc,
+    public void createRecipe(String recipeName, WoodType woodType, Block output, Identifier recipeLoc,
                              ResourceSink sink, ResourceManager manager) {
 
         try (InputStream recipeStream = manager.getResource(ResType.RECIPES.getPath(recipeLoc))
@@ -174,9 +174,9 @@ public class BeautifulCampfiresModule extends EveryCompatModule {
 
     private void makeCampfireTextures(ResourceManager manager, ResourceSink sink) {
         String campfirePath = "block/acacia_campfire_log";
-        ResourceLocation campfireImage = modRes(campfirePath);
-        ResourceLocation targetLogMask = EveryCompat.res("block/bc/campfire_log_m"); // Focus on the log part
-        ResourceLocation targetPlankMask = EveryCompat.res("block/bc/campfire_plank_m"); // Focus on the plank part
+        Identifier campfireImage = modRes(campfirePath);
+        Identifier targetLogMask = EveryCompat.res("block/bc/campfire_log_m"); // Focus on the log part
+        Identifier targetPlankMask = EveryCompat.res("block/bc/campfire_plank_m"); // Focus on the plank part
 
         try (TextureImage textureImage = TextureImage.open(manager, campfireImage);
              TextureImage targetLogImage = TextureImage.open(manager, targetLogMask);
@@ -185,7 +185,7 @@ public class BeautifulCampfiresModule extends EveryCompatModule {
             Respriter respriterLog = Respriter.masked(textureImage, targetLogImage);
 
             campfires.blocks.forEach((wood, block) -> {
-                ResourceLocation id = Utils.getID(block);
+                Identifier id = Utils.getID(block);
 
                 try (
                         TextureImage plankTexture = TextureImage.open(manager,

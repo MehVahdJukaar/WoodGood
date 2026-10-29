@@ -12,7 +12,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
@@ -51,7 +51,7 @@ public abstract class MacawDoorsModuleAbstract extends EveryCompatModule {
 
     public MacawDoorsModuleAbstract(String modId) {
         super(modId, "mcd");
-        ResourceLocation tab = (PlatHelper.getPlatform().isFabric()) ? modRes("inv") : modRes(modId);
+        Identifier tab = (PlatHelper.getPlatform().isFabric()) ? modRes("inv") : modRes(modId);
 
         WaffleDoors = SimpleEntrySet.builder(WoodType.class, "waffle_door",
                         getModBlock("oak_waffle_door"), () -> VanillaWoodTypes.OAK,

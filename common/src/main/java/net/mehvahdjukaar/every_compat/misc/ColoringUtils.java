@@ -2,7 +2,7 @@ package net.mehvahdjukaar.every_compat.misc;
 
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -12,9 +12,9 @@ import java.util.Set;
 
 public final class ColoringUtils {
 
-    static final Set<ResourceLocation> HARDCODED_NO_TINT = Set.of(
-            ResourceLocation.fromNamespaceAndPath("blue_skies", "cherry"),
-            ResourceLocation.fromNamespaceAndPath("twilightforest", "beanstalk")
+    static final Set<Identifier> HARDCODED_NO_TINT = Set.of(
+            Identifier.fromNamespaceAndPath("blue_skies", "cherry"),
+            Identifier.fromNamespaceAndPath("twilightforest", "beanstalk")
     );
 
     public static void copyItemTint(ClientHelper.ItemColorEvent event, Map<? extends BlockType, ? extends Item> items) {

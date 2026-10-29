@@ -3,7 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.storagedrawers;
 import com.jaquadro.minecraft.storagedrawers.block.BlockCompDrawers;
 import com.jaquadro.minecraft.storagedrawers.block.BlockDrawers;
 import net.minecraft.client.renderer.block.model.BlockModel;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.phys.AABB;
@@ -88,14 +88,14 @@ public class ModDrawersGeometry {
     }
 
     //FORGE use StorageDrawers.rl() and FABRIC use ModConstants.loc()
-    private static ResourceLocation modLoc(String path) {
-        return ResourceLocation.fromNamespaceAndPath("storagedrawers", path);
+    private static Identifier modLoc(String path) {
+        return Identifier.fromNamespaceAndPath("storagedrawers", path);
     }
 
-    private static void populateGeometryData(ResourceLocation locationIcon,
-                                             ResourceLocation locationCount,
-                                             ResourceLocation locationInd,
-                                             ResourceLocation locationIndBase, ResourceManager manager,
+    private static void populateGeometryData(Identifier locationIcon,
+                                             Identifier locationCount,
+                                             Identifier locationInd,
+                                             Identifier locationIndBase, ResourceManager manager,
                                              BlockDrawers... blocks) {
         BlockModel slotInfo = getBlockModel(locationIcon, manager);
         BlockModel countInfo = getBlockModel(locationCount, manager);
@@ -128,7 +128,7 @@ public class ModDrawersGeometry {
         }
     }
 
-    private static BlockModel getBlockModel(ResourceLocation location, ResourceManager manager) {
+    private static BlockModel getBlockModel(Identifier location, ResourceManager manager) {
         Resource iresource;
         Reader reader = null;
         try {

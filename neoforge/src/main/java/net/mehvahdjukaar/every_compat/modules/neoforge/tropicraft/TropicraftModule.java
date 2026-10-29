@@ -11,7 +11,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -51,7 +51,7 @@ public class TropicraftModule extends EveryCompatModule {
     @Override
     // RECIPES
     public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
-        ResourceLocation recipePath = modRes("mangrove_boardwalk");
+        Identifier recipePath = modRes("mangrove_boardwalk");
         executor.accept((manager, sink) -> {
             boardwalks.blocks.forEach((wood, block) -> {
 

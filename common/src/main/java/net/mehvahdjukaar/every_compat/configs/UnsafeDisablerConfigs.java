@@ -16,7 +16,7 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -171,7 +171,7 @@ public class UnsafeDisablerConfigs {
 
     // preview icon for a type id; empty for regex patterns that don't resolve to a real type
     private static ItemStack typeStack(BlockTypeRegistry<?> reg, String id) {
-        ResourceLocation rl = ResourceLocation.tryParse(id);
+        Identifier rl = Identifier.tryParse(id);
         BlockType type = rl == null ? null : reg.get(rl);
         return type == null ? ItemStack.EMPTY : new ItemStack(type.mainChild().asItem());
     }

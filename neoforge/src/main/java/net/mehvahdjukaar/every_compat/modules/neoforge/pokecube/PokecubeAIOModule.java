@@ -10,7 +10,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
@@ -33,7 +33,7 @@ public class PokecubeAIOModule extends EveryCompatModule {
 
     public PokecubeAIOModule(String modId) {
         super(modId, "pcl");
-        ResourceLocation tab = modRes("building_blocks_tab");
+        Identifier tab = modRes("building_blocks_tab");
 
         distortic_planks = SimpleEntrySet.builder(WoodType.class, "planks", "distortic",
                         BlockInit.DISTORTIC_OAK_PLANKS, () -> VanillaWoodTypes.OAK,
@@ -86,11 +86,11 @@ public class PokecubeAIOModule extends EveryCompatModule {
             LegendsDistorticRecipeImpl modifiedRecipe = null;
             ItemStack originalResult = old.getResultItem(RegistryAccess.EMPTY);
             ItemStack newResult = RecipeTemplate.convertItemStack(originalResult, from, to);
-            ResourceLocation dimId = old.dimId.location();
+            Identifier dimId = old.dimId.location();
 
             try {
                 Ingredient inputObj = Ingredient.of(Items.OAK_PLANKS);
-                ResourceLocation dummyblock = modRes("distortic_mirror");
+                Identifier dummyblock = modRes("distortic_mirror");
 
                 LegendsDistorticRecipeImpl instance = new LegendsDistorticRecipeImpl(inputObj, newResult, dummyblock, dimId);
 
@@ -103,7 +103,7 @@ public class PokecubeAIOModule extends EveryCompatModule {
 
                 Field blockField = LegendsDistorticRecipeImpl.class.getDeclaredField("block");
                 blockField.setAccessible(true);
-                ResourceLocation blockId = Utils.getID((Block) blockField.get(instance));
+                Identifier blockId = Utils.getID((Block) blockField.get(instance));
 
                 modifiedRecipe = new LegendsDistorticRecipeImpl(newInput, newResult, blockId,
                         dimId);

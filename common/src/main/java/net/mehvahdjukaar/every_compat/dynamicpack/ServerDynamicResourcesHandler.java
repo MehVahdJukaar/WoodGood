@@ -12,7 +12,7 @@ import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -100,7 +100,7 @@ public class ServerDynamicResourcesHandler extends DynamicServerResourceProvider
                     String typeName = r.typeName();
                     for (BlockType blockType : r.getValues()) {
                         failures.runSafely("block type tag", blockType.getId()::toString, () -> {
-                            ResourceLocation tagId = blockType.getId().withPrefix(typeName + "/");
+                            Identifier tagId = blockType.getId().withPrefix(typeName + "/");
                             SimpleTagBuilder itemTag = SimpleTagBuilder.of(tagId);
                             SimpleTagBuilder blockTag = SimpleTagBuilder.of(tagId);
                             boolean isItemAddedToTag = false;

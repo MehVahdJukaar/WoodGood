@@ -10,7 +10,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -38,9 +38,9 @@ public class MoreCraftingTablesForForgeModule extends EveryCompatModule {
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_top"), EveryCompat.res("block/mctb/spruce_crafting_table_top_m"))
                 //TAG: forge:workbenches removed
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(ResourceLocation.parse("forge:workbench"), Registries.BLOCK)
-                .addTag(ResourceLocation.parse("forge:workbenches"), Registries.BLOCK)
-                .addTag(ResourceLocation.parse("charm:crafting_table"), Registries.ITEM)
+                .addTag(Identifier.parse("forge:workbench"), Registries.BLOCK)
+                .addTag(Identifier.parse("forge:workbenches"), Registries.BLOCK)
+                .addTag(Identifier.parse("charm:crafting_table"), Registries.ITEM)
                 .addTag(modRes("revertable_workbench"), Registries.ITEM)
                 .setTab(getTab(tab))
                 .defaultRecipe()

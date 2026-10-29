@@ -12,7 +12,7 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
@@ -35,7 +35,7 @@ public class CompatSpritesHelper {
     public static Set<SpriteExtra> spriteExtraSet = new HashSet<>();
 
     private static String normalizeLabel(String s) {
-        var res = ResourceLocation.tryParse(s);
+        var res = Identifier.tryParse(s);
         return res == null ? s.replace("#", "") : res.getPath();
     }
 
@@ -488,20 +488,20 @@ public class CompatSpritesHelper {
     }
 
     private static void addOptional(String blockId, String textureId, String texturePath) {
-        BuiltInRegistries.BLOCK.getOptional(ResourceLocation.parse(blockId))
-                .ifPresent(b -> TextureCache.registerSpecialTextureForBlock(b, textureId, ResourceLocation.parse(texturePath)));
+        BuiltInRegistries.BLOCK.getOptional(Identifier.parse(blockId))
+                .ifPresent(b -> TextureCache.registerSpecialTextureForBlock(b, textureId, Identifier.parse(texturePath)));
     }
 
     /// @param ec_texturePath everycomp will be used as namespace
     @SuppressWarnings("SameParameterValue")
     private static void addOptionalInEC(String blockId, String textureId, String ec_texturePath) {
-        BuiltInRegistries.BLOCK.getOptional(ResourceLocation.parse(blockId))
+        BuiltInRegistries.BLOCK.getOptional(Identifier.parse(blockId))
                 .ifPresent(b -> TextureCache.registerSpecialTextureForBlock(b, textureId, EveryCompat.res(ec_texturePath)));
     }
 
     private static void addOptional(String modId, String blockPath, String textureId, String texturePath) {
-        BuiltInRegistries.BLOCK.getOptional(ResourceLocation.parse(modId + ":" + blockPath))
-                .ifPresent(b -> TextureCache.registerSpecialTextureForBlock(b, textureId, ResourceLocation.parse(modId + ":" + texturePath)));
+        BuiltInRegistries.BLOCK.getOptional(Identifier.parse(modId + ":" + blockPath))
+                .ifPresent(b -> TextureCache.registerSpecialTextureForBlock(b, textureId, Identifier.parse(modId + ":" + texturePath)));
     }
 
     // ┌──────────────────────────────────────────────────────────┐
@@ -569,16 +569,16 @@ public class CompatSpritesHelper {
 
     //ugly hardcoded wood post-processing
     private static final Supplier<WoodType> FLOWERING_AZALEA = WoodTypeRegistry.INSTANCE.makeFutureHolder(
-            ResourceLocation.parse("ecologics:flowering_azalea"));
+            Identifier.parse("ecologics:flowering_azalea"));
     private static final Supplier<WoodType> AZALEA = WoodTypeRegistry.INSTANCE.makeFutureHolder(
-            ResourceLocation.parse("ecologics:azalea"));
+            Identifier.parse("ecologics:azalea"));
     private static final Supplier<WoodType> BRIMWOOD = WoodTypeRegistry.INSTANCE.makeFutureHolder(
-            ResourceLocation.parse("regions_unexplored:brimwood"));
+            Identifier.parse("regions_unexplored:brimwood"));
     private static final Supplier<WoodType> STRANGEWOOD = WoodTypeRegistry.INSTANCE.makeFutureHolder(
-            ResourceLocation.parse("aoa:strangewood"));
+            Identifier.parse("aoa:strangewood"));
 
     // ─────────────────────────────────── Woodtype ────────────────────────────────────
-    public static void maybePostProcessWoodTexture(WoodType wood, ResourceLocation newId, ResourceManager manager,
+    public static void maybePostProcessWoodTexture(WoodType wood, Identifier newId, ResourceManager manager,
                                                    TextureImage textureSupplier, TextureInfo textureInfo) {
         // Ecologics
         if (wood == FLOWERING_AZALEA.get()) {
@@ -595,7 +595,7 @@ public class CompatSpritesHelper {
     }
 
     //for ecologics
-    private static void flowerAzalea(TextureImage image, ResourceManager manager, ResourceLocation textureId, TextureInfo textureInfo) {
+    private static void flowerAzalea(TextureImage image, ResourceManager manager, Identifier textureId, TextureInfo textureInfo) {
         if (!(image.imageWidth() > 32) && !(image.imageHeight() > 32)) {
             try (TextureImage flowerOverLay = TextureImage.open(manager,
                     EveryCompat.res("block/ecologics_overlay"));
@@ -622,7 +622,7 @@ public class CompatSpritesHelper {
     }
 
     //for Regions-Unexplored's brimwood
-    private static void brimwoodGlow(TextureImage image, ResourceManager manager, ResourceLocation textureId, TextureInfo textureInfo) {
+    private static void brimwoodGlow(TextureImage image, ResourceManager manager, Identifier textureId, TextureInfo textureInfo) {
 
         try (TextureImage baseTexture = TextureImage.open(manager, textureInfo.texture());
              TextureImage planksTexture = TextureImage.open(manager, EveryCompat.res("block/regions_unexplored/brimwood_planks"))
@@ -696,7 +696,7 @@ public class CompatSpritesHelper {
     //for Advent-Of-Ascension's stranglewood
     private static void strangewoodPattern(TextureImage image, ResourceManager manager) {
         try (TextureImage vineOverlay = TextureImage.open(manager,
-                ResourceLocation.fromNamespaceAndPath("aoa3","block/stranglewood_log_vine"));
+                Identifier.fromNamespaceAndPath("aoa3","block/stranglewood_log_vine"));
              TextureImage logTexture = TextureImage.open(manager,
                      RPUtils.findFirstBlockTextureLocation(manager, STRANGEWOOD.get().log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))) {
 

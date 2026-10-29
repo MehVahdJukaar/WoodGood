@@ -10,7 +10,7 @@ import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
@@ -25,7 +25,7 @@ public class DecorationDelightModule extends EveryCompatModule {
 
     public DecorationDelightModule(String modId) {
         super(modId, "ddr");
-        ResourceLocation tab = modRes("decoration_delight_tab");
+        Identifier tab = modRes("decoration_delight_tab");
 
         COUNTER = SimpleEntrySet.builder(WoodType.class, "counter",
                 getModBlock("oak_counter"), () -> VanillaWoodTypes.OAK,

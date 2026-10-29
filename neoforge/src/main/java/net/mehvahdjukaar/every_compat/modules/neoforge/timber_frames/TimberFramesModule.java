@@ -13,7 +13,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
@@ -127,7 +127,7 @@ public class TimberFramesModule extends EveryCompatModule {
 
                 for (String type : types) {
                     String path = "_timber_frame_" + type;
-                    ResourceLocation resLoc = modRes("oak" + path);
+                    Identifier resLoc = modRes("oak" + path);
 
                     try (InputStream mcmetaStream = manager.getResource(ResType.BLOCK_MCMETA.getPath(resLoc))
                             .orElseThrow(() -> new FileNotFoundException("failed to open the recipe file @" +

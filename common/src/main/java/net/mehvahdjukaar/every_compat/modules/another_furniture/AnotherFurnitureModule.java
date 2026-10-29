@@ -12,7 +12,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 
 //SUPPORT: v3.0.1+
@@ -29,7 +29,7 @@ public class AnotherFurnitureModule extends EveryCompatModule {
     public AnotherFurnitureModule(String modId) {
         super(modId, "af");
 
-        ResourceLocation tabKey = PlatHelper.getPlatform().isForge() ?
+        Identifier tabKey = PlatHelper.getPlatform().isForge() ?
                 modRes(modId) : modRes("tab");
 
         flowerBoxes = SimpleEntrySet.builder(WoodType.class, "flower_box",

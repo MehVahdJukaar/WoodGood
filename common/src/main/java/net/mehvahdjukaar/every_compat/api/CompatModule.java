@@ -14,7 +14,7 @@ import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -107,8 +107,8 @@ public abstract class CompatModule {
         return "module[ " + getModName() + typeOrEmpty + " @ " + getMyNamespace() + " ]";
     }
 
-    public ResourceLocation modRes(String string) {
-        return ResourceLocation.fromNamespaceAndPath(modId, string);
+    public Identifier modRes(String string) {
+        return Identifier.fromNamespaceAndPath(modId, string);
     }
 
     public List<String> getAlreadySupportedMods() {

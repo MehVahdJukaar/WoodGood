@@ -10,7 +10,7 @@ import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -25,17 +25,17 @@ public class UtilityTag {
     /**
      * Get the namespace:WoodType_logs tag from the wood mods or create a new tag if not available
      *
-     * @return ResourceLocation
+     * @return Identifier
      **/
-    public static ResourceLocation getATagOrCreateANew(String suffixTag, String suffixAlt, BlockType blockType, ResourceSink sink, ResourceManager manager) {
+    public static Identifier getATagOrCreateANew(String suffixTag, String suffixAlt, BlockType blockType, ResourceSink sink, ResourceManager manager) {
         String resLocMOD = blockType.getNamespace() + ":" + blockType.getTypeName();
 
-        // ResourceLocation
-        ResourceLocation tagId = getTagId(blockType);
-        ResourceLocation RLocLogs = ResourceLocation.parse(resLocMOD + "_" + suffixTag); // modId:TYPE_suffix
-        ResourceLocation RLocStems = ResourceLocation.parse(resLocMOD + "_" + suffixAlt);
-        ResourceLocation RLocFolders = ResourceLocation.parse(blockType.getNamespace() + ":" + suffixTag + "/" + blockType.getTypeName()); // modId:suffix/TYPE
-        ResourceLocation RLocEC = EveryCompat.res(blockType.getAppendableId() + "_" + suffixTag); // everycomp:modId/TYPE_suffix
+        // Identifier
+        Identifier tagId = getTagId(blockType);
+        Identifier RLocLogs = Identifier.parse(resLocMOD + "_" + suffixTag); // modId:TYPE_suffix
+        Identifier RLocStems = Identifier.parse(resLocMOD + "_" + suffixAlt);
+        Identifier RLocFolders = Identifier.parse(blockType.getNamespace() + ":" + suffixTag + "/" + blockType.getTypeName()); // modId:suffix/TYPE
+        Identifier RLocEC = EveryCompat.res(blockType.getAppendableId() + "_" + suffixTag); // everycomp:modId/TYPE_suffix
 
         if (doTagExistFor(tagId, manager))
             return tagId;
@@ -54,7 +54,7 @@ public class UtilityTag {
 
     }
 
-    private static ResourceLocation getTagId(BlockType blockType) {
+    private static Identifier getTagId(BlockType blockType) {
         Optional<Block> log = Optional.ofNullable(blockType.getBlockOfThis("log"));
         Optional<Block> block = Optional.ofNullable(blockType.getBlockOfThis("block"));
 
@@ -69,7 +69,7 @@ public class UtilityTag {
      *
      * @return true if tag was added successfully
      **/
-    public static boolean createAndAddDefaultTags(ResourceLocation resLoc, ResourceSink sink, BlockType blockType, Block... blocks) {
+    public static boolean createAndAddDefaultTags(Identifier resLoc, ResourceSink sink, BlockType blockType, Block... blocks) {
         if (blockType instanceof WoodType woodType)
             return createAndAddCustomTags(resLoc, sink, woodType.log, woodType.getBlockOfThis("stripped_log"), woodType.getBlockOfThis("wood"), woodType.getBlockOfThis("stripped_wood"));
         else
@@ -81,7 +81,7 @@ public class UtilityTag {
      *
      * @return true if tag was added successfully
      **/
-    public static boolean createAndAddCustomTags(ResourceLocation resLoc, ResourceSink sink, Block... blocks) {
+    public static boolean createAndAddCustomTags(Identifier resLoc, ResourceSink sink, Block... blocks) {
         boolean isTagCreated = false;
 
         SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(resLoc);
@@ -105,7 +105,7 @@ public class UtilityTag {
      *
      * @return true if tag was added successfully
      **/
-    public static boolean createAndAddCustomTags(ResourceLocation resLoc, ResourceSink sink, Item... items) {
+    public static boolean createAndAddCustomTags(Identifier resLoc, ResourceSink sink, Item... items) {
         boolean isTagCreated = false;
 
         SimpleTagBuilder tagBuilder = SimpleTagBuilder.of(resLoc);
@@ -148,8 +148,8 @@ public class UtilityTag {
 
             boolean isBlockTagCreated = false;
             boolean isItemTagCreated = false;
-            SimpleTagBuilder blocktagBuilder = SimpleTagBuilder.of(ResourceLocation.parse(tagPathOrResLoc));
-            SimpleTagBuilder itemtagBuilder = SimpleTagBuilder.of(ResourceLocation.parse(tagPathOrResLoc));
+            SimpleTagBuilder blocktagBuilder = SimpleTagBuilder.of(Identifier.parse(tagPathOrResLoc));
+            SimpleTagBuilder itemtagBuilder = SimpleTagBuilder.of(Identifier.parse(tagPathOrResLoc));
             for (Map.Entry<T, B> entry : blocks.entrySet()) {
                 T blockType = entry.getKey();
                 B block = entry.getValue();
@@ -182,12 +182,12 @@ public class UtilityTag {
     /**
      * Get the id tag from the mods
      *
-     * @return Pair of ResourceLocation, Boolean
+     * @return Pair of Identifier, Boolean
      **/
-    public static Pair<ResourceLocation, Boolean> getATagId(String idTag, String idAlt, ResourceManager manager) {
-        // ResourceLocation
-        ResourceLocation RLocId = ResourceLocation.parse(idTag); // forge:suffix/EXTRA_TYPE or c:TYPE_ingot
-        ResourceLocation RLocIdAlt = ResourceLocation.parse(idAlt); // forge:suffix/EXTRATYPE or c:TYPEingot
+    public static Pair<Identifier, Boolean> getATagId(String idTag, String idAlt, ResourceManager manager) {
+        // Identifier
+        Identifier RLocId = Identifier.parse(idTag); // forge:suffix/EXTRA_TYPE or c:TYPE_ingot
+        Identifier RLocIdAlt = Identifier.parse(idAlt); // forge:suffix/EXTRATYPE or c:TYPEingot
 
         if (doTagExistFor(RLocId, manager))
             return Pair.of(RLocId, true);
@@ -198,7 +198,7 @@ public class UtilityTag {
     }
 
     /// Checking if a tag exist for a block or an item
-    private static boolean doTagExistFor(ResourceLocation resLoc, ResourceManager manager) {
+    private static boolean doTagExistFor(Identifier resLoc, ResourceManager manager) {
         boolean blocksTag = manager.getResource(ResType.TAGS.getPath(resLoc.withPrefix("blocks/"))).isPresent();
         boolean blockTag = manager.getResource(ResType.TAGS.getPath(resLoc.withPrefix("block/"))).isPresent();
         boolean itemsTag = manager.getResource(ResType.TAGS.getPath(resLoc.withPrefix("items/"))).isPresent();
@@ -211,28 +211,28 @@ public class UtilityTag {
 
     @SuppressWarnings("SameParameterValue")
     /// @return c:tagPath for FABRIC or neoforge:tagPath for NEOFORGE
-    public static ResourceLocation platformTag(String tagPath) {
+    public static Identifier platformTag(String tagPath) {
         return platformTag(tagPath, tagPath);
     }
 
-    public static ResourceLocation platformTag(String fabric, String neoforge) {
+    public static Identifier platformTag(String fabric, String neoforge) {
         return PlatHelper.getPlatform().isFabric() ? fabricTag(fabric) : neoforgeTag(neoforge);
     }
 
     /// @return c:tagPath
-    public static ResourceLocation fabricTag(String tagPath) {
-        return ResourceLocation.fromNamespaceAndPath("c", tagPath);
+    public static Identifier fabricTag(String tagPath) {
+        return Identifier.fromNamespaceAndPath("c", tagPath);
     }
 
     /// @return c:tagPath
-    public static ResourceLocation neoforgeTag(String tagPath) {
-        return ResourceLocation.fromNamespaceAndPath("c", tagPath);
+    public static Identifier neoforgeTag(String tagPath) {
+        return Identifier.fromNamespaceAndPath("c", tagPath);
     }
 
 
 
-    public static final ResourceLocation SILICA_TAG = platformTag("silica_glass", "silica");
-    public static final ResourceLocation GLASS_TAG = platformTag("glass_blocks", "glass");
-    public static final ResourceLocation GLASS_PANE_TAG = platformTag("glass_panes");
+    public static final Identifier SILICA_TAG = platformTag("silica_glass", "silica");
+    public static final Identifier GLASS_TAG = platformTag("glass_blocks", "glass");
+    public static final Identifier GLASS_PANE_TAG = platformTag("glass_panes");
 
 }

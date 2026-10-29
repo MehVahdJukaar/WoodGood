@@ -16,7 +16,7 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -82,7 +82,7 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
 
                     ///OPTIONAL: Adding block's textures to be generated
                     .addTexture(modRes("block/oak_table"), PaletteStrategies.LOG_SIDE_STANDARD)
-                    .addTexture(ResourceLocation.parse("twigs:block/oak_table_bottom"), PaletteStrategies.LOG_SIDE_STANDARD)
+                    .addTexture(Identifier.parse("twigs:block/oak_table_bottom"), PaletteStrategies.LOG_SIDE_STANDARD)
                     .addTextureM(modRes("block/oak_table_top"), modRes("block/mask/oak_table_top_m")) // If the texture has parts that shouldn't be recolored, the mask (black color) can be used to exclude them
 
                     ///OPTIONAL: Adding tags to the block
@@ -93,7 +93,7 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
             // https://github.com/MehVahdJukaar/WoodGood/blob/79396eae711cee032635b52d957ddfe9eaa0121b/common/src/main/java/net/mehvahdjukaar/every_compat/misc/UtilityTag.java#L194
 
                     ///OPTIONAL: Creating recipes for the block
-                    .defaultRecipe() // default: new ResourceLocation("twigs:oak_table") via recipes folder
+                    .defaultRecipe() // default: new Identifier("twigs:oak_table") via recipes folder
                     ///OPTIONAL: if the recipe has a different path unlike above
                     .addRecipe(modRes("path/to/recipeFile")) // Do not use "recipes/"
 
@@ -169,7 +169,7 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
 ///      │  from being registered                                   │
 ///      └──────────────────────────────────────────────────────────┘
     @Override
-    public boolean isEntryAlreadyRegistered(String entrySetId, ResourceLocation blockId, BlockType blockType, Registry<?> registry) {
+    public boolean isEntryAlreadyRegistered(String entrySetId, Identifier blockId, BlockType blockType, Registry<?> registry) {
         // A NOTE:
         // You can whitelist a block with vanilla WoodTypes (spruce, acacia, jungle, so on) if your mod only have minecraft:oak
         // It can be temporary until you add other Vanilla WoodType into your mod

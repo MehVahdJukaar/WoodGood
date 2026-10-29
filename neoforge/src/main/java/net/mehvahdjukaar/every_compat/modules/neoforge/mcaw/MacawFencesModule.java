@@ -6,7 +6,7 @@ import net.mehvahdjukaar.every_compat.modules.macaw.MacawFencesModuleAbstract;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
@@ -19,7 +19,7 @@ public class MacawFencesModule extends MacawFencesModuleAbstract {
     }
 
     @Override
-    public ResourceLocation getTabKey() {
+    public Identifier getTabKey() {
         return modRes("fenceitemgroup");
     }
 

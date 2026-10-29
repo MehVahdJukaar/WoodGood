@@ -8,7 +8,7 @@ import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -20,7 +20,7 @@ public class OreberriesReplantedModule extends EveryCompatModule {
 
     public OreberriesReplantedModule(String modId) {
         super(modId, "or");
-        ResourceLocation tab = modRes("tab");
+        Identifier tab = modRes("tab");
 
         vats = SimpleEntrySet.builder(WoodType.class, "vat",
                         OreBerryRegistry.OAK_VAT, () -> VanillaWoodTypes.OAK,

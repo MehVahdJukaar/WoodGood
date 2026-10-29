@@ -14,7 +14,7 @@ import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
@@ -45,8 +45,8 @@ public class LightmansCurrencyModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WITHER_IMMUNE, Registries.BLOCK)
                 .addTag(BlockTags.DRAGON_IMMUNE, Registries.BLOCK)
-                .addTag(ResourceLocation.parse("create:non_movable"), Registries.BLOCK)
-                .addTag(ResourceLocation.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
+                .addTag(Identifier.parse("create:non_movable"), Registries.BLOCK)
+                .addTag(Identifier.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .addTag(modRes("trader_normal"), Registries.ITEM)
                 .addTag(modRes("shelf"), Registries.ITEM)
                 .setTab(tab)
@@ -68,8 +68,8 @@ public class LightmansCurrencyModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WITHER_IMMUNE, Registries.BLOCK)
                 .addTag(BlockTags.DRAGON_IMMUNE, Registries.BLOCK)
-                .addTag(ResourceLocation.parse("create:non_movable"), Registries.BLOCK)
-                .addTag(ResourceLocation.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
+                .addTag(Identifier.parse("create:non_movable"), Registries.BLOCK)
+                .addTag(Identifier.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .addTag(modRes("trader_normal"), Registries.ITEM)
                 .addTag(modRes("shelf"), Registries.ITEM)
                 .setTab(tab)

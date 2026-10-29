@@ -15,7 +15,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -57,10 +57,10 @@ public class MoreChestVariantsModule extends EveryCompatModule {
                 .addTile(MoreChestBlockEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
-                .addTag(ResourceLocation.parse("lieonstudio:chests/wooden"), Registries.BLOCK, Registries.ITEM)
-                .addTag(ResourceLocation.parse("lieonstudio:chests/normal"), Registries.BLOCK, Registries.ITEM)
-                .addTag(ResourceLocation.parse("quad:cats_on_blocks/sit"), Registries.BLOCK)
-                .addTag(ResourceLocation.parse("quad:fuel/wood"), Registries.ITEM)
+                .addTag(Identifier.parse("lieonstudio:chests/wooden"), Registries.BLOCK, Registries.ITEM)
+                .addTag(Identifier.parse("lieonstudio:chests/normal"), Registries.BLOCK, Registries.ITEM)
+                .addTag(Identifier.parse("quad:cats_on_blocks/sit"), Registries.BLOCK)
+                .addTag(Identifier.parse("quad:fuel/wood"), Registries.ITEM)
                 .setTab(functionalTab)
                 .defaultRecipe()
                 .build();
@@ -79,9 +79,9 @@ public class MoreChestVariantsModule extends EveryCompatModule {
                 .addTile(MoreTrappedBlockEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
-                .addTag(ResourceLocation.parse("lieonstudio:chests/wooden"), Registries.BLOCK, Registries.ITEM)
-                .addTag(ResourceLocation.parse("lieonstudio:chests/trapped"), Registries.BLOCK, Registries.ITEM)
-                .addTag(ResourceLocation.parse("quad:fuel/wood"), Registries.ITEM)
+                .addTag(Identifier.parse("lieonstudio:chests/wooden"), Registries.BLOCK, Registries.ITEM)
+                .addTag(Identifier.parse("lieonstudio:chests/trapped"), Registries.BLOCK, Registries.ITEM)
+                .addTag(Identifier.parse("quad:fuel/wood"), Registries.ITEM)
                 .setTab(redstoneTab)
                 .defaultRecipe()
                 .build();

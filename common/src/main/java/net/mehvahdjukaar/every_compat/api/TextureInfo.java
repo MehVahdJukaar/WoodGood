@@ -2,36 +2,36 @@ package net.mehvahdjukaar.every_compat.api;
 
 import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.Nullable;
 
-public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation mask, @Nullable ResourceLocation overlay,
+public record TextureInfo(Identifier texture, @Nullable Identifier mask, @Nullable Identifier overlay,
                           boolean keepNamespace, boolean copyTexture, boolean noAnimation,
                           String customTexturePath, Pair<String, String> replacePath,
                           boolean autoMask,
                           @Deprecated boolean onAtlas,
                           PaletteStrategy paletteStrategy) {
 
-    public static Builder of(ResourceLocation res) {
+    public static Builder of(Identifier res) {
         return new Builder(res);
     }
 
-    public static Builder of(ResourceLocation res, ResourceLocation mask) {
+    public static Builder of(Identifier res, Identifier mask) {
         return new Builder(res).mask(mask);
     }
 
-    public static Builder of(ResourceLocation res, ResourceLocation mask, ResourceLocation overlay) {
+    public static Builder of(Identifier res, Identifier mask, Identifier overlay) {
         return new Builder(res).mask(mask).overlay(overlay);
     }
 
-    public static <T extends BlockType> Builder of(ResourceLocation res, String customTexturePath) {
+    public static <T extends BlockType> Builder of(Identifier res, String customTexturePath) {
         return new Builder(res).customTexture(customTexturePath);
     }
 
     public static class Builder {
-        private final ResourceLocation texture;
-        private ResourceLocation mask;
-        private ResourceLocation overlay;
+        private final Identifier texture;
+        private Identifier mask;
+        private Identifier overlay;
         private boolean keepNamespace = false;
         private boolean copyTexture = false;
         private boolean noAnimation = false;
@@ -41,17 +41,17 @@ public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation m
         private Pair<String, String> replacePath;
         private PaletteStrategy palette = PaletteStrategies.MAIN_CHILD;
 
-        public Builder(ResourceLocation texture) {
+        public Builder(Identifier texture) {
             this.texture = texture;
             this.onAtlas = !texture.getPath().startsWith("entity/");
         }
 
-        public Builder mask(ResourceLocation mask) {
+        public Builder mask(Identifier mask) {
             this.mask = mask;
             return this;
         }
 
-        public Builder overlay(ResourceLocation overlay) {
+        public Builder overlay(Identifier overlay) {
             this.overlay = overlay;
             return this;
         }

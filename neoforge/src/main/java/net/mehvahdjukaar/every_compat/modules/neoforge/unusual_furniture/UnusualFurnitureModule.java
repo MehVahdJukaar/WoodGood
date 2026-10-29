@@ -11,7 +11,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -42,13 +42,13 @@ public class UnusualFurnitureModule extends EveryCompatModule {
     public final SimpleEntrySet<WoodType, Block> beam;
     public final SimpleEntrySet<WoodType, Block> shelf;
 
-    public static final Map<Block, ResourceLocation> BLOCK_TO_TEXTURE_MAP = new HashMap<>();
+    public static final Map<Block, Identifier> BLOCK_TO_TEXTURE_MAP = new HashMap<>();
     public final String shortenedId;
 
     public UnusualFurnitureModule(String modId) {
         super(modId, "uf");
         this.shortenedId = shortenedId();
-        ResourceLocation tab = modRes(modId);
+        Identifier tab = modRes(modId);
 
         carved = SimpleEntrySet.builder(WoodType.class, "", "carved",
                         getModBlock("carved_oak"), () -> VanillaWoodTypes.OAK,
@@ -108,7 +108,7 @@ public class UnusualFurnitureModule extends EveryCompatModule {
                 .addTexture(modRes("block/oak_stool"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("stool"), Registries.BLOCK)
-                .addTag(ResourceLocation.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
+                .addTag(Identifier.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .setTab(getTab(tab))
                 .addRecipe(modRes("oak_stool_craft"))
                 .build();
@@ -124,7 +124,7 @@ public class UnusualFurnitureModule extends EveryCompatModule {
                 //TEXTURES: carved_oak, stool
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("stool"), Registries.BLOCK)
-                .addTag(ResourceLocation.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
+                .addTag(Identifier.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .setTab(getTab(tab))
                 .addRecipe(modRes("oak_chair_craft"))
                 .build();
@@ -170,7 +170,7 @@ public class UnusualFurnitureModule extends EveryCompatModule {
                 .addTextureM(modRes("block/bench_oak"), EveryCompat.res("block/uf/bench_oak_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("bench"), Registries.BLOCK)
-                .addTag(ResourceLocation.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
+                .addTag(Identifier.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .setTab(getTab(tab))
                 .addRecipe(modRes("oak_bench_craft"))
                 .build();
@@ -290,7 +290,7 @@ public class UnusualFurnitureModule extends EveryCompatModule {
     public class CompatDrawerBlock extends JungleDrawerBlock {
         public CompatDrawerBlock(WoodType woodType) {
             super();
-            BLOCK_TO_TEXTURE_MAP.put(this, ResourceLocation.parse(
+            BLOCK_TO_TEXTURE_MAP.put(this, Identifier.parse(
                     woodType.createFullIdWith(EveryCompat.MOD_ID, "textures/block",
                             shortenedId, "java_drawer", ".png")
             ));

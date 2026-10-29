@@ -18,7 +18,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeBuilder;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -59,7 +59,7 @@ public class ResourcesUtils {
             return;
         }
 
-        ResourceLocation baseId = Utils.getID(baseBlock);
+        Identifier baseId = Utils.getID(baseBlock);
 
         Set<String> modelsLoc = new HashSet<>();
 
@@ -75,7 +75,7 @@ public class ResourcesUtils {
             List<StaticResource> oakBlockModels = gatherNonVanillaModels(manager, modelsLoc, modelConfig);
 
             blocks.forEach((blockType, block) -> {
-                ResourceLocation blockId = Utils.getID(block);
+                Identifier blockId = Utils.getID(block);
                 failures.runSafely("blockstate", blockId::toString, () -> {
                     if (true || ModEntriesConfigs.isEntryEnabled(blockType, block)) { //generating all the times otherwise we get log spam
                         /// Creates blockstate
@@ -114,7 +114,7 @@ public class ResourcesUtils {
 
         for (var m : modelsLoc) {
             //remove the ones from mc namespace
-            ResourceLocation modelRes = ResourceLocation.parse(m);
+            Identifier modelRes = Identifier.parse(m);
             if (!modelRes.getNamespace().equals("minecraft") || modelConfig.blockModel().contains(modelRes) || modelConfig.itemModel().contains(modelRes)) {
                 StaticResource model = StaticResource.getOrLog(manager, ResType.MODELS.getPath(m));
                 if (Objects.nonNull(model)) models.add(model);
@@ -176,7 +176,7 @@ public class ResourcesUtils {
             }
 
             items.forEach((blockType, item) -> {
-                ResourceLocation id = Utils.getID(item);
+                Identifier id = Utils.getID(item);
                 failures.runSafely("item model", id::toString, () -> {
                     StaticResource newRes = itemModelTransformer.transform(oakItemModel, id, blockType);
                     Preconditions.checkArgument(newRes.location != oakItemModel.location,
@@ -193,7 +193,7 @@ public class ResourcesUtils {
         List<StaticResource> oakItemModels = gatherNonVanillaModels(manager, modelsLoc, modelConfig);
 
         items.forEach((w, b) -> {
-            ResourceLocation id = Utils.getID(b);
+            Identifier id = Utils.getID(b);
             if (true || ModEntriesConfigs.isEntryEnabled(w, b)) { //generating all the times otherwise we get log spam
 
                 //creates item model
@@ -214,7 +214,7 @@ public class ResourcesUtils {
             BlockTypeResTransformer<T> transformer, T baseType) {
         String oldTypeName = baseType.getTypeName();
 
-        // Modifying models' filename & ResourceLocation
+        // Modifying models' filename & Identifier
         transformer.setIDModifier((text, id, w) ->
                 BlockTypeResTransformer.replaceFullGenericType(text, w, id, oldTypeName, null, 2));
 
@@ -238,12 +238,12 @@ public class ResourcesUtils {
     //creates and add new jsons based off the ones at the given resources with the provided modifiers
     public static <B extends Block, T extends BlockType> void addBlockResources(ResourceManager manager, ResourceSink sink,
                                                                                 Map<T, B> blocks,
-                                                                                BlockTypeResTransformer<T> modifier, ResourceLocation... jsonsLocations) {
+                                                                                BlockTypeResTransformer<T> modifier, Identifier... jsonsLocations) {
         List<StaticResource> original = Arrays.stream(jsonsLocations).map(s -> StaticResource.getOrLog(manager, s)).toList();
 
         blocks.forEach((wood, value) -> {
             if (ModEntriesConfigs.isEntryEnabled(wood, value)) {
-                ResourceLocation blockId = Utils.getID(value);
+                Identifier blockId = Utils.getID(value);
                 for (var res : original) {
                     TaskRunnerWithFailureCollection.active().runSafely("block resource", () -> blockId + " (" + res.location + ")", () -> {
                         StaticResource newRes = modifier.transform(res, blockId, wood);
@@ -281,20 +281,20 @@ public class ResourcesUtils {
      */
     public static <B extends Item, T extends BlockType> void addBlocksRecipes(String modId, ResourceManager manager, ResourceSink pack,
                                                                               Map<T, B> blocks, String baseRecipe, T fromType) {
-        addBlocksRecipes(manager, pack, blocks, ResourceLocation.fromNamespaceAndPath(modId, baseRecipe), fromType, 0);
+        addBlocksRecipes(manager, pack, blocks, Identifier.fromNamespaceAndPath(modId, baseRecipe), fromType, 0);
     }
 
     public static <B extends Item, T extends BlockType> void addBlocksRecipes(ResourceManager manager, ResourceSink sink,
-                                                                              Map<T, B> items, ResourceLocation baseRecipe, T fromType,
+                                                                              Map<T, B> items, Identifier baseRecipe, T fromType,
                                                                               int index) {
         Recipe<?> template = RPUtils.readRecipe(manager, baseRecipe);
         items.forEach((blockType, i) -> {
 
             if (ModEntriesConfigs.isEntryEnabled(blockType, i)) {
-                ResourceLocation itemId = Utils.getID(i);
+                Identifier itemId = Utils.getID(i);
                 TaskRunnerWithFailureCollection.active().runSafely("recipe", () -> itemId + " (" + baseRecipe + ")", () -> {
                     //check for disabled ones. Will actually crash if its null since vanilla recipe builder expects a non-null one
-                    ResourceLocation blockId = RecipeBuilder.getDefaultRecipeId(i);
+                    Identifier blockId = RecipeBuilder.getDefaultRecipeId(i);
                     String baseRecipePath = baseRecipe.getPath();
 
                     String modifiedRecipePath = baseRecipePath.substring(baseRecipePath.lastIndexOf("/") + 1).replace(fromType.getTypeName(), blockType.getTypeName());
@@ -305,7 +305,7 @@ public class ResourcesUtils {
 
                     // matches() ensure the last word, [a-z]_[a-z] is not one word, CASE: lightman's currency
                     if (!blockId.toString().equals(newId) && newId.matches("\\w+:\\w+/\\w+/\\w+_\\w+")) {
-                        sink.addBlockTypeSwapRecipe(manager, baseRecipe, fromType, blockType, ResourceLocation.parse(newId));
+                        sink.addBlockTypeSwapRecipe(manager, baseRecipe, fromType, blockType, Identifier.parse(newId));
                     }
                     else {
                         sink.addBlockTypeSwapRecipe(manager, baseRecipe, fromType, blockType, blockId);
@@ -357,7 +357,7 @@ public class ResourcesUtils {
     public static String convertItemIDinText(String text, BlockType fromType, BlockType toType) {
         Matcher matcher = RES_PATTERN.matcher(text);
         return matcher.replaceAll(m -> {
-            var item = BuiltInRegistries.ITEM.getOptional(ResourceLocation.tryParse(m.group(1)));
+            var item = BuiltInRegistries.ITEM.getOptional(Identifier.tryParse(m.group(1)));
             return item.map(value -> {
                 Item newItem = BlockType.changeItemType(value, fromType, toType);
 

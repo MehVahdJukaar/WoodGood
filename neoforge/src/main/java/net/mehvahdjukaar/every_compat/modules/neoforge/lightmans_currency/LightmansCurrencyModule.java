@@ -11,7 +11,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
@@ -49,7 +49,7 @@ public class LightmansCurrencyModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(LCTags.Blocks.SAFE_INTERACTABLE, Registries.BLOCK)
                 .addTag(LCTags.Blocks.AUCTION_STAND, Registries.BLOCK)
-                .addTag(ResourceLocation.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
+                .addTag(Identifier.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .addTag(LCTags.Items.AUCTION_STAND, Registries.ITEM)
                 .setTab(extraOrMachine)
                 .addRecipe(modRes("auction_stand/oak"))
@@ -71,8 +71,8 @@ public class LightmansCurrencyModule extends EveryCompatModule {
                 .addTag(LCTags.Blocks.SAFE_INTERACTABLE, Registries.BLOCK)
                 .addTag(LCTags.Blocks.OWNER_PROTECTED, Registries.BLOCK)
                 .addTag(LCTags.Blocks.SHELF, Registries.BLOCK)
-                .addTag(ResourceLocation.parse("carryon:block_blacklist"), Registries.BLOCK)
-                .addTag(ResourceLocation.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
+                .addTag(Identifier.parse("carryon:block_blacklist"), Registries.BLOCK)
+                .addTag(Identifier.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .addTag(LCTags.Items.TRADER_SHELF, Registries.ITEM)
                 .addTag(LCTags.Items.TRADER, Registries.ITEM)
                 .addTag(LCTags.Items.TRADER_NORMAL, Registries.ITEM)
@@ -96,8 +96,8 @@ public class LightmansCurrencyModule extends EveryCompatModule {
                 .addTag(LCTags.Blocks.SAFE_INTERACTABLE, Registries.BLOCK)
                 .addTag(LCTags.Blocks.OWNER_PROTECTED, Registries.BLOCK)
                 .addTag(LCTags.Blocks.SHELF_2x2, Registries.BLOCK)
-                .addTag(ResourceLocation.parse("carryon:block_blacklist"), Registries.BLOCK)
-                .addTag(ResourceLocation.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
+                .addTag(Identifier.parse("carryon:block_blacklist"), Registries.BLOCK)
+                .addTag(Identifier.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .addTag(LCTags.Items.TRADER_SHELF_2x2, Registries.ITEM)
                 .addTag(LCTags.Items.TRADER, Registries.ITEM)
                 .addTag(LCTags.Items.TRADER_NORMAL, Registries.ITEM)
@@ -120,8 +120,8 @@ public class LightmansCurrencyModule extends EveryCompatModule {
                 .addTag(BlockTags.DRAGON_IMMUNE, Registries.BLOCK)
                 .addTag(LCTags.Blocks.SAFE_INTERACTABLE, Registries.BLOCK)
                 .addTag(LCTags.Blocks.OWNER_PROTECTED, Registries.BLOCK)
-                .addTag(ResourceLocation.parse("carryon:block_blacklist"), Registries.BLOCK)
-                .addTag(ResourceLocation.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
+                .addTag(Identifier.parse("carryon:block_blacklist"), Registries.BLOCK)
+                .addTag(Identifier.parse("ftbchunks:interact_whitelist"), Registries.BLOCK)
                 .addTag(LCTags.Items.TRADER_SPECIALTY, Registries.ITEM)
                 .addTag(LCTags.Items.TRADER, Registries.ITEM)
                 .addTag(LCTags.Items.TRADER_SPECIALTY_BOOKSHELF, Registries.ITEM)

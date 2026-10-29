@@ -19,7 +19,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
@@ -82,7 +82,7 @@ public class CuriositiesModule extends EveryCompatModule {
     public void createSawmillRecipe(String typeOutput, String typeInput, ResourceSink sink, ResourceManager manager, WoodType newWoodType) {
         String fromBambooType = typeInput.matches("logs?") ? "blocks" : typeInput;
 
-        ResourceLocation recipeLocation = (IsBambooLike(newWoodType))
+        Identifier recipeLocation = (IsBambooLike(newWoodType))
                 ? modRes("fancied_bamboo_" + typeOutput + "_from_bamboo_" + fromBambooType + "_sawing")
                 : modRes("fancied_acacia_" + typeOutput + "_from_acacia_" + typeInput + "_sawing");
 
@@ -111,7 +111,7 @@ public class CuriositiesModule extends EveryCompatModule {
                 }
                 else {
                     isIngredientModified = true;
-                    ResourceLocation newTag = getATagOrCreateANew("logs", "blocks", newWoodType, sink, manager);
+                    Identifier newTag = getATagOrCreateANew("logs", "blocks", newWoodType, sink, manager);
                     newIngredient = Ingredient.of(TagKey.create(Registries.ITEM, newTag));
 
                 }

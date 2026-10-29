@@ -21,7 +21,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -128,7 +128,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
         String childKey = makeRegisteredChildKey(module);
         for (T blockType : types) {
-            ResourceLocation id = makeFullEntryID(module, blockType);
+            Identifier id = makeFullEntryID(module, blockType);
 
             if (module.isEntryAlreadyRegistered(childKey, id, blockType, BuiltInRegistries.BLOCK)) continue;
 
@@ -180,9 +180,9 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
     @Nullable
     private static Block getOptionalBlock(String path, String... namespaces) {
-        ResourceLocation id;
+        Identifier id;
         for (var namespace : namespaces) {
-            id = ResourceLocation.fromNamespaceAndPath(namespace, path);
+            id = Identifier.fromNamespaceAndPath(namespace, path);
             var i = BuiltInRegistries.BLOCK.getOptional(id);
             if (i.isPresent()) {
                 return i.get();
@@ -205,9 +205,9 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             //for ones that don't have item
             if (i != null) {
                 this.items.put(blockType, i);
-                ResourceLocation id = Utils.getID(value);
+                Identifier id = Utils.getID(value);
                 if (id.toString().equals("minecraft:air")) {
-                    ResourceLocation expectedName = makeFullEntryID(module, blockType);
+                    Identifier expectedName = makeFullEntryID(module, blockType);
                     throw new UnsupportedOperationException("Attempted to register a Item of " + blockType.getTranslationKey() + " with an EntrySetId: " + childKey + ". " +
                             "This means that the block with expected ID: " + expectedName + " does not have an registry ID assigned");
                 }
@@ -245,7 +245,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     @Override
     public void generateLootTables(SimpleModule module, ResourceManager manager, ResourceSink sink) {
         if (lootMode == LootTableMode.COPY_FROM_PARENT) {
-            ResourceLocation reg = Utils.getID(getBaseBlock());
+            Identifier reg = Utils.getID(getBaseBlock());
             ResourcesUtils.addBlockResources(manager, sink, blocks,
                     makeLootTableTransformer(module, manager),
                     ResType.BLOCK_LOOT_TABLES.getPath(reg));
@@ -354,7 +354,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         }
 
         public <H extends BlockEntity> Builder<T, B> addTile(String idTile) {
-            BlockEntityType<?> entityType = BuiltInRegistries.BLOCK_ENTITY_TYPE.getOptional(ResourceLocation.parse(idTile))
+            BlockEntityType<?> entityType = BuiltInRegistries.BLOCK_ENTITY_TYPE.getOptional(Identifier.parse(idTile))
                     .orElseThrow(() -> new NoSuchElementException("BlockEntityType's ID: " + idTile + " not found! ID must be wrong!"));
 
             this.tileHolder = new ExistingTileHolder<>(() -> entityType);
@@ -420,7 +420,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
 
         /// Include models/block files so it can be generated - Only MINECRAFT's
-        public Builder<T, B> includeModelsBlock(ResourceLocation... resourceLocations) {
+        public Builder<T, B> includeModelsBlock(Identifier... resourceLocations) {
             if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
                 this.extraModelConfig = ExtraModelConfiguration.createNew();
             }
@@ -429,7 +429,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         }
 
         /// Include mod's models/block files to a List so it can be generated - REASON: Some files did not get generated
-        public Builder<T, B> includeModelsBlock(boolean includeInGeneration, ResourceLocation... resourceLocations) {
+        public Builder<T, B> includeModelsBlock(boolean includeInGeneration, Identifier... resourceLocations) {
             if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
                 this.extraModelConfig = ExtraModelConfiguration.createNew(includeInGeneration);
             }
@@ -438,7 +438,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         }
 
         /// Include models/item files so it can be generated - Only MINECRAFT's
-        public Builder<T, B> includeModelsItem(ResourceLocation... resourceLocations) {
+        public Builder<T, B> includeModelsItem(Identifier... resourceLocations) {
             if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
                 this.extraModelConfig = ExtraModelConfiguration.createNew();
             }
@@ -447,7 +447,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         }
 
         /// Include mod's models/item files to a List so it can be generated - REASON: Some files did not get generated
-        public Builder<T, B> includeModelsItem(boolean includeInGeneration, ResourceLocation... resourceLocations) {
+        public Builder<T, B> includeModelsItem(boolean includeInGeneration, Identifier... resourceLocations) {
             if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
                 this.extraModelConfig = ExtraModelConfiguration.createNew(includeInGeneration);
             }

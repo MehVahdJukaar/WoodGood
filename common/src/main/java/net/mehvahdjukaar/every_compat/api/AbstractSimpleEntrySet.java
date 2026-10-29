@@ -18,7 +18,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
@@ -42,7 +42,7 @@ import static net.mehvahdjukaar.every_compat.misc.UtilityTag.platformTag;
 //@SuppressWarnings({"unused"})
 public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Block, I extends Item> implements EntrySet<T> {
 
-    protected static final ResourceLocation NO_TAB_MARKER = ResourceLocation.withDefaultNamespace("none");
+    protected static final Identifier NO_TAB_MARKER = Identifier.withDefaultNamespace("none");
 
     public final Map<T, B> blocks = new HashMap<>();
     public final Map<T, I> items = new HashMap<>();
@@ -64,8 +64,8 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     @Nullable
     private final Supplier<Holder<CreativeModeTab>> tab;
     protected final TabAddMode tabMode;
-    protected final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
-    protected final Set<Supplier<ResourceLocation>> recipeLocations = new HashSet<>();
+    protected final Map<Identifier, Set<ResourceKey<?>>> tags = new HashMap<>();
+    protected final Set<Supplier<Identifier>> recipeLocations = new HashSet<>();
     protected final Set<TextureInfo> textures = new HashSet<>();
     @Nullable
     protected final Consumer<BlockTypeResTransformer<T>> extraModelTransform;
@@ -142,7 +142,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     public String getEquivalentBlock(CompatModule module, String oldName, String woodFrom) {
         String wood = parseWoodType(oldName);
         if (wood != null) {
-            var w = BlockSetAPI.getBlockSet(this.getTypeClass()).get(ResourceLocation.fromNamespaceAndPath(woodFrom, wood));
+            var w = BlockSetAPI.getBlockSet(this.getTypeClass()).get(Identifier.fromNamespaceAndPath(woodFrom, wood));
             if (w != null) {
                 return module.shortenedId() + "/" + w.getNamespace() + "/" + oldName;
             }
@@ -337,8 +337,8 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         /// Will be set to false if noTab() is used
         protected boolean addToTab = true;
 
-        protected final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
-        protected final Set<Supplier<ResourceLocation>> recipes = new HashSet<>();
+        protected final Map<Identifier, Set<ResourceKey<?>>> tags = new HashMap<>();
+        protected final Set<Supplier<Identifier>> recipes = new HashSet<>();
         protected final Set<TextureInfo> textures = new HashSet<>();
         protected boolean useMergedPalette;
         @Nullable
@@ -461,11 +461,11 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return (BL) this;
         }
 
-        public BL addTag(ResourceLocation tag, ResourceKey<?> registries) {
+        public BL addTag(Identifier tag, ResourceKey<?> registries) {
             return this.addTag(tag, new ResourceKey[]{registries});
         }
 
-        public BL addTag(ResourceLocation location, ResourceKey<?>... registries) {
+        public BL addTag(Identifier location, ResourceKey<?>... registries) {
             var s = this.tags.computeIfAbsent(location, b -> new HashSet<>());
             s.addAll(List.of(registries));
             return (BL) this;
@@ -481,7 +481,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return (BL) this;
         }
 
-        public BL addRecipe(ResourceLocation resourceLocation) {
+        public BL addRecipe(Identifier resourceLocation) {
             this.recipes.add(() -> resourceLocation);
             return (BL) this;
         }
@@ -498,72 +498,72 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return (BL) this;
         }
 
-        public BL addTexture(ResourceLocation resourceLocation) {
+        public BL addTexture(Identifier resourceLocation) {
             return addTexture(TextureInfo.of(resourceLocation));
         }
 
-        public BL addTexture(ResourceLocation resourceLocation, PaletteStrategy palette) {
+        public BL addTexture(Identifier resourceLocation, PaletteStrategy palette) {
             return addTexture(TextureInfo.of(resourceLocation)
                     .setPalette(palette));
         }
 
-        public BL addNonAnimatedTexture(ResourceLocation textureLocation) {
+        public BL addNonAnimatedTexture(Identifier textureLocation) {
             return addTexture(TextureInfo.of(textureLocation)
                     .noAnimation());
         }
 
-        public BL addNonAnimatedTextureM(ResourceLocation textureLocation, ResourceLocation maskLocation) {
+        public BL addNonAnimatedTextureM(Identifier textureLocation, Identifier maskLocation) {
             return addTexture(TextureInfo.of(textureLocation)
                     .mask(maskLocation)
                     .noAnimation());
         }
 
-        public BL addTextureM(ResourceLocation textureLocation, ResourceLocation maskLocation) {
+        public BL addTextureM(Identifier textureLocation, Identifier maskLocation) {
             return addTexture(TextureInfo.of(textureLocation)
                     .mask(maskLocation));
         }
 
-        public BL addTextureM(ResourceLocation textureLocation, ResourceLocation maskLocation, ResourceLocation overlayLocation) {
+        public BL addTextureM(Identifier textureLocation, Identifier maskLocation, Identifier overlayLocation) {
             return addTexture(TextureInfo.of(textureLocation)
                     .mask(maskLocation)
                     .overlay(overlayLocation));
         }
 
-        public BL addTextureM(ResourceLocation textureLocation, ResourceLocation maskLocation, PaletteStrategy palette) {
+        public BL addTextureM(Identifier textureLocation, Identifier maskLocation, PaletteStrategy palette) {
             return addTexture(TextureInfo.of(textureLocation)
                     .mask(maskLocation)
                     .setPalette(palette));
         }
 
-        public BL addTextureM(ResourceLocation textureLocation, ResourceLocation maskLocation, ResourceLocation overlayLocation, PaletteStrategy palette) {
+        public BL addTextureM(Identifier textureLocation, Identifier maskLocation, Identifier overlayLocation, PaletteStrategy palette) {
             return addTexture(TextureInfo.of(textureLocation)
                     .mask(maskLocation)
                     .overlay(overlayLocation)
                     .setPalette(palette));
         }
 
-        /// Custom Texture Path is for placing the texture in the correct ResourceLocation
-        public BL addTextureC(ResourceLocation textureLocation, String customTexturePath) {
+        /// Custom Texture Path is for placing the texture in the correct Identifier
+        public BL addTextureC(Identifier textureLocation, String customTexturePath) {
             return addTexture(TextureInfo.of(textureLocation, customTexturePath));
         }
 
-        public BL addTextureC(ResourceLocation textureLocation, PaletteStrategy palette, String customTexturePath) {
+        public BL addTextureC(Identifier textureLocation, PaletteStrategy palette, String customTexturePath) {
             return addTexture(TextureInfo.of(textureLocation, customTexturePath).setPalette(palette));
         }
 
-        public BL addTextureMC(ResourceLocation textureLocation, ResourceLocation maskLocation, PaletteStrategy palette, String customTexturePath) {
+        public BL addTextureMC(Identifier textureLocation, Identifier maskLocation, PaletteStrategy palette, String customTexturePath) {
             return addTexture(TextureInfo.of(textureLocation, customTexturePath)
                     .mask(maskLocation)
                     .setPalette(palette));
         }
 
         /// Copy the texture as it is to EC's Resources
-        public BL copyTexture(ResourceLocation textureLocation) {
+        public BL copyTexture(Identifier textureLocation) {
             return addTexture(TextureInfo.of(textureLocation).copyTexture());
         }
 
         // adds a texture with automatic masking. Experimental
-//        public BL addTextureAutoM(ResourceLocation textureLocation) {
+//        public BL addTextureAutoM(Identifier textureLocation) {
 //            return addTexture(TextureInfo.of(textureLocation)
 //                    .autoMask());
 //        }
@@ -624,7 +624,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     }
 
 
-    protected @NotNull ResourceLocation makeFullEntryID(SimpleModule module, T blockType) {
+    protected @NotNull Identifier makeFullEntryID(SimpleModule module, T blockType) {
         String name = makeEntryName(blockType);
         String fullName = module.shortenedId() + "/" + blockType.getNamespace() + "/" + name;
         return module.makeMyRes(fullName);

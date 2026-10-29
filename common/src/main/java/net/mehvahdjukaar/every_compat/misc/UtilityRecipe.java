@@ -7,7 +7,7 @@ import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.level.block.Block;
 
@@ -22,8 +22,8 @@ public class UtilityRecipe {
     /**
      * Create Stonecutting Recipe that use tag as an ingredient
      */
-    public static void stonecuttingWithTagRecipe(Block output, ResourceLocation recipeLoc, ResourceLocation tagResLoc,
-                                                 ResourceLocation newRecipeLoc, ResourceSink sink, ResourceManager manager) {
+    public static void stonecuttingWithTagRecipe(Block output, Identifier recipeLoc, Identifier tagResLoc,
+                                                 Identifier newRecipeLoc, ResourceSink sink, ResourceManager manager) {
         if (Objects.nonNull(output)) {
             try (InputStream recipeStream = manager.getResource(recipeLoc)
                     .orElseThrow(() -> new FileNotFoundException(recipeLoc.toString())).open()) {
@@ -45,7 +45,7 @@ public class UtilityRecipe {
     /**
      * Create Recipe that use tag as an ingredient. Note the recipe has more than 1 tag
      */
-    public static void createRecipeWithTag(ResourceLocation recipeLoc, ResourceLocation newRecipeLoc,
+    public static void createRecipeWithTag(Identifier recipeLoc, Identifier newRecipeLoc,
                                            String oldTagIngredient, String newTagIngredient, Object newResult,
                                            ResourceSink sink, ResourceManager manager) {
         if (Objects.nonNull(newResult)) {
@@ -66,7 +66,7 @@ public class UtilityRecipe {
     }
 
     /// Parsing the recipe and modifying elements
-    public static void parseAndModifyRecipe(Object object, String oldIngredient, String newIngredien, String newOutput, ResourceLocation recipeId) {
+    public static void parseAndModifyRecipe(Object object, String oldIngredient, String newIngredien, String newOutput, Identifier recipeId) {
 
         if (object instanceof JsonObject jsonObject) {
             for (String key : jsonObject.keySet()) {

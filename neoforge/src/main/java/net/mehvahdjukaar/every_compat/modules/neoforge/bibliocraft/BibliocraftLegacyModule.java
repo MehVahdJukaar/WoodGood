@@ -17,7 +17,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
@@ -42,7 +42,7 @@ public class BibliocraftLegacyModule extends EveryCompatModule {
 
     public BibliocraftLegacyModule(String modId) {
         super(modId, "bcl");
-        ResourceLocation tab = modRes(modId);
+        Identifier tab = modRes(modId);
 
         bookcase = SimpleEntrySet.builder(WoodType.class, "bookcase",
                         getModBlock("oak_bookcase"), () -> VanillaWoodTypes.OAK,

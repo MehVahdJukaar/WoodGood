@@ -16,7 +16,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.CreativeModeTab;
@@ -141,9 +141,9 @@ public class WilderWildModule extends EveryCompatModule {
         executor.accept((manager, sink) -> {
             forEachSafely("hollowed log recipe", hollow_logs.blocks, (wood, block) -> {
                 // Variables
-                ResourceLocation recipeLoc = ResType.RECIPES.getPath("wilderwild:oak_planks_from_hollowed");
-                ResourceLocation newRecipeLoc = EveryCompat.res(wood.getTypeName() + "_planks_from_hollowed");
-                ResourceLocation tagRLoc = EveryCompat.res(shortenedId() + "/" + wood.getNamespace() + "/" + "hollowed_" +
+                Identifier recipeLoc = ResType.RECIPES.getPath("wilderwild:oak_planks_from_hollowed");
+                Identifier newRecipeLoc = EveryCompat.res(wood.getTypeName() + "_planks_from_hollowed");
+                Identifier tagRLoc = EveryCompat.res(shortenedId() + "/" + wood.getNamespace() + "/" + "hollowed_" +
                         wood.getTypeName() + "_logs");
 
 // TAGS ================================================================================================

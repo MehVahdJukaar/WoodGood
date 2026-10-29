@@ -209,12 +209,12 @@ public class EveryCompatForge extends EveryCompatCommon {
     @SubscribeEvent
     public void onRemap(MissingMappingsEvent event) {
         for (var mapping : event.getMappings(Registries.BLOCK_ENTITY_TYPE, EveryCompat.MOD_ID)) {
-            ResourceLocation key = mapping.getKey();
+            Identifier key = mapping.getKey();
             String path = key.getPath();
             forAllModules(m -> {
                 if (path.startsWith(m.shortenedId() + "_")) {
                     String newPath = path.substring((m.shortenedId() + "_").length());
-                    ResourceLocation newId = ResourceLocation.fromNamespaceAndPath(m.getModId(), newPath);
+                    Identifier newId = Identifier.fromNamespaceAndPath(m.getModId(), newPath);
                     Optional<BlockEntityType<?>> optional = BuiltInRegistries.BLOCK_ENTITY_TYPE.getOptional(newId);
                     optional.ifPresent(mapping::remap);
                 }

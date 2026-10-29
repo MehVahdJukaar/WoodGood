@@ -2,7 +2,7 @@ package net.mehvahdjukaar.every_compat.misc;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,8 +10,8 @@ import java.util.Set;
 public class ModelWarningSuppressor {
 
     public static int missingTextures;
-    public static final Set<ResourceLocation> missingVariantBlockstates = new HashSet<>();
-    public static final Set<ResourceLocation> unloadableModels = new HashSet<>();
+    public static final Set<Identifier> missingVariantBlockstates = new HashSet<>();
+    public static final Set<Identifier> unloadableModels = new HashSet<>();
 
     public static void reset() {
         missingTextures = 0;

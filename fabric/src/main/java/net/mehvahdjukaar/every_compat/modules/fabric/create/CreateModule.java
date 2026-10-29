@@ -5,7 +5,7 @@ import com.simibubi.create.content.decoration.palettes.WindowBlock;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Blocks;
 
 // SUPPORT: v0.5.1+
@@ -16,7 +16,7 @@ public class CreateModule extends EveryCompatModule {
 
     public CreateModule(String modId) {
         super(modId, "c");
-        ResourceLocation tab = modRes("palettes");
+        Identifier tab = modRes("palettes");
 
 /*
         windows = SimpleEntrySet.builder(WoodType.class, "window",

@@ -39,7 +39,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
@@ -98,7 +98,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTag(BlockTags.ENCHANTMENT_POWER_PROVIDER, Registries.BLOCK)
                 .addTag(Tags.Blocks.BOOKSHELVES, Registries.BLOCK)
                 .addTag(Tags.Items.BOOKSHELVES, Registries.ITEM)
-                .addTag(ResourceLocation.parse("blueprint:wooden_bookshelves"), Registries.BLOCK, Registries.ITEM)
+                .addTag(Identifier.parse("blueprint:wooden_bookshelves"), Registries.BLOCK, Registries.ITEM)
                 .setTab(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .defaultRecipe()
@@ -122,7 +122,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(Tags.Blocks.BOOKSHELVES, Registries.BLOCK)
                 .addTag(Tags.Items.BOOKSHELVES, Registries.ITEM)
-                .addTag(ResourceLocation.parse("blueprint:wooden_chiseled_bookshelves"), Registries.BLOCK, Registries.ITEM)
+                .addTag(Identifier.parse("blueprint:wooden_chiseled_bookshelves"), Registries.BLOCK, Registries.ITEM)
                 .setTab(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .defaultRecipe()
@@ -157,8 +157,8 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTexture(EveryCompat.res("block/spruce_ladder"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
-                .addTag(ResourceLocation.parse("quark:ladders"), Registries.BLOCK, Registries.ITEM)
-                .addTag(ResourceLocation.parse("blueprint:wooden_ladders"), Registries.BLOCK, Registries.ITEM)
+                .addTag(Identifier.parse("quark:ladders"), Registries.BLOCK, Registries.ITEM)
+                .addTag(Identifier.parse("blueprint:wooden_ladders"), Registries.BLOCK, Registries.ITEM)
                 .setTab(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .defaultRecipe()
@@ -179,7 +179,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTexture(EveryCompat.res("block/spruce_beehive_end"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.BEEHIVES, Registries.BLOCK)
-                .addTag(ResourceLocation.parse("blueprint:wooden_beehives"), Registries.BLOCK, Registries.ITEM)
+                .addTag(Identifier.parse("blueprint:wooden_beehives"), Registries.BLOCK, Registries.ITEM)
                 .setTab(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .defaultRecipe()
@@ -195,9 +195,9 @@ public class WoodworksModule extends EveryCompatModule {
                 .addCondition(woodType -> !woodType.isBambooLike())
                 .addTile(abwwChestBlockEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(ResourceLocation.parse("blueprint:wooden_chests"), Registries.BLOCK, Registries.ITEM)
-                .addTag(ResourceLocation.parse("quark:revertable_chests"), Registries.ITEM)
-                .addTag(ResourceLocation.parse("quark:boatable_chests"), Registries.ITEM)
+                .addTag(Identifier.parse("blueprint:wooden_chests"), Registries.BLOCK, Registries.ITEM)
+                .addTag(Identifier.parse("quark:revertable_chests"), Registries.ITEM)
+                .addTag(Identifier.parse("quark:boatable_chests"), Registries.ITEM)
                 .setTab(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .defaultRecipe()
@@ -214,7 +214,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .addCondition(woodType -> !woodType.isBambooLike())
                 .addTile(abwwTrappedBlockEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(ResourceLocation.parse("blueprint:wooden_trapped_chests"), Registries.BLOCK, Registries.ITEM)
+                .addTag(Identifier.parse("blueprint:wooden_trapped_chests"), Registries.BLOCK, Registries.ITEM)
                 .setTab(tab)
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .defaultRecipe()
@@ -242,9 +242,9 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTag(Tags.Blocks.CHESTS_WOODEN, Registries.BLOCK)
                 .addTag(Tags.Items.CHESTS, Registries.ITEM)
                 .addTag(Tags.Items.CHESTS_WOODEN, Registries.ITEM)
-                .addTag(ResourceLocation.parse("blueprint:wooden_chests"), Registries.ITEM, Registries.BLOCK)
-                .addTag(ResourceLocation.parse("quark:revertable_chests"), Registries.ITEM)
-                .addTag(ResourceLocation.parse("quark:boatable_chests"), Registries.ITEM)
+                .addTag(Identifier.parse("blueprint:wooden_chests"), Registries.ITEM, Registries.BLOCK)
+                .addTag(Identifier.parse("quark:revertable_chests"), Registries.ITEM)
+                .addTag(Identifier.parse("quark:boatable_chests"), Registries.ITEM)
                 .setTab(tab)
                 .defaultRecipe()
                 .addCustomItem((w, block, properties) -> new CompatClosetItem(block, new Item.Properties()))
@@ -270,7 +270,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTag(Tags.Blocks.CHESTS, Registries.BLOCK)
                 .addTag(Tags.Blocks.CHESTS_WOODEN, Registries.BLOCK)
                 .addTag(Tags.Blocks.CHESTS_TRAPPED, Registries.BLOCK)
-                .addTag(ResourceLocation.parse("blueprint:wooden_trapped_chests"), Registries.BLOCK, Registries.ITEM)
+                .addTag(Identifier.parse("blueprint:wooden_trapped_chests"), Registries.BLOCK, Registries.ITEM)
                 .addTag(Tags.Items.CHESTS, Registries.ITEM)
                 .addTag(Tags.Items.CHESTS_WOODEN, Registries.ITEM)
                 .addTag(Tags.Items.CHESTS_TRAPPED, Registries.ITEM)
@@ -351,7 +351,7 @@ public class WoodworksModule extends EveryCompatModule {
                 // The generation of ladders get skipped due to some mods already have ladders and will be used as an alt
                 Item getLadder = ladders.items.get(wood);
                 Item ladder = (getLadder != null) ? getLadder : BuiltInRegistries.ITEM.get(
-                        ResourceLocation.fromNamespaceAndPath(wood.getNamespace(), wood.getTypeName() +"_ladder"));
+                        Identifier.fromNamespaceAndPath(wood.getNamespace(), wood.getTypeName() +"_ladder"));
 
                 // sawmill recipes - from LOGS
                 createSawmillRecipe(PLANKS, "logs", wood.getItemOfThis(PLANKS), sink, manager, wood);
@@ -382,7 +382,7 @@ public class WoodworksModule extends EveryCompatModule {
 
         String fromBambooType = typeInput.matches("logs") ? "blocks" : typeInput;
 
-        ResourceLocation recipeLocation = (IsBambooLike(newWoodType))
+        Identifier recipeLocation = (IsBambooLike(newWoodType))
                 ? modRes("bamboo_" + typeOutput + "_from_bamboo_" + fromBambooType + "_sawing")
                 : modRes("acacia_" + typeOutput + "_from_acacia_" + typeInput + "_sawing");
 
@@ -411,7 +411,7 @@ public class WoodworksModule extends EveryCompatModule {
                 }
                 else {
                     isIngredientModified = true;
-                    ResourceLocation newTag = getATagOrCreateANew("logs", "blocks", newWoodType, sink, manager);
+                    Identifier newTag = getATagOrCreateANew("logs", "blocks", newWoodType, sink, manager);
                     newIngredient = Ingredient.of(TagKey.create(Registries.ITEM, newTag));
 
                 }

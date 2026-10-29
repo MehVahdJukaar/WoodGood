@@ -14,7 +14,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
@@ -34,7 +34,7 @@ public class JustARaftModule extends EveryCompatModule {
 
     public JustARaftModule(String modId) {
         super(modId, "jar");
-        ResourceLocation tab = modRes("tab");
+        Identifier tab = modRes("tab");
 
         rafts = ItemOnlyEntrySet.builder(WoodType.class, "raft",
                         getModItem("oak_raft"), () -> VanillaWoodTypes.OAK,
@@ -66,7 +66,7 @@ public class JustARaftModule extends EveryCompatModule {
     public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
         super.addDynamicServerResources(executor);
         executor.accept((manager, sink) -> {
-            ResourceLocation recipeLoc = ResType.RECIPES.getPath(modRes("oak_raft"));
+            Identifier recipeLoc = ResType.RECIPES.getPath(modRes("oak_raft"));
 
             rafts.items.forEach((wood, item) -> {
                 try (InputStream recipeStrem = manager.getResource(recipeLoc)

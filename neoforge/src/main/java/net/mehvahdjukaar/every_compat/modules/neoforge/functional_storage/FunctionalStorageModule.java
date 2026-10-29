@@ -19,7 +19,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -44,7 +44,7 @@ public class FunctionalStorageModule extends EveryCompatModule {
 
     public FunctionalStorageModule(String modId) {
         super(modId, "fs");
-        ResourceLocation tab = modRes("main");
+        Identifier tab = modRes("main");
 
         drawer_1 = SimpleEntrySet.builder(WoodType.class, "1",
                         getModBlock("spruce_1", DrawerBlock.class), () -> VanillaWoodTypes.SPRUCE,

@@ -9,7 +9,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.*;
 import net.yirmiri.excessive_building.block.DecorativeShelfBlock;
@@ -40,7 +40,7 @@ public class ExcessiveBuildingModule extends EveryCompatModule {
 
     public ExcessiveBuildingModule(String modId) {
         super(modId, "eb");
-        ResourceLocation tab = modRes(modId);
+        Identifier tab = modRes(modId);
 
 //!! OAK
         vertical_stairs = SimpleEntrySet.builder(WoodType.class, "vertical_stairs",

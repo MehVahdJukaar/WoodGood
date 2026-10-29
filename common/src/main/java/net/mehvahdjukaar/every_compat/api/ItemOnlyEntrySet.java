@@ -14,7 +14,7 @@ import net.mehvahdjukaar.moonlight.api.set.BlockTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -78,7 +78,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
         BlockTypeRegistry<T> typeRegistry = BlockSetAPI.getTypeRegistry(this.type);
         String childKey = makeRegisteredChildKey(module);
         for (T blockType : Objects.requireNonNull(typeRegistry).getValues()) {
-            ResourceLocation id = makeFullEntryID(module, blockType);
+            Identifier id = makeFullEntryID(module, blockType);
 
             if (module.isEntryAlreadyRegistered(childKey, id, blockType, BuiltInRegistries.ITEM)) continue;
 
@@ -129,9 +129,9 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
 
     @Nullable
     private static Item getOptionalItem(String path, String... namespaces) {
-        ResourceLocation id;
+        Identifier id;
         for (var n : namespaces) {
-            id = ResourceLocation.fromNamespaceAndPath(n, path);
+            id = Identifier.fromNamespaceAndPath(n, path);
             var i = BuiltInRegistries.ITEM.getOptional(id);
             if (i.isPresent()) {
                 return i.get();
@@ -210,7 +210,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
         }
 
         /// Include models/item files so it can be generated - Only MINECRAFT's
-        public Builder<T, I> includeModelsItem(ResourceLocation... itemModels) {
+        public Builder<T, I> includeModelsItem(Identifier... itemModels) {
             if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
                 this.extraModelConfig = ExtraModelConfiguration.createNew();
             }
@@ -219,7 +219,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
         }
 
         /// Include mod's models/item files to a List so it can be generated - REASON: Some files did not get generated
-        public Builder<T, I> includeModelsItem(boolean includeInGeneration, ResourceLocation... resourceLocations) {
+        public Builder<T, I> includeModelsItem(boolean includeInGeneration, Identifier... resourceLocations) {
             if (this.extraModelConfig == ExtraModelConfiguration.EMPTY) {
                 this.extraModelConfig = ExtraModelConfiguration.createNew(includeInGeneration);
             }

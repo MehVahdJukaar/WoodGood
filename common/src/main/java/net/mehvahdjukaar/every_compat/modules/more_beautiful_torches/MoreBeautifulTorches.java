@@ -12,7 +12,7 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.level.block.*;
 
@@ -46,7 +46,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
 
     public MoreBeautifulTorches(String modId) {
         super(modId, "mbt");
-        ResourceLocation tab = (PlatHelper.Platform.FABRIC.isFabric())
+        Identifier tab = (PlatHelper.Platform.FABRIC.isFabric())
                 ? modRes("goldenfoods_tab")
                 : modRes("morebeautifultorches_tab");
 
@@ -55,7 +55,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                         woodType -> new WallTorchBlock(ParticleTypes.FLAME, Utils.copyPropertySafe(Blocks.WALL_TORCH))
                 )
                 .addTextureM(modRes("block/oak_log_torch"), EveryCompat.res("block/common_torch_m"))
-                .addTag(ResourceLocation.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
+                .addTag(Identifier.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
                 .noTab()
                 .noItem()
                 .setRenderType(RenderLayer.CUTOUT)
@@ -67,7 +67,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                         woodType -> new TorchBlock(ParticleTypes.FLAME, Utils.copyPropertySafe(Blocks.TORCH))
                 )
                 //TEXTURES: wall_torch
-                .addTag(ResourceLocation.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
+                .addTag(Identifier.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
                 .setTab(getTab(tab))
                 .defaultRecipe()
                 .addCustomItem((w, b, p) -> new StandingAndWallBlockItem(b, log_wall_torch.blocks.get(w), p, Direction.DOWN))
@@ -80,7 +80,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                         woodType -> new WallTorchBlock(ParticleTypes.SOUL_FIRE_FLAME, Utils.copyPropertySafe(Blocks.SOUL_WALL_TORCH))
                 )
                 .setRenderType(RenderLayer.CUTOUT)
-                .addTag(ResourceLocation.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
+                .addTag(Identifier.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
                 .addTextureM(modRes("block/oak_log_soul_torch"), EveryCompat.res("block/common_torch_m"))
                 .noTab()
                 .noItem()
@@ -92,7 +92,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                         woodType -> new TorchBlock(ParticleTypes.SOUL_FIRE_FLAME, Utils.copyPropertySafe(Blocks.SOUL_TORCH))
                 )
                 //TEXTURES: soul_wall_torch
-                .addTag(ResourceLocation.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
+                .addTag(Identifier.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
                 .setTab(getTab(tab))
                 .defaultRecipe()
                 .addCustomItem((w, b, p) -> new StandingAndWallBlockItem(b, log_soul_wall_torch.blocks.get(w), p, Direction.DOWN))
@@ -130,7 +130,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                         woodType -> new WallTorchBlock(ParticleTypes.FLAME, Utils.copyPropertySafe(Blocks.WALL_TORCH))
                 )
                 .addTextureM(modRes("block/oak_planks_torch"), EveryCompat.res("block/common_torch_m"))
-                .addTag(ResourceLocation.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
+                .addTag(Identifier.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
                 .noTab()
                 .noItem()
                 .setRenderType(RenderLayer.CUTOUT)
@@ -142,7 +142,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                         woodType -> new TorchBlock(ParticleTypes.FLAME, Utils.copyPropertySafe(Blocks.TORCH))
                 )
                 //TEXTURES: planks_wall_torch
-                .addTag(ResourceLocation.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
+                .addTag(Identifier.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
                 .setTab(getTab(tab))
                 .defaultRecipe()
                 .addCustomItem((s, b, p) -> new StandingAndWallBlockItem(b, planks_wall_torch.blocks.get(s), p, Direction.DOWN))
@@ -155,7 +155,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                         woodType -> new WallTorchBlock(ParticleTypes.SOUL_FIRE_FLAME, Utils.copyPropertySafe(Blocks.SOUL_WALL_TORCH))
                 )
                 .addTextureM(modRes("block/oak_planks_soul_torch"), EveryCompat.res("block/common_torch_m"))
-                .addTag(ResourceLocation.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
+                .addTag(Identifier.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
                 .noTab()
                 .noItem()
                 .setRenderType(RenderLayer.CUTOUT)
@@ -167,7 +167,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                         woodType -> new TorchBlock(ParticleTypes.SOUL_FIRE_FLAME, Utils.copyPropertySafe(Blocks.SOUL_TORCH))
                 )
                 //TEXTURES: planks_soul_wall_torch
-                .addTag(ResourceLocation.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
+                .addTag(Identifier.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
                 .setTab(getTab(tab))
                 .defaultRecipe()
                 .addCustomItem((s, b, p) -> new StandingAndWallBlockItem(b, planks_soul_wall_torch.blocks.get(s), p, Direction.DOWN))
@@ -206,7 +206,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTextureM(modRes("block/stripped_oak_log_torch"), EveryCompat.res("block/common_torch_m"), PaletteStrategies.STRIPPED_LOG_TOP_STANDARD)
-                .addTag(ResourceLocation.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
+                .addTag(Identifier.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
                 .noTab()
                 .noItem()
                 .setRenderType(RenderLayer.CUTOUT)
@@ -219,7 +219,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                 )
                 //TEXTURES: stripped_wall_torch
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
-                .addTag(ResourceLocation.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
+                .addTag(Identifier.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
                 .setTab(getTab(tab))
                 .defaultRecipe()
                 .addCustomItem((s, b, p) -> new StandingAndWallBlockItem(b, stripped_wall_torch.blocks.get(s), p, Direction.DOWN))
@@ -233,7 +233,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTextureM(modRes("block/stripped_oak_log_soul_torch"), EveryCompat.res("block/common_torch_m"), PaletteStrategies.STRIPPED_LOG_TOP_STANDARD)
-                .addTag(ResourceLocation.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
+                .addTag(Identifier.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
                 .noTab()
                 .noItem()
                 .setRenderType(RenderLayer.CUTOUT)
@@ -246,7 +246,7 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                 )
                 //TEXTURES: stripped_soul_wall_torch
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
-                .addTag(ResourceLocation.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
+                .addTag(Identifier.parse("dangerclose:torch_burn_danger"), Registries.BLOCK)
                 .setTab(getTab(tab))
                 .defaultRecipe()
                 .addCustomItem((s, b, p) -> new StandingAndWallBlockItem(b, stripped_soul_wall_torch.blocks.get(s), p, Direction.DOWN))

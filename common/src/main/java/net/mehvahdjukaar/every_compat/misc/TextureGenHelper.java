@@ -16,7 +16,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.api.util.math.colors.RGBColor;
 import net.mehvahdjukaar.moonlight.core.misc.McMetaFile;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -44,19 +44,19 @@ public class TextureGenHelper {
                 RPUtils.findFirstBlockTextureLocation(manager, mainChildBlock))) {
 //            Palette oakPlanksPalette = Palette.fromImage(oakPlanksTexture);
 
-            Map<ResourceLocation, Respriter> respriters = new HashMap<>();
-            Map<ResourceLocation, TextureImage> partialRespriters = new HashMap<>();
+            Map<Identifier, Respriter> respriters = new HashMap<>();
+            Map<Identifier, TextureImage> partialRespriters = new HashMap<>();
             Palette globalPalette = Palette.empty();
 
-            Multimap<ResourceLocation, TextureInfo> infoPerTextures = ArrayListMultimap.create();
+            Multimap<Identifier, TextureInfo> infoPerTextures = ArrayListMultimap.create();
             TaskRunnerWithFailureCollection failures = TaskRunnerWithFailureCollection.active();
 
             /// Adding multiple textures from one block into Respriter without/with mask & infoPerTextures
             for (TextureInfo textureInfo : textureInfos) {
-                ResourceLocation textureId = textureInfo.texture();
+                Identifier textureId = textureInfo.texture();
 
                 try {
-                    ResourceLocation maskId = textureInfo.mask();
+                    Identifier maskId = textureInfo.mask();
                     TextureImage main = TextureImage.open(manager, textureId);
 
                     infoPerTextures.put(textureId, textureInfo);
@@ -107,12 +107,12 @@ public class TextureGenHelper {
             for (var entry : entries.entrySet()) {
                 ItemLike block = entry.getValue();
                 T blockType = entry.getKey();
-                ResourceLocation blockId = Utils.getID(block);
+                Identifier blockId = Utils.getID(block);
 
                 failures.runSafely("block texture", blockId::toString, () -> {
                     /// Creating new Path to add the new textures via the resources
                     for (var respriterSet : respriters.entrySet()) {
-                        ResourceLocation oldTextureId = respriterSet.getKey();
+                        Identifier oldTextureId = respriterSet.getKey();
                         String baseOldPath = oldTextureId.getPath();
 
                         String newPath = BlockTypeResTransformer.replaceTypeNoNamespace(baseOldPath, blockType, blockId, baseType.getTypeName());
@@ -133,7 +133,7 @@ public class TextureGenHelper {
                                     throw new RuntimeException("This should not happen. A palette of size 0 was found");
                                 }
 
-                                ResourceLocation newId;
+                                Identifier newId;
                                 /// Creating a new Id for the texture
                                 if (info.customTexturePath() != null) {
                                     String textureOldPath = info.customTexturePath();
@@ -145,7 +145,7 @@ public class TextureGenHelper {
                                 } else if (info.keepNamespace()) {
                                     newId = oldTextureId.withPath(newPath);
                                 } else { /// DEFAULT
-                                    newId = ResourceLocation.fromNamespaceAndPath(blockId.getNamespace(), newPath);
+                                    newId = Identifier.fromNamespaceAndPath(blockId.getNamespace(), newPath);
                                 }
 
                                 if (newId.getPath().isEmpty()) {
@@ -153,7 +153,7 @@ public class TextureGenHelper {
                                     return null;
                                 }
 
-                                ResourceLocation finalNewId = newId;
+                                Identifier finalNewId = newId;
                                 sink.addTextureIfNotPresent(manager, newId, () -> {
                                     Respriter respriter = respriterSet.getValue();
                                     TextureImage img = (info.noAnimation()) ? respriter.recolor(targetPalette) : respriter.recolorWithAnimation(targetPalette, targetAnimation);
@@ -175,7 +175,7 @@ public class TextureGenHelper {
 
     //post process some textures.
     @SuppressWarnings("UnusedReturnValue")
-    private static <T extends BlockType> TextureImage postProcessSpecialTexture(T blockType, ResourceLocation newId, ResourceManager manager,
+    private static <T extends BlockType> TextureImage postProcessSpecialTexture(T blockType, Identifier newId, ResourceManager manager,
                                                                                 TextureImage texture, TextureInfo textureInfo) {
         if (blockType.getClass() == WoodType.class) {
             CompatSpritesHelper.maybePostProcessWoodTexture((WoodType) blockType, newId, manager, texture, textureInfo);
@@ -183,7 +183,7 @@ public class TextureGenHelper {
         return texture;
     }
 
-    private static void getAndApplyOverlay(TextureImage image, ResourceLocation overlayLocation, ResourceManager manager) {
+    private static void getAndApplyOverlay(TextureImage image, Identifier overlayLocation, ResourceManager manager) {
         try (TextureImage overlayTexture = TextureImage.open(manager, overlayLocation)) {
             TextureOps.applyOverlay(image, overlayTexture);
         } catch (Exception e) {

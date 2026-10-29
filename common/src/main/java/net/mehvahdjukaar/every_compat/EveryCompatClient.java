@@ -20,7 +20,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -98,7 +98,7 @@ public class EveryCompatClient {
     }
 
     public static <B extends Block> void registerRenderType(B b, BlockType bt, Object type) {
-        if (bt.id.equals(ResourceLocation.tryParse("rats:pirat"))) {
+        if (bt.id.equals(Identifier.tryParse("rats:pirat"))) {
             type = RenderLayer.TRANSLUCENT;
         }
         if (type == null) return;

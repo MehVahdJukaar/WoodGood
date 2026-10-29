@@ -9,7 +9,7 @@ import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
 
@@ -19,7 +19,7 @@ public class BotanyPotsHelper {
 
     public static void cropQuarkHedgeRecipe(QuarkModule module, Item input, Item output, ResourceSink sink, ResourceManager manager, LeavesType leaves) {
 
-        ResourceLocation recipeLocation = EveryCompat.res("template_recipes/botanypots/crop/leaves_from_quark_hedge_crop.json"); // get Recipe JSON
+        Identifier recipeLocation = EveryCompat.res("template_recipes/botanypots/crop/leaves_from_quark_hedge_crop.json"); // get Recipe JSON
         JsonObject recipe = null;
 
         try (InputStream recipeStream = manager.getResource(recipeLocation).orElseThrow().open()) {

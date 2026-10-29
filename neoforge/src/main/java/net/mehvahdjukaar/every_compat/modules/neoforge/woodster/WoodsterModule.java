@@ -9,7 +9,7 @@ import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ChiseledBookShelfBlock;
@@ -25,7 +25,7 @@ public class WoodsterModule extends EveryCompatModule {
 
     public WoodsterModule(String modId) {
         super(modId, "wdst");
-        ResourceLocation tab = modRes(modId);
+        Identifier tab = modRes(modId);
 
         chiseled_books = SimpleEntrySet.builder(WoodType.class, "chiseled_bookshelf",
                         getModBlock("dark_oak_chiseled_bookshelf"), () -> VanillaWoodTypes.DARK_OAK,
@@ -58,7 +58,7 @@ public class WoodsterModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .addTag(BlockTags.FALL_DAMAGE_RESETTING, Registries.BLOCK)
-                .addTag(ResourceLocation.parse("quill:ladders"), Registries.BLOCK)
+                .addTag(Identifier.parse("quill:ladders"), Registries.BLOCK)
                 .setTab(getTab(tab))
                 .defaultRecipe()
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)

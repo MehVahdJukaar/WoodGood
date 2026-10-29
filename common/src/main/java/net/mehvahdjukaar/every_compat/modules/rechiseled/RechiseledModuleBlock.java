@@ -12,7 +12,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
@@ -564,7 +564,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
                             chiseling_recipe.add("entries", entriesArray);
 
                             // Adding to resources
-                            ResourceLocation resLoc = EveryCompat.res("chiseling_recipes/" + woodType.getAppendableId());
+                            Identifier resLoc = EveryCompat.res("chiseling_recipes/" + woodType.getAppendableId());
                             if (!entriesArray.isEmpty()) sink.addJson(resLoc, chiseling_recipe, ResType.JSON);
 
                         })

@@ -21,7 +21,7 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
@@ -103,7 +103,7 @@ public class QuarkModule extends EveryCompatModule {
                         EveryCompat.res("block/acacia_bookshelf_m"),
                         BOOKSHELF_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(ResourceLocation.parse("c:bookshelves"), Registries.BLOCK, Registries.ITEM)
+                .addTag(Identifier.parse("c:bookshelves"), Registries.BLOCK, Registries.ITEM)
                 .setTab(getTab(tab))
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addRecipe(modRes("building/crafting/bookshelves/acacia_bookshelf"))
@@ -294,7 +294,7 @@ public class QuarkModule extends EveryCompatModule {
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
-                .addTag(ResourceLocation.parse("mynethersdelight:resurgent_soil_plant"), Registries.BLOCK)
+                .addTag(Identifier.parse("mynethersdelight:resurgent_soil_plant"), Registries.BLOCK)
                 .setTab(getTab(tab))
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addRecipe(modRes("building/crafting/leafcarpet/oak_leaf_carpet"))
@@ -457,7 +457,7 @@ public class QuarkModule extends EveryCompatModule {
                     .replace("[TAG]", newTag)
                     .replace("[HEDGE]", Utils.getID(hedge).toString());
 
-            // Adding the finished recipe to ResourceLocation
+            // Adding the finished recipe to Identifier
             sink.addBytes(EveryCompat.res(leavesType.createPathWith(shortenedId(), "hedge")),
                     newRecipe.getBytes(),
                     ResType.RECIPES);
@@ -494,7 +494,7 @@ public class QuarkModule extends EveryCompatModule {
                     .replace("[SLAB]", Utils.getID(Objects.requireNonNull(woodType.getBlockOfThis(SLAB))).toString())
                     .replace("[VERTICAL_SLAB]", Utils.getID(vertSlab).toString());
 
-            // Adding the finished recipe to ResourceLocation
+            // Adding the finished recipe to Identifier
             sink.addBytes(EveryCompat.res(woodType.createPathWith(shortenedId(), "vertical_slab_revert")),
                     newRecipe.getBytes(), ResType.RECIPES);
         }

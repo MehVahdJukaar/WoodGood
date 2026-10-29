@@ -2,7 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.neoforge.excessive_building;
 /*
 
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 //SUPPORT: //!! NOT AVAILABLE
 // DIFFERENCE: The classes for blocks are not same in FABRIC & FORGE
@@ -26,7 +26,7 @@ public class ExcessiveBuildingModule extends EveryCompatModule {
 
     public ExcessiveBuildingModule(String modId) {
         super(modId, "eb");
-        ResourceLocation tab = modRes(modId);
+        Identifier tab = modRes(modId);
 /*
 
 //!! OAK

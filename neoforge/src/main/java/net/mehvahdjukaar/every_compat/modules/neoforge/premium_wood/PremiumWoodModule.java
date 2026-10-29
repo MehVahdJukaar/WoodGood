@@ -11,7 +11,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -28,7 +28,7 @@ public class PremiumWoodModule extends EveryCompatModule {
     public PremiumWoodModule(String modId) {
         super(modId, "pw");
         ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
-        var tiger = WoodTypeRegistry.INSTANCE.makeFutureHolder(ResourceLocation.parse("premium_wood:tiger"));
+        var tiger = WoodTypeRegistry.INSTANCE.makeFutureHolder(Identifier.parse("premium_wood:tiger"));
 
         craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
                         getModBlock("tiger_crafting_table"), tiger,

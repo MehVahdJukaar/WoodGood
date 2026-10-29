@@ -12,7 +12,7 @@ import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
 import org.jetbrains.annotations.Nullable;
@@ -26,12 +26,12 @@ import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.BOAT
 public class UtilityTexture {
 
     /**
-     * modify the original Path of Texture's ResourceLocation by replacing oldTypeName with new WoodType's name
+     * modify the original Path of Texture's Identifier by replacing oldTypeName with new WoodType's name
      * @param prefix use either block/ or item/
      * @return block/shortenedId/namespace/baseTexturePath<br>
      *         item/shortenedId/namespace/baseTexturePath
     **/
-    public static ResourceLocation modifyTexturePath(String baseTexturePath, String prefix, String shortenedId, String oldTypeName,
+    public static Identifier modifyTexturePath(String baseTexturePath, String prefix, String shortenedId, String oldTypeName,
                                            BlockType blockType) {
         String infix =  shortenedId +"/"+ blockType.getNamespace() + "/";
         return EveryCompat.res(prefix + infix + baseTexturePath.substring(prefix.length()).replace(oldTypeName, blockType.getTypeName()));
@@ -43,8 +43,8 @@ public class UtilityTexture {
      * @param logMaskLoc exclude the logs part from being recolored
      * @param planksMaskLoc exclude the planks part from being recolored
     **/
-    public static void generateLogTexture(ResourceLocation baseTextureLoc,
-                                          ResourceLocation logMaskLoc, ResourceLocation planksMaskLoc,
+    public static void generateLogTexture(Identifier baseTextureLoc,
+                                          Identifier logMaskLoc, Identifier planksMaskLoc,
                                           String shortenedId, String oldTypeName,
                                           PaletteStrategy logPaletteStrategy,
                                           ResourceSink sink, ResourceManager manager) {
@@ -57,7 +57,7 @@ public class UtilityTexture {
             for (WoodType woodType : WoodTypeRegistry.INSTANCE) {
                 if (isKnownVanillaWood(woodType)) continue;
 
-                ResourceLocation newResLoc = modifyTexturePath(baseTextureLoc.getPath(), "block/", shortenedId, oldTypeName, woodType);
+                Identifier newResLoc = modifyTexturePath(baseTextureLoc.getPath(), "block/", shortenedId, oldTypeName, woodType);
 
                 // Adding to the resource
                 sink.addTextureIfNotPresent(manager, newResLoc, () -> {
@@ -89,8 +89,8 @@ public class UtilityTexture {
     }
 
     /// Apply log's texture over the baseTexture's log parts & swap out the planks' part
-    public static void applyLogOverlayAndswapPlanks(ResourceLocation baseTextureLoc,
-                                                    ResourceLocation logMaskLoc, ResourceLocation planksMaskLoc,
+    public static void applyLogOverlayAndswapPlanks(Identifier baseTextureLoc,
+                                                    Identifier logMaskLoc, Identifier planksMaskLoc,
                                                     String shortenedId, String oldTypeName,
                                                     ResourceSink sink, ResourceManager manager) {
         try (
@@ -102,7 +102,7 @@ public class UtilityTexture {
             for (WoodType woodType : WoodTypeRegistry.INSTANCE) {
                 if (isKnownVanillaWood(woodType)) continue;
 
-                ResourceLocation newPath = modifyTexturePath(baseTextureLoc.getPath(), "block/", shortenedId, oldTypeName, woodType);
+                Identifier newPath = modifyTexturePath(baseTextureLoc.getPath(), "block/", shortenedId, oldTypeName, woodType);
 
                 // Recoloring the baseTexture
                 try (
@@ -147,8 +147,8 @@ public class UtilityTexture {
     }
 
     /// Apply log's texture over the baseTexture's log parts
-    public static void applyLogOverlay(ResourceLocation baseTextureLoc,
-                                       ResourceLocation maskLoc,
+    public static void applyLogOverlay(Identifier baseTextureLoc,
+                                       Identifier maskLoc,
                                        String shortenedId, String oldTypeName,
                                        ResourceSink sink, ResourceManager manager) {
         try (
@@ -158,7 +158,7 @@ public class UtilityTexture {
             for (WoodType woodType : WoodTypeRegistry.INSTANCE) {
                 if (isKnownVanillaWood(woodType)) continue;
 
-                ResourceLocation newResLoc = modifyTexturePath(baseTextureLoc.getPath(), "block/", shortenedId, oldTypeName, woodType);
+                Identifier newResLoc = modifyTexturePath(baseTextureLoc.getPath(), "block/", shortenedId, oldTypeName, woodType);
 
                 try (
                         TextureImage logTexture = TextureImage.open(manager,
@@ -223,7 +223,7 @@ public class UtilityTexture {
     //      ┌──────────────────────────────────────────────────────────┐
     //      │                       BOAT TEXTURE                       │
     //      └──────────────────────────────────────────────────────────┘
-    public static void addBoatTextureEntity(ItemOnlyEntrySet<WoodType, Item> boats, ResourceLocation baseTextureLoc, ResourceLocation maskTextureLoc,
+    public static void addBoatTextureEntity(ItemOnlyEntrySet<WoodType, Item> boats, Identifier baseTextureLoc, Identifier maskTextureLoc,
                                             ResourceManager manager, ResourceSink sink) {
 
         /// Entity Textures
@@ -236,7 +236,7 @@ public class UtilityTexture {
             //unfortunately theres no programmatic way to get all boat textures of a given boat. also because entities might be for multiple wod types. we can only generate them from scratc
             boats.items.forEach((woodType, boat) -> {
                 //NOTE: folderDepth is set to 3 so it can include entity/
-                ResourceLocation newResLoc = EveryCompat.res(
+                Identifier newResLoc = EveryCompat.res(
                         BlockTypeResTransformer.replaceFullGenericType(baseTextureLoc.getPath(), woodType, Utils.getID(boat), "oak", null, 2)
                 );
 
@@ -261,7 +261,7 @@ public class UtilityTexture {
         }
     }
 
-    public static void addBoatTextureItem(ItemOnlyEntrySet<WoodType, Item> boats, ResourceLocation baseTextureLoc, ResourceLocation maskTextureLoc,
+    public static void addBoatTextureItem(ItemOnlyEntrySet<WoodType, Item> boats, Identifier baseTextureLoc, Identifier maskTextureLoc,
                                           ResourceManager manager, ResourceSink sink) {
         /// Item Textures
         try (TextureImage baseImage = TextureImage.open(manager, baseTextureLoc)
@@ -273,7 +273,7 @@ public class UtilityTexture {
 
             boats.items.forEach((woodType, boat) -> {
 
-                ResourceLocation newResLoc = EveryCompat.res(
+                Identifier newResLoc = EveryCompat.res(
                         BlockTypeResTransformer.replaceTypeNoNamespace(baseTextureLoc.getPath(), woodType, Utils.getID(boat), "oak")
                 );
 

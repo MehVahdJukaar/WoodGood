@@ -16,7 +16,7 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.leaves.VanillaLeavesTypes;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
@@ -47,7 +47,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
 
     public ChippedLeavesModule(String modId) {
         super(modId);
-        ResourceLocation tab = modRes(TAB_PATH);
+        Identifier tab = modRes(TAB_PATH);
         setBlockType("Leaves");
 
         apple = SimpleEntrySet.builder(LeavesType.class, "leaves", "apple",
@@ -368,7 +368,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
     }
 
     /// Generate textures using opposite of standard texture generation
-    public void generateLeaves(ResourceLocation targetResLoc, ResourceSink sink, ResourceManager manager) {
+    public void generateLeaves(Identifier targetResLoc, ResourceSink sink, ResourceManager manager) {
         for (LeavesType leavesType : LeavesTypeRegistry.INSTANCE) {
 
             if (isKnownVanillaLeaves(leavesType) || leavesType.getNamespace().equals("chipped")) continue;
@@ -379,7 +379,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
                     TextureImage baseTexture = TextureImage.open(manager, targetResLoc) // Using chipped's leaves' texture instead of leaves' texture
             ) {
 
-                ResourceLocation newResLoc = UtilityTexture.modifyTexturePath(targetResLoc.getPath(), "block/", shortenedId(), "oak", leavesType);
+                Identifier newResLoc = UtilityTexture.modifyTexturePath(targetResLoc.getPath(), "block/", shortenedId(), "oak", leavesType);
 
                 int height = leavesTexture.imageHeight();
                 int width = leavesTexture.imageWidth();
@@ -410,7 +410,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
     }
 
     /// Generate top & overlay for frosted_leaves
-    public void generateFrostedLeaves(ResourceLocation targetResLoc, ResourceSink sink, ResourceManager manager) {
+    public void generateFrostedLeaves(Identifier targetResLoc, ResourceSink sink, ResourceManager manager) {
         for (LeavesType leavesType : LeavesTypeRegistry.INSTANCE) {
 
             if (isKnownVanillaLeaves(leavesType) || leavesType.getNamespace().equals("chipped")) continue;
@@ -428,10 +428,10 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
 
                 // block/ch/namespace/oak_leaves/frosted_oak_leaves_top
                 topPath = topPath.replace("oak", leavesType.getTypeName());
-                ResourceLocation topResLoc = EveryCompat.res(topPath);
+                Identifier topResLoc = EveryCompat.res(topPath);
 
                 // block/ch/namespace/oak_leaves/frosted_oak_overlay
-                ResourceLocation overlayResLoc = EveryCompat.res(topPath.replace("leaves_top", "overlay"));
+                Identifier overlayResLoc = EveryCompat.res(topPath.replace("leaves_top", "overlay"));
 
                 int height = leavesTexture.imageHeight();
                 int width = leavesTexture.imageWidth();

@@ -26,7 +26,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.ItemStack;
@@ -60,7 +60,7 @@ public class ValhelsiaStructuresModule extends EveryCompatModule {
 
     public ValhelsiaStructuresModule(String modId) {
         super(modId, "vs");
-        ResourceLocation tab = modRes("main");
+        Identifier tab = modRes("main");
 
         strippedPosts = SimpleEntrySet.builder(WoodType.class, "post", "stripped",
                         getModBlock("stripped_oak_post"), () -> VanillaWoodTypes.OAK,
@@ -181,14 +181,14 @@ public class ValhelsiaStructuresModule extends EveryCompatModule {
             try {
                 //!! oak_posts
                 posts.blocks.forEach((w, block) -> {
-                    ResourceLocation id = Utils.getID(block);
+                    Identifier id = Utils.getID(block);
 
                     try (TextureImage logTexture = TextureImage.open(manager,
                             RPUtils.findFirstBlockTextureLocation(manager, w.log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
                          TextureImage topTexture = TextureImage.open(manager,
                                  RPUtils.findFirstBlockTextureLocation(manager, w.log, CompatSpritesHelper.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
 
-                        ResourceLocation newId = EveryCompat.res(
+                        Identifier newId = EveryCompat.res(
                                 BlockTypeResTransformer.replaceTypeNoNamespace("block/post/oak_post", w, id, "oak")
                         );
                         var newTexture = logTexture.makeCopy();
@@ -207,14 +207,14 @@ public class ValhelsiaStructuresModule extends EveryCompatModule {
 
                 //!! stripped_oak_posts
                 strippedPosts.blocks.forEach((w, block) -> {
-                    ResourceLocation id = Utils.getID(block);
+                    Identifier id = Utils.getID(block);
 
                     try (TextureImage logTexture = TextureImage.open(manager,
                             RPUtils.findFirstBlockTextureLocation(manager, w.getBlockOfThis("stripped_log"), CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
                          TextureImage topTexture = TextureImage.open(manager,
                                  RPUtils.findFirstBlockTextureLocation(manager, w.getBlockOfThis("stripped_log"), CompatSpritesHelper.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
 
-                        ResourceLocation newResLoc = EveryCompat.res(
+                        Identifier newResLoc = EveryCompat.res(
                                 BlockTypeResTransformer.replaceTypeNoNamespace("block/post/stripped_oak_post", w, id, "oak")
                         );
 
@@ -248,7 +248,7 @@ public class ValhelsiaStructuresModule extends EveryCompatModule {
             ) {
 
                 bundledPosts.blocks.forEach((w, block) -> {
-                    ResourceLocation resLoc = ResourceLocation.parse(w.createFullIdWith(EveryCompat.MOD_ID, "block", shortenedId(),
+                    Identifier resLoc = Identifier.parse(w.createFullIdWith(EveryCompat.MOD_ID, "block", shortenedId(),
                             "bundled_posts/bundled_", "posts"));
 
                     createTexture(resLoc, w.log, logInnerMask, logOuterMask, BPTopInnerMask, BPTopOuterMask,
@@ -258,7 +258,7 @@ public class ValhelsiaStructuresModule extends EveryCompatModule {
                 });
 
                 bundledStrippedPosts.blocks.forEach((w, block) -> {
-                    ResourceLocation resLoc = ResourceLocation.parse(w.createFullIdWith(EveryCompat.MOD_ID, "block", shortenedId(),
+                    Identifier resLoc = Identifier.parse(w.createFullIdWith(EveryCompat.MOD_ID, "block", shortenedId(),
                             "bundled_posts/bundled_stripped_", "posts"));
 
                     createTexture(resLoc, w.getBlockOfThis("stripped_log"), logInnerMask, logOuterMask,
@@ -274,9 +274,9 @@ public class ValhelsiaStructuresModule extends EveryCompatModule {
         });
     }
 
-    private void createTexture(ResourceLocation resLoc, Block getLogBlock, TextureImage logInnerMask, TextureImage logOuterMask,
+    private void createTexture(Identifier resLoc, Block getLogBlock, TextureImage logInnerMask, TextureImage logOuterMask,
                                TextureImage BPTopInnerMask, TextureImage BPTopOuterMask,
-                               ResourceLocation getLogSide, ResourceLocation getLogTop,
+                               Identifier getLogSide, Identifier getLogTop,
                                ResourceSink sink, ResourceManager manager, Block block
     ) {
         try (TextureImage logSide_texture = TextureImage.open(manager,
@@ -361,7 +361,7 @@ public class ValhelsiaStructuresModule extends EveryCompatModule {
 
         @Override
         public BlockState getToolModifiedState(BlockState state, UseOnContext context, ItemAbility itemAbility, boolean simulate) {
-            ResourceLocation location = BuiltInRegistries.BLOCK.getKey(this);
+            Identifier location = BuiltInRegistries.BLOCK.getKey(this);
 
             if (!context.getItemInHand().canPerformAction(itemAbility) || Objects.requireNonNull(location).getPath().contains("stripped")) {
                 return null;
@@ -389,7 +389,7 @@ public class ValhelsiaStructuresModule extends EveryCompatModule {
 
         @Override
         public BlockState getToolModifiedState(BlockState state, UseOnContext context, ItemAbility itemAbility, boolean simulate) {
-            ResourceLocation location = BuiltInRegistries.BLOCK.getKey(this);
+            Identifier location = BuiltInRegistries.BLOCK.getKey(this);
 
             if (!context.getItemInHand().canPerformAction(itemAbility) || Objects.requireNonNull(location).getPath().contains("stripped")) {
                 return null;

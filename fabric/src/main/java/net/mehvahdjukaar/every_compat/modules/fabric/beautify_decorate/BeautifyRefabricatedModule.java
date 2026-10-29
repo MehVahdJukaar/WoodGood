@@ -6,7 +6,7 @@ import io.github.suel_ki.beautify.common.block.Trellis;
 import net.mehvahdjukaar.every_compat.modules.beautify.BeautifyModuleAbstract;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 
@@ -18,7 +18,7 @@ public class BeautifyRefabricatedModule extends BeautifyModuleAbstract {
     }
 
     @Override
-    public ResourceLocation getTabKey() {
+    public Identifier getTabKey() {
         return modRes("group");
     }
 

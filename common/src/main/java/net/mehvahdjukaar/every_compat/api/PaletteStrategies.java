@@ -7,7 +7,7 @@ import net.mehvahdjukaar.moonlight.api.resources.textures.SpriteUtils;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -176,7 +176,7 @@ public class PaletteStrategies {
                 try (TextureImage blockTexture = TextureImage.open(m,
                         RPUtils.findFirstBlockTextureLocation(m, block, whichSide))
                 ) {
-                    ResourceLocation textureId = RPUtils.findFirstBlockTextureLocation(m, block, whichSide);
+                    Identifier textureId = RPUtils.findFirstBlockTextureLocation(m, block, whichSide);
 
                     List<Palette> targetPalette = Palette.fromAnimatedImage(blockTexture);
                     if (paletteTransform != null) targetPalette.forEach(paletteTransform);
@@ -187,7 +187,7 @@ public class PaletteStrategies {
             } else { /// default PaletteSupplier: planks
                 try (TextureImage plankTexture = TextureImage.open(m, RPUtils.findFirstBlockTextureLocation(m, block))) {
 
-                    ResourceLocation textureId = RPUtils.findFirstBlockTextureLocation(m, block);
+                    Identifier textureId = RPUtils.findFirstBlockTextureLocation(m, block);
 
                     List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
                     if (paletteTransform != null) targetPalette.forEach(paletteTransform);
@@ -201,7 +201,7 @@ public class PaletteStrategies {
             /// Default PaletteSupplier: planks
             try (TextureImage plankTexture = TextureImage.open(m, RPUtils.findFirstItemTextureLocation(m, item))) {
 
-                ResourceLocation textureId = RPUtils.findFirstItemTextureLocation(m, item);
+                Identifier textureId = RPUtils.findFirstItemTextureLocation(m, item);
 
                 List<Palette> targetPalette = Palette.fromAnimatedImage(plankTexture);
                 if (paletteTransform != null) targetPalette.forEach(paletteTransform);

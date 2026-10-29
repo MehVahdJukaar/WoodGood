@@ -9,7 +9,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
@@ -46,7 +46,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
 
     public DawnOfTimeModule(String modId) {
         super(modId, "dot");
-        ResourceLocation tab = modRes("dot_tab");
+        Identifier tab = modRes("dot_tab");
 
         PLATE = SimpleEntrySet.builder(WoodType.class, "planks_plate",
                         getModBlock("oak_planks_plate"), () -> VanillaWoodTypes.OAK,
@@ -104,7 +104,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
                         w -> new WallBlock(Utils.copyPropertySafe(w.planks))
                 )
                 //TEXTURES: ???
-                .addTag(ResourceLocation.withDefaultNamespace("decoration_blocks/fences_and_walls"), Registries.ITEM)
+                .addTag(Identifier.withDefaultNamespace("decoration_blocks/fences_and_walls"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(ItemTags.WALLS, Registries.ITEM)

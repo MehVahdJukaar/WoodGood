@@ -17,7 +17,7 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -36,8 +36,8 @@ public class SimpleModule extends CompatModule {
         super(modId, shortId, myNamespace);
     }
 
-    public final ResourceLocation makeMyRes(String name) {
-        return ResourceLocation.fromNamespaceAndPath(getMyNamespace(), name);
+    public final Identifier makeMyRes(String name) {
+        return Identifier.fromNamespaceAndPath(getMyNamespace(), name);
     }
 
     @Override
@@ -185,7 +185,7 @@ public class SimpleModule extends CompatModule {
 
 
     //TODO: improve
-    public boolean isEntryAlreadyRegistered(String entrySetId, ResourceLocation blockId, BlockType blockType, Registry<?> registry) {
+    public boolean isEntryAlreadyRegistered(String entrySetId, Identifier blockId, BlockType blockType, Registry<?> registry) {
 
         if (registry.containsKey(blockId)) {
             EveryCompat.crashIfInDev("Attempted to register a block with id: (" + blockType.getClass().getSimpleName()
@@ -221,8 +221,8 @@ public class SimpleModule extends CompatModule {
         /// ========== EXCLUDE ========== \\\
 
         // Discards the supportedBlockName being already in the supportedModId & Vanilla blockType (mod has builtin compat)
-        if (registry.containsKey(ResourceLocation.fromNamespaceAndPath(modId, blockName)) ||
-                registry.containsKey(ResourceLocation.fromNamespaceAndPath(modId, underscoreConvention))) {
+        if (registry.containsKey(Identifier.fromNamespaceAndPath(modId, blockName)) ||
+                registry.containsKey(Identifier.fromNamespaceAndPath(modId, underscoreConvention))) {
             //check for false positives (block types with same names)
             if (WoodTypeRegistry.INSTANCE.get(modRes(blockType.getTypeName())) == null) {
                 return true;
@@ -230,17 +230,17 @@ public class SimpleModule extends CompatModule {
             }
         }
 
-        if (registry.containsKey(ResourceLocation.fromNamespaceAndPath(woodTypeFrom, blockName)))
+        if (registry.containsKey(Identifier.fromNamespaceAndPath(woodTypeFrom, blockName)))
             return true; //REASON: prevent duplicated blocks for now & above is WIP for now
 
         for (var c : EveryCompat.getCompatMods()) {
             String compatModId = c.modId();  //bopcomp : bop->quark, twigs
             //if the wood is from the mod this adds compat for && it supports this block type
             if (c.woodsFrom().contains(woodTypeFrom) && c.blocksFrom().contains(modId)) {
-                if (registry.containsKey(ResourceLocation.fromNamespaceAndPath(compatModId, blockName))) return true;
-                if (registry.containsKey(ResourceLocation.fromNamespaceAndPath(compatModId, slashConvention)))
+                if (registry.containsKey(Identifier.fromNamespaceAndPath(compatModId, blockName))) return true;
+                if (registry.containsKey(Identifier.fromNamespaceAndPath(compatModId, slashConvention)))
                     return true;
-                if (registry.containsKey(ResourceLocation.fromNamespaceAndPath(compatModId, underscoreConvention)))
+                if (registry.containsKey(Identifier.fromNamespaceAndPath(compatModId, underscoreConvention)))
                     return true;
             }
         }

@@ -20,7 +20,7 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.moonlight.api.util.math.colors.HCLColor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
@@ -48,7 +48,7 @@ public class StorageDrawersModule extends EveryCompatModule {
 
     public StorageDrawersModule(String modId) {
         super(modId, "sd");
-        ResourceLocation tab = modRes(ModConstants.MOD_ID);
+        Identifier tab = modRes(ModConstants.MOD_ID);
 
         FULL_DRAWERS_1 = SimpleEntrySet.builder(WoodType.class, "full_drawers_1",
                         getModBlock("oak_full_drawers_1", BlockStandardDrawers.class), () -> VanillaWoodTypes.OAK,

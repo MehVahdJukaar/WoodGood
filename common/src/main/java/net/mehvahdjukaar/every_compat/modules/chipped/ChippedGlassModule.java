@@ -10,7 +10,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.IronBarsBlock;
@@ -46,7 +46,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
 
     public ChippedGlassModule(String modId) {
         super(modId);
-        ResourceLocation tab = modRes(TAB_PATH);
+        Identifier tab = modRes(TAB_PATH);
         setBlockType("Glass");
 
         circleGlass = SimpleEntrySet.builder(WoodType.class, "glass", "circle",
@@ -293,7 +293,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 // using the same glass texture
                 .addTexture(modRes("block/glass_pane/circle_oak_glass_pane_top"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
-                .addTag(ResourceLocation.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
+                .addTag(Identifier.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.BLOCK)
@@ -312,7 +312,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 // using the same glass texture
                 .addTexture(modRes("block/glass_pane/oak_bared_glass_pane_top"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
-                .addTag(ResourceLocation.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
+                .addTag(Identifier.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.BLOCK)
@@ -331,7 +331,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 // using the same glass texture
                 .addTexture(modRes("block/glass_pane/oak_bordered_glass_pane_top"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
-                .addTag(ResourceLocation.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
+                .addTag(Identifier.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.BLOCK)
@@ -350,7 +350,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 // using the same glass texture
                 .addTexture(modRes("block/glass_pane/oak_diamond_bordered_glass_pane_top"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
-                .addTag(ResourceLocation.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
+                .addTag(Identifier.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.BLOCK)
@@ -369,7 +369,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 // using the same glass texture
                 .addTexture(modRes("block/glass_pane/oak_horizontal_lined_glass_pane_top"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
-                .addTag(  ResourceLocation.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
+                .addTag(  Identifier.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.BLOCK)
@@ -388,7 +388,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 // using the same glass texture
                 .addTexture(modRes("block/glass_pane/oak_large_diamond_glass_pane_top"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
-                .addTag(  ResourceLocation.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
+                .addTag(  Identifier.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.BLOCK)
@@ -407,7 +407,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 // using the same glass texture
                 .addTexture(modRes("block/glass_pane/oak_line_bared_glass_pane_top"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
-                .addTag(ResourceLocation.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
+                .addTag(Identifier.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.BLOCK)
@@ -426,7 +426,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 // using the same glass texture
                 .addTexture(modRes("block/glass_pane/oak_ornate_bared_glass_pane_top"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
-                .addTag(ResourceLocation.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
+                .addTag(Identifier.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.BLOCK)
@@ -445,7 +445,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 // using the same glass texture
                 .addTexture(modRes("block/glass_pane/oak_snowflake_glass_pane_top"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
-                .addTag(ResourceLocation.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
+                .addTag(Identifier.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.BLOCK)
@@ -464,7 +464,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 // using the same glass texture
                 .addTexture(modRes("block/glass_pane/oak_woven_glass_pane_top"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
-                .addTag(ResourceLocation.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
+                .addTag(Identifier.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.BLOCK)
@@ -483,7 +483,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
                 // using the same glass texture
                 .addTexture(modRes("block/glass_pane/square_oak_glass_pane_top"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
-                .addTag(ResourceLocation.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
+                .addTag(Identifier.fromNamespaceAndPath("diagonalwindows","non_diagonal_windows"), Registries.BLOCK) //REASON: Due to incompatible model
                 .addTag(modRes("glass_pane"), Registries.BLOCK)
                 .addTag(modRes("glass_pane"), Registries.ITEM)
                 .addTag(UtilityTag.GLASS_PANE_TAG, Registries.BLOCK)

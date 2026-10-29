@@ -20,7 +20,7 @@ import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
@@ -63,8 +63,8 @@ public abstract class EveryCompat {
     private static final Map<CompatModule, Throwable> ERRORED = new HashMap<>();
 
     /// @return everycomp:path
-    public static ResourceLocation res(String path) {
-        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+    public static Identifier res(String path) {
+        return Identifier.fromNamespaceAndPath(MOD_ID, path);
     }
 
     public static void init() {
@@ -148,7 +148,7 @@ public abstract class EveryCompat {
                     if (entrySet instanceof AbstractSimpleEntrySet<?, ?, ?> abstractEntrySet) {
                         Holder<CreativeModeTab> tab = abstractEntrySet.getTab();
                         if (tab != null) {
-                            tab.unwrapKey().orElseThrow(() -> new RuntimeException("The Creative Tab's ResourceLocation is outdated"));
+                            tab.unwrapKey().orElseThrow(() -> new RuntimeException("The Creative Tab's Identifier is outdated"));
                         }
                         else {
                             if (PlatHelper.isDev()) {

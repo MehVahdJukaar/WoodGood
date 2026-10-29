@@ -8,7 +8,7 @@ import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
@@ -40,7 +40,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
 
     public MacawWindowsModuleAbstract(String modId) {
         super(modId, "mcw");
-        ResourceLocation tab = modRes(modId);
+        Identifier tab = modRes(modId);
 
         window = SimpleEntrySet.builder(WoodType.class, "window",
                         getModBlock("oak_window"), () -> VanillaWoodTypes.OAK,

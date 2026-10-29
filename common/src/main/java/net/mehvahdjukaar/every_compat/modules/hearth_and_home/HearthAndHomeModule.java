@@ -12,7 +12,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
@@ -27,7 +27,7 @@ public class HearthAndHomeModule extends EveryCompatModule {
 
     public HearthAndHomeModule(String modId) {
         super(modId, "hnhome");
-        ResourceLocation tab = (PlatHelper.getPlatform().isForge()) ? modRes(HearthAndHome.MOD_ID) : modRes("tab");
+        Identifier tab = (PlatHelper.getPlatform().isForge()) ? modRes(HearthAndHome.MOD_ID) : modRes("tab");
 
         sanded_wood = SimpleEntrySet.builder(WoodType.class, "sanded_wood",
                         getModBlock("oak_sanded_wood"), () -> VanillaWoodTypes.OAK,

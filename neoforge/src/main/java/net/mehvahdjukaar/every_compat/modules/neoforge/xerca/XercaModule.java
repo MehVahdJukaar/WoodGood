@@ -19,7 +19,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -289,7 +289,7 @@ public class XercaModule extends EveryCompatModule {
         super.addDynamicClientResources(executor);
         executor.accept((manager, sink) -> {
             for (WoodType woodType : WoodTypeRegistry.INSTANCE) {
-                ResourceLocation modelLocation = modRes("models/block/carved_wood/carved_dark_oak.json"); // get model JSON
+                Identifier modelLocation = modRes("models/block/carved_wood/carved_dark_oak.json"); // get model JSON
 
                 if (HardcodedBlockType.isKnownVanillaWood(woodType)) continue;
 

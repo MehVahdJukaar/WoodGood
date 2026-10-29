@@ -28,7 +28,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.ItemStack;
@@ -72,7 +72,7 @@ public class RefurbishedFurnitureModule extends EveryCompatModule {
 
     public RefurbishedFurnitureModule(String modId) {
         super(modId, "rfm");
-        ResourceLocation tab = modRes("creative_tab");
+        Identifier tab = modRes("creative_tab");
 
         chairs = SimpleEntrySet.builder(WoodType.class, "chair",
                         getModBlock("oak_chair"), () -> VanillaWoodTypes.OAK,
@@ -470,13 +470,13 @@ public class RefurbishedFurnitureModule extends EveryCompatModule {
     public void onClientSetup() {
         super.onClientSetup();
         darkFans.blocks.forEach((key, value) -> {
-            ResourceLocation res = EveryCompat.res("extra/" + key.getAppendableId() + "_dark_ceiling_fan_blade");
+            Identifier res = EveryCompat.res("extra/" + key.getAppendableId() + "_dark_ceiling_fan_blade");
             CeilingFanBlockEntityRenderer.registerFanBlade(value, () ->
                     ClientHelper.getModel(Minecraft.getInstance().getModelManager(),
                             RenderUtil.getStandaloneModelLocation(res)));
         });
         lightFans.blocks.forEach((key, value) -> {
-            ResourceLocation res = EveryCompat.res("extra/" + key.getAppendableId() + "_light_ceiling_fan_blade");
+            Identifier res = EveryCompat.res("extra/" + key.getAppendableId() + "_light_ceiling_fan_blade");
             CeilingFanBlockEntityRenderer.registerFanBlade(value, () ->
                     ClientHelper.getModel(Minecraft.getInstance().getModelManager(),
                             RenderUtil.getStandaloneModelLocation(res)));

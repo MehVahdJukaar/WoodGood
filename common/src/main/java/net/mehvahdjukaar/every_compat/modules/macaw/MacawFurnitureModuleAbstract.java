@@ -7,7 +7,7 @@ import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -103,7 +103,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
 
     public MacawFurnitureModuleAbstract(String modId) {
         super(modId, "mcfur");
-        ResourceLocation tab =  modRes("furnitures");
+        Identifier tab =  modRes("furnitures");
 
         String entityType = (PlatHelper.getPlatform().isFabric()) ? "box_block" : "furniture_storage";
 

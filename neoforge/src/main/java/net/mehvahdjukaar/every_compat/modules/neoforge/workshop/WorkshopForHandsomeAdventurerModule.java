@@ -17,7 +17,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -35,8 +35,8 @@ import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRI
 
 ///SUPPORT: v1.35.1+
 public class WorkshopForHandsomeAdventurerModule extends EveryCompatModule {
-    private static final ResourceLocation TAG_FORGE_WORKBENCH = ResourceLocation.fromNamespaceAndPath("c", "workbench");
-    private static final ResourceLocation TAG_PACKINGTAPE_BLACKLIST = ResourceLocation.fromNamespaceAndPath("packingtape", "te_blacklist");
+    private static final Identifier TAG_FORGE_WORKBENCH = Identifier.fromNamespaceAndPath("c", "workbench");
+    private static final Identifier TAG_PACKINGTAPE_BLACKLIST = Identifier.fromNamespaceAndPath("packingtape", "te_blacklist");
     public final SimpleEntrySet<WoodType, Block> double_bookshelves, open_double_bookshelves, min_bookshelves, open_min_bookshelves, lantern_bookshelves;
     public final SimpleEntrySet<WoodType, Block> simple_tables, potionshelves1, dual_table_parts_bl, dual_table_parts_br, dual_table_parts_tl, dual_table_parts_tr;
     public final SimpleEntrySet<WoodType, Block> framed_toolracks, pframed_toolracks, double_toolracks, single_toolracks;

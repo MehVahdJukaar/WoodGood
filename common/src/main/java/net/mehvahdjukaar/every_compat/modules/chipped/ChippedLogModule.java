@@ -13,7 +13,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
@@ -62,7 +62,7 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
     public ChippedLogModule(String modId) {
         super(modId);
-        ResourceLocation tab = modRes(TAB_PATH);
+        Identifier tab = modRes(TAB_PATH);
         setBlockType("Log");
 
         BundledLog = SimpleEntrySet.builder(WoodType.class, "log", "bundled",

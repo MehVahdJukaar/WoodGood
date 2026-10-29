@@ -20,7 +20,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -43,7 +43,7 @@ public class BewitchmentModule extends EveryCompatModule {
 
     public BewitchmentModule(String modId) {
         super(modId, "bw");
-        ResourceLocation tab = modRes(Bewitchment.MOD_ID);
+        Identifier tab = modRes(Bewitchment.MOD_ID);
 
         poppet_shelf = SimpleEntrySet.builder(WoodType.class, "poppet_shelf",
                         getModBlock("oak_poppet_shelf"), () -> VanillaWoodTypes.OAK,

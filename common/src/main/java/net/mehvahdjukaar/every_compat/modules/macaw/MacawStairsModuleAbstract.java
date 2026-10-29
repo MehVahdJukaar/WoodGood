@@ -6,7 +6,7 @@ import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -29,7 +29,7 @@ public abstract class MacawStairsModuleAbstract extends EveryCompatModule {
 
     public MacawStairsModuleAbstract(String modId) {
         super(modId, "mws");
-        ResourceLocation tab = modRes(modId);
+        Identifier tab = modRes(modId);
 
         terrace_stairs = SimpleEntrySet.builder(WoodType.class, "terrace_stairs",
                         getModBlock("oak_terrace_stairs"), () -> VanillaWoodTypes.OAK,

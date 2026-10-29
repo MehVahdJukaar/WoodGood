@@ -20,7 +20,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
@@ -132,8 +132,8 @@ public abstract class RegionsUnexploredModuleAbstract extends EveryCompatModule 
                 if (HardcodedBlockType.isKnownVanillaWood(woodType) || woodType.getNamespace().equals("regions_unexplored")) continue;
 
                 //Tagging the planks as ingredient to get painted_planks
-                createAndAddCustomTags(ResourceLocation.withDefaultNamespace("planks"), sink, woodType.planks);
-                createAndAddCustomTags(ResourceLocation.parse("forge:planks"), sink, woodType.planks);
+                createAndAddCustomTags(Identifier.withDefaultNamespace("planks"), sink, woodType.planks);
+                createAndAddCustomTags(Identifier.parse("forge:planks"), sink, woodType.planks);
             }
 
             forEachSafely("branch recipe", branches.blocks, (wt, block) -> {

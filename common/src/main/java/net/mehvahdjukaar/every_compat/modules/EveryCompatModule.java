@@ -6,7 +6,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -38,7 +38,7 @@ public abstract class EveryCompatModule extends SimpleModule {
         return memor(id, BuiltInRegistries.CREATIVE_MODE_TAB);
     }
 
-    protected final Supplier<CreativeModeTab> getTab(ResourceLocation id) {
+    protected final Supplier<CreativeModeTab> getTab(Identifier id) {
         return Suppliers.memoize(() -> BuiltInRegistries.CREATIVE_MODE_TAB.get(id));
     }
 
@@ -68,7 +68,7 @@ public abstract class EveryCompatModule extends SimpleModule {
         return Suppliers.memoize(() -> {
             try {
                 return (id.contains(":"))
-                        ? (T) reg.getOptional(ResourceLocation.parse(id)).orElseThrow()
+                        ? (T) reg.getOptional(Identifier.parse(id)).orElseThrow()
                         : (T) reg.getOptional(modRes(id)).orElseThrow();
             } catch (Throwable e) {
                 throw new IllegalStateException("Could not find \"" + id + "\" in " + reg + ". This likely means that the reigstry entry was renamed in the original mod and EC needs updating. " +

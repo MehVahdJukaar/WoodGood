@@ -9,7 +9,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import twilightforest.block.BanisterBlock;
 import twilightforest.block.HollowLogHorizontal;
@@ -30,7 +30,7 @@ public class TwilightForestModule extends EveryCompatModule {
 
     public TwilightForestModule(String modId) {
         super(modId, "tf");
-        ResourceLocation tab = modRes("blocks");
+        Identifier tab = modRes("blocks");
 
         banisters = SimpleEntrySet.builder(WoodType.class, "banister",
                         getModBlock("oak_banister"), () -> VanillaWoodTypes.OAK,
@@ -59,7 +59,7 @@ public class TwilightForestModule extends EveryCompatModule {
         this.addEntry(hollowLogsHorizontal);
 
 /*        hollowLogsVertical = SimpleEntrySet.builder(WoodType.class, "log_vertical", "hollow",
-                        TFBlocks.HOLLOW_ACACIA_LOG_VERTICAL, () -> WoodTypeRegistry.getValue(ResourceLocation.parse("acacia")),
+                        TFBlocks.HOLLOW_ACACIA_LOG_VERTICAL, () -> WoodTypeRegistry.getValue(Identifier.parse("acacia")),
                         w -> {
                             var id = EveryCompat.res(this.shortenedId() + "/" + w.getVariantId("hollow", true) + "_log_climbable");
                             return new HollowLogVertical(Utils.copyPropertySafe(w.log), makeRegObj(id));
@@ -96,7 +96,7 @@ public class TwilightForestModule extends EveryCompatModule {
             .filter(f -> f.getType().equals(Supplier.class)).findFirst().get();
 
 /*    @NotNull
-    private static<T extends Block> RegistryObject<T> makeRegObj(ResourceLocation id) {
+    private static<T extends Block> RegistryObject<T> makeRegObj(Identifier id) {
         RegistryObject<T> r = new RegistryObject<>(id, ResourceKey.create(Registries.BLOCK, id));
         portingLibBadAPI.setAccessible(true);
         try {

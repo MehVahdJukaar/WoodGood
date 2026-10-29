@@ -11,7 +11,7 @@ import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
 
@@ -47,9 +47,9 @@ public class BuildersDelightModule extends EveryCompatModule {
     @SuppressWarnings("DataFlowIssue") // <- already has null check
     public BuildersDelightModule(String modId) {
         super(modId, "bdl");
-        ResourceLocation tabDeco = modRes("decoration");
-        ResourceLocation tabBlock = modRes("blocks");
-        ResourceLocation tabMater = modRes("materials");
+        Identifier tabDeco = modRes("decoration");
+        Identifier tabBlock = modRes("blocks");
+        Identifier tabMater = modRes("materials");
         //TYPE: ITEM
 /*        FURNITURE_KIT = ItemOnlyEntrySet.builder(WoodType.class, "furniture_kit",
                         getModItem("oak_furniture_kit"), () -> VanillaWoodTypes.OAK,
@@ -71,7 +71,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                 .addTag(modRes("chair"), Registries.ITEM)
                 .setTab(getTab(tabDeco))
                 .addTexture(modRes("block/decoration/seating/oak/oak_chair_1"), PaletteStrategies.PLANKS_LOW_CONTRAST)
-                .addRecipe(ResourceLocation.tryParse("minecraft:oak_chair_1"))
+                .addRecipe(Identifier.tryParse("minecraft:oak_chair_1"))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .addCustomItem((woodType, block, properties) -> new BDBlockItem(block, properties, "chair_1"))
                 .build();
@@ -84,7 +84,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("chair"), Registries.ITEM)
                 .addTexture(modRes("block/decoration/seating/oak/oak_chair_2"), PaletteStrategies.PLANKS_LOW_CONTRAST)
-                .addRecipe(ResourceLocation.tryParse("minecraft:oak_chair_2"))
+                .addRecipe(Identifier.tryParse("minecraft:oak_chair_2"))
                 .setTab(getTab(tabDeco))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "chair_2"))
@@ -102,7 +102,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                 .addTag(modRes("table"), Registries.ITEM)
                 .setTab(getTab(tabDeco))
                 .addTexture(modRes("block/decoration/tables/oak/oak_table_1"))
-                .addRecipe(ResourceLocation.tryParse("minecraft:oak_table_1"))
+                .addRecipe(Identifier.tryParse("minecraft:oak_table_1"))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "table_1"))
                 .build();
@@ -116,7 +116,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                 .addTag(modRes("table"), Registries.ITEM)
                 .setTab(getTab(tabDeco))
                 .addTexture(modRes("block/decoration/tables/oak/oak_table_2"))
-                .addRecipe(ResourceLocation.tryParse("minecraft:oak_table_2"))
+                .addRecipe(Identifier.tryParse("minecraft:oak_table_2"))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "table_2"))
                 .build();
@@ -814,7 +814,7 @@ public class BuildersDelightModule extends EveryCompatModule {
                     // Used in recipe of glass_1, frame_1, & furniture_kit
 //                    planksTags(w, sink, PLANKS_1, PLANKS_2, PLANKS_3, PLANKS_4, PLANKS_5, PLANKS_6, PLANKS_7);
 
-                    ResourceLocation resLoc = EveryCompat.res("items/" + w.getTypeName() + "_planks");
+                    Identifier resLoc = EveryCompat.res("items/" + w.getTypeName() + "_planks");
                     createAndAddCustomTags(resLoc, sink,
                             w.planks,
                             PLANKS_1.blocks.get(w),
@@ -860,7 +860,7 @@ public class BuildersDelightModule extends EveryCompatModule {
             String r = recipe.replace("[result]", Utils.getID(v.getValue()).toString())
                     .replace("[planks]", EveryCompat.MOD_ID + ":" + wood.getTypeName() +"_planks");
 
-                ResourceLocation res = EveryCompat.res("bdl/" + wood.getAppendableId() + "_furniture_kit");
+                Identifier res = EveryCompat.res("bdl/" + wood.getAppendableId() + "_furniture_kit");
                 sink.addBytes(res, r.getBytes(), ResType.RECIPES);
             }
 
@@ -872,7 +872,7 @@ public class BuildersDelightModule extends EveryCompatModule {
         // bdl/namespace/<type>_glass_1;
         String pathBuilder = this.shortenedId() + "/" + wood.getVariantId(baseName,false);
 
-        ResourceLocation recipeLoc = modRes("recipes/oak_"+ baseName + ".json");
+        Identifier recipeLoc = modRes("recipes/oak_"+ baseName + ".json");
         JsonObject recipe;
         try (InputStream recipeStream = manager.getResource(recipeLoc).orElseThrow().open()) {
             recipe = RPUtils.deserializeJson(recipeStream);
@@ -910,7 +910,7 @@ public class BuildersDelightModule extends EveryCompatModule {
         if(vanilla != null) arr.add(Utils.getID(vanilla).toString());
         if (!arr.isEmpty()) {
             JsonObject jo = new JsonObject();
-            ResourceLocation res = EveryCompat.res("chisel/" + w.getVariantId(name) + ".json");
+            Identifier res = EveryCompat.res("chisel/" + w.getVariantId(name) + ".json");
             jo.add("variants", arr);
             sink.addJson(res, jo, ResType.GENERIC);
         }

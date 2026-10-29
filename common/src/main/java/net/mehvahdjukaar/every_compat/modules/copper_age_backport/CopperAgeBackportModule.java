@@ -10,7 +10,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -30,7 +30,7 @@ public class CopperAgeBackportModule extends EveryCompatModule {
         ResourceKey<CreativeModeTab> tab = CreativeModeTabs.FUNCTIONAL_BLOCKS;
 
         shelf = SimpleEntrySet.builder(WoodType.class, "shelf",
-                        () -> BuiltInRegistries.BLOCK.get(ResourceLocation.withDefaultNamespace("oak_shelf")), () -> VanillaWoodTypes.OAK,
+                        () -> BuiltInRegistries.BLOCK.get(Identifier.withDefaultNamespace("oak_shelf")), () -> VanillaWoodTypes.OAK,
                         w -> new ShelfBlock(BlockBehaviour.Properties.of()
                                 .strength(2.0F, 3.0F)
                                 .sound(SoundType.WOOD)
@@ -38,15 +38,15 @@ public class CopperAgeBackportModule extends EveryCompatModule {
                         )
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
-                .addTexture(ResourceLocation.withDefaultNamespace("block/oak_shelf"), PaletteStrategies.STRIPPED_LOG_TOP_STANDARD)
+                .addTexture(Identifier.withDefaultNamespace("block/oak_shelf"), PaletteStrategies.STRIPPED_LOG_TOP_STANDARD)
                 .includeModelsBlock(
-                        ResourceLocation.withDefaultNamespace("block/oak_shelf"),
-                        ResourceLocation.withDefaultNamespace("block/oak_shelf_center"),
-                        ResourceLocation.withDefaultNamespace("block/oak_shelf_inventory"),
-                        ResourceLocation.withDefaultNamespace("block/oak_shelf_left"),
-                        ResourceLocation.withDefaultNamespace("block/oak_shelf_right"),
-                        ResourceLocation.withDefaultNamespace("block/oak_shelf_unconnected"),
-                        ResourceLocation.withDefaultNamespace("block/oak_shelf_unpowered")
+                        Identifier.withDefaultNamespace("block/oak_shelf"),
+                        Identifier.withDefaultNamespace("block/oak_shelf_center"),
+                        Identifier.withDefaultNamespace("block/oak_shelf_inventory"),
+                        Identifier.withDefaultNamespace("block/oak_shelf_left"),
+                        Identifier.withDefaultNamespace("block/oak_shelf_right"),
+                        Identifier.withDefaultNamespace("block/oak_shelf_unconnected"),
+                        Identifier.withDefaultNamespace("block/oak_shelf_unpowered")
                 )
                 // Also modify Blockstates, too
                 .addModelTransform(m ->
@@ -61,10 +61,10 @@ public class CopperAgeBackportModule extends EveryCompatModule {
                 )
                 .addTile(getModTile("minecraft:shelf"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(ResourceLocation.withDefaultNamespace("wooden_shelves"), Registries.BLOCK)
+                .addTag(Identifier.withDefaultNamespace("wooden_shelves"), Registries.BLOCK)
                 .addTag(modRes("wooden_shelves"), Registries.BLOCK)
                 .setTab(getTab(tab))
-                .addRecipe(ResourceLocation.withDefaultNamespace("oak_shelf"))
+                .addRecipe(Identifier.withDefaultNamespace("oak_shelf"))
                 .build();
         this.addEntry(shelf);
 

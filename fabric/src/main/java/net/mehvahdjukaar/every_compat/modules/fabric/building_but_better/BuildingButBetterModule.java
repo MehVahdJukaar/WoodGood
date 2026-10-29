@@ -15,7 +15,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -158,7 +158,7 @@ public class BuildingButBetterModule extends EveryCompatModule {
                 .addTexture(modRes("block/frame/oak_frame"))
                 .addTexture(modRes("block/frame/oak_frame_sticks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(ResourceLocation.fromNamespaceAndPath("create", "movable_empty_collider"), Registries.BLOCK)
+                .addTag(Identifier.fromNamespaceAndPath("create", "movable_empty_collider"), Registries.BLOCK)
                 .addTag(modRes("wooden_blocks"), Registries.BLOCK)
                 .addTag(modRes("frames"), Registries.BLOCK, Registries.ITEM)
                 .setTab(getTab(tab))

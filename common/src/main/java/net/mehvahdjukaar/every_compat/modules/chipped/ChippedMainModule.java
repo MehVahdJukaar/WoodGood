@@ -14,7 +14,7 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.StandingAndWallBlockItem;
@@ -82,7 +82,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
 
     public ChippedMainModule(String modId) {
         super(modId);
-        ResourceLocation tab = modRes(TAB_PATH);
+        Identifier tab = modRes(TAB_PATH);
         setBlockType("General");
 
         mosaicPlanks = SimpleEntrySet.builder(WoodType.class, "planks_mosaic",

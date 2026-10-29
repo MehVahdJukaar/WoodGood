@@ -10,7 +10,7 @@ import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureOps;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.core.misc.McMetaFile;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import org.jetbrains.annotations.Nullable;
 
@@ -38,18 +38,18 @@ public class CompatChestTexture {
      */
     public static boolean copyModProvidedChestTextures(ResourceSink sink, ResourceManager manager,
                                                        String shortenedID, WoodType wood) {
-        List<ResourceLocation> sources = new ArrayList<>();
+        List<Identifier> sources = new ArrayList<>();
         for (String variant : MOD_CHEST_VARIANTS) {
-            ResourceLocation from = ResourceLocation.fromNamespaceAndPath(wood.getNamespace(),
+            Identifier from = Identifier.fromNamespaceAndPath(wood.getNamespace(),
                     "entity/chest/" + wood.getTypeName() + "/" + variant);
-            ResourceLocation textureId = ResType.TEXTURES.getPath(from);
+            Identifier textureId = ResType.TEXTURES.getPath(from);
 
             if (manager.getResource(textureId).isEmpty()) return false;
             sources.add(textureId);
         }
 
         for (int idx = 0; idx < CHEST_TEXTURE_SUFFIXES.length; idx++) {
-            ResourceLocation to = EveryCompat.res("entity/chest/" + shortenedID + "/" +
+            Identifier to = EveryCompat.res("entity/chest/" + shortenedID + "/" +
                     wood.getAppendableId() + CHEST_TEXTURE_SUFFIXES[idx]);
 
             if (sink.alreadyHasTextureAtLocation(manager, to)) continue;
@@ -61,13 +61,13 @@ public class CompatChestTexture {
 
     public static boolean copyHandmadeChestTextures(ResourceSink sink, ResourceManager manager,
                                                     String fromShortenedId, String toShortenedID, WoodType wood) {
-        List<ResourceLocation> sources = new ArrayList<>();
-        List<ResourceLocation> sourcesMCMETA = new ArrayList<>();
+        List<Identifier> sources = new ArrayList<>();
+        List<Identifier> sourcesMCMETA = new ArrayList<>();
         for (String chestTextureSuffix : CHEST_TEXTURE_SUFFIXES) {
-            ResourceLocation from = EveryCompat.res("entity/chest/" + fromShortenedId + "/" +
+            Identifier from = EveryCompat.res("entity/chest/" + fromShortenedId + "/" +
                     wood.getAppendableId() + chestTextureSuffix);
-            ResourceLocation textureId = ResType.TEXTURES.getPath(from);
-            ResourceLocation mcmetaId = ResType.MCMETA.getPath(from);
+            Identifier textureId = ResType.TEXTURES.getPath(from);
+            Identifier mcmetaId = ResType.MCMETA.getPath(from);
 
             if (manager.getResource(textureId).isEmpty()) return false;
             sources.add(textureId);
@@ -75,7 +75,7 @@ public class CompatChestTexture {
         }
 
         for (int idx = 0; idx < CHEST_TEXTURE_SUFFIXES.length; idx++) {
-            ResourceLocation to = EveryCompat.res("entity/chest/" + toShortenedID + "/" +
+            Identifier to = EveryCompat.res("entity/chest/" + toShortenedID + "/" +
                     wood.getAppendableId() + CHEST_TEXTURE_SUFFIXES[idx]);
 
             if (sink.alreadyHasTextureAtLocation(manager, to)) continue;
@@ -87,8 +87,8 @@ public class CompatChestTexture {
 
     public static void generateChestTexture(ResourceSink handler, ResourceManager manager,
                                             String shortenedID, WoodType wood,
-                                            ResourceLocation normalRLoc, ResourceLocation maskRLoc, ResourceLocation overlayRLoc,
-                                            ResourceLocation trappedORLoc,
+                                            Identifier normalRLoc, Identifier maskRLoc, Identifier overlayRLoc,
+                                            Identifier trappedORLoc,
                                             int darkControl
     ) {
         generateChestTexture(handler, manager, shortenedID, wood, normalRLoc, maskRLoc, overlayRLoc, trappedORLoc,
@@ -97,8 +97,8 @@ public class CompatChestTexture {
 
     public static void generateChestTexture(ResourceSink handler, ResourceManager manager,
                                             String shortenedID, WoodType wood,
-                                            ResourceLocation normalRLoc, ResourceLocation maskRLoc, ResourceLocation overlayRLoc,
-                                            ResourceLocation trappedORLoc
+                                            Identifier normalRLoc, Identifier maskRLoc, Identifier overlayRLoc,
+                                            Identifier trappedORLoc
     ) {
         generateChestTexture(handler, manager, shortenedID, wood, normalRLoc, maskRLoc, overlayRLoc, trappedORLoc,
                 0, 0);
@@ -114,15 +114,15 @@ public class CompatChestTexture {
      * </ol>
      */
     public static void generateChestTexture(ResourceSink sink, ResourceManager manager, String shortenedID, WoodType wood,
-                                            ResourceLocation normalRLoc, ResourceLocation maskRLoc, ResourceLocation overlayRLoc,
-                                            ResourceLocation trappedORLoc, int darkControl, int darkestOffset) {
+                                            Identifier normalRLoc, Identifier maskRLoc, Identifier overlayRLoc,
+                                            Identifier trappedORLoc, int darkControl, int darkestOffset) {
         generateChestTexture(sink, manager, shortenedID, wood, normalRLoc, maskRLoc, overlayRLoc, trappedORLoc,
                 darkControl, darkestOffset, "_chest", "_trapped_chest");
     }
 
     public static void generateChestTexture(ResourceSink sink, ResourceManager manager, String shortenedID, WoodType wood,
-                                            ResourceLocation normalRLoc, ResourceLocation maskRLoc, ResourceLocation overlayRLoc,
-                                            ResourceLocation trappedORLoc, int darkControl, int darkestOffset,
+                                            Identifier normalRLoc, Identifier maskRLoc, Identifier overlayRLoc,
+                                            Identifier trappedORLoc, int darkControl, int darkestOffset,
                                             String normalSuffix, String trappedSuffix) {
 
         try (TextureImage texture = TextureImage.open(manager, normalRLoc);
@@ -188,9 +188,9 @@ public class CompatChestTexture {
                 List<Palette> overlayPalette = Palette.fromAnimatedImage(overlay);
 
                 // Generating textures
-                ResourceLocation res = EveryCompat.res(path);
+                Identifier res = EveryCompat.res(path);
                 if (!sink.alreadyHasTextureAtLocation(manager, res)) {
-                    ResourceLocation trappedRes = EveryCompat.res(trapped_path);
+                    Identifier trappedRes = EveryCompat.res(trapped_path);
 
                     createChestTextures(respriterNormal, respriterOverlay, plankTexture.getMcMeta(),
                             plankPalette, overlayPalette, res, trappedRes, trapOverlay, wood, sink);
@@ -206,8 +206,8 @@ public class CompatChestTexture {
 
     private static void createChestTextures(Respriter respriter, Respriter respriterO,
                                             McMetaFile baseMeta, List<Palette> planksPalette,
-                                            List<Palette> overlayPalette, ResourceLocation normalRLoc,
-                                            ResourceLocation trappedRLoc, TextureImage trappedOverlay,
+                                            List<Palette> overlayPalette, Identifier normalRLoc,
+                                            Identifier trappedRLoc, TextureImage trappedOverlay,
                                             WoodType wood, ResourceSink sink) {
 
         try (TextureImage recoloredBase = respriter.recolorWithAnimation(planksPalette, baseMeta);

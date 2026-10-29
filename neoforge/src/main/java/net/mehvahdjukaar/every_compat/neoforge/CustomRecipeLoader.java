@@ -17,13 +17,13 @@ public class CustomRecipeLoader extends SimpleJsonResourceReloadListener {
     public static void onEarlyPackLoad(final IEarlyPackReloadEvent event) {
         var manager = event.getManager();
         //code from simple reload listener
-        Map<ResourceLocation, JsonElement> map = Maps.newHashMap();
+        Map<Identifier, JsonElement> map = Maps.newHashMap();
         String directory = "template_recipes";
         int i = directory.length() + 1;
 
-        for (ResourceLocation resourcelocation : manager.listResources(directory, (s) -> s.endsWith(".json"))) {
+        for (Identifier resourcelocation : manager.listResources(directory, (s) -> s.endsWith(".json"))) {
             String s = resourcelocation.getPath();
-            ResourceLocation location = ResourceLocation.fromNamespaceAndPath(resourcelocation.getNamespace(), s.substring(i, s.length() - PATH_SUFFIX_LENGTH));
+            Identifier location = Identifier.fromNamespaceAndPath(resourcelocation.getNamespace(), s.substring(i, s.length() - PATH_SUFFIX_LENGTH));
             try (Resource resource = manager.getResource(resourcelocation)) {
                 try (InputStream inputstream = resource.getInputStream()) {
                     try (Reader reader = new BufferedReader(new InputStreamReader(inputstream, StandardCharsets.UTF_8))) {
@@ -45,12 +45,12 @@ public class CustomRecipeLoader extends SimpleJsonResourceReloadListener {
         loadRecipes(map);
     }
     @Override
-    protected void apply(Map<ResourceLocation, JsonElement> jsons, ResourceManager pResourceManager, ProfilerFiller pProfiler) {
+    protected void apply(Map<Identifier, JsonElement> jsons, ResourceManager pResourceManager, ProfilerFiller pProfiler) {
         loadRecipes(jsons);
     }
 
     //TODO:fix, this isnt loading anymore
-    private static void loadRecipes(Map<ResourceLocation, JsonElement> jsons) {
+    private static void loadRecipes(Map<Identifier, JsonElement> jsons) {
         int added = 0;
         boolean oldStatus = ServerDynamicResourcesHandler.INSTANCE.getPack().generateDebugResources;
         ServerDynamicResourcesHandler.INSTANCE.getPack().generateDebugResources = true;
@@ -65,7 +65,7 @@ public class CustomRecipeLoader extends SimpleJsonResourceReloadListener {
                             //not adding oak for now //TODO: remove
                             continue;
                         }
-                        ResourceLocation res = EveryCompat.res(w.getAppendableId() + j.getKey().getPath());
+                        Identifier res = EveryCompat.res(w.getAppendableId() + j.getKey().getPath());
 
                         newR = template.createSimilar(WoodTypeRegistry.OAK_TYPE, w, w.planks.asItem(), res.toString());
 

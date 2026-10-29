@@ -16,7 +16,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -52,7 +52,7 @@ public class FurnishModule extends EveryCompatModule {
 
     public FurnishModule(String modId) {
         super(modId, "fur");
-        ResourceLocation tab = modRes(modId);
+        Identifier tab = modRes(modId);
 
         bedside_table = SimpleEntrySet.builder(WoodType.class, "bedside_table",
                         getModBlock("oak_bedside_table"), () -> VanillaWoodTypes.OAK,

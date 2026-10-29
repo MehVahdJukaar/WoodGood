@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
@@ -29,14 +29,14 @@ import static net.mehvahdjukaar.every_compat.modules.neoforge.unusual_furniture.
 @OnlyIn(Dist.CLIENT)
 public class CompatDrawerRenderer implements BlockEntityRenderer<CompatDrawerBlockEntity> {
         private final CustomHierarchicalModel model;
-//        private final ResourceLocation texture;
+//        private final Identifier texture;
 
         public CompatDrawerRenderer(BlockEntityRendererProvider.Context context) {
             super();
             this.model = new CustomHierarchicalModel(context.bakeLayer(Modeljavadrawer.LAYER_LOCATION));
 //            String textureLocation = woodType.createFullIdWith(EveryCompat.MOD_ID, "textures/block", shortenedId, "java_drawer", ".png");
 
-//            this.texture = ResourceLocation.parse(textureLocation);
+//            this.texture = Identifier.parse(textureLocation);
         }
 
         private void updateRenderState(CompatDrawerBlockEntity blockEntity) {
@@ -48,7 +48,7 @@ public class CompatDrawerRenderer implements BlockEntityRenderer<CompatDrawerBlo
         public void render(@NotNull CompatDrawerBlockEntity blockEntity, float partialTick, PoseStack poseStack, @NotNull MultiBufferSource renderer, int light, int overlayLight) {
             this.updateRenderState(blockEntity);
 
-            ResourceLocation textureLocation = BLOCK_TO_TEXTURE_MAP.get(blockEntity.getBlockState().getBlock());
+            Identifier textureLocation = BLOCK_TO_TEXTURE_MAP.get(blockEntity.getBlockState().getBlock());
 
             poseStack.pushPose();
             poseStack.scale(-1.0F, -1.0F, 1.0F);

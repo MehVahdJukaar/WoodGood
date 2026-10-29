@@ -2,7 +2,7 @@ package net.mehvahdjukaar.every_compat.platform;
 
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootParams;
@@ -12,7 +12,7 @@ import java.util.function.Consumer;
 
 public class ECPlatStuffImpl {
 
-    public static List<ItemStack> modifyLoot(ResourceLocation id, List<ItemStack> stacks, LootParams lootContext) {
+    public static List<ItemStack> modifyLoot(Identifier id, List<ItemStack> stacks, LootParams lootContext) {
         return stacks;
     }
 

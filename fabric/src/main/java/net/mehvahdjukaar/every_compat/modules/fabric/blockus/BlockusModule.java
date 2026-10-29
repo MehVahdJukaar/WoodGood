@@ -23,7 +23,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.*;
@@ -58,7 +58,7 @@ public class BlockusModule extends EveryCompatModule {
 
     public BlockusModule(String modId) {
         super(modId, "bus");
-        ResourceLocation tab = modRes("blockus_building_blocks");
+        Identifier tab = modRes("blockus_building_blocks");
 
         herringbone_planks = SimpleEntrySet.builder(WoodType.class, "planks", "herringbone",
                         getModBlock("herringbone_oak_planks"), () -> VanillaWoodTypes.OAK,
@@ -322,13 +322,13 @@ public class BlockusModule extends EveryCompatModule {
 
         executor.accept((manager, sink) -> {
             String texturePath = "block/small_acacia_logs_top";
-            ResourceLocation logTopResLoc = modRes(texturePath);
+            Identifier logTopResLoc = modRes(texturePath);
 
             try (TextureImage edgeMask = TextureImage.open(manager, res("block/bus/small_logs_top_edge_m"));
                  TextureImage insideMask = TextureImage.open(manager, res("block/bus/small_logs_top_inside_m"))
             ) {
                 small_logs.blocks.forEach((woodType, block) -> {
-                    ResourceLocation blockId = Utils.getID(block);
+                    Identifier blockId = Utils.getID(block);
 
                     try (TextureImage baseLogTopTexture = TextureImage.open(manager, logTopResLoc);
                          TextureImage logSideTexture = TextureImage.open(manager,

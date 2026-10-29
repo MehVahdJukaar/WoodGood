@@ -7,7 +7,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
@@ -23,7 +23,7 @@ public class MosaicCarpentryModule extends EveryCompatModule {
 
     public MosaicCarpentryModule(String modId) {
         super(modId, "mc");
-        ResourceLocation tab = modRes("mosaic_carpentry");
+        Identifier tab = modRes("mosaic_carpentry");
 
 
         mosaics = SimpleEntrySet.builder(WoodType.class, "mosaic",

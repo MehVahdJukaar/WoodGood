@@ -14,7 +14,7 @@ import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.BlockTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -42,7 +42,7 @@ public class ModEntriesConfigs {
     public static ModConfigHolder SPEC;
     private static boolean wasInit = false;
     private static boolean logOnce = false;
-    private static final ArrayList<ResourceLocation> LOGGED_BLOCK_TYPE = new ArrayList<>();
+    private static final ArrayList<Identifier> LOGGED_BLOCK_TYPE = new ArrayList<>();
     private static final ArrayList<String> LOGGED_CHILD_TYPE = new ArrayList<>();
 
     // default as we are initializing it late
@@ -67,7 +67,7 @@ public class ModEntriesConfigs {
             byNamespace.forEach((namespace, types) -> {
                 builder.push(namespace); // mod id sub-category, left without an icon on purpose
                 for (var w : types) {
-                    ResourceLocation icon = typeIcon(w);
+                    Identifier icon = typeIcon(w);
                     if (icon != null) builder.icon(icon);
                     map.put(w.toString(), builder.feature(w.getId().getPath(), true));
                 }
@@ -79,7 +79,7 @@ public class ModEntriesConfigs {
 
         builder.comment("Disables specific entries")
                 .push("entries");
-        Map<String, ResourceLocation> entryIcons = entryIcons();
+        Map<String, Identifier> entryIcons = entryIcons();
         for (var reg : BlockSetAPI.getRegistries()) {
             builder.icon(defaultIcon(reg)).push(reg.typeName().replace(" ", "_"));
             // child keys are "modid:name" - group by that mod id
@@ -92,7 +92,7 @@ public class ModEntriesConfigs {
             byNamespace.forEach((namespace, childKeys) -> {
                 builder.push(namespace); // mod id sub-category, left without an icon on purpose
                 for (var c : childKeys) {
-                    ResourceLocation icon = entryIcons.get(c);
+                    Identifier icon = entryIcons.get(c);
                     if (icon != null) builder.icon(icon);
                     int i = c.indexOf(':');
                     map.put(c, builder.feature(i < 0 ? c : c.substring(i + 1), true));
@@ -109,23 +109,23 @@ public class ModEntriesConfigs {
     }
 
     // icon for a registry category: the default type's main item (e.g. oak planks for wood types)
-    private static ResourceLocation defaultIcon(BlockTypeRegistry<?> reg) {
+    private static Identifier defaultIcon(BlockTypeRegistry<?> reg) {
         return Utils.getID(reg.getDefaultType().mainChild().asItem());
     }
 
     // icon for a single block type: its own main item (e.g. fir planks)
     @Nullable
-    private static ResourceLocation typeIcon(BlockType w) {
+    private static Identifier typeIcon(BlockType w) {
         Item item = w.mainChild().asItem();
         return item == null ? null : Utils.getID(item);
     }
 
-    private static Map<String, ResourceLocation> entryIcons() {
-        Map<String, ResourceLocation> map = new HashMap<>();
+    private static Map<String, Identifier> entryIcons() {
+        Map<String, Identifier> map = new HashMap<>();
         for (CompatModule module : EveryCompat.getActiveModules()) {
             if (!(module instanceof SimpleModule simpleModule)) continue;
             for (EntrySet<?> entry : simpleModule.getEntries()) {
-                ResourceLocation icon = baseIcon(entry);
+                Identifier icon = baseIcon(entry);
                 if (icon != null) map.put(entry.makeChildKey(simpleModule), icon);
             }
         }
@@ -133,7 +133,7 @@ public class ModEntriesConfigs {
     }
 
     @Nullable
-    private static ResourceLocation baseIcon(EntrySet<?> entry) {
+    private static Identifier baseIcon(EntrySet<?> entry) {
         try {
             if (entry instanceof SimpleEntrySet<?, ?> s) {
                 Block b = s.getBaseBlock();

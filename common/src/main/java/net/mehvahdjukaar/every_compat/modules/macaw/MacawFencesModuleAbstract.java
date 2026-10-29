@@ -9,7 +9,7 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.VanillaLeavesTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
@@ -27,7 +27,7 @@ public abstract class MacawFencesModuleAbstract extends EveryCompatModule {
 
     public MacawFencesModuleAbstract(String modId) {
         super(modId, "mcf");
-        ResourceLocation tab = getTabKey();
+        Identifier tab = getTabKey();
 
         picketFences = SimpleEntrySet.builder(WoodType.class, "picket_fence",
                         getModBlock("oak_picket_fence"), () -> VanillaWoodTypes.OAK,
@@ -143,7 +143,7 @@ public abstract class MacawFencesModuleAbstract extends EveryCompatModule {
         this.addEntry(hedges);
     }
 
-    public abstract ResourceLocation getTabKey();
+    public abstract Identifier getTabKey();
 
     public abstract Block newFenceBlock(WoodType woodType);
     public abstract Block newFenceGateBlock(WoodType woodType);
