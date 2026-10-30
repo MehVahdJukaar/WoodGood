@@ -80,3 +80,10 @@ referralUrl = "https://www.curseforge.com/minecraft/mc-mods/blockus"
 versionRange = "[0.6,)"
 ordering = "AFTER"
 side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "unusual_furniture"
+type = "optional"
+versionRange = "[2.0.0,)"
+ordering = "NONE"
+side = "BOTH"

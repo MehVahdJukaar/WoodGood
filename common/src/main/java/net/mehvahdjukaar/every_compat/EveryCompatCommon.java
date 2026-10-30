@@ -24,6 +24,7 @@ import net.mehvahdjukaar.every_compat.modules.rechiseled.RechiseledModuleSlab;
 import net.mehvahdjukaar.every_compat.modules.rechiseled.RechiseledModuleStairs;
 import net.mehvahdjukaar.every_compat.modules.storagedrawers.StorageDrawersModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
+import net.mehvahdjukaar.every_compat.modules.unusual_furniture.UnusualFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.valhelsia_furniture.ValhelsiaFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.variants.VariantVanillaBlocksModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
@@ -130,6 +131,7 @@ public class EveryCompatCommon {
             addOptionalModule("storagedrawers", () -> StorageDrawersModule.class);
 //            addOptionalModule("table_top_craft", () -> TableTopCraftModule.class); //- Not-Available-For-1.21.1
             addOptionalModule("twigs", () -> TwigsModule.class);
+            addOptionalModule("unusual_furniture", () -> UnusualFurnitureModule.class);
             addOptionalModule("valhelsia_furniture", () -> ValhelsiaFurnitureModule.class);
             addOptionalModule("variantvanillablocks", () -> VariantVanillaBlocksModule.class);
         }
