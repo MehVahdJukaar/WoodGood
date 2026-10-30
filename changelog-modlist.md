@@ -71,6 +71,7 @@
 | The New Shutter aka Launch's Shutter                |   🟩   |
 | Twigs                                               |   🟩   |
 | Unusual End                                         |   🟡   |
+| Unusual Furniture                                   |   🟩   |
 | Valhelsia Furniture                                 |   🟩   |
 | Variant Vanilla Blocks (XanthianZ)                  |   🟩   |
 |                                                     |        |
@@ -97,6 +98,7 @@
 | Lepton (FORGE)                       |   🟡   |
 | Lightman's Currency                  |   🟩   |
 | Market Crates                        |   ❔   |
+| Marioverse                           |   🟩   |
 | More Crafting Tables for Forge       |   🟩   |
 | Mosaic Carpentry                     |   ❔   |
 | No Man's Land                        |   🟡   |
@@ -113,7 +115,6 @@
 | Tropicraft                           |   🟩   |
 | Ultimate Car Mod                     |   🟩   |
 | Unusual End                          |   🟡   |
-| Unusual Furniture                    |   🟩   |
 | Valhelsia Structures                 |   🟩   |
 | Variant Crafting Tables (Kitteh6660) |   ❔   |
 | Villagers Plus (NEOFORGE)            |   🟩   |
