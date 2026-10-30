@@ -12,24 +12,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import net.toopa.unusual_furniture.common.block.BeamBlock;
-import net.toopa.unusual_furniture.common.block.BenchBlock;
-import net.toopa.unusual_furniture.common.block.CarvedPlanksBlock;
-import net.toopa.unusual_furniture.common.block.CeilingLampBlock;
-import net.toopa.unusual_furniture.common.block.ChairBlock;
-import net.toopa.unusual_furniture.common.block.CoffeeTableBlock;
-import net.toopa.unusual_furniture.common.block.DrawerBlock;
-import net.toopa.unusual_furniture.common.block.OpenRiserStairBlock;
-import net.toopa.unusual_furniture.common.block.RailingBlock;
-import net.toopa.unusual_furniture.common.block.ShelfBlock;
-import net.toopa.unusual_furniture.common.block.StoolBlock;
-import net.toopa.unusual_furniture.common.block.TableBlock;
+import net.toopa.unusual_furniture.common.block.*;
 import net.toopa.unusual_furniture.common.item.OpenRiserStairBlockItem;
 import net.toopa.unusual_furniture.common.reg.UFBlockEntityTypes;
 
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
-//SUPPORT: v2.0.1+
+///SUPPORT: v2.0.2+
 public class UnusualFurnitureModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> carved;
