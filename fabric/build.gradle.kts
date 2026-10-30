@@ -174,6 +174,7 @@ dependencies {
     modCompileOnly("curse.maven:storage-drawers-223852:6995424")
     modCompileOnly("curse.maven:table-top-craft-fabric-729535:5319819") //@RLM: exp4j //!! 1.20.1
     modCompileOnly("curse.maven:twigs-496913:6782788")
+    modCompileOnly("curse.maven:unusual-furniture-1278034:9372047") // 2.0.2 NeoForge
     modCompileOnly("curse.maven:valhelsia-furniture-694349:6334936")
     modCompileOnly("curse.maven:variant-vanilla-blocks-866509:5703471")
 
