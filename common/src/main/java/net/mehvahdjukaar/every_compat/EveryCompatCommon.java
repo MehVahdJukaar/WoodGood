@@ -117,6 +117,7 @@ public class EveryCompatCommon {
             addOptionalModule("storagedrawers", () -> StorageDrawersModule.class);
 //            addOptionalModule("table_top_craft", () -> TableTopCraftModule.class); //- Not-Available-For-1.21.1
 //            addOptionalModule("twigs", () -> TwigsModule.class);
+//            addOptionalModule("unusual_furniture", () -> UnusualFurnitureModule.class);
 //            addOptionalModule("valhelsia_furniture", () -> ValhelsiaFurnitureModule.class);
 //            addOptionalModule("variantvanillablocks", () -> VariantVanillaBlocksModule.class);
         }

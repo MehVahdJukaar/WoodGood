@@ -152,7 +152,6 @@ public class EveryCompatForge extends EveryCompatCommon {
 //            addOptionalModule("shutter", () -> LauchsShuttersModule.class);
             addOptionalModule("tropicraft", () -> TropicraftModule.class);
             addOptionalModule("twilightforest", () -> TwilightForestModule.class);
-//            addOptionalModule("unusual_furniture", () -> UnusualFurnitureModule.class);
 //            addOptionalModule("valhelsia_structures", () -> ValhelsiaStructuresModule.class);
 //            addOptionalModule("vct", () -> VariantCraftingTablesModule.class);
 //            addOptionalModule("woodster", () -> WoodsterModule.class);
