@@ -339,7 +339,7 @@ public abstract class EveryCompat {
     }
 
     private static void registerItemsToTabs(RegHelper.ItemToTabEvent event) {
-        if (ECConfigs.TAB_ENABLED.get()) {
+        if (ECConfigs.TAB_MODE.get().hasECTab()) {
             Map<ResourceKey<CreativeModeTab>, Map<BlockType, List<Item>>> typeToEntrySet = new LinkedHashMap<>();
             forAllModules(m -> {
                 var tabItemsByType = typeToEntrySet.computeIfAbsent(m.getDedicatedTab(), j -> new LinkedHashMap<>());
@@ -357,7 +357,7 @@ public abstract class EveryCompat {
             }
         }
 
-        if (!ECConfigs.NO_MOD_CREATIVE_TAB.get()) {
+        if (ECConfigs.TAB_MODE.get().addsToModTabs()) {
             forAllModules(m -> m.registerItemsToExistingTabs(event));
         }
     }

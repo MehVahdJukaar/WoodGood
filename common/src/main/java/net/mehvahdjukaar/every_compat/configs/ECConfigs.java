@@ -30,12 +30,24 @@ public class ECConfigs {
         }
     }
 
+    public enum TabMode {
+        EC_TAB,
+        MOD_TABS,
+        BOTH;
+
+        public boolean hasECTab() {
+            return this != MOD_TABS;
+        }
+        public boolean addsToModTabs() {
+            return this != EC_TAB;
+        }
+    }
+
     public static ModConfigHolder SPEC;
     public static ModConfigHolder CLIENT_SPEC;
 
-    public static final Supplier<Boolean> TAB_ENABLED;
+    public static final Supplier<TabMode> TAB_MODE;
     public static final Supplier<Boolean> TAB_ITEM_SEARCH_ENABLED;
-    public static final Supplier<Boolean> NO_MOD_CREATIVE_TAB;
     public static final Supplier<Boolean> CHECK_PACKET;
     public static final Supplier<Boolean> DEBUG_PACKET;
     public static final Supplier<Boolean> BLOCK_TYPE_TOOLTIP;
@@ -88,18 +100,14 @@ public class ECConfigs {
                         - ALWAYS: Will always generate the assets & will be stored in memory. No cache is used. Unintuitively, this is often the fastest method as any disk access will be slow. \nTry and see what works best for you.""")
                 .worldReload()
                 .define("server_assets_generation_mode", GenMode.ALWAYS);
-        TAB_ENABLED = builder
-                .comment("Puts all the added items into a new Every Compat tab instead of their own mod tabs. Be warned that if disabled it could cause some issue with some mods that have custom tabs.")
+        TAB_MODE = builder
+                .comment(" Where the added items show up in the creative menu")
                 .gameRestart()
-                .define("creative_tab", true);
+                .define("creative_tab_mode", TabMode.BOTH);
         TAB_ITEM_SEARCH_ENABLED = builder
                 .comment("Allow the item_search or searchBar to be visible.")
                 .gameRestart()
                 .define("tab_item_search", true);
-        NO_MOD_CREATIVE_TAB = builder
-                .comment("If set to true, then all of the generated items will not be put into the mod's tab.")
-                .gameRestart()
-                .define("no_mod_creative_tab", false);
         GENERATE_BLOCKTYPE_TAGS = builder
                 .comment("Generate blocktype tags for every block type. This will be applied to all the mods that use the system, not just Every Compat. Can make pack a bit faster if its off. Turn off if you dont need it.")
                 .gameRestart()

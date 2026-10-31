@@ -1,7 +1,6 @@
 package net.mehvahdjukaar.every_compat.misc;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 
 import java.util.ArrayList;
@@ -63,9 +62,6 @@ public final class TaskRunnerWithFailureCollection {
     public synchronized void record(String context, Supplier<String> item, Throwable error) {
         if (disabled) {
             EveryCompat.LOGGER.error("[{}] {}: {}", context, item.get(), error.getMessage(), error);
-            if (PlatHelper.isDev()) {
-                throw error instanceof RuntimeException re ? re : new RuntimeException(error);
-            }
             return;
         }
 
@@ -78,9 +74,6 @@ public final class TaskRunnerWithFailureCollection {
 
         if (group.count == 1) {
             EveryCompat.LOGGER.error("[{}] {}: {}", context, item.get(), error.getMessage(), error);
-            if (PlatHelper.isDev()) {
-                throw error instanceof RuntimeException re ? re : new RuntimeException(error);
-            }
         }
     }
 

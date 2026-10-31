@@ -33,8 +33,6 @@ import java.util.function.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static net.mehvahdjukaar.every_compat.configs.ECConfigs.NO_MOD_CREATIVE_TAB;
-
 //contrary to popular belief this class is indeed not simple. Its usage however is
 //@SuppressWarnings({"unused"})
 public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Block, I extends Item> implements EntrySet<T> {
@@ -168,7 +166,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return;
         }
         Holder<CreativeModeTab> tabHolder = getTab();
-        if (tabHolder == null || NO_MOD_CREATIVE_TAB.get()) {
+        if (tabHolder == null) {
             return;
         }
         var tabKey = tabHolder.unwrapKey().get();

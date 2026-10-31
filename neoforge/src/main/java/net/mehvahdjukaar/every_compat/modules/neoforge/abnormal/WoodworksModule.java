@@ -257,7 +257,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTag(Identifier.parse("quark:boatable_chests"), Registries.ITEM)
                 .setTab(tab)
                 .defaultRecipe()
-                .addCustomItem((w, block, properties) -> new CompatClosetItem(block, new Item.Properties()))
+                .addCustomItem((w, block, properties) -> new CompatClosetItem(block, properties))
                 .build();
         this.addEntry(closet);
 
@@ -286,7 +286,7 @@ public class WoodworksModule extends EveryCompatModule {
                 .addTag(Tags.Items.CHESTS_TRAPPED, Registries.ITEM)
                 .setTab(tab)
                 .defaultRecipe()
-                .addCustomItem((w, block, properties) -> new CompatClosetItem(block, new Item.Properties()))
+                .addCustomItem((w, block, properties) -> new CompatClosetItem(block, properties))
                 .build();
         this.addEntry(trappedCloset);
 

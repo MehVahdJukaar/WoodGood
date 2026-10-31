@@ -67,7 +67,11 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
 
     @Override
     public void addTranslations(SimpleModule module, AfterLanguageLoadEvent lang) {
-        items.forEach((blockType, item) -> LangBuilder.addDynamicEntry(lang, "item_type." + module.getModId() + "." + typeName, blockType, item));
+        String key = "item_type." + module.getModId() + "." + typeName;
+        //most item just sets mirror block, so they can reuse its name
+        if (lang.getEntry(key) == null) key = "block_type." + module.getModId() + "." + typeName;
+        String finalKey = key;
+        items.forEach((blockType, item) -> LangBuilder.addDynamicEntry(lang, finalKey, blockType, item));
     }
 
     @Override

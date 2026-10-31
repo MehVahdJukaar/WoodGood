@@ -19,7 +19,7 @@ public class ECRegistry {
     public static final Supplier<AllWoodItem> ALL_WOODS = RegHelper.registerItem(EveryCompat.res("all_woods"), AllWoodItem::new);
 
     @Nullable
-    public static final RegSupplier<CreativeModeTab> MOD_TAB = ECConfigs.TAB_ENABLED.get() ?
+    public static final RegSupplier<CreativeModeTab> MOD_TAB = ECConfigs.TAB_MODE.get().hasECTab() ?
                     RegHelper.registerCreativeModeTab(EveryCompat.res(EveryCompat.MOD_ID),
                             TAB_ITEM_SEARCH_ENABLED.get(), // searchBar
                             builder -> builder.icon(() -> ALL_WOODS.get().getDefaultInstance())
