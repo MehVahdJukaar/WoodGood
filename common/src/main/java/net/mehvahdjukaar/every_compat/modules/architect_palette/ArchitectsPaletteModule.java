@@ -40,7 +40,7 @@ public class ArchitectsPaletteModule extends EveryCompatModule {
 
         railings = SimpleEntrySet.builder(WoodType.class, "railing",
                         getModBlock("oak_railing"), () -> VanillaWoodTypes.OAK,
-                        w -> new RailingBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new RailingBlock(p)
                 )
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -51,7 +51,7 @@ public class ArchitectsPaletteModule extends EveryCompatModule {
 
         boards = SimpleEntrySet.builder(WoodType.class, "boards",
                         getModBlock("oak_boards"), () -> VanillaWoodTypes.OAK,
-                        w -> new Block(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new Block(p)
                 )
                 .addTexture(modRes("block/oak_boards"), CUSTOM_PALETTE)
                 .addTexture(modRes("block/oak_boards_odd"), CUSTOM_PALETTE)
@@ -64,7 +64,7 @@ public class ArchitectsPaletteModule extends EveryCompatModule {
 
         boardSlabs = SimpleEntrySet.builder(WoodType.class, "board_slab",
                         getModBlock("oak_board_slab"), () -> VanillaWoodTypes.OAK,
-                        w -> new SlabBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new SlabBlock(p)
                 )
                 .requiresFromMap(boards.blocks) //REASONS: textures, recipes
                 //TEXTURES: boards
@@ -79,7 +79,7 @@ public class ArchitectsPaletteModule extends EveryCompatModule {
 
         boardStairs = SimpleEntrySet.builder(WoodType.class, "board_stairs",
                         getModBlock("oak_board_stairs"), () -> VanillaWoodTypes.OAK,
-                        w -> new ModStairBlock(() -> boards.blocks.get(w), Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new ModStairBlock(() -> boards.blocks.get(w), p)
                 )
                 .requiresFromMap(boards.blocks) //REASONS: textures, recipes
                 //TEXTURES: boards
@@ -93,7 +93,7 @@ public class ArchitectsPaletteModule extends EveryCompatModule {
 
         boardWalls = SimpleEntrySet.builder(WoodType.class, "board_wall",
                         getModBlock("oak_board_wall"), () -> VanillaWoodTypes.OAK,
-                        w -> new WallBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new WallBlock(p)
                 )
                 .requiresFromMap(boards.blocks) //REASONS: textures, recipes
                 //TEXTURES: boards

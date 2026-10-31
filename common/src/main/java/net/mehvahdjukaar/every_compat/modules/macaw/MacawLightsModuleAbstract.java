@@ -36,8 +36,9 @@ public abstract class MacawLightsModuleAbstract extends EveryCompatModule {
 
         SOUL_TIKI_TORCH = SimpleEntrySet.builder(WoodType.class, "tiki_torch", "soul",
                         getModBlock("soul_oak_tiki_torch"), () -> VanillaWoodTypes.OAK,
-                        w -> newTikiTorch(w, ParticleTypes.SOUL_FIRE_FLAME)
+                        (w, p) -> newTikiTorch(w, p, ParticleTypes.SOUL_FIRE_FLAME)
                 )
+                .setProperties(this::copyStandardProperties)
                 .requiresChildren(FENCE) //REASON: recipes
                 //TEXTURES: using oak_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -49,8 +50,9 @@ public abstract class MacawLightsModuleAbstract extends EveryCompatModule {
 
         TIKI_TORCH = SimpleEntrySet.builder(WoodType.class, "tiki_torch",
                         getModBlock("oak_tiki_torch"), () -> VanillaWoodTypes.OAK,
-                        w -> newTikiTorch(w, ParticleTypes.FLAME)
+                        (w, p) -> newTikiTorch(w, p, ParticleTypes.FLAME)
                 )
+                .setProperties(this::copyStandardProperties)
                 .requiresChildren(FENCE) //REASON: recipes
                 //TEXTURES: using oak_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -64,6 +66,7 @@ public abstract class MacawLightsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_ceiling_fan_light"), () -> VanillaWoodTypes.OAK,
                         this::newLightBaseShort
                 )
+                .setProperties(this::copyStandardProperties)
                 .requiresChildren(SLAB) //REASON: recipes
                 .addTextureM(modRes("block/oak_ceiling_fan"), EveryCompat.res("block/mcw/lights/ceiling_fan_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -88,6 +91,7 @@ public abstract class MacawLightsModuleAbstract extends EveryCompatModule {
         return (state) -> (Boolean)state.getValue(BlockStateProperties.LIT) ? lightLevel : 0;
     }
 
-    public abstract Block newTikiTorch(WoodType woodType, ParticleOptions particleOptions);
-    public abstract Block newLightBaseShort(WoodType woodType);
+
+    public abstract Block newTikiTorch(WoodType woodType, BlockBehaviour.Properties p, ParticleOptions particleOptions);
+    public abstract Block newLightBaseShort(WoodType woodType, BlockBehaviour.Properties p);
 }

@@ -25,7 +25,7 @@ public class WoodenHoppersModule extends EveryCompatModule {
 
         hoppers = SimpleEntrySet.builder(WoodType.class, "hopper",
                         getModBlock("oak_hopper"), () -> VanillaWoodTypes.OAK,
-                        w -> new WoodenHopperBlock(Utils.copyPropertySafe(w.planks).strength(2))
+                        (w, p) -> new WoodenHopperBlock(p.strength(2))
                 )
                 .addTile(() -> Main.WOODEN_HOPPER_BLOCK_ENTITY_TYPE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)

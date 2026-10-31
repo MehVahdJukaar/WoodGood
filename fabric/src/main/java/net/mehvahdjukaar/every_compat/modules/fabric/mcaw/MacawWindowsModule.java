@@ -16,38 +16,38 @@ public class MacawWindowsModule extends MacawWindowsModuleAbstract {
     }
 
     @Override
-    public Block newConnectedWindow(WoodType woodType) {
-        return new ConnectedWindow(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(0.6F, 1.2F));
+    public Block newConnectedWindow(WoodType woodType, BlockBehaviour.Properties p) {
+        return new ConnectedWindow(p.mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(0.6F, 1.2F));
     }
 
     @Override
-    public Block newWindowBarred(WoodType woodType) {
-        return new WindowBarred(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(0.6F, 1.2F));
+    public Block newWindowBarred(WoodType woodType, BlockBehaviour.Properties p) {
+        return new WindowBarred(p.mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(0.6f, 1.2F));
     }
 
     @Override
-    public Block newWindow(WoodType woodType) {
-        return new Window(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(0.6F, 1.2F));
+    public Block newWindow(WoodType woodType, BlockBehaviour.Properties p) {
+        return new Window(p.mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(0.6F, 1.2F));
     }
 
     @Override
-    public Block newParapet(WoodType woodType) {
-        return new Parapet(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(0.2F, 1.0F));
+    public Block newParapet(WoodType woodType, BlockBehaviour.Properties p) {
+        return new Parapet(p.mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(0.2F, 1.0F));
     }
 
     @Override
-    public Block newBlinds(WoodType woodType) {
-        return new Blinds(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(0.3F, 1.0F));
+    public Block newBlinds(WoodType woodType, BlockBehaviour.Properties p) {
+        return new Blinds(p.mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(0.3F, 1.0F));
     }
 
     @Override
-    public Block newShutter(WoodType woodType) {
-        return new Shutter(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(0.5F, 2.0F));
+    public Block newShutter(WoodType woodType, BlockBehaviour.Properties p) {
+        return new Shutter(p.mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(0.5F, 2.0F));
     }
 
     @Override
-    public Block newCurtainRod(WoodType woodType) {
-        return new CurtainRod(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(0.3F, 0.7F));
+    public Block newCurtainRod(WoodType woodType, BlockBehaviour.Properties p) {
+        return new CurtainRod(p.mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(0.3F, 0.7F));
     }
 
 }

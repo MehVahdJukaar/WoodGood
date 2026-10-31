@@ -6,6 +6,7 @@ import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
@@ -125,10 +126,10 @@ public abstract class MacawBridgesModuleAbstract extends EveryCompatModule {
 
     }
 
-    public abstract Block newBridge_Support(WoodType woodType);
-    public abstract Block newBridge_Block_Rope(WoodType woodType);
-    public abstract Block newLog_Bridge(WoodType woodType);
-    public abstract Block newRail_Bridge(WoodType woodType);
-    public abstract Block newBridge_Stairs(WoodType woodType);
+    public abstract Block newBridge_Support(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newBridge_Block_Rope(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newLog_Bridge(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newRail_Bridge(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newBridge_Stairs(WoodType woodType, BlockBehaviour.Properties p);
 
 }

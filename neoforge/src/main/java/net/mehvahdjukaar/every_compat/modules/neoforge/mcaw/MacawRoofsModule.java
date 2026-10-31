@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.neoforge.mcaw;
 import com.mcwroofs.kikoz.objects.roofs.*;
 import net.mehvahdjukaar.every_compat.modules.macaw.MacawRoofsModuleAbstract;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.Block;
 
 //See MacawRoofsModuleAbstract's SUPPORTED VERSION
@@ -13,32 +14,32 @@ public class MacawRoofsModule extends MacawRoofsModuleAbstract {
     }
 
     @Override
-    public Block newRoofGlass(WoodType woodType) {
-        return new RoofGlass(copyStandardProperties(woodType));
+    public Block newRoofGlass(WoodType woodType, BlockBehaviour.Properties p) {
+        return new RoofGlass(p);
     }
 
     @Override
-    public Block newBaseRoof(WoodType woodType) {
-        return new BaseRoof(woodType.planks.defaultBlockState(), copyStandardProperties(woodType));
+    public Block newBaseRoof(WoodType woodType, BlockBehaviour.Properties p) {
+        return new BaseRoof(woodType.planks.defaultBlockState(), p);
     }
 
     @Override
-    public Block newSteepRoof(WoodType woodType) {
-        return new SteepRoof(woodType.planks.defaultBlockState(), copyStandardProperties(woodType));
+    public Block newSteepRoof(WoodType woodType, BlockBehaviour.Properties p) {
+        return new SteepRoof(woodType.planks.defaultBlockState(), p);
     }
 
     @Override
-    public Block newRoofTopNew(WoodType woodType) {
-        return new RoofTopNew(copyStandardProperties(woodType));
+    public Block newRoofTopNew(WoodType woodType, BlockBehaviour.Properties p) {
+        return new RoofTopNew(p);
     }
 
     @Override
-    public Block newLower(WoodType woodType) {
-        return new Lower(woodType.planks.defaultBlockState(), copyStandardProperties(woodType));
+    public Block newLower(WoodType woodType, BlockBehaviour.Properties p) {
+        return new Lower(woodType.planks.defaultBlockState(), p);
     }
 
     @Override
-    public Block newSteep(WoodType woodType) {
-        return new Steep(woodType.planks.defaultBlockState(), copyStandardProperties(woodType));
+    public Block newSteep(WoodType woodType, BlockBehaviour.Properties p) {
+        return new Steep(woodType.planks.defaultBlockState(), p);
     }
 }

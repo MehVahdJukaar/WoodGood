@@ -52,7 +52,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
 
         apple = SimpleEntrySet.builder(LeavesType.class, "leaves", "apple",
                         getModBlock("apple_oak_leaves"), () -> VanillaLeavesTypes.OAK,
-                        leavesType -> new LeavesBlock(Utils.copyPropertySafe(leavesType.leaves))
+                        (leavesType, p) -> new LeavesBlock(p)
                 )
                 // Below insert a new key "overlay" in models/block files
                 .addModelTransform(m -> m.addModifier((string, ignored, ignored2) -> {
@@ -83,7 +83,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
 
         cherry = SimpleEntrySet.builder(LeavesType.class, "leaves", "cherry",
                         getModBlock("cherry_oak_leaves"), () -> VanillaLeavesTypes.OAK,
-                        leavesType -> new LeavesBlock(Utils.copyPropertySafe(leavesType.leaves))
+                        (leavesType, p) -> new LeavesBlock(p)
                 )
                 // Below insert a new key "overlay" in models/block files
                 .addModelTransform(m -> m.addModifier((string, ignored, ignored2) -> {
@@ -115,7 +115,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
         // \"all\":\"chipped:block/oak_leaves/" + prefix + "_oak
         frosted = SimpleEntrySet.builder(LeavesType.class, "leaves", "frosted",
                         getModBlock("frosted_oak_leaves"), () -> VanillaLeavesTypes.OAK,
-                        leavesType -> new LeavesBlock(Utils.copyPropertySafe(leavesType.leaves))
+                        (leavesType, p) -> new LeavesBlock(p)
                 )
                 // Below insert a new key "overlay" in models/block files
                 .addModelTransform(m -> m.addModifier((string, ignored, leavesType) -> {
@@ -148,7 +148,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
 
         golden_apple = SimpleEntrySet.builder(LeavesType.class, "leaves", "golden_apple",
                         getModBlock("golden_apple_oak_leaves"), () -> VanillaLeavesTypes.OAK,
-                        leavesType -> new LeavesBlock(Utils.copyPropertySafe(leavesType.leaves))
+                        (leavesType, p) -> new LeavesBlock(p)
                 )
                 // Below insert a new key "overlay" in models/block files
                 .addModelTransform(m -> m.addModifier((string, ignored, ignored2) -> {
@@ -179,7 +179,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
 
         golden_cherry = SimpleEntrySet.builder(LeavesType.class, "leaves", "golden_cherry",
                         getModBlock("golden_cherry_oak_leaves"), () -> VanillaLeavesTypes.OAK,
-                        leavesType -> new LeavesBlock(Utils.copyPropertySafe(leavesType.leaves))
+                        (leavesType, p) -> new LeavesBlock(p)
                 )
                 // Below insert a new key "overlay" in models/block files
                 .addModelTransform(m -> m.addModifier((string, ignored, ignored2) -> {
@@ -210,7 +210,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
 
         magenta_flower = SimpleEntrySet.builder(LeavesType.class, "leaves", "magenta_flower",
                         getModBlock("magenta_flower_oak_leaves"), () -> VanillaLeavesTypes.OAK,
-                        leavesType -> new LeavesBlock(Utils.copyPropertySafe(leavesType.leaves))
+                        (leavesType, p) -> new LeavesBlock(p)
                 )
                 // Below insert a new key "overlay" in models/block files
                 .addModelTransform(m -> m.addModifier((string, ignored, ignored2) -> {
@@ -241,7 +241,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
 
         white_flower = SimpleEntrySet.builder(LeavesType.class, "leaves", "white_flower",
                         getModBlock("white_flower_oak_leaves"), () -> VanillaLeavesTypes.OAK,
-                        leavesType -> new LeavesBlock(Utils.copyPropertySafe(leavesType.leaves))
+                        (leavesType, p) -> new LeavesBlock(p)
                 )
                 // Below insert a new key "overlay" in models/block files
                 .addModelTransform(m -> m.addModifier((string, ignored, ignored2) -> {
@@ -272,7 +272,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
 
         dead = SimpleEntrySet.builder(LeavesType.class, "leaves", "dead",
                         getModBlock("dead_oak_leaves"), () -> VanillaLeavesTypes.OAK,
-                        leavesType -> new LeavesBlock(Utils.copyPropertySafe(leavesType.leaves))
+                        (leavesType, p) -> new LeavesBlock(p)
                 )
                 //TEXTURES: See addDynamicClientResources (below)
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
@@ -288,7 +288,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
 
         golden = SimpleEntrySet.builder(LeavesType.class, "leaves", "golden",
                         getModBlock("golden_oak_leaves"), () -> VanillaLeavesTypes.OAK,
-                        leavesType -> new LeavesBlock(Utils.copyPropertySafe(leavesType.leaves))
+                        (leavesType, p) -> new LeavesBlock(p)
                 )
                 //TEXTURES: See addDynamicClientResources (below)
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
@@ -304,7 +304,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
 
         orange = SimpleEntrySet.builder(LeavesType.class, "leaves", "orange",
                         getModBlock("orange_oak_leaves"), () -> VanillaLeavesTypes.OAK,
-                        leavesType -> new LeavesBlock(Utils.copyPropertySafe(leavesType.leaves))
+                        (leavesType, p) -> new LeavesBlock(p)
                 )
                 //TEXTURES: See addDynamicClientResources (below)
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
@@ -320,7 +320,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
 
         red = SimpleEntrySet.builder(LeavesType.class, "leaves", "red",
                         getModBlock("red_oak_leaves"), () -> VanillaLeavesTypes.OAK,
-                        leavesType -> new LeavesBlock(Utils.copyPropertySafe(leavesType.leaves))
+                        (leavesType, p) -> new LeavesBlock(p)
                 )
                 //TEXTURES: See addDynamicClientResources (below)
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)

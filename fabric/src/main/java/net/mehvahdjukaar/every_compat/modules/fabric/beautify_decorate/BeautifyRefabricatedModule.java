@@ -6,6 +6,7 @@ import io.github.suel_ki.beautify.common.block.Trellis;
 import net.mehvahdjukaar.every_compat.modules.beautify.BeautifyModuleAbstract;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -23,24 +24,24 @@ public class BeautifyRefabricatedModule extends BeautifyModuleAbstract {
     }
 
     @Override
-    public Block newTrellis(WoodType woodType) {
-        return new Trellis(Utils.copyPropertySafe(woodType.planks)
+    public Block newTrellis(WoodType woodType, BlockBehaviour.Properties p) {
+        return new Trellis(p
                 .strength(0.3F, 0.3F)
                 .sound(SoundType.BAMBOO).noOcclusion()
         );
     }
 
     @Override
-    public Block newBlinds(WoodType woodType) {
-        return new Blinds(Utils.copyPropertySafe(woodType.planks)
+    public Block newBlinds(WoodType woodType, BlockBehaviour.Properties p) {
+        return new Blinds(p
                 .noOcclusion().strength(0.4F, 0.4F)
                 .sound(SoundType.WOOD)
         );
     }
 
     @Override
-    public Block newPictureFrame(WoodType woodType) {
-        return new PictureFrame(Utils.copyPropertySafe(woodType.planks)
+    public Block newPictureFrame(WoodType woodType, BlockBehaviour.Properties p) {
+        return new PictureFrame(p
                 .noOcclusion().strength(0.1F, 0.1F)
                 .sound(SoundType.WOOD).noOcclusion()
         );

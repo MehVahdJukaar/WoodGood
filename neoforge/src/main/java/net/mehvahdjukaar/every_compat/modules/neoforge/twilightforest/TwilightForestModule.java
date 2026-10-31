@@ -55,7 +55,7 @@ public class TwilightForestModule extends EveryCompatModule {
 
         banisters = SimpleEntrySet.builder(WoodType.class, "banister",
                         TFBlocks.OAK_BANISTER, () -> VanillaWoodTypes.OAK,
-                        w -> new BanisterBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new BanisterBlock(p.noOcclusion())
                 )
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -69,8 +69,9 @@ public class TwilightForestModule extends EveryCompatModule {
 
         drying_rack = SimpleEntrySet.builder(WoodType.class, "drying_rack",
                         getModBlock("oak_drying_rack"), () -> VanillaWoodTypes.OAK,
-                        w -> new DryingRackBlock(copySlabPropertySafe(w, 0.5F))
+                        (w, p) -> new DryingRackBlock(p)
                 )
+                .setProperties(w -> copySlabPropertySafe(w, 0.5F))
                 .requiresChildren(SLAB) //REASON: recipes, properties
                 .addTile(getModTile("drying_rack"))
                 //TEXTURES: planks
@@ -83,8 +84,9 @@ public class TwilightForestModule extends EveryCompatModule {
 
         hollow_log_horizontal = SimpleEntrySet.builder(WoodType.class, "log_horizontal", "hollow",
                         TFBlocks.HOLLOW_BIRCH_LOG_HORIZONTAL, () -> VanillaWoodTypes.BIRCH,
-                        w -> new HorizontalHollowLogBlock(Utils.copyPropertySafe(w.log))
+                        (w, p) -> new HorizontalHollowLogBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 .requiresChildren(STRIPPED_LOG) //REASON: Textures
                 //TEXTURES: stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -98,10 +100,11 @@ public class TwilightForestModule extends EveryCompatModule {
 
         hollow_log_vertical = SimpleEntrySet.builder(WoodType.class, "log_vertical", "hollow",
                         TFBlocks.HOLLOW_BIRCH_LOG_VERTICAL, () -> VanillaWoodTypes.BIRCH,
-                        w -> {
+                        (w, p) -> {
                             var id = EveryCompat.res(this.shortenedId() + "/" + w.getVariantId("hollow", true) + "_log_climbable");
-                            return new VerticalHollowLogBlock(DeferredHolder.create(Registries.BLOCK, id), Utils.copyPropertySafe(w.log));
+                            return new VerticalHollowLogBlock(DeferredHolder.create(Registries.BLOCK, id), p);
                         })
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 .requiresChildren(STRIPPED_LOG) //REASON: Textures
                 //TEXTURES: stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -115,10 +118,11 @@ public class TwilightForestModule extends EveryCompatModule {
 
         hollow_log_climbable = SimpleEntrySet.builder(WoodType.class, "log_climbable", "hollow",
                         TFBlocks.HOLLOW_BIRCH_LOG_CLIMBABLE, () -> VanillaWoodTypes.BIRCH,
-                        w -> new ClimbableHollowLogBlock(
+                        (w, p) -> new ClimbableHollowLogBlock(
                                 DeferredHolder.create(Registries.BLOCK, Utils.getID(hollow_log_vertical.blocks.get(w))),
-                                Utils.copyPropertySafe(w.log))
+                                p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 .requiresChildren(STRIPPED_LOG) //REASON: Textures
                 //TEXTURES: stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -134,11 +138,11 @@ public class TwilightForestModule extends EveryCompatModule {
 
         hollow_log = ItemOnlyEntrySet.builder(WoodType.class, "log", "hollow",
                         getModItem("hollow_birch_log"), () -> VanillaWoodTypes.BIRCH,
-                        w -> new HollowLogItem(
+                        (w, p) -> new HollowLogItem(
                                 DeferredHolder.create(Registries.BLOCK, Utils.getID(hollow_log_horizontal.blocks.get(w))),
                                 DeferredHolder.create(Registries.BLOCK, Utils.getID(hollow_log_vertical.blocks.get(w))),
                                 DeferredHolder.create(Registries.BLOCK, Utils.getID(hollow_log_climbable.blocks.get(w))),
-                                new Item.Properties())
+                                p)
                 )
                 .requiresFromMap(hollow_log_vertical.blocks)
                 .requiresFromMap(hollow_log_horizontal.blocks)

@@ -111,6 +111,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_kitchen_cabinet"), () -> VanillaWoodTypes.OAK,
                         this::newCabinetHinge
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
@@ -126,6 +127,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_double_kitchen_cabinet"), () -> VanillaWoodTypes.OAK,
                         this::newCabinet
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log, oak_handle (kitchen_cabinet)
@@ -140,6 +142,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_glass_kitchen_cabinet"), () -> VanillaWoodTypes.OAK,
                         this::newCabinet
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log, oak_handle (kitchen_cabinet)
@@ -154,6 +157,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_kitchen_sink"), () -> VanillaWoodTypes.OAK,
                         this::newSinkCounter
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -167,6 +171,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_kitchen_cabinet"), () -> VanillaWoodTypes.OAK,
                         this::newCabinetHinge
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log, oak_handle (kitchen_cabinet)
@@ -181,6 +186,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_double_kitchen_cabinet"), () -> VanillaWoodTypes.OAK,
                         this::newCabinet
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log, oak_handle (kitchen_cabinet)
@@ -195,6 +201,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_glass_kitchen_cabinet"), () -> VanillaWoodTypes.OAK,
                         this::newCabinet
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log, oak_handle (kitchen_cabinet)
@@ -209,6 +216,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_kitchen_sink"), () -> VanillaWoodTypes.OAK,
                         this::newSinkCounter
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -222,6 +230,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_wardrobe"), () -> VanillaWoodTypes.OAK,
                         this::newTallFurnitureHinge
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
@@ -236,6 +245,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_modern_wardrobe"), () -> VanillaWoodTypes.OAK,
                         this::newTallFurnitureHinge
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
@@ -250,6 +260,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_double_wardrobe"), () -> VanillaWoodTypes.OAK,
                         this::newTallFurniture
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
@@ -264,6 +275,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_bookshelf"), () -> VanillaWoodTypes.OAK,
                         this::newTallFurniture
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
@@ -279,6 +291,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_bookshelf_cupboard"), () -> VanillaWoodTypes.OAK,
                         this::newTallFurnitureHinge
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
@@ -293,6 +306,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_drawer"), () -> VanillaWoodTypes.OAK,
                         this::newWideFurniture
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
@@ -307,6 +321,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_double_drawer"), () -> VanillaWoodTypes.OAK,
                         this::newWideFurniture
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
@@ -321,6 +336,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_bookshelf_drawer"), () -> VanillaWoodTypes.OAK,
                         this::newWideFurniture
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
@@ -335,6 +351,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_lower_bookshelf_drawer"), () -> VanillaWoodTypes.OAK,
                         this::newWideFurniture
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
@@ -349,6 +366,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_large_drawer"), () -> VanillaWoodTypes.OAK,
                         this::newWideFurniture
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
@@ -363,6 +381,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_lower_triple_drawer"), () -> VanillaWoodTypes.OAK,
                         this::newWideFurniture
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
@@ -377,6 +396,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_triple_drawer"), () -> VanillaWoodTypes.OAK,
                         this::newWideFurniture
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
@@ -391,6 +411,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_desk"), () -> VanillaWoodTypes.OAK,
                         this::newDesk
                 )
+                .setProperties(w -> copyStandardProperties())
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("desk"), Registries.BLOCK)
@@ -403,6 +424,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_covered_desk"), () -> VanillaWoodTypes.OAK,
                         this::newDesk
                 )
+                .setProperties(w -> copyStandardProperties())
                 //TEXTURES: log
                 .addTag(modRes("covered_desk"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -415,6 +437,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_modern_desk"), () -> VanillaWoodTypes.OAK,
                         this::newDesk
                 )
+                .setProperties(w -> copyStandardProperties())
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("modern_desk"), Registries.BLOCK)
@@ -427,6 +450,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_table"), () -> VanillaWoodTypes.OAK,
                         this::newTableHitbox
                 )
+                .setProperties(w -> copyStandardProperties())
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("table"), Registries.BLOCK)
@@ -439,6 +463,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_end_table"), () -> VanillaWoodTypes.OAK,
                         this::newTableHitbox
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG)
                 //TEXTURES: stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -452,6 +477,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_coffee_table"), () -> VanillaWoodTypes.OAK,
                         this::newTable
                 )
+                .setProperties(w -> copyStandardProperties())
                 //TEXTURES: log
                 .addTag(modRes("coffee_table"), Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -464,6 +490,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_glass_table"), () -> VanillaWoodTypes.OAK,
                         this::newTableHitbox
                 )
+                .setProperties(w -> copyStandardProperties())
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("glass_table"), Registries.BLOCK)
@@ -477,6 +504,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_chair"), () -> VanillaWoodTypes.OAK,
                         this::newStripedChair
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -490,6 +518,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_modern_chair"), () -> VanillaWoodTypes.OAK,
                         this::newModernChair
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: log, stripped
                 .addTag(modRes("modern_chair"), Registries.BLOCK)
@@ -503,6 +532,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_striped_chair"), () -> VanillaWoodTypes.OAK,
                         this::newStripedChair
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: log, stripped
                 .addTag(modRes("striped_chair"), Registries.BLOCK)
@@ -517,6 +547,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_stool_chair"), () -> VanillaWoodTypes.OAK,
                         this::newChair
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: log, stripped
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -530,6 +561,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_counter"), () -> VanillaWoodTypes.OAK,
                         this::newCounter
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped
@@ -544,6 +576,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_drawer_counter"), () -> VanillaWoodTypes.OAK,
                         this::newStorageCounter
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped
@@ -558,6 +591,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_double_drawer_counter"), () -> VanillaWoodTypes.OAK,
                         this::newStorageCounter
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped
@@ -572,6 +606,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_cupboard_counter"), () -> VanillaWoodTypes.OAK,
                         this::newCupboardCounter
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped
@@ -587,6 +622,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_wardrobe"), () -> VanillaWoodTypes.OAK,
                         this::newTallFurnitureHinge
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped
@@ -601,6 +637,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_modern_wardrobe"), () -> VanillaWoodTypes.OAK,
                         this::newTallFurnitureHinge
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
@@ -615,6 +652,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_double_wardrobe"), () -> VanillaWoodTypes.OAK,
                         this::newTallFurniture
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
@@ -629,6 +667,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_bookshelf"), () -> VanillaWoodTypes.OAK,
                         this::newTallFurniture
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
@@ -644,6 +683,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_bookshelf_cupboard"), () -> VanillaWoodTypes.OAK,
                         this::newTallFurnitureHinge
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
@@ -658,6 +698,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_drawer"), () -> VanillaWoodTypes.OAK,
                         this::newWideFurniture
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
@@ -672,6 +713,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_double_drawer"), () -> VanillaWoodTypes.OAK,
                         this::newWideFurniture
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
@@ -686,6 +728,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_bookshelf_drawer"), () -> VanillaWoodTypes.OAK,
                         this::newWideFurniture
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
@@ -700,6 +743,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_lower_bookshelf_drawer"), () -> VanillaWoodTypes.OAK,
                         this::newWideFurniture
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
@@ -714,6 +758,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_large_drawer"), () -> VanillaWoodTypes.OAK,
                         this::newWideFurniture
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
@@ -728,6 +773,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_lower_triple_drawer"), () -> VanillaWoodTypes.OAK,
                         this::newWideFurniture
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
@@ -742,6 +788,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_triple_drawer"), () -> VanillaWoodTypes.OAK,
                         this::newWideFurniture
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
@@ -756,6 +803,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_desk"), () -> VanillaWoodTypes.OAK,
                         this::newDesk
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -769,6 +817,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_covered_desk"), () -> VanillaWoodTypes.OAK,
                         this::newDesk
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("covered_desk"), Registries.BLOCK)
@@ -782,6 +831,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_modern_desk"), () -> VanillaWoodTypes.OAK,
                         this::newDesk
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -795,6 +845,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_table"), () -> VanillaWoodTypes.OAK,
                         this::newTableHitbox
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -808,6 +859,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_end_table"), () -> VanillaWoodTypes.OAK,
                         this::newTableHitbox
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -821,6 +873,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_coffee_table"), () -> VanillaWoodTypes.OAK,
                         this::newTable
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("coffee_table"), Registries.BLOCK)
@@ -834,6 +887,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_glass_table"), () -> VanillaWoodTypes.OAK,
                         this::newTableHitbox
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -848,6 +902,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_chair"), () -> VanillaWoodTypes.OAK,
                         this::newStripedChair
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -861,6 +916,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_modern_chair"), () -> VanillaWoodTypes.OAK,
                         this::newModernChair
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("modern_chair"), Registries.BLOCK)
@@ -874,6 +930,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_striped_chair"), () -> VanillaWoodTypes.OAK,
                         this::newStripedChair
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: log, stripped_log
                 .addTag(modRes("striped_chair"), Registries.BLOCK)
@@ -888,6 +945,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_stool_chair"), () -> VanillaWoodTypes.OAK,
                         this::newChair
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -901,6 +959,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_counter"), () -> VanillaWoodTypes.OAK,
                         this::newCounter
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
@@ -915,6 +974,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_drawer_counter"), () -> VanillaWoodTypes.OAK,
                         this::newStorageCounter
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
@@ -929,6 +989,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_double_drawer_counter"), () -> VanillaWoodTypes.OAK,
                         this::newStorageCounter
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
@@ -943,6 +1004,7 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_cupboard_counter"), () -> VanillaWoodTypes.OAK,
                         this::newCupboardCounter
                 )
+                .setProperties(w -> copyStandardProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile(entityType))
                 //TEXTURES: log, stripped_log
@@ -959,19 +1021,20 @@ public abstract class MacawFurnitureModuleAbstract extends EveryCompatModule {
         return BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).strength(2.0F, 2.3F);
     }
 
-    public abstract Block newCabinet(WoodType woodType);
-    public abstract Block newCabinetHinge(WoodType woodType);
-    public abstract Block newWideFurniture(WoodType woodType);
-    public abstract Block newTallFurniture(WoodType woodType);
-    public abstract Block newTallFurnitureHinge(WoodType woodType);
-    public abstract Block newDesk(WoodType woodType);
-    public abstract Block newTable(WoodType woodType);
-    public abstract Block newTableHitbox(WoodType woodType);
-    public abstract Block newStripedChair(WoodType woodType);
-    public abstract Block newModernChair(WoodType woodType);
-    public abstract Block newChair(WoodType woodType);
-    public abstract Block newCounter(WoodType woodType);
-    public abstract Block newStorageCounter(WoodType woodType);
-    public abstract Block newCupboardCounter(WoodType woodType);
-    public abstract Block newSinkCounter(WoodType woodType);
+
+    public abstract Block newCabinet(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newCabinetHinge(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newWideFurniture(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newTallFurniture(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newTallFurnitureHinge(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newDesk(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newTable(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newTableHitbox(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newStripedChair(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newModernChair(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newChair(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newCounter(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newStorageCounter(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newCupboardCounter(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newSinkCounter(WoodType woodType, BlockBehaviour.Properties p);
 }

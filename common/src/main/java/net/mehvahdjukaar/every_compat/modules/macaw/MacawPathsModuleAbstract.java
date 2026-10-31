@@ -6,6 +6,7 @@ import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
@@ -36,5 +37,5 @@ public abstract class MacawPathsModuleAbstract extends EveryCompatModule {
         this.addEntry(planks_path);
     }
 
-    public abstract Block newFacingPathBlock(WoodType woodType);
+    public abstract Block newFacingPathBlock(WoodType woodType, BlockBehaviour.Properties p);
 }

@@ -31,7 +31,7 @@ public class TwigsModule extends EveryCompatModule {
 
         tables = SimpleEntrySet.builder(WoodType.class, "table",
                         getModBlock("oak_table"), () -> VanillaWoodTypes.OAK,
-                        w -> new TableBlock(Utils.copyPropertySafe(w.planks).instabreak()))
+                        (w, p) -> new TableBlock(p.instabreak()))
                 .addTag(modRes("tables"), Registries.BLOCK)
                 .addTag(modRes("tables"), Registries.ITEM)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)

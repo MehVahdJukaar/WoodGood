@@ -5,6 +5,7 @@ import com.simibubi.create.content.decoration.palettes.WindowBlock;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Blocks;
 
@@ -22,6 +23,7 @@ public class CreateModule extends EveryCompatModule {
         windows = SimpleEntrySet.builder(WoodType.class, "window",
                         getModBlock("oak_window"), () -> VanillaWoodTypes.OAK,
                         this::makeWindow)
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.GLASS))
                 .addTextureM(modRes("block/palettes/oak_window"), EveryCompat.res("block/c/palettes/oak_window_m"), PaletteStrategies.WOOD_PLANKS_REMOVE_DARKEST)
                 .addTextureM(modRes("block/palettes/oak_window_connected"), EveryCompat.res("block/c/palettes/oak_window_connected_m"), PaletteStrategies.WOOD_PLANKS_REMOVE_DARKEST)
                 .addTag(BlockTags.IMPERMEABLE, Registries.BLOCK)
@@ -48,8 +50,8 @@ public class CreateModule extends EveryCompatModule {
 
     }
 
-    private WindowBlock makeWindow(WoodType w) {
-        return new WindowBlock(Utils.copyPropertySafe(Blocks.GLASS)
+    private WindowBlock makeWindow(WoodType w, BlockBehaviour.Properties p) {
+        return new WindowBlock(p
                 .isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false), false);
     }

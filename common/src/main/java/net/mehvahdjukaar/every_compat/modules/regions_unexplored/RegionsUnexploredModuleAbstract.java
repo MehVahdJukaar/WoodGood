@@ -39,8 +39,13 @@ import static net.mehvahdjukaar.every_compat.misc.UtilityTag.createAndAddCustomT
 
 ///SUPPORT: v0.6.3+
 public abstract class RegionsUnexploredModuleAbstract extends EveryCompatModule {
-    public final BlockBehaviour.Properties BRANCH_PROPERTIES = BlockBehaviour.Properties.of().noOcclusion().sound(SoundType.MANGROVE_ROOTS).strength(1.0F, 1.5F).dynamicShape();
-    public final BlockBehaviour.Properties SHRUB_PROPERTIES = BlockBehaviour.Properties.of().pushReaction(PushReaction.DESTROY).noCollision().instabreak().sound(SoundType.AZALEA).offsetType(BlockBehaviour.OffsetType.XZ);
+    private static BlockBehaviour.Properties branchProperties() {
+        return BlockBehaviour.Properties.of().noOcclusion().sound(SoundType.MANGROVE_ROOTS).strength(1.0F, 1.5F).dynamicShape();
+    }
+
+    private static BlockBehaviour.Properties shrubProperties() {
+        return BlockBehaviour.Properties.of().pushReaction(PushReaction.DESTROY).noCollision().instabreak().sound(SoundType.AZALEA).offsetType(BlockBehaviour.OffsetType.XZ);
+    }
 
     public final SimpleEntrySet<WoodType, Block> branches;
     public final SimpleEntrySet<LeavesType, Block> shrubs;
@@ -53,6 +58,7 @@ public abstract class RegionsUnexploredModuleAbstract extends EveryCompatModule 
                         getModBlock("oak_branch"), () -> VanillaWoodTypes.OAK,
                         this::newBranchBlock
                 )
+                .setProperties(w -> branchProperties())
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK)
                 .addTag(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE, Registries.BLOCK)
@@ -74,6 +80,7 @@ public abstract class RegionsUnexploredModuleAbstract extends EveryCompatModule 
                         () -> VanillaLeavesTypes.DARK_OAK,
                         this::newShrubBlock
                 )
+                .setProperties(l -> shrubProperties())
                 .addCondition(l -> {
                     boolean log = l.getAssociatedWoodType() != null; //REASON: textures
                     boolean sapling = l.getItemOfThis("sapling") != null; //REASON: recipes
@@ -92,9 +99,9 @@ public abstract class RegionsUnexploredModuleAbstract extends EveryCompatModule 
         this.addEntry(shrubs);
     }
 
-    public abstract Block newShrubBlock(LeavesType leavesType);
+    public abstract Block newShrubBlock(LeavesType leavesType, BlockBehaviour.Properties p);
 
-    public abstract Block newBranchBlock(WoodType w);
+    public abstract Block newBranchBlock(WoodType w, BlockBehaviour.Properties p);
 
     @Override
     public void onModSetup() {

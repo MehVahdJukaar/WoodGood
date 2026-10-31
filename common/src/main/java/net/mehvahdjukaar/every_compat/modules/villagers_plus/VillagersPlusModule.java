@@ -28,8 +28,9 @@ public class VillagersPlusModule extends EveryCompatModule {
 
         tub = SimpleEntrySet.builder(WoodType.class, "horticulturist_table",
                         VPBlocks.OAK_HORTICULTURIST_TABLE_BLOCK, () -> VanillaWoodTypes.OAK,
-                        w -> new HorticulturistTableBlock(BlockBehaviour.Properties.of().strength(0.5F).noOcclusion().ignitedByLava())
+                        (w, p) -> new HorticulturistTableBlock(p.strength(0.5F).noOcclusion().ignitedByLava())
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .requiresChildren("stripped_log") //REASON: recipes & textures
                 .addTextureM(modRes("block/oak_horticulturist_workstation"),
                         EveryCompat.res("block/vp/oak_horticulturist_workstation_m"),

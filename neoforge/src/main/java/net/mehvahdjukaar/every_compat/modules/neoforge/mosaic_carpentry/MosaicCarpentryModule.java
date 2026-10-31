@@ -28,7 +28,7 @@ public class MosaicCarpentryModule extends EveryCompatModule {
 
         mosaics = SimpleEntrySet.builder(WoodType.class, "mosaic",
                         getModBlock("spruce_mosaic"), () -> VanillaWoodTypes.SPRUCE,
-                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                        (w, p) -> new Block(p))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
                 .addTag(ItemTags.PLANKS, Registries.ITEM)
@@ -40,7 +40,7 @@ public class MosaicCarpentryModule extends EveryCompatModule {
 
         mosaicStairs = SimpleEntrySet.builder(WoodType.class, "mosaic_stairs",
                         getModBlock("spruce_mosaic_stairs"), () -> VanillaWoodTypes.SPRUCE,
-                        w -> new StairBlock(w.planks.defaultBlockState(), Utils.copyPropertySafe(w.planks)))
+                        (w, p) -> new StairBlock(w.planks.defaultBlockState(), p))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_STAIRS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_STAIRS, Registries.ITEM)
@@ -52,7 +52,7 @@ public class MosaicCarpentryModule extends EveryCompatModule {
 
         mosaicSlabs = SimpleEntrySet.builder(WoodType.class, "mosaic_slab",
                         getModBlock("spruce_mosaic_slab"), () -> VanillaWoodTypes.SPRUCE,
-                        w -> new SlabBlock(Utils.copyPropertySafe(w.planks)))
+                        (w, p) -> new SlabBlock(p))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_SLABS, Registries.BLOCK)
                 .addTag(ItemTags.WOODEN_SLABS, Registries.ITEM)

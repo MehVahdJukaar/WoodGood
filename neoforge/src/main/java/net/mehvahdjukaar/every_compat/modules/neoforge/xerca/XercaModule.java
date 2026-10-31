@@ -52,7 +52,8 @@ public class XercaModule extends EveryCompatModule {
 
         carved1 = SimpleEntrySet.builder(WoodType.class, "1", "carved",
                         getModBlock("carved_warped_1"), () -> VanillaWoodTypes.WARPED,
-                        w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
+                        (w, p) -> new BlockCarvedLog(p))
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
                 .addTexture(modRes("block/carved_wood/carved_warped_1_top"), DARKER_PALETTE)
@@ -65,7 +66,8 @@ public class XercaModule extends EveryCompatModule {
 
         carved2 = SimpleEntrySet.builder(WoodType.class, "2", "carved",
                         getModBlock("carved_warped_2"), () -> VanillaWoodTypes.WARPED,
-                        w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
+                        (w, p) -> new BlockCarvedLog(p))
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
                 .addTexture(modRes("block/carved_wood/carved_warped_2_top"), DARKEST_PALETTE)
@@ -78,7 +80,8 @@ public class XercaModule extends EveryCompatModule {
 
         carved3 = SimpleEntrySet.builder(WoodType.class, "3", "carved",
                         getModBlock("carved_warped_3"), () -> VanillaWoodTypes.WARPED,
-                        w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
+                        (w, p) -> new BlockCarvedLog(p))
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
                 .addTexture(modRes("block/carved_wood/carved_warped_3_top"), DARKEST_PALETTE)
@@ -91,7 +94,8 @@ public class XercaModule extends EveryCompatModule {
 
         carved4 = SimpleEntrySet.builder(WoodType.class, "4", "carved",
                         getModBlock("carved_warped_4"), () -> VanillaWoodTypes.WARPED,
-                        w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
+                        (w, p) -> new BlockCarvedLog(p))
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
                 .addTexture(modRes("block/carved_wood/carved_warped_4_top"), DARKEST_PALETTE)
@@ -104,7 +108,8 @@ public class XercaModule extends EveryCompatModule {
 
         carved5 = SimpleEntrySet.builder(WoodType.class, "5", "carved",
                         getModBlock("carved_warped_5"), () -> VanillaWoodTypes.WARPED,
-                        w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
+                        (w, p) -> new BlockCarvedLog(p))
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
                 .addTexture(modRes("block/carved_wood/carved_warped_5_top"), DARKEST_PALETTE)
@@ -118,7 +123,8 @@ public class XercaModule extends EveryCompatModule {
 
         carved6 = SimpleEntrySet.builder(WoodType.class, "6", "carved",
                         getModBlock("carved_warped_6"), () -> VanillaWoodTypes.WARPED,
-                        w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
+                        (w, p) -> new BlockCarvedLog(p))
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
                 .addTexture(modRes("block/carved_wood/carved_warped_6_top"), DARK_PALETTE)
@@ -135,7 +141,8 @@ public class XercaModule extends EveryCompatModule {
 
         carved7 = SimpleEntrySet.builder(WoodType.class, "7", "carved",
                         getModBlock("carved_warped_7"), () -> VanillaWoodTypes.WARPED,
-                        w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
+                        (w, p) -> new BlockCarvedLog(p))
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
                 .addTexture(modRes("block/carved_wood/carved_warped_7_top"), NEUTRAL_PALETTE)
@@ -149,7 +156,8 @@ public class XercaModule extends EveryCompatModule {
 
         carved8 = SimpleEntrySet.builder(WoodType.class, "8", "carved",
                         getModBlock("carved_warped_8"), () -> VanillaWoodTypes.WARPED,
-                        w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
+                        (w, p) -> new BlockCarvedLog(p))
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_warped\"", "\"xercamod:block/carved_wood/carved_oak\""))
                 .addTexture(modRes("block/carved_wood/carved_warped_8_top"), NEUTRAL_PALETTE)

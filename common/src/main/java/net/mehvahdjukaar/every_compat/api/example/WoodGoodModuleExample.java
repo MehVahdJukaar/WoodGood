@@ -56,7 +56,7 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
             // after creating the entry set, don't forget to add it to the module via this.addEntry(entrySet);
             sampleBlock_2 = SimpleEntrySet.builder(WoodType.class,"suffix", "prefix",
                             getModBlock("oak_table"), ()-> VanillaWoodTypes.OAK,
-                    woodType -> new Block(Utils.copyPropertySafe(woodType.planks).instabreak())
+                    (woodType, p) -> new Block(p.instabreak())
                     )
                     /// Similar setup as sampleBlock
                     .build();
@@ -64,7 +64,7 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
 
             sampleBlock = SimpleEntrySet.builder(WoodType.class,"table",
                             getModBlock("oak_table"), ()-> VanillaWoodTypes.OAK,
-                            woodType -> new Block(Utils.copyPropertySafe(woodType.planks).instabreak())
+                            (woodType, p) -> new Block(p.instabreak())
                     )
                     ///REQUIRED: Add block to your mod's tab or Minecraft's tab
                     .setTab(getTab(tab))
@@ -113,7 +113,7 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
 
             sampleItem = ItemOnlyEntrySet.builder(WoodType.class,"table",
                             getModItem("oak_table"), ()-> VanillaWoodTypes.OAK,
-                            w -> new Item(new Item.Properties())
+                            (w, p) -> new Item(p)
                     )
                     .addTexture(modRes("item/itemTexture"))
                     .addTag(modRes("tables"), Registries.ITEM)

@@ -34,7 +34,7 @@ public class TwilightForestModule extends EveryCompatModule {
 
         banisters = SimpleEntrySet.builder(WoodType.class, "banister",
                         getModBlock("oak_banister"), () -> VanillaWoodTypes.OAK,
-                        w -> new BanisterBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new BanisterBlock(p.noOcclusion())
                 )
                 .addTag(modRes("banisters"), Registries.BLOCK)
                 .addTag(modRes("banisters"), Registries.ITEM)
@@ -46,8 +46,9 @@ public class TwilightForestModule extends EveryCompatModule {
 
         hollowLogsHorizontal = SimpleEntrySet.builder(WoodType.class, "log_horizontal", "hollow",
                         getModBlock("hollow_acacia_log_horizontal", HollowLogHorizontal.class), () -> VanillaWoodTypes.ACACIA,
-                        w -> new HollowLogHorizontal(Utils.copyPropertySafe(w.log))
+                        (w, p) -> new HollowLogHorizontal(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 .requiresChildren(STRIPPED_LOG) //REASON: Textures
                 //REASON: Excluded terrestria's 2 logs have non-standard 16x16 texture, take a look. you'll see why.
                 .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)"))
@@ -60,10 +61,11 @@ public class TwilightForestModule extends EveryCompatModule {
 
 /*        hollowLogsVertical = SimpleEntrySet.builder(WoodType.class, "log_vertical", "hollow",
                         TFBlocks.HOLLOW_ACACIA_LOG_VERTICAL, () -> WoodTypeRegistry.getValue(Identifier.parse("acacia")),
-                        w -> {
+                        (w, p) -> {
                             var id = EveryCompat.res(this.shortenedId() + "/" + w.getVariantId("hollow", true) + "_log_climbable");
-                            return new HollowLogVertical(Utils.copyPropertySafe(w.log), makeRegObj(id));
+                            return new HollowLogVertical(p, makeRegObj(id));
                         })
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 .requiresChildren("stripped_log") //REASON: Textures
                 //REASON: Excluded terrestria's 2 logs have non-standard 16x16 texture, take a look. you'll see why.
                 .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)"))
@@ -76,9 +78,10 @@ public class TwilightForestModule extends EveryCompatModule {
 
         hollowLogsClimbable = SimpleEntrySet.builder(WoodType.class, "log_climbable", "hollow",
                         TFBlocks.HOLLOW_ACACIA_LOG_CLIMBABLE, () -> WoodTypeRegistry.getValue(VanillaWoods.ACACIA),
-                        w -> new HollowLogClimbable(Utils.copyPropertySafe(w.log),
+                        (w, p) -> new HollowLogClimbable(p,
                                 makeRegObj(Utils.getID(hollowLogsVertical.blocks.get(w))))
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 .requiresChildren("stripped_log") //REASON: Textures
                 //REASON: Excluded terrestria's 2 logs have non-standard 16x16 texture, take a look. you'll see why.
                 .addCondition(w -> !w.getId().toString().matches("terrestria:(sakura|yucca_palm)"))

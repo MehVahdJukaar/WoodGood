@@ -5,7 +5,7 @@
   "compatibilityLevel": "JAVA_21",
   "client": [
     "client.BlockStateModelLoaderMixin",
-    "client.ModelBakeryMixin",
+    "client.ModelDiscoveryMixin",
     "client.ModelManagerMixin"
   ],
   "mixins": [

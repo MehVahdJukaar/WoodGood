@@ -35,6 +35,7 @@ public abstract class MacawStairsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_terrace_stairs"), () -> VanillaWoodTypes.OAK,
                         this::newTerraceStairs
                 )
+                .setProperties(w -> copyProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -50,6 +51,7 @@ public abstract class MacawStairsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_skyline_stairs"), () -> VanillaWoodTypes.OAK,
                         this::newSkylineStairs
                 )
+                .setProperties(w -> copyProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -65,6 +67,7 @@ public abstract class MacawStairsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_compact_stairs"), () -> VanillaWoodTypes.OAK,
                         this::newCompactStairs
                 )
+                .setProperties(w -> copyProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -80,6 +83,7 @@ public abstract class MacawStairsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_bulk_stairs"), () -> VanillaWoodTypes.OAK,
                         this::newBulkStairs
                 )
+                .setProperties(w -> copyProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -95,6 +99,7 @@ public abstract class MacawStairsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_loft_stairs"), () -> VanillaWoodTypes.OAK,
                         this::newLoftStairs
                 )
+                .setProperties(w -> copyProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -110,6 +115,7 @@ public abstract class MacawStairsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_balcony"), () -> VanillaWoodTypes.OAK,
                         this::newBalconyRailing
                 )
+                .setProperties(w -> copyProperties())
                 .requiresChildren(FENCE, STRIPPED_LOG) //REASON: textures, recipes
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -126,6 +132,7 @@ public abstract class MacawStairsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_railing"), () -> VanillaWoodTypes.OAK,
                         this::newStairRailing
                 )
+                .setProperties(w -> copyProperties())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .requiresFromMap(balconies.blocks) //REASON: recipes
                 //TEXTURES: log
@@ -142,6 +149,7 @@ public abstract class MacawStairsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_platform"), () -> VanillaWoodTypes.OAK,
                         this::newStairPlatform
                 )
+                .setProperties(w -> copyProperties())
                 .requiresChildren(SLAB, STRIPPED_LOG) //REASON: textures, recipes
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -155,14 +163,14 @@ public abstract class MacawStairsModuleAbstract extends EveryCompatModule {
 
     }
 
-    public abstract Block newTerraceStairs(WoodType woodType);
-    public abstract Block newSkylineStairs(WoodType woodType);
-    public abstract Block newCompactStairs(WoodType woodType);
-    public abstract Block newBulkStairs(WoodType woodType);
-    public abstract Block newLoftStairs(WoodType woodType);
-    public abstract Block newBalconyRailing(WoodType woodType);
-    public abstract Block newStairRailing(WoodType woodType);
-    public abstract Block newStairPlatform(WoodType woodType);
+    public abstract Block newTerraceStairs(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newSkylineStairs(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newCompactStairs(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newBulkStairs(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newLoftStairs(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newBalconyRailing(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newStairRailing(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newStairPlatform(WoodType woodType, BlockBehaviour.Properties p);
 
     // METHODS
     public BlockBehaviour.Properties copyProperties() {

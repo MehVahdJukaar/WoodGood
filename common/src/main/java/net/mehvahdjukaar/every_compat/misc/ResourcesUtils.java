@@ -172,8 +172,12 @@ public class ResourcesUtils {
             //we cant use this since it might override parent too. Custom textured items need a custom model added manually with addBlockResources
             // modelModifier.replaceItemType(baseItemname);
 
-            StaticResource oakItemModel = StaticResource.getOrLog(manager,
-                    ResType.ITEM_MODELS.getPath(Utils.getID(oakItem)));
+            Identifier oakItemId = Utils.getID(oakItem);
+            if (manager.getResource(ResType.ITEM_MODELS.getPath(oakItemId)).isEmpty()) {
+                copyItemDefinitions(manager, sink, items, oakItemId, itemModelTransformer);
+                return;
+            }
+            StaticResource oakItemModel = StaticResource.getOrLog(manager, ResType.ITEM_MODELS.getPath(oakItemId));
 
             if (oakItemModel == null) return;
             JsonArray oakTints = getItemDefinitionTints(manager, Utils.getID(oakItem));
@@ -235,6 +239,23 @@ public class ResourcesUtils {
             JsonObject definition = new JsonObject();
             definition.add("model", model);
             return definition;
+        });
+    }
+
+    //no models/item, so the items/ json points straight at block modesl (or a special renderer). copy it over
+    private static <I extends Item, T extends BlockType> void copyItemDefinitions(ResourceManager manager, ResourceSink sink, Map<T, I> items,
+                                                                                  Identifier oakItemId, BlockTypeResTransformer<T> transformer) {
+        StaticResource oakDefinition = StaticResource.getOrLog(manager, ResType.ITEMS.getPath(oakItemId));
+        if (oakDefinition == null) return;
+
+        items.forEach((blockType, item) -> {
+            if (isCompatChest(item)) return;
+            Identifier id = Utils.getID(item);
+            TaskRunnerWithFailureCollection.active().runSafely("item definition", id::toString, () -> {
+                StaticResource newDefinition = transformer.transform(oakDefinition, id, blockType);
+                sink.addJsonUnlessPresent(manager, ResType.ITEMS.getPath(id),
+                        () -> RPUtils.deserializeJson(new ByteArrayInputStream(newDefinition.data)));
+            });
         });
     }
 

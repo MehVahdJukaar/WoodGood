@@ -61,8 +61,9 @@ public class ReDecoModule extends EveryCompatModule {
 
         tables = SimpleEntrySet.builder(WoodType.class, "table",
                         getModBlock("oak_table"), () -> VanillaWoodTypes.OAK,
-                        w -> new TableBlock(copyProperties(w, 1.0F))
+                        (w, p) -> new TableBlock(p)
                 )
+                .setProperties(w -> copyProperties(w, 1.0F))
                 .addTexture(modRes("block/table/oak_table"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tab))
@@ -72,8 +73,9 @@ public class ReDecoModule extends EveryCompatModule {
 
         side_tables = SimpleEntrySet.builder(WoodType.class, "side_table",
                         getModBlock("oak_side_table"), () -> VanillaWoodTypes.OAK,
-                        w -> new SideTableBlock(copyProperties(w, 1.0F))
+                        (w, p) -> new SideTableBlock(p)
                 )
+                .setProperties(w -> copyProperties(w, 1.0F))
                 .addTile(getModTile("side_table_block_entity"))
                 .addTextureM(modRes("block/sidetable/oak_side_table"), EveryCompat.res("block/rd/oak_side_table_m"))
                 .addTextureM(modRes("block/drawer_oak"), EveryCompat.res("block/rd/drawer_oak_m"))
@@ -85,8 +87,9 @@ public class ReDecoModule extends EveryCompatModule {
 
         drawers = SimpleEntrySet.builder(WoodType.class, "drawers",
                         getModBlock("oak_drawers"), () -> VanillaWoodTypes.OAK,
-                        w -> new DrawersBlock(copyProperties(w, 1.0F))
+                        (w, p) -> new DrawersBlock(p)
                 )
+                .setProperties(w -> copyProperties(w, 1.0F))
                 .addTile(getModTile("drawers_block_entity"))
                 .addTextureM(modRes("block/drawers/oak_drawers"), EveryCompat.res("block/rd/oak_drawers_m"))
                 //TEXTURES: side_tables' drawer_oak (above)
@@ -98,8 +101,9 @@ public class ReDecoModule extends EveryCompatModule {
 
         coffee_tables = SimpleEntrySet.builder(WoodType.class, "coffee_table",
                         getModBlock("oak_coffee_table"), () -> VanillaWoodTypes.OAK,
-                        w -> new CoffeeTableBlock(copyProperties(w, 1.0F))
+                        (w, p) -> new CoffeeTableBlock(p)
                 )
+                .setProperties(w -> copyProperties(w, 1.0F))
                 //TEXTURES: tables' oak_table (above)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tab))
@@ -109,8 +113,9 @@ public class ReDecoModule extends EveryCompatModule {
 
         chairs = SimpleEntrySet.builder(WoodType.class, "chair",
                         getModBlock("oak_chair"), () -> VanillaWoodTypes.OAK,
-                        w -> new ChairBlock(copyProperties(w, 1.0F))
+                        (w, p) -> new ChairBlock(p)
                 )
+                .setProperties(w -> copyProperties(w, 1.0F))
                 .addTile(getModTile("chair_block_entity"))
                 .addTexture(modRes("block/chair/oak_chair"))
                 .addTexture(modRes("block/chair/oak_back_0"))
@@ -129,8 +134,9 @@ public class ReDecoModule extends EveryCompatModule {
 
         stools = SimpleEntrySet.builder(WoodType.class, "stool",
                         getModBlock("oak_stool"), () -> VanillaWoodTypes.OAK,
-                        w -> new StoolBlock(copyProperties(w, 1.0F))
+                        (w, p) -> new StoolBlock(p)
                 )
+                .setProperties(w -> copyProperties(w, 1.0F))
                 .addTile(getModTile("stool_block_entity"))
                 .addTexture(modRes("block/stool/oak_stool"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -142,8 +148,9 @@ public class ReDecoModule extends EveryCompatModule {
 
         benches = SimpleEntrySet.builder(WoodType.class, "bench",
                         getModBlock("oak_bench"), () -> VanillaWoodTypes.OAK,
-                        w -> new BenchBlock(copyProperties(w, 1.0F))
+                        (w, p) -> new BenchBlock(p)
                 )
+                .setProperties(w -> copyProperties(w, 1.0F))
                 .addTile(getModTile("bench_block_entity"))
                 .addTexture(modRes("block/bench/oak_bench"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -155,8 +162,9 @@ public class ReDecoModule extends EveryCompatModule {
 
         shelves = SimpleEntrySet.builder(WoodType.class, "shelf",
                         getModBlock("oak_shelf"), () -> VanillaWoodTypes.OAK,
-                        w -> new ShelfBlock(copyProperties(w, 1.0F))
+                        (w, p) -> new ShelfBlock(p)
                 )
+                .setProperties(w -> copyProperties(w, 1.0F))
                 .addTile(getModTile("shelf_block_entity"))
                 .addTexture(modRes("block/shelf/oak_shelf"))
                 .addTexture(modRes("block/shelf/oak_shelf_support"))
@@ -168,8 +176,9 @@ public class ReDecoModule extends EveryCompatModule {
 
         crates = SimpleEntrySet.builder(WoodType.class, "crate",
                         getModBlock("oak_crate"), () -> VanillaWoodTypes.OAK,
-                        w -> new CrateBlock(copyProperties(w, 1.0F))
+                        (w, p) -> new CrateBlock(p)
                 )
+                .setProperties(w -> copyProperties(w, 1.0F))
                 .addTile(getModTile("crate_block_entity"))
                 .addTexture(modRes("block/crate/oak_crate"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -181,8 +190,9 @@ public class ReDecoModule extends EveryCompatModule {
 
         display_cases = SimpleEntrySet.builder(WoodType.class, "display_case",
                         getModBlock("oak_display_case"), () -> VanillaWoodTypes.OAK,
-                        w -> new DisplayCaseBlock(copyProperties(w, 1.0F).noOcclusion())
+                        (w, p) -> new DisplayCaseBlock(p.noOcclusion())
                 )
+                .setProperties(w -> copyProperties(w, 1.0F))
                 .addTile(getModTile("display_case_block_entity"))
                 .addTexture(modRes("block/displaycase/oak_display_case"))
                 .addTexture(modRes("block/displaycase/oak_inside"))
@@ -195,8 +205,9 @@ public class ReDecoModule extends EveryCompatModule {
 
         sword_mounts = SimpleEntrySet.builder(WoodType.class, "sword_mount",
                         getModBlock("oak_sword_mount"), () -> VanillaWoodTypes.OAK,
-                        w -> new SwordMountBlock(copyProperties(w, 1.0F).noOcclusion())
+                        (w, p) -> new SwordMountBlock(p.noOcclusion())
                 )
+                .setProperties(w -> copyProperties(w, 1.0F))
                 .addTile(getModTile("sword_mount_block_entity"))
                 .addTexture(modRes("block/swordmount/oak_sword_mount"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -208,8 +219,9 @@ public class ReDecoModule extends EveryCompatModule {
 
         pedestals = SimpleEntrySet.builder(WoodType.class, "pedestal",
                         getModBlock("oak_pedestal"), () -> VanillaWoodTypes.OAK,
-                        w -> new PedestalBlock(copyProperties(w, 1.0F).noOcclusion())
+                        (w, p) -> new PedestalBlock(p.noOcclusion())
                 )
+                .setProperties(w -> copyProperties(w, 1.0F))
                 .addTile(getModTile("pedestal_block_entity"))
                 .addTexture(modRes("block/pedestal/oak_pedestal"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -221,8 +233,9 @@ public class ReDecoModule extends EveryCompatModule {
 
         plank_fences = SimpleEntrySet.builder(WoodType.class, "plank_fence",
                         getModBlock("oak_plank_fence"), () -> VanillaWoodTypes.OAK,
-                        w -> new PlankFenceBlock(copyProperties(w, 1.0F))
+                        (w, p) -> new PlankFenceBlock(p)
                 )
+                .setProperties(w -> copyProperties(w, 1.0F))
                 .addTexture(modRes("block/plankfence/oak_plank_fence"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
@@ -233,9 +246,10 @@ public class ReDecoModule extends EveryCompatModule {
 
         plank_gates = SimpleEntrySet.builder(WoodType.class, "plank_gate",
                         getModBlock("oak_plank_gate"), () -> VanillaWoodTypes.OAK,
-                        w -> new PlankGateBlock(copyProperties(w, 1.0F),
+                        (w, p) -> new PlankGateBlock(p,
                                 SoundEvents.FENCE_GATE_CLOSE, SoundEvents.FENCE_GATE_OPEN)
                 )
+                .setProperties(w -> copyProperties(w, 1.0F))
                 //TEXTURES: plank_fences' oak_plank_fence (above)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tab))
@@ -245,9 +259,10 @@ public class ReDecoModule extends EveryCompatModule {
 
         lattices = SimpleEntrySet.builder(WoodType.class, "lattice",
                         getModBlock("oak_lattice"), () -> VanillaWoodTypes.OAK,
-                        w -> new LatticeBlock(Utils.copyPropertySafe(Blocks.LADDER)
+                        (w, p) -> new LatticeBlock(p
                                 .strength(1.0F).noOcclusion().sound(SoundType.WOOD))
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.LADDER))
                 .addTexture(modRes("block/lattice/oak_lattice"))
                 .addTexture(modRes("item/oak_lattice"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -260,8 +275,9 @@ public class ReDecoModule extends EveryCompatModule {
 
         counters = SimpleEntrySet.builder(WoodType.class, "counter",
                         getModBlock("oak_counter"), () -> VanillaWoodTypes.OAK,
-                        w -> new CounterBlock(copyProperties(w, 1.0F))
+                        (w, p) -> new CounterBlock(p)
                 )
+                .setProperties(w -> copyProperties(w, 1.0F))
                 .addTextureM(modRes("block/counters/oak_counters"), EveryCompat.res("block/rd/oak_counters_m"))
                 //TEXTURES: polished_planks' polished_oak_planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -272,8 +288,9 @@ public class ReDecoModule extends EveryCompatModule {
 
         drawer_counters = SimpleEntrySet.builder(WoodType.class, "drawer_counter",
                         getModBlock("oak_drawer_counter"), () -> VanillaWoodTypes.OAK,
-                        w -> new DrawerCounterBlock(copyProperties(w, 1.0F))
+                        (w, p) -> new DrawerCounterBlock(p)
                 )
+                .setProperties(w -> copyProperties(w, 1.0F))
                 .addTile(getModTile("drawers_block_entity"))
                 //TEXTURES: counters' oak_counters (above)
                 //TEXTURES: drawers' drawer_oak (above)
@@ -286,8 +303,9 @@ public class ReDecoModule extends EveryCompatModule {
 
         cabinet_counters = SimpleEntrySet.builder(WoodType.class, "cabinet_counter",
                         getModBlock("oak_cabinet_counter"), () -> VanillaWoodTypes.OAK,
-                        w -> new CabinetCounterBlock(copyProperties(w, 1.0F))
+                        (w, p) -> new CabinetCounterBlock(p)
                 )
+                .setProperties(w -> copyProperties(w, 1.0F))
                 .addTile(getModTile("cabinet_block_entity"))
                 //TEXTURES: counters' oak_counters (above)
                 //TEXTURES: polished_planks' polished_oak_planks -below
@@ -300,8 +318,9 @@ public class ReDecoModule extends EveryCompatModule {
 
         cabinets = SimpleEntrySet.builder(WoodType.class, "cabinet",
                         getModBlock("oak_cabinet"), () -> VanillaWoodTypes.OAK,
-                        w -> new CabinetBlock(copyProperties(w, 1.0F))
+                        (w, p) -> new CabinetBlock(p)
                 )
+                .setProperties(w -> copyProperties(w, 1.0F))
                 .addTile(getModTile("cabinet_block_entity"))
                 .addTextureM(modRes("block/cabinet/oak_cabinet"), EveryCompat.res("block/rd/oak_cabinet_m"))
                 .addTextureM(modRes("block/cabinet_doors_oak"), EveryCompat.res("block/rd/cabinet_doors_oak_m"))
@@ -313,8 +332,9 @@ public class ReDecoModule extends EveryCompatModule {
 
         polished_planks = SimpleEntrySet.builder(WoodType.class, "planks", "polished",
                         getModBlock("polished_oak_planks"), () -> VanillaWoodTypes.OAK,
-                        w -> new PolishedPlankBlock(copyProperties(w, 1.0F))
+                        (w, p) -> new PolishedPlankBlock(p)
                 )
+                .setProperties(w -> copyProperties(w, 1.0F))
                 .addTexture(modRes("block/polishedplanks/polished_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PLANKS, Registries.BLOCK)
@@ -341,8 +361,9 @@ public class ReDecoModule extends EveryCompatModule {
 
         polished_slabs = SimpleEntrySet.builder(WoodType.class, "slab", "polished",
                         getModBlock("polished_oak_slab"), () -> VanillaWoodTypes.OAK,
-                        w -> new PolishedPlankSlab(copyProperties(w, 1.0F))
+                        (w, p) -> new PolishedPlankSlab(p)
                 )
+                .setProperties(w -> copyProperties(w, 1.0F))
                 //TEXTURES: polished_planks' polished_oak_planks (above)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.SLABS, Registries.BLOCK)

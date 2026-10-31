@@ -14,7 +14,7 @@ public class ProductiveBeesModule extends EveryCompatModule {
         //TODO: all these are invalid now
         advancedBeehives = SimpleEntrySet.builder(WoodType.class, "beehive", "advanced",
                         ModBlocks.ADVANCED_SPRUCE_BEEHIVE, () -> WoodTypeRegistry.getValue(new Identifier("spruce")),
-                        w -> new AdvancedBeehive(Utils.copyPropertySafe(w.planks)))
+                        (w, p) -> new AdvancedBeehive(p))
                 // Textures are not generated for this, temporary until model overrides work
                 .addModelTransform(m -> m.replaceString("buzzier_bees:block/spruce", "productivebees:block/spruce"))
                 .addTextureM(EveryCompat.res("block/advanced_beehive/horizontal/spruce_beehive_front_right_honey"), EveryCompat.res("block/pb/advanced_beehive/horizontal/oak_beehive_front_right_honey_m"))
@@ -50,7 +50,7 @@ public class ProductiveBeesModule extends EveryCompatModule {
 
         expansionBoxes = SimpleEntrySet.builder(WoodType.class, "", "expansion_box",
                         ModBlocks.EXPANSION_BOX_SPRUCE, () -> WoodTypeRegistry.getValue(new Identifier("spruce")),
-                        w -> new ExpansionBox(Utils.copyPropertySafe(w.planks)))
+                        (w, p) -> new ExpansionBox(p))
                 // Textures are not generated for this, temporary until model overrides work
                 .addModelTransform(m -> m.replaceString("buzzier_bees:block/spruce", "productivebees:block/spruce"))
                 .addTextureM(EveryCompat.res("block/advanced_beehive/horizontal/spruce_beehive_front_right_honey"), EveryCompat.res("block/pb/advanced_beehive/horizontal/oak_beehive_front_right_honey_m"))

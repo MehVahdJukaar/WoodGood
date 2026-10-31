@@ -62,7 +62,7 @@ public class BewitchmentModule extends EveryCompatModule {
 
         bark = ItemOnlyEntrySet.builder(WoodType.class, "bark",
                         () -> BWObjects.OAK_BARK, () -> VanillaWoodTypes.OAK,
-                        w -> new Item(new Item.Properties())
+                        (w, p) -> new Item(p)
                 )
                 .requiresChildren(STRIPPED_LOG) // Recipes
                 .addTexture(modRes("item/oak_bark"), PaletteStrategies.LOG_SIDE_STANDARD)

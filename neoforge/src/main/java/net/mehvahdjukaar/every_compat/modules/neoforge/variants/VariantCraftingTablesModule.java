@@ -30,7 +30,7 @@ public class VariantCraftingTablesModule extends EveryCompatModule {
 
         craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
                         getModBlock("spruce_crafting_table"), () -> VanillaWoodTypes.SPRUCE,
-                        w -> new VCTCraftingTableBlock(Utils.copyPropertySafe(w.planks).strength(2.5F).sound(SoundType.WOOD)))
+                        (w, p) -> new VCTCraftingTableBlock(p.strength(2.5F).sound(SoundType.WOOD)))
                 //TEXTURE: texture is oak_craftng_table's texture
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_front"),
                         EveryCompat.res("block/vct/spruce_crafting_table_front_m"))

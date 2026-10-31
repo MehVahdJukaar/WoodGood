@@ -52,7 +52,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_beams = SimpleEntrySet.builder(WoodType.class, "planks_beams",
                         getModBlock("oak_planks_beams"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(false, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(false, p)
                 )
                 .addTexture(modRes("block/oak_planks_beams"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -62,7 +62,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_beams_connecting = SimpleEntrySet.builder(WoodType.class, "planks_beams_connecting",
                         getModBlock("oak_planks_beams_connecting"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(true, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(true, p)
                 )
                 //TEXTURES: blank_1 (above)
                 .addModelTransform(m -> m.addModifier((s, blockId, woodType) ->
@@ -78,7 +78,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_brick_pattern = SimpleEntrySet.builder(WoodType.class, "planks_brick_pattern",
                         getModBlock("oak_planks_brick_pattern"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(false, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(false, p)
                 )
                 //REASON: FUSION's error: Image/frame size 128x128 is not a multiple of 'full' layout's 8 : 6 aspect ratio
                 // Below is the only way to prevent an animated texture from being generated
@@ -90,7 +90,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_brick_pattern_connecting = SimpleEntrySet.builder(WoodType.class, "planks_brick_pattern_connecting",
                         getModBlock("oak_planks_brick_pattern_connecting"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(true, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(true, p)
                 )
                 //TEXTURES: blank_2 (above)
                 .addModelTransform(m -> m.addModifier((s, blockId, woodType) ->
@@ -106,7 +106,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_brick_paving = SimpleEntrySet.builder(WoodType.class, "planks_brick_paving",
                         getModBlock("oak_planks_brick_paving"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(false, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(false, p)
                 )
                 .addTexture(modRes("block/oak_planks_brick_paving"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -116,7 +116,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_brick_paving_connecting = SimpleEntrySet.builder(WoodType.class, "planks_brick_paving_connecting",
                         getModBlock("oak_planks_brick_paving_connecting"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(true, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(true, p)
                 )
                 //TEXTURES: blank_3 (above)
                 .addModelTransform(m -> m.addModifier((s, blockId, woodType) ->
@@ -132,7 +132,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_bricks = SimpleEntrySet.builder(WoodType.class, "planks_bricks",
                         getModBlock("oak_planks_bricks"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(false, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(false, p)
                 )
                 .addTexture(modRes("block/oak_planks_bricks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -142,7 +142,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_bricks_connecting = SimpleEntrySet.builder(WoodType.class, "planks_bricks_connecting",
                         getModBlock("oak_planks_bricks_connecting"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(true, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(true, p)
                 )
                 //TEXTURES: blank_4 (above)
                 .addModelTransform(m -> m.addModifier((s, blockId, woodType) ->
@@ -158,7 +158,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_crate = SimpleEntrySet.builder(WoodType.class, "planks_crate",
                         getModBlock("oak_planks_crate"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(false, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(false, p)
                 )
                 .addTexture(modRes("block/oak_planks_crate"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -168,7 +168,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_crate_connecting = SimpleEntrySet.builder(WoodType.class, "planks_crate_connecting",
                         getModBlock("oak_planks_crate_connecting"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(true, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(true, p)
                 )
                 //TEXTURES: blank_5 (above)
                 .addModelTransform(m -> m.addModifier((s, blockId, woodType) ->
@@ -184,7 +184,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_diagonal_stripes = SimpleEntrySet.builder(WoodType.class, "planks_diagonal_stripes",
                         getModBlock("oak_planks_diagonal_stripes"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(false, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(false, p)
                 )
                 .addTexture(modRes("block/oak_planks_diagonal_stripes"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -194,7 +194,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_diagonal_stripes_connecting = SimpleEntrySet.builder(WoodType.class, "planks_diagonal_stripes_connecting",
                         getModBlock("oak_planks_diagonal_stripes_connecting"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(true, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(true, p)
                 )
                 //TEXTURES: blank_6 (above)
                 .addModelTransform(m -> m.addModifier((s, blockId, woodType) ->
@@ -210,7 +210,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_diagonal_tiles = SimpleEntrySet.builder(WoodType.class, "planks_diagonal_tiles",
                         getModBlock("oak_planks_diagonal_tiles"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(false, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(false, p)
                 )
                 .addTexture(modRes("block/oak_planks_diagonal_tiles"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -220,7 +220,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_diagonal_tiles_connecting = SimpleEntrySet.builder(WoodType.class, "planks_diagonal_tiles_connecting",
                         getModBlock("oak_planks_diagonal_tiles_connecting"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(true, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(true, p)
                 )
                 //TEXTURES: blank_7 (above)
                 .addModelTransform(m -> m.addModifier((s, blockId, woodType) ->
@@ -236,7 +236,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_dotted = SimpleEntrySet.builder(WoodType.class, "planks_dotted",
                         getModBlock("oak_planks_dotted"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(false, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(false, p)
                 )
                 .addTexture(modRes("block/oak_planks_dotted"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -246,7 +246,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_dotted_connecting = SimpleEntrySet.builder(WoodType.class, "planks_dotted_connecting",
                         getModBlock("oak_planks_dotted_connecting"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(true, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(true, p)
                 )
                 //TEXTURES: blank_8 (above)
                 .addModelTransform(m -> m.addModifier((s, blockId, woodType) ->
@@ -262,7 +262,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_flooring = SimpleEntrySet.builder(WoodType.class, "planks_flooring",
                         getModBlock("oak_planks_flooring"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(false, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(false, p)
                 )
                 .addTexture(modRes("block/oak_planks_flooring"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -272,7 +272,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_flooring_connecting = SimpleEntrySet.builder(WoodType.class, "planks_flooring_connecting",
                         getModBlock("oak_planks_flooring_connecting"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(true, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(true, p)
                 )
                 //TEXTURES: blank_9 (above)
                 .addModelTransform(m -> m.addModifier((s, blockId, woodType) ->
@@ -288,7 +288,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_large_tiles = SimpleEntrySet.builder(WoodType.class, "planks_large_tiles",
                         getModBlock("oak_planks_large_tiles"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(false, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(false, p)
                 )
                 .addTexture(modRes("block/oak_planks_large_tiles"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -298,7 +298,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_large_tiles_connecting = SimpleEntrySet.builder(WoodType.class, "planks_large_tiles_connecting",
                         getModBlock("oak_planks_large_tiles_connecting"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(true, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(true, p)
                 )
                 //TEXTURES: blank_10 (above)
                 .addModelTransform(m -> m.addModifier((s, blockId, woodType) ->
@@ -314,7 +314,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_pattern = SimpleEntrySet.builder(WoodType.class, "planks_pattern",
                         getModBlock("oak_planks_pattern"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(false, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(false, p)
                 )
                 .addTexture(modRes("block/oak_planks_pattern"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -324,7 +324,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_pattern_connecting = SimpleEntrySet.builder(WoodType.class, "planks_pattern_connecting",
                         getModBlock("oak_planks_pattern_connecting"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(true, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(true, p)
                 )
                 //TEXTURES: blank_11 (above)
                 .addModelTransform(m -> m.addModifier((s, blockId, woodType) ->
@@ -340,7 +340,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_rotated_bricks = SimpleEntrySet.builder(WoodType.class, "planks_rotated_bricks",
                         getModBlock("oak_planks_rotated_bricks"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(false, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(false, p)
                 )
                 .addTexture(modRes("block/oak_planks_rotated_bricks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -350,7 +350,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_rotated_bricks_connecting = SimpleEntrySet.builder(WoodType.class, "planks_rotated_bricks_connecting",
                         getModBlock("oak_planks_rotated_bricks_connecting"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(true, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(true, p)
                 )
                 //TEXTURES: blank_12 (above)
                 .addModelTransform(m -> m.addModifier((s, blockId, woodType) ->
@@ -366,7 +366,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_small_bricks = SimpleEntrySet.builder(WoodType.class, "planks_small_bricks",
                         getModBlock("oak_planks_small_bricks"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(false, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(false, p)
                 )
                 .addTexture(modRes("block/oak_planks_small_bricks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -376,7 +376,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_small_bricks_connecting = SimpleEntrySet.builder(WoodType.class, "planks_small_bricks_connecting",
                         getModBlock("oak_planks_small_bricks_connecting"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(true, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(true, p)
                 )
                 //TEXTURES: blank_13 (above)
                 .addModelTransform(m -> m.addModifier((s, blockId, woodType) ->
@@ -392,7 +392,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_small_tiles = SimpleEntrySet.builder(WoodType.class, "planks_small_tiles",
                         getModBlock("oak_planks_small_tiles"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(false, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(false, p)
                 )
                 .addTexture(modRes("block/oak_planks_small_tiles"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -402,7 +402,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_small_tiles_connecting = SimpleEntrySet.builder(WoodType.class, "planks_small_tiles_connecting",
                         getModBlock("oak_planks_small_tiles_connecting"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(true, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(true, p)
                 )
                 //TEXTURES: blank_14 (above)
                 .addModelTransform(m -> m.addModifier((s, blockId, woodType) ->
@@ -418,7 +418,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_squares = SimpleEntrySet.builder(WoodType.class, "planks_squares",
                         getModBlock("oak_planks_squares"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(false, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(false, p)
                 )
                 .addTexture(modRes("block/oak_planks_squares"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -428,7 +428,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_squares_connecting = SimpleEntrySet.builder(WoodType.class, "planks_squares_connecting",
                         getModBlock("oak_planks_squares_connecting"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(true, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(true, p)
                 )
                 //TEXTURES: blank_15 (above)
                 .addModelTransform(m -> m.addModifier((s, blockId, woodType) ->
@@ -444,7 +444,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_tiles = SimpleEntrySet.builder(WoodType.class, "planks_tiles",
                         getModBlock("oak_planks_tiles"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(false, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(false, p)
                 )
                 .addTexture(modRes("block/oak_planks_tiles"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -454,7 +454,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_tiles_connecting = SimpleEntrySet.builder(WoodType.class, "planks_tiles_connecting",
                         getModBlock("oak_planks_tiles_connecting"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(true, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(true, p)
                 )
                 //TEXTURES: blank_16 (above)
                 .addModelTransform(m -> m.addModifier((s, blockId, woodType) ->
@@ -470,7 +470,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_wavy = SimpleEntrySet.builder(WoodType.class, "planks_wavy",
                         getModBlock("oak_planks_wavy"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(false, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(false, p)
                 )
                 .addTexture(modRes("block/oak_planks_wavy"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -480,7 +480,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_wavy_connecting = SimpleEntrySet.builder(WoodType.class, "planks_wavy_connecting",
                         getModBlock("oak_planks_wavy_connecting"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(true, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(true, p)
                 )
                 //TEXTURES: blank_17 (above)
                 .addModelTransform(m -> m.addModifier((s, blockId, woodType) ->
@@ -496,7 +496,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_woven = SimpleEntrySet.builder(WoodType.class, "planks_woven",
                         getModBlock("oak_planks_woven"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(false, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(false, p)
                 )
                 .addTexture(modRes("block/oak_planks_woven"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -506,7 +506,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_woven_connecting = SimpleEntrySet.builder(WoodType.class, "planks_woven_connecting",
                         getModBlock("oak_planks_woven_connecting"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(true, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(true, p)
                 )
                 //TEXTURES: blank_18 (above)
                 .addModelTransform(m -> m.addModifier((s, blockId, woodType) ->
@@ -523,7 +523,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
         oak_planks_mosaic = SimpleEntrySet.builder(WoodType.class, "planks_mosaic",
                         getModBlock("oak_planks_mosaic"), () -> VanillaWoodTypes.OAK,
-                        type -> new RechiseledBlock(false, Utils.copyPropertySafe(type.planks))
+                        (type, p) -> new RechiseledBlock(false, p)
                 )
                 .addTexture(modRes("block/oak_planks_mosaic"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)

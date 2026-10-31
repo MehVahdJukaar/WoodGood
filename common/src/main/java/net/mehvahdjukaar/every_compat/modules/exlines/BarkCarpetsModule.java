@@ -22,7 +22,8 @@ public class BarkCarpetsModule extends EveryCompatModule {
 
         barkCarpets = SimpleEntrySet.builder(WoodType.class, "bark_carpet",
                         getModBlock("oak_bark_carpet", BarkCarpetBlock.class), () -> VanillaWoodTypes.OAK,
-                        w -> new BarkCarpetBlock(Utils.copyPropertySafe(w.log)))
+                        (w, p) -> new BarkCarpetBlock(p))
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .setTab(getModTab("tab"))

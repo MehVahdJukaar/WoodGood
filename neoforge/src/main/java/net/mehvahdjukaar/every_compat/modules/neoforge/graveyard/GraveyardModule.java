@@ -37,8 +37,9 @@ public class GraveyardModule extends EveryCompatModule {
 
         COFFINS = SimpleEntrySet.builder(WoodType.class, "coffin",
                         getModBlock("oak_coffin"), () -> VanillaWoodTypes.OAK,
-                        w -> new CompatCoffinfBlock(Utils.copyPropertySafe(Blocks.OAK_PLANKS).noOcclusion(), w)
+                        (w, p) -> new CompatCoffinfBlock(p.noOcclusion(), w)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.OAK_PLANKS))
                 .addTile(TGBlockEntities.SARCOPHAGUS_BLOCK_ENTITY)
                 .addTextureM(modRes("block/oak_coffin"), EveryCompat.res("block/gy/oak_coffin_m"))
                 .addTag(modRes("coffins"), Registries.BLOCK, Registries.ITEM)

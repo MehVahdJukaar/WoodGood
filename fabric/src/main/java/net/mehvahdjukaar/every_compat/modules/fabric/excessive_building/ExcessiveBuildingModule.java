@@ -46,7 +46,7 @@ public class ExcessiveBuildingModule extends EveryCompatModule {
 //!! OAK
         vertical_stairs = SimpleEntrySet.builder(WoodType.class, "vertical_stairs",
                         getModBlock("oak_vertical_stairs"), () -> VanillaWoodTypes.OAK,
-                        woodType -> new VerticalStairsBlock(Utils.copyPropertySafe(woodType.planks))
+                        (woodType, p) -> new VerticalStairsBlock(p)
                 )
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -59,7 +59,7 @@ public class ExcessiveBuildingModule extends EveryCompatModule {
 
         mosaics = SimpleEntrySet.builder(WoodType.class, "mosaic",
                         getModBlock("oak_mosaic"), () -> VanillaWoodTypes.OAK,
-                        woodType -> new Block(Utils.copyPropertySafe(woodType.planks))
+                        (woodType, p) -> new Block(p)
                 )
                 .requiresChildren(SLAB) //REASON: recipes
                 .addTexture(modRes("block/oak_mosaic"))
@@ -71,8 +71,8 @@ public class ExcessiveBuildingModule extends EveryCompatModule {
 
         mosaic_stairs = SimpleEntrySet.builder(WoodType.class, "mosaic_stairs",
                         getModBlock("oak_mosaic_stairs"), () -> VanillaWoodTypes.OAK,
-                        woodType -> new StairBlock(mosaics.blocks.get(woodType).defaultBlockState(),
-                                Utils.copyPropertySafe(woodType.planks).sound(SoundType.WOOD))
+                        (woodType, p) -> new StairBlock(mosaics.blocks.get(woodType).defaultBlockState(),
+                                p.sound(SoundType.WOOD))
                 )
                 .requiresFromMap(mosaics.blocks) //REASON: recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -85,7 +85,7 @@ public class ExcessiveBuildingModule extends EveryCompatModule {
 
         mosaic_slabs = SimpleEntrySet.builder(WoodType.class, "mosaic_slab",
                         getModBlock("oak_mosaic_slab"), () -> VanillaWoodTypes.OAK,
-                        woodType -> new SlabBlock(Utils.copyPropertySafe(woodType.planks).sound(SoundType.WOOD))
+                        (woodType, p) -> new SlabBlock(p.sound(SoundType.WOOD))
                 )
                 .requiresFromMap(mosaics.blocks) //REASON: recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -98,7 +98,7 @@ public class ExcessiveBuildingModule extends EveryCompatModule {
 
         mosaic_vertical_stairs = SimpleEntrySet.builder(WoodType.class, "mosaic_vertical_stairs",
                         getModBlock("oak_mosaic_vertical_stairs"), () -> VanillaWoodTypes.OAK,
-                        woodType -> new VerticalStairsBlock(Utils.copyPropertySafe(woodType.planks).sound(SoundType.WOOD))
+                        (woodType, p) -> new VerticalStairsBlock(p.sound(SoundType.WOOD))
                 )
                 .requiresFromMap(mosaics.blocks) //REASON: recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -111,7 +111,7 @@ public class ExcessiveBuildingModule extends EveryCompatModule {
 
         chiseled_planks = SimpleEntrySet.builder(WoodType.class, "planks", "chiseled",
                         getModBlock("chiseled_oak_planks"), () -> VanillaWoodTypes.OAK,
-                        woodType -> new Block(Utils.copyPropertySafe(woodType.planks).sound(SoundType.WOOD))
+                        (woodType, p) -> new Block(p.sound(SoundType.WOOD))
                 )
                 .requiresChildren(SLAB) //REASON: recipes
                 .addTexture(modRes("block/chiseled_oak_planks_side"))
@@ -124,8 +124,9 @@ public class ExcessiveBuildingModule extends EveryCompatModule {
 
         decorative_shelves = SimpleEntrySet.builder(WoodType.class, "decorative_shelf",
                         getModBlock("oak_decorative_shelf"), () -> VanillaWoodTypes.OAK,
-                        woodType -> new DecorativeShelfBlock(Utils.copyPropertySafe(Blocks.BOOKSHELF).sound(SoundType.WOOD))
+                        (woodType, p) -> new DecorativeShelfBlock(p.sound(SoundType.WOOD))
                 )
+                .setProperties(woodType -> Utils.copyPropertySafe(Blocks.BOOKSHELF))
                 .requiresFromMap(mosaics.blocks) //REASON: textures, recipes
                 .addTexture(modRes("block/oak_decorative_shelf0"))
                 .addTextureM(modRes("block/oak_decorative_shelf1"), EveryCompat.res("block/eb/oak_decorative_shelf1_m"))
@@ -143,7 +144,7 @@ public class ExcessiveBuildingModule extends EveryCompatModule {
 //!! SPRUCE
         crafting_tables = SimpleEntrySet.builder(WoodType.class, "crafting_table",
                         getModBlock("spruce_crafting_table"), () -> VanillaWoodTypes.SPRUCE,
-                        woodType -> new EBCraftingTableBlock(Utils.copyPropertySafe(woodType.planks)
+                        (woodType, p) -> new EBCraftingTableBlock(p
                                 .sound(SoundType.WOOD)
                         )
                 )
@@ -159,8 +160,9 @@ public class ExcessiveBuildingModule extends EveryCompatModule {
 
         bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf",
                         getModBlock("spruce_bookshelf"), () -> VanillaWoodTypes.SPRUCE,
-                        woodType -> new EBBookshelfBlock(Utils.copyPropertySafe(Blocks.BOOKSHELF).sound(SoundType.WOOD))
+                        (woodType, p) -> new EBBookshelfBlock(p.sound(SoundType.WOOD))
                 )
+                .setProperties(woodType -> Utils.copyPropertySafe(Blocks.BOOKSHELF))
                 //TEXTURES: planks
                 .addTextureM(modRes("block/spruce_bookshelf"), EveryCompat.res("block/eb/spruce_bookshelf_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -173,8 +175,9 @@ public class ExcessiveBuildingModule extends EveryCompatModule {
 //!! CRIMSON
         ladders = SimpleEntrySet.builder(WoodType.class, "ladder",
                         getModBlock("crimson_ladder"), () -> VanillaWoodTypes.CRIMSON,
-                        woodType -> new EBLadderBlock(Utils.copyPropertySafe(Blocks.LADDER).sound(woodType.getSound()))
+                        (woodType, p) -> new EBLadderBlock(p.sound(woodType.getSound()))
                 )
+                .setProperties(woodType -> Utils.copyPropertySafe(Blocks.LADDER))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .addTexture(modRes("block/crimson_ladder"))
                 .addTexture(modRes("item/crimson_ladder"))

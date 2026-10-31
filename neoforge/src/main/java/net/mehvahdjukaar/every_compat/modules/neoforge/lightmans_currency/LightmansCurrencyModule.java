@@ -42,7 +42,7 @@ public class LightmansCurrencyModule extends EveryCompatModule {
 
         auction_stands = SimpleEntrySet.builder(WoodType.class, "", "auction_stand",
                         getModBlock("auction_stand_oak"), () -> VanillaWoodTypes.OAK,
-                        w -> new AuctionStandBlock(Utils.copyPropertySafe(w.planks)
+                        (w, p) -> new AuctionStandBlock(p
                                 .mapColor(w.getColor()).strength(2.0F)
                         )
                 )
@@ -60,7 +60,7 @@ public class LightmansCurrencyModule extends EveryCompatModule {
 
         shelves = SimpleEntrySet.builder(WoodType.class, "", "shelf",
                         getModBlock("shelf_oak"), () -> VanillaWoodTypes.OAK,
-                        w -> new ShelfBlock(Utils.copyPropertySafe(w.planks)
+                        (w, p) -> new ShelfBlock(p
                                 .mapColor(w.getColor()).strength(2.0F, Float.POSITIVE_INFINITY),
                                 1
                         )
@@ -85,7 +85,7 @@ public class LightmansCurrencyModule extends EveryCompatModule {
 
         shelves_2x2 = SimpleEntrySet.builder(WoodType.class, "","shelf_2x2",
                         getModBlock("shelf_2x2_oak"), () -> VanillaWoodTypes.OAK,
-                        w -> new ShelfBlock(Utils.copyPropertySafe(w.planks)
+                        (w, p) -> new ShelfBlock(p
                                 .mapColor(w.getColor()).strength(2.0F, Float.POSITIVE_INFINITY),
                                 4
                         )
@@ -110,7 +110,7 @@ public class LightmansCurrencyModule extends EveryCompatModule {
 
         bookshelf_traders = SimpleEntrySet.builder(WoodType.class, "", "bookshelf_trader",
                         getModBlock("bookshelf_trader_oak"), () -> VanillaWoodTypes.OAK,
-                        w -> new BookTraderBlock(Utils.copyPropertySafe(w.planks)
+                        (w, p) -> new BookTraderBlock(p
                                 .mapColor(w.getColor()).strength(3.0F, Float.POSITIVE_INFINITY)
                                 .sound(SoundType.WOOD)
                         )

@@ -24,13 +24,14 @@ public class OreberriesReplantedModule extends EveryCompatModule {
 
         vats = SimpleEntrySet.builder(WoodType.class, "vat",
                         OreBerryRegistry.OAK_VAT, () -> VanillaWoodTypes.OAK,
-                        w -> new VatBlock(BlockBehaviour.Properties.of()
+                        (w, p) -> new VatBlock(p
                                 .mapColor(w.planks.defaultMapColor())
                                 .sound(SoundType.SWEET_BERRY_BUSH)
                                 .noOcclusion()
                                 .isSuffocating(OreBerryBushBlock::isntSolid)
                                 .isViewBlocking(OreBerryBushBlock::isntSolid))
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 //TEXTURES: planks
                 .addTile(OreBerryRegistry.VAT_BLOCK_ENTITY)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)

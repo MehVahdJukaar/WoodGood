@@ -43,6 +43,7 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_attic_roof"), () -> VanillaWoodTypes.OAK,
                         this::newRoofGlass
                 )
+                .setProperties(this::copyStandardProperties)
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tab)
@@ -56,6 +57,7 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_lower_roof"), () -> VanillaWoodTypes.OAK,
                         this::newBaseRoof
                 )
+                .setProperties(this::copyStandardProperties)
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tab)
@@ -69,6 +71,7 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_roof"), () -> VanillaWoodTypes.OAK,
                         this::newBaseRoof
                 )
+                .setProperties(this::copyStandardProperties)
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tab)
@@ -82,6 +85,7 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_steep_roof"), () -> VanillaWoodTypes.OAK,
                         this::newSteepRoof
                 )
+                .setProperties(this::copyStandardProperties)
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tab)
@@ -95,6 +99,7 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_top_roof"), () -> VanillaWoodTypes.OAK,
                         this::newRoofTopNew
                 )
+                .setProperties(this::copyStandardProperties)
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tab)
@@ -108,6 +113,7 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_upper_lower_roof"), () -> VanillaWoodTypes.OAK,
                         this::newLower
                 )
+                .setProperties(this::copyStandardProperties)
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tab)
@@ -121,6 +127,7 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_upper_steep_roof"), () -> VanillaWoodTypes.OAK,
                         this::newSteep
                 )
+                .setProperties(this::copyStandardProperties)
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tab)
@@ -134,6 +141,7 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_planks_attic_roof"), () -> VanillaWoodTypes.OAK,
                         this::newRoofGlass
                 )
+                .setProperties(this::copyStandardProperties)
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tab)
@@ -146,6 +154,7 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_planks_lower_roof"), () -> VanillaWoodTypes.OAK,
                         this::newBaseRoof
                 )
+                .setProperties(this::copyStandardProperties)
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tab)
@@ -158,6 +167,7 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_planks_roof"), () -> VanillaWoodTypes.OAK,
                         this::newBaseRoof
                 )
+                .setProperties(this::copyStandardProperties)
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tab)
@@ -170,6 +180,7 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_planks_steep_roof"), () -> VanillaWoodTypes.OAK,
                         this::newSteepRoof
                 )
+                .setProperties(this::copyStandardProperties)
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tab)
@@ -182,6 +193,7 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_planks_top_roof"), () -> VanillaWoodTypes.OAK,
                         this::newRoofTopNew
                 )
+                .setProperties(this::copyStandardProperties)
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tab)
@@ -194,6 +206,7 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_planks_upper_lower_roof"), () -> VanillaWoodTypes.OAK,
                         this::newLower
                 )
+                .setProperties(this::copyStandardProperties)
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tab)
@@ -206,6 +219,7 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_planks_upper_steep_roof"), () -> VanillaWoodTypes.OAK,
                         this::newSteep
                 )
+                .setProperties(this::copyStandardProperties)
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(tab)
@@ -215,12 +229,12 @@ public abstract class MacawRoofsModuleAbstract extends EveryCompatModule {
         this.addEntry(PLANKS_UPPER_STEEP_ROOFS);
     }
 
-    public abstract Block newRoofGlass(WoodType woodType);
-    public abstract Block newBaseRoof(WoodType woodType);
-    public abstract Block newSteepRoof(WoodType woodType);
-    public abstract Block newRoofTopNew(WoodType woodType);
-    public abstract Block newLower(WoodType woodType);
-    public abstract Block newSteep(WoodType woodType);
+    public abstract Block newRoofGlass(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newBaseRoof(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newSteepRoof(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newRoofTopNew(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newLower(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newSteep(WoodType woodType, BlockBehaviour.Properties p);
 
     public BlockBehaviour.Properties copyStandardProperties(WoodType woodType) {
         return BlockBehaviour.Properties.of()

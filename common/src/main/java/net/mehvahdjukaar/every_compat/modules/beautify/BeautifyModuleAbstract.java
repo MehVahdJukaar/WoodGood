@@ -4,6 +4,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
@@ -63,7 +64,7 @@ public abstract class BeautifyModuleAbstract extends EveryCompatModule {
 
     public abstract Identifier getTabKey();
 
-    public abstract Block newTrellis(WoodType woodType);
-    public abstract Block newBlinds(WoodType woodType);
-    public abstract Block newPictureFrame(WoodType woodType);
+    public abstract Block newTrellis(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newBlinds(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newPictureFrame(WoodType woodType, BlockBehaviour.Properties p);
 }

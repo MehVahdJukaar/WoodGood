@@ -14,7 +14,9 @@ import net.mehvahdjukaar.moonlight.api.set.BlockTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -31,12 +33,12 @@ import java.util.function.*;
 public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends AbstractSimpleEntrySet<T, Block, I> {
 
     protected final Supplier<@Nullable I> baseItem;
-    protected final Function<T, @Nullable I> itemFactory;
+    protected final BiFunction<T, Item.Properties, @Nullable I> itemFactory;
     protected ExtraModelConfiguration modelConfig;
 
     public ItemOnlyEntrySet(Class<T> type,
                             String name, @Nullable String prefix,
-                            Function<T, I> itemFactory,
+                            BiFunction<T, Item.Properties, I> itemFactory,
                             Supplier<@Nullable I> baseItem,
                             Supplier<T> baseType,
                             @Nullable Supplier<Holder<CreativeModeTab>> tab,
@@ -83,7 +85,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
             if (module.isEntryAlreadyRegistered(childKey, id, blockType, BuiltInRegistries.ITEM)) continue;
 
             if (condition.test(blockType)) {
-                I item = itemFactory.apply(blockType);
+                I item = itemFactory.apply(blockType, new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id)));
                 if (item != null) {
                     try {
                         Preconditions.checkArgument(item != Items.AIR, "Item factory returned AIR item instance");
@@ -169,24 +171,24 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
     //ok...
     public static <T extends BlockType, I extends Item> Builder<T, I> builder(Class<T> type, String name,
                                                                               Supplier<I> baseItem, Supplier<T> baseType,
-                                                                              Function<T, I> itemSupplier) {
+                                                                              BiFunction<T, Item.Properties, I> itemSupplier) {
 
         return new Builder<>(type, name, null, baseType, baseItem, itemSupplier);
     }
 
     public static <T extends BlockType, I extends Item> Builder<T, I> builder(Class<T> type, String name, String prefix,
                                                                               Supplier<I> baseItem, Supplier<T> baseType,
-                                                                              Function<T, I> itemSupplier) {
+                                                                              BiFunction<T, Item.Properties, I> itemSupplier) {
 
         return new Builder<>(type, name, prefix, baseType, baseItem, itemSupplier);
     }
 
     public static class Builder<T extends BlockType, I extends Item> extends AbstractSimpleEntrySet.Builder<Builder<T, I>, T, Block, I> {
         protected final Supplier<@Nullable I> baseItem;
-        protected final Function<T, I> itemFactory;
+        protected final BiFunction<T, Item.Properties, I> itemFactory;
         protected ExtraModelConfiguration extraModelConfig = ExtraModelConfiguration.EMPTY;
 
-        protected Builder(Class<T> type, String name, @Nullable String prefix, Supplier<T> baseType, Supplier<I> baseItem, Function<T, I> itemFactory) {
+        protected Builder(Class<T> type, String name, @Nullable String prefix, Supplier<T> baseType, Supplier<I> baseItem, BiFunction<T, Item.Properties, I> itemFactory) {
             super(type, name, prefix, baseType);
             this.baseItem = baseItem;
             this.itemFactory = itemFactory;

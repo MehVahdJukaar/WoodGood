@@ -56,7 +56,7 @@ public class BlocksPlusModule extends EveryCompatModule {
 
         cracked_planks = SimpleEntrySet.builder(WoodType.class, "planks", "cracked",
                         getModBlock("cracked_acacia_planks"), () -> VanillaWoodTypes.ACACIA,
-                        w -> new BPCrackedMossyPlanks(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new BPCrackedMossyPlanks(p)
                 )
                 .addTexture(modRes("block/cracked_acacia_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -67,7 +67,7 @@ public class BlocksPlusModule extends EveryCompatModule {
 
         mossy_planks = SimpleEntrySet.builder(WoodType.class, "planks", "mossy",
                         getModBlock("mossy_acacia_planks"), () -> VanillaWoodTypes.ACACIA,
-                        w -> new BPCrackedMossyPlanks(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new BPCrackedMossyPlanks(p)
                 )
                 .addTextureM(modRes("block/mossy_acacia_planks"), EveryCompat.res("block/bp/mossy_acacia_planks_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -78,8 +78,9 @@ public class BlocksPlusModule extends EveryCompatModule {
 
         crafting_table = SimpleEntrySet.builder(WoodType.class, "crafting_table",
                         getModBlock("acacia_crafting_table"), () -> VanillaWoodTypes.ACACIA,
-                        w -> new BPCraftingTable(Utils.copyPropertySafe(Blocks.CRAFTING_TABLE).mapColor(w.getColor()))
+                        (w, p) -> new BPCraftingTable(p.mapColor(w.getColor()))
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.CRAFTING_TABLE))
                 .addTextureM(modRes("block/acacia_crafting_table_side"), EveryCompat.res("block/vanilla_crafting_table_side_m"))
                 .addTextureM(modRes("block/acacia_crafting_table_front"), EveryCompat.res("block/vanilla_crafting_table_front_m"))
                 .addTextureM(modRes("block/acacia_crafting_table_top"), EveryCompat.res("block/vanilla_crafting_table_top_m"))
@@ -91,8 +92,9 @@ public class BlocksPlusModule extends EveryCompatModule {
 
         chest = SimpleEntrySet.builder(WoodType.class, "chest",
                         getModBlock("acacia_chest"), () -> VanillaWoodTypes.ACACIA,
-                        w -> new CompatChestBlock(this::getChestTile, Utils.copyPropertySafe(Blocks.CHEST).mapColor(w.getColor()))
+                        (w, p) -> new CompatChestBlock(this::getChestTile, p.mapColor(w.getColor()))
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.CHEST))
                 //TEXTURES: planks
                 .addTile(bpChestBlockEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -107,8 +109,9 @@ public class BlocksPlusModule extends EveryCompatModule {
 
         trapped_chest = SimpleEntrySet.builder(WoodType.class, "trapped_chest",
                         getModBlock("acacia_trapped_chest"), () -> VanillaWoodTypes.ACACIA,
-                        w -> new CompatTrappedChestBlock(this::getTrappedTile, Utils.copyPropertySafe(Blocks.TRAPPED_CHEST).mapColor(w.getColor()))
+                        (w, p) -> new CompatTrappedChestBlock(this::getTrappedTile, p.mapColor(w.getColor()))
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.TRAPPED_CHEST))
                 //TEXTURES: planks
                 .addTile(bpTrappedBlockEntity::new)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -123,8 +126,9 @@ public class BlocksPlusModule extends EveryCompatModule {
 
         bookshelf = SimpleEntrySet.builder(WoodType.class, "bookshelf",
                         getModBlock("acacia_bookshelf"), () -> VanillaWoodTypes.ACACIA,
-                        w -> new BPPlankBookshelf(Utils.copyPropertySafe(Blocks.BOOKSHELF).mapColor(w.getColor()))
+                        (w, p) -> new BPPlankBookshelf(p.mapColor(w.getColor()))
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.BOOKSHELF))
                 .addTextureM(modRes("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("bookshelves"), Registries.BLOCK)
@@ -136,7 +140,7 @@ public class BlocksPlusModule extends EveryCompatModule {
 
         wooden_crate = SimpleEntrySet.builder(WoodType.class, "wooden_crate",
                         getModBlock("acacia_wooden_crate"), () -> VanillaWoodTypes.ACACIA,
-                        w -> new BPPlanks(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new BPPlanks(p)
                 )
                 .addTexture(modRes("block/acacia_wooden_crate"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -147,8 +151,9 @@ public class BlocksPlusModule extends EveryCompatModule {
 
         ladder = SimpleEntrySet.builder(WoodType.class, "ladder",
                         getModBlock("acacia_ladder"), () -> VanillaWoodTypes.ACACIA,
-                        w -> new LadderBlock(Utils.copyPropertySafe(Blocks.LADDER).mapColor(w.getColor()))
+                        (w, p) -> new LadderBlock(p.mapColor(w.getColor()))
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.LADDER))
                 .addTexture(modRes("block/acacia_ladder"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(UtilityTag.LADDERS_TAG, Registries.BLOCK, Registries.ITEM)
@@ -162,7 +167,7 @@ public class BlocksPlusModule extends EveryCompatModule {
 
         mosaic = SimpleEntrySet.builder(WoodType.class, "mosaic",
                         getModBlock("acacia_mosaic"), () -> VanillaWoodTypes.ACACIA,
-                        w -> new BPPlanks(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new BPPlanks(p)
                 )
                 .addTexture(modRes("block/acacia_mosaic"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -173,9 +178,10 @@ public class BlocksPlusModule extends EveryCompatModule {
 
         mosaic_stairs = SimpleEntrySet.builder(WoodType.class, "mosaic_stairs",
                         getModBlock("acacia_mosaic_stairs"), () -> VanillaWoodTypes.ACACIA,
-                        w -> new BPPlankStairs(mosaic.blocks.get(w).defaultBlockState(),
-                                Utils.copyPropertySafe(getBlockSafe(w, "stairs")).mapColor(w.getColor()))
+                        (w, p) -> new BPPlankStairs(mosaic.blocks.get(w).defaultBlockState(),
+                                p.mapColor(w.getColor()))
                 )
+                .setProperties(w -> Utils.copyPropertySafe(getBlockSafe(w, "stairs")))
                 .requiresChildren("stairs")
                 .requiresFromMap(mosaic.blocks) //REASON: textures, recipes
                 //TEXTURES: mosaic
@@ -187,8 +193,9 @@ public class BlocksPlusModule extends EveryCompatModule {
 
         mosaic_slab = SimpleEntrySet.builder(WoodType.class, "mosaic_slab",
                         getModBlock("acacia_mosaic_slab"), () -> VanillaWoodTypes.ACACIA,
-                        w -> new BPPlankSlab(Utils.copyPropertySafe(getBlockSafe(w, "slab")).mapColor(w.getColor()))
+                        (w, p) -> new BPPlankSlab(p.mapColor(w.getColor()))
                 )
+                .setProperties(w -> Utils.copyPropertySafe(getBlockSafe(w, "slab")))
                 .requiresChildren("slab")
                 .requiresFromMap(mosaic.blocks) //REASON: textures, recipes
                 //TEXTURES: mosaic
@@ -200,11 +207,12 @@ public class BlocksPlusModule extends EveryCompatModule {
 
         mosaic_pressure_plate = SimpleEntrySet.builder(WoodType.class, "mosaic_pressure_plate",
                         getModBlock("acacia_mosaic_pressure_plate"), () -> VanillaWoodTypes.ACACIA,
-                        w -> new PressurePlateBlock(
+                        (w, p) -> new PressurePlateBlock(
                                 w.toVanillaOrOak().setType(),
-                                Utils.copyPropertySafe(getBlockSafe(w, "pressure_plate")).mapColor(w.getColor())
+                                p.mapColor(w.getColor())
                         )
                 )
+                .setProperties(w -> Utils.copyPropertySafe(getBlockSafe(w, "pressure_plate")))
                 .requiresFromMap(mosaic.blocks) //REASON: textures, recipes
                 //TEXTURES: mosaic
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -215,7 +223,7 @@ public class BlocksPlusModule extends EveryCompatModule {
 
         cracked_mosaic = SimpleEntrySet.builder(WoodType.class, "mosaic", "cracked",
                         getModBlock("cracked_acacia_mosaic"), () -> VanillaWoodTypes.ACACIA,
-                        w -> new BPCrackedMossyPlanks(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new BPCrackedMossyPlanks(p)
                 )
                 .addTexture(modRes("block/cracked_acacia_mosaic"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -226,7 +234,7 @@ public class BlocksPlusModule extends EveryCompatModule {
 
         mossy_mosaic = SimpleEntrySet.builder(WoodType.class, "mosaic", "mossy",
                         getModBlock("mossy_acacia_mosaic"), () -> VanillaWoodTypes.ACACIA,
-                        w -> new BPCrackedMossyPlanks(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new BPCrackedMossyPlanks(p)
                 )
                 .addTextureM(modRes("block/mossy_acacia_mosaic"), EveryCompat.res("block/bp/mossy_acacia_mosaic_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)

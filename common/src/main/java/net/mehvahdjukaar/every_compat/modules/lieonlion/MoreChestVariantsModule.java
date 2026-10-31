@@ -47,9 +47,10 @@ public class MoreChestVariantsModule extends EveryCompatModule {
 
         chests = SimpleEntrySet.builder(WoodType.class, "chest",
                         getModBlock("oak_chest"), () -> VanillaWoodTypes.OAK,
-                        w -> new CompatChestBlock(this::getChestTile,
-                                Utils.copyPropertySafe(Blocks.CHEST).mapColor(MapColor.WOOD))
+                        (w, p) -> new CompatChestBlock(this::getChestTile,
+                                p.mapColor(MapColor.WOOD))
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.CHEST))
                 //REASON: ensure Chest's texture in inventory is corrected
                 .addModelTransform(m -> m.addModifier((s, blockId, woodType) ->
                         s.replace("\"lolmcv:entity/chest/oak\"",
@@ -72,9 +73,10 @@ public class MoreChestVariantsModule extends EveryCompatModule {
 
         trappedChests = SimpleEntrySet.builder(WoodType.class, "trapped_chest",
                         getModBlock("oak_trapped_chest"), () -> VanillaWoodTypes.OAK,
-                        w -> new CompatTrappedChestBlock(this::getTrappedTile,
-                                Utils.copyPropertySafe(Blocks.TRAPPED_CHEST).mapColor(MapColor.WOOD))
+                        (w, p) -> new CompatTrappedChestBlock(this::getTrappedTile,
+                                p.mapColor(MapColor.WOOD))
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.TRAPPED_CHEST))
                 //REASON: ensure Chest's texture in inventory is corrected
                 .addModelTransform(m -> m.addModifier((s, blockId, woodType) ->
                         s.replace("\"lolmcv:entity/chest/trapped/oak\"",

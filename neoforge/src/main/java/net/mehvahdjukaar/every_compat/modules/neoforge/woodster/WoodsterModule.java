@@ -30,11 +30,12 @@ public class WoodsterModule extends EveryCompatModule {
 
         chiseled_books = SimpleEntrySet.builder(WoodType.class, "chiseled_bookshelf",
                         getModBlock("dark_oak_chiseled_bookshelf"), () -> VanillaWoodTypes.DARK_OAK,
-                        w -> new ChiseledBookShelfBlock(BlockBehaviour.Properties.of()
+                        (w, p) -> new ChiseledBookShelfBlock(p
                                 .strength(1.5F)
                                 .sound(SoundType.CHISELED_BOOKSHELF)
                         )
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .addTile(() -> BlockEntityType.CHISELED_BOOKSHELF)
                 .addTexture(TextureInfo.of(modRes("block/everycomp_dark_oak_chiseled_bookshelf_6"), "block/dark_oak_chiseled_bookshelf_6")
                         .mask(modRes("block/everycomp_dark_oak_chiseled_bookshelf_overlay")))
@@ -50,11 +51,12 @@ public class WoodsterModule extends EveryCompatModule {
 
         ladders = SimpleEntrySet.builder(WoodType.class, "ladder",
                         getModBlock("spruce_ladder"), () -> VanillaWoodTypes.SPRUCE,
-                        w -> new LadderBlock(BlockBehaviour.Properties.of()
+                        (w, p) -> new LadderBlock(p
                                 .strength(0.4F)
                                 .sound(SoundType.LADDER)
                         )
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .addTexture(EveryCompat.res("block/spruce_ladder"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(UtilityTag.LADDERS_TAG, Registries.BLOCK, Registries.ITEM)

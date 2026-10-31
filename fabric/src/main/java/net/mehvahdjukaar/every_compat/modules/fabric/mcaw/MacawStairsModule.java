@@ -6,6 +6,7 @@ import com.mcwstairs.kikoz.objects.StairRailing;
 import com.mcwstairs.kikoz.objects.stair_types.*;
 import net.mehvahdjukaar.every_compat.modules.macaw.MacawStairsModuleAbstract;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.Block;
 
 //SUPPORT: v1.0.0+
@@ -16,43 +17,43 @@ public class MacawStairsModule extends MacawStairsModuleAbstract {
     }
 
     @Override
-    public Block newTerraceStairs(WoodType woodType) {
-        return new TerraceStairs(copyProperties());
+    public Block newTerraceStairs(WoodType woodType, BlockBehaviour.Properties p) {
+        return new TerraceStairs(p);
     }
 
     @Override
-    public Block newSkylineStairs(WoodType woodType) {
-        return new SkylineStairs(copyProperties());
+    public Block newSkylineStairs(WoodType woodType, BlockBehaviour.Properties p) {
+        return new SkylineStairs(p);
     }
 
     @Override
-    public Block newCompactStairs(WoodType woodType) {
-        return new CompactStairs(copyProperties());
+    public Block newCompactStairs(WoodType woodType, BlockBehaviour.Properties p) {
+        return new CompactStairs(p);
     }
 
     @Override
-    public Block newBulkStairs(WoodType woodType) {
-        return new BulkStairs(copyProperties());
+    public Block newBulkStairs(WoodType woodType, BlockBehaviour.Properties p) {
+        return new BulkStairs(p);
     }
 
     @Override
-    public Block newLoftStairs(WoodType woodType) {
-        return new LoftStairs(copyProperties());
+    public Block newLoftStairs(WoodType woodType, BlockBehaviour.Properties p) {
+        return new LoftStairs(p);
     }
 
     @Override
-    public Block newBalconyRailing(WoodType woodType) {
-        return new BalconyRailing(copyProperties());
+    public Block newBalconyRailing(WoodType woodType, BlockBehaviour.Properties p) {
+        return new BalconyRailing(p);
     }
 
     @Override
-    public Block newStairRailing(WoodType woodType) {
-        return new StairRailing(copyProperties());
+    public Block newStairRailing(WoodType woodType, BlockBehaviour.Properties p) {
+        return new StairRailing(p);
     }
 
     @Override
-    public Block newStairPlatform(WoodType woodType) {
-        return new StairPlatform(copyProperties());
+    public Block newStairPlatform(WoodType woodType, BlockBehaviour.Properties p) {
+        return new StairPlatform(p);
     }
 
 }

@@ -24,8 +24,9 @@ public class StylishStilesModule extends EveryCompatModule {
         //noinspection DataFlowIssue
         STILE = SimpleEntrySet.builder(WoodType.class, "stile",
                         getModBlock("oak_stile"), () -> VanillaWoodTypes.OAK,
-                        w -> registerIfFence(w, () -> new Stile(Utils.copyPropertySafe(w.getBlockOfThis("fence"))))
+                        (w, p) -> registerIfFence(w, () -> new Stile(p))
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.getBlockOfThis("fence")))
                 .addModelTransform(m -> m.addModifier((s, id, w) -> {
                     if (w.getNamespace().equals("tfc")) {
                         return s.replace("\"model\": \"minecraft:block/oak_fence_side\"",

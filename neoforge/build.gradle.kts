@@ -61,17 +61,17 @@ dependencies {
 //    modRuntimeOnly("curse.maven:patchouli-306770:7730942") // TFC, Timber-Frames
 //    modRuntimeOnly("curse.maven:athena-841890:5629395") // v4.0.1 | Chipped
 //    modRuntimeOnly("curse.maven:cloth-config-348521:5729127") // v15.0.140 | REI
-//    modRuntimeOnly("curse.maven:fusion-connected-textures-854949:7471474") // v1.2.12 | Dawn of Time, Timber-Frame, Rechiseled
-//    modRuntimeOnly("curse.maven:supermartijn642s-config-lib-438332:5546996") // v1.1.8 | Rechiseled
+    modRuntimeOnly("maven.modrinth:fusion-connected-textures:1.3.16-neoforge-mc26.1") // Dawn of Time, Timber-Frame, Rechiseled
+    modRuntimeOnly("maven.modrinth:supermartijn642s-config-lib:1.1.8-neoforge-mc26.1") // Rechiseled
 //    modRuntimeOnly("maven.modrinth:midnightlib:YeePowOJ") // v1.6.3 | Building-But-Better
-//    modRuntimeOnly("curse.maven:flib-661261:5495793") // Absent-By-Design //!! 1.20.1
+    modRuntimeOnly("maven.modrinth:flib:26.1.2-0.2.11") // Absent-By-Design
 //    modRuntimeOnly("curse.maven:curios-309927:5680164") // Malum //!! 1.20.1
 //    modRuntimeOnly("curse.maven:lodestone-616457:5712854") // Malum //!! 1.20.1
 //    modRuntimeOnly("curse.maven:citadel-331936:5143956") // Alex's Cave //!! 1.20.1
 //    modRuntimeOnly("curse.maven:structure-gel-api-378802:5188368") // Blue-Skies //!! 1.20.1
 //    modRuntimeOnly("curse.maven:monolib-968432:6123990") //v2.0.0 | More-Beautiful-Torches
 //    modRuntimeOnly("curse.maven:quad-932715:5900860") // v1.2.9 | More-Chest-Variants, More-Crafting-Table
-//    modRuntimeOnly("curse.maven:lithostitched-936015:9170709") // v1.8.1 | Regions-Unexplored
+    modRuntimeOnly("maven.modrinth:lithostitched:1.8.1-neoforge-26.1") // Regions-Unexplored
 //    modRuntimeOnly("curse.maven:platform-997634:8075942") // v1.3.3 | Vanilla-Backport
 
     //- ~/neoforge/mods LOCAL

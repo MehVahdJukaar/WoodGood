@@ -21,7 +21,8 @@ public class MissingWildModule extends EveryCompatModule {
 
         fallenLogs = SimpleEntrySet.builder(WoodType.class, "log", "fallen",
                         getModBlock("fallen_acacia_log"), () -> VanillaWoodTypes.ACACIA,
-                        w -> new FallenLogBlock(Utils.copyPropertySafe(w.log).noOcclusion()))
+                        (w, p) -> new FallenLogBlock(p.noOcclusion()))
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 .addTag(modRes("fallen_logs"), Registries.BLOCK, Registries.ITEM)
                 .setTab(getModTab("items"))
                 .defaultRecipe()

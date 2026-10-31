@@ -70,7 +70,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
 
         panels = SimpleEntrySet.builder(WoodType.class, "panel",
                         getModBlock("oak_panel"), () -> VanillaWoodTypes.OAK,
-                        (w) -> new PanelBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new PanelBlock(p)
                 )
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -81,7 +81,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
 
         tables = SimpleEntrySet.builder(WoodType.class,"table",
                         getModBlock("oak_table"), () -> VanillaWoodTypes.OAK,
-                        w -> new TableBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new TableBlock(p)
                 )
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -92,7 +92,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
 
         stools = SimpleEntrySet.builder(WoodType.class, "stool",
                         getModBlock("oak_stool"), () -> VanillaWoodTypes.OAK,
-                        w -> new StoolBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new StoolBlock(p)
                 )
                 .requiresChildren(STRIPPED_LOG)
                 //TEXTURES: planks, stripped_log
@@ -104,7 +104,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
 
         chairs = SimpleEntrySet.builder(WoodType.class, "chair",
                         getModBlock("oak_chair"), () -> VanillaWoodTypes.OAK,
-                        w -> new ChairBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new ChairBlock(p)
                 )
                 .requiresChildren(STRIPPED_LOG)
                 //TEXTURES: planks, stripped_log
@@ -116,7 +116,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
 
         counters = SimpleEntrySet.builder(WoodType.class, "counter",
                         getModBlock("oak_counter"), () -> VanillaWoodTypes.OAK,
-                        w -> new CounterBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new CounterBlock(p)
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tab))
@@ -126,7 +126,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
 
         countersAndesite = SimpleEntrySet.builder(WoodType.class, "andesite_counter",
                         getModBlock("oak_andesite_counter"), () -> VanillaWoodTypes.OAK,
-                        w -> new CounterBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new CounterBlock(p)
                 )
                 .requiresChildren(STRIPPED_LOG)
                 //TEXTURES: planks, stripped_log
@@ -138,7 +138,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
 
         countersDiorite = SimpleEntrySet.builder(WoodType.class, "diorite_counter",
                         getModBlock("oak_diorite_counter"), () -> VanillaWoodTypes.OAK,
-                        w -> new CounterBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new CounterBlock(p)
                 )
                 .requiresChildren(STRIPPED_LOG)
                 //TEXTURES: planks, stripped_log
@@ -150,7 +150,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
 
         countersGranite = SimpleEntrySet.builder(WoodType.class, "granite_counter",
                         getModBlock("oak_granite_counter"), () -> VanillaWoodTypes.OAK,
-                        w -> new CounterBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new CounterBlock(p)
                 )
                 .requiresChildren(STRIPPED_LOG)
                 //TEXTURES: planks, stripped_log
@@ -162,7 +162,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
 
         countersBlackstone = SimpleEntrySet.builder(WoodType.class, "blackstone_counter",
                         getModBlock("oak_blackstone_counter"), () -> VanillaWoodTypes.OAK,
-                        w -> new CounterBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new CounterBlock(p)
                 )
                 .requiresChildren(STRIPPED_LOG)
                 //TEXTURES: planks, stripped_log
@@ -174,7 +174,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
 
         countersDeepslate = SimpleEntrySet.builder(WoodType.class, "deepslate_counter",
                         getModBlock("oak_deepslate_counter"), () -> VanillaWoodTypes.OAK,
-                        w -> new CounterBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new CounterBlock(p)
                 )
                 .requiresChildren(STRIPPED_LOG)
                 //TEXTURES: planks, stripped_log
@@ -186,7 +186,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
 
         countersBasal = SimpleEntrySet.builder(WoodType.class, "basal_counter",
                         getModBlock("oak_basal_counter"), () -> VanillaWoodTypes.OAK,
-                        w -> new CounterBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new CounterBlock(p)
                 )
                 .requiresChildren(STRIPPED_LOG)
                 //TEXTURES: planks, stripped_log
@@ -198,7 +198,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
 
         bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf",
                         getModBlock("oak_bookshelf"), () -> VanillaWoodTypes.OAK,
-                        w -> new BookshelfBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new BookshelfBlock(p)
                 )
                 .requiresChildren(STRIPPED_LOG, "slab") //REASON: textures, recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -209,7 +209,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
 
         shelves = SimpleEntrySet.builder(WoodType.class, "shelf",
                         getModBlock("oak_shelf"), () -> VanillaWoodTypes.OAK,
-                        w -> new ShelfBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new ShelfBlock(p)
                 )
                 .requiresChildren("slab") //REASON: recipes
                 .addTile(getModTile("shelf"))
@@ -222,7 +222,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
 
         cabinets = SimpleEntrySet.builder(WoodType.class, "cabinet",
                         getModBlock("oak_cabinet"), () -> VanillaWoodTypes.OAK,
-                        w -> new CabinetBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new CabinetBlock(p)
                 )
                 .requiresChildren(STRIPPED_LOG)
                 //TEXTURES: planks, stripped_log
@@ -234,7 +234,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
 
         cupboards = SimpleEntrySet.builder(WoodType.class, "cupboard",
                         getModBlock("oak_cupboard"), () -> VanillaWoodTypes.OAK,
-                        w -> new CupboardBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new CupboardBlock(p)
                 )
                 .addTile(getModTile("cupboard"))
                 .requiresChildren(STRIPPED_LOG)
@@ -248,7 +248,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
 
         benches = SimpleEntrySet.builder(WoodType.class, "bench",
                         getModBlock("oak_bench"), () -> VanillaWoodTypes.OAK,
-                        w -> new BenchBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new BenchBlock(p)
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
                 //TEXTURES: planks, stripped_log
@@ -260,7 +260,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
 
         supportBeams = SimpleEntrySet.builder(WoodType.class, "support_bracket",
                         getModBlock("oak_support_bracket"), () -> VanillaWoodTypes.OAK,
-                        w -> new SupportBeamBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new SupportBeamBlock(p)
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
                 //TEXTURES: stripped_log
@@ -272,7 +272,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
 
         bedsideTables = SimpleEntrySet.builder(WoodType.class, "bedside_table",
                         getModBlock("oak_bedside_table"), () -> VanillaWoodTypes.OAK,
-                        w -> new BedsideTableBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new BedsideTableBlock(p)
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
                 //TEXTURES: planks, stripped_log
@@ -284,7 +284,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
 
         arcades = SimpleEntrySet.builder(WoodType.class, "arcade",
                         getModBlock("oak_arcade"), () -> VanillaWoodTypes.OAK,
-                        w -> new ArcadeBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new ArcadeBlock(p)
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
                 //TEXTURES: planks, stripped_log
@@ -296,7 +296,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
 
         shopSigns = SimpleEntrySet.builder(WoodType.class, "shop_sign",
                         getModBlock("oak_shop_sign"), () -> VanillaWoodTypes.OAK,
-                        w -> new ShopSignBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new ShopSignBlock(p)
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
                 //TEXTURES: stripped_log
@@ -308,7 +308,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
 
         posts = SimpleEntrySet.builder(WoodType.class, "post",
                         getModBlock("oak_post"), () -> VanillaWoodTypes.OAK,
-                        w -> new PostBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new PostBlock(p)
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
                 //TEXTURES: stripped_log
@@ -320,7 +320,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
 
         stripped_fences = SimpleEntrySet.builder(WoodType.class, "stripped_fence",
                         getModBlock("oak_stripped_fence"), () -> VanillaWoodTypes.OAK,
-                        w -> new StrippedFenceBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new StrippedFenceBlock(p)
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
                 //TEXTURES: planks, stripped_log
@@ -332,7 +332,7 @@ public class BuildersAdditionModule extends EveryCompatModule {
 
         hedges = SimpleEntrySet.builder(LeavesType.class, "hedge",
                         getModBlock("oak_hedge"), () -> VanillaLeavesTypes.OAK,
-                        w -> new HedgeBlock(Utils.copyPropertySafe(w.leaves))
+                        (w, p) -> new HedgeBlock(p)
                 )
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 //TEXTURES: leaves

@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.modules.fabric.regions_unexplored;
 import net.mehvahdjukaar.every_compat.modules.regions_unexplored.RegionsUnexploredModuleAbstract;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.Block;
 import net.regions_unexplored.block.type.shrub.ShrubBlock;
 import net.regions_unexplored.block.type.wood.BranchBlock;
@@ -15,13 +16,13 @@ public class RegionsUnexploredModule extends RegionsUnexploredModuleAbstract {
     }
 
     @Override
-    public Block newShrubBlock(LeavesType l) {
-        return new ShrubBlock(SHRUB_PROPERTIES);
+    public Block newShrubBlock(LeavesType l, BlockBehaviour.Properties p) {
+        return new ShrubBlock(p);
     }
 
     @Override
-    public Block newBranchBlock(WoodType w) {
-        return new BranchBlock(BRANCH_PROPERTIES);
+    public Block newBranchBlock(WoodType w, BlockBehaviour.Properties p) {
+        return new BranchBlock(p);
     }
 
 }

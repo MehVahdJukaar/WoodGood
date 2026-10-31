@@ -34,8 +34,9 @@ public class TropicraftModule extends EveryCompatModule {
 
         boardwalks = SimpleEntrySet.builder(WoodType.class, "boardwalk",
                         getModBlock("mangrove_boardwalk"), () -> VanillaWoodTypes.MANGROVE,
-                        w -> new BoardwalkBlock(BlockBehaviour.Properties.of().noOcclusion())
+                        (w, p) -> new BoardwalkBlock(p.noOcclusion())
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .requiresChildren(SLAB) //REASON: Recipes
                 //TEXTURE: planks
                 //REASON: tropicraft has its own planks texture for mangrove, Below is use mod's planks texture

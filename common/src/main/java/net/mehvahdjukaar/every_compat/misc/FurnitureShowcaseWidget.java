@@ -26,7 +26,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
@@ -40,7 +39,6 @@ import java.util.List;
 
 public class FurnitureShowcaseWidget extends AbstractWidget {
 
-    private static final ItemStack BARRIER = Items.BARRIER.getDefaultInstance();
     private static final float SECONDS_PER_TURN = 8f;
     private static final float TILT = 15f;
     private static final float BLOCK_FILL = 0.62f;
@@ -141,7 +139,7 @@ public class FurnitureShowcaseWidget extends AbstractWidget {
         pose.pushMatrix();
         pose.translate(getX() + (width - size) / 2f, getY() + (height - size) / 2f);
         pose.scale(size / 16f, size / 16f);
-        graphics.fakeItem(BARRIER, 0, 0);
+        graphics.fakeItem(Items.BARRIER.getDefaultInstance(), 0, 0);
         pose.popMatrix();
     }
 

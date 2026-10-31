@@ -89,11 +89,12 @@ public class WoodworksModule extends EveryCompatModule {
         bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf",
                         getModBlock("acacia_bookshelf"),
                         () -> VanillaWoodTypes.ACACIA,
-                        woodType -> new Block(Utils.copyPropertySafe(woodType.log)
+                        (woodType, p) -> new Block(p
                                 .sound(woodType.getSound())
                                 .strength(1.5F)
                         )
                 )
+                .setProperties(woodType -> Utils.copyPropertySafe(woodType.log))
                 .addTextureM(EveryCompat.res("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.ENCHANTMENT_POWER_PROVIDER, Registries.BLOCK)
@@ -110,11 +111,12 @@ public class WoodworksModule extends EveryCompatModule {
         chiseled_bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf", "chiseled",
                         getModBlock("chiseled_acacia_bookshelf"),
                         () -> VanillaWoodTypes.ACACIA,
-                        woodType -> new BlueprintChiseledBookShelfBlock(Utils.copyPropertySafe(woodType.log)
+                        (woodType, p) -> new BlueprintChiseledBookShelfBlock(p
                                 .sound(woodType.getSound())
                                 .strength(1.5F)
                         )
                 )
+                .setProperties(woodType -> Utils.copyPropertySafe(woodType.log))
                 .addTexture(modRes("block/chiseled_acacia_bookshelf_empty"))
                 .addTextureM(modRes("block/chiseled_acacia_bookshelf_occupied"),
                         EveryCompat.res("block/acacia_chiseled_bookshelf_occupied_m"))
@@ -133,7 +135,7 @@ public class WoodworksModule extends EveryCompatModule {
 
         boards = SimpleEntrySet.builder(WoodType.class, "boards",
                         WoodworksBlocks.OAK_BOARDS, () -> VanillaWoodTypes.OAK,
-                        woodType -> new RotatedPillarBlock(Utils.copyPropertySafe(woodType.planks)
+                        (woodType, p) -> new RotatedPillarBlock(p
                                 .strength(2.0F, 3.0F))
                 )
                 .copyParentDrop()
@@ -149,11 +151,12 @@ public class WoodworksModule extends EveryCompatModule {
         ladders = SimpleEntrySet.builder(WoodType.class, "ladder",
                         getModBlock("spruce_ladder"),
                         () -> VanillaWoodTypes.SPRUCE,
-                        woodType -> new LadderBlock(Utils.copyPropertySafe(Blocks.LADDER)
+                        (woodType, p) -> new LadderBlock(p
                                 .strength(0.4F)
                                 .noOcclusion()
                                 .pushReaction(PushReaction.DESTROY))
                 )
+                .setProperties(woodType -> Utils.copyPropertySafe(Blocks.LADDER))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .addTexture(EveryCompat.res("block/spruce_ladder"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -170,11 +173,12 @@ public class WoodworksModule extends EveryCompatModule {
         beehives = SimpleEntrySet.builder(WoodType.class, "beehive",
                         getModBlock("spruce_beehive"),
                         () -> VanillaWoodTypes.SPRUCE,
-                        woodType -> new BlueprintBeehiveBlock(Utils.copyPropertySafe(woodType.log)
+                        (woodType, p) -> new BlueprintBeehiveBlock(p
                                 .sound(woodType.getSound())
                                 .strength(0.6F)
                         )
                 )
+                .setProperties(woodType -> Utils.copyPropertySafe(woodType.log))
                 .addTextureM(EveryCompat.res("block/spruce_beehive_front_honey"), EveryCompat.res("block/spruce_beehive_front_honey_m"))
                 .addTextureM(EveryCompat.res("block/spruce_beehive_front"), EveryCompat.res("block/spruce_beehive_front_m"))
                 .addTextureM(EveryCompat.res("block/spruce_beehive_side"), EveryCompat.res("block/spruce_beehive_side_m"))
@@ -190,8 +194,8 @@ public class WoodworksModule extends EveryCompatModule {
 
         chests = SimpleEntrySet.builder(WoodType.class, "chest",
                         getModBlock("oak_chest"), () -> VanillaWoodTypes.OAK,
-                        woodType -> new CompatChestBlock(this::getChestTile,
-                                Utils.copyPropertySafe(woodType.planks).strength(2.5F)
+                        (woodType, p) -> new CompatChestBlock(this::getChestTile,
+                                p.strength(2.5F)
                         )
                 )
                 .addCondition(woodType -> !woodType.isBambooLike())
@@ -211,8 +215,8 @@ public class WoodworksModule extends EveryCompatModule {
 
         trappedChests = SimpleEntrySet.builder(WoodType.class, "chest", "trapped",
                         getModBlock("trapped_oak_chest"), () -> VanillaWoodTypes.OAK,
-                        woodType -> new CompatTrappedChestBlock(this::getTrappedTile,
-                                Utils.copyPropertySafe(woodType.planks).strength(2.5F)
+                        (woodType, p) -> new CompatTrappedChestBlock(this::getTrappedTile,
+                                p.strength(2.5F)
                         )
                 )
                 .addCondition(woodType -> !woodType.isBambooLike())
@@ -230,13 +234,13 @@ public class WoodworksModule extends EveryCompatModule {
 
         closet = SimpleEntrySet.builder(WoodType.class, "closet",
                         getModBlock("bamboo_closet"), () -> VanillaWoodTypes.BAMBOO,
-                        woodType -> {
+                        (woodType, p) -> {
                             String name = BlueprintChestMaterials.registerMaterials(EveryCompat.MOD_ID,
                                     woodType.createPathWith(shortenedId(), ""), false
                             );
 
                             return new ClosetBlock(name,
-                                    Utils.copyPropertySafe(woodType.planks).strength(2.5F).sound(woodType.getSound())
+                                    p.strength(2.5F).sound(woodType.getSound())
                             );
                         }
                 )
@@ -259,13 +263,13 @@ public class WoodworksModule extends EveryCompatModule {
 
         trappedCloset = SimpleEntrySet.builder(WoodType.class, "closet", "trapped",
                         getModBlock("trapped_bamboo_closet"), () -> VanillaWoodTypes.BAMBOO,
-                        woodType -> {
+                        (woodType, p) -> {
                             String name = BlueprintChestMaterials.registerMaterials(EveryCompat.MOD_ID,
                                     woodType.createPathWith(shortenedId(), ""), true
                             );
 
                             return new TrappedClosetBlock(name,
-                                    Utils.copyPropertySafe(woodType.planks).strength(2.5F).sound(woodType.getSound())
+                                    p.strength(2.5F).sound(woodType.getSound())
                             );
                         }
                 )
@@ -288,7 +292,7 @@ public class WoodworksModule extends EveryCompatModule {
 
         leafPiles = SimpleEntrySet.builder(LeavesType.class, "leaf_pile",
                         WoodworksBlocks.OAK_LEAF_PILE, () -> VanillaLeavesTypes.OAK,
-                        leavesType -> new LeafPileBlock(Utils.copyPropertySafe(leavesType.leaves)
+                        (leavesType, p) -> new LeafPileBlock(p
                                 .noCollission()
                                 .strength(0.2F)
                                 .sound(leavesType.getSound())

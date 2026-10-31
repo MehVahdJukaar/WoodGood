@@ -25,7 +25,7 @@ public class MightyMailModule extends EveryCompatModule {
 
         mailboxes = SimpleEntrySet.builder(WoodType.class, "mail_box",
                         getModBlock("oak_mail_box"), () -> VanillaWoodTypes.OAK,
-                        w -> new MailboxBlock(Utils.copyPropertySafe(w.planks)
+                        (w, p) -> new MailboxBlock(p
                                 .strength(3.5F).sound(SoundType.WOOD).ignitedByLava())
                 )
                 .addTile(ModBlockEntities.MAIL_BOX::get)

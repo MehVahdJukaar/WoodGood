@@ -53,7 +53,7 @@ public class HandcraftedModule extends EveryCompatModule {
 
         chair = SimpleEntrySet.builder(WoodType.class, "chair",
                         getModBlock("oak_chair"), () -> VanillaWoodTypes.OAK,
-                        w -> new ChairBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new ChairBlock(p.noOcclusion())
                 )
                 .setRenderType(RenderLayer.CUTOUT)
                 .addTexture(modRes("block/chair/oak_chair"))
@@ -67,7 +67,7 @@ public class HandcraftedModule extends EveryCompatModule {
 
         table = SimpleEntrySet.builder(WoodType.class, "table",
                         getModBlock("oak_table"), () -> VanillaWoodTypes.OAK,
-                        w -> new TableBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new TableBlock(p.noOcclusion())
                 )
                 .setRenderType(RenderLayer.CUTOUT)
                 .addTexture(modRes("block/table/table/oak_table"))
@@ -82,7 +82,7 @@ public class HandcraftedModule extends EveryCompatModule {
 
         bench = SimpleEntrySet.builder(WoodType.class, "bench",
                         getModBlock("oak_bench"), () -> VanillaWoodTypes.OAK,
-                        w -> new BenchBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new BenchBlock(p.noOcclusion())
                 )
                 .setRenderType(RenderLayer.CUTOUT)
                 .addTexture(modRes("block/bench/oak_bench"))
@@ -97,7 +97,7 @@ public class HandcraftedModule extends EveryCompatModule {
 
         couch = SimpleEntrySet.builder(WoodType.class, "couch",
                         getModBlock("oak_couch"), () -> VanillaWoodTypes.OAK,
-                        w -> new CouchBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new CouchBlock(p.noOcclusion())
                 )
                 .setRenderType(RenderLayer.CUTOUT)
                 .addTexture(modRes("block/couch/oak_couch"))
@@ -111,8 +111,9 @@ public class HandcraftedModule extends EveryCompatModule {
 
         fancy_bed = SimpleEntrySet.builder(WoodType.class, "fancy_bed",
                         getModBlock("oak_fancy_bed"), () -> VanillaWoodTypes.OAK,
-                        w -> new FancyBedBlock(Utils.copyPropertySafe(Blocks.WHITE_BED))
+                        (w, p) -> new FancyBedBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.WHITE_BED))
                 .setRenderType(RenderLayer.CUTOUT)
                 .addTexture(modRes("block/fancy_bed/single/oak_fancy_bed"))
                 .addTexture(modRes("block/fancy_bed/double/oak_fancy_bed"))
@@ -128,7 +129,7 @@ public class HandcraftedModule extends EveryCompatModule {
 
         dining_bench = SimpleEntrySet.builder(WoodType.class, "dining_bench",
                         getModBlock("oak_dining_bench"), () -> VanillaWoodTypes.OAK,
-                        w -> new DiningBenchBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new DiningBenchBlock(p.noOcclusion())
                 )
                 .setRenderType(RenderLayer.CUTOUT)
                 .addTexture(modRes("block/dining_bench/oak_dining_bench"))
@@ -142,7 +143,7 @@ public class HandcraftedModule extends EveryCompatModule {
 
         nightstand = SimpleEntrySet.builder(WoodType.class, "nightstand",
                         getModBlock("oak_nightstand"), () -> VanillaWoodTypes.OAK,
-                        w -> new NightstandBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new NightstandBlock(p.noOcclusion())
                 )
                 .addTile(getModTile("container"))
                 .setRenderType(RenderLayer.CUTOUT)
@@ -158,7 +159,7 @@ public class HandcraftedModule extends EveryCompatModule {
 
         desk = SimpleEntrySet.builder(WoodType.class, "desk",
                         getModBlock("oak_desk"), () -> VanillaWoodTypes.OAK,
-                        w -> new DeskBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new DeskBlock(p.noOcclusion())
                 )
                 .addTile(getModTile("container"))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
@@ -174,7 +175,7 @@ public class HandcraftedModule extends EveryCompatModule {
 
         side_table = SimpleEntrySet.builder(WoodType.class, "side_table",
                         getModBlock("oak_side_table"), () -> VanillaWoodTypes.OAK,
-                        w -> new SideTableBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new SideTableBlock(p.noOcclusion())
                 )
                 .addTile(getModTile("container"))
                 .setRenderType(RenderLayer.CUTOUT)
@@ -189,7 +190,7 @@ public class HandcraftedModule extends EveryCompatModule {
 
         counter = SimpleEntrySet.builder(WoodType.class, "counter",
                         getModBlock("acacia_counter"), () -> VanillaWoodTypes.ACACIA,
-                        w -> new CounterBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new CounterBlock(p)
                 )
                 .addTile(getModTile("container"))
                 .addTextureM(modRes("block/counter/acacia_counter_1"), EveryCompat.res("block/hc/counter/oak_counter_1_m"))
@@ -206,7 +207,7 @@ public class HandcraftedModule extends EveryCompatModule {
 
         cupboard = SimpleEntrySet.builder(WoodType.class, "cupboard",
                         getModBlock("oak_cupboard"), () -> VanillaWoodTypes.OAK,
-                        w -> new CupboardBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new CupboardBlock(p)
                 )
                 .addTile(getModTile("container"))
                 .addTextureM(modRes("block/cupboard/oak/cupboard_1"), EveryCompat.res("block/hc/cupboard/cupboard_1_m"))
@@ -224,7 +225,7 @@ public class HandcraftedModule extends EveryCompatModule {
 
         drawer = SimpleEntrySet.builder(WoodType.class, "drawer",
                         getModBlock("oak_drawer"), () -> VanillaWoodTypes.OAK,
-                        w -> new DrawerBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new DrawerBlock(p.noOcclusion())
                 )
                 .addTile(getModTile("container"))
                 .addTextureM(modRes("block/drawer/oak/front_1/drawer_left"), EveryCompat.res("block/hc/drawer/front_1/drawer_left_m"))
@@ -255,7 +256,7 @@ public class HandcraftedModule extends EveryCompatModule {
 
         shelf = SimpleEntrySet.builder(WoodType.class, "shelf",
                         getModBlock("oak_shelf"), () -> VanillaWoodTypes.OAK,
-                        w -> new ShelfBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new ShelfBlock(p)
                 )
                 .addTile(getModTile("container"))
                 .addTexture(modRes("block/shelf/oak/shelf_back"))
@@ -277,7 +278,7 @@ public class HandcraftedModule extends EveryCompatModule {
 
         pillarTrim = SimpleEntrySet.builder(WoodType.class, "pillar_trim",
                         getModBlock("oak_pillar_trim"), () -> VanillaWoodTypes.OAK,
-                        w -> new PillarTrimBlock(true, Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new PillarTrimBlock(true, p.noOcclusion())
                 )
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .addTexture(modRes("block/trim/pillar/oak_pillar_trim_normal"))
@@ -297,7 +298,7 @@ public class HandcraftedModule extends EveryCompatModule {
 
         cornerTrim = SimpleEntrySet.builder(WoodType.class, "corner_trim",
                         getModBlock("oak_corner_trim"), () -> VanillaWoodTypes.OAK,
-                        w -> new CornerTrimBlock(true, Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new CornerTrimBlock(true, p.noOcclusion())
                 )
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .addTexture(modRes("block/trim/corner/oak_corner_trim_normal"))

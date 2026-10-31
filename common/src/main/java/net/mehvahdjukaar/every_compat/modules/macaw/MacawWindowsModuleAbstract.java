@@ -7,6 +7,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
@@ -46,6 +47,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_window"), () -> VanillaWoodTypes.OAK,
                         this::newConnectedWindow
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
@@ -61,6 +63,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_window2"), () -> VanillaWoodTypes.OAK,
                         this::newWindowBarred
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
@@ -76,6 +79,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_four_window"), () -> VanillaWoodTypes.OAK,
                         this::newWindowBarred
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
@@ -91,6 +95,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_log_window"), () -> VanillaWoodTypes.OAK,
                         this::newConnectedWindow
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -107,6 +112,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_log_window2"), () -> VanillaWoodTypes.OAK,
                         this::newWindowBarred
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -123,6 +129,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_log_four_window"), () -> VanillaWoodTypes.OAK,
                         this::newWindowBarred
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -139,6 +146,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_plank_window"), () -> VanillaWoodTypes.OAK,
                         this::newConnectedWindow
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
@@ -153,6 +161,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_plank_window2"), () -> VanillaWoodTypes.OAK,
                         this::newWindowBarred
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
@@ -167,6 +176,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_plank_four_window"), () -> VanillaWoodTypes.OAK,
                         this::newWindowBarred
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
@@ -181,6 +191,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_pane_window"), () -> VanillaWoodTypes.OAK,
                         this::newWindow
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
@@ -196,6 +207,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                         getModBlock("stripped_oak_pane_window"), () -> VanillaWoodTypes.OAK,
                         this::newWindow
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -212,6 +224,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_plank_pane_window"), () -> VanillaWoodTypes.OAK,
                         this::newWindow
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
@@ -226,6 +239,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_log_parapet"), () -> VanillaWoodTypes.OAK,
                         this::newParapet
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("parapets"), Registries.BLOCK)
@@ -240,6 +254,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_plank_parapet"), () -> VanillaWoodTypes.OAK,
                         this::newParapet
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("parapets"), Registries.BLOCK)
@@ -252,6 +267,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_blinds"), () -> VanillaWoodTypes.OAK,
                         this::newBlinds
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: log, stripped_log, planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -266,6 +282,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_shutter"), () -> VanillaWoodTypes.OAK,
                         this::newShutter
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .addTexture(modRes("block/oak_shutter"), SHUTTER_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("shutters"), Registries.BLOCK)
@@ -279,6 +296,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_louvered_shutter"), () -> VanillaWoodTypes.OAK,
                         this::newShutter
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .addTexture(modRes("block/oak_louvered_shutter"), SHUTTER_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("shutters"), Registries.BLOCK)
@@ -292,6 +310,7 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
                         getModBlock("oak_curtain_rod"), () -> VanillaWoodTypes.OAK,
                         this::newCurtainRod
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -315,12 +334,12 @@ public abstract class MacawWindowsModuleAbstract extends EveryCompatModule {
             })
     );
 
-    public abstract Block newConnectedWindow(WoodType woodType);
-    public abstract Block newWindowBarred(WoodType woodType);
-    public abstract Block newWindow(WoodType woodType);
-    public abstract Block newParapet(WoodType woodType);
-    public abstract Block newBlinds(WoodType woodType);
-    public abstract Block newShutter(WoodType woodType);
-    public abstract Block newCurtainRod(WoodType woodType);
+    public abstract Block newConnectedWindow(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newWindowBarred(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newWindow(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newParapet(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newBlinds(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newShutter(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newCurtainRod(WoodType woodType, BlockBehaviour.Properties p);
 
 }

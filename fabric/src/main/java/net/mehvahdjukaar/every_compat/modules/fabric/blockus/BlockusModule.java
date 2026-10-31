@@ -62,7 +62,7 @@ public class BlockusModule extends EveryCompatModule {
 
         herringbone_planks = SimpleEntrySet.builder(WoodType.class, "planks", "herringbone",
                         getModBlock("herringbone_oak_planks"), () -> VanillaWoodTypes.OAK,
-                        w -> new Block(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new Block(p)
                 )
                 .addTexture(modRes("block/herringbone_oak_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -77,7 +77,7 @@ public class BlockusModule extends EveryCompatModule {
 
         mossy_planks = SimpleEntrySet.builder(WoodType.class, "planks", "mossy",
                         getModBlock("mossy_oak_planks"), () -> VanillaWoodTypes.OAK,
-                        woodType -> new Block(Utils.copyPropertySafe(woodType.planks))
+                        (woodType, p) -> new Block(p)
                 )
                 .addTextureM(modRes("block/mossy_oak_planks"), res("block/bus/mossy_oak_planks_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -91,8 +91,9 @@ public class BlockusModule extends EveryCompatModule {
 
         mossy_slab = SimpleEntrySet.builder(WoodType.class, "slab", "mossy",
                         getModBlock("mossy_oak_slab"), () -> VanillaWoodTypes.OAK,
-                        woodType  -> new SlabBlock(copyChildrenPropertySafe("slab", woodType))
+                        (woodType, p) -> new SlabBlock(p)
                 )
+                .setProperties(woodType -> copyChildrenPropertySafe("slab", woodType))
                 .requiresFromMap(mossy_planks.blocks) //REASON: textures, recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.SLABS, Registries.BLOCK)
@@ -105,10 +106,11 @@ public class BlockusModule extends EveryCompatModule {
 
         mossy_stairs = SimpleEntrySet.builder(WoodType.class, "stairs", "mossy",
                         getModBlock("mossy_oak_stairs"), () -> VanillaWoodTypes.OAK,
-                        woodType -> new StairBlock(mossy_planks.blocks.get(woodType).defaultBlockState(),
-                                copyChildrenPropertySafe("stairs", woodType))
+                        (woodType, p) -> new StairBlock(mossy_planks.blocks.get(woodType).defaultBlockState(),
+                                p)
 
                 )
+                .setProperties(woodType -> copyChildrenPropertySafe("stairs", woodType))
                 .requiresFromMap(mossy_planks.blocks) //REASON: textures, recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.STAIRS, Registries.BLOCK)
@@ -121,7 +123,7 @@ public class BlockusModule extends EveryCompatModule {
 
         grate = SimpleEntrySet.builder(WoodType.class, "grate",
                         getModBlock("oak_grate"), () -> VanillaWoodTypes.OAK,
-                        w -> new WaterloggedTransparentBlock(Utils.copyPropertySafe(w.planks)
+                        (w, p) -> new WaterloggedTransparentBlock(p
                                 .noOcclusion()
                                 .isValidSpawn(Blocks::never)
                                 .isRedstoneConductor(Blocks::never)
@@ -140,7 +142,7 @@ public class BlockusModule extends EveryCompatModule {
 
         lattice = SimpleEntrySet.builder(WoodType.class, "lattice",
                         getModBlock("oak_lattice"), () -> VanillaWoodTypes.OAK,
-                        w -> new IronBarsBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new IronBarsBlock(p)
                 )
                 .requiresFromMap(grate.blocks) //REASON: textures, recipes
                 .addTexture(modRes("block/oak_lattice_top"))
@@ -154,7 +156,7 @@ public class BlockusModule extends EveryCompatModule {
 
         mosaic = SimpleEntrySet.builder(WoodType.class, "mosaic",
                         getModBlock("oak_mosaic"), () -> VanillaWoodTypes.OAK,
-                        woodType -> new Block(Utils.copyPropertySafe(woodType.planks))
+                        (woodType, p) -> new Block(p)
                 )
                 .addTexture(modRes("block/oak_mosaic"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -168,8 +170,9 @@ public class BlockusModule extends EveryCompatModule {
 
         mosaic_slab = SimpleEntrySet.builder(WoodType.class, "mosaic_slab",
                         getModBlock("oak_mosaic_slab"), () -> VanillaWoodTypes.OAK,
-                        woodType -> new SlabBlock(copyChildrenPropertySafe("slab", woodType))
+                        (woodType, p) -> new SlabBlock(p)
                 )
+                .setProperties(woodType -> copyChildrenPropertySafe("slab", woodType))
                 .requiresFromMap(mosaic.blocks) //REASON: textures, recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.SLABS, Registries.BLOCK)
@@ -181,10 +184,11 @@ public class BlockusModule extends EveryCompatModule {
 
         mosaic_stairs = SimpleEntrySet.builder(WoodType.class, "mosaic_stairs",
                         getModBlock("oak_mosaic_stairs"), () -> VanillaWoodTypes.OAK,
-                        woodType -> new StairBlock(mosaic.blocks.get(woodType).defaultBlockState(),
-                                copyChildrenPropertySafe("stairs", woodType))
+                        (woodType, p) -> new StairBlock(mosaic.blocks.get(woodType).defaultBlockState(),
+                                p)
 
                 )
+                .setProperties(woodType -> copyChildrenPropertySafe("stairs", woodType))
                 .requiresFromMap(mosaic.blocks) //REASON: textures, recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.STAIRS, Registries.BLOCK)
@@ -197,7 +201,7 @@ public class BlockusModule extends EveryCompatModule {
 
         small_logs = SimpleEntrySet.builder(WoodType.class, "logs", "small",
                         getModBlock("small_acacia_logs"), () -> VanillaWoodTypes.ACACIA,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
                 .addTexture(modRes("block/small_acacia_logs"), PaletteStrategies.LOG_SIDE_STANDARD)
                 //TEXTURE: manually generated texture below (acacia_small_logs_top.png)
@@ -216,7 +220,7 @@ public class BlockusModule extends EveryCompatModule {
 
         timber_frame = SimpleEntrySet.builder(WoodType.class, "timber_frame",
                         getModBlock("oak_timber_frame"), () -> VanillaWoodTypes.OAK,
-                        w -> new Block(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new Block(p)
                 )
                 .addTextureM(modRes("block/oak_timber_frame"),
                         res("block/bus/oak_timber_frame_m"))
@@ -229,7 +233,7 @@ public class BlockusModule extends EveryCompatModule {
 
         diagonal_timber_frame = SimpleEntrySet.builder(WoodType.class, "diagonal_timber_frame",
                         getModBlock("oak_diagonal_timber_frame"), () -> VanillaWoodTypes.OAK,
-                        w -> new OrientableBlockBase(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new OrientableBlockBase(p)
                 )
                 .requiresFromMap(timber_frame.blocks) //REASON: recipes
                 .addTextureM(modRes("block/oak_diagonal_timber_frame_left"),
@@ -245,7 +249,7 @@ public class BlockusModule extends EveryCompatModule {
 
         cross_timber_frame = SimpleEntrySet.builder(WoodType.class, "cross_timber_frame",
                         getModBlock("oak_cross_timber_frame"), () -> VanillaWoodTypes.OAK,
-                        w -> new Block(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new Block(p)
                 )
                 .requiresFromMap(diagonal_timber_frame.blocks) //REASON: recipes
                 .addTextureM(modRes("block/oak_cross_timber_frame"),
@@ -259,11 +263,12 @@ public class BlockusModule extends EveryCompatModule {
 
         stripped_post = SimpleEntrySet.builder(WoodType.class, "post", "stripped",
                         getModBlock("stripped_oak_post"), () -> VanillaWoodTypes.OAK,
-                        w -> new PostBlock(
-                                Utils.copyPropertySafe(Objects.requireNonNull(w.getBlockOfThis("stripped_log")))
+                        (w, p) -> new PostBlock(
+                                p
                                         .forceSolidOn()
                         )
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Objects.requireNonNull(w.getBlockOfThis("stripped_log"))))
                 .requiresChildren("stripped_log") //REASON: textures, recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_posts"), Registries.BLOCK)
@@ -276,8 +281,9 @@ public class BlockusModule extends EveryCompatModule {
 
         post = SimpleEntrySet.builder(WoodType.class, "post",
                         getModBlock("oak_post"), () -> VanillaWoodTypes.OAK,
-                        w -> new PostBlock(Utils.copyPropertySafe(w.log).forceSolidOn())
+                        (w, p) -> new PostBlock(p.forceSolidOn())
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 //TEXTURES: log, log_top
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("wooden_posts"), Registries.BLOCK)
@@ -290,7 +296,7 @@ public class BlockusModule extends EveryCompatModule {
 
         small_hedge = SimpleEntrySet.builder(LeavesType.class, "hedge",
                         getModBlock("oak_hedge"), () -> VanillaLeavesTypes.OAK,
-                        leavesType -> new SmallHedgeBlock(Utils.copyPropertySafe(leavesType.leaves)
+                        (leavesType, p) -> new SmallHedgeBlock(p
                                 .isSuffocating(BlockFactory::never)
                                 .isViewBlocking(BlockFactory::never)
                                 .isValidSpawn(BlockFactory::canSpawnOnLeaves)

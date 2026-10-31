@@ -4,8 +4,6 @@ import com.buuz135.functionalstorage.FunctionalStorage;
 import com.buuz135.functionalstorage.block.DrawerBlock;
 import com.buuz135.functionalstorage.block.tile.DrawerTile;
 import com.buuz135.functionalstorage.client.DrawerRenderer;
-import com.buuz135.functionalstorage.client.item.DrawerISTER;
-import com.buuz135.functionalstorage.inventory.item.DrawerStackItemHandler;
 import com.buuz135.functionalstorage.util.IWoodType;
 import com.hrznstudio.titanium.module.BlockWithTile;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -17,23 +15,16 @@ import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
-import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Consumer;
 
 //SUPPORT: v1.5.4+
 public class FunctionalStorageModule extends EveryCompatModule {
@@ -48,7 +39,7 @@ public class FunctionalStorageModule extends EveryCompatModule {
 
         drawer_1 = SimpleEntrySet.builder(WoodType.class, "1",
                         getModBlock("spruce_1", DrawerBlock.class), () -> VanillaWoodTypes.SPRUCE,
-                        w -> new DrawerBlock(wrap(w), FunctionalStorage.DrawerType.X_1, Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new DrawerBlock(wrap(w), FunctionalStorage.DrawerType.X_1, p)
                 )
                 .addTile(getModTile("spruce_1"))
                 .addTexture(modRes("block/spruce_front_1"))
@@ -62,13 +53,13 @@ public class FunctionalStorageModule extends EveryCompatModule {
                 .addTag(modRes("drawer_1x1"), Registries.ITEM)
                 .setTab(getTab(tab))
                 .defaultRecipe()
-                .addCustomItem((woodType, block, properties) -> new CompatDrawerItem(block, properties))
+                .addCustomItem((woodType, block, properties) -> new DrawerBlock.DrawerItem(block, properties, FunctionalStorage.TAB))
                 .build();
         this.addEntry(drawer_1);
 
         drawer_2 = SimpleEntrySet.builder(WoodType.class, "2",
                         getModBlock("spruce_2", DrawerBlock.class), () -> VanillaWoodTypes.SPRUCE,
-                        w -> new DrawerBlock(wrap(w), FunctionalStorage.DrawerType.X_2, Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new DrawerBlock(wrap(w), FunctionalStorage.DrawerType.X_2, p)
                 )
                 .addTile(getModTile("spruce_2"))
                 .addTexture(modRes("block/spruce_front_2"))
@@ -81,13 +72,13 @@ public class FunctionalStorageModule extends EveryCompatModule {
                 .addTag(modRes("drawer_1x2"), Registries.ITEM)
                 .setTab(getTab(tab))
                 .defaultRecipe()
-                .addCustomItem((woodType, block, properties) -> new CompatDrawerItem(block, properties))
+                .addCustomItem((woodType, block, properties) -> new DrawerBlock.DrawerItem(block, properties, FunctionalStorage.TAB))
                 .build();
         this.addEntry(drawer_2);
 
         drawer_4 = SimpleEntrySet.builder(WoodType.class, "4",
                         getModBlock("spruce_4", DrawerBlock.class), () -> VanillaWoodTypes.SPRUCE,
-                        w -> new DrawerBlock(wrap(w), FunctionalStorage.DrawerType.X_4, Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new DrawerBlock(wrap(w), FunctionalStorage.DrawerType.X_4, p)
                 )
                 .addTile(getModTile("spruce_4"))
                 .addTexture(modRes("block/spruce_front_4"))
@@ -100,7 +91,7 @@ public class FunctionalStorageModule extends EveryCompatModule {
                 .addTag(modRes("drawer_2x2"), Registries.ITEM)
                 .setTab(getTab(tab))
                 .defaultRecipe()
-                .addCustomItem((woodType, block, properties) -> new CompatDrawerItem(block, properties))
+                .addCustomItem((woodType, block, properties) -> new DrawerBlock.DrawerItem(block, properties, FunctionalStorage.TAB))
                 .build();
         this.addEntry(drawer_4);
 
@@ -165,36 +156,6 @@ public class FunctionalStorageModule extends EveryCompatModule {
         public String getName() {
             return "fs/" + woodType.getAppendableId();
         }
-    }
-
-    public static class CompatDrawerItem extends DrawerBlock.DrawerItem {
-
-        private final DrawerBlock drawerBlock;
-
-        public CompatDrawerItem(DrawerBlock drawerBlock, Properties properties) {
-            super(drawerBlock, properties, FunctionalStorage.TAB);
-            this.drawerBlock = drawerBlock;
-        }
-
-        @Nullable
-        public IItemHandler initCapabilities(ItemStack stack) {
-            return new DrawerStackItemHandler(stack, this.drawerBlock.getType());
-        }
-
-        @Override
-        public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-            consumer.accept(new IClientItemExtensions() {
-                @Override
-                public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                    return switch (drawerBlock.getType()){
-                        case X_2 -> DrawerISTER.SLOT_2;
-                        case X_4 -> DrawerISTER.SLOT_4;
-                        default -> DrawerISTER.SLOT_1;
-                    };
-                }
-            });
-        }
-
     }
 
 }

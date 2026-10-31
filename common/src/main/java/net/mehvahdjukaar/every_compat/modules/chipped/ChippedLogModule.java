@@ -67,8 +67,9 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
         BundledLog = SimpleEntrySet.builder(WoodType.class, "log", "bundled",
                         getModBlock("bundled_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 //TEXTURES: manually generated (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tab))
@@ -77,8 +78,9 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
         CenterCutLog = SimpleEntrySet.builder(WoodType.class, "log", "center_cut",
                         getModBlock("center_cut_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 //TEXTURES: manually generated (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tab))
@@ -87,8 +89,9 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
         DamagedLog = SimpleEntrySet.builder(WoodType.class, "log", "damaged",
                         getModBlock("damaged_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 .addTexture(modRes("block/oak_log/damaged_oak_log_top"), PaletteStrategies.PLANKS_REMOVE_DARKEST)
                 //TEXTURES: manually generated (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -97,8 +100,9 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
         EdgeCutLog = SimpleEntrySet.builder(WoodType.class, "log", "edge_cut",
                         getModBlock("edge_cut_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 //TEXTURES: manually generated (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tab))
@@ -107,8 +111,9 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
         FirewoodLog = SimpleEntrySet.builder(WoodType.class, "log", "firewood",
                         getModBlock("firewood_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 .addTexture(modRes("block/oak_log/firewood_oak_log"), LOG_SIDE_LIGHT_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tab))
@@ -117,8 +122,9 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
         FloweringLog = SimpleEntrySet.builder(WoodType.class, "log", "flowering",
                         getModBlock("flowering_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 .addTextureM(modRes("block/oak_log/flowering_oak_log"),
                         EveryCompat.res("block/ch/oak_logs/flowering_oak_log_m"), PaletteStrategies.LOG_SIDE_STANDARD)
                 .addTextureM(modRes("block/oak_log/flowering_oak_log_top"),
@@ -130,8 +136,9 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
         MixedLog = SimpleEntrySet.builder(WoodType.class, "log", "mixed",
                         getModBlock("mixed_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 .addTexture(modRes("block/oak_log/mixed_oak_log"), LOG_SIDE_REMOVE_2_DARKEST)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tab))
@@ -140,8 +147,9 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
         NailedLog = SimpleEntrySet.builder(WoodType.class, "log", "nailed",
                         getModBlock("nailed_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 //TEXTURES: manually generated (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tab))
@@ -150,8 +158,9 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
         OvergrownLog = SimpleEntrySet.builder(WoodType.class, "log", "overgrown",
                         getModBlock("overgrown_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 .addTextureM(modRes("block/oak_log/overgrown_oak_log"),
                         EveryCompat.res("block/ch/oak_logs/overgrown_oak_log_m"), PaletteStrategies.LOG_SIDE_STANDARD)
                 //TEXTURES: manually generated (BELOW)
@@ -162,8 +171,9 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
         PlankedLog = SimpleEntrySet.builder(WoodType.class, "log", "planked",
                         getModBlock("planked_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 //TEXTURES: manually generated (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tab))
@@ -172,8 +182,9 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
         ReinforcedLog = SimpleEntrySet.builder(WoodType.class, "log", "reinforced",
                         getModBlock("reinforced_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.log))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 //TEXTURES: manually generated (BELOW)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tab))
@@ -184,8 +195,9 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
         carvedStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "carved_stripped",
                         getModBlock("carved_stripped_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
+                .setProperties(this::copyStrippedLogProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
                 .addTexture(modRes("block/stripped_oak_log/carved_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/carved_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
@@ -196,8 +208,9 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
         ChippedStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "chipped_stripped",
                         getModBlock("chipped_stripped_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
+                .setProperties(this::copyStrippedLogProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
                 .addTexture(modRes("block/stripped_oak_log/chipped_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/chipped_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
@@ -208,8 +221,9 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
         DSignStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "d_sign_stripped",
                         getModBlock("d_sign_stripped_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
+                .setProperties(this::copyStrippedLogProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
                 .addTexture(modRes("block/stripped_oak_log/d_sign_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/d_sign_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
@@ -220,8 +234,9 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
         edgedStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "edged_stripped",
                         getModBlock("edged_stripped_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
+                .setProperties(this::copyStrippedLogProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
                 .addTexture(modRes("block/stripped_oak_log/edged_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/edged_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
@@ -232,8 +247,9 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
         FSignStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "f_sign_stripped",
                         getModBlock("f_sign_stripped_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
+                .setProperties(this::copyStrippedLogProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
                 .addTexture(modRes("block/stripped_oak_log/f_sign_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/f_sign_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
@@ -244,8 +260,9 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
         ISignStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "i_sign_stripped",
                         getModBlock("i_sign_stripped_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
+                .setProperties(this::copyStrippedLogProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
                 .addTexture(modRes("block/stripped_oak_log/i_sign_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/i_sign_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
@@ -256,8 +273,9 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
         KSignStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "k_sign_stripped",
                         getModBlock("k_sign_stripped_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
+                .setProperties(this::copyStrippedLogProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
                 .addTexture(modRes("block/stripped_oak_log/k_sign_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/k_sign_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
@@ -268,8 +286,9 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
         knottedStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "knotted_stripped",
                         getModBlock("knotted_stripped_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
+                .setProperties(this::copyStrippedLogProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
                 .addTexture(modRes("block/stripped_oak_log/knotted_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/knotted_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
@@ -280,8 +299,9 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
         LSignStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "l_sign_stripped",
                         getModBlock("l_sign_stripped_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
+                .setProperties(this::copyStrippedLogProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
                 .addTexture(modRes("block/stripped_oak_log/l_sign_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/l_sign_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
@@ -292,8 +312,9 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
         LayeredStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "layered_stripped",
                         getModBlock("layered_stripped_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
+                .setProperties(this::copyStrippedLogProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
                 .addTexture(modRes("block/stripped_oak_log/layered_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/layered_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
@@ -304,8 +325,9 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
         LumpyStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "lumpy_stripped",
                         getModBlock("lumpy_stripped_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
+                .setProperties(this::copyStrippedLogProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
                 .addTexture(modRes("block/stripped_oak_log/lumpy_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/lumpy_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
@@ -316,8 +338,9 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
         PatientStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "patient_stripped",
                         getModBlock("patient_stripped_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
+                .setProperties(this::copyStrippedLogProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
                 .addTexture(modRes("block/stripped_oak_log/patient_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/patient_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
@@ -328,8 +351,9 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
         ReinforcedStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "reinforced_stripped",
                         getModBlock("reinforced_stripped_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
+                .setProperties(this::copyStrippedLogProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
                 .addTextureM(modRes("block/stripped_oak_log/reinforced_stripped_oak_log"),
                         EveryCompat.res("block/ch/stripped_oak_logs/reinforced_stripped_oak_log_m"),
@@ -342,8 +366,9 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
         signStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "sign_stripped",
                         getModBlock("sign_stripped_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
+                .setProperties(this::copyStrippedLogProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
                 .addTexture(modRes("block/stripped_oak_log/sign_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/sign_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
@@ -354,8 +379,9 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
         sternStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "stern_stripped",
                         getModBlock("stern_stripped_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
+                .setProperties(this::copyStrippedLogProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
                 .addTexture(modRes("block/stripped_oak_log/stern_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/stern_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)
@@ -366,8 +392,9 @@ public class ChippedLogModule extends ChippedModuleAbstract {
 
         wiseStrippedLog = SimpleEntrySet.builder(WoodType.class, "log", "wise_stripped",
                         getModBlock("wise_stripped_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new RotatedPillarBlock(copyStrippedLogProperties(w))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
+                .setProperties(this::copyStrippedLogProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
                 .addTexture(modRes("block/stripped_oak_log/wise_stripped_oak_log"), STRIPPED_LOG_LIGHT_PALETTE)
                 .addTexture(modRes("block/stripped_oak_log/wise_stripped_oak_log_top"), STRIPPED_LOG_LIGHT_PALETTE)

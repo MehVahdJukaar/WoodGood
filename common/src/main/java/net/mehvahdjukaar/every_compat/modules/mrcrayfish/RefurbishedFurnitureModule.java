@@ -75,8 +75,9 @@ public class RefurbishedFurnitureModule extends EveryCompatModule {
 
         chairs = SimpleEntrySet.builder(WoodType.class, "chair",
                         getModBlock("oak_chair"), () -> VanillaWoodTypes.OAK,
-                        w -> new ChairBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of().strength(2.0F)))
+                        (w, p) -> new ChairBlock(w.toVanillaOrOak(), addWoodProp(w, p.strength(2.0F)))
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .addTexture(modRes("block/oak_chair"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("general"), Registries.ITEM)
@@ -87,9 +88,10 @@ public class RefurbishedFurnitureModule extends EveryCompatModule {
 
         tables = SimpleEntrySet.builder(WoodType.class, "table",
                         getModBlock("oak_table"), () -> VanillaWoodTypes.OAK,
-                        w -> new TableBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of()
+                        (w, p) -> new TableBlock(w.toVanillaOrOak(), addWoodProp(w, p
                                 .strength(2.0F)))
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .addTexture(modRes("block/oak_table"))
                 .addTexture(modRes("block/oak_particle"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -102,11 +104,12 @@ public class RefurbishedFurnitureModule extends EveryCompatModule {
 
         darkFans = SimpleEntrySet.builder(WoodType.class, "dark_ceiling_fan",
                         getModBlock("oak_dark_ceiling_fan"), () -> VanillaWoodTypes.OAK,
-                        w -> new CeilingFanBlock(w.toVanillaOrOak(),
+                        (w, p) -> new CeilingFanBlock(w.toVanillaOrOak(),
                                 MetalType.DARK,
-                                BlockBehaviour.Properties.of().mapColor(w.planks.defaultMapColor())
+                                p.mapColor(w.planks.defaultMapColor())
                                         .strength(0.8F).sound(w.getSound()).lightLevel(CeilingFanBlock::light))
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .addTile(ModBlockEntities.CEILING_FAN::get)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("electronics"), Registries.ITEM)
@@ -122,11 +125,12 @@ public class RefurbishedFurnitureModule extends EveryCompatModule {
 
         lightFans = SimpleEntrySet.builder(WoodType.class, "light_ceiling_fan",
                         getModBlock("oak_light_ceiling_fan"), () -> VanillaWoodTypes.OAK,
-                        w -> new CeilingFanBlock(w.toVanillaOrOak(),
+                        (w, p) -> new CeilingFanBlock(w.toVanillaOrOak(),
                                 MetalType.DARK,
-                                BlockBehaviour.Properties.of().mapColor(w.planks.defaultMapColor())
+                                p.mapColor(w.planks.defaultMapColor())
                                         .strength(0.8F).sound(w.getSound()).lightLevel(CeilingFanBlock::light))
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .addTile(ModBlockEntities.CEILING_FAN::get)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("electronics"), Registries.ITEM)
@@ -142,9 +146,10 @@ public class RefurbishedFurnitureModule extends EveryCompatModule {
 
         crates = SimpleEntrySet.builder(WoodType.class, "crate",
                         getModBlock("oak_crate"), () -> VanillaWoodTypes.OAK,
-                        w -> new CrateBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of()
+                        (w, p) -> new CrateBlock(w.toVanillaOrOak(), addWoodProp(w, p
                                 .forceSolidOn().strength(2.5F)))
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .addTile(ModBlockEntities.CRATE::get)
                 .addTexture(modRes("block/oak_crate"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -157,9 +162,10 @@ public class RefurbishedFurnitureModule extends EveryCompatModule {
 
         mailboxes = SimpleEntrySet.builder(WoodType.class, "mail_box",
                         getModBlock("oak_mail_box"), () -> VanillaWoodTypes.OAK,
-                        w -> new MailboxBlock(w.toVanillaOrOak(), addWoodPropNoFire(w, BlockBehaviour.Properties.of()
+                        (w, p) -> new MailboxBlock(w.toVanillaOrOak(), addWoodPropNoFire(w, p
                                 .strength(2.5F)))
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .addCustomItem((woodType, block, properties) -> new MailboxItem(block, properties))
                 .addTile(ModBlockEntities.MAIL_BOX::get)
                 .addNonAnimatedTextureM(modRes("block/oak_mail_box"),
@@ -175,9 +181,10 @@ public class RefurbishedFurnitureModule extends EveryCompatModule {
 
         toilets = SimpleEntrySet.builder(WoodType.class, "toilet",
                         getModBlock("oak_toilet"), () -> VanillaWoodTypes.OAK,
-                        w -> new WoodenToiletBlock(w.toVanillaOrOak(), BlockBehaviour.Properties.of().mapColor(w.planks.defaultMapColor())
+                        (w, p) -> new WoodenToiletBlock(w.toVanillaOrOak(), p.mapColor(w.planks.defaultMapColor())
                                 .strength(3.5f).sound(SoundType.STONE))
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .addTile(ModBlockEntities.TOILET::get)
                 .addNonAnimatedTextureM(modRes("block/oak_toilet"),
                         EveryCompat.res("block/rfm/oak_toilet_m"))
@@ -192,10 +199,11 @@ public class RefurbishedFurnitureModule extends EveryCompatModule {
 
         jars = SimpleEntrySet.builder(WoodType.class, "storage_jar",
                         getModBlock("oak_storage_jar"), () -> VanillaWoodTypes.OAK,
-                        w -> new StorageJarBlock(w.toVanillaOrOak(), BlockBehaviour.Properties.of()
+                        (w, p) -> new StorageJarBlock(w.toVanillaOrOak(), p
                                 .mapColor(w.planks.defaultMapColor())
                                 .instrument(NoteBlockInstrument.HAT).strength(1.0F).sound(SoundType.GLASS))
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .addTile(ModBlockEntities.STORAGE_JAR::get)
                 .addNonAnimatedTextureM(modRes("block/oak_storage_jar"),
                         EveryCompat.res("block/rfm/oak_storage_jar_m"))
@@ -210,9 +218,10 @@ public class RefurbishedFurnitureModule extends EveryCompatModule {
 
         kitchen_cabinetry = SimpleEntrySet.builder(WoodType.class, "kitchen_cabinetry",
                         getModBlock("oak_kitchen_cabinetry"), () -> VanillaWoodTypes.OAK,
-                        w -> new WoodenKitchenCabinetryBlock(w.toVanillaOrOak(),
-                                addWoodProp(w, BlockBehaviour.Properties.of()).forceSolidOn().strength(2.0f))
+                        (w, p) -> new WoodenKitchenCabinetryBlock(w.toVanillaOrOak(),
+                                addWoodProp(w, p).forceSolidOn().strength(2.0f))
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
 //                .addTile(ModBlockEntities.STORAGE_CABINET::get)
                 .addNonAnimatedTextureM(modRes("block/oak_kitchen_cabinetry"),
                         EveryCompat.res("block/rfm/oak_kitchen_cabinetry_m"))
@@ -226,9 +235,10 @@ public class RefurbishedFurnitureModule extends EveryCompatModule {
 
         kitchen_drawer = SimpleEntrySet.builder(WoodType.class, "kitchen_drawer",
                         getModBlock("oak_kitchen_drawer"), () -> VanillaWoodTypes.OAK,
-                        w -> new WoodenKitchenDrawerBlock(w.toVanillaOrOak(),
-                                addWoodProp(w, BlockBehaviour.Properties.of()).forceSolidOn().strength(2.5f))
+                        (w, p) -> new WoodenKitchenDrawerBlock(w.toVanillaOrOak(),
+                                addWoodProp(w, p).forceSolidOn().strength(2.5f))
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .addTile(ModBlockEntities.KITCHEN_DRAWER::get)
                 .addNonAnimatedTextureM(modRes("block/oak_kitchen_drawer"),
                         EveryCompat.res("block/rfm/oak_kitchen_drawer_m"))
@@ -243,9 +253,10 @@ public class RefurbishedFurnitureModule extends EveryCompatModule {
 
         kitchen_sink = SimpleEntrySet.builder(WoodType.class, "kitchen_sink",
                         getModBlock("oak_kitchen_sink"), () -> VanillaWoodTypes.OAK,
-                        w -> new WoodenKitchenSinkBlock(w.toVanillaOrOak(),
-                                addWoodProp(w, BlockBehaviour.Properties.of()).forceSolidOn().strength(2.5f))
+                        (w, p) -> new WoodenKitchenSinkBlock(w.toVanillaOrOak(),
+                                addWoodProp(w, p).forceSolidOn().strength(2.5f))
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .addTile(ModBlockEntities.KITCHEN_SINK::get)
                 .addNonAnimatedTextureM(modRes("block/oak_kitchen_sink"),
                         EveryCompat.res("block/rfm/oak_kitchen_sink_m"))
@@ -260,9 +271,10 @@ public class RefurbishedFurnitureModule extends EveryCompatModule {
 
         kitchen_storage_cabinet = SimpleEntrySet.builder(WoodType.class, "kitchen_storage_cabinet",
                         getModBlock("oak_kitchen_storage_cabinet"), () -> VanillaWoodTypes.OAK,
-                        w -> new WoodenKitchenStorageCabinetBlock(w.toVanillaOrOak(),
-                                addWoodProp(w, BlockBehaviour.Properties.of()).forceSolidOn().strength(2.5f))
+                        (w, p) -> new WoodenKitchenStorageCabinetBlock(w.toVanillaOrOak(),
+                                addWoodProp(w, p).forceSolidOn().strength(2.5f))
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .addTile(ModBlockEntities.STORAGE_CABINET::get)
                 .addNonAnimatedTextureM(modRes("block/oak_kitchen_storage_cabinet"),
                         EveryCompat.res("block/rfm/oak_kitchen_storage_cabinet_m"))
@@ -277,9 +289,10 @@ public class RefurbishedFurnitureModule extends EveryCompatModule {
 
         storage_cabinet = SimpleEntrySet.builder(WoodType.class, "storage_cabinet",
                         getModBlock("oak_storage_cabinet"), () -> VanillaWoodTypes.OAK,
-                        w -> new WoodenStorageCabinetBlock(w.toVanillaOrOak(),
-                                addWoodProp(w, BlockBehaviour.Properties.of()).forceSolidOn().strength(2.5f))
+                        (w, p) -> new WoodenStorageCabinetBlock(w.toVanillaOrOak(),
+                                addWoodProp(w, p).forceSolidOn().strength(2.5f))
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .addTile(ModBlockEntities.STORAGE_CABINET::get)
                 .addTextureM(modRes("block/oak_storage_cabinet"),
                         EveryCompat.res("block/rfm/oak_storage_cabinet_m"))
@@ -295,11 +308,12 @@ public class RefurbishedFurnitureModule extends EveryCompatModule {
 
         basin = SimpleEntrySet.builder(WoodType.class, "basin",
                         getModBlock("oak_basin"), () -> VanillaWoodTypes.OAK,
-                        w -> new WoodenBasinBlock(w.toVanillaOrOak(), BlockBehaviour.Properties.of()
+                        (w, p) -> new WoodenBasinBlock(w.toVanillaOrOak(), p
                                 .mapColor(w.planks.defaultMapColor())
                                 .strength(3.5f).sound(SoundType.STONE)
                         )
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .addTile(ModBlockEntities.BASIN::get)
                 .addNonAnimatedTextureM(modRes("block/oak_basin"),
                         EveryCompat.res("block/rfm/oak_basin_m"))
@@ -313,11 +327,12 @@ public class RefurbishedFurnitureModule extends EveryCompatModule {
 
         bath = SimpleEntrySet.builder(WoodType.class, "bath",
                         getModBlock("oak_bath"), () -> VanillaWoodTypes.OAK,
-                        w -> new WoodenBathBlock(w.toVanillaOrOak(), BlockBehaviour.Properties.of()
+                        (w, p) -> new WoodenBathBlock(w.toVanillaOrOak(), p
                                 .mapColor(w.planks.defaultMapColor())
                                 .strength(3.5f).sound(SoundType.STONE)
                         )
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .addTile(ModBlockEntities.BATH::get)
                 .addNonAnimatedTextureM(modRes("block/oak_bath"),
                         EveryCompat.res("block/rfm/oak_bath_m"))
@@ -331,10 +346,11 @@ public class RefurbishedFurnitureModule extends EveryCompatModule {
 
         lattice_fence = SimpleEntrySet.builder(WoodType.class, "lattice_fence",
                         getModBlock("oak_lattice_fence"), () -> VanillaWoodTypes.OAK,
-                        w -> new LatticeFenceBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of()
+                        (w, p) -> new LatticeFenceBlock(w.toVanillaOrOak(), addWoodProp(w, p
                                 .strength(2.0f).forceSolidOn())
                         )
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .addTile(ModBlockEntities.STORAGE_JAR::get)
                 .addTexture(modRes("block/oak_lattice_fence"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -350,10 +366,11 @@ public class RefurbishedFurnitureModule extends EveryCompatModule {
 
         lattice_fence_gate = SimpleEntrySet.builder(WoodType.class, "lattice_fence_gate",
                         getModBlock("oak_lattice_fence_gate"), () -> VanillaWoodTypes.OAK,
-                        w -> new LatticeFenceGateBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of())
+                        (w, p) -> new LatticeFenceGateBlock(w.toVanillaOrOak(), addWoodProp(w, p)
                                 .strength(2.0f)
                         )
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .addTile(ModBlockEntities.STORAGE_JAR::get)
                 .addNonAnimatedTextureM(modRes("block/oak_lattice_fence_gate"),
                         EveryCompat.res("block/rfm/oak_lattice_fence_gate_m"))
@@ -369,10 +386,11 @@ public class RefurbishedFurnitureModule extends EveryCompatModule {
 
         desk = SimpleEntrySet.builder(WoodType.class, "desk",
                         getModBlock("oak_desk"), () -> VanillaWoodTypes.OAK,
-                        w -> new DeskBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of())
+                        (w, p) -> new DeskBlock(w.toVanillaOrOak(), addWoodProp(w, p)
                                 .strength(2.0f).forceSolidOn()
                         )
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .addTexture(modRes("block/oak_desk"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("tuckable"), Registries.BLOCK)
@@ -385,10 +403,11 @@ public class RefurbishedFurnitureModule extends EveryCompatModule {
 
         cutting_board = SimpleEntrySet.builder(WoodType.class, "cutting_board",
                         getModBlock("oak_cutting_board"), () -> VanillaWoodTypes.OAK,
-                        w -> new CuttingBoardBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of())
+                        (w, p) -> new CuttingBoardBlock(w.toVanillaOrOak(), addWoodProp(w, p)
                                 .strength(1.5f)
                         )
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .addTile(ModBlockEntities.CUTTING_BOARD::get)
                 .addTexture(modRes("block/oak_cutting_board"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -400,10 +419,11 @@ public class RefurbishedFurnitureModule extends EveryCompatModule {
 
         drawer = SimpleEntrySet.builder(WoodType.class, "drawer",
                         getModBlock("oak_drawer"), () -> VanillaWoodTypes.OAK,
-                        w -> new DrawerBlock(w.toVanillaOrOak(), addWoodProp(w, BlockBehaviour.Properties.of())
+                        (w, p) -> new DrawerBlock(w.toVanillaOrOak(), addWoodProp(w, p)
                                 .strength(2.5f).forceSolidOn()
                         )
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .addTile(ModBlockEntities.DRAWER::get)
                 .addTexture(modRes("block/oak_drawer"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -417,9 +437,10 @@ public class RefurbishedFurnitureModule extends EveryCompatModule {
 
         hedges = SimpleEntrySet.builder(LeavesType.class, "hedge",
                         getModBlock("oak_hedge"), () -> VanillaLeavesTypes.OAK,
-                        l -> new HedgeBlock(LeafType.OAK, BlockBehaviour.Properties.of().strength(0.5f)
+                        (l, p) -> new HedgeBlock(LeafType.OAK, p.strength(0.5f)
                                 .sound(SoundType.AZALEA_LEAVES))
                 )
+                .setProperties(l -> BlockBehaviour.Properties.of())
                 .requiresChildren(LEAVES) // Textures
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
                         LEAVES, CompatSpritesHelper.LOOKS_LIKE_LEAF_TEXTURE))

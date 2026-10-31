@@ -38,7 +38,7 @@ public class JustARaftModule extends EveryCompatModule {
 
         rafts = ItemOnlyEntrySet.builder(WoodType.class, "raft",
                         getModItem("oak_raft"), () -> VanillaWoodTypes.OAK,
-                        woodType -> new RaftItem(getRaftType(woodType), new Item.Properties())
+                        (woodType, p) -> new RaftItem(getRaftType(woodType), p)
                 )
                 .addTextureM(modRes("entity/raft/oak_raft"), EveryCompat.res("entity/raft/oak_raft_m"),
                         PaletteStrategies.LOG_SIDE_STANDARD)

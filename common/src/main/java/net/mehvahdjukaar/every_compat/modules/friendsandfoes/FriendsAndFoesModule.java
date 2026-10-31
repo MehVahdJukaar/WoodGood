@@ -26,8 +26,9 @@ public class FriendsAndFoesModule extends EveryCompatModule {
 
         beehives = SimpleEntrySet.builder(WoodType.class, "beehive",
                         getModBlock("spruce_beehive"), () -> VanillaWoodTypes.SPRUCE,
-                        w -> new BeehiveBlock(Utils.copyPropertySafe(Blocks.BEEHIVE))
+                        (w, p) -> new BeehiveBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.BEEHIVE))
                 .addTextureM(EveryCompat.res("block/spruce_beehive_front_honey"), EveryCompat.res("block/spruce_beehive_front_honey_m"))
                 .addTextureM(EveryCompat.res("block/spruce_beehive_front"), EveryCompat.res("block/spruce_beehive_front_m"))
                 .addTextureM(EveryCompat.res("block/spruce_beehive_side"), EveryCompat.res("block/spruce_beehive_side_m"))

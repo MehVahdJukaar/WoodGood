@@ -31,12 +31,13 @@ public class CopperAgeBackportModule extends EveryCompatModule {
 
         shelf = SimpleEntrySet.builder(WoodType.class, "shelf",
                         () -> BuiltInRegistries.BLOCK.get(Identifier.withDefaultNamespace("oak_shelf")), () -> VanillaWoodTypes.OAK,
-                        w -> new ShelfBlock(BlockBehaviour.Properties.of()
+                        (w, p) -> new ShelfBlock(p
                                 .strength(2.0F, 3.0F)
                                 .sound(SoundType.WOOD)
                                 .noOcclusion()
                         )
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .requiresChildren(STRIPPED_LOG) //REASON: textures, recipes
                 .addTexture(Identifier.withDefaultNamespace("block/oak_shelf"), PaletteStrategies.STRIPPED_LOG_TOP_STANDARD)
                 .includeModelsBlock(

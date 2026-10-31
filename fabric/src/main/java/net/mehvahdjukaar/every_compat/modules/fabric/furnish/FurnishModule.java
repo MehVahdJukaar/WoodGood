@@ -57,8 +57,9 @@ public class FurnishModule extends EveryCompatModule {
 
         bedside_table = SimpleEntrySet.builder(WoodType.class, "bedside_table",
                         getModBlock("oak_bedside_table"), () -> VanillaWoodTypes.OAK,
-                        w -> new Drawer(copyStadnardProperties(w))
+                        (w, p) -> new Drawer(p)
                 )
+                .setProperties(this::copyStadnardProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile("furniture"))
                 //TEXTURES: log, stripped_log
@@ -72,8 +73,9 @@ public class FurnishModule extends EveryCompatModule {
 
         bench = SimpleEntrySet.builder(WoodType.class, "bench",
                         getModBlock("oak_bench"), () -> VanillaWoodTypes.OAK,
-                        w -> new Bench(copyStadnardProperties(w))
+                        (w, p) -> new Bench(p)
                 )
+                .setProperties(this::copyStadnardProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -86,8 +88,9 @@ public class FurnishModule extends EveryCompatModule {
 
         cabinet = SimpleEntrySet.builder(WoodType.class, "cabinet",
                         getModBlock("birch_cabinet"), () -> VanillaWoodTypes.BIRCH,
-                        w -> new Cabinet(copyStadnardProperties(w))
+                        (w, p) -> new Cabinet(p)
                 )
+                .setProperties(this::copyStadnardProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTexture(modRes("block/birch_cabinet_door_right"))
                 .addTexture(modRes("block/birch_cabinet_door_left"))
@@ -102,8 +105,9 @@ public class FurnishModule extends EveryCompatModule {
 
         chair = SimpleEntrySet.builder(WoodType.class, "chair",
                         getModBlock("oak_chair"), () -> VanillaWoodTypes.OAK,
-                        w -> new Chair(copyStadnardProperties(w))
+                        (w, p) -> new Chair(p)
                 )
+                .setProperties(this::copyStadnardProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -116,8 +120,9 @@ public class FurnishModule extends EveryCompatModule {
 
         crate = SimpleEntrySet.builder(WoodType.class, "crate",
                         getModBlock("oak_crate"), () -> VanillaWoodTypes.OAK,
-                        w -> new Crate(copyStadnardProperties(w))
+                        (w, p) -> new Crate(p)
                 )
+                .setProperties(this::copyStadnardProperties)
                 .addTile(getModTile("crate"))
                 .addTexture(modRes("block/oak_crate_top"))
                 .addTexture(modRes("block/oak_crate_side"))
@@ -131,8 +136,9 @@ public class FurnishModule extends EveryCompatModule {
 
         kitchen_cabinet = SimpleEntrySet.builder(WoodType.class, "kitchen_cabinet",
                         getModBlock("oak_kitchen_cabinet"), () -> VanillaWoodTypes.OAK,
-                        w -> new Drawer(copyStadnardProperties(w))
+                        (w, p) -> new Drawer(p)
                 )
+                .setProperties(this::copyStadnardProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile("furniture"))
                 //TEXTURES: planks, stripped_log
@@ -146,8 +152,9 @@ public class FurnishModule extends EveryCompatModule {
 
         ladder = SimpleEntrySet.builder(WoodType.class, "ladder",
                         getModBlock("oak_ladder"), () -> VanillaWoodTypes.OAK,
-                        w -> new Ladder(copyStadnardProperties(w))
+                        (w, p) -> new Ladder(p)
                 )
+                .setProperties(this::copyStadnardProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: planks, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -161,8 +168,9 @@ public class FurnishModule extends EveryCompatModule {
 
         log_bench = SimpleEntrySet.builder(WoodType.class, "log_bench",
                         getModBlock("oak_log_bench"), () -> VanillaWoodTypes.OAK,
-                        w -> new LogBench(copyStadnardProperties(w))
+                        (w, p) -> new LogBench(p)
                 )
+                .setProperties(this::copyStadnardProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: log
                 .addTexture(modRes("block/oak_log_bench_top"), PaletteStrategies.LOG_TOP_STANDARD)
@@ -176,8 +184,9 @@ public class FurnishModule extends EveryCompatModule {
 
         pedestal_table = SimpleEntrySet.builder(WoodType.class, "pedestal_table",
                         getModBlock("oak_pedestal_table"), () -> VanillaWoodTypes.OAK,
-                        w -> new Block(copyStadnardProperties(w))
+                        (w, p) -> new Block(p)
                 )
+                .setProperties(this::copyStadnardProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -190,8 +199,9 @@ public class FurnishModule extends EveryCompatModule {
 
         shelf = SimpleEntrySet.builder(WoodType.class, "shelf",
                         getModBlock("oak_shelf"), () -> VanillaWoodTypes.OAK,
-                        w -> new Shelf(copyStadnardProperties(w))
+                        (w, p) -> new Shelf(p)
                 )
+                .setProperties(this::copyStadnardProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile("shelf"))
                 //TEXTURES: planks, stripped_log
@@ -205,8 +215,9 @@ public class FurnishModule extends EveryCompatModule {
 
         shutter = SimpleEntrySet.builder(WoodType.class, "shutter",
                         getModBlock("oak_shutter"), () -> VanillaWoodTypes.OAK,
-                        w -> new Shutter(copyStadnardProperties(w))
+                        (w, p) -> new Shutter(p)
                 )
+                .setProperties(this::copyStadnardProperties)
                 .requiresChildren(TRAPDOOR) //REASON: recipes
                 .addTexture(modRes("block/oak_shutter"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -219,8 +230,9 @@ public class FurnishModule extends EveryCompatModule {
 
         square_table = SimpleEntrySet.builder(WoodType.class, "square_table",
                         getModBlock("oak_square_table"), () -> VanillaWoodTypes.OAK,
-                        w -> new Table(copyStadnardProperties(w))
+                        (w, p) -> new Table(p)
                 )
+                .setProperties(this::copyStadnardProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -233,8 +245,9 @@ public class FurnishModule extends EveryCompatModule {
 
         stool = SimpleEntrySet.builder(WoodType.class, "stool",
                         getModBlock("oak_stool"), () -> VanillaWoodTypes.OAK,
-                        w -> new Chair(copyStadnardProperties(w))
+                        (w, p) -> new Chair(p)
                 )
+                .setProperties(this::copyStadnardProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -247,8 +260,9 @@ public class FurnishModule extends EveryCompatModule {
 
         table = SimpleEntrySet.builder(WoodType.class, "table",
                         getModBlock("oak_table"), () -> VanillaWoodTypes.OAK,
-                        w -> new Table(copyStadnardProperties(w).forceSolidOn())
+                        (w, p) -> new Table(p.forceSolidOn())
                 )
+                .setProperties(this::copyStadnardProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -261,8 +275,9 @@ public class FurnishModule extends EveryCompatModule {
 
         wardrobe = SimpleEntrySet.builder(WoodType.class, "wardrobe",
                         getModBlock("birch_wardrobe"), () -> VanillaWoodTypes.BIRCH,
-                        w -> new Wardrobe(copyStadnardProperties(w))
+                        (w, p) -> new Wardrobe(p)
                 )
+                .setProperties(this::copyStadnardProperties)
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 .addTile(getModTile("large_furniture"))
                 //TEXTURES: stripped_log

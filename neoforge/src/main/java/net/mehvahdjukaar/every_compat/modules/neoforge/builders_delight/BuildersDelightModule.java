@@ -53,7 +53,7 @@ public class BuildersDelightModule extends EveryCompatModule {
         //TYPE: ITEM
 /*        FURNITURE_KIT = ItemOnlyEntrySet.builder(WoodType.class, "furniture_kit",
                         getModItem("oak_furniture_kit"), () -> VanillaWoodTypes.OAK,
-                        w -> new CustomBdFurnitureKit(new Item.Properties().stacksTo(64),"furniture_kit")
+                        (w, p) -> new CustomBdFurnitureKit(p.stacksTo(64),"furniture_kit")
                 )
                 .setTab(getTab(tabMater))
                 .addTextureM(modRes("item/oak_furniture_kit"), EveryCompat.res("item/bdl/furniture_kit_mask"),
@@ -65,7 +65,7 @@ public class BuildersDelightModule extends EveryCompatModule {
         //TYPE: CHAIR
         CHAIR_1 = SimpleEntrySet.builder(WoodType.class, "chair_1",
                         BdDecoration.OAK_CHAIR_1, () -> VanillaWoodTypes.OAK,
-                        w -> new BlockChair(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new BlockChair(p)
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("chair"), Registries.ITEM)
@@ -79,7 +79,7 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         CHAIR_2 = SimpleEntrySet.builder(WoodType.class, "chair_2",
                         BdDecoration.OAK_CHAIR_2, () -> VanillaWoodTypes.OAK,
-                        w -> new BlockStool(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new BlockStool(p)
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("chair"), Registries.ITEM)
@@ -96,7 +96,7 @@ public class BuildersDelightModule extends EveryCompatModule {
         TABLE_1 = SimpleEntrySet.builder(WoodType.class, "table_1",
                         BdDecoration.OAK_TABLE_1,
                         () -> VanillaWoodTypes.OAK,
-                        w -> new BlockSmallTable(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new BlockSmallTable(p)
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("table"), Registries.ITEM)
@@ -110,7 +110,7 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         TABLE_2 = SimpleEntrySet.builder(WoodType.class, "table_2",
                         BdDecoration.OAK_TABLE_2, () -> VanillaWoodTypes.OAK,
-                        w -> new BlockSmallTable(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new BlockSmallTable(p)
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("table"), Registries.ITEM)
@@ -126,7 +126,7 @@ public class BuildersDelightModule extends EveryCompatModule {
         //TYPE: PLANKS
         PLANKS_1 = SimpleEntrySet.builder(WoodType.class, "planks_1",
                         BdBlocks.OAK_PLANKS_1, () -> VanillaWoodTypes.OAK,
-                        w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new BlockFlammable(p)
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tabBlock))
@@ -139,7 +139,7 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         PLANKS_2 = SimpleEntrySet.builder(WoodType.class, "planks_2",
                         BdBlocks.OAK_PLANKS_2, () -> VanillaWoodTypes.OAK,
-                        w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new BlockFlammable(p)
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tabBlock))
@@ -152,7 +152,7 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         PLANKS_3 = SimpleEntrySet.builder(WoodType.class, "planks_3",
                         BdBlocks.OAK_PLANKS_3, () -> VanillaWoodTypes.OAK,
-                        w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new BlockFlammable(p)
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tabBlock))
@@ -165,7 +165,7 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         PLANKS_4 = SimpleEntrySet.builder(WoodType.class, "planks_4",
                         BdBlocks.OAK_PLANKS_4, () -> VanillaWoodTypes.OAK,
-                        w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new BlockFlammable(p)
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tabBlock))
@@ -178,7 +178,7 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         PLANKS_5 = SimpleEntrySet.builder(WoodType.class, "planks_5",
                         BdBlocks.OAK_PLANKS_5, () -> VanillaWoodTypes.OAK,
-                        w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new BlockFlammable(p)
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tabBlock))
@@ -191,7 +191,7 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         PLANKS_6 = SimpleEntrySet.builder(WoodType.class, "planks_6",
                         BdBlocks.OAK_PLANKS_6, () -> VanillaWoodTypes.OAK,
-                        w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new BlockFlammable(p)
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tabBlock))
@@ -204,7 +204,7 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         PLANKS_7 = SimpleEntrySet.builder(WoodType.class, "planks_7",
                         BdBlocks.OAK_PLANKS_7, () -> VanillaWoodTypes.OAK,
-                        w -> new BlockFlammable(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new BlockFlammable(p)
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tabBlock))
@@ -219,8 +219,9 @@ public class BuildersDelightModule extends EveryCompatModule {
         //TYPE: STAIRS
         STAIRS_1 = SimpleEntrySet.builder(WoodType.class, "stairs_1",
                         BdBlocks.OAK_STAIRS_1, () -> VanillaWoodTypes.OAK,
-                        w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
+                        (w, p) -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tabBlock))
                 .requiresChildren("stairs")
@@ -233,8 +234,9 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         STAIRS_2 = SimpleEntrySet.builder(WoodType.class, "stairs_2",
                         BdBlocks.OAK_STAIRS_2, () -> VanillaWoodTypes.OAK,
-                        w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
+                        (w, p) -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tabBlock))
                 .requiresChildren("stairs")
@@ -247,8 +249,9 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         STAIRS_3 = SimpleEntrySet.builder(WoodType.class, "stairs_3",
                         BdBlocks.OAK_STAIRS_3, () -> VanillaWoodTypes.OAK,
-                        w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
+                        (w, p) -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tabBlock))
                 .requiresChildren("stairs")
@@ -261,8 +264,9 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         STAIRS_4 = SimpleEntrySet.builder(WoodType.class, "stairs_4",
                         BdBlocks.OAK_STAIRS_4, () -> VanillaWoodTypes.OAK,
-                        w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
+                        (w, p) -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tabBlock))
                 .requiresChildren("stairs")
@@ -275,8 +279,9 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         STAIRS_5 = SimpleEntrySet.builder(WoodType.class, "stairs_5",
                         BdBlocks.OAK_STAIRS_5, () -> VanillaWoodTypes.OAK,
-                        w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
+                        (w, p) -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tabBlock))
                 .requiresChildren("stairs")
@@ -289,8 +294,9 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         STAIRS_6 = SimpleEntrySet.builder(WoodType.class, "stairs_6",
                         BdBlocks.OAK_STAIRS_6, () -> VanillaWoodTypes.OAK,
-                        w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
+                        (w, p) -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tabBlock))
                 .requiresChildren("stairs")
@@ -303,8 +309,9 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         STAIRS_7 = SimpleEntrySet.builder(WoodType.class, "stairs_7",
                         BdBlocks.OAK_STAIRS_7, () -> VanillaWoodTypes.OAK,
-                        w -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
+                        (w, p) -> new StairFlammable(Blocks.OAK_STAIRS.defaultBlockState(), p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.getBlockOfThis("stairs")))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tabBlock))
                 .requiresChildren("stairs")
@@ -319,8 +326,9 @@ public class BuildersDelightModule extends EveryCompatModule {
         //TYPE: SLAB
         SLAB_1 = SimpleEntrySet.builder(WoodType.class, "slab_1",
                         BdBlocks.OAK_SLAB_1, () -> VanillaWoodTypes.OAK,
-                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
+                        (w, p) -> new SlabFlammable(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .requiresChildren("slab")
                 .setTab(getTab(tabBlock))
@@ -333,8 +341,9 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         SLAB_2 = SimpleEntrySet.builder(WoodType.class, "slab_2",
                         BdBlocks.OAK_SLAB_2, () -> VanillaWoodTypes.OAK,
-                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
+                        (w, p) -> new SlabFlammable(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tabBlock))
                 .requiresChildren("slab")
@@ -347,8 +356,9 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         SLAB_3 = SimpleEntrySet.builder(WoodType.class, "slab_3",
                         BdBlocks.OAK_SLAB_3, () -> VanillaWoodTypes.OAK,
-                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
+                        (w, p) -> new SlabFlammable(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tabBlock))
                 .requiresChildren("slab")
@@ -361,8 +371,9 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         SLAB_4 = SimpleEntrySet.builder(WoodType.class, "slab_4",
                         BdBlocks.OAK_SLAB_4, () -> VanillaWoodTypes.OAK,
-                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
+                        (w, p) -> new SlabFlammable(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tabBlock))
                 .requiresChildren("slab")
@@ -375,8 +386,9 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         SLAB_5 = SimpleEntrySet.builder(WoodType.class, "slab_5",
                         BdBlocks.OAK_SLAB_5, () -> VanillaWoodTypes.OAK,
-                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
+                        (w, p) -> new SlabFlammable(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tabBlock))
                 .requiresChildren("slab")
@@ -389,8 +401,9 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         SLAB_6 = SimpleEntrySet.builder(WoodType.class, "slab_6",
                         BdBlocks.OAK_SLAB_6, () -> VanillaWoodTypes.OAK,
-                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
+                        (w, p) -> new SlabFlammable(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tabBlock))
                 .requiresChildren("slab")
@@ -403,8 +416,9 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         SLAB_7 = SimpleEntrySet.builder(WoodType.class, "slab_7",
                         BdBlocks.OAK_SLAB_7, () -> VanillaWoodTypes.OAK,
-                        w -> new SlabFlammable(Utils.copyPropertySafe(w.getBlockOfThis("slab")))
+                        (w, p) -> new SlabFlammable(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.getBlockOfThis("slab")))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getTab(tabBlock))
                 .requiresChildren("slab")
@@ -540,8 +554,9 @@ public class BuildersDelightModule extends EveryCompatModule {
         //TYPE: GLASS
         GLASS_1 = SimpleEntrySet.builder(WoodType.class, "glass_1",
                         BdBlocks.OAK_GLASS_1, () -> VanillaWoodTypes.OAK,
-                        w -> new BlockGlassBlock(Utils.copyPropertySafe(Blocks.GLASS))
+                        (w, p) -> new BlockGlassBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.GLASS))
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_1"))
                 .addTag(Tags.Blocks.GLASS_BLOCKS_BLOCKS, Registries.BLOCK)
                 .setTab(getTab(tabBlock))
@@ -554,8 +569,9 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         GLASS_2 = SimpleEntrySet.builder(WoodType.class, "glass_2",
                         BdBlocks.OAK_GLASS_2, () -> VanillaWoodTypes.OAK,
-                        w -> new BlockGlassBlock(Utils.copyPropertySafe(Blocks.GLASS))
+                        (w, p) -> new BlockGlassBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.GLASS))
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_2"))
                 .addTag(Tags.Blocks.GLASS_BLOCKS, Registries.BLOCK)
                 .setTab(getTab(tabBlock))
@@ -570,8 +586,9 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         GLASS_3 = SimpleEntrySet.builder(WoodType.class, "glass_3",
                         BdBlocks.OAK_GLASS_3, () -> VanillaWoodTypes.OAK,
-                        w -> new BlockGlassBlock(Utils.copyPropertySafe(Blocks.GLASS))
+                        (w, p) -> new BlockGlassBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.GLASS))
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_3"))
                 .addTag(Tags.Blocks.GLASS_BLOCKS, Registries.BLOCK)
                 .setTab(getTab(tabBlock))
@@ -586,8 +603,9 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         GLASS_4 = SimpleEntrySet.builder(WoodType.class, "glass_4",
                         BdBlocks.OAK_GLASS_4, () -> VanillaWoodTypes.OAK,
-                        w -> new BlockGlassBlock(Utils.copyPropertySafe(Blocks.GLASS))
+                        (w, p) -> new BlockGlassBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.GLASS))
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_4"))
                 .addTag(Tags.Blocks.GLASS_BLOCKS, Registries.BLOCK)
                 .setTab(getTab(tabBlock))
@@ -600,8 +618,9 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         GLASS_5 = SimpleEntrySet.builder(WoodType.class, "glass_5",
                         BdBlocks.OAK_GLASS_5, () -> VanillaWoodTypes.OAK,
-                        w -> new BlockGlassBlock(Utils.copyPropertySafe(Blocks.GLASS))
+                        (w, p) -> new BlockGlassBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.GLASS))
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_5"))
                 .addTag(Tags.Blocks.GLASS_BLOCKS, Registries.BLOCK)
                 .setTab(getTab(tabBlock))
@@ -616,8 +635,9 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         GLASS_6 = SimpleEntrySet.builder(WoodType.class, "glass_6",
                         BdBlocks.OAK_GLASS_6, () -> VanillaWoodTypes.OAK,
-                        w -> new BlockGlassBlock(Utils.copyPropertySafe(Blocks.GLASS))
+                        (w, p) -> new BlockGlassBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.GLASS))
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_6"))
                 .addTag(Tags.Blocks.GLASS_BLOCKS, Registries.BLOCK)
                 .setTab(getTab(tabBlock))
@@ -632,8 +652,9 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         GLASS_7 = SimpleEntrySet.builder(WoodType.class, "glass_7",
                         BdBlocks.OAK_GLASS_7, () -> VanillaWoodTypes.OAK,
-                        w -> new BlockGlassBlock(Utils.copyPropertySafe(Blocks.GLASS))
+                        (w, p) -> new BlockGlassBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.GLASS))
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_7"))
                 .addTag(Tags.Blocks.GLASS_BLOCKS, Registries.BLOCK)
                 .setTab(getTab(tabBlock))
@@ -648,8 +669,9 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         GLASS_8 = SimpleEntrySet.builder(WoodType.class, "glass_8",
                         BdBlocks.OAK_GLASS_8, () -> VanillaWoodTypes.OAK,
-                        w -> new BlockGlassBlock(Utils.copyPropertySafe(Blocks.GLASS))
+                        (w, p) -> new BlockGlassBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.GLASS))
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_8"))
                 .addTag(Tags.Blocks.GLASS_BLOCKS, Registries.BLOCK)
                 .setTab(getTab(tabBlock))
@@ -664,8 +686,9 @@ public class BuildersDelightModule extends EveryCompatModule {
         //TYPE: GLASS_PANE
         GLASS_PANE_1 = SimpleEntrySet.builder(WoodType.class, "glass_pane_1",
                         BdBlocks.OAK_GLASS_PANE_1, () -> VanillaWoodTypes.OAK,
-                        w -> new IronBarsBlock(Utils.copyPropertySafe(Blocks.GLASS))
+                        (w, p) -> new IronBarsBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.GLASS))
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_1"))
                 .setTab(getTab(tabBlock))
                 .addTexture(modRes("block/oak_glass_pane_1_top"))
@@ -677,8 +700,9 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         GLASS_PANE_2 = SimpleEntrySet.builder(WoodType.class, "glass_pane_2",
                         BdBlocks.OAK_GLASS_PANE_2, () -> VanillaWoodTypes.OAK,
-                        w -> new IronBarsBlock(Utils.copyPropertySafe(Blocks.GLASS))
+                        (w, p) -> new IronBarsBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.GLASS))
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_2"))
                 .setTab(getTab(tabBlock))
                 .addTexture(modRes("block/oak_glass_pane_2_top"))
@@ -690,8 +714,9 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         GLASS_PANE_3 = SimpleEntrySet.builder(WoodType.class, "glass_pane_3",
                         BdBlocks.OAK_GLASS_PANE_3, () -> VanillaWoodTypes.OAK,
-                        w -> new IronBarsBlock(Utils.copyPropertySafe(Blocks.GLASS))
+                        (w, p) -> new IronBarsBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.GLASS))
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_3"))
                 .setTab(getTab(tabBlock))
                 .addTexture(modRes("block/oak_glass_pane_3_top"))
@@ -703,8 +728,9 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         GLASS_PANE_4 = SimpleEntrySet.builder(WoodType.class, "glass_pane_4",
                         BdBlocks.OAK_GLASS_PANE_4, () -> VanillaWoodTypes.OAK,
-                        w -> new IronBarsBlock(Utils.copyPropertySafe(Blocks.GLASS))
+                        (w, p) -> new IronBarsBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.GLASS))
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_4"))
                 .setTab(getTab(tabBlock))
                 .addTexture(modRes("block/oak_glass_pane_4_top"))
@@ -716,8 +742,9 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         GLASS_PANE_5 = SimpleEntrySet.builder(WoodType.class, "glass_pane_5",
                         BdBlocks.OAK_GLASS_PANE_5, () -> VanillaWoodTypes.OAK,
-                        w -> new IronBarsBlock(Utils.copyPropertySafe(Blocks.GLASS))
+                        (w, p) -> new IronBarsBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.GLASS))
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_5"))
                 .setTab(getTab(tabBlock))
                 .addTexture(modRes("block/oak_glass_pane_5_top"))
@@ -729,8 +756,9 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         GLASS_PANE_6 = SimpleEntrySet.builder(WoodType.class, "glass_pane_6",
                         BdBlocks.OAK_GLASS_PANE_6, () -> VanillaWoodTypes.OAK,
-                        w -> new IronBarsBlock(Utils.copyPropertySafe(Blocks.GLASS))
+                        (w, p) -> new IronBarsBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.GLASS))
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_6"))
                 .setTab(getTab(tabBlock))
                 .addTexture(modRes("block/oak_glass_pane_6_top"))
@@ -742,8 +770,9 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         GLASS_PANE_7 = SimpleEntrySet.builder(WoodType.class, "glass_pane_7",
                         BdBlocks.OAK_GLASS_PANE_7, () -> VanillaWoodTypes.OAK,
-                        w -> new IronBarsBlock(Utils.copyPropertySafe(Blocks.GLASS))
+                        (w, p) -> new IronBarsBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.GLASS))
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_7"))
                 .setTab(getTab(tabBlock))
                 .addTexture(modRes("block/oak_glass_pane_7_top"))
@@ -755,8 +784,9 @@ public class BuildersDelightModule extends EveryCompatModule {
 
         GLASS_PANE_8 = SimpleEntrySet.builder(WoodType.class, "glass_pane_8",
                         BdBlocks.OAK_GLASS_PANE_8, () -> VanillaWoodTypes.OAK,
-                        w -> new IronBarsBlock(Utils.copyPropertySafe(Blocks.GLASS))
+                        (w, p) -> new IronBarsBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.GLASS))
                 .addCustomItem((w, b, p) -> new BDBlockItem(b, p, "glass_pane_8"))
                 .setTab(getTab(tabBlock))
                 .addTexture(modRes("block/oak_glass_pane_8_top"))

@@ -30,7 +30,7 @@ public abstract class BlockTypeCycleItemModel<T extends BlockType> implements It
     private final List<String> childKeys = new ArrayList<>();
     private final List<T> moddedBlockTypes = new ArrayList<>();
     private final Class<T> typeClass;
-    private ItemStack currentStack = Items.BARRIER.getDefaultInstance();
+    private ItemStack currentStack = ItemStack.EMPTY;
     private int lastIndex = 0;
     private int lastTime = 0;
     private int typeIndex = 0;

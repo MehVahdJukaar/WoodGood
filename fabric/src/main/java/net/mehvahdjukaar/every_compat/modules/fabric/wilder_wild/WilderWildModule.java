@@ -43,8 +43,9 @@ public class WilderWildModule extends EveryCompatModule {
 
         hollow_logs = SimpleEntrySet.builder(WoodType.class, "log", "hollowed",
                         getModBlock("hollowed_oak_log", HollowedLogBlock.class), () -> VanillaWoodTypes.OAK,
-                        w -> new HollowedLogBlock(Utils.copyPropertySafe(getModBlock("hollowed_oak_log").get()))
+                        (w, p) -> new HollowedLogBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(getModBlock("hollowed_oak_log").get()))
                 .requiresChildren("stripped_log", "wood") //REASON: textures, recipes
                 //TEXTURES: stripped_oak_log, log_top
                 //REASON: using the vanilla textures instead of generated textures
@@ -76,8 +77,9 @@ public class WilderWildModule extends EveryCompatModule {
 
         stripped_hollow_logs = SimpleEntrySet.builder(WoodType.class, "log", "stripped_hollowed",
                         getModBlock("stripped_hollowed_oak_log", HollowedLogBlock.class), () -> VanillaWoodTypes.OAK,
-                        w -> new HollowedLogBlock(Utils.copyPropertySafe(getModBlock("stripped_hollowed_oak_log").get()))
+                        (w, p) -> new HollowedLogBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(getModBlock("stripped_hollowed_oak_log").get()))
                 .requiresChildren("stripped_log", "stripped_wood") //REASON: textures, recipes
                 //TEXTURES: stripped_log, stripped_log_top
                 //REASON: using the vanilla textures instead of generated textures

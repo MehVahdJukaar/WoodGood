@@ -25,7 +25,7 @@ public class BackpackedModule extends EveryCompatModule {
 
         shelves = SimpleEntrySet.builder(WoodType.class, "backpack_shelf",
                         ModBlocks.OAK_BACKPACK_SHELF::get, () -> VanillaWoodTypes.OAK,
-                        w -> new ShelfBlock(Utils.copyPropertySafe(w.planks)))
+                        (w, p) -> new ShelfBlock(p))
                 .requiresChildren("stripped_log")
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setTab(getModTab("creative_tab"))

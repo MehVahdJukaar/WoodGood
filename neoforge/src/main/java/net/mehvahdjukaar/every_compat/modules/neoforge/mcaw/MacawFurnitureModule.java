@@ -11,6 +11,7 @@ import com.mcwfurnitures.kikoz.objects.counters.SinkCounter;
 import com.mcwfurnitures.kikoz.objects.counters.StorageCounter;
 import net.mehvahdjukaar.every_compat.modules.macaw.MacawFurnitureModuleAbstract;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.Block;
 
 //See MacawFurnitureAbstractModule's SUPPORTED VERSION
@@ -21,77 +22,77 @@ public class MacawFurnitureModule extends MacawFurnitureModuleAbstract {
     }
 
     @Override
-    public Block newCabinet(WoodType woodType) {
-        return new Cabinet(woodType.planks.defaultBlockState(), copyStandardProperties());
+    public Block newCabinet(WoodType woodType, BlockBehaviour.Properties p) {
+        return new Cabinet(woodType.planks.defaultBlockState(), p);
     }
 
     @Override
-    public Block newCabinetHinge(WoodType woodType) {
-        return new CabinetHinge(copyStandardProperties());
+    public Block newCabinetHinge(WoodType woodType, BlockBehaviour.Properties p) {
+        return new CabinetHinge(p);
     }
 
     @Override
-    public Block newWideFurniture(WoodType woodType) {
-        return new WideFurniture(copyStandardProperties());
+    public Block newWideFurniture(WoodType woodType, BlockBehaviour.Properties p) {
+        return new WideFurniture(p);
     }
 
     @Override
-    public Block newTallFurniture(WoodType woodType) {
-        return new TallFurniture(copyStandardProperties());
+    public Block newTallFurniture(WoodType woodType, BlockBehaviour.Properties p) {
+        return new TallFurniture(p);
     }
 
     @Override
-    public Block newTallFurnitureHinge(WoodType woodType) {
-        return new TallFurnitureHinge(copyStandardProperties());
+    public Block newTallFurnitureHinge(WoodType woodType, BlockBehaviour.Properties p) {
+        return new TallFurnitureHinge(p);
     }
 
     @Override
-    public Block newDesk(WoodType woodType) {
-        return new Desk(copyStandardProperties());
+    public Block newDesk(WoodType woodType, BlockBehaviour.Properties p) {
+        return new Desk(p);
     }
 
     @Override
-    public Block newTable(WoodType woodType) {
-        return new Table(copyStandardProperties());
+    public Block newTable(WoodType woodType, BlockBehaviour.Properties p) {
+        return new Table(p);
     }
 
     @Override
-    public Block newTableHitbox(WoodType woodType) {
-        return new TableHitbox(copyStandardProperties());
+    public Block newTableHitbox(WoodType woodType, BlockBehaviour.Properties p) {
+        return new TableHitbox(p);
     }
 
     @Override
-    public Block newStripedChair(WoodType woodType) {
-        return new StripedChair(copyStandardProperties());
+    public Block newStripedChair(WoodType woodType, BlockBehaviour.Properties p) {
+        return new StripedChair(p);
     }
 
     @Override
-    public Block newModernChair(WoodType woodType) {
-        return new ModernChair(copyStandardProperties());
+    public Block newModernChair(WoodType woodType, BlockBehaviour.Properties p) {
+        return new ModernChair(p);
     }
 
     @Override
-    public Block newChair(WoodType woodType) {
-        return new Chair(copyStandardProperties());
+    public Block newChair(WoodType woodType, BlockBehaviour.Properties p) {
+        return new Chair(p);
     }
 
     @Override
-    public Block newCounter(WoodType woodType) {
-        return new Counter(copyStandardProperties());
+    public Block newCounter(WoodType woodType, BlockBehaviour.Properties p) {
+        return new Counter(p);
     }
 
     @Override
-    public Block newStorageCounter(WoodType woodType) {
-        return new StorageCounter(woodType.planks.defaultBlockState(), copyStandardProperties());
+    public Block newStorageCounter(WoodType woodType, BlockBehaviour.Properties p) {
+        return new StorageCounter(woodType.planks.defaultBlockState(), p);
     }
 
     @Override
-    public Block newCupboardCounter(WoodType woodType) {
-        return new CupboardCounter(copyStandardProperties());
+    public Block newCupboardCounter(WoodType woodType, BlockBehaviour.Properties p) {
+        return new CupboardCounter(p);
     }
 
     @Override
-    public Block newSinkCounter(WoodType woodType) {
-        return new SinkCounter(copyStandardProperties());
+    public Block newSinkCounter(WoodType woodType, BlockBehaviour.Properties p) {
+        return new SinkCounter(p);
     }
 }

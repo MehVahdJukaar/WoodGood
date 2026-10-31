@@ -37,7 +37,7 @@ public class PokecubeAIOModule extends EveryCompatModule {
 
         distortic_planks = SimpleEntrySet.builder(WoodType.class, "planks", "distortic",
                         BlockInit.DISTORTIC_OAK_PLANKS, () -> VanillaWoodTypes.OAK,
-                        w -> new Block(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new Block(p)
                 )
                 .addTexture(modRes("block/distortic_oak_planks"))
                 .addTag(modRes("legends_planks"), Registries.BLOCK)
@@ -52,7 +52,7 @@ public class PokecubeAIOModule extends EveryCompatModule {
 
         distortic_stairs = SimpleEntrySet.builder(WoodType.class, "stairs", "distortic",
                         BlockInit.DISTORTIC_OAK_STAIRS, () -> VanillaWoodTypes.OAK,
-                        w -> new ItemGenerator.GenericStairs(w.planks.defaultBlockState(), Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new ItemGenerator.GenericStairs(w.planks.defaultBlockState(), p)
                 )
                 .requiresFromMap(distortic_planks.blocks) //REASON: textures, recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -65,7 +65,7 @@ public class PokecubeAIOModule extends EveryCompatModule {
 
         distortic_slab = SimpleEntrySet.builder(WoodType.class, "slab", "distortic",
                         BlockInit.DISTORTIC_OAK_SLAB, () -> VanillaWoodTypes.OAK,
-                        w -> new SlabBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new SlabBlock(p)
                 )
                 .requiresFromMap(distortic_planks.blocks) //REASON: textures, recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)

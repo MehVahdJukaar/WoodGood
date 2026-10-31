@@ -55,8 +55,9 @@ public abstract class MacawDoorsModuleAbstract extends EveryCompatModule {
 
         WaffleDoors = SimpleEntrySet.builder(WoodType.class, "waffle_door",
                         getModBlock("oak_waffle_door"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newDoor("oak_waffle_door", woodType)
+                        (woodType, p) -> newDoor(woodType, p)
                 )
+                .setProperties(woodType -> standardPropertiesSafe("oak_waffle_door", woodType))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(BlockTags.DOORS, Registries.BLOCK)
@@ -77,8 +78,9 @@ public abstract class MacawDoorsModuleAbstract extends EveryCompatModule {
 
         BarkGlassDoors = SimpleEntrySet.builder(WoodType.class, "bark_glass_door",
                         getModBlock("oak_bark_glass_door"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newDoor("oak_bark_glass_door", woodType)
+                        (woodType, p) -> newDoor(woodType, p)
                 )
+                .setProperties(woodType -> standardPropertiesSafe("oak_bark_glass_door", woodType))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(BlockTags.DOORS, Registries.BLOCK)
@@ -95,8 +97,9 @@ public abstract class MacawDoorsModuleAbstract extends EveryCompatModule {
 
         BarnDoors = SimpleEntrySet.builder(WoodType.class, "barn_door",
                         getModBlock("oak_barn_door"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newDoor("oak_barn_door", woodType)
+                        (woodType, p) -> newDoor(woodType, p)
                 )
+                .setProperties(woodType -> standardPropertiesSafe("oak_barn_door", woodType))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(BlockTags.DOORS, Registries.BLOCK)
@@ -117,8 +120,9 @@ public abstract class MacawDoorsModuleAbstract extends EveryCompatModule {
 
         BarnGlassDoors = SimpleEntrySet.builder(WoodType.class, "barn_glass_door",
                         getModBlock("oak_barn_glass_door"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newDoor("oak_barn_glass_door", woodType)
+                        (woodType, p) -> newDoor(woodType, p)
                 )
+                .setProperties(woodType -> standardPropertiesSafe("oak_barn_glass_door", woodType))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(BlockTags.DOORS, Registries.BLOCK)
@@ -139,8 +143,9 @@ public abstract class MacawDoorsModuleAbstract extends EveryCompatModule {
 
         BeachDoors = SimpleEntrySet.builder(WoodType.class, "beach_door",
                         getModBlock("oak_beach_door"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newDoor("oak_beach_door", woodType)
+                        (woodType, p) -> newDoor(woodType, p)
                 )
+                .setProperties(woodType -> standardPropertiesSafe("oak_beach_door", woodType))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(BlockTags.DOORS, Registries.BLOCK)
@@ -161,8 +166,9 @@ public abstract class MacawDoorsModuleAbstract extends EveryCompatModule {
 
         ClassicDoors = SimpleEntrySet.builder(WoodType.class, "classic_door",
                         getModBlock("spruce_classic_door"), () -> VanillaWoodTypes.SPRUCE,
-                        woodType -> newDoor("spruce_classic_door", woodType)
+                        (woodType, p) -> newDoor(woodType, p)
                 )
+                .setProperties(woodType -> standardPropertiesSafe("spruce_classic_door", woodType))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(BlockTags.DOORS, Registries.BLOCK)
@@ -183,8 +189,9 @@ public abstract class MacawDoorsModuleAbstract extends EveryCompatModule {
 
         CottageDoors = SimpleEntrySet.builder(WoodType.class, "cottage_door",
                         getModBlock("oak_cottage_door"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newDoor("oak_cottage_door", woodType)
+                        (woodType, p) -> newDoor(woodType, p)
                 )
+                .setProperties(woodType -> standardPropertiesSafe("oak_cottage_door", woodType))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(BlockTags.DOORS, Registries.BLOCK)
@@ -205,8 +212,9 @@ public abstract class MacawDoorsModuleAbstract extends EveryCompatModule {
 
         FourPanelDoors = SimpleEntrySet.builder(WoodType.class, "four_panel_door",
                         getModBlock("oak_four_panel_door"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newDoor("oak_four_panel_door", woodType)
+                        (woodType, p) -> newDoor(woodType, p)
                 )
+                .setProperties(woodType -> standardPropertiesSafe("oak_four_panel_door", woodType))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(BlockTags.DOORS, Registries.BLOCK)
@@ -227,8 +235,9 @@ public abstract class MacawDoorsModuleAbstract extends EveryCompatModule {
 
         GlassDoors = SimpleEntrySet.builder(WoodType.class, "glass_door",
                         getModBlock("oak_glass_door"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newDoor("oak_glass_door", woodType)
+                        (woodType, p) -> newDoor(woodType, p)
                 )
+                .setProperties(woodType -> standardPropertiesSafe("oak_glass_door", woodType))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(BlockTags.DOORS, Registries.BLOCK)
@@ -249,8 +258,9 @@ public abstract class MacawDoorsModuleAbstract extends EveryCompatModule {
 
         MeshDoors = SimpleEntrySet.builder(WoodType.class, "bamboo_door",
                         getModBlock("oak_bamboo_door"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newDoor("oak_bamboo_door", woodType)
+                        (woodType, p) -> newDoor(woodType, p)
                 )
+                .setProperties(woodType -> standardPropertiesSafe("oak_bamboo_door", woodType))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.DOORS, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
@@ -273,8 +283,9 @@ public abstract class MacawDoorsModuleAbstract extends EveryCompatModule {
 
         ModernDoors = SimpleEntrySet.builder(WoodType.class, "modern_door",
                         getModBlock("oak_modern_door"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newDoor("oak_modern_door", woodType)
+                        (woodType, p) -> newDoor(woodType, p)
                 )
+                .setProperties(woodType -> standardPropertiesSafe("oak_modern_door", woodType))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(BlockTags.DOORS, Registries.BLOCK)
@@ -295,8 +306,9 @@ public abstract class MacawDoorsModuleAbstract extends EveryCompatModule {
 
         MysticDoors = SimpleEntrySet.builder(WoodType.class, "mystic_door",
                         getModBlock("oak_mystic_door"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newDoor("oak_mystic_door", woodType)
+                        (woodType, p) -> newDoor(woodType, p)
                 )
+                .setProperties(woodType -> standardPropertiesSafe("oak_mystic_door", woodType))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(BlockTags.DOORS, Registries.BLOCK)
@@ -317,8 +329,9 @@ public abstract class MacawDoorsModuleAbstract extends EveryCompatModule {
 
         NetherDoors = SimpleEntrySet.builder(WoodType.class, "nether_door",
                         getModBlock("oak_nether_door"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newDoor("oak_nether_door", woodType)
+                        (woodType, p) -> newDoor(woodType, p)
                 )
+                .setProperties(woodType -> standardPropertiesSafe("oak_nether_door", woodType))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(BlockTags.DOORS, Registries.BLOCK)
@@ -339,8 +352,9 @@ public abstract class MacawDoorsModuleAbstract extends EveryCompatModule {
 
         PaperDoors = SimpleEntrySet.builder(WoodType.class, "paper_door",
                         getModBlock("oak_paper_door"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newDoor("oak_paper_door", woodType)
+                        (woodType, p) -> newDoor(woodType, p)
                 )
+                .setProperties(woodType -> standardPropertiesSafe("oak_paper_door", woodType))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(BlockTags.DOORS, Registries.BLOCK)
@@ -361,8 +375,9 @@ public abstract class MacawDoorsModuleAbstract extends EveryCompatModule {
 
         ShojiDoors = SimpleEntrySet.builder(WoodType.class, "japanese_door",
                         getModBlock("oak_japanese_door"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newJapaneseDoors("oak_japanese_door", woodType)
+                        (woodType, p) -> newJapaneseDoors(woodType, p)
                 )
+                .setProperties(woodType -> standardPropertiesSafe("oak_japanese_door", woodType))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(BlockTags.DOORS, Registries.BLOCK)
@@ -383,8 +398,9 @@ public abstract class MacawDoorsModuleAbstract extends EveryCompatModule {
 
         ShojiWholeDoors = SimpleEntrySet.builder(WoodType.class, "japanese2_door",
                         getModBlock("oak_japanese2_door"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newJapaneseDoors("oak_japanese2_door", woodType)
+                        (woodType, p) -> newJapaneseDoors(woodType, p)
                 )
+                .setProperties(woodType -> standardPropertiesSafe("oak_japanese2_door", woodType))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(BlockTags.DOORS, Registries.BLOCK)
@@ -405,8 +421,9 @@ public abstract class MacawDoorsModuleAbstract extends EveryCompatModule {
 
         StableDoors = SimpleEntrySet.builder(WoodType.class, "stable_door",
                         getModBlock("oak_stable_door"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newStableDoor("oak_stable_door", woodType)
+                        (woodType, p) -> newStableDoor(woodType, p)
                 )
+                .setProperties(woodType -> standardPropertiesSafe("oak_stable_door", woodType))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(BlockTags.DOORS, Registries.BLOCK)
@@ -429,8 +446,9 @@ public abstract class MacawDoorsModuleAbstract extends EveryCompatModule {
 
         StableHeadDoors = SimpleEntrySet.builder(WoodType.class, "stable_head_door",
                         getModBlock("oak_stable_head_door"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newStableDoor("oak_stable_head_door", woodType)
+                        (woodType, p) -> newStableDoor(woodType, p)
                 )
+                .setProperties(woodType -> standardPropertiesSafe("oak_stable_head_door", woodType))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(BlockTags.DOORS, Registries.BLOCK)
@@ -453,8 +471,9 @@ public abstract class MacawDoorsModuleAbstract extends EveryCompatModule {
 
         SwampDoors = SimpleEntrySet.builder(WoodType.class, "swamp_door",
                         getModBlock("oak_swamp_door"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newDoor("oak_swamp_door", woodType)
+                        (woodType, p) -> newDoor(woodType, p)
                 )
+                .setProperties(woodType -> standardPropertiesSafe("oak_swamp_door", woodType))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(BlockTags.DOORS, Registries.BLOCK)
@@ -478,8 +497,9 @@ public abstract class MacawDoorsModuleAbstract extends EveryCompatModule {
 
         TropicalDoors = SimpleEntrySet.builder(WoodType.class, "tropical_door",
                         getModBlock("oak_tropical_door"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newDoor("oak_tropical_door", woodType)
+                        (woodType, p) -> newDoor(woodType, p)
                 )
+                .setProperties(woodType -> standardPropertiesSafe("oak_tropical_door", woodType))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(BlockTags.DOORS, Registries.BLOCK)
@@ -497,8 +517,9 @@ public abstract class MacawDoorsModuleAbstract extends EveryCompatModule {
 
         WesternDoors = SimpleEntrySet.builder(WoodType.class, "western_door",
                         getModBlock("oak_western_door"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newDoor("oak_western_door", woodType)
+                        (woodType, p) -> newDoor(woodType, p)
                 )
+                .setProperties(woodType -> standardPropertiesSafe("oak_western_door", woodType))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(BlockTags.DOORS, Registries.BLOCK)
@@ -519,8 +540,9 @@ public abstract class MacawDoorsModuleAbstract extends EveryCompatModule {
 
         WhisperingDoors = SimpleEntrySet.builder(WoodType.class, "whispering_door",
                         getModBlock("oak_whispering_door"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newDoor("oak_whispering_door", woodType)
+                        (woodType, p) -> newDoor(woodType, p)
                 )
+                .setProperties(woodType -> standardPropertiesSafe("oak_whispering_door", woodType))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.WOODEN_DOORS, Registries.BLOCK)
                 .addTag(BlockTags.DOORS, Registries.BLOCK)
@@ -555,8 +577,9 @@ public abstract class MacawDoorsModuleAbstract extends EveryCompatModule {
         return Utils.copyPropertySafe(woodType.log).noOcclusion();
     }
 
-    protected abstract Block newDoor(String blocKId, WoodType woodType);
-    protected abstract Block newJapaneseDoors(String blocKId, WoodType woodType);
-    protected abstract Block newStableDoor(String blocKId, WoodType woodType);
+
+    protected abstract Block newDoor(WoodType woodType, BlockBehaviour.Properties p);
+    protected abstract Block newJapaneseDoors(WoodType woodType, BlockBehaviour.Properties p);
+    protected abstract Block newStableDoor(WoodType woodType, BlockBehaviour.Properties p);
 
 }

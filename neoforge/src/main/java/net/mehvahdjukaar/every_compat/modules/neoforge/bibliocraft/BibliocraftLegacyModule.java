@@ -46,7 +46,7 @@ public class BibliocraftLegacyModule extends EveryCompatModule {
 
         bookcase = SimpleEntrySet.builder(WoodType.class, "bookcase",
                         getModBlock("oak_bookcase"), () -> VanillaWoodTypes.OAK,
-                        w -> new BookcaseBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new BookcaseBlock(p.noOcclusion())
                 )
                 .requiresChildren(SLAB) //REASON: recipes
                 .addTile(getModTile("bookcase"))
@@ -60,7 +60,7 @@ public class BibliocraftLegacyModule extends EveryCompatModule {
 
         fancy_armor_stand = SimpleEntrySet.builder(WoodType.class, "fancy_armor_stand",
                         getModBlock("oak_fancy_armor_stand"), () -> VanillaWoodTypes.OAK,
-                        w -> new FancyArmorStandBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new FancyArmorStandBlock(p.noOcclusion())
                 )
                 .requiresChildren(SLAB) //REASON: recipes
                 .addTile(getModTile("fancy_armor_stand"))
@@ -76,7 +76,7 @@ public class BibliocraftLegacyModule extends EveryCompatModule {
 
         fancy_clock = SimpleEntrySet.builder(WoodType.class, "fancy_clock",
                         getModBlock("oak_fancy_clock"), () -> VanillaWoodTypes.OAK,
-                        w -> new FancyClockBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new FancyClockBlock(p.noOcclusion())
                 )
                 .requiresChildren(SLAB) //REASON: recipes
                 .addTile(getModTile("clock"))
@@ -90,7 +90,7 @@ public class BibliocraftLegacyModule extends EveryCompatModule {
 
         fancy_crafter = SimpleEntrySet.builder(WoodType.class, "fancy_crafter",
                         getModBlock("oak_fancy_crafter"), () -> VanillaWoodTypes.OAK,
-                        w -> new FancyCrafterBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new FancyCrafterBlock(p.noOcclusion())
                 )
                 .addTile(getModTile("fancy_crafter"))
                 //TEXTURES: planks
@@ -103,7 +103,7 @@ public class BibliocraftLegacyModule extends EveryCompatModule {
 
         fancy_sign = SimpleEntrySet.builder(WoodType.class, "fancy_sign",
                         getModBlock("oak_fancy_sign"), () -> VanillaWoodTypes.OAK,
-                        w -> new FancySignBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new FancySignBlock(p.noOcclusion())
                 )
                 //TEXTURES: planks
                 .addTile(getModTile("fancy_sign"))
@@ -116,7 +116,7 @@ public class BibliocraftLegacyModule extends EveryCompatModule {
 
         grandfather_clock = SimpleEntrySet.builder(WoodType.class, "grandfather_clock",
                         getModBlock("oak_grandfather_clock"), () -> VanillaWoodTypes.OAK,
-                        w -> new GrandfatherClockBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new GrandfatherClockBlock(p.noOcclusion())
                 )
                 .requiresFromMap(fancy_clock.blocks) //REASON: recipes
                 //TEXTURES: planks
@@ -131,7 +131,7 @@ public class BibliocraftLegacyModule extends EveryCompatModule {
 
         label = SimpleEntrySet.builder(WoodType.class, "label",
                         getModBlock("oak_label"), () -> VanillaWoodTypes.OAK,
-                        w -> new LabelBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new LabelBlock(p.noOcclusion())
                 )
                 .requiresChildren(SLAB) //REASON: recipes
                 .addTile(getModTile("label"))
@@ -145,7 +145,7 @@ public class BibliocraftLegacyModule extends EveryCompatModule {
 
         potion_shelf = SimpleEntrySet.builder(WoodType.class, "potion_shelf",
                         getModBlock("oak_potion_shelf"), () -> VanillaWoodTypes.OAK,
-                        w -> new PotionShelfBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new PotionShelfBlock(p.noOcclusion())
                 )
                 .requiresChildren(SLAB) //REASON: recipes
                 .addTile(getModTile("potion_shelf"))
@@ -159,7 +159,7 @@ public class BibliocraftLegacyModule extends EveryCompatModule {
 
         shelf = SimpleEntrySet.builder(WoodType.class, "shelf",
                         getModBlock("oak_shelf"), () -> VanillaWoodTypes.OAK,
-                        w -> new ShelfBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new ShelfBlock(p.noOcclusion())
                 )
                 .requiresChildren(SLAB) //REASON: recipes
                 .addTile(getModTile("shelf"))
@@ -173,7 +173,7 @@ public class BibliocraftLegacyModule extends EveryCompatModule {
 
         table = SimpleEntrySet.builder(WoodType.class, "table",
                         getModBlock("oak_table"), () -> VanillaWoodTypes.OAK,
-                        w -> new TableBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new TableBlock(p.noOcclusion())
                 )
                 .addTile(getModTile("table"))
                 //TEXTURES: planks
@@ -186,7 +186,7 @@ public class BibliocraftLegacyModule extends EveryCompatModule {
 
         tool_rack = SimpleEntrySet.builder(WoodType.class, "tool_rack",
                         getModBlock("oak_tool_rack"), () -> VanillaWoodTypes.OAK,
-                        w -> new ToolRackBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new ToolRackBlock(p.noOcclusion())
                 )
                 .addTile(getModTile("tool_rack"))
                 //TEXTURES: planks

@@ -6,6 +6,8 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
@@ -44,8 +46,9 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
 
         BARK_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "bark_trapdoor",
                         getModBlock("oak_bark_trapdoor"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newTrapDoorBlock(woodType, woodType.log)
+                        (woodType, p) -> newTrapDoorBlock(woodType, p)
                 )
+                .setProperties(woodType -> Utils.copyPropertySafe(woodType.log))
                 //TEXTURES: log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)
@@ -61,7 +64,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
 
         BARN_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "barn_trapdoor",
                         getModBlock("oak_barn_trapdoor"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newTrapDoorBlock(woodType, woodType.planks)
+                        (woodType, p) -> newTrapDoorBlock(woodType, p)
                 )
                 .addTexture(modRes("block/barn/oak_barn_trapdoor"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -78,7 +81,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
 
         BARRED_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "barred_trapdoor",
                         getModBlock("oak_barred_trapdoor"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newTrapDoorBlock(woodType, woodType.planks)
+                        (woodType, p) -> newTrapDoorBlock(woodType, p)
                 )
                 .addTexture(modRes("block/barred/oak_barred_trapdoor"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -95,7 +98,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
 
         BEACH_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "beach_trapdoor",
                         getModBlock("oak_beach_trapdoor"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newTrapDoorBlock(woodType, woodType.planks)
+                        (woodType, p) -> newTrapDoorBlock(woodType, p)
                 )
                 .addTextureM(modRes("block/beach/oak_beach_trapdoor"), EveryCompat.res("block/mcw/trapdoors/oak_beach_trapdoor_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -112,7 +115,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
 
         CLASSIC_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "classic_trapdoor",
                         getModBlock("spruce_classic_trapdoor"), () -> VanillaWoodTypes.SPRUCE,
-                        woodType -> newTrapDoorBlock(woodType, woodType.planks)
+                        (woodType, p) -> newTrapDoorBlock(woodType, p)
                 )
                 .addTexture(modRes("block/classic/spruce_classic_trapdoor"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -129,7 +132,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
 
         COTTAGE_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "cottage_trapdoor",
                         getModBlock("oak_cottage_trapdoor"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newTrapDoorBlock(woodType, woodType.planks)
+                        (woodType, p) -> newTrapDoorBlock(woodType, p)
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.TRAPDOORS, Registries.BLOCK)
@@ -146,7 +149,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
 
         FOUR_PANEL_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "four_panel_trapdoor",
                         getModBlock("oak_four_panel_trapdoor"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newTrapDoorBlock(woodType, woodType.planks)
+                        (woodType, p) -> newTrapDoorBlock(woodType, p)
                 )
                 .addTexture(modRes("block/four_panel/oak_four_panel_trapdoor"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -163,7 +166,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
 
         GLASS_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "glass_trapdoor",
                         getModBlock("oak_glass_trapdoor"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newTrapDoorBlock(woodType, woodType.planks)
+                        (woodType, p) -> newTrapDoorBlock(woodType, p)
                 )
                 .addTextureM(modRes("block/glass/oak_glass_trapdoor"),
                         EveryCompat.res("block/mcw/trapdoors/oak_glass_trapdoor_m"),
@@ -182,7 +185,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
 
         MESH_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "bamboo_trapdoor",
                         getModBlock("oak_bamboo_trapdoor"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newTrapDoorBlock(woodType, woodType.planks)
+                        (woodType, p) -> newTrapDoorBlock(woodType, p)
                 )
                 .addTexture(modRes("block/bamboo/oak_bamboo_trapdoor"), PLANKS_REMOVE_DARKEST)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -199,7 +202,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
 
         MYSTIC_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "mystic_trapdoor",
                         getModBlock("oak_mystic_trapdoor"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newTrapDoorBlock(woodType, woodType.planks)
+                        (woodType, p) -> newTrapDoorBlock(woodType, p)
                 )
                 .addTexture(modRes("block/mystic/oak_mystic_trapdoor"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -216,7 +219,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
 
         PAPER_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "paper_trapdoor",
                         getModBlock("oak_paper_trapdoor"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newTrapDoorBlock(woodType, woodType.planks)
+                        (woodType, p) -> newTrapDoorBlock(woodType, p)
                 )
                 .addTextureM(modRes("block/paper/oak_paper_trapdoor"),
                         EveryCompat.res("block/mcw/trapdoors/oak_paper_trapdoor_m"),
@@ -235,8 +238,9 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
 
         RANCH_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "ranch_trapdoor",
                         getModBlock("oak_ranch_trapdoor"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newTrapDoorBlock(woodType, woodType.log)
+                        (woodType, p) -> newTrapDoorBlock(woodType, p)
                 )
+                .setProperties(woodType -> Utils.copyPropertySafe(woodType.log))
                 .requiresChildren(STRIPPED_LOG) //REASON: textures
                 //TEXTURES: log, stripped_log
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -253,7 +257,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
 
         SWAMP_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "swamp_trapdoor",
                         getModBlock("oak_swamp_trapdoor"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newTrapDoorBlock(woodType, woodType.planks)
+                        (woodType, p) -> newTrapDoorBlock(woodType, p)
                 )
                 .addTexture(modRes("block/swamp/oak_swamp_trapdoor"), PLANKS_REMOVE_2_DARKEST)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -270,7 +274,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
 
         TROPICAL_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "tropical_trapdoor",
                         getModBlock("oak_tropical_trapdoor"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newTrapDoorBlock(woodType, woodType.planks)
+                        (woodType, p) -> newTrapDoorBlock(woodType, p)
                 )
                 .addTextureM(modRes("block/tropical/oak_tropical_trapdoor"),
                         EveryCompat.res("block/mcw/trapdoors/oak_tropical_trapdoor_m"))
@@ -288,7 +292,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
 
         WAFFLE_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "blossom_trapdoor",
                         getModBlock("oak_blossom_trapdoor"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newTrapDoorBlock(woodType, woodType.planks)
+                        (woodType, p) -> newTrapDoorBlock(woodType, p)
                 )
                 .addTexture(modRes("block/blossom/oak_blossom_trapdoor"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -305,7 +309,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
 
         BARREL_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "barrel_trapdoor",
                         getModBlock("spruce_barrel_trapdoor"), () -> VanillaWoodTypes.SPRUCE,
-                        woodType -> newTrapDoorBlock(woodType, woodType.planks)
+                        (woodType, p) -> newTrapDoorBlock(woodType, p)
                 )
                 .addTextureM(modRes("block/barrel/spruce_barrel_trapdoor"),
                         EveryCompat.res("block/mcw/trapdoors/oak_barrel_trapdoor_m"))
@@ -323,7 +327,7 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
 
         WHISPERING_TRAPDOORS = SimpleEntrySet.builder(WoodType.class, "whispering_trapdoor",
                         getModBlock("oak_whispering_trapdoor"), () -> VanillaWoodTypes.OAK,
-                        woodType -> newTrapDoorBlock(woodType, woodType.planks)
+                        (woodType, p) -> newTrapDoorBlock(woodType, p)
                 )
                 .addTextureM(modRes("block/whispering/oak_whispering_trapdoor"),
                         EveryCompat.res("block/mcw/trapdoors/oak_whispering_trapdoor_m"))
@@ -341,5 +345,5 @@ public abstract class MacawTrapdoorsModuleAbstract extends EveryCompatModule {
 
     }
 
-    protected abstract Block newTrapDoorBlock(WoodType woodType, Block block);
+    protected abstract Block newTrapDoorBlock(WoodType woodType, BlockBehaviour.Properties p);
 }

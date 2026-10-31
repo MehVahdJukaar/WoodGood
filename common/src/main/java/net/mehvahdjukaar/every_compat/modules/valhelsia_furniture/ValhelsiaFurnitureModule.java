@@ -44,7 +44,7 @@ public class ValhelsiaFurnitureModule extends EveryCompatModule {
 
         tables = SimpleEntrySet.builder(WoodType.class, "table",
                         getModBlock("oak_table", TableBlock.class), () -> VanillaWoodTypes.OAK,
-                        w -> new TableBlock(w.toVanillaOrOak(), Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new TableBlock(w.toVanillaOrOak(), p)
                 )
                 .setRenderType(RenderLayer.CUTOUT)
                 .addTexture(modRes("block/table/oak/oak_table"))
@@ -58,7 +58,7 @@ public class ValhelsiaFurnitureModule extends EveryCompatModule {
 
         chairs = SimpleEntrySet.builder(WoodType.class, "chair",
                         getModBlock("oak_chair", ChairBlock.class), () -> VanillaWoodTypes.OAK,
-                        w -> new CompatChairBlock(w.toVanillaOrOak(), Utils.copyPropertySafe(w.planks), false)
+                        (w, p) -> new CompatChairBlock(w.toVanillaOrOak(), p, false)
                 )
                 .setRenderType(RenderLayer.CUTOUT)
                 .addTexture(modRes("block/chair/oak/oak_chair"))
@@ -71,7 +71,7 @@ public class ValhelsiaFurnitureModule extends EveryCompatModule {
 
         hay_chairs = SimpleEntrySet.builder(WoodType.class, "chair", "hay",
                         getModBlock("hay_oak_chair", ChairBlock.class), () -> VanillaWoodTypes.OAK,
-                        w -> new CompatChairBlock(w.toVanillaOrOak(), Utils.copyPropertySafe(w.planks), true)
+                        (w, p) -> new CompatChairBlock(w.toVanillaOrOak(), p, true)
                 )
                 .setRenderType(RenderLayer.CUTOUT)
                 .addTextureM(modRes("block/chair/oak/hay_oak_chair"),
@@ -85,7 +85,7 @@ public class ValhelsiaFurnitureModule extends EveryCompatModule {
 
         stools = SimpleEntrySet.builder(WoodType.class, "stool",
                         getModBlock("oak_stool", StoolBlock.class), () -> VanillaWoodTypes.OAK,
-                        w -> new StoolBlock(w.toVanillaOrOak(), Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new StoolBlock(w.toVanillaOrOak(), p)
                 )
                 .setRenderType(RenderLayer.CUTOUT)
                 .addTexture(modRes("block/stool/oak_stool"))
@@ -98,7 +98,7 @@ public class ValhelsiaFurnitureModule extends EveryCompatModule {
 
         desks = SimpleEntrySet.builder(WoodType.class, "desk",
                         getModBlock("oak_desk", DeskBlock.class), () -> VanillaWoodTypes.OAK,
-                        w -> new DeskBlock(w.toVanillaOrOak(), modTag(w.getAppendableId() + "_desks"), Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new DeskBlock(w.toVanillaOrOak(), modTag(w.getAppendableId() + "_desks"), p)
                 )
                 .addTextureM(modRes("block/desk/oak/front"),
                         EveryCompat.res("block/vf/desk_front_m"))
@@ -117,7 +117,7 @@ public class ValhelsiaFurnitureModule extends EveryCompatModule {
 
         desk_drawers = SimpleEntrySet.builder(WoodType.class, "desk_drawer",
                         getModBlock("oak_desk_drawer", DeskDrawerBlock.class), () -> VanillaWoodTypes.OAK,
-                        w -> new DeskDrawerBlock(w.toVanillaOrOak(), modTag(w.getAppendableId() + "_desks"), Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new DeskDrawerBlock(w.toVanillaOrOak(), modTag(w.getAppendableId() + "_desks"), p)
                 )
                 .addTile(ModBlockEntities.DESK_DRAWER)
                 // Using the same textures from desk's above

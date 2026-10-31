@@ -21,7 +21,9 @@ import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -29,6 +31,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import org.apache.commons.lang3.function.TriFunction;
 import org.jetbrains.annotations.NotNull;
@@ -43,7 +46,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
     protected final Supplier<@Nullable B> baseBlock;
 
-    protected final Function<T, @Nullable B> blockFactory;
+    protected final BiFunction<T, BlockBehaviour.Properties, @Nullable B> blockFactory;
+    protected final Function<T, BlockBehaviour.Properties> propertiesFactory;
     @Nullable
     protected final TriFunction<T, B, Item.Properties, @Nullable Item> itemFactory;
     @Nullable
@@ -58,7 +62,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
     public SimpleEntrySet(Class<T> type,
                           String name, @Nullable String prefix,
-                          Function<T, B> blockSupplier,
+                          BiFunction<T, BlockBehaviour.Properties, B> blockSupplier,
+                          Function<T, BlockBehaviour.Properties> propertiesFactory,
                           Supplier<@Nullable B> baseBlock,
                           Supplier<T> baseType,
                           @NotNull Supplier<Holder<CreativeModeTab>> tab,
@@ -76,6 +81,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     ) {
         super(type, name, prefix, baseType, tab, tabMode, paletteSupplier, extraTransform, mergedPalette, copyTint, condition);
         this.blockFactory = blockSupplier;
+        this.propertiesFactory = propertiesFactory;
         this.tileHolder = tileFactory;
         this.lootMode = lootMode;
         this.baseBlock = baseBlock;
@@ -133,10 +139,13 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             if (module.isEntryAlreadyRegistered(childKey, id, blockType, BuiltInRegistries.BLOCK)) continue;
 
             if (condition.test(blockType)) {
-                B block = blockFactory.apply(blockType);
+                var properties = propertiesFactory.apply(blockType).setId(ResourceKey.create(Registries.BLOCK, id));
+                B block = blockFactory.apply(blockType, properties);
                 if(block != null) {
                     try {
                         Preconditions.checkArgument(block != Blocks.AIR, "Block factory returned AIR block instance");
+                        //a shared or self made Properties would give every block the same id
+                        Preconditions.checkArgument(Utils.getID(block).equals(id), "Block factory ignored the given properties");
                         registry.register(id, block);
 
                         this.blocks.put(blockType, block);
@@ -196,16 +205,19 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         blocks.forEach((blockType, value) -> {
             Item i;
             String childKey = makeChildKey(module);
+            Identifier id = Utils.getID(value);
+            Item.Properties properties = new Item.Properties()
+                    .setId(ResourceKey.create(Registries.ITEM, id))
+                    .useBlockDescriptionPrefix();
 
             if (itemFactory != null) {
-                i = itemFactory.apply(blockType, value, new Item.Properties());
+                i = itemFactory.apply(blockType, value, properties);
             } else {
-                i = new BlockTypeBasedBlockItem<>(value, new Item.Properties(), blockType);
+                i = new BlockTypeBasedBlockItem<>(value, properties, blockType);
             }
             //for ones that don't have item
             if (i != null) {
                 this.items.put(blockType, i);
-                Identifier id = Utils.getID(value);
                 if (id.toString().equals("minecraft:air")) {
                     Identifier expectedName = makeFullEntryID(module, blockType);
                     throw new UnsupportedOperationException("Attempted to register a Item of " + blockType.getTranslationKey() + " with an EntrySetId: " + childKey + ". " +
@@ -292,13 +304,13 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
     //ok...
     public static <T extends BlockType, B extends Block> Builder<T, B> builder(Class<T> type,
-                                                                               String name, Supplier<B> baseBlock, Supplier<T> baseType, Function<T, B> blockSupplier) {
+                                                                               String name, Supplier<B> baseBlock, Supplier<T> baseType, BiFunction<T, BlockBehaviour.Properties, B> blockSupplier) {
 
         return new Builder<>(type, name, null, baseType, baseBlock, blockSupplier);
     }
 
     public static <T extends BlockType, B extends Block> Builder<T, B> builder(Class<T> type,
-                                                                               String name, String prefix, Supplier<B> baseBlock, Supplier<T> baseType, Function<T, B> blockSupplier) {
+                                                                               String name, String prefix, Supplier<B> baseBlock, Supplier<T> baseType, BiFunction<T, BlockBehaviour.Properties, B> blockSupplier) {
 
         return new Builder<>(type, name, prefix, baseType, baseBlock, blockSupplier);
     }
@@ -309,7 +321,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     public static class Builder<T extends BlockType, B extends Block> extends AbstractSimpleEntrySet.Builder<Builder<T, B>, T, B, Item> {
         protected final Supplier<@Nullable B> baseBlock;
         protected LootTableMode lootMode = LootTableMode.DROP_SELF;
-        protected final Function<T, B> blockFactory;
+        protected final BiFunction<T, BlockBehaviour.Properties, B> blockFactory;
+        protected Function<T, BlockBehaviour.Properties> propertiesFactory = SimpleEntrySet::copyMainChildProperties;
         @Nullable
         protected TriFunction<T, B, Item.Properties, Item> itemFactory;
         @Nullable
@@ -320,7 +333,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
         protected ExtraModelConfiguration extraModelConfig = ExtraModelConfiguration.EMPTY;
 
-        protected Builder(Class<T> type, String name, @Nullable String prefix, Supplier<T> baseType, Supplier<B> baseBlock, Function<T, B> blockFactory) {
+        protected Builder(Class<T> type, String name, @Nullable String prefix, Supplier<T> baseType, Supplier<B> baseBlock, BiFunction<T, BlockBehaviour.Properties, B> blockFactory) {
             super(type, name, prefix, baseType);
             this.baseBlock = baseBlock;
             this.blockFactory = blockFactory;
@@ -330,7 +343,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             if (this.addToTab && tab == null) {
                 throw new IllegalStateException("Tab for: " + getEntryName() + " was null!");
             }
-            SimpleEntrySet<T, B> e = finishBuild(new SimpleEntrySet<>(type, name, prefix, blockFactory, baseBlock, baseType, tab, tabMode, lootMode,
+            SimpleEntrySet<T, B> e = finishBuild(new SimpleEntrySet<>(type, name, prefix, blockFactory, propertiesFactory, baseBlock, baseType, tab, tabMode, lootMode,
                     itemFactory, tileHolder, renderType, null, extraModelTransform, useMergedPalette, copyTint, condition,
                     this.extraModelConfig
             ));
@@ -358,6 +371,12 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
         public <H extends BlockEntity> Builder<T, B> addTile(BiFunction<BlockPos, BlockState, H> tileFactory) {
             this.tileHolder = new NewTileHolder<>(tileFactory);
+            return this;
+        }
+
+        /// Defaults to a copy of the type main block (planks, leaves)
+        public Builder<T, B> setProperties(Function<T, BlockBehaviour.Properties> propertiesFactory) {
+            this.propertiesFactory = propertiesFactory;
             return this;
         }
 
@@ -491,6 +510,11 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
     protected static final boolean YEET_JSONS = true;
     protected static final Set<Block> SIMPLE_DROPS = new HashSet<>();
+
+    public static <T extends BlockType> BlockBehaviour.Properties copyMainChildProperties(T type) {
+        if (type.mainChild() instanceof Block main) return Utils.copyPropertySafe(main);
+        throw new UnsupportedOperationException("Main child of " + type + " is not a block, entry set needs setProperties");
+    }
 
     public static boolean isSimpleDrop(Block block) {
         return SIMPLE_DROPS.contains(block);

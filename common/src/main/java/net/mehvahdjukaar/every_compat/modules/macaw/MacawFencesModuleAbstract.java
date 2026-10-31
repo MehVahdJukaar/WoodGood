@@ -8,6 +8,7 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.VanillaLeavesTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
@@ -145,9 +146,9 @@ public abstract class MacawFencesModuleAbstract extends EveryCompatModule {
 
     public abstract Identifier getTabKey();
 
-    public abstract Block newFenceBlock(WoodType woodType);
-    public abstract Block newFenceGateBlock(WoodType woodType);
-    public abstract Block newWiredFence(WoodType woodType);
-    public abstract Block newFenceHitbox(LeavesType leavesType);
+    public abstract Block newFenceBlock(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newFenceGateBlock(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newWiredFence(WoodType woodType, BlockBehaviour.Properties p);
+    public abstract Block newFenceHitbox(LeavesType leavesType, BlockBehaviour.Properties p);
 
 }

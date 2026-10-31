@@ -67,7 +67,7 @@ public class ClutterModule extends EveryCompatModule {
 
         wall_bookshelves = SimpleEntrySet.builder(WoodType.class, "wall_bookshelf",
                         getModBlock("oak_wall_bookshelf"), () -> VanillaWoodTypes.OAK,
-                        w -> new WallBookshelfBlock(Utils.copyPropertySafe(w.planks)
+                        (w, p) -> new WallBookshelfBlock(p
                                 .lightLevel(createLightLevelFromLitBlockState())
                         )
                 )
@@ -85,7 +85,7 @@ public class ClutterModule extends EveryCompatModule {
 
         window_sills = SimpleEntrySet.builder(WoodType.class, "window_sill",
                         getModBlock("oak_window_sill"), () -> VanillaWoodTypes.OAK,
-                        w -> new WindowSillBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new WindowSillBlock(p)
                 )
                 .setRenderType(RenderLayer.CUTOUT)
                 //TEXTURES: planks
@@ -99,7 +99,7 @@ public class ClutterModule extends EveryCompatModule {
 
         tables = SimpleEntrySet.builder(WoodType.class, "table",
                         getModBlock("oak_table"), () -> VanillaWoodTypes.OAK,
-                        w -> new CompatTableBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new CompatTableBlock(p)
                 )
                 //TEXTURES: log, planks
                 .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
@@ -114,7 +114,7 @@ public class ClutterModule extends EveryCompatModule {
 
         stripped_tables = SimpleEntrySet.builder(WoodType.class, "table", "stripped",
                         getModBlock("stripped_oak_table"), () -> VanillaWoodTypes.OAK,
-                        w -> new CompatTableBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new CompatTableBlock(p)
                 )
                 .requiresChildren("stripped_log") //REASON: recipes & textures
                 //TEXTURES: stripped_log, planks
@@ -130,7 +130,7 @@ public class ClutterModule extends EveryCompatModule {
 
         chairs = SimpleEntrySet.builder(WoodType.class, "chair",
                         getModBlock("oak_chair"), () -> VanillaWoodTypes.OAK,
-                        w -> new CompatChairBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new CompatChairBlock(p)
                 )
                 //TEXTURES: log, planks
                 .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
@@ -145,7 +145,7 @@ public class ClutterModule extends EveryCompatModule {
 
         stripped_chairs = SimpleEntrySet.builder(WoodType.class, "chair", "stripped",
                         getModBlock("stripped_oak_chair"), () -> VanillaWoodTypes.OAK,
-                        w -> new CompatChairBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new CompatChairBlock(p)
                 )
                 .requiresChildren("stripped_log") //REASON: recipes & textures
                 //TEXTURES: stripped_log, planks
@@ -161,7 +161,7 @@ public class ClutterModule extends EveryCompatModule {
 
         cupboards = SimpleEntrySet.builder(WoodType.class, "cupboard",
                         getModBlock("oak_cupboard"), () -> VanillaWoodTypes.OAK,
-                        w -> new CupboardBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new CupboardBlock(p.noOcclusion())
                 )
                 .addTile(() -> ModBlockEntities.CUPBOARD)
                 //TEXTURES: planks
@@ -177,7 +177,7 @@ public class ClutterModule extends EveryCompatModule {
 
         wall_cupboards = SimpleEntrySet.builder(WoodType.class, "wall_cupboard",
                         getModBlock("oak_wall_cupboard"), () -> VanillaWoodTypes.OAK,
-                        w -> new WallCupboardBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new WallCupboardBlock(p.noOcclusion())
                 )
                 .addTile(() -> ModBlockEntities.WALL_CUPBOARD)
                 //TEXTURES: planks, cupboard_door (cupboards), cupboard_inside (cupboards)
@@ -191,7 +191,7 @@ public class ClutterModule extends EveryCompatModule {
 
         shelves = SimpleEntrySet.builder(WoodType.class, "shelf",
                         getModBlock("oak_shelf"), () -> VanillaWoodTypes.OAK,
-                        w -> new ShelfBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new ShelfBlock(p.noOcclusion())
                 )
                 .addTile(() -> ModBlockEntities.SHELF)
                 //TEXTURES: log, planks
@@ -205,7 +205,7 @@ public class ClutterModule extends EveryCompatModule {
 
         trellises = SimpleEntrySet.builder(WoodType.class, "trellis",
                         getModBlock("oak_trellis"), () -> VanillaWoodTypes.OAK,
-                        w -> new TrellisBlock(Utils.copyPropertySafe(w.planks)
+                        (w, p) -> new TrellisBlock(p
                                 .lightLevel(createLightLevelFromLitBlockState()))
                 )
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
@@ -222,7 +222,7 @@ public class ClutterModule extends EveryCompatModule {
 
         benches = SimpleEntrySet.builder(WoodType.class, "bench",
                         getModBlock("oak_bench"), () -> VanillaWoodTypes.OAK,
-                        w -> new CompatBenchBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new CompatBenchBlock(p)
                 )
                 //TEXTURES: log, planks
                 .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
@@ -237,7 +237,7 @@ public class ClutterModule extends EveryCompatModule {
 
         stripped_benches = SimpleEntrySet.builder(WoodType.class, "bench", "stripped",
                         getModBlock("stripped_oak_bench"), () -> VanillaWoodTypes.OAK,
-                        w -> new CompatBenchBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new CompatBenchBlock(p)
                 )
                 .requiresChildren("stripped_log") //REASON: recipes & textures
                 //TEXTURES: stripped_log, planks
@@ -252,7 +252,7 @@ public class ClutterModule extends EveryCompatModule {
 
         mosaic_planks = SimpleEntrySet.builder(WoodType.class, "mosaic",
                         getModBlock("oak_mosaic"), () -> VanillaWoodTypes.OAK,
-                        w -> new Block(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new Block(p)
                 )
                 .addTexture(modRes("block/oak_mosaic"))
                 .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
@@ -282,8 +282,9 @@ public class ClutterModule extends EveryCompatModule {
 
         mosaic_slabs = SimpleEntrySet.builder(WoodType.class, "mosaic_slab",
                         getModBlock("oak_mosaic_slab"), () -> VanillaWoodTypes.OAK,
-                        w -> new SlabBlock(copySlabs(w))
+                        (w, p) -> new SlabBlock(p)
                 )
+                .setProperties(this::copySlabs)
                 .requiresFromMap(mosaic_planks.blocks) //REASON: textures
                 .setRenderType(RenderLayer.CUTOUT)
                 //TEXTURES: mosaic_planks

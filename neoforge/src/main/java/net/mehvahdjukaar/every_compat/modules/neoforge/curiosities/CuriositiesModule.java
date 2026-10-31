@@ -48,7 +48,7 @@ public class CuriositiesModule extends EveryCompatModule {
 
         fancied_planks = SimpleEntrySet.builder(WoodType.class, "planks", "fancied",
                         getModBlock("fancied_oak_planks"), () -> VanillaWoodTypes.OAK,
-                        w -> new VerticalConnectingPillarBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new VerticalConnectingPillarBlock(p)
                 )
                 .addTexture(modRes("block/fancied_oak_planks_normal"))
                 .addTexture(modRes("block/fancied_oak_planks_top"))

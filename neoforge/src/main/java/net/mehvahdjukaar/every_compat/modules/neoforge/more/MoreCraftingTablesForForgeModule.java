@@ -30,7 +30,7 @@ public class MoreCraftingTablesForForgeModule extends EveryCompatModule {
 
         craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
                         getModBlock("spruce_crafting_table"), () -> VanillaWoodTypes.SPRUCE,
-                        w -> new CraftingBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new CraftingBlock(p)
                 )
                 //TEXTURES: oak_craftng_table - BaseTexture
                 .addTextureM(EveryCompat.res("block/spruce_crafting_table_front"), EveryCompat.res("block/mctb/spruce_crafting_table_front_m"))

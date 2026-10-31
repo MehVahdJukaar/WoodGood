@@ -4,6 +4,7 @@ import com.mcwpaths.kikoz.objects.FacingPathBlock;
 import net.mehvahdjukaar.every_compat.modules.macaw.MacawPathsModuleAbstract;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.Block;
 
 //See MacawPathModuleAbstract's SUPPORTED VERSION
@@ -14,7 +15,7 @@ public class MacawPathsModule extends MacawPathsModuleAbstract {
     }
 
     @Override
-    public Block newFacingPathBlock(WoodType woodType) {
-        return new FacingPathBlock(Utils.copyPropertySafe(woodType.planks));
+    public Block newFacingPathBlock(WoodType woodType, BlockBehaviour.Properties p) {
+        return new FacingPathBlock(p);
     }
 }

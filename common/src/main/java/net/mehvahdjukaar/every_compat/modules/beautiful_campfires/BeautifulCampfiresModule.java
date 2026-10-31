@@ -59,8 +59,9 @@ public class BeautifulCampfiresModule extends EveryCompatModule {
 
         campfires = SimpleEntrySet.builder(WoodType.class, "campfire",
                         getModBlock("acacia_campfire", CampfireBlock.class), () -> VanillaWoodTypes.ACACIA,
-                        w -> new CampfireBlock(true, 1, copyProperties(15))
+                        (w, p) -> new CampfireBlock(true, 1, p)
                 )
+                .setProperties(w -> copyProperties(15))
                 .addTile(() -> BlockEntityType.CAMPFIRE)
                 .addTextureM(modRes("item/acacia_campfire"), EveryCompat.res("item/bc/campfire_m"))
                 .addTextureM(modRes("item/acacia_soul_campfire"), EveryCompat.res("item/bc/campfire_m"))
@@ -73,8 +74,9 @@ public class BeautifulCampfiresModule extends EveryCompatModule {
 
         soul_campfires = SimpleEntrySet.builder(WoodType.class, "soul_campfire",
                         getModBlock("acacia_soul_campfire", CampfireBlock.class), () -> VanillaWoodTypes.ACACIA,
-                        w -> new CampfireBlock(true, 2, copyProperties(10))
+                        (w, p) -> new CampfireBlock(true, 2, p)
                 )
+                .setProperties(w -> copyProperties(10))
                 .addTile(() -> BlockEntityType.CAMPFIRE)
                 //TEXTURES: acacia_soul_campfire above
                 .addTextureM(modRes("block/acacia_campfire_log_lit"),

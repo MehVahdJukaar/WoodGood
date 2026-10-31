@@ -89,8 +89,8 @@ dependencies {
 
     // Special dumb stuff required by TerraBlender
     modImplementation("com.terraformersmc:modmenu:${property("modmenu_version")}")
-    modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-base:6.1.1")
-    modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:6.1.1")
+//    modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-base:6.1.1") //!! 1.20
+//    modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:6.1.1") //!! 1.20
     // so dumber stuff requird by GlitchCore
     modImplementation("net.jodah:typetools:0.6.3")
     modImplementation("com.electronwill.night-config:core:3.8.1")

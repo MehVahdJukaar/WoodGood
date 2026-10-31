@@ -56,7 +56,7 @@ public class BuildingButBetterModule extends EveryCompatModule {
 
         layers = SimpleEntrySet.builder(WoodType.class, "layer",
                         getModBlock("oak_layer"), () -> VanillaWoodTypes.OAK,
-                        w -> new LayerBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new LayerBlock(p)
                 )
                 .requiresChildren("slab") //REASON: recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -74,7 +74,7 @@ public class BuildingButBetterModule extends EveryCompatModule {
 
         trims = SimpleEntrySet.builder(WoodType.class, "trim",
                         getModBlock("oak_trim"), () -> VanillaWoodTypes.OAK,
-                        w -> new FacingConnectingBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new FacingConnectingBlock(p)
                 )
                 .addTexture(modRes("block/trim/oak_bottom"))
                 .addTexture(modRes("block/trim/oak_middle"))
@@ -91,7 +91,7 @@ public class BuildingButBetterModule extends EveryCompatModule {
 
         beams = SimpleEntrySet.builder(WoodType.class, "beam",
                         getModBlock("oak_beam"), () -> VanillaWoodTypes.OAK,
-                        w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new RotatedPillarBlock(p)
                 )
                 .requiresChildren("stripped_log") //REASON: recipes
                 .addTexture(modRes("block/beam/oak"))
@@ -107,7 +107,7 @@ public class BuildingButBetterModule extends EveryCompatModule {
 
         beamStairs = SimpleEntrySet.builder(WoodType.class, "beam_stairs",
                         getModBlock("oak_beam_stairs"), () -> VanillaWoodTypes.OAK,
-                        w -> new StairBlock(w.planks.defaultBlockState(), Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new StairBlock(w.planks.defaultBlockState(), p)
                 )
                 .requiresFromMap(beams.blocks) //REASON: recipes
                 .addTexture(modRes("block/beam/oak"))
@@ -124,7 +124,7 @@ public class BuildingButBetterModule extends EveryCompatModule {
 
         beamSlabs = SimpleEntrySet.builder(WoodType.class, "beam_slab",
                         getModBlock("oak_beam_slab"), () -> VanillaWoodTypes.OAK,
-                        w -> new FacingSlabBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new FacingSlabBlock(p)
                 )
                 .requiresFromMap(beams.blocks) //REASON: recipes
                 .addTexture(modRes("block/beam/oak"))
@@ -141,7 +141,7 @@ public class BuildingButBetterModule extends EveryCompatModule {
 
         supports = SimpleEntrySet.builder(WoodType.class, "support",
                         getModBlock("oak_support"), () -> VanillaWoodTypes.OAK,
-                        w -> new SupportBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new SupportBlock(p.noOcclusion())
                 )
                 .addTexture(modRes("block/beam/oak"))
                 .addTexture(modRes("block/beam/oak_top"))
@@ -167,7 +167,7 @@ public class BuildingButBetterModule extends EveryCompatModule {
 
         frames = SimpleEntrySet.builder(WoodType.class, "frame",
                         getModBlock("oak_frame"), () -> VanillaWoodTypes.OAK,
-                        w -> new FrameBlock(Utils.copyPropertySafe(w.planks).noOcclusion().noCollission().pushReaction(PushReaction.DESTROY))
+                        (w, p) -> new FrameBlock(p.noOcclusion().noCollission().pushReaction(PushReaction.DESTROY))
                 )
                 .requiresChildren("slab") //REASON: recipes
                 .addTexture(frameTexture)
@@ -184,7 +184,7 @@ public class BuildingButBetterModule extends EveryCompatModule {
 
         pallets = SimpleEntrySet.builder(WoodType.class, "pallet",
                         getModBlock("oak_pallet"), () -> VanillaWoodTypes.OAK,
-                        w -> new PalletBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        (w, p) -> new PalletBlock(p.noOcclusion())
                 )
                 .addTexture(modRes("block/pallet/oak_pallet"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -198,7 +198,7 @@ public class BuildingButBetterModule extends EveryCompatModule {
 
         lanterns = SimpleEntrySet.builder(WoodType.class, "lantern",
                         getModBlock("oak_lantern"), () -> VanillaWoodTypes.OAK,
-                        w -> new WoodenLanternBlock(Utils.copyPropertySafe(w.planks).lightLevel((blockStatex) -> 15))
+                        (w, p) -> new WoodenLanternBlock(p.lightLevel((blockStatex) -> 15))
                 )
                 .requiresChildren(SLAB) //REASON: recipes
                 .addTexture(modRes("block/lantern/oak"))
@@ -215,8 +215,9 @@ public class BuildingButBetterModule extends EveryCompatModule {
 
         ladders = SimpleEntrySet.builder(WoodType.class, "ladder",
                         getModBlock("oak_ladder"), () -> VanillaWoodTypes.OAK,
-                        w -> new BBBLadderBlock(1, Utils.copyPropertySafe(Blocks.LADDER))
+                        (w, p) -> new BBBLadderBlock(1, p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.LADDER))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
                 .addTexture(modRes("block/ladder/acacia/oak"))
                 .addTexture(modRes("block/ladder/birch/oak"))
@@ -242,7 +243,7 @@ public class BuildingButBetterModule extends EveryCompatModule {
 
         walls = SimpleEntrySet.builder(WoodType.class, "wall",
                         getModBlock("oak_wall"), () -> VanillaWoodTypes.OAK,
-                        w -> new WoodenWallBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new WoodenWallBlock(p)
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
                 .addTexture(modRes("block/beam/oak"))

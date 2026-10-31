@@ -25,9 +25,10 @@ public class RedBitsModule extends EveryCompatModule {
 
         large_buttons = SimpleEntrySet.builder(WoodType.class, "large_button",
                         getModBlock("oak_large_button"), () -> VanillaWoodTypes.OAK,
-                        wood -> new LargeButtonBlock(new BlockSetType(wood.getTypeName()), BlockBehaviour.Properties.of()
+                        (wood, p) -> new LargeButtonBlock(new BlockSetType(wood.getTypeName()), p
                                 .noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY))
                 )
+                .setProperties(wood -> BlockBehaviour.Properties.of())
                 .requiresChildren(BUTTON) // Recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("large_buttons"), Registries.BLOCK)

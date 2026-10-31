@@ -51,7 +51,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
 
         circleGlass = SimpleEntrySet.builder(WoodType.class, "glass", "circle",
                         getModBlock("circle_oak_glass"), () -> VanillaWoodTypes.OAK,
-                        w -> new TransparentBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                        (w, p) -> new TransparentBlock(p.strength(0.3F).sound(SoundType.GLASS)
                                 .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
                                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false))
                 )
@@ -69,7 +69,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
 
         barredGlass = SimpleEntrySet.builder(WoodType.class, "bared_glass",
                         getModBlock("oak_bared_glass"), () -> VanillaWoodTypes.OAK,
-                        w -> new TransparentBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                        (w, p) -> new TransparentBlock(p.strength(0.3F).sound(SoundType.GLASS)
                                 .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
                                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false))
                 )
@@ -91,7 +91,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
 
         borderedGlass = SimpleEntrySet.builder(WoodType.class, "bordered_glass",
                         getModBlock("oak_bordered_glass"), () -> VanillaWoodTypes.OAK,
-                        w -> new TransparentBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                        (w, p) -> new TransparentBlock(p.strength(0.3F).sound(SoundType.GLASS)
                                 .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
                                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false))
                 )
@@ -113,7 +113,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
 
         diamondBorderedGlass = SimpleEntrySet.builder(WoodType.class, "diamond_bordered_glass",
                         getModBlock("oak_diamond_bordered_glass"), () -> VanillaWoodTypes.OAK,
-                        w -> new TransparentBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                        (w, p) -> new TransparentBlock(p.strength(0.3F).sound(SoundType.GLASS)
                                 .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
                                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false))
                 )
@@ -135,7 +135,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
 
         horizontalLinedGlass = SimpleEntrySet.builder(WoodType.class, "horizontal_lined_glass",
                         getModBlock("oak_horizontal_lined_glass"), () -> VanillaWoodTypes.OAK,
-                        w -> new TransparentBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                        (w, p) -> new TransparentBlock(p.strength(0.3F).sound(SoundType.GLASS)
                                 .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
                                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false))
                 )
@@ -157,7 +157,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
 
         largeDiamondGlass = SimpleEntrySet.builder(WoodType.class, "large_diamond_glass",
                         getModBlock("oak_large_diamond_glass"), () -> VanillaWoodTypes.OAK,
-                        w -> new TransparentBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                        (w, p) -> new TransparentBlock(p.strength(0.3F).sound(SoundType.GLASS)
                                 .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
                                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false))
                 )
@@ -179,7 +179,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
 
         lineBarredGlass = SimpleEntrySet.builder(WoodType.class, "line_bared_glass",
                         getModBlock("oak_line_bared_glass"), () -> VanillaWoodTypes.OAK,
-                        w -> new TransparentBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                        (w, p) -> new TransparentBlock(p.strength(0.3F).sound(SoundType.GLASS)
                                 .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
                                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false))
                 )
@@ -201,7 +201,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
 
         ornateBarredGlass = SimpleEntrySet.builder(WoodType.class, "ornate_bared_glass",
                         getModBlock("oak_ornate_bared_glass"), () -> VanillaWoodTypes.OAK,
-                        w -> new TransparentBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                        (w, p) -> new TransparentBlock(p.strength(0.3F).sound(SoundType.GLASS)
                                 .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
                                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false))
                 )
@@ -223,7 +223,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
 
         snowflakeGlass = SimpleEntrySet.builder(WoodType.class, "snowflake_glass",
                         getModBlock("oak_snowflake_glass"), () -> VanillaWoodTypes.OAK,
-                        w -> new TransparentBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                        (w, p) -> new TransparentBlock(p.strength(0.3F).sound(SoundType.GLASS)
                                 .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
                                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false))
                 )
@@ -241,7 +241,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
 
         wovenGlass = SimpleEntrySet.builder(WoodType.class, "woven_glass",
                         getModBlock("oak_woven_glass"), () -> VanillaWoodTypes.OAK,
-                        w -> new TransparentBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                        (w, p) -> new TransparentBlock(p.strength(0.3F).sound(SoundType.GLASS)
                                 .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
                                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false))
                 )
@@ -263,7 +263,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
 
         squareGlass = SimpleEntrySet.builder(WoodType.class, "glass", "square",
                         getModBlock("square_oak_glass"), () -> VanillaWoodTypes.OAK,
-                        w -> new TransparentBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS)
+                        (w, p) -> new TransparentBlock(p.strength(0.3F).sound(SoundType.GLASS)
                                 .noOcclusion().isValidSpawn((s, l, ps, t) -> false).isRedstoneConductor((s, l, ps) -> false)
                                 .isSuffocating((s, l, ps) -> false).isViewBlocking((s, l, ps) -> false))
                 )
@@ -286,7 +286,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
         //TYPE glass_pane
         circleGlassPane = SimpleEntrySet.builder(WoodType.class, "glass_pane", "circle",
                         getModBlock("circle_oak_glass_pane"), () -> VanillaWoodTypes.OAK,
-                        w -> new IronBarsBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS).noOcclusion())
+                        (w, p) -> new IronBarsBlock(p.strength(0.3F).sound(SoundType.GLASS).noOcclusion())
                 )
                 .requiresFromMap(circleGlass.blocks) //REASON: textures
                 .addModelTransform(m -> m.replaceString("minecraft:block/glass_pane_top", "chipped:block/glass_pane/circle_oak_glass_pane_top"))
@@ -305,7 +305,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
 
         barredGlassPane = SimpleEntrySet.builder(WoodType.class, "bared_glass_pane",
                         getModBlock("oak_bared_glass_pane"), () -> VanillaWoodTypes.OAK,
-                        w -> new IronBarsBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS).noOcclusion())
+                        (w, p) -> new IronBarsBlock(p.strength(0.3F).sound(SoundType.GLASS).noOcclusion())
                 )
                 .requiresFromMap(barredGlass.blocks) //REASON: textures
                 .addModelTransform(m -> m.replaceString("minecraft:block/glass_pane_top", "chipped:block/glass_pane/oak_bared_glass_pane_top"))
@@ -324,7 +324,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
 
         borderedGlassPane = SimpleEntrySet.builder(WoodType.class, "bordered_glass_pane",
                         getModBlock("oak_bordered_glass_pane"), () -> VanillaWoodTypes.OAK,
-                        w -> new IronBarsBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS).noOcclusion())
+                        (w, p) -> new IronBarsBlock(p.strength(0.3F).sound(SoundType.GLASS).noOcclusion())
                 )
                 .requiresFromMap(borderedGlass.blocks) //REASON: textures
                 .addModelTransform(m -> m.replaceString("minecraft:block/glass_pane_top", "chipped:block/glass_pane/oak_bordered_glass_pane_top"))
@@ -343,7 +343,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
 
         diamondBorderedGlassPane = SimpleEntrySet.builder(WoodType.class, "diamond_bordered_glass_pane",
                         getModBlock("oak_diamond_bordered_glass_pane"), () -> VanillaWoodTypes.OAK,
-                        w -> new IronBarsBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS).noOcclusion())
+                        (w, p) -> new IronBarsBlock(p.strength(0.3F).sound(SoundType.GLASS).noOcclusion())
                 )
                 .requiresFromMap(diamondBorderedGlass.blocks) //REASON: textures
                 .addModelTransform(m -> m.replaceString("minecraft:block/glass_pane_top", "chipped:block/glass_pane/oak_diamond_bordered_glass_pane_top"))
@@ -362,7 +362,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
 
         horizontalLinedGlassPane = SimpleEntrySet.builder(WoodType.class, "horizontal_lined_glass_pane",
                         getModBlock("oak_horizontal_lined_glass_pane"), () -> VanillaWoodTypes.OAK,
-                        w -> new IronBarsBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS).noOcclusion())
+                        (w, p) -> new IronBarsBlock(p.strength(0.3F).sound(SoundType.GLASS).noOcclusion())
                 )
                 .requiresFromMap(horizontalLinedGlass.blocks) //REASON: textures
                 .addModelTransform(m -> m.replaceString("minecraft:block/glass_pane_top", "chipped:block/glass_pane/oak_horizontal_lined_glass_pane_top"))
@@ -381,7 +381,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
 
         largeDiamondGlassPane = SimpleEntrySet.builder(WoodType.class, "large_diamond_glass_pane",
                         getModBlock("oak_large_diamond_glass_pane"), () -> VanillaWoodTypes.OAK,
-                        w -> new IronBarsBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS).noOcclusion())
+                        (w, p) -> new IronBarsBlock(p.strength(0.3F).sound(SoundType.GLASS).noOcclusion())
                 )
                 .requiresFromMap(largeDiamondGlass.blocks) //REASON: textures
                 .addModelTransform(m -> m.replaceString("minecraft:block/glass_pane_top", "chipped:block/glass_pane/oak_large_diamond_glass_pane_top"))
@@ -400,7 +400,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
 
         lineBarredGlassPane = SimpleEntrySet.builder(WoodType.class, "line_bared_glass_pane",
                         getModBlock("oak_line_bared_glass_pane"), () -> VanillaWoodTypes.OAK,
-                        w -> new IronBarsBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS).noOcclusion())
+                        (w, p) -> new IronBarsBlock(p.strength(0.3F).sound(SoundType.GLASS).noOcclusion())
                 )
                 .requiresFromMap(lineBarredGlass.blocks) //REASON: textures
                 .addModelTransform(m -> m.replaceString("minecraft:block/glass_pane_top", "chipped:block/glass_pane/oak_line_bared_glass_pane_top"))
@@ -419,7 +419,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
 
         ornateBarredGlassPane = SimpleEntrySet.builder(WoodType.class, "ornate_bared_glass_pane",
                         getModBlock("oak_ornate_bared_glass_pane"), () -> VanillaWoodTypes.OAK,
-                        w -> new IronBarsBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS).noOcclusion())
+                        (w, p) -> new IronBarsBlock(p.strength(0.3F).sound(SoundType.GLASS).noOcclusion())
                 )
                 .requiresFromMap(ornateBarredGlass.blocks) //REASON: textures
                 .addModelTransform(m -> m.replaceString("minecraft:block/glass_pane_top", "chipped:block/glass_pane/oak_ornate_bared_glass_pane_top"))
@@ -438,7 +438,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
 
         snowflakeGlassPane = SimpleEntrySet.builder(WoodType.class, "snowflake_glass_pane",
                         getModBlock("oak_snowflake_glass_pane"), () -> VanillaWoodTypes.OAK,
-                        w -> new IronBarsBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS).noOcclusion())
+                        (w, p) -> new IronBarsBlock(p.strength(0.3F).sound(SoundType.GLASS).noOcclusion())
                 )
                 .requiresFromMap(snowflakeGlass.blocks) //REASON: textures
                 .addModelTransform(m -> m.replaceString("minecraft:block/glass_pane_top", "chipped:block/glass_pane/oak_snowflake_glass_pane_top"))
@@ -457,7 +457,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
 
         wovenGlassPane = SimpleEntrySet.builder(WoodType.class, "woven_glass_pane",
                         getModBlock("oak_woven_glass_pane"), () -> VanillaWoodTypes.OAK,
-                        w -> new IronBarsBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS).noOcclusion())
+                        (w, p) -> new IronBarsBlock(p.strength(0.3F).sound(SoundType.GLASS).noOcclusion())
                 )
                 .requiresFromMap(wovenGlass.blocks) //REASON: textures
                 .addModelTransform(m -> m.replaceString("minecraft:block/glass_pane_top", "chipped:block/glass_pane/oak_woven_glass_pane_top"))
@@ -476,7 +476,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
 
         squareGlassPane = SimpleEntrySet.builder(WoodType.class, "glass_pane", "square",
                         getModBlock("square_oak_glass_pane"), () -> VanillaWoodTypes.OAK,
-                        w -> new IronBarsBlock(Utils.copyPropertySafe(w.planks).strength(0.3F).sound(SoundType.GLASS).noOcclusion())
+                        (w, p) -> new IronBarsBlock(p.strength(0.3F).sound(SoundType.GLASS).noOcclusion())
                 )
                 .requiresFromMap(squareGlass.blocks) //REASON: textures
                 .addModelTransform(m -> m.replaceString("minecraft:block/glass_pane_top", "chipped:block/glass_pane/square_oak_glass_pane_top"))

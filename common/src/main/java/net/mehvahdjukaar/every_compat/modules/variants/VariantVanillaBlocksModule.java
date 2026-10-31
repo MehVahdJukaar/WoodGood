@@ -52,8 +52,9 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
 
         barrel = SimpleEntrySet.builder(WoodType.class, "barrel",
                         getModBlock("oak_barrel"), () -> VanillaWoodTypes.OAK,
-                        w -> new BarrelBlock(Utils.copyPropertySafe(Blocks.BARREL))
+                        (w, p) -> new BarrelBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.BARREL))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
                 .addTag(modRes("barrels"), Registries.BLOCK, Registries.ITEM)
@@ -72,8 +73,9 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
 
         beehive = SimpleEntrySet.builder(WoodType.class, "beehive",
                         getModBlock("spruce_beehive"), () -> VanillaWoodTypes.SPRUCE,
-                        w -> new BeehiveBlock(Utils.copyPropertySafe(Blocks.BEEHIVE))
+                        (w, p) -> new BeehiveBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.BEEHIVE))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.BEEHIVES, Registries.BLOCK)
                 .addTag(modRes("beehives"), Registries.BLOCK, Registries.ITEM)
@@ -90,8 +92,9 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
 
         bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf",
                         getModBlock("acacia_bookshelf"), () -> VanillaWoodTypes.ACACIA,
-                        w -> new Block(Utils.copyPropertySafe(Blocks.BOOKSHELF))
+                        (w, p) -> new Block(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.BOOKSHELF))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.ENCHANTMENT_POWER_PROVIDER, Registries.BLOCK)
                 .addTag(modRes("bookshelves"), Registries.BLOCK, Registries.ITEM)
@@ -105,8 +108,9 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
 
         cartography = SimpleEntrySet.builder(WoodType.class, "cartography_table",
                         getModBlock("oak_cartography_table"), () -> VanillaWoodTypes.OAK,
-                        w -> new CartographyTableBlock(Utils.copyPropertySafe(Blocks.CARTOGRAPHY_TABLE)){}
+                        (w, p) -> new CartographyTableBlock(p){}
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.CARTOGRAPHY_TABLE))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("cartography_tables"), Registries.BLOCK, Registries.ITEM)
                 .addTextureM(modRes("block/oak_cartography_table_side1"), EveryCompat.res("block/vanilla_cartography_table_side1_m"))
@@ -121,7 +125,7 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
 
         chests = SimpleEntrySet.builder(WoodType.class, "chest",
                         getModBlock("acacia_chest"), () -> VanillaWoodTypes.ACACIA,
-                        w -> new CompatChestBlock(this::getTile, Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new CompatChestBlock(this::getTile, p)
                 )
                 .addTile(VariantChestBlockEntity::new)
                 .addModelTransform(m -> m.addModifier((s, blockId, woodType) ->
@@ -144,7 +148,7 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
 
         chiseledBookshelves = SimpleEntrySet.builder(WoodType.class, "chiseled_bookshelf",
                         getModBlock("acacia_chiseled_bookshelf"), () -> VanillaWoodTypes.ACACIA,
-                        w -> new ChiseledBookShelfBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new ChiseledBookShelfBlock(p)
                 )
                 .addTile(() -> BlockEntityType.CHISELED_BOOKSHELF)
                 .addTexture(modRes("block/acacia_chiseled_bookshelf_empty"))
@@ -161,8 +165,9 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
 
         composters = SimpleEntrySet.builder(WoodType.class, "composter",
                         getModBlock("oak_composter"), () -> VanillaWoodTypes.OAK,
-                        w -> new ComposterBlock(Utils.copyPropertySafe(Blocks.COMPOSTER))
+                        (w, p) -> new ComposterBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.COMPOSTER))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("composters"), Registries.BLOCK, Registries.ITEM)
                 .addTexture(modRes("block/oak_composter_bottom"))
@@ -176,7 +181,7 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
 
         craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
                         getModBlock("spruce_crafting_table"), () -> VanillaWoodTypes.SPRUCE,
-                        w -> new CraftingTableBlock(Utils.copyPropertySafe(w.planks)) {
+                        (w, p) -> new CraftingTableBlock(p) {
                         }
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -194,9 +199,10 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
 
         fletchingTable = SimpleEntrySet.builder(WoodType.class, "fletching_table",
                         getModBlock("oak_fletching_table"), () -> VanillaWoodTypes.OAK,
-                        w -> new FletchingTableBlock(Utils.copyPropertySafe(Blocks.FLETCHING_TABLE)) {
+                        (w, p) -> new FletchingTableBlock(p) {
                         }
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.FLETCHING_TABLE))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("fletching_tables"), Registries.BLOCK, Registries.ITEM)
                 .addTextureM(modRes("block/oak_fletching_table_front"), EveryCompat.res("block/vanilla_fletching_table_front_m"))
@@ -210,9 +216,10 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
 
         grindstones = SimpleEntrySet.builder(WoodType.class, "grindstone",
                         getModBlock("oak_grindstone"), () -> VanillaWoodTypes.OAK,
-                        w -> new GrindstoneBlock(Utils.copyPropertySafe(Blocks.GRINDSTONE)) {
+                        (w, p) -> new GrindstoneBlock(p) {
                         }
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.GRINDSTONE))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("grindstones"), Registries.BLOCK, Registries.ITEM)
                 .addTexture(modRes("block/oak_grindstone_pivot"))
@@ -224,9 +231,10 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
 
         lectern = SimpleEntrySet.builder(WoodType.class, "lectern",
                         getModBlock("acacia_lectern"), () -> VanillaWoodTypes.ACACIA,
-                        w -> new LecternBlock(Utils.copyPropertySafe(Blocks.LECTERN)) {
+                        (w, p) -> new LecternBlock(p) {
                         }
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.LECTERN))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("lecterns"), Registries.BLOCK)
                 .addTag(modRes("lecterns"), Registries.ITEM)
@@ -243,9 +251,10 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
 
         smithingTable = SimpleEntrySet.builder(WoodType.class, "smithing_table",
                         getModBlock("oak_smithing_table"), () -> VanillaWoodTypes.OAK,
-                        w -> new SmithingTableBlock(Utils.copyPropertySafe(Blocks.SMITHING_TABLE)) {
+                        (w, p) -> new SmithingTableBlock(p) {
                         }
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.SMITHING_TABLE))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("smithing_tables"), Registries.BLOCK, Registries.ITEM)
                 .addTextureM(modRes("block/oak_smithing_table_bottom"), EveryCompat.res("block/vanilla_smithing_table_bottom_m"))
@@ -259,9 +268,10 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
 
         smoker = SimpleEntrySet.builder(WoodType.class, "smoker",
                         getModBlock("acacia_smoker"), () -> VanillaWoodTypes.ACACIA,
-                        w -> new SmokerBlock(Utils.copyPropertySafe(Blocks.SMOKER)) {
+                        (w, p) -> new SmokerBlock(p) {
                         }
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.SMOKER))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("smokers"), Registries.BLOCK, Registries.ITEM)
                 .addTextureM(modRes("block/acacia_smoker_front"), EveryCompat.res("block/vanilla_smoker_front_m"))

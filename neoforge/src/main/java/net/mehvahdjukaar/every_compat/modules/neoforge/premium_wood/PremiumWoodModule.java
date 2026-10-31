@@ -32,7 +32,7 @@ public class PremiumWoodModule extends EveryCompatModule {
 
         craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
                         getModBlock("tiger_crafting_table"), tiger,
-                        w -> new PremiumWorkbenchBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new PremiumWorkbenchBlock(p)
                 )
                 .addTextureM(EveryCompat.res("block/tiger/tiger_crafting_table_front"), EveryCompat.res("block/pw/tiger_crafting_table_front_m"))
                 .addTextureM(EveryCompat.res("block/tiger/tiger_crafting_table_side"), EveryCompat.res("block/pw/tiger_crafting_table_side_m"))
@@ -47,8 +47,9 @@ public class PremiumWoodModule extends EveryCompatModule {
 
         bookshelf = SimpleEntrySet.builder(WoodType.class, "bookshelf",
                         getModBlock("tiger_bookshelf"), tiger,
-                        w -> new PremiumBookshelfBlock(Utils.copyPropertySafe(Blocks.BOOKSHELF))
+                        (w, p) -> new PremiumBookshelfBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.BOOKSHELF))
                 .addTextureM(modRes("block/tiger/tiger_bookshelf"), EveryCompat.res("block/pw/tiger_bookshelf_m"))
                 .addModelTransform(m -> m.replaceString("premium_wood:block/tiger/tiger_planks", "block/tiger_planks"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -60,8 +61,9 @@ public class PremiumWoodModule extends EveryCompatModule {
 
         framedGlass = SimpleEntrySet.builder(WoodType.class, "framed_glass",
                         getModBlock("tiger_framed_glass"), tiger,
-                        w -> new TransparentBlock(Utils.copyPropertySafe(Blocks.GLASS))
+                        (w, p) -> new TransparentBlock(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(Blocks.GLASS))
                 .addTextureM(modRes("block/tiger/tiger_framed_glass"), EveryCompat.res("block/pw/tiger_framed_glass_m"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(modRes("framed_glass"), Registries.BLOCK)

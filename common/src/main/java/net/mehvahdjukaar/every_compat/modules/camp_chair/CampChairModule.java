@@ -23,11 +23,12 @@ public class CampChairModule extends EveryCompatModule {
 
         campChairs = SimpleEntrySet.builder(WoodType.class, "camp_chair",
                         getModBlock("oak_camp_chair", CampChairBlock.class), () -> VanillaWoodTypes.OAK,
-                        w -> new CampChairBlock(BlockBehaviour.Properties.of()
+                        (w, p) -> new CampChairBlock(p
                                 .mapColor(w.getColor())
                                 .sound(w.getSound())
                                 .strength(2.0F, 3.0F).sound(SoundType.WOOD))
                 )
+                .setProperties(w -> BlockBehaviour.Properties.of())
                 .addTag(modRes("camp_chairs"), Registries.BLOCK, Registries.ITEM)
                 .setTab(getTab(tab))                .defaultRecipe()
                 .build();

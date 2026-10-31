@@ -50,7 +50,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
 
         PLATE = SimpleEntrySet.builder(WoodType.class, "planks_plate",
                         getModBlock("oak_planks_plate"), () -> VanillaWoodTypes.OAK,
-                        w -> new PlateBlock(Utils.copyPropertySafe(w.planks).ignitedByLava()))
+                        (w, p) -> new PlateBlock(p.ignitedByLava()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
                 .setTab(getTab(tab))
@@ -59,7 +59,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
 
         EDGE = SimpleEntrySet.builder(WoodType.class, "planks_edge",
                         getModBlock("oak_planks_edge"), () -> VanillaWoodTypes.OAK,
-                        w -> new EdgeBlock(Utils.copyPropertySafe(w.planks).ignitedByLava()))
+                        (w, p) -> new EdgeBlock(p.ignitedByLava()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
                 .setTab(getTab(tab))
@@ -68,7 +68,8 @@ public class DawnOfTimeModule extends EveryCompatModule {
 
         PERGOLA = SimpleEntrySet.builder(WoodType.class, "pergola",
                         getModBlock("oak_pergola"), () -> VanillaWoodTypes.OAK,
-                        w -> new PergolaBlock(Utils.copyPropertySafe(w.log).ignitedByLava()))
+                        (w, p) -> new PergolaBlock(p.ignitedByLava()))
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 .addTextureM(modRes("block/oak_pergola"), EveryCompat.res("block/dot/oak_pergola_m"), DULL_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
@@ -79,7 +80,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
 
         LATTICE = SimpleEntrySet.builder(WoodType.class, "lattice",
                         getModBlock("oak_lattice"), () -> VanillaWoodTypes.OAK,
-                        w -> new LatticeBlock(Utils.copyPropertySafe(w.planks).noOcclusion().ignitedByLava()))
+                        (w, p) -> new LatticeBlock(p.noOcclusion().ignitedByLava()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTexture(modRes("block/oak_lattice"))
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
@@ -90,7 +91,8 @@ public class DawnOfTimeModule extends EveryCompatModule {
 
         BEAM = SimpleEntrySet.builder(WoodType.class, "beam",
                         getModBlock("oak_beam"), () -> VanillaWoodTypes.OAK,
-                        w -> new BeamBlock(Utils.copyPropertySafe(w.log).ignitedByLava()))
+                        (w, p) -> new BeamBlock(p.ignitedByLava()))
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 .addTextureM(modRes("block/oak_beam"), EveryCompat.res("block/dot/oak_beam_m"), DULL_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)
@@ -101,7 +103,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
 
         WALL = SimpleEntrySet.builder(WoodType.class, "wall",
                         getModBlock("oak_wall"), () -> VanillaWoodTypes.OAK,
-                        w -> new WallBlock(Utils.copyPropertySafe(w.planks))
+                        (w, p) -> new WallBlock(p)
                 )
                 //TEXTURES: ???
                 .addTag(Identifier.withDefaultNamespace("decoration_blocks/fences_and_walls"), Registries.ITEM)
@@ -116,7 +118,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
 
         SUPPORT_BEAM = SimpleEntrySet.builder(WoodType.class, "support_beam",
                         getModBlock("oak_support_beam"), () -> VanillaWoodTypes.OAK,
-                        w -> new SupportBeamBlock(Utils.copyPropertySafe(w.planks).ignitedByLava())
+                        (w, p) -> new SupportBeamBlock(p.ignitedByLava())
                 )
                 //TEXTURES: ???
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -127,7 +129,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
 
         SUPPORT_SLAB = SimpleEntrySet.builder(WoodType.class, "support_slab",
                         getModBlock("oak_support_slab"), () -> VanillaWoodTypes.OAK,
-                        w -> new SupportSlabBlock(Utils.copyPropertySafe(w.planks).ignitedByLava())
+                        (w, p) -> new SupportSlabBlock(p.ignitedByLava())
                 )
                 //TEXTURES: ???
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -138,7 +140,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
 
         FANCY_FENCE = SimpleEntrySet.builder(WoodType.class, "fancy_fence",
                         getModBlock("birch_fancy_fence"), () -> VanillaWoodTypes.BIRCH,
-                        w -> new PlateBlock(Utils.copyPropertySafe(w.planks)
+                        (w, p) -> new PlateBlock(p
                                 .ignitedByLava().noOcclusion().strength(3.0F, 5.0F),
                                 VoxelShapes.THIN_PLATE_SHAPES))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -150,7 +152,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
 
         FOOTSTOOL = SimpleEntrySet.builder(WoodType.class, "footstool",
                         getModBlock("birch_footstool"), () -> VanillaWoodTypes.BIRCH,
-                        w -> new BirchFootstoolBlock(Utils.copyPropertySafe(w.planks), 9.0F))
+                        (w, p) -> new BirchFootstoolBlock(p, 9.0F))
                 .addTextureM(modRes("block/birch_footstool"), EveryCompat.res("block/dot/birch_footstool_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
@@ -160,7 +162,7 @@ public class DawnOfTimeModule extends EveryCompatModule {
 
         COUCH = SimpleEntrySet.builder(WoodType.class, "couch",
                         getModBlock("birch_couch"), () -> VanillaWoodTypes.BIRCH,
-                        w -> new BirchCouchBlock(Utils.copyPropertySafe(w.planks), 13.0F,
+                        (w, p) -> new BirchCouchBlock(p, 13.0F,
                                 VoxelShapes.ROMAN_COUCH_SHAPES))
                 .addTextureM(modRes("block/birch_couch"), EveryCompat.res("block/dot/birch_couch_m"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -171,8 +173,9 @@ public class DawnOfTimeModule extends EveryCompatModule {
 
         LOW_TABLE = SimpleEntrySet.builder(WoodType.class, "low_table",
                         getModBlock("spruce_low_table"), () -> VanillaWoodTypes.SPRUCE,
-                        w -> new SpruceLowTableBlock(Utils.copyPropertySafe(w.log).noOcclusion()
+                        (w, p) -> new SpruceLowTableBlock(p.noOcclusion()
                                 .strength(2.0F, 6.0F).lightLevel(litBlockEmission(14))))
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTexture(modRes("block/spruce_low_table"), DULL_PALETTE)
                 .addTile(getModTile("displayer"))
@@ -183,9 +186,10 @@ public class DawnOfTimeModule extends EveryCompatModule {
 
         LEGLESS_CHAIR = SimpleEntrySet.builder(WoodType.class, "legless_chair",
                         getModBlock("spruce_legless_chair"), () -> VanillaWoodTypes.SPRUCE,
-                        w -> new ChairBlock(Utils.copyPropertySafe(w.log).noOcclusion()
+                        (w, p) -> new ChairBlock(p.noOcclusion()
                                 .strength(2.0F, 6.0F), 3.0F,
                                 VoxelShapes.SPRUCE_LEGLESS_CHAIR_SHAPES))
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 .addTextureM(modRes("block/spruce_legless_chair"), EveryCompat.res("block/dot/spruce_legless_chair_m"), DULL_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()

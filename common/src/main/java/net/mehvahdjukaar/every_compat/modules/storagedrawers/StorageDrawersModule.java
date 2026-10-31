@@ -52,13 +52,14 @@ public class StorageDrawersModule extends EveryCompatModule {
 
         FULL_DRAWERS_1 = SimpleEntrySet.builder(WoodType.class, "full_drawers_1",
                         getModBlock("oak_full_drawers_1", BlockStandardDrawers.class), () -> VanillaWoodTypes.OAK,
-                        w -> {
+                        (w, p) -> {
                             int drawerCount = 1;
                             boolean halfDepth = false;
                             IDrawerConfig config = getStandardConfig(drawerCount, halfDepth);
-                            return new BlockStandardDrawers(drawerCount, halfDepth, config, getWoodenDrawerBlockProperties());
+                            return new BlockStandardDrawers(drawerCount, halfDepth, config, p);
                         }
                 )
+                .setProperties(w -> getWoodenDrawerBlockProperties())
                 .addTile(getModTile("standard_drawers_1"))
                 .addTexture(modRes("block/drawers_oak_front_1"), DRAWERS_PALETTE)
                 .addTexture(modRes("block/drawers_oak_side"), DRAWERS_PALETTE)
@@ -74,13 +75,14 @@ public class StorageDrawersModule extends EveryCompatModule {
 
         FULL_DRAWERS_2 = SimpleEntrySet.builder(WoodType.class, "full_drawers_2",
                         getModBlock("oak_full_drawers_2", BlockStandardDrawers.class), () -> VanillaWoodTypes.OAK,
-                        w -> {
+                        (w, p) -> {
                             int drawerCount = 2;
                             boolean halfDepth = false;
                             IDrawerConfig config = getStandardConfig(drawerCount, halfDepth);
-                            return new BlockStandardDrawers(drawerCount, halfDepth, config, getWoodenDrawerBlockProperties());
+                            return new BlockStandardDrawers(drawerCount, halfDepth, config, p);
                         }
                 )
+                .setProperties(w -> getWoodenDrawerBlockProperties())
                 .addTile(getModTile("standard_drawers_2"))
                 .addTexture(modRes("block/drawers_oak_front_2"), DRAWERS_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -94,13 +96,14 @@ public class StorageDrawersModule extends EveryCompatModule {
 
         FULL_DRAWERS_4 = SimpleEntrySet.builder(WoodType.class, "full_drawers_4",
                         getModBlock("oak_full_drawers_4", BlockStandardDrawers.class), () -> VanillaWoodTypes.OAK,
-                        w -> {
+                        (w, p) -> {
                             int drawerCount = 4;
                             boolean halfDepth = false;
                             IDrawerConfig config = getStandardConfig(drawerCount, halfDepth);
-                            return new BlockStandardDrawers(drawerCount, halfDepth, config, getWoodenDrawerBlockProperties());
+                            return new BlockStandardDrawers(drawerCount, halfDepth, config, p);
                         }
                 )
+                .setProperties(w -> getWoodenDrawerBlockProperties())
                 .addTile(getModTile("standard_drawers_4"))
                 .addTexture(modRes("block/drawers_oak_front_4"), DRAWERS_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -115,13 +118,14 @@ public class StorageDrawersModule extends EveryCompatModule {
 
         HALF_DRAWERS_1 = SimpleEntrySet.builder(WoodType.class, "half_drawers_1",
                         getModBlock("oak_half_drawers_1", BlockStandardDrawers.class), () -> VanillaWoodTypes.OAK,
-                        w -> {
+                        (w, p) -> {
                             int drawerCount = 1;
                             boolean halfDepth = true;
                             IDrawerConfig config = getStandardConfig(drawerCount, halfDepth);
-                            return new BlockStandardDrawers(drawerCount, halfDepth, config, getWoodenDrawerBlockProperties());
+                            return new BlockStandardDrawers(drawerCount, halfDepth, config, p);
                         }
                 )
+                .setProperties(w -> getWoodenDrawerBlockProperties())
                 .addTexture(modRes("block/drawers_oak_side_h"), DRAWERS_PALETTE)
                 .addTexture(modRes("block/drawers_oak_side_v"), DRAWERS_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -136,13 +140,14 @@ public class StorageDrawersModule extends EveryCompatModule {
 
         HALF_DRAWERS_2 = SimpleEntrySet.builder(WoodType.class, "half_drawers_2",
                         getModBlock("oak_half_drawers_2", BlockStandardDrawers.class), () -> VanillaWoodTypes.OAK,
-                        w -> {
+                        (w, p) -> {
                             int drawerCount = 2;
                             boolean halfDepth = true;
                             IDrawerConfig config = getStandardConfig(drawerCount, halfDepth);
-                            return new BlockStandardDrawers(drawerCount, halfDepth, config, getWoodenDrawerBlockProperties());
+                            return new BlockStandardDrawers(drawerCount, halfDepth, config, p);
                         }
                 )
+                .setProperties(w -> getWoodenDrawerBlockProperties())
                 .addTile(getModTile("standard_drawers_2"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("drawers"), Registries.BLOCK, Registries.ITEM)
@@ -155,13 +160,14 @@ public class StorageDrawersModule extends EveryCompatModule {
 
         HALF_DRAWERS_4 = SimpleEntrySet.builder(WoodType.class, "half_drawers_4",
                         getModBlock("oak_half_drawers_4", BlockStandardDrawers.class), () -> VanillaWoodTypes.OAK,
-                        w -> {
+                        (w, p) -> {
                             int drawerCount = 4;
                             boolean halfDepth = true;
                             IDrawerConfig config = getStandardConfig(drawerCount, halfDepth);
-                            return new BlockStandardDrawers(drawerCount, halfDepth, config, getWoodenDrawerBlockProperties());
+                            return new BlockStandardDrawers(drawerCount, halfDepth, config, p);
                         }
                 )
+                .setProperties(w -> getWoodenDrawerBlockProperties())
                 .addTile(getModTile("standard_drawers_4"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("drawers"), Registries.BLOCK, Registries.ITEM)
@@ -174,8 +180,9 @@ public class StorageDrawersModule extends EveryCompatModule {
 
         TRIMS = SimpleEntrySet.builder(WoodType.class, "trim",
                         getModBlock("oak_trim", BlockTrim.class), () -> VanillaWoodTypes.OAK,
-                        w -> new BlockTrim(Utils.copyPropertySafe(getModBlock("oak_trim").get()))
+                        (w, p) -> new BlockTrim(p)
                 )
+                .setProperties(w -> Utils.copyPropertySafe(getModBlock("oak_trim").get()))
                 .addTexture(modRes("block/drawers_oak_trim"), TRIM_PALETTE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("trim"), Registries.BLOCK, Registries.ITEM)

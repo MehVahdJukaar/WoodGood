@@ -4,6 +4,7 @@ import net.kikoz.mcwdoors.objects.JapaneseDoors;
 import net.kikoz.mcwdoors.objects.StableDoor;
 import net.mehvahdjukaar.every_compat.modules.macaw.MacawDoorsModuleAbstract;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoorBlock;
 
@@ -14,17 +15,18 @@ public class MacawDoorsModule extends MacawDoorsModuleAbstract {
         super(modId);
     }
 
-    protected Block newDoor(String blockId, WoodType woodType) {
-        return new DoorBlock(woodType.toVanillaOrOak().setType(), standardPropertiesSafe(blockId, woodType)) {};
+    protected Block newDoor(WoodType woodType, BlockBehaviour.Properties p) {
+        return new DoorBlock(woodType.toVanillaOrOak().setType(), p) {};
     }
 
-    protected Block newJapaneseDoors(String blockId, WoodType woodType) {
-        return new JapaneseDoors(standardPropertiesSafe(blockId, woodType),
+
+    protected Block newJapaneseDoors(WoodType woodType, BlockBehaviour.Properties p) {
+        return new JapaneseDoors(p,
                 woodType.toVanillaOrOak().setType());
     }
 
-    protected Block newStableDoor(String blockId, WoodType woodType) {
-        return new StableDoor(standardPropertiesSafe(blockId, woodType), woodType.toVanillaOrOak().setType());
+    protected Block newStableDoor(WoodType woodType, BlockBehaviour.Properties p) {
+        return new StableDoor(p, woodType.toVanillaOrOak().setType());
     }
 
 }

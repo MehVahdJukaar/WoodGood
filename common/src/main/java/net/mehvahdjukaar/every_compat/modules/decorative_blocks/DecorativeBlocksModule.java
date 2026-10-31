@@ -42,10 +42,11 @@ public class DecorativeBlocksModule extends EveryCompatModule {
 
         beams = SimpleEntrySet.builder(WoodType.class, "beam",
                         getModBlock("oak_beam"), () -> VanillaWoodTypes.OAK,
-                        w -> new BeamBlock(wtConversion.get(w),
-                                copyStandardProperties(w, 1.2F, 0)
+                        (w, p) -> new BeamBlock(wtConversion.get(w),
+                                p
                         )
                 )
+                .setProperties(w -> copyStandardProperties(w, 1.2F, 0))
                 .requiresChildren(STRIPPED_LOG) //REASON: recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.PARROTS_SPAWNABLE_ON, Registries.BLOCK)
@@ -67,10 +68,11 @@ public class DecorativeBlocksModule extends EveryCompatModule {
 
         palisades = SimpleEntrySet.builder(WoodType.class, "palisade",
                         getModBlock("oak_palisade"), () -> VanillaWoodTypes.OAK,
-                        w -> new PalisadeBlock(wtConversion.get(w),
-                                copyStandardProperties(w, 2.0F, 4.0F)
+                        (w, p) -> new PalisadeBlock(wtConversion.get(w),
+                                p
                         )
                 )
+                .setProperties(w -> copyStandardProperties(w, 2.0F, 4.0F))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
@@ -88,10 +90,11 @@ public class DecorativeBlocksModule extends EveryCompatModule {
 
         supports = SimpleEntrySet.builder(WoodType.class, "support",
                         getModBlock("oak_support"), () -> VanillaWoodTypes.OAK,
-                        w -> new SupportBlock(wtConversion.get(w),
-                                copyStandardProperties(w, 1.2F, 0)
+                        (w, p) -> new SupportBlock(wtConversion.get(w),
+                                p
                         )
                 )
+                .setProperties(w -> copyStandardProperties(w, 1.2F, 0))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("supports"), Registries.BLOCK)
                 .addTag(modRes("supports_that_burn"), Registries.BLOCK)
@@ -108,10 +111,11 @@ public class DecorativeBlocksModule extends EveryCompatModule {
 
         seats = SimpleEntrySet.builder(WoodType.class, "seat",
                         getModBlock("oak_seat"), () -> VanillaWoodTypes.OAK,
-                        w -> new SeatBlock(wtConversion.get(w),
-                                copyStandardProperties(w, 1.2F, 0)
+                        (w, p) -> new SeatBlock(wtConversion.get(w),
+                                p
                         )
                 )
+                .setProperties(w -> copyStandardProperties(w, 1.2F, 0))
                 .requiresChildren(FENCE, SLAB) //REASON: recipes
                 .addTexture(modRes("block/oak_seat"), PaletteStrategies.SIGN_LIKE)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)

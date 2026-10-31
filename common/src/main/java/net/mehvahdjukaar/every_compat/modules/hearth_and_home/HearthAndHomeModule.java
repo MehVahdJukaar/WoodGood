@@ -31,7 +31,7 @@ public class HearthAndHomeModule extends EveryCompatModule {
 
         sanded_wood = SimpleEntrySet.builder(WoodType.class, "sanded_wood",
                         getModBlock("oak_sanded_wood"), () -> VanillaWoodTypes.OAK,
-                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                        (w, p) -> new Block(p))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("sanded_wood"), Registries.BLOCK, Registries.ITEM)
                 .addTexture(modRes("block/sanded_wood/oak"))
@@ -42,7 +42,7 @@ public class HearthAndHomeModule extends EveryCompatModule {
 
         parquet = SimpleEntrySet.builder(WoodType.class, "parquet",
                         getModBlock("oak_parquet"), () -> VanillaWoodTypes.OAK,
-                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                        (w, p) -> new Block(p))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("parquet"), Registries.BLOCK,  Registries.ITEM)
                 .addTexture(modRes("block/parquet/oak"))
@@ -53,7 +53,7 @@ public class HearthAndHomeModule extends EveryCompatModule {
 
         trim = SimpleEntrySet.builder(WoodType.class, "trim",
                         getModBlock("oak_trim"), () -> VanillaWoodTypes.OAK,
-                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                        (w, p) -> new Block(p))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("trims"), Registries.BLOCK, Registries.ITEM)
                 .addTexture(modRes("block/trim/oak"))
@@ -65,7 +65,7 @@ public class HearthAndHomeModule extends EveryCompatModule {
 
         vertical_trim = SimpleEntrySet.builder(WoodType.class, "vertical_trim",
                         getModBlock("oak_vertical_trim"), () -> VanillaWoodTypes.OAK,
-                        w -> new Block(Utils.copyPropertySafe(w.planks)))
+                        (w, p) -> new Block(p))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("trims"), Registries.BLOCK, Registries.ITEM)
                 .addTexture(modRes("block/trim/oak"))
@@ -76,7 +76,7 @@ public class HearthAndHomeModule extends EveryCompatModule {
 
         lattice = SimpleEntrySet.builder(WoodType.class, "lattice",
                         getModBlock("oak_lattice"), () -> VanillaWoodTypes.OAK,
-                        w -> new LatticeBlock(Utils.copyPropertySafe(w.planks).noOcclusion()))
+                        (w, p) -> new LatticeBlock(p.noOcclusion()))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("lattices"), Registries.BLOCK, Registries.ITEM)
                 .setRenderType(RenderLayer.CUTOUT_MIPPED)

@@ -30,8 +30,9 @@ public class AbsentByDesignModule extends EveryCompatModule {
 
         fence_log = SimpleEntrySet.builder(WoodType.class, "", "fence_log",
                         getModBlock("fence_log_oak"), () -> VanillaWoodTypes.OAK,
-                        w -> new BlockAbsentFence(Utils.copyPropertySafe(w.log).ignitedByLava())
+                        (w, p) -> new BlockAbsentFence(p.ignitedByLava())
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 //TEXTURES: oak_log
                 .addTag(BlockTags.FENCES, Registries.BLOCK)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -43,8 +44,9 @@ public class AbsentByDesignModule extends EveryCompatModule {
 
         wall_log = SimpleEntrySet.builder(WoodType.class, "log", "wall",
                         getModBlock("wall_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new BlockAbsentWall(Utils.copyPropertySafe(w.log).ignitedByLava())
+                        (w, p) -> new BlockAbsentWall(p.ignitedByLava())
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 .requiresChildren(WOOD) //REASON: recipes
                 //TEXTURES: oak_log
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
@@ -59,8 +61,9 @@ public class AbsentByDesignModule extends EveryCompatModule {
 
         wall_stripped_log = SimpleEntrySet.builder(WoodType.class, "log", "wall_stripped",
                         getModBlock("wall_stripped_oak_log"), () -> VanillaWoodTypes.OAK,
-                        w -> new BlockAbsentWall(Utils.copyPropertySafe(w.log).ignitedByLava())
+                        (w, p) -> new BlockAbsentWall(p.ignitedByLava())
                 )
+                .setProperties(w -> Utils.copyPropertySafe(w.log))
                 .requiresChildren(STRIPPED_WOOD) //REASON: recipes
                 //TEXTURES: stripped_log
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
@@ -75,7 +78,7 @@ public class AbsentByDesignModule extends EveryCompatModule {
 
         wall_planks = SimpleEntrySet.builder(WoodType.class, "planks", "wall",
                         getModBlock("wall_oak_planks"), () -> VanillaWoodTypes.OAK,
-                        w -> new BlockAbsentWall(Utils.copyPropertySafe(w.planks).ignitedByLava())
+                        (w, p) -> new BlockAbsentWall(p.ignitedByLava())
                 )
                 //TEXTURES: planks
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
