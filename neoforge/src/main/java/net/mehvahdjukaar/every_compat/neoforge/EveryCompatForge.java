@@ -10,7 +10,6 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.absent_by_design.AbsentBy
 import net.mehvahdjukaar.every_compat.modules.neoforge.bibliocraft.BibliocraftLegacyModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.functional_storage.FunctionalStorageModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.just_a_raft.JustARaftModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.lightmans_currency.LightmansCurrencyModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.neoforge.oreberries_replanted.OreberriesReplantedModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.premium_wood.PremiumWoodModule;
@@ -36,9 +35,10 @@ import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerNegotiationEvent;
-import net.neoforged.neoforge.items.IItemHandlerModifiable;
-import net.neoforged.neoforge.items.wrapper.InvWrapper;
-import net.neoforged.neoforge.items.wrapper.SidedInvWrapper;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import net.neoforged.neoforge.transfer.item.VanillaContainerWrapper;
+import net.neoforged.neoforge.transfer.item.WorldlyContainerWrapper;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.WeakReference;
@@ -69,11 +69,11 @@ public class EveryCompatForge extends EveryCompatCommon {
     }
 
     //TOOD: replace this with ForgeHelperImpl.makeDefaultInvHandler
-    private static @NotNull IItemHandlerModifiable makeDefaultInvHandler(Container container, Direction side) {
+    private static @NotNull ResourceHandler<ItemResource> makeDefaultInvHandler(Container container, Direction side) {
         if (container instanceof WorldlyContainer wc) {
-            return new SidedInvWrapper(wc, side == null ? Direction.UP : side);
+            return new WorldlyContainerWrapper(wc, side == null ? Direction.UP : side);
         } else {
-            return new InvWrapper(container);
+            return VanillaContainerWrapper.of(container);
         }
     }
 
@@ -88,11 +88,11 @@ public class EveryCompatForge extends EveryCompatCommon {
                     try {
                         BlockEntityType<?> beType = simpleEntrySet.getTile();
                         Optional<Block> baseBlock = beType.getValidBlocks().stream().findFirst();
-                        if (baseBlock.isEmpty() || event.isBlockRegistered(Capabilities.ItemHandler.BLOCK, baseBlock.get())) return;
+                        if (baseBlock.isEmpty() || event.isBlockRegistered(Capabilities.Item.BLOCK, baseBlock.get())) return;
 
                         BlockEntity instance = beType.create(BlockPos.ZERO, baseBlock.get().defaultBlockState());
                         if (instance instanceof Container) {
-                            event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, beType,
+                            event.registerBlockEntity(Capabilities.Item.BLOCK, beType,
                                     (be, side) -> makeDefaultInvHandler((Container) be, side));
                         }
                     } catch (Exception ignored) {
@@ -143,7 +143,7 @@ public class EveryCompatForge extends EveryCompatCommon {
 //            addOptionalModule("missing_blocks", () -> LegendsMissingBlocksModule.class);
 //            addOptionalModule("mosaic_carpentry", () -> MosaicCarpentryModule.class);
             addOptionalModule("oreberriesreplanted", () -> OreberriesReplantedModule.class);
-            addOptionalModule("lightmanscurrency", () -> LightmansCurrencyModule.class);
+//            addOptionalModule("lightmanscurrency", () -> LightmansCurrencyModule.class); //TODO: add back
 //            addOptionalModule("pokecube_legends", () -> PokecubeAIOModule.class);
             addOptionalModule("premium_wood", () -> PremiumWoodModule.class);
 //            addOptionalModule("quark", () -> QuarkModule.class);

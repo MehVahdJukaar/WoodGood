@@ -2,18 +2,22 @@ package net.mehvahdjukaar.every_compat.modules.storagedrawers;
 
 import com.jaquadro.minecraft.storagedrawers.block.BlockCompDrawers;
 import com.jaquadro.minecraft.storagedrawers.block.BlockDrawers;
-import net.minecraft.client.renderer.block.model.BlockModel;
+import net.minecraft.client.resources.model.cuboid.CuboidModel;
+import net.minecraft.client.resources.model.cuboid.CuboidModelElement;
+import net.minecraft.client.resources.model.cuboid.UnbakedCuboidGeometry;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.phys.AABB;
 import org.apache.commons.io.IOUtils;
-import org.joml.Vector3f;
+import org.joml.Vector3fc;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ModDrawersGeometry {
     private static boolean geometryDataLoaded = false;
@@ -97,44 +101,47 @@ public class ModDrawersGeometry {
                                              Identifier locationInd,
                                              Identifier locationIndBase, ResourceManager manager,
                                              BlockDrawers... blocks) {
-        BlockModel slotInfo = getBlockModel(locationIcon, manager);
-        BlockModel countInfo = getBlockModel(locationCount, manager);
-        BlockModel indInfo = getBlockModel(locationInd, manager);
-        BlockModel indBaseInfo = getBlockModel(locationIndBase, manager);
+        List<CuboidModelElement> slotInfo = getElements(getBlockModel(locationIcon, manager));
+        List<CuboidModelElement> countInfo = getElements(getBlockModel(locationCount, manager));
+        List<CuboidModelElement> indInfo = getElements(getBlockModel(locationInd, manager));
+        List<CuboidModelElement> indBaseInfo = getElements(getBlockModel(locationIndBase, manager));
         for (BlockDrawers block : blocks) {
             if (block == null)
                 continue;
 
             for (int i = 0; i < block.getDrawerCount(); i++) {
-                Vector3f from = slotInfo.getElements().get(i).from;
-                Vector3f to = slotInfo.getElements().get(i).to;
-                block.labelGeometry[i] = new AABB(from.x(), from.y(), from.z(), to.x(), to.y(), to.z());
+                block.labelGeometry[i] = toAABB(slotInfo.get(i));
             }
             for (int i = 0; i < block.getDrawerCount(); i++) {
-                Vector3f from = countInfo.getElements().get(i).from;
-                Vector3f to = countInfo.getElements().get(i).to;
-                block.countGeometry[i] = new AABB(from.x(), from.y(), from.z(), to.x(), to.y(), to.z());
+                block.countGeometry[i] = toAABB(countInfo.get(i));
             }
             for (int i = 0; i < block.getDrawerCount(); i++) {
-                Vector3f from = indInfo.getElements().get(i).from;
-                Vector3f to = indInfo.getElements().get(i).to;
-                block.indGeometry[i] = new AABB(from.x(), from.y(), from.z(), to.x(), to.y(), to.z());
+                block.indGeometry[i] = toAABB(indInfo.get(i));
             }
             for (int i = 0; i < block.getDrawerCount(); i++) {
-                Vector3f from = indBaseInfo.getElements().get(i).from;
-                Vector3f to = indBaseInfo.getElements().get(i).to;
-                block.indBaseGeometry[i] = new AABB(from.x(), from.y(), from.z(), to.x(), to.y(), to.z());
+                block.indBaseGeometry[i] = toAABB(indBaseInfo.get(i));
             }
         }
     }
 
-    private static BlockModel getBlockModel(Identifier location, ResourceManager manager) {
+    private static AABB toAABB(CuboidModelElement element) {
+        Vector3fc from = element.from();
+        Vector3fc to = element.to();
+        return new AABB(from.x(), from.y(), from.z(), to.x(), to.y(), to.z());
+    }
+
+    private static List<CuboidModelElement> getElements(CuboidModel model) {
+        if (model == null) return new ArrayList<>();
+        return model.geometry() instanceof UnbakedCuboidGeometry geo ? geo.elements() : new ArrayList<>();
+    }
+
+    private static CuboidModel getBlockModel(Identifier location, ResourceManager manager) {
         Resource iresource;
         Reader reader = null;
         try {
             iresource =  manager.getResourceOrThrow(location);
             reader = new InputStreamReader(iresource.open(), StandardCharsets.UTF_8);
-            return BlockModel.fromStream(reader);
+            return CuboidModel.fromStream(reader);
         } catch (IOException e) {
             return null;
         } finally {

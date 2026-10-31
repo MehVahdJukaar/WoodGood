@@ -42,11 +42,11 @@ public abstract class EveryCompatModule extends SimpleModule {
     }
 
     protected final Supplier<CreativeModeTab> getTab(Identifier id) {
-        return Suppliers.memoize(() -> BuiltInRegistries.CREATIVE_MODE_TAB.get(id));
+        return Suppliers.memoize(() -> BuiltInRegistries.CREATIVE_MODE_TAB.getValue(id));
     }
 
     protected final Supplier<CreativeModeTab> getTab(ResourceKey<CreativeModeTab> id) {
-        return Suppliers.memoize(() -> BuiltInRegistries.CREATIVE_MODE_TAB.get(id));
+        return Suppliers.memoize(() -> BuiltInRegistries.CREATIVE_MODE_TAB.getValue(id));
     }
 
     //internal use only. If you are a mod adding a module in your mod use by reference

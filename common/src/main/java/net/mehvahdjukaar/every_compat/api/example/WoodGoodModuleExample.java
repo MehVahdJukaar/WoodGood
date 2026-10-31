@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.api.example;
 
-import com.ninni.twigs.block.TableBlock;
 import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
@@ -57,7 +56,7 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
             // after creating the entry set, don't forget to add it to the module via this.addEntry(entrySet);
             sampleBlock_2 = SimpleEntrySet.builder(WoodType.class,"suffix", "prefix",
                             getModBlock("oak_table"), ()-> VanillaWoodTypes.OAK,
-                    woodType -> new TableBlock(Utils.copyPropertySafe(woodType.planks).instabreak())
+                    woodType -> new Block(Utils.copyPropertySafe(woodType.planks).instabreak())
                     )
                     /// Similar setup as sampleBlock
                     .build();
@@ -65,7 +64,7 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
 
             sampleBlock = SimpleEntrySet.builder(WoodType.class,"table",
                             getModBlock("oak_table"), ()-> VanillaWoodTypes.OAK,
-                            woodType -> new TableBlock(Utils.copyPropertySafe(woodType.planks).instabreak())
+                            woodType -> new Block(Utils.copyPropertySafe(woodType.planks).instabreak())
                     )
                     ///REQUIRED: Add block to your mod's tab or Minecraft's tab
                     .setTab(getTab(tab))

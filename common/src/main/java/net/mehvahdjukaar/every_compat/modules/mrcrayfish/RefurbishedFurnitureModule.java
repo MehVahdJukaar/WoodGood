@@ -11,7 +11,6 @@ import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
-import net.mehvahdjukaar.moonlight.api.client.util.RenderUtil;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RecipeTemplate;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
@@ -24,14 +23,14 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.VanillaLeavesTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.util.RandomSource;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -471,22 +470,24 @@ public class RefurbishedFurnitureModule extends EveryCompatModule {
         super.onClientSetup();
         darkFans.blocks.forEach((key, value) -> {
             Identifier res = EveryCompat.res("extra/" + key.getAppendableId() + "_dark_ceiling_fan_blade");
-            CeilingFanBlockEntityRenderer.registerFanBlade(value, () ->
-                    ClientHelper.getModel(Minecraft.getInstance().getModelManager(),
-                            RenderUtil.getStandaloneModelLocation(res)));
+            CeilingFanBlockEntityRenderer.registerFanBlade(value, () -> getFanBladeModel(res));
         });
         lightFans.blocks.forEach((key, value) -> {
             Identifier res = EveryCompat.res("extra/" + key.getAppendableId() + "_light_ceiling_fan_blade");
-            CeilingFanBlockEntityRenderer.registerFanBlade(value, () ->
-                    ClientHelper.getModel(Minecraft.getInstance().getModelManager(),
-                            RenderUtil.getStandaloneModelLocation(res)));
+            CeilingFanBlockEntityRenderer.registerFanBlade(value, () -> getFanBladeModel(res));
         });
+    }
+
+    private static BlockStateModelPart getFanBladeModel(Identifier modelId) {
+        List<BlockStateModelPart> parts = new ArrayList<>(1);
+        ClientHelper.getStandaloneModel(modelId).collectParts(RandomSource.create(), parts);
+        return parts.getFirst();
     }
 
     @Override
     public void onClientInit() {
         super.onClientInit();
-        ClientHelper.addSpecialModelRegistration(event -> darkFans.blocks.keySet().forEach(w -> {
+        ClientHelper.addStandaloneModelRegistration(event -> darkFans.blocks.keySet().forEach(w -> {
             event.register(EveryCompat.res("extra/" + w.getAppendableId() + "_dark_ceiling_fan_blade"));
             event.register(EveryCompat.res("extra/" + w.getAppendableId() + "_light_ceiling_fan_blade"));
         }));
@@ -509,12 +510,12 @@ public class RefurbishedFurnitureModule extends EveryCompatModule {
 
         RecipeTemplate.register(WorkbenchContructingRecipe.class, (old, from, to) -> {
             List<StackedIngredient> newList = convertStackedIngredients(old.getMaterials(), from, to);
-            ItemStack originalResult = old.getResultItem(RegistryAccess.EMPTY);
-            ItemStack newResult = RecipeTemplate.convertItemStack(originalResult, from, to);
+            ItemStackTemplate newResult = RecipeTemplate.convertResult(old.getResult(), from, to);
             if (newResult == null) {
                 throw new UnsupportedOperationException("Failed to convert recipe result");
             } else {
-                NonNullList<StackedIngredient> ingredients = NonNullList.of(StackedIngredient.EMPTY, newList.toArray(StackedIngredient[]::new));
+                NonNullList<StackedIngredient> ingredients = NonNullList.create();
+                ingredients.addAll(newList);
                 return new WorkbenchContructingRecipe(ingredients, newResult, old.showNotification());
             }
         });

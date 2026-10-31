@@ -77,7 +77,7 @@ public class UltimateCarModule extends EveryCompatModule {
                                             "", "planks.png"
                                     )
                             );*/
-                            return new ItemCarPart(new PartLicensePlateHolder(planksResLoc.withPrefix("textures/")));
+                            return new ItemCarPart(new Item.Properties(), new PartLicensePlateHolder(planksResLoc.withPrefix("textures/")));
                         }
                 )
                 .addTexture(modRes("item/oak_license_plate_holder"))
@@ -97,7 +97,7 @@ public class UltimateCarModule extends EveryCompatModule {
                                 planksResLoc = Identifier.withDefaultNamespace("block/oak_planks");
                                 EveryCompat.LOGGER.error("Failed to get Identifier for {} - {}", Utils.getID(w.planks), e);
                             }
-                            return new ItemCarPart(new PartBumper(planksResLoc.withPrefix("textures/")));
+                            return new ItemCarPart(new Item.Properties(), new PartBumper(planksResLoc.withPrefix("textures/")));
                         }
                 )
                 .addTexture(modRes("item/oak_bumper"))
@@ -126,7 +126,7 @@ public class UltimateCarModule extends EveryCompatModule {
                                 planksResLoc = Identifier.withDefaultNamespace("block/oak_planks");
                                 EveryCompat.LOGGER.error("Failed to get Identifier for {} - {}", Utils.getID(w.planks), e);
                             }
-                            return new ItemCarPart(new PartBodyWood(planksResLoc.withPrefix("textures/"), w.getTypeName()));
+                            return new ItemCarPart(new Item.Properties(), new PartBodyWood(planksResLoc.withPrefix("textures/"), w.getTypeName()));
                         }
                 )
                 .addTextureM(modRes("entity/car_wood_oak"), EveryCompat.res("entity/ucm/car_wood_oak_m"))
@@ -155,7 +155,7 @@ public class UltimateCarModule extends EveryCompatModule {
                                 planksResLoc = Identifier.withDefaultNamespace("block/oak_planks");
                                 EveryCompat.LOGGER.error("Failed to get Identifier for {} - {}", Utils.getID(w.planks), e);
                             }
-                            return new ItemCarPart(new PartBodyBigWood(planksResLoc.withPrefix("textures/"), w.getTypeName()));
+                            return new ItemCarPart(new Item.Properties(), new PartBodyBigWood(planksResLoc.withPrefix("textures/"), w.getTypeName()));
                         }
                 )
                 .addTextureM(modRes("entity/car_big_wood_oak"), EveryCompat.res("entity/ucm/car_big_wood_oak_m"))

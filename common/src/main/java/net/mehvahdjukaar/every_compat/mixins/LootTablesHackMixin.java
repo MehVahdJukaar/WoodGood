@@ -34,7 +34,7 @@ public abstract class LootTablesHackMixin {
                                        @Local ResourceKey<LootTable> resId) {
         if (lootTable == LootTable.EMPTY && EveryCompat.isMyIdOrAddon(Utils.getID(state.getBlock()).getNamespace())) {
             if (SimpleEntrySet.isSimpleDrop(state.getBlock())) {
-                cir.setReturnValue(ECPlatStuff.modifyLoot(resId.location(), List.of(this.asItem().getDefaultInstance()),
+                cir.setReturnValue(ECPlatStuff.modifyLoot(resId.identifier(), List.of(this.asItem().getDefaultInstance()),
                         lootParams));
             }
         }

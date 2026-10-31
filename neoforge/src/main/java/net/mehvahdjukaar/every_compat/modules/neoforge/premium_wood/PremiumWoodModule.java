@@ -32,7 +32,7 @@ public class PremiumWoodModule extends EveryCompatModule {
 
         craftingTable = SimpleEntrySet.builder(WoodType.class, "crafting_table",
                         getModBlock("tiger_crafting_table"), tiger,
-                        w -> new PremiumWorkbenchBlock()
+                        w -> new PremiumWorkbenchBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .addTextureM(EveryCompat.res("block/tiger/tiger_crafting_table_front"), EveryCompat.res("block/pw/tiger_crafting_table_front_m"))
                 .addTextureM(EveryCompat.res("block/tiger/tiger_crafting_table_side"), EveryCompat.res("block/pw/tiger_crafting_table_side_m"))
@@ -47,7 +47,7 @@ public class PremiumWoodModule extends EveryCompatModule {
 
         bookshelf = SimpleEntrySet.builder(WoodType.class, "bookshelf",
                         getModBlock("tiger_bookshelf"), tiger,
-                        w -> new PremiumBookshelfBlock()
+                        w -> new PremiumBookshelfBlock(Utils.copyPropertySafe(Blocks.BOOKSHELF))
                 )
                 .addTextureM(modRes("block/tiger/tiger_bookshelf"), EveryCompat.res("block/pw/tiger_bookshelf_m"))
                 .addModelTransform(m -> m.replaceString("premium_wood:block/tiger/tiger_planks", "block/tiger_planks"))

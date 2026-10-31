@@ -1,16 +1,16 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.bibliocraft;
 
-import com.github.minecraftschurlimods.bibliocraft.content.bookcase.BookcaseBlock;
-import com.github.minecraftschurlimods.bibliocraft.content.clock.FancyClockBlock;
-import com.github.minecraftschurlimods.bibliocraft.content.clock.GrandfatherClockBlock;
-import com.github.minecraftschurlimods.bibliocraft.content.fancyarmorstand.FancyArmorStandBlock;
-import com.github.minecraftschurlimods.bibliocraft.content.fancycrafter.FancyCrafterBlock;
-import com.github.minecraftschurlimods.bibliocraft.content.fancysign.FancySignBlock;
-import com.github.minecraftschurlimods.bibliocraft.content.label.LabelBlock;
-import com.github.minecraftschurlimods.bibliocraft.content.potionshelf.PotionShelfBlock;
-import com.github.minecraftschurlimods.bibliocraft.content.shelf.ShelfBlock;
-import com.github.minecraftschurlimods.bibliocraft.content.table.TableBlock;
-import com.github.minecraftschurlimods.bibliocraft.content.toolrack.ToolRackBlock;
+import at.minecraftschurli.mods.bibliocraft.content.bookcase.BookcaseBlock;
+import at.minecraftschurli.mods.bibliocraft.content.clock.FancyClockBlock;
+import at.minecraftschurli.mods.bibliocraft.content.clock.GrandfatherClockBlock;
+import at.minecraftschurli.mods.bibliocraft.content.fancyarmorstand.FancyArmorStandBlock;
+import at.minecraftschurli.mods.bibliocraft.content.fancycrafter.FancyCrafterBlock;
+import at.minecraftschurli.mods.bibliocraft.content.fancysign.FancySignBlock;
+import at.minecraftschurli.mods.bibliocraft.content.label.LabelBlock;
+import at.minecraftschurli.mods.bibliocraft.content.potionshelf.PotionShelfBlock;
+import at.minecraftschurli.mods.bibliocraft.content.shelf.ShelfBlock;
+import at.minecraftschurli.mods.bibliocraft.content.table.TableBlock;
+import at.minecraftschurli.mods.bibliocraft.content.toolrack.ToolRackBlock;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;

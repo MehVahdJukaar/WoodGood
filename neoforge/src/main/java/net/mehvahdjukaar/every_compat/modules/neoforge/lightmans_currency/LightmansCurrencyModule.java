@@ -1,4 +1,6 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.lightmans_currency;
+//TODO: add back. auction stand is gone and LC moved everything around
+/*
 
 import io.github.lightman314.lightmanscurrency.LCTags;
 import io.github.lightman314.lightmanscurrency.ModCreativeGroups;
@@ -134,6 +136,7 @@ public class LightmansCurrencyModule extends EveryCompatModule {
 
     @Override
     public List<String> getAlreadySupportedMods() {
-        return List.of("biomesoplenty", "biomeswevegone"/*, "quark"*/);
+        return List.of("biomesoplenty", "biomeswevegone"); //, "quark"
     }
 }
+*/

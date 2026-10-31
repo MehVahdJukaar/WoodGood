@@ -1,21 +1,22 @@
 package net.mehvahdjukaar.every_compat.misc;
 
 
-import net.mehvahdjukaar.moonlight.api.resources.textures.TextureOps;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
 public class AllWoodItem extends Item {
 
-    public AllWoodItem() {
-        super(new Properties());
+    public AllWoodItem(Properties properties) {
+        super(properties);
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
-        super.inventoryTick(stack, level, entity, slotId, isSelected);
+    public void inventoryTick(ItemStack stack, ServerLevel level, Entity entity, @Nullable EquipmentSlot slot) {
+        super.inventoryTick(stack, level, entity, slot);
         stack.setCount(0);
 
     }

@@ -20,7 +20,6 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.BlockItem;
@@ -366,7 +365,7 @@ public class ResourcesUtils {
                 Identifier itemId = Utils.getID(i);
                 TaskRunnerWithFailureCollection.active().runSafely("recipe", () -> itemId + " (" + baseRecipe + ")", () -> {
                     //check for disabled ones. Will actually crash if its null since vanilla recipe builder expects a non-null one
-                    Identifier blockId = RecipeBuilder.getDefaultRecipeId(i);
+                    Identifier blockId = itemId;
                     String baseRecipePath = baseRecipe.getPath();
 
                     String modifiedRecipePath = baseRecipePath.substring(baseRecipePath.lastIndexOf("/") + 1).replace(fromType.getTypeName(), blockType.getTypeName());
@@ -401,8 +400,8 @@ public class ResourcesUtils {
 
     public static <T extends BlockType> Ingredient convertIngredient(Ingredient ingredient, T originalMat, T destinationMat) {
         Ingredient newIng = ingredient;
-        for (var in : ingredient.getItems()) {
-            Item it = in.getItem();
+        for (var in : ingredient.items().toList()) {
+            Item it = in.value();
             if (it != Items.BARRIER) {
                 ItemLike i = BlockType.changeItemType(it, originalMat, destinationMat);
                 if (i != null) {

@@ -100,7 +100,7 @@ public class TwilightForestModule extends EveryCompatModule {
                         TFBlocks.HOLLOW_BIRCH_LOG_VERTICAL, () -> VanillaWoodTypes.BIRCH,
                         w -> {
                             var id = EveryCompat.res(this.shortenedId() + "/" + w.getVariantId("hollow", true) + "_log_climbable");
-                            return new VerticalHollowLogBlock(Utils.copyPropertySafe(w.log), DeferredHolder.create(Registries.BLOCK, id));
+                            return new VerticalHollowLogBlock(DeferredHolder.create(Registries.BLOCK, id), Utils.copyPropertySafe(w.log));
                         })
                 .requiresChildren(STRIPPED_LOG) //REASON: Textures
                 //TEXTURES: stripped_log
