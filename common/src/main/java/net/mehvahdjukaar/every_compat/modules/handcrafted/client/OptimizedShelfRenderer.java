@@ -6,12 +6,11 @@ import com.mojang.math.Vector3f;
 import com.teamresourceful.resourcefullib.client.CloseablePoseStack;
 import earth.terrarium.handcrafted.client.block.counter.ShelfRenderer;
 import earth.terrarium.handcrafted.common.block.counter.ShelfBlock;
-import earth.terrarium.handcrafted.common.block.counter.ShelfBlockEntity;
 import earth.terrarium.handcrafted.common.block.crockery.CrockeryBlock;
 import earth.terrarium.handcrafted.common.block.pot.PotBlock;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.mehvahdjukaar.every_compat.modules.handcrafted.HandcraftedModule;
+import net.mehvahdjukaar.every_compat.modules.handcrafted.HandcraftedModuleAbstract;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -26,12 +25,12 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.WebBlock;
 
 @Environment(EnvType.CLIENT)
-public class OptimizedShelfRenderer implements BlockEntityRenderer<HandcraftedModule.compatShelfEntity> {
+public class OptimizedShelfRenderer implements BlockEntityRenderer<HandcraftedModuleAbstract.CompatShelfEntity> {
     public OptimizedShelfRenderer(BlockEntityRendererProvider.Context ctx) {
     }
 
     @Override
-    public void render(HandcraftedModule.compatShelfEntity entity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
+    public void render(HandcraftedModuleAbstract.CompatShelfEntity entity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         if (entity.getStack().isEmpty()) return;
         if (entity.getLevel() == null) return;
 

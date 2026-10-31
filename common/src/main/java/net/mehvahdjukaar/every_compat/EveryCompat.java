@@ -17,7 +17,6 @@ import net.mehvahdjukaar.every_compat.modules.decorative_blocks.DecorativeBlocks
 import net.mehvahdjukaar.every_compat.modules.exline.BarkCarpetsModule;
 import net.mehvahdjukaar.every_compat.modules.friendsandfoes.FriendsAndFoesModule;
 import net.mehvahdjukaar.every_compat.modules.furnish.FurnishModule;
-import net.mehvahdjukaar.every_compat.modules.handcrafted.HandcraftedModule;
 import net.mehvahdjukaar.every_compat.modules.hearth_and_home.HearthAndHomeModule;
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish.RefurbishedFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.table_top_craft.TableTopCraftModule;
@@ -134,7 +133,6 @@ public abstract class EveryCompat {
         addModule("decorative_blocks", () -> DecorativeBlocksModule::new);
         addModule("friendsandfoes", () -> FriendsAndFoesModule::new);
         addModule("furnish", () -> FurnishModule::new);
-        addModule("handcrafted", () -> HandcraftedModule::new);
         addModule( "hnh" , () -> HearthAndHomeModule::new);
         addModule("twigs", () -> TwigsModule::new);
         addModule("table_top_craft", () -> TableTopCraftModule::new);

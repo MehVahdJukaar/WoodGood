@@ -27,22 +27,23 @@ import net.minecraft.world.item.Items;
 @Environment(EnvType.CLIENT)
 public class CompatItemRenderer {
 
-    public static class TableItemRenderer extends ItemStackRenderer {
-        @Override
-        public void renderByItem(ItemStack itemStack, ItemTransforms.TransformType transformType, PoseStack poseStack,
-                                 MultiBufferSource multiBufferSource, int i, int i1) {
-            OptimizedTableRenderer.INSTANCE.doRender(poseStack, multiBufferSource, i, i1,
-                    TableState.SINGLE, SheetState.SINGLE, Items.AIR, itemStack.getItem());
-        }
-    }
-
     public static class ChairItemRenderer extends ItemStackRenderer {
+
         @Override
         public void renderByItem(ItemStack itemStack, ItemTransforms.TransformType transformType, PoseStack poseStack,
                                  MultiBufferSource multiBufferSource, int packedLight, int packedOverlay) {
             poseStack.scale(0.75f, 0.75f, 0.75f);
             OptimizedChairRenderer.INSTANCE.doRender(Direction.SOUTH, poseStack, multiBufferSource,
                     packedLight, packedOverlay, itemStack.getItem(), Items.AIR);
+        }
+    }
+
+    public static class TableItemRenderer extends ItemStackRenderer {
+        @Override
+        public void renderByItem(ItemStack itemStack, ItemTransforms.TransformType transformType, PoseStack poseStack,
+                                 MultiBufferSource multiBufferSource, int i, int i1) {
+            OptimizedTableRenderer.INSTANCE.doRender(poseStack, multiBufferSource, i, i1,
+                    TableState.SINGLE, SheetState.SINGLE, Items.AIR, itemStack.getItem());
         }
     }
 

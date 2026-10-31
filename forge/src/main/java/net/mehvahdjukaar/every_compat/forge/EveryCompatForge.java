@@ -19,6 +19,7 @@ import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsM
 import net.mehvahdjukaar.every_compat.modules.forge.dramaticdoors.DramaticDoorsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.exnihilo.ExNihiloSequentiaModule;
 import net.mehvahdjukaar.every_compat.modules.forge.farmersdelight.FarmersDelightModule;
+import net.mehvahdjukaar.every_compat.modules.forge.handcrafted.HandcraftedModule;
 import net.mehvahdjukaar.every_compat.modules.forge.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.lauchs.LauchsShuttersModule;
 import net.mehvahdjukaar.every_compat.modules.forge.lightmans_currency.LightmansCurrencyModule;
@@ -105,6 +106,7 @@ public class EveryCompatForge extends EveryCompat {
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);
         addModule("exnihilosequentia", () -> ExNihiloSequentiaModule::new);
         addModule("farmersdelight", () -> FarmersDelightModule::new);
+        addModule("handcrafted", () -> HandcraftedModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
         addModule("lightmanscurrency", () -> LightmansCurrencyModule::new);
         addModule("mighty_mail", () -> MightyMailModule::new);

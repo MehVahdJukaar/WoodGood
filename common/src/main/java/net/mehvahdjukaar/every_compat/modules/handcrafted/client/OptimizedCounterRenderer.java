@@ -8,7 +8,7 @@ import earth.terrarium.handcrafted.common.block.chair.couch.ExpandableCouchBlock
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.mehvahdjukaar.every_compat.modules.handcrafted.HandcraftedModule;
+import net.mehvahdjukaar.every_compat.modules.handcrafted.HandcraftedModuleAbstract;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -23,7 +23,7 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.Map;
 
 @Environment(EnvType.CLIENT)
-public class OptimizedCounterRenderer implements BlockEntityRenderer<HandcraftedModule.compatCounterEntity> {
+public class OptimizedCounterRenderer implements BlockEntityRenderer<HandcraftedModuleAbstract.CompatCounterEntity> {
     public static final Map<ResourceLocation, Material> OBJECT_TO_TEXTURE = new Object2ObjectArrayMap<>();
 
     public static OptimizedCounterRenderer INSTANCE = null;
@@ -41,7 +41,7 @@ public class OptimizedCounterRenderer implements BlockEntityRenderer<Handcrafted
     }
 
     @Override
-    public void render(HandcraftedModule.compatCounterEntity entity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource,
+    public void render(HandcraftedModuleAbstract.CompatCounterEntity entity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource,
                        int packedLight, int packedOverlay) {
         ResourceLocation blockKey = Registry.BLOCK.getKey(entity.getBlockState().getBlock());
 
