@@ -1,12 +1,9 @@
 package net.mehvahdjukaar.every_compat.api;
 
-import net.mehvahdjukaar.candlelight.api.ClientOnly;
 import net.mehvahdjukaar.every_compat.ECRegistry;
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
-import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
@@ -121,12 +118,6 @@ public abstract class CompatModule {
     public void onModSetup() {
     }
 
-    public void onClientInit() {
-    }
-
-    public void onClientSetup() {
-    }
-
     private <T extends BlockType> void registerBlocks(Class<T> type,
                                                       Registrator<Block> registry) {
         this.registerBlocks(type, registry, BlockSetAPI.getBlockSet(type).getValues());
@@ -150,21 +141,12 @@ public abstract class CompatModule {
     public void addDynamicServerResources(Consumer<ResourceGenTask> executor) {
     }
 
-    @ClientOnly
-    public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
-    }
-
-    @ClientOnly
-    public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
-    }
-
-    public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, AfterLanguageLoadEvent lang) {
-    }
-
-    public void registerBlockColors(ClientHelper.BlockColorEvent event) {
-    }
-
     public void registerItemsToExistingTabs(RegHelper.ItemToTabEvent event) {
+    }
+
+    /// Only called on client. Override to give the module its own client class
+    public CompatModuleClient<?> createClient() {
+        return new CompatModuleClient<>(this);
     }
 
 

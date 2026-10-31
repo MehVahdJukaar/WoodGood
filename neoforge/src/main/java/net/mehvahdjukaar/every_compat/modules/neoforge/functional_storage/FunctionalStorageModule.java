@@ -3,15 +3,14 @@ package net.mehvahdjukaar.every_compat.modules.neoforge.functional_storage;
 import com.buuz135.functionalstorage.FunctionalStorage;
 import com.buuz135.functionalstorage.block.DrawerBlock;
 import com.buuz135.functionalstorage.block.tile.DrawerTile;
-import com.buuz135.functionalstorage.client.DrawerRenderer;
 import com.buuz135.functionalstorage.util.IWoodType;
 import com.hrznstudio.titanium.module.BlockWithTile;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.CompatModuleClient;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.TextureInfo;
 import net.mehvahdjukaar.every_compat.misc.UtilityTag;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
-import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -19,8 +18,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.HashMap;
@@ -98,15 +95,6 @@ public class FunctionalStorageModule extends EveryCompatModule {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
-    public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
-        super.registerBlockEntityRenderers(event);
-        event.register(drawer_1.getTile(DrawerTile.class), c -> new DrawerRenderer());
-        event.register(drawer_2.getTile(DrawerTile.class), c -> new DrawerRenderer());
-        event.register(drawer_4.getTile(DrawerTile.class), c -> new DrawerRenderer());
-    }
-
-    @Override
     public void onModSetup() {
         super.onModSetup();
         var     x_1 = FunctionalStorage.DRAWER_TYPES.get(FunctionalStorage.DrawerType.X_1);
@@ -158,4 +146,8 @@ public class FunctionalStorageModule extends EveryCompatModule {
         }
     }
 
+    @Override
+    public CompatModuleClient<?> createClient() {
+        return new FunctionalStorageClient(this);
+    }
 }

@@ -123,7 +123,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     public void registerBlocks(SimpleModule module, Registrator<Block> registry, Collection<T> types) {
         Block base = getBaseBlock();
         if (base == null || base == Blocks.AIR)
-            //?? wtf im using disabled to allow for null??
+            // wtf im using disabled to allow for null??
             throw new UnsupportedOperationException("Base block cant be null (" + this.typeName + " for " + module.modId + " module)");
 
         //assets and loot tables get their names from this scheme, a base block that doesnt follow it generates everything under the wrong name
@@ -144,7 +144,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                 if(block != null) {
                     try {
                         Preconditions.checkArgument(block != Blocks.AIR, "Block factory returned AIR block instance");
-                        //a shared or self made Properties would give every block the same id
+                        //a shared or self made Properties would give every block same id
                         Preconditions.checkArgument(Utils.getID(block).equals(id), "Block factory ignored the given properties");
                         registry.register(id, block);
 

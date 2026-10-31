@@ -7,9 +7,11 @@ import com.jaquadro.minecraft.storagedrawers.block.BlockStandardDrawers;
 import com.jaquadro.minecraft.storagedrawers.block.BlockTrim;
 import com.jaquadro.minecraft.storagedrawers.config.ModCommonConfig;
 import com.jaquadro.minecraft.storagedrawers.item.ItemDrawers;
+import net.mehvahdjukaar.every_compat.api.CompatModuleClient;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategy;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.every_compat.api.SimpleModuleClient;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.textures.PaletteColor;
@@ -246,19 +248,6 @@ public class StorageDrawersModule extends EveryCompatModule {
     //      │                                      Dynamic Resources                                       │
     //      └──────────────────────────────────────────────────────────────────────────────────────────────┘
 
-    @Override
-    // DATA
-    public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
-        super.addDynamicClientResources(executor);
-        executor.accept((manager, s) -> ModDrawersGeometry.loadGeometryData(this, manager));
-    }
-
-    @Override
-    public void onClientInit() {
-        super.onClientInit();
-        ModDrawersModels.registerDrawerModelDecoration(this);
-    }
-
     private <B extends Block> Stream<B> getBlocksOfType(Class<B> blockClass) {
         Stream<Block> allBlocks = this.getEntries().stream().map(e -> ((SimpleEntrySet<?, B>) e)
                 .blocks.values()).flatMap(Collection::stream);
@@ -282,5 +271,30 @@ public class StorageDrawersModule extends EveryCompatModule {
 
     public <BD extends BlockDrawers> Stream<BD> getDrawersOfTypeAndSizeAndDepth(Class<BD> drawerClass, int size, boolean halfDepth) {
         return getDrawersOfTypeAndSize(drawerClass, size).filter((blockDrawers) -> blockDrawers.isHalfDepth() == halfDepth);
+    }
+
+    @Override
+    public CompatModuleClient<?> createClient() {
+        return new Client();
+    }
+
+    private class Client extends SimpleModuleClient<StorageDrawersModule> {
+
+        private Client() {
+            super(StorageDrawersModule.this);
+        }
+
+        @Override
+        // DATA
+        public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
+            super.addDynamicClientResources(executor);
+            executor.accept((manager, s) -> ModDrawersGeometry.loadGeometryData(StorageDrawersModule.this, manager));
+        }
+
+        @Override
+        public void onClientInit() {
+            super.onClientInit();
+            ModDrawersModels.registerDrawerModelDecoration(StorageDrawersModule.this);
+        }
     }
 }

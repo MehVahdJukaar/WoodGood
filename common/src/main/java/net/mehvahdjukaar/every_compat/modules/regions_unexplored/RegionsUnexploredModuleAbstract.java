@@ -1,8 +1,10 @@
 package net.mehvahdjukaar.every_compat.modules.regions_unexplored;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.CompatModuleClient;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.every_compat.api.SimpleModuleClient;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
@@ -154,99 +156,111 @@ public abstract class RegionsUnexploredModuleAbstract extends EveryCompatModule 
     }
 
     @Override
-    //TEXTURES
-    public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
-        super.addDynamicClientResources(executor);
+    public CompatModuleClient<?> createClient() {
+        return new Client();
+    }
+
+    private class Client extends SimpleModuleClient<RegionsUnexploredModuleAbstract> {
+
+        private Client() {
+            super(RegionsUnexploredModuleAbstract.this);
+        }
+
+        @Override
+        //TEXTURES
+        public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
+            super.addDynamicClientResources(executor);
 
 // Generating branch textures ==========================================================================================
-        executor.accept((manager, sink) -> {
-            try (TextureImage branch_side = TextureImage.open(manager, EveryCompat.res("item/oak_branch_side"));
-                 TextureImage branch_top = TextureImage.open(manager, EveryCompat.res("item/oak_branch_top"));
-                 TextureImage branch_block = TextureImage.open(manager, modRes("block/oak_branch"))
-            ) {
-                Respriter respriterSIDE = Respriter.of(branch_side); // ITEM
-                Respriter respriterTOP = Respriter.of(branch_top); // ITEM
-                Respriter respriterBlock = Respriter.of(branch_block); // BLOCK
+            executor.accept((manager, sink) -> {
+                try (TextureImage branch_side = TextureImage.open(manager, EveryCompat.res("item/oak_branch_side"));
+                     TextureImage branch_top = TextureImage.open(manager, EveryCompat.res("item/oak_branch_top"));
+                     TextureImage branch_block = TextureImage.open(manager, modRes("block/oak_branch"))
+                ) {
+                    Respriter respriterSIDE = Respriter.of(branch_side); // ITEM
+                    Respriter respriterTOP = Respriter.of(branch_top); // ITEM
+                    Respriter respriterBlock = Respriter.of(branch_block); // BLOCK
 
-                branches.blocks.forEach((wood, block) -> {
-                    try (TextureImage logSide_texture = TextureImage.open(manager, RPUtils.findFirstBlockTextureLocation(manager, wood.log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
-                         TextureImage logTop_texture = TextureImage.open(manager, RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
+                    branches.blocks.forEach((wood, block) -> {
+                        try (TextureImage logSide_texture = TextureImage.open(manager, RPUtils.findFirstBlockTextureLocation(manager, wood.log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
+                             TextureImage logTop_texture = TextureImage.open(manager, RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
 
-                        String resLocITEM = wood.createFullIdWith("", "item", shortenedId(), "", "branch");
-                        String resLocBLOCK = wood.createFullIdWith("", "block", shortenedId(), "", "branch");
+                            String resLocITEM = wood.createFullIdWith("", "item", shortenedId(), "", "branch");
+                            String resLocBLOCK = wood.createFullIdWith("", "block", shortenedId(), "", "branch");
 
-                        List<Palette> list_logSide = Palette.fromAnimatedImage(logSide_texture);
-                        List<Palette> list_logTop = Palette.fromAnimatedImage(logTop_texture);
+                            List<Palette> list_logSide = Palette.fromAnimatedImage(logSide_texture);
+                            List<Palette> list_logTop = Palette.fromAnimatedImage(logTop_texture);
 
-                        // Block Texture
-                        sink.addTextureIfNotPresent(manager, EveryCompat.res(resLocBLOCK), () -> respriterBlock.recolor(list_logSide));
-                        // Item Texture
-                        sink.addTextureIfNotPresent(manager, EveryCompat.res(resLocITEM), () -> {
-                            TextureImage recoloredITEM = respriterSIDE.recolor(list_logSide);
-                            try (TextureImage recoloredTOP = respriterTOP.recolor(list_logTop)) {
-                                TextureOps.applyOverlay(recoloredITEM, recoloredTOP);
-                            }
-                            return recoloredITEM;
-                        });
+                            // Block Texture
+                            sink.addTextureIfNotPresent(manager, EveryCompat.res(resLocBLOCK), () -> respriterBlock.recolor(list_logSide));
+                            // Item Texture
+                            sink.addTextureIfNotPresent(manager, EveryCompat.res(resLocITEM), () -> {
+                                TextureImage recoloredITEM = respriterSIDE.recolor(list_logSide);
+                                try (TextureImage recoloredTOP = respriterTOP.recolor(list_logTop)) {
+                                    TextureOps.applyOverlay(recoloredITEM, recoloredTOP);
+                                }
+                                return recoloredITEM;
+                            });
 
-                    } catch (Exception e) {
-                        EveryCompat.LOGGER.error("Failed to get Log Texture for {} : {}", block, e);
-                    }
-                });
-            } catch (Exception e) {
-                EveryCompat.LOGGER.error("Failed to get Branch Item Texture for ", e);
-            }
+                        } catch (Exception e) {
+                            EveryCompat.LOGGER.error("Failed to get Log Texture for {} : {}", block, e);
+                        }
+                    });
+                } catch (Exception e) {
+                    EveryCompat.LOGGER.error("Failed to get Branch Item Texture for ", e);
+                }
 
 // Generating shrub textures ===========================================================================================
-            try (
-                    // middle is the bark part of shrub_top's
-                    TextureImage shrubTop = TextureImage.open(manager, modRes("block/dark_oak_shrub_top"));
-                    TextureImage shrubBottom = TextureImage.open(manager, modRes("block/dark_oak_shrub_bottom"));
-                    TextureImage shrubTopMask = TextureImage.open(manager, EveryCompat.res("block/ru/mask_shrub_top"));
-                    TextureImage shrubMiddleMask = TextureImage.open(manager, EveryCompat.res("block/ru/mask_shrub_middle"))
-            ) {
+                try (
+                        // middle is the bark part of shrub_top's
+                        TextureImage shrubTop = TextureImage.open(manager, modRes("block/dark_oak_shrub_top"));
+                        TextureImage shrubBottom = TextureImage.open(manager, modRes("block/dark_oak_shrub_bottom"));
+                        TextureImage shrubTopMask = TextureImage.open(manager, EveryCompat.res("block/ru/mask_shrub_top"));
+                        TextureImage shrubMiddleMask = TextureImage.open(manager, EveryCompat.res("block/ru/mask_shrub_middle"))
+                ) {
 
 
-                shrubs.blocks.forEach((leavesType, block) -> {
-                    String shrubPath = leavesType.createPathWith(shortenedId(), "shrub");
+                    shrubs.blocks.forEach((leavesType, block) -> {
+                        String shrubPath = leavesType.createPathWith(shortenedId(), "shrub");
 
-                    // Generating textures for shrubs
-                    try (TextureImage logTexture = TextureImage.open(manager,
-                            RPUtils.findFirstBlockTextureLocation(manager, Objects.requireNonNull(leavesType.getAssociatedWoodType()).log,
-                                    CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
-                         TextureImage leavesTexture = TextureImage.open(manager,
-                                 RPUtils.findFirstBlockTextureLocation(manager, leavesType.leaves,
-                                         CompatSpritesHelper.LOOKS_LIKE_LEAF_TEXTURE))
-                    ) {
-                        Respriter respriterTop = Respriter.masked(shrubTop, shrubMiddleMask);
-                        Respriter respriterBottom = Respriter.of(shrubBottom);
+                        // Generating textures for shrubs
+                        try (TextureImage logTexture = TextureImage.open(manager,
+                                RPUtils.findFirstBlockTextureLocation(manager, Objects.requireNonNull(leavesType.getAssociatedWoodType()).log,
+                                        CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
+                             TextureImage leavesTexture = TextureImage.open(manager,
+                                     RPUtils.findFirstBlockTextureLocation(manager, leavesType.leaves,
+                                             CompatSpritesHelper.LOOKS_LIKE_LEAF_TEXTURE))
+                        ) {
+                            Respriter respriterTop = Respriter.masked(shrubTop, shrubMiddleMask);
+                            Respriter respriterBottom = Respriter.of(shrubBottom);
 
-                        List<Palette> logSidePalette = Palette.fromAnimatedImage(logTexture);
-                        List<Palette> leavesPalette = Palette.fromAnimatedImage(leavesTexture);
+                            List<Palette> logSidePalette = Palette.fromAnimatedImage(logTexture);
+                            List<Palette> leavesPalette = Palette.fromAnimatedImage(leavesTexture);
 
-                        // Adding to the resource
-                        String resLoc = "block/" + shrubPath;
-                        sink.addTextureIfNotPresent(manager, EveryCompat.res(resLoc + "_bottom"), () -> {
-                            // Recoloring the shrub's Bottom
-                            return respriterBottom.recolor(logSidePalette);
-                        });
+                            // Adding to the resource
+                            String resLoc = "block/" + shrubPath;
+                            sink.addTextureIfNotPresent(manager, EveryCompat.res(resLoc + "_bottom"), () -> {
+                                // Recoloring the shrub's Bottom
+                                return respriterBottom.recolor(logSidePalette);
+                            });
 
-                        sink.addTextureIfNotPresent(manager, EveryCompat.res(resLoc + "_top"), () -> {
-                            // Recoloring the shrub's Top (the leaves part)
-                            try (TextureImage recoloredShrubTop = respriterTop.recolor(leavesPalette)) {
-                                // Recoloring the shrub's Middle (the bark part)
-                                Respriter respriterMiddle = Respriter.masked(recoloredShrubTop, shrubTopMask);
-                                return respriterMiddle.recolor(logSidePalette);
-                            }
-                        });
-                    } catch (Exception e) {
-                        EveryCompat.LOGGER.error("Failed to get texture for {} : {}", block.toString(), e.getMessage());
-                    }
-                });
-            } catch (Exception e) {
-                EveryCompat.LOGGER.error("Failed to open textures for: {}", e.getMessage());
-            }
+                            sink.addTextureIfNotPresent(manager, EveryCompat.res(resLoc + "_top"), () -> {
+                                // Recoloring the shrub's Top (the leaves part)
+                                try (TextureImage recoloredShrubTop = respriterTop.recolor(leavesPalette)) {
+                                    // Recoloring the shrub's Middle (the bark part)
+                                    Respriter respriterMiddle = Respriter.masked(recoloredShrubTop, shrubTopMask);
+                                    return respriterMiddle.recolor(logSidePalette);
+                                }
+                            });
+                        } catch (Exception e) {
+                            EveryCompat.LOGGER.error("Failed to get texture for {} : {}", block.toString(), e.getMessage());
+                        }
+                    });
+                } catch (Exception e) {
+                    EveryCompat.LOGGER.error("Failed to open textures for: {}", e.getMessage());
+                }
 
-        });
+            });
+        }
     }
 }

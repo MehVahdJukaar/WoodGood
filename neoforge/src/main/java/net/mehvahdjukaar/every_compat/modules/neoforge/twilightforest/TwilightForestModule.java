@@ -1,9 +1,11 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.twilightforest;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.CompatModuleClient;
 import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.every_compat.api.SimpleModuleClient;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
@@ -154,28 +156,6 @@ public class TwilightForestModule extends EveryCompatModule {
 
     }
 
-    @Override
-    public void registerBlockColors(ClientHelper.@NotNull BlockColorEvent event) {
-        BlockTintSource vineFoliage = new BlockTintSource() {
-            @Override
-            public int color(BlockState state) {
-                return state.getValue(ClimbableHollowLogBlock.VARIANT) != HollowLogVariants.Climbable.VINE ? -1 : FoliageColor.FOLIAGE_DEFAULT;
-            }
-
-            @Override
-            public int colorInWorld(BlockState state, BlockAndTintGetter level, BlockPos pos) {
-                return state.getValue(ClimbableHollowLogBlock.VARIANT) != HollowLogVariants.Climbable.VINE ? -1 : BiomeColors.getAverageFoliageColor(level, pos);
-            }
-
-            @Override
-            public Set<Property<?>> relevantProperties() {
-                return Set.of(ClimbableHollowLogBlock.VARIANT);
-            }
-        };
-        event.register(List.of(vineFoliage), hollow_log_climbable.blocks.values().toArray(Block[]::new));
-        event.register(List.of(BlockTintSources.sugarCane()), hollow_log_horizontal.blocks.values().toArray(Block[]::new));
-    }
-
     @SuppressWarnings("DataFlowIssue")
     private BlockBehaviour.Properties copySlabPropertySafe(WoodType woodType, float scale) {
         Block slab = (woodType.getBlockOfThis(SLAB) != null)
@@ -187,5 +167,39 @@ public class TwilightForestModule extends EveryCompatModule {
         return properties.noOcclusion()
                 .destroyTime(slab.defaultDestroyTime() * scale)
                 .explosionResistance(slab.getExplosionResistance() * scale);
+    }
+
+    @Override
+    public CompatModuleClient<?> createClient() {
+        return new Client();
+    }
+
+    private class Client extends SimpleModuleClient<TwilightForestModule> {
+
+        private Client() {
+            super(TwilightForestModule.this);
+        }
+
+        @Override
+        public void registerBlockColors(ClientHelper.@NotNull BlockColorEvent event) {
+            BlockTintSource vineFoliage = new BlockTintSource() {
+                @Override
+                public int color(BlockState state) {
+                    return state.getValue(ClimbableHollowLogBlock.VARIANT) != HollowLogVariants.Climbable.VINE ? -1 : FoliageColor.FOLIAGE_DEFAULT;
+                }
+
+                @Override
+                public int colorInWorld(BlockState state, BlockAndTintGetter level, BlockPos pos) {
+                    return state.getValue(ClimbableHollowLogBlock.VARIANT) != HollowLogVariants.Climbable.VINE ? -1 : BiomeColors.getAverageFoliageColor(level, pos);
+                }
+
+                @Override
+                public Set<Property<?>> relevantProperties() {
+                    return Set.of(ClimbableHollowLogBlock.VARIANT);
+                }
+            };
+            event.register(List.of(vineFoliage), hollow_log_climbable.blocks.values().toArray(Block[]::new));
+            event.register(List.of(BlockTintSources.sugarCane()), hollow_log_horizontal.blocks.values().toArray(Block[]::new));
+        }
     }
 }

@@ -2,13 +2,11 @@ package net.mehvahdjukaar.every_compat.api;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
-import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.every_compat.misc.OtherCompatMod;
 import net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
-import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
@@ -85,11 +83,6 @@ public class SimpleModule extends CompatModule {
         return entries.get(name);
     }
 
-    @Override
-    public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, AfterLanguageLoadEvent lang) {
-        getEntries().forEach(e -> e.addTranslations(this, lang));
-    }
-
     //TODO: move the blockCount / bloat to registerItems
     public <T extends BlockType> void registerBlocks(Class<T> typeClass,
                                                      Registrator<Block> registry, Collection<T> types) {
@@ -144,24 +137,8 @@ public class SimpleModule extends CompatModule {
     }
 
     @Override
-    public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
-        for (var entry : getEntries()) {
-            executor.accept((manager, sink) -> {
-                try {
-                    entry.generateTextures(this, manager, sink);
-                    entry.generateModels(this, manager, sink);
-
-                } catch (Exception ex) {
-                    TaskRunnerWithFailureCollection.active().record("client entry set", () -> String.valueOf(entry), ex);
-                    if (PlatHelper.isDev()) throw ex;
-                }
-            });
-        }
-    }
-
-    @Override
-    public void registerBlockColors(ClientHelper.BlockColorEvent event) {
-        getEntries().forEach(e -> e.registerBlockColors(event));
+    public CompatModuleClient<?> createClient() {
+        return new SimpleModuleClient<>(this);
     }
 
     @Override

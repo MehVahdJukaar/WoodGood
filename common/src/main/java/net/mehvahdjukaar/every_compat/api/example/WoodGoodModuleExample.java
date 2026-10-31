@@ -1,9 +1,11 @@
 package net.mehvahdjukaar.every_compat.api.example;
 
+import net.mehvahdjukaar.every_compat.api.CompatModuleClient;
 import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.every_compat.api.SimpleModuleClient;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
@@ -128,17 +130,6 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
 ///      ┌──────────────────────────────────────────────────────────┐
 ///      │     Manaully generating Textures or Modifying models     │
 ///      └──────────────────────────────────────────────────────────┘
-        @Override
-        public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
-            super.addDynamicClientResources(executor);
-
-            executor.accept((manager, sink) -> {
-                /// a code to manually generate textures if `.addTexture()` doesn't generate a good looking texture
-                /// Good examples is RegionsUnexploredModule's shrub OR ChippedModule's bundledLog OR ValhelsiaStructuresModule's bundledPosts
-                /// You can look at above and other modules for references
-            });
-        }
-
 ///      ┌──────────────────────────────────────────────────────────┐
 ///      │  Manually generating Recipes or creating tags or adding  │
 ///      │  blocks to tags                                          │
@@ -240,4 +231,27 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
             return null;
         }
     }
+
+        @Override
+        public CompatModuleClient<?> createClient() {
+            return new Client();
+        }
+
+        private class Client extends SimpleModuleClient<WoodGoodModuleExample> {
+
+            private Client() {
+                super(WoodGoodModuleExample.this);
+            }
+
+            @Override
+            public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
+                super.addDynamicClientResources(executor);
+
+                executor.accept((manager, sink) -> {
+                    /// a code to manually generate textures if `.addTexture()` doesn't generate a good looking texture
+                    /// Good examples is RegionsUnexploredModule's shrub OR ChippedModule's bundledLog OR ValhelsiaStructuresModule's bundledPosts
+                    /// You can look at above and other modules for references
+                });
+            }
+        }
 }

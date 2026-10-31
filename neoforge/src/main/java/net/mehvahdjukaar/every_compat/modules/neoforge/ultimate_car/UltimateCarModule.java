@@ -6,7 +6,9 @@ import de.maxhenkel.car.entity.car.parts.PartBumper;
 import de.maxhenkel.car.entity.car.parts.PartLicensePlateHolder;
 import de.maxhenkel.car.items.ItemCarPart;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.CompatModuleClient;
 import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
+import net.mehvahdjukaar.every_compat.api.SimpleModuleClient;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
@@ -167,13 +169,6 @@ public class UltimateCarModule extends EveryCompatModule {
 
     }
 
-    @Override
-    public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, AfterLanguageLoadEvent lang) {
-        super.addTranslations(clientDynamicResourcesHandler, lang);
-
-        body.items.forEach((woodType, item) -> addDynamicEntry(lang, "car_variant.%s", woodType));
-    }
-
     /// Custom Lang for "car_variant.oak": "Oak"
     public void addDynamicEntry(AfterLanguageLoadEvent lang, String key, BlockType type) {
         String base = lang.getEntry(key);
@@ -183,6 +178,25 @@ public class UltimateCarModule extends EveryCompatModule {
                 String typeKey = String.format(key, typeName.toLowerCase());
                 lang.addEntry(typeKey, String.format(base, typeName));
             }
+        }
+    }
+
+    @Override
+    public CompatModuleClient<?> createClient() {
+        return new Client();
+    }
+
+    private class Client extends SimpleModuleClient<UltimateCarModule> {
+
+        private Client() {
+            super(UltimateCarModule.this);
+        }
+
+        @Override
+        public void addTranslations(ClientDynamicResourcesHandler clientDynamicResourcesHandler, AfterLanguageLoadEvent lang) {
+            super.addTranslations(clientDynamicResourcesHandler, lang);
+
+            body.items.forEach((woodType, item) -> addDynamicEntry(lang, "car_variant.%s", woodType));
         }
     }
 }

@@ -6,9 +6,11 @@ import com.brand.blockus.blocks.base.SmallHedgeBlock;
 import com.brand.blockus.utils.helper.BlockFactory;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.CompatModuleClient;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.every_compat.api.SimpleModuleClient;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.every_compat.misc.UtilityTag;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
@@ -321,45 +323,6 @@ public class BlockusModule extends EveryCompatModule {
         });
     }
 
-    @Override
-    // TEXTURES
-    public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
-        super.addDynamicClientResources(executor);
-
-        executor.accept((manager, sink) -> {
-            String texturePath = "block/small_acacia_logs_top";
-            Identifier logTopResLoc = modRes(texturePath);
-
-            try (TextureImage edgeMask = TextureImage.open(manager, res("block/bus/small_logs_top_edge_m"));
-                 TextureImage insideMask = TextureImage.open(manager, res("block/bus/small_logs_top_inside_m"))
-            ) {
-                small_logs.blocks.forEach((woodType, block) -> {
-                    Identifier blockId = Utils.getID(block);
-
-                    try (TextureImage baseLogTopTexture = TextureImage.open(manager, logTopResLoc);
-                         TextureImage logSideTexture = TextureImage.open(manager,
-                                 RPUtils.findFirstBlockTextureLocation(manager, woodType.log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
-                         TextureImage planksTexture = TextureImage.open(manager,
-                                 RPUtils.findFirstBlockTextureLocation(manager, woodType.planks))
-                    ) {
-
-                        String newPath = BlockTypeResTransformer.replaceTypeNoNamespace(texturePath, woodType, blockId, "acacia");
-
-                        // Adding to the resource
-                        sink.addTextureIfNotPresent(manager, res(newPath), () ->
-                                generateLogTopTexture(baseLogTopTexture, logSideTexture, insideMask, planksTexture, edgeMask));
-
-                    } catch (Exception e) {
-                        EveryCompat.LOGGER.error("Failed to generate texture for {} : {}", block, e);
-                    }
-                });
-            } catch (Exception e) {
-                EveryCompat.LOGGER.error("Failed to open the mask texture: ", e);
-            }
-
-        });
-    }
-
     private TextureImage generateLogTopTexture(TextureImage baseTexture, TextureImage logSideTexture, TextureImage insideMask,
                                                TextureImage planksTexture, TextureImage edgeMask) {
 
@@ -377,5 +340,56 @@ public class BlockusModule extends EveryCompatModule {
     @Override
     public List<String> getAlreadySupportedMods() {
         return List.of("promenade");
+    }
+
+    @Override
+    public CompatModuleClient<?> createClient() {
+        return new Client();
+    }
+
+    private class Client extends SimpleModuleClient<BlockusModule> {
+
+        private Client() {
+            super(BlockusModule.this);
+        }
+
+        @Override
+        // TEXTURES
+        public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
+            super.addDynamicClientResources(executor);
+
+            executor.accept((manager, sink) -> {
+                String texturePath = "block/small_acacia_logs_top";
+                Identifier logTopResLoc = modRes(texturePath);
+
+                try (TextureImage edgeMask = TextureImage.open(manager, res("block/bus/small_logs_top_edge_m"));
+                     TextureImage insideMask = TextureImage.open(manager, res("block/bus/small_logs_top_inside_m"))
+                ) {
+                    small_logs.blocks.forEach((woodType, block) -> {
+                        Identifier blockId = Utils.getID(block);
+
+                        try (TextureImage baseLogTopTexture = TextureImage.open(manager, logTopResLoc);
+                             TextureImage logSideTexture = TextureImage.open(manager,
+                                     RPUtils.findFirstBlockTextureLocation(manager, woodType.log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
+                             TextureImage planksTexture = TextureImage.open(manager,
+                                     RPUtils.findFirstBlockTextureLocation(manager, woodType.planks))
+                        ) {
+
+                            String newPath = BlockTypeResTransformer.replaceTypeNoNamespace(texturePath, woodType, blockId, "acacia");
+
+                            // Adding to the resource
+                            sink.addTextureIfNotPresent(manager, res(newPath), () ->
+                                    generateLogTopTexture(baseLogTopTexture, logSideTexture, insideMask, planksTexture, edgeMask));
+
+                        } catch (Exception e) {
+                            EveryCompat.LOGGER.error("Failed to generate texture for {} : {}", block, e);
+                        }
+                    });
+                } catch (Exception e) {
+                    EveryCompat.LOGGER.error("Failed to open the mask texture: ", e);
+                }
+
+            });
+        }
     }
 }

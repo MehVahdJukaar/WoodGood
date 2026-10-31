@@ -7,8 +7,10 @@ import com.mrcrayfish.furniture.refurbished.crafting.StackedIngredient;
 import com.mrcrayfish.furniture.refurbished.crafting.WorkbenchContructingRecipe;
 import com.mrcrayfish.furniture.refurbished.item.MailboxItem;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.CompatModuleClient;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.every_compat.api.SimpleModuleClient;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
@@ -454,25 +456,6 @@ public class RefurbishedFurnitureModule extends EveryCompatModule {
         this.addEntry(hedges);
     }
 
-    @Override
-    // MODELS
-    public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
-        super.addDynamicClientResources(executor);
-
-        executor.accept((manager, sink) -> {
-
-            // code copied from ResourceUtils.addStandardResources
-            StaticResource darkBlade = StaticResource.getOrLog(manager, ResType.MODELS.getPath(
-                    modRes("extra/oak_dark_ceiling_fan_blade")
-            ));
-            addFanModels(sink, manager, darkBlade, darkFans);
-            StaticResource lightBlade = StaticResource.getOrLog(manager, ResType.MODELS.getPath(
-                    modRes("extra/oak_light_ceiling_fan_blade")
-            ));
-            addFanModels(sink, manager, lightBlade, lightFans);
-        });
-    }
-
     private void addFanModels(ResourceSink sink, ResourceManager manager, StaticResource darkBlade, SimpleEntrySet<WoodType, Block> darkFans) {
         darkFans.blocks.forEach((w, b) -> {
             try {
@@ -486,38 +469,9 @@ public class RefurbishedFurnitureModule extends EveryCompatModule {
         });
     }
 
-    @Override
-    public void onClientSetup() {
-        super.onClientSetup();
-        darkFans.blocks.forEach((key, value) -> {
-            Identifier res = EveryCompat.res("extra/" + key.getAppendableId() + "_dark_ceiling_fan_blade");
-            CeilingFanBlockEntityRenderer.registerFanBlade(value, () -> getFanBladeModel(res));
-        });
-        lightFans.blocks.forEach((key, value) -> {
-            Identifier res = EveryCompat.res("extra/" + key.getAppendableId() + "_light_ceiling_fan_blade");
-            CeilingFanBlockEntityRenderer.registerFanBlade(value, () -> getFanBladeModel(res));
-        });
-    }
-
-    private static BlockStateModelPart getFanBladeModel(Identifier modelId) {
-        List<BlockStateModelPart> parts = new ArrayList<>(1);
-        ClientHelper.getStandaloneModel(modelId).collectParts(RandomSource.create(), parts);
-        return parts.getFirst();
-    }
-
-    @Override
-    public void onClientInit() {
-        super.onClientInit();
-        ClientHelper.addStandaloneModelRegistration(event -> darkFans.blocks.keySet().forEach(w -> {
-            event.register(EveryCompat.res("extra/" + w.getAppendableId() + "_dark_ceiling_fan_blade"));
-            event.register(EveryCompat.res("extra/" + w.getAppendableId() + "_light_ceiling_fan_blade"));
-        }));
-    }
-
     public static BlockBehaviour.Properties addWoodProp(WoodType w, BlockBehaviour.Properties p) {
         if (w.canBurn()) p.ignitedByLava();
-        p.mapColor(w.planks.defaultMapColor()).sound(w.getSound()).instrument(NoteBlockInstrument.BASS);
-        return p;
+        return addWoodPropNoFire(w, p);
     }
 
     public static BlockBehaviour.Properties addWoodPropNoFire(WoodType w, BlockBehaviour.Properties p) {
@@ -559,4 +513,62 @@ public class RefurbishedFurnitureModule extends EveryCompatModule {
         return newList;
     }
 
+    @Override
+    public CompatModuleClient<?> createClient() {
+        return new Client();
+    }
+
+    private class Client extends SimpleModuleClient<RefurbishedFurnitureModule> {
+
+        private Client() {
+            super(RefurbishedFurnitureModule.this);
+        }
+
+        @Override
+        // MODELS
+        public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
+            super.addDynamicClientResources(executor);
+
+            executor.accept((manager, sink) -> {
+
+                // code copied from ResourceUtils.addStandardResources
+                StaticResource darkBlade = StaticResource.getOrLog(manager, ResType.MODELS.getPath(
+                        modRes("extra/oak_dark_ceiling_fan_blade")
+                ));
+                addFanModels(sink, manager, darkBlade, darkFans);
+                StaticResource lightBlade = StaticResource.getOrLog(manager, ResType.MODELS.getPath(
+                        modRes("extra/oak_light_ceiling_fan_blade")
+                ));
+                addFanModels(sink, manager, lightBlade, lightFans);
+            });
+        }
+
+        @Override
+        public void onClientSetup() {
+            super.onClientSetup();
+            darkFans.blocks.forEach((key, value) -> {
+                Identifier res = EveryCompat.res("extra/" + key.getAppendableId() + "_dark_ceiling_fan_blade");
+                CeilingFanBlockEntityRenderer.registerFanBlade(value, () -> getFanBladeModel(res));
+            });
+            lightFans.blocks.forEach((key, value) -> {
+                Identifier res = EveryCompat.res("extra/" + key.getAppendableId() + "_light_ceiling_fan_blade");
+                CeilingFanBlockEntityRenderer.registerFanBlade(value, () -> getFanBladeModel(res));
+            });
+        }
+
+        private static BlockStateModelPart getFanBladeModel(Identifier modelId) {
+            List<BlockStateModelPart> parts = new ArrayList<>(1);
+            ClientHelper.getStandaloneModel(modelId).collectParts(RandomSource.create(), parts);
+            return parts.getFirst();
+        }
+
+        @Override
+        public void onClientInit() {
+            super.onClientInit();
+            ClientHelper.addStandaloneModelRegistration(event -> darkFans.blocks.keySet().forEach(w -> {
+                event.register(EveryCompat.res("extra/" + w.getAppendableId() + "_dark_ceiling_fan_blade"));
+                event.register(EveryCompat.res("extra/" + w.getAppendableId() + "_light_ceiling_fan_blade"));
+            }));
+        }
+    }
 }

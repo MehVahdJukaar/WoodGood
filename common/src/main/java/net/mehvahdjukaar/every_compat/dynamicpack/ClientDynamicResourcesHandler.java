@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat.dynamicpack;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
@@ -37,7 +38,7 @@ public class ClientDynamicResourcesHandler extends DynamicClientResourceProvider
 
     @Override
     public void addDynamicTranslations(AfterLanguageLoadEvent lang) {
-        EveryCompat.forAllModules(m -> m.addTranslations(this, lang));
+        EveryCompatClient.forAllClients(c -> c.addTranslations(this, lang));
     }
 
     @Override
@@ -67,7 +68,7 @@ public class ClientDynamicResourcesHandler extends DynamicClientResourceProvider
         PaletteStrategies.clearCache();
 
         List<ResourceGenTask> tasks = new ArrayList<>();
-        EveryCompat.forAllModules(m -> m.addDynamicClientResources(tasks::add));
+        EveryCompatClient.forAllClients(c -> c.addDynamicClientResources(tasks::add));
 
         //one batch per core. a batch shares one sink so smaller ones also lose less if something escapes
         int cores = Runtime.getRuntime().availableProcessors();

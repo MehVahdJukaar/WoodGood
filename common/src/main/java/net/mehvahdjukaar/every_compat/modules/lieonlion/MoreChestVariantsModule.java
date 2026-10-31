@@ -1,8 +1,9 @@
 package net.mehvahdjukaar.every_compat.modules.lieonlion;
 
-import net.mehvahdjukaar.candlelight.api.ClientOnly;
 import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.CompatModuleClient;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.every_compat.api.SimpleModuleClient;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlock;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockEntity;
 import net.mehvahdjukaar.every_compat.common_classes.CompatChestBlockRenderer;
@@ -121,45 +122,56 @@ public class MoreChestVariantsModule extends EveryCompatModule {
     }
 
     // Registry --------------------------------------------------------------------------------------------------------
-    @Override
-    @ClientOnly
-    public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
-        super.registerBlockEntityRenderers(event);
-        CompatChestBlockRenderer.register(event, chests.getTile(CompatChestBlockEntity.class), shortenedId());
-        CompatChestBlockRenderer.register(event, trappedChests.getTile(CompatChestBlockEntity.class), shortenedId());
-    }
 
     @Override
-    // TEXTURES
-    public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
-        super.addDynamicClientResources(executor);
-
-        executor.accept((manager, sink) ->
-            forEachSafely("mcv's chest texture", trappedChests.blocks, (wood, block) -> {
-                // SINGLE
-                generateChestTexture(sink, manager, shortenedId(), wood,
-                        modRes("entity/chest/acacia"),
-                        EveryCompat.res("quark_variant_chests/oak_chest_normal_m"),
-                        EveryCompat.res("quark_variant_chests/oak_chest_normal_o"),
-                        null
-                );
-                // LEFT
-                generateChestTexture(sink, manager, shortenedId(), wood,
-                        modRes("entity/chest/acacia_left"),
-                        EveryCompat.res("quark_variant_chests/oak_chest_left_m"),
-                        EveryCompat.res("quark_variant_chests/oak_chest_left_o"),
-                        null
-                );
-                // RIGHT
-                generateChestTexture(sink, manager, shortenedId(), wood,
-                        modRes("entity/chest/acacia_right"),
-                        EveryCompat.res("quark_variant_chests/oak_chest_right_m"),
-                        EveryCompat.res("quark_variant_chests/oak_chest_right_o"),
-                        null
-                );
-            })
-
-        );
+    public CompatModuleClient<?> createClient() {
+        return new Client();
     }
 
+    private class Client extends SimpleModuleClient<MoreChestVariantsModule> {
+
+        private Client() {
+            super(MoreChestVariantsModule.this);
+        }
+
+        @Override
+        public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
+            super.registerBlockEntityRenderers(event);
+            CompatChestBlockRenderer.register(event, chests.getTile(CompatChestBlockEntity.class), shortenedId());
+            CompatChestBlockRenderer.register(event, trappedChests.getTile(CompatChestBlockEntity.class), shortenedId());
+        }
+
+        @Override
+        // TEXTURES
+        public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
+            super.addDynamicClientResources(executor);
+
+            executor.accept((manager, sink) ->
+                forEachSafely("mcv's chest texture", trappedChests.blocks, (wood, block) -> {
+                    // SINGLE
+                    generateChestTexture(sink, manager, shortenedId(), wood,
+                            modRes("entity/chest/acacia"),
+                            EveryCompat.res("quark_variant_chests/oak_chest_normal_m"),
+                            EveryCompat.res("quark_variant_chests/oak_chest_normal_o"),
+                            null
+                    );
+                    // LEFT
+                    generateChestTexture(sink, manager, shortenedId(), wood,
+                            modRes("entity/chest/acacia_left"),
+                            EveryCompat.res("quark_variant_chests/oak_chest_left_m"),
+                            EveryCompat.res("quark_variant_chests/oak_chest_left_o"),
+                            null
+                    );
+                    // RIGHT
+                    generateChestTexture(sink, manager, shortenedId(), wood,
+                            modRes("entity/chest/acacia_right"),
+                            EveryCompat.res("quark_variant_chests/oak_chest_right_m"),
+                            EveryCompat.res("quark_variant_chests/oak_chest_right_o"),
+                            null
+                    );
+                })
+
+            );
+        }
+    }
 }

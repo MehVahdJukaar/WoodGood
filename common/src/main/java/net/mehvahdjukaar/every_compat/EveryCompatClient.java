@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.every_compat;
 
 import net.mehvahdjukaar.every_compat.api.CompatModule;
+import net.mehvahdjukaar.every_compat.api.CompatModuleClient;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.BlockCountConfigOverlay;
@@ -23,13 +24,18 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Consumer;
 
 
 public class EveryCompatClient {
 
+    private static final Map<CompatModule, CompatModuleClient<?>> CLIENTS = new ConcurrentHashMap<>();
+
     public static void init() {
         ClientHelper.addClientSetup(EveryCompatClient::clientSetup);
-        EveryCompat.forAllModules(CompatModule::onClientInit);
+        forAllClients(CompatModuleClient::onClientInit);
         ClientHelper.addBlockEntityRenderersRegistration(EveryCompatClient::registerBlockEntityRenderers);
         ClientHelper.addBlockColorsRegistration(EveryCompatClient::registerBlockColors);
         RegHelper.registerDynamicResourceProvider(ClientDynamicResourcesHandler.getInstance());
@@ -47,16 +53,21 @@ public class EveryCompatClient {
         EveryCompat.canShowErrorScreen = false;
     }
 
+    // lazy so modules added late by addons still get one
+    public static void forAllClients(Consumer<CompatModuleClient<?>> action) {
+        EveryCompat.forAllModules(m -> action.accept(CLIENTS.computeIfAbsent(m, CompatModule::createClient)));
+    }
+
     private static void registerBlockColors(ClientHelper.BlockColorEvent event) {
-        EveryCompat.forAllModules(m -> m.registerBlockColors(event));
+        forAllClients(c -> c.registerBlockColors(event));
     }
 
     private static void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
-        EveryCompat.forAllModules(m -> m.registerBlockEntityRenderers(event));
+        forAllClients(c -> c.registerBlockEntityRenderers(event));
     }
 
     public static void clientSetup() {
-        EveryCompat.forAllModules(CompatModule::onClientSetup);
+        forAllClients(CompatModuleClient::onClientSetup);
     }
 
     public static void onItemTooltip(ItemStack stack, Item.TooltipContext tooltipContext, TooltipFlag tooltipFlag, List<Component> components) {
