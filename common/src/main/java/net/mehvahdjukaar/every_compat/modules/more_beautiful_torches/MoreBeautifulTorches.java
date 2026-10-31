@@ -5,7 +5,6 @@ import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
-import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
@@ -46,12 +45,10 @@ public class MoreBeautifulTorches extends EveryCompatModule {
 
     public MoreBeautifulTorches(String modId) {
         super(modId, "mbt");
-        Identifier tab = (PlatHelper.Platform.FABRIC.isFabric())
-                ? modRes("goldenfoods_tab")
-                : modRes("morebeautifultorches_tab");
+        Identifier tab = modRes("more_beautiful_torches");
 
-        log_wall_torch = SimpleEntrySet.builder(WoodType.class, "log_wall_torch",
-                        getModBlock("oak_log_wall_torch"), () -> VanillaWoodTypes.OAK,
+        log_wall_torch = SimpleEntrySet.builder(WoodType.class, "log_torch_wall",
+                        getModBlock("oak_log_torch_wall"), () -> VanillaWoodTypes.OAK,
                         (woodType, p) -> new WallTorchBlock(ParticleTypes.FLAME, p)
                 )
                 .setProperties(woodType -> Utils.copyPropertySafe(Blocks.WALL_TORCH))
@@ -77,8 +74,8 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                 .build();
         this.addEntry(log_torch);
 
-        log_soul_wall_torch = SimpleEntrySet.builder(WoodType.class, "log_soul_wall_torch",
-                        getModBlock("oak_log_soul_wall_torch"), () -> VanillaWoodTypes.OAK,
+        log_soul_wall_torch = SimpleEntrySet.builder(WoodType.class, "log_soul_torch_wall",
+                        getModBlock("oak_log_soul_torch_wall"), () -> VanillaWoodTypes.OAK,
                         (woodType, p) -> new WallTorchBlock(ParticleTypes.SOUL_FIRE_FLAME, p)
                 )
                 .setProperties(woodType -> Utils.copyPropertySafe(Blocks.SOUL_WALL_TORCH))
@@ -104,8 +101,8 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                 .build();
         this.addEntry(log_soul_torch);
 
-        log_redstone_wall_torch = SimpleEntrySet.builder(WoodType.class, "log_redstone_wall_torch",
-                        getModBlock("oak_log_redstone_wall_torch"), () -> VanillaWoodTypes.OAK,
+        log_redstone_wall_torch = SimpleEntrySet.builder(WoodType.class, "log_redstone_torch_wall",
+                        getModBlock("oak_log_redstone_torch_wall"), () -> VanillaWoodTypes.OAK,
                         (woodType, p) -> new RedstoneWallTorchBlock(p)
                 )
                 .setProperties(woodType -> Utils.copyPropertySafe(Blocks.REDSTONE_WALL_TORCH))
@@ -131,8 +128,8 @@ public class MoreBeautifulTorches extends EveryCompatModule {
         this.addEntry(log_redstone_torch);
 
 //!!--PLANKS--
-        planks_wall_torch = SimpleEntrySet.builder(WoodType.class, "planks_wall_torch",
-                        getModBlock("oak_planks_wall_torch"), () -> VanillaWoodTypes.OAK,
+        planks_wall_torch = SimpleEntrySet.builder(WoodType.class, "planks_torch_wall",
+                        getModBlock("oak_planks_torch_wall"), () -> VanillaWoodTypes.OAK,
                         (woodType, p) -> new WallTorchBlock(ParticleTypes.FLAME, p)
                 )
                 .setProperties(woodType -> Utils.copyPropertySafe(Blocks.WALL_TORCH))
@@ -158,8 +155,8 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                 .build();
         this.addEntry(planks_torch);
 
-        planks_soul_wall_torch = SimpleEntrySet.builder(WoodType.class, "planks_soul_wall_torch",
-                        getModBlock("oak_planks_soul_wall_torch"), () -> VanillaWoodTypes.OAK,
+        planks_soul_wall_torch = SimpleEntrySet.builder(WoodType.class, "planks_soul_torch_wall",
+                        getModBlock("oak_planks_soul_torch_wall"), () -> VanillaWoodTypes.OAK,
                         (woodType, p) -> new WallTorchBlock(ParticleTypes.SOUL_FIRE_FLAME, p)
                 )
                 .setProperties(woodType -> Utils.copyPropertySafe(Blocks.SOUL_WALL_TORCH))
@@ -185,8 +182,8 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                 .build();
         this.addEntry(planks_soul_torch);
 
-        planks_redstone_wall_torch = SimpleEntrySet.builder(WoodType.class, "planks_redstone_wall_torch",
-                        getModBlock("oak_planks_redstone_wall_torch"), () -> VanillaWoodTypes.OAK,
+        planks_redstone_wall_torch = SimpleEntrySet.builder(WoodType.class, "planks_redstone_torch_wall",
+                        getModBlock("oak_planks_redstone_torch_wall"), () -> VanillaWoodTypes.OAK,
                         (woodType, p) -> new RedstoneWallTorchBlock(p)
                 )
                 .setProperties(woodType -> Utils.copyPropertySafe(Blocks.REDSTONE_WALL_TORCH))
@@ -212,8 +209,8 @@ public class MoreBeautifulTorches extends EveryCompatModule {
         this.addEntry(planks_redstone_torch);
 
 //!!--STRIPPED-LOG--
-        stripped_wall_torch = SimpleEntrySet.builder(WoodType.class, "log_wall_torch", "stripped",
-                        getModBlock("stripped_oak_log_wall_torch"), () -> VanillaWoodTypes.OAK,
+        stripped_wall_torch = SimpleEntrySet.builder(WoodType.class, "log_torch_wall", "stripped",
+                        getModBlock("stripped_oak_log_torch_wall"), () -> VanillaWoodTypes.OAK,
                         (woodType, p) -> new WallTorchBlock(ParticleTypes.FLAME, p)
                 )
                 .setProperties(woodType -> Utils.copyPropertySafe(Blocks.WALL_TORCH))
@@ -241,8 +238,8 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                 .build();
         this.addEntry(stripped_torch);
 
-        stripped_soul_wall_torch = SimpleEntrySet.builder(WoodType.class, "log_soul_wall_torch", "stripped",
-                        getModBlock("stripped_oak_log_soul_wall_torch"), () -> VanillaWoodTypes.OAK,
+        stripped_soul_wall_torch = SimpleEntrySet.builder(WoodType.class, "log_soul_torch_wall", "stripped",
+                        getModBlock("stripped_oak_log_soul_torch_wall"), () -> VanillaWoodTypes.OAK,
                         (woodType, p) -> new WallTorchBlock(ParticleTypes.SOUL_FIRE_FLAME, p)
                 )
                 .setProperties(woodType -> Utils.copyPropertySafe(Blocks.SOUL_WALL_TORCH))
@@ -270,8 +267,8 @@ public class MoreBeautifulTorches extends EveryCompatModule {
                 .build();
         this.addEntry(stripped_soul_torch);
 
-        stripped_redstone_wall_torch = SimpleEntrySet.builder(WoodType.class, "log_redstone_wall_torch", "stripped",
-                        getModBlock("stripped_oak_log_redstone_wall_torch"), () -> VanillaWoodTypes.OAK,
+        stripped_redstone_wall_torch = SimpleEntrySet.builder(WoodType.class, "log_redstone_torch_wall", "stripped",
+                        getModBlock("stripped_oak_log_redstone_torch_wall"), () -> VanillaWoodTypes.OAK,
                         (woodType, p) -> new RedstoneWallTorchBlock(p)
                 )
                 .setProperties(woodType -> Utils.copyPropertySafe(Blocks.REDSTONE_WALL_TORCH))

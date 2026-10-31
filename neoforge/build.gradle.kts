@@ -166,7 +166,7 @@ dependencies {
 //    modCompileOnly("curse.maven:timber-frames-606011:5372390") //!! 1.20.1
     modImplementation("curse.maven:tropicraft-254794:8285189")
 //    modCompileOnly("curse.maven:unusual-furniture-1278034:7332052")
-    modImplementation("curse.maven:ultimate-car-mod-267458:9105514")
+    modCompileOnly("curse.maven:ultimate-car-mod-267458:9105514")
 //    modCompileOnly("curse.maven:valhelsia-structures-347488:6814480") // Valhelsia-Core
 //    modCompileOnly("curse.maven:variant-crafting-tables-565095:4585921") //!! 1.20.1
 //    modCompileOnly("curse.maven:woodster-869951:6732058")
@@ -192,7 +192,7 @@ dependencies {
     modImplementation("curse.maven:decorative-blocks-reborn-1327768:8959324")
 //    modCompileOnly("curse.maven:farmersdelight-398521:8083481")
 //    modCompileOnly("curse.maven:handcrafted-538214:6330030") // Resourceful-Lib
-    modImplementation("curse.maven:rechiseled-558998:8875922") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ]
+    modCompileOnly("curse.maven:rechiseled-558998:8875922") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ]
     modImplementation("curse.maven:refurbished-furniture-897116:7943178")
     modImplementation("curse.maven:storage-drawers-223852:8915908")
 //    modCompileOnly("curse.maven:twigs-496913:8191595")
@@ -220,7 +220,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:strata-forge-edition-387296:4989643") // STONE-TYPES //!! 1.20.1
 //    modRuntimeOnly("curse.maven:endless-biomes-667688:5109705") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:blue-skies-312918:5010316") // structure-gel-api //!! 1.20.1
-//    modRuntimeOnly("curse.maven:biomes-o-plenty-220318:7251965") // Terrablender, GlitchCore
+    modRuntimeOnly("curse.maven:biomes-o-plenty-220318:8239932") // Terrablender, GlitchCore
 //    modRuntimeOnly("maven.modrinth:gardens-of-the-dead:YfbXE0Lc")
 //    modRuntimeOnly("curse.maven:upgrade-aquatic-326895:6969604") // Blueprint
 //    modRuntimeOnly("curse.maven:autumnity-365045:7118591") // Blueprint

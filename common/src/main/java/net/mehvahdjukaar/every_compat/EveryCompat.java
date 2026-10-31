@@ -255,6 +255,7 @@ public abstract class EveryCompat {
 
                 addModule(module);
             } catch (Throwable t) {
+                EveryCompat.LOGGER.error("Failed to create module for mod {}", modId, t);
                 addError(createDummyModule(modId), t);
             }
         }

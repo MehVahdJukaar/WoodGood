@@ -9,57 +9,57 @@
 | Beautify Refabricated      |   🟡   |
 | Bewitchment                |   ❔   |
 | Blockus                    |   🟩   |
-| Clutter                    |   🟩   |
+| Clutter                    |   🟥   |
 | Create (FABRIC)            |   🟥   |
-| Excessive Building         |   🟩   |
-| Exline's Awnings           |   🟩   |
-| Furnish                    |   🟩   |
-| Lightman's Currency Fabric |   🟩   |
+| Excessive Building         |   🟥   |
+| Exline's Awnings           |   🟥   |
+| Furnish                    |   🟥   |
+| Lightman's Currency Fabric |   🟥   |
 | More Barrier Variants      |   🟡   |
-| Redbits                    |   🟩   |
-| Stylish Stiles             |   🟩   |
+| Redbits                    |   🟥   |
+| Stylish Stiles             |   🟥   |
 | Villagers Plus (FABRIC)    |   🟩   |
 | Wilder Wild                |   🟩   |
-| Wooden Hoppers             |   🟩   |
+| Wooden Hoppers             |   🟥   |
 |                            |        |
 
 </td><td valign="top">
 
 | MODS                                                | STATUS |
 |-----------------------------------------------------|:------:|
-| Another Furniture                                   |   🟩   |
-| Architect's Palette                                 |   🟩   |
+| Another Furniture                                   |   🟥   |
+| Architect's Palette                                 |   🟥   |
 | Backpacked                                          |   🟩   |
-| Beautiful Campfires                                 |   🟩   |
+| Beautiful Campfires                                 |   🟥   |
 | Botany Pot                                          |   🟩   |
 | Bountiful Fares                                     |   🟡   |
 | Building But Better                                 |   ❔   |
 | Camp Chair                                          |   ❔   |
 | Carpentry & Chisels                                 |   🟡   |
 | Carved Wood                                         |   🟡   |
-| Chipped                                             |   🟩   |
+| Chipped                                             |   🟥   |
 | Chopper's Delight                                   |   🟡   |
-| Copper Age Backport                                 |   🟩   |
-| Corail Pillar                                       |   🟩   |
-| Dawn of Time Builder                                |   🟩   |
+| Copper Age Backport                                 |   🟥   |
+| Corail Pillar                                       |   🟥   |
+| Dawn of Time Builder                                |   🟥   |
 | Decorative Blocks Reborn                            |   🟩   |
-| Dramatic Doors                                      |   🟩   |
-| Dramatic Doors' <br>Supported Macaw's Door          |   🟩   |
+| Dramatic Doors                                      |   🟥   |
+| Dramatic Doors' <br>Supported Macaw's Door          |   🟥   |
 | Envelope                                            |   🟡   |
 | Exline's Bark Carpets                               |   🟥   |
-| Farmer's Delight                                    |   🟩   |
+| Farmer's Delight                                    |   🟥   |
 | Friends & Foes                                      |   🟩   |
 | Guita's Woodworks                                   |   🟡   |
-| Handcrafted                                         |   🟩   |
+| Handcrafted                                         |   🟥   |
 | Hearth & Home                                       |   ❔   |
 | Infinity Buttons                                    |   🟡   |
 | \[Let's Do] Hearth & Timber                         |   🟡   |
 | Macaw's Mods                                        |   🟩   |
-| Mighty Mail                                         |   🟩   |
-| Missing Wilds                                       |   🟩   |
+| Mighty Mail                                         |   🟥   |
+| Missing Wilds                                       |   🟥   |
 | More Beautiful Torches                              |   🟩   |
 | More Chests Variants (MCV)                          |   🟩   |
-| More Crafting Tables (MCT)                          |   🟩   |
+| More Crafting Tables (MCT)                          |   🟥   |
 | MrCrayfish's Furniture Mod: Refurbished             |   🟩   |
 | Nosiphus Furniture Mod + MrCrayFish's Furniture Mod |   🟡   |
 | Rechiseled                                          |   🟩   |
@@ -68,11 +68,11 @@
 | Storage Delight                                     |   🟡   |
 | Storage Drawers                                     |   🟩   |
 | Table Top Craft                                     |   ❔   |
-| The New Shutter aka Launch's Shutter                |   🟩   |
-| Twigs                                               |   🟩   |
+| The New Shutter aka Launch's Shutter                |   🟥   |
+| Twigs                                               |   🟥   |
 | Unusual End                                         |   🟡   |
-| Valhelsia Furniture                                 |   🟩   |
-| Variant Vanilla Blocks (XanthianZ)                  |   🟩   |
+| Valhelsia Furniture                                 |   🟥   |
+| Variant Vanilla Blocks (XanthianZ)                  |   🟥   |
 |                                                     |        |
 
 </td><td valign="top">
@@ -80,45 +80,45 @@
 | MODS                                 | STATUS |
 |--------------------------------------|:------:|
 | Absent by Design                     |   ❔   |
-| Beautify! (Beautify Decorate)        |   🟩   |
+| Beautify! (Beautify Decorate)        |   🟥   |
 | Beautify Refoxed                     |   🟩   |
 | Bibliocraft Legacy                   |   🟩   |
-| Boatload                             |   🟩   |
-| Builders Crafts & Additions          |   🟩   |
+| Boatload                             |   🟥   |
+| Builders Crafts & Additions          |   🟥   |
 | Builder's Delight                    |   ❔   |
 | Corail Woodcutter                    |   🟩   |
 | Create (NEOFORGE)                    |   ❔   |
-| Curiosities!                         |   🟩   |
+| Curiosities!                         |   🟥   |
 | Decoration Delight: Refurbished      |   ❔   |
 | Ex Nihilo Sequentia                  |   🟡   |
 | Functional Storage                   |   🟩   |
 | Just A Raft Mod                      |   🟩   |
-| Legend's Missing Blocks              |   🟩   |
+| Legend's Missing Blocks              |   🟥   |
 | Lepton (FORGE)                       |   🟡   |
-| Lightman's Currency                  |   🟩   |
+| Lightman's Currency                  |   🟥   |
 | Market Crates                        |   ❔   |
-| More Crafting Tables for Forge       |   🟩   |
+| More Crafting Tables for Forge       |   🟥   |
 | Mosaic Carpentry                     |   ❔   |
 | No Man's Land                        |   🟡   |
 | Oreberries Replanted                 |   🟩   |
 | Pokecube AIO                         |   ❔   |
 | Premium Wood                         |   ❔   |
 | Productive Bees                      |   🟥   |
-| Quark                                |   🟩   |
+| Quark                                |   🟥   |
 | Re:Deco                              |   ❔   |
-| Shadow_x_os's Blocks +               |   🟩   |
+| Shadow_x_os's Blocks +               |   🟥   |
 | The Graveyard                        |   ❔   |
 | The Twilight Forest                  |   🟩   |
 | Timber Frames                        |   🟠   |
 | Tropicraft                           |   🟩   |
 | Ultimate Car Mod                     |   🟩   |
 | Unusual End                          |   🟡   |
-| Unusual Furniture                    |   🟩   |
-| Valhelsia Structures                 |   🟩   |
+| Unusual Furniture                    |   🟥   |
+| Valhelsia Structures                 |   🟥   |
 | Variant Crafting Tables (Kitteh6660) |   ❔   |
 | Villagers Plus (NEOFORGE)            |   🟩   |
-| Woodster                             |   🟩   |
-| Woodworks                            |   🟩   |
+| Woodster                             |   🟥   |
+| Woodworks                            |   🟥   |
 | Workshop for Handsome Adventurer     |   🟥   |
 | XercaMod                             |   ❔   |
 |                                      |        |
