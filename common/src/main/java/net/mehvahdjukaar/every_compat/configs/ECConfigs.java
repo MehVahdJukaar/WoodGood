@@ -103,7 +103,7 @@ public class ECConfigs {
         TAB_MODE = builder
                 .comment(" Where the added items show up in the creative menu")
                 .gameRestart()
-                .define("creative_tab_mode", TabMode.BOTH);
+                .define("creative_tab_mode", TabMode.EC_TAB);
         TAB_ITEM_SEARCH_ENABLED = builder
                 .comment("Allow the item_search or searchBar to be visible.")
                 .gameRestart()
