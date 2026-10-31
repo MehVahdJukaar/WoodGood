@@ -193,18 +193,18 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
 
     @Override
     public void registerItems(CompatModule module, Registrator<Item> registry) {
-        blocks.forEach((w, value) -> {
+        blocks.forEach((woodType, value) -> {
             Item i;
-            CreativeModeTab tab = getTab(w, value);
+            CreativeModeTab tab = getTab(woodType, value);
 
             if (itemFactory != null) {
-                i = itemFactory.apply(w, value, new Item.Properties().tab(tab));
+                i = itemFactory.apply(woodType, value, new Item.Properties().tab(tab));
             } else {
-                i = new BlockTypeBasedBlockItem<>(value, new Item.Properties().tab(tab), w);
+                i = new BlockTypeBasedBlockItem<>(value, new Item.Properties().tab(tab), woodType);
             }
             //for ones that don't have item
             if (i != null) {
-                this.items.put(w, i);
+                this.items.put(woodType, i);
                 registry.register(Utils.getID(value), i);
             }
         });
