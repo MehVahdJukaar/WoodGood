@@ -2,169 +2,11 @@ plugins {
     id "architectury-plugin" version "3.4-SNAPSHOT"
     id "dev.architectury.loom" version "1.6.+" apply false
     id 'io.github.juuxel.loom-quiltflower' version '1.7.1' apply false
-    id "com.matthewprenger.cursegradle" version "1.4.0"
-    id "com.modrinth.minotaur" version "2.+"
+    id "me.modmuss50.mod-publish-plugin" version "2.2.0" apply false
 }
 
 architectury {
     minecraft = rootProject.minecraft_version
-}
-
-subprojects {
-    apply plugin: "dev.architectury.loom"
-    apply plugin: "io.github.juuxel.loom-quiltflower"
-    apply plugin: "com.matthewprenger.cursegradle"
-    apply plugin: "com.modrinth.minotaur"
-
-    loom {
-        silentMojangMappingsLicense()
-    }
-
-    dependencies {
-        minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
-        // The following line declares the mojmap mappings, you may use other mappings as well
-        mappings loom.layered() {
-            it.parchment("org.parchmentmc.data:parchment-${rootProject.parchment_version}")
-            it.officialMojangMappings {
-                setNameSyntheticMembers(false)
-            }
-        }
-    }
-
-    var env = System.getenv()
-    var modLoader = name
-
-    var changelogFile = rootProject.file("changelog.md")
-    var changelogText = changelogFile.exists() ? changelogFile.text : ""
-
-    if (env.MODRINTH_TOKEN) {
-        modrinth {
-            projectId = "every-compat"
-            uploadFile = tasks.remapJar
-            gameVersions = [rootProject.minecraft_version]
-            loaders = [modLoader]
-            changelog = changelogText
-
-            if (modLoader == "fabric") {
-                dependencies {
-                    required.project "fabric-api"
-                    required.project "moonlight"
-                }
-            } else {
-                dependencies {
-                    required.project "moonlight"
-                }
-            }
-        }
-    }
-
-    if (env.CURSEFORGE_TOKEN) {
-        curseforge {
-            apiKey = env.CURSEFORGE_TOKEN
-            project {
-                id = rootProject.project_id
-                changelogType = 'markdown'
-                changelog = changelogText
-                releaseType = 'release'
-                addGameVersion rootProject.minecraft_version
-                addGameVersion modLoader.capitalize()
-
-                mainArtifact(tasks.remapJar)
-
-                if (modLoader == "fabric") {
-                    relations {
-                        requiredDependency "fabric-api"
-                        requiredDependency "selene"
-                        optionalDependency("another-furniture")
-                        optionalDependency("architects-palette-fabric")
-                        optionalDependency("beautify-refabricated")
-                        optionalDependency("bewitchment")
-                        optionalDependency("camp-chair")
-                        optionalDependency("chipped")
-                        optionalDependency("cozy")
-                        optionalDependency("create-fabric")
-                        optionalDependency("decorative-blocks")
-                        optionalDependency("dramatic-doors")
-                        optionalDependency("exlines-bark-carpets")
-                        optionalDependency("farmers-delight-fabric")
-                        optionalDependency("friends-and-foes")
-                        optionalDependency("furnish")
-                        optionalDependency("handcrafted")
-                        optionalDependency("hearth-and-home")
-                        optionalDependency("infinitybuttons")
-                        optionalDependency("macaws-bridges")
-                        optionalDependency("macaws-doors")
-                        optionalDependency("macaws-fences-and-walls")
-                        optionalDependency("macaws-furniture")
-                        optionalDependency("macaws-lights-and-lamps")
-                        optionalDependency("macaws-paths-and-pavings")
-                        optionalDependency("macaws-roofs")
-                        optionalDependency("macaws-trapdoors")
-                        optionalDependency("macaws-windows")
-                        optionalDependency("missing-wilds")
-                        optionalDependency("red-bits")
-                        optionalDependency("refurbished-furniture")
-                        optionalDependency("table-top-craft-fabric")
-                        optionalDependency("the-twilight-forest")
-                        optionalDependency("twigs")
-                    }
-                } else {
-                    relations {
-                        requiredDependency("selene")
-                        optionalDependency("another-furniture")
-                        optionalDependency("architects-palette")
-                        optionalDependency("beautify-decorate")
-                        optionalDependency("backpacked")
-                        optionalDependency("builders-delight-forge")
-                        optionalDependency("buildersaddition")
-                        optionalDependency("camp-chair")
-                        optionalDependency("chipped")
-                        optionalDependency("create")
-                        optionalDependency("decorative-blocks")
-                        optionalDependency("domum-ornamentum")
-                        optionalDependency("dramatic-doors")
-                        optionalDependency("exnihilosequentia")
-                        optionalDependency("exlines-bark-carpets")
-                        optionalDependency("farmers-delight")
-                        optionalDependency("friends-and-foes-forge")
-                        optionalDependency("furnish")
-                        optionalDependency("habitat")
-                        optionalDependency("handcrafted")
-                        optionalDependency("infinitybuttons")
-                        optionalDependency("lauchs-shutters")
-                        optionalDependency("macaws-bridges")
-                        optionalDependency("macaws-doors")
-                        optionalDependency("macaws-fences-and-walls")
-                        optionalDependency("macaws-furniture")
-                        optionalDependency("macaws-lights-and-lamps")
-                        optionalDependency("macaws-paths-and-pavings")
-                        optionalDependency("macaws-roofs")
-                        optionalDependency("macaws-trapdoors")
-                        optionalDependency("macaws-windows")
-                        optionalDependency("mighty-mail")
-                        optionalDependency("missing-wilds-forge")
-                        optionalDependency("mosaic-carpentry")
-                        optionalDependency("mrcrayfish-furniture-mod")
-                        optionalDependency("pokecube-aoi")
-                        optionalDependency("premium-wood")
-                        optionalDependency("productivebees")
-                        optionalDependency("quark")
-                        optionalDependency("rechiseled")
-                        optionalDependency("refurbished-furniture")
-                        optionalDependency("storage-drawers")
-                        optionalDependency("table-top-craft")
-                        optionalDependency("the-twilight-forest")
-                        optionalDependency("twigs")
-                        optionalDependency("valhelsia-structures")
-                        optionalDependency("woodster")
-                        optionalDependency("woodworks")
-                        optionalDependency("workshop-for-handsome-adventurer")
-                        optionalDependency("xercamod")
-                    }
-                }
-            }
-        }
-    }
 }
 
 allprojects {
@@ -195,9 +37,10 @@ allprojects {
             url = "https://www.cursemaven.com"
             allowInsecureProtocol = true
         }
-        maven {
-            url = "https://api.modrinth.com/maven"
-        }
+        maven { url = "https://api.modrinth.com/maven" }
+
+//        maven { url = "https://maven.firstdark.dev/releases" } // mod-publish-plugin
+
         maven { url = "https://mvn.devos.one/snapshots/" }
 
         maven { url = "https://jitpack.io/" } // for Porting Lib: Mixin Extras, Fabric ASM
@@ -208,7 +51,164 @@ allprojects {
         }
     }
 
-    tasks.withType(JavaCompile) {
+    subprojects {
+        apply plugin: "dev.architectury.loom"
+        apply plugin: "io.github.juuxel.loom-quiltflower"
+        apply plugin: "me.modmuss50.mod-publish-plugin"
+
+        loom {
+            silentMojangMappingsLicense()
+        }
+
+        dependencies {
+            minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
+            // The following line declares the mojmap mappings, you may use other mappings as well
+            mappings loom.layered() {
+                it.parchment("org.parchmentmc.data:parchment-${rootProject.parchment_version}")
+                it.officialMojangMappings {
+                    setNameSyntheticMembers(false)
+                }
+            }
+        }
+
+        var env = System.getenv()
+        var modLoader = name
+
+        var changelogFile = rootProject.file("changelog.md")
+        var changelogText = changelogFile.exists() ? changelogFile.text : ""
+
+        publishMods {
+            dryRun = false
+            file = tasks.remapJar.archiveFile
+            changelog = changelogText
+            version = mod_version + "-" + modLoader
+            type = release_type == "beta" ? BETA : (release_type == "alpha" ? ALPHA : STABLE)
+            displayName = mod_id + "-" + mod_version + "-" + modLoader
+            modLoaders.add(modLoader)
+
+            if (env.MODRINTH_TOKEN) {
+                modrinth {
+                    accessToken = env.MODRINTH_TOKEN
+                    projectId = "${modrinth_id}"
+                    environment = CLIENT_AND_SERVER
+
+                    minecraftVersions.add("${minecraft_version}")
+
+                    if (modLoader == "fabric") {
+                        dependencies {
+                            requires("fabric-api")
+                            requires("moonlight")
+                        }
+                    } else {
+                        dependencies {
+                            requires("moonlight")
+                        }
+                    }
+                }
+            }
+
+            if (env.CURSEFORGE_TOKEN) {
+                curseforge {
+                    accessToken = env.CURSEFORGE_TOKEN
+                    projectId = curseforge_id
+
+                    minecraftVersions.add("${minecraft_version}")
+
+                    clientRequired = true
+                    serverRequired = true
+
+                    if (modLoader == "fabric") {
+                        requires("fabric-api")
+                        requires("selene")
+                        optional("another-furniture")
+                        optional("architects-palette-fabric")
+                        optional("beautify-refabricated")
+                        optional("bewitchment")
+                        optional("camp-chair")
+                        optional("chipped")
+                        optional("cozy")
+                        optional("create-fabric")
+                        optional("decorative-blocks")
+                        optional("dramatic-doors")
+                        optional("exlines-bark-carpets")
+                        optional("farmers-delight-fabric")
+                        optional("friends-and-foes")
+                        optional("furnish")
+                        optional("handcrafted")
+                        optional("hearth-and-home")
+                        optional("infinitybuttons")
+                        optional("macaws-bridges")
+                        optional("macaws-doors")
+                        optional("macaws-fences-and-walls")
+                        optional("macaws-furniture")
+                        optional("macaws-lights-and-lamps")
+                        optional("macaws-paths-and-pavings")
+                        optional("macaws-roofs")
+                        optional("macaws-trapdoors")
+                        optional("macaws-windows")
+                        optional("missing-wilds")
+                        optional("red-bits")
+                        optional("refurbished-furniture")
+                        optional("table-top-craft-fabric")
+                        optional("the-twilight-forest")
+                        optional("twigs")
+                    } else {
+                        requires("selene")
+                        optional("another-furniture")
+                        optional("architects-palette")
+                        optional("beautify-decorate")
+                        optional("backpacked")
+                        optional("builders-delight-forge")
+                        optional("buildersaddition")
+                        optional("camp-chair")
+                        optional("chipped")
+                        optional("create")
+                        optional("decorative-blocks")
+                        optional("domum-ornamentum")
+                        optional("dramatic-doors")
+                        optional("exnihilosequentia")
+                        optional("exlines-bark-carpets")
+                        optional("farmers-delight")
+                        optional("friends-and-foes-forge")
+                        optional("furnish")
+                        optional("habitat")
+                        optional("handcrafted")
+                        optional("infinitybuttons")
+                        optional("lauchs-shutters")
+                        optional("macaws-bridges")
+                        optional("macaws-doors")
+                        optional("macaws-fences-and-walls")
+                        optional("macaws-furniture")
+                        optional("macaws-lights-and-lamps")
+                        optional("macaws-paths-and-pavings")
+                        optional("macaws-roofs")
+                        optional("macaws-trapdoors")
+                        optional("macaws-windows")
+                        optional("mighty-mail")
+                        optional("missing-wilds-forge")
+                        optional("mosaic-carpentry")
+                        optional("mrcrayfish-furniture-mod")
+                        optional("pokecube-aoi")
+                        optional("premium-wood")
+                        optional("productivebees")
+                        optional("quark")
+                        optional("rechiseled")
+                        optional("refurbished-furniture")
+                        optional("storage-drawers")
+                        optional("table-top-craft")
+                        optional("the-twilight-forest")
+                        optional("twigs")
+                        optional("valhelsia-structures")
+                        optional("woodworks")
+                        optional("workshop-for-handsome-adventurer")
+                        optional("xercamod")
+                    }
+                }
+            }
+        }
+    }
+
+    tasks.withType(JavaCompile).configureEach {
         options.encoding = "UTF-8"
         options.release = 17
     }
