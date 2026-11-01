@@ -1669,5 +1669,7 @@
   "everycomp.configuration.more_beautiful_torches.planks_torch_wall": "Planks Torch Wall",
   "everycomp.configuration.more_beautiful_torches.log_torch_wall": "Log Torch Wall",
   "everycomp.configuration.more_beautiful_torches.log_soul_torch_wall": "Log Soul Torch Wall",
-  "everycomp.configuration.more_beautiful_torches.log_redstone_torch_wall": "Log Redstone Torch Wall"
+  "everycomp.configuration.more_beautiful_torches.log_redstone_torch_wall": "Log Redstone Torch Wall",
+  "everycomp.configuration.general.creative_tab_mode": "Creative Tab Mode",
+  "everycomp.configuration.general.creative_tab_mode.description": " Where the added items show up in the creative menu"
 }
