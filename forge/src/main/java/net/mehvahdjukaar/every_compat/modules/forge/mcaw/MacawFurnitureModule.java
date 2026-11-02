@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.forge.mcaw;
 
-import com.mcwfurnitures.kikoz.MacawsFurnitures;
 import com.mcwfurnitures.kikoz.init.BlockEntityInit;
 import com.mcwfurnitures.kikoz.init.BlockInit;
 import com.mcwfurnitures.kikoz.objects.*;
@@ -19,9 +18,9 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
@@ -85,15 +84,15 @@ public class MacawFurnitureModule extends SimpleModule {
 
     public MacawFurnitureModule(String modId) {
         super(modId, "mcfur");
-        CreativeModeTab tab = MacawsFurnitures.FURNITUREITEMGROUP;
+        ResourceLocation tab = modRes("furnitures");
 
 
         WARDROBE = SimpleEntrySet.builder(WoodType.class, "wardrobe",
                         BlockInit.OAK_WARDROBE, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new TallFurnitureHinge(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wardrobe"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("wardrobe"), Registries.BLOCK)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -102,9 +101,9 @@ public class MacawFurnitureModule extends SimpleModule {
         modernWardrobe = SimpleEntrySet.builder(WoodType.class, "modern_wardrobe",
                         BlockInit.OAK_MODERN_WARDROBE, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new TallFurnitureHinge(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("modern_wardrobe"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("modern_wardrobe"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -113,9 +112,9 @@ public class MacawFurnitureModule extends SimpleModule {
         doubleWardrobe = SimpleEntrySet.builder(WoodType.class, "double_wardrobe",
                         BlockInit.OAK_DOUBLE_WARDROBE, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new TallFurniture(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("double_wardrobe"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("double_wardrobe"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -124,9 +123,9 @@ public class MacawFurnitureModule extends SimpleModule {
         bookshelf = SimpleEntrySet.builder(WoodType.class, "bookshelf",
                         BlockInit.OAK_BOOKSHELF, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new BookCabinet(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("bookshelf"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("bookshelf"), Registries.BLOCK)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -135,9 +134,9 @@ public class MacawFurnitureModule extends SimpleModule {
         cupboardBookshelf = SimpleEntrySet.builder(WoodType.class, "bookshelf_cupboard",
                         BlockInit.OAK_BOOKSHELF_CUPBOARD, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new BookCabinetHinge(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("bookshelf_cupboard"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("bookshelf_cupboard"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -146,9 +145,9 @@ public class MacawFurnitureModule extends SimpleModule {
         drawer = SimpleEntrySet.builder(WoodType.class, "drawer",
                         BlockInit.OAK_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new WideFurniture(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("drawer"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("drawer"), Registries.BLOCK)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -157,9 +156,9 @@ public class MacawFurnitureModule extends SimpleModule {
         doubleDrawer = SimpleEntrySet.builder(WoodType.class, "double_drawer",
                         BlockInit.OAK_DOUBLE_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new WideFurniture(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("double_drawer"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("double_drawer"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -168,9 +167,9 @@ public class MacawFurnitureModule extends SimpleModule {
         bookshelfDrawer = SimpleEntrySet.builder(WoodType.class, "bookshelf_drawer",
                         BlockInit.OAK_BOOKSHELF_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new BookDrawer(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("bookshelf_drawer"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("bookshelf_drawer"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -179,9 +178,9 @@ public class MacawFurnitureModule extends SimpleModule {
         lowerBookshelfDrawer = SimpleEntrySet.builder(WoodType.class, "lower_bookshelf_drawer",
                         BlockInit.OAK_LOWER_BOOKSHELF_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new BookDrawer(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("lower_bookshelf_drawer"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("lower_bookshelf_drawer"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -190,9 +189,9 @@ public class MacawFurnitureModule extends SimpleModule {
         largeDrawer = SimpleEntrySet.builder(WoodType.class, "large_drawer",
                         BlockInit.OAK_LARGE_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new WideFurniture(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("large_drawer"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("large_drawer"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -201,9 +200,9 @@ public class MacawFurnitureModule extends SimpleModule {
         lowerTripleDrawer = SimpleEntrySet.builder(WoodType.class, "lower_triple_drawer",
                         BlockInit.OAK_LOWER_TRIPLE_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new WideFurniture(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("lower_triple_drawer"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("lower_triple_drawer"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -212,9 +211,9 @@ public class MacawFurnitureModule extends SimpleModule {
         TRIPLE_DRAWER = SimpleEntrySet.builder(WoodType.class, "triple_drawer",
                         BlockInit.OAK_TRIPLE_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new WideFurniture(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("triple_drawer"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("triple_drawer"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -223,9 +222,9 @@ public class MacawFurnitureModule extends SimpleModule {
         desk = SimpleEntrySet.builder(WoodType.class, "desk",
                         BlockInit.OAK_DESK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Desk(Utils.copyPropertySafe(w.log)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("desk"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("desk"), Registries.BLOCK)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(desk);
@@ -233,9 +232,9 @@ public class MacawFurnitureModule extends SimpleModule {
         coveredDesk = SimpleEntrySet.builder(WoodType.class, "covered_desk",
                         BlockInit.OAK_COVERED_DESK, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Desk(Utils.copyPropertySafe(w.log)))
-                .addTag(modRes("covered_desk"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("covered_desk"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(coveredDesk);
@@ -243,9 +242,9 @@ public class MacawFurnitureModule extends SimpleModule {
         modernDesk = SimpleEntrySet.builder(WoodType.class, "modern_desk",
                         BlockInit.OAK_MODERN_DESK, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new Desk(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("modern_desk"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("modern_desk"), Registries.BLOCK)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(modernDesk);
@@ -253,9 +252,9 @@ public class MacawFurnitureModule extends SimpleModule {
         TABLE = SimpleEntrySet.builder(WoodType.class, "table",
                         BlockInit.OAK_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TableHitbox(Utils.copyPropertySafe(w.log)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("table"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("table"), Registries.BLOCK)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(TABLE);
@@ -263,9 +262,9 @@ public class MacawFurnitureModule extends SimpleModule {
         endTable = SimpleEntrySet.builder(WoodType.class, "end_table",
                         BlockInit.OAK_END_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TableHitbox(Utils.copyPropertySafe(w.log)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("end_table"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("end_table"), Registries.BLOCK)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(endTable);
@@ -273,9 +272,9 @@ public class MacawFurnitureModule extends SimpleModule {
         coffeeTable = SimpleEntrySet.builder(WoodType.class, "coffee_table",
                         BlockInit.OAK_COFFEE_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Table(Utils.copyPropertySafe(w.log)))
-                .addTag(modRes("coffee_table"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("coffee_table"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(coffeeTable);
@@ -283,10 +282,10 @@ public class MacawFurnitureModule extends SimpleModule {
         glassTable = SimpleEntrySet.builder(WoodType.class, "glass_table",
                         BlockInit.OAK_GLASS_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new TableHitbox(Utils.copyPropertySafe(w.log)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("glass_table"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("glass_table"), Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(glassTable);
@@ -294,9 +293,9 @@ public class MacawFurnitureModule extends SimpleModule {
         chair = SimpleEntrySet.builder(WoodType.class, "chair",
                         BlockInit.OAK_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new ClassicChair(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("chair"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("chair"), Registries.BLOCK)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(chair);
@@ -304,9 +303,9 @@ public class MacawFurnitureModule extends SimpleModule {
         modernChair = SimpleEntrySet.builder(WoodType.class, "modern_chair",
                         BlockInit.OAK_MODERN_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new ModernChair(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("modern_chair"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("modern_chair"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(modernChair);
@@ -314,10 +313,10 @@ public class MacawFurnitureModule extends SimpleModule {
         stripedChair = SimpleEntrySet.builder(WoodType.class, "striped_chair",
                         BlockInit.OAK_STRIPED_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new StripedChair(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("striped_chair"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("striped_chair"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(stripedChair);
@@ -325,9 +324,9 @@ public class MacawFurnitureModule extends SimpleModule {
         stool = SimpleEntrySet.builder(WoodType.class, "stool_chair",
                         BlockInit.OAK_STOOL_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new Chair(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("stool_chair"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("stool_chair"), Registries.BLOCK)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(stool);
@@ -335,9 +334,9 @@ public class MacawFurnitureModule extends SimpleModule {
         counter = SimpleEntrySet.builder(WoodType.class, "counter",
                         BlockInit.OAK_COUNTER, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new Counter(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("counter"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("counter"), Registries.BLOCK)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(counter);
@@ -345,9 +344,9 @@ public class MacawFurnitureModule extends SimpleModule {
         drawerCounter = SimpleEntrySet.builder(WoodType.class, "drawer_counter",
                         BlockInit.OAK_DRAWER_COUNTER, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new StorageCounter(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("drawer_counter"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("drawer_counter"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -356,9 +355,9 @@ public class MacawFurnitureModule extends SimpleModule {
         doubleDrawerCounter = SimpleEntrySet.builder(WoodType.class, "double_drawer_counter",
                         BlockInit.OAK_DOUBLE_DRAWER_COUNTER, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new StorageCounter(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("double_drawer_counter"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("double_drawer_counter"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -367,10 +366,10 @@ public class MacawFurnitureModule extends SimpleModule {
         cupboardCounter = SimpleEntrySet.builder(WoodType.class, "cupboard_counter",
                         BlockInit.OAK_CUPBOARD_COUNTER, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new CupboardCounter(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("cupboard_counter"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("cupboard_counter"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::solid)
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -379,9 +378,9 @@ public class MacawFurnitureModule extends SimpleModule {
         STRIPPED_WARDROBE = SimpleEntrySet.builder(WoodType.class, "wardrobe", "stripped",
                         BlockInit.STRIPPED_OAK_WARDROBE, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new TallFurnitureHinge(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wardrobe"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("wardrobe"), Registries.BLOCK)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -390,9 +389,9 @@ public class MacawFurnitureModule extends SimpleModule {
         STRIPPED_MODERN_WARDROBE = SimpleEntrySet.builder(WoodType.class, "modern_wardrobe", "stripped",
                         BlockInit.STRIPPED_OAK_MODERN_WARDROBE, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new TallFurnitureHinge(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("modern_wardrobe"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("modern_wardrobe"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -401,9 +400,9 @@ public class MacawFurnitureModule extends SimpleModule {
         STRIPPED_DOUBLE_WARDROBE = SimpleEntrySet.builder(WoodType.class, "double_wardrobe", "stripped",
                         BlockInit.STRIPPED_OAK_DOUBLE_WARDROBE, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new TallFurniture(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("double_wardrobe"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("double_wardrobe"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -412,9 +411,9 @@ public class MacawFurnitureModule extends SimpleModule {
         strippedBookshelf = SimpleEntrySet.builder(WoodType.class, "bookshelf", "stripped",
                         BlockInit.STRIPPED_OAK_BOOKSHELF, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new BookCabinet(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("bookshelf"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("bookshelf"), Registries.BLOCK)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -423,9 +422,9 @@ public class MacawFurnitureModule extends SimpleModule {
         STRIPPED_CUPBOARD_BOOKSHELF = SimpleEntrySet.builder(WoodType.class, "bookshelf_cupboard", "stripped",
                         BlockInit.STRIPPED_OAK_BOOKSHELF_CUPBOARD, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new BookCabinetHinge(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("bookshelf_cupboard"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("bookshelf_cupboard"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -434,9 +433,9 @@ public class MacawFurnitureModule extends SimpleModule {
         STRIPPED_DRAWER = SimpleEntrySet.builder(WoodType.class, "drawer", "stripped",
                         BlockInit.STRIPPED_OAK_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new WideFurniture(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("drawer"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("drawer"), Registries.BLOCK)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -445,9 +444,9 @@ public class MacawFurnitureModule extends SimpleModule {
         STRIPPED_DOUBLE_DRAWER = SimpleEntrySet.builder(WoodType.class, "double_drawer", "stripped",
                         BlockInit.STRIPPED_OAK_DOUBLE_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new WideFurniture(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("double_drawer"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("double_drawer"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -456,9 +455,9 @@ public class MacawFurnitureModule extends SimpleModule {
         strippedBookshelfDrawer = SimpleEntrySet.builder(WoodType.class, "bookshelf_drawer", "stripped",
                         BlockInit.STRIPPED_OAK_BOOKSHELF_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new BookDrawer(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("bookshelf_drawer"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("bookshelf_drawer"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -467,9 +466,9 @@ public class MacawFurnitureModule extends SimpleModule {
         STRIPPED_LOWER_BOOKSHELF_DRAWER = SimpleEntrySet.builder(WoodType.class, "lower_bookshelf_drawer", "stripped",
                         BlockInit.STRIPPED_OAK_LOWER_BOOKSHELF_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new BookDrawer(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("lower_bookshelf_drawer"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("lower_bookshelf_drawer"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -478,9 +477,9 @@ public class MacawFurnitureModule extends SimpleModule {
         STRIPPED_LARGE_DRAWER = SimpleEntrySet.builder(WoodType.class, "large_drawer", "stripped",
                         BlockInit.STRIPPED_OAK_LARGE_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new WideFurniture(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("large_drawer"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("large_drawer"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -489,9 +488,9 @@ public class MacawFurnitureModule extends SimpleModule {
         STRIPPED_LOWER_TRIPLE_DRAWER = SimpleEntrySet.builder(WoodType.class, "lower_triple_drawer", "stripped",
                         BlockInit.STRIPPED_OAK_LOWER_TRIPLE_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new WideFurniture(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("lower_triple_drawer"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("lower_triple_drawer"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -500,9 +499,9 @@ public class MacawFurnitureModule extends SimpleModule {
         STRIPPED_TRIPLE_DRAWER = SimpleEntrySet.builder(WoodType.class, "triple_drawer", "stripped",
                         BlockInit.STRIPPED_OAK_TRIPLE_DRAWER, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new WideFurniture(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("triple_drawer"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("triple_drawer"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -511,9 +510,9 @@ public class MacawFurnitureModule extends SimpleModule {
         STRIPPED_DESK = SimpleEntrySet.builder(WoodType.class, "desk", "stripped",
                         BlockInit.STRIPPED_OAK_DESK, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new Desk(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("desk"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("desk"), Registries.BLOCK)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(STRIPPED_DESK);
@@ -521,9 +520,9 @@ public class MacawFurnitureModule extends SimpleModule {
         STRIPPED_COVERED_DESK = SimpleEntrySet.builder(WoodType.class, "covered_desk", "stripped",
                         BlockInit.STRIPPED_OAK_COVERED_DESK, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new Desk(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("covered_desk"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("covered_desk"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(STRIPPED_COVERED_DESK);
@@ -531,9 +530,9 @@ public class MacawFurnitureModule extends SimpleModule {
         STRIPPED_MODERN_DESK = SimpleEntrySet.builder(WoodType.class, "modern_desk", "stripped",
                         BlockInit.STRIPPED_OAK_MODERN_DESK, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new Desk(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("modern_desk"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("modern_desk"), Registries.BLOCK)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(STRIPPED_MODERN_DESK);
@@ -541,9 +540,9 @@ public class MacawFurnitureModule extends SimpleModule {
         STRIPPED_TABLE = SimpleEntrySet.builder(WoodType.class, "table", "stripped",
                         BlockInit.STRIPPED_OAK_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new TableHitbox(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("table"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("table"), Registries.BLOCK)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(STRIPPED_TABLE);
@@ -551,9 +550,9 @@ public class MacawFurnitureModule extends SimpleModule {
         STRIPPED_END_TABLE = SimpleEntrySet.builder(WoodType.class, "end_table", "stripped",
                         BlockInit.STRIPPED_OAK_END_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new TableHitbox(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("end_table"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("end_table"), Registries.BLOCK)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(STRIPPED_END_TABLE);
@@ -561,9 +560,9 @@ public class MacawFurnitureModule extends SimpleModule {
         strippedCoffeeTable = SimpleEntrySet.builder(WoodType.class, "coffee_table", "stripped",
                         BlockInit.STRIPPED_OAK_COFFEE_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new Table(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("coffee_table"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("coffee_table"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedCoffeeTable);
@@ -571,10 +570,10 @@ public class MacawFurnitureModule extends SimpleModule {
         STRIPPED_GLASS_TABLE = SimpleEntrySet.builder(WoodType.class, "glass_table", "stripped",
                         BlockInit.STRIPPED_OAK_GLASS_TABLE, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new TableHitbox(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("glass_table"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("glass_table"), Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(STRIPPED_GLASS_TABLE);
@@ -582,9 +581,9 @@ public class MacawFurnitureModule extends SimpleModule {
         strippedChair = SimpleEntrySet.builder(WoodType.class, "chair", "stripped",
                         BlockInit.STRIPPED_OAK_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new ClassicChair(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("chair"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("chair"), Registries.BLOCK)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedChair);
@@ -592,9 +591,9 @@ public class MacawFurnitureModule extends SimpleModule {
         STRIPPED_MODERN_CHAIR = SimpleEntrySet.builder(WoodType.class, "modern_chair", "stripped",
                         BlockInit.STRIPPED_OAK_MODERN_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new ModernChair(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("modern_chair"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("modern_chair"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(STRIPPED_MODERN_CHAIR);
@@ -602,10 +601,10 @@ public class MacawFurnitureModule extends SimpleModule {
         STRIPPED_STRIPED_CHAIR = SimpleEntrySet.builder(WoodType.class, "striped_chair", "stripped",
                         BlockInit.STRIPPED_OAK_STRIPED_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new StripedChair(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("striped_chair"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("striped_chair"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(STRIPPED_STRIPED_CHAIR);
@@ -613,9 +612,9 @@ public class MacawFurnitureModule extends SimpleModule {
         STRIPPED_STOOL = SimpleEntrySet.builder(WoodType.class, "stool_chair", "stripped",
                         BlockInit.STRIPPED_OAK_STOOL_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new Chair(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("stool_chair"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("stool_chair"), Registries.BLOCK)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(STRIPPED_STOOL);
@@ -623,9 +622,9 @@ public class MacawFurnitureModule extends SimpleModule {
         strippedCounter = SimpleEntrySet.builder(WoodType.class, "counter", "stripped",
                         BlockInit.STRIPPED_OAK_COUNTER, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new Counter(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("counter"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("counter"), Registries.BLOCK)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(strippedCounter);
@@ -633,9 +632,9 @@ public class MacawFurnitureModule extends SimpleModule {
         STRIPPED_DRAWER_COUNTER = SimpleEntrySet.builder(WoodType.class, "drawer_counter", "stripped",
                         BlockInit.STRIPPED_OAK_DRAWER_COUNTER, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new StorageCounter(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("drawer_counter"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("drawer_counter"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -644,9 +643,9 @@ public class MacawFurnitureModule extends SimpleModule {
         STRIPPED_DOUBLE_DRAWER_COUNTER = SimpleEntrySet.builder(WoodType.class, "double_drawer_counter", "stripped",
                         BlockInit.STRIPPED_OAK_DOUBLE_DRAWER_COUNTER, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new StorageCounter(Blocks.OAK_PLANKS.defaultBlockState(), Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("double_drawer_counter"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("double_drawer_counter"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();
@@ -655,10 +654,10 @@ public class MacawFurnitureModule extends SimpleModule {
         STRIPPED_CUPBOARD_COUNTER = SimpleEntrySet.builder(WoodType.class, "cupboard_counter", "stripped",
                         BlockInit.STRIPPED_OAK_CUPBOARD_COUNTER, () -> WoodTypeRegistry.OAK_TYPE,
                         ifHasChild(w -> new CupboardCounter(Utils.copyPropertySafe(w.log)), "stripped_log"))
-                .addTag(modRes("cupboard_counter"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("cupboard_counter"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::solid)
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .addTile(BlockEntityInit.FURNITURE_STORAGE)
                 .defaultRecipe()
                 .build();

@@ -2,8 +2,6 @@ package net.mehvahdjukaar.every_compat.modules.forge.architect_palette;
 
 import architectspalette.content.blocks.BoardBlock;
 import architectspalette.content.blocks.RailingBlock;
-import architectspalette.core.ArchitectsPalette;
-import architectspalette.core.registry.APBlocks;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.block.ModStairBlock;
@@ -11,7 +9,6 @@ import net.mehvahdjukaar.moonlight.api.resources.textures.PaletteColor;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
@@ -19,10 +16,6 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.WallBlock;
-
-import java.util.Objects;
-
-import static architectspalette.core.registry.APBlocks.createBoardNode;
 
 //SUPPORT: v1.3.5+
 public class ArchitectsPaletteModule extends SimpleModule {
@@ -43,11 +36,10 @@ public class ArchitectsPaletteModule extends SimpleModule {
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(() -> tab)
+//                .setTabKey(tab)
                 .build();
 
         this.addEntry(railings);
-
 
         boards = SimpleEntrySet.builder(WoodType.class, "boards",
                         () -> getModBlock("oak_boards"), () -> WoodTypeRegistry.OAK_TYPE,
@@ -56,7 +48,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(() -> tab)
+//                .setTabKey(tab)
                 .createPaletteFromOak(p -> {
 
                     while (p.size() > 7 && (p.getLightest().luminance()- p.getDarkest().luminance())>0.23) {
@@ -93,7 +85,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
                 .addTag(BlockTags.SLABS, Registries.BLOCK)
                 .defaultRecipe()
                 .copyParentDrop()
-                .setTab(() -> tab)
+//                .setTabKey(tab)
                 .build();
         this.addEntry(boardSlabs);
 
@@ -107,7 +99,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
                 .addTag(BlockTags.WALLS, Registries.BLOCK)
                 .addTag(BlockTags.WALLS, Registries.ITEM)
                 .defaultRecipe()
-                .setTab(() -> tab)
+//                .setTabKey(tab)
                 .build();
         this.addEntry(boardWalls);
 
@@ -120,7 +112,7 @@ public class ArchitectsPaletteModule extends SimpleModule {
                 .addTag(BlockTags.STAIRS, Registries.BLOCK)
                 .addTag(BlockTags.STAIRS, Registries.ITEM)
                 .defaultRecipe()
-                .setTab(() -> tab)
+//                .setTabKey(tab)
                 .build();
         this.addEntry(boardStairs);
     }

@@ -10,14 +10,13 @@ import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import ovh.corail.corail_pillar.block.BlockPillar;
-import ovh.corail.corail_pillar.registry.ModTabs;
 
 import java.util.Objects;
 
@@ -29,16 +28,16 @@ public class CorailPillarModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> SMALL_PLANK_PILLAR;
     public CorailPillarModule(String modId) {
         super(modId, "cpr");
-        CreativeModeTab tab = ModTabs.mainTab;
+        ResourceLocation tab = modRes(modId);
 
         LOG_PILLAR = SimpleEntrySet.builder(WoodType.class, "log", "pillar",
                 () -> getModBlock("pillar_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
                 w -> new BlockPillar(w.getTypeName(), w.log, false)
         )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("pillar"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wooden_pillar"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("pillar"), Registries.BLOCK)
+                .addTag(modRes("wooden_pillar"), Registries.BLOCK)
+                .setTabKey(tab)
                 .build();
         this.addEntry(LOG_PILLAR);
 
@@ -46,10 +45,10 @@ public class CorailPillarModule extends SimpleModule {
                 () -> getModBlock("small_pillar_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
                 w -> new BlockPillar(w.getTypeName(), w.log, true)
         )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("pillar"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wooden_pillar"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("pillar"), Registries.BLOCK)
+                .addTag(modRes("wooden_pillar"), Registries.BLOCK)
+                .setTabKey(tab)
                 .build();
         this.addEntry(SMALL_LOG_PILLAR);
 
@@ -57,10 +56,10 @@ public class CorailPillarModule extends SimpleModule {
                 () -> getModBlock("pillar_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                 w -> new BlockPillar(w.getTypeName(), w.log, true)
         )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("pillar"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wooden_pillar"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("pillar"), Registries.BLOCK)
+                .addTag(modRes("wooden_pillar"), Registries.BLOCK)
+                .setTabKey(tab)
                 .build();
         this.addEntry(PLANK_PILLAR);
 
@@ -68,10 +67,10 @@ public class CorailPillarModule extends SimpleModule {
                 () -> getModBlock("small_pillar_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                 w -> new BlockPillar(w.getTypeName(), w.log, true)
         )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("pillar"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wooden_pillar"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("pillar"), Registries.BLOCK)
+                .addTag(modRes("wooden_pillar"), Registries.BLOCK)
+                .setTabKey(tab)
                 .build();
         this.addEntry(SMALL_PLANK_PILLAR);
 

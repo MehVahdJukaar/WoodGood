@@ -4,7 +4,6 @@ import com.google.gson.JsonObject;
 import moriyashiine.bewitchment.api.block.PoppetShelfBlock;
 import moriyashiine.bewitchment.common.Bewitchment;
 import moriyashiine.bewitchment.common.registry.BWBlockEntityTypes;
-import moriyashiine.bewitchment.common.registry.BWObjects;
 import moriyashiine.bewitchment.common.registry.BWTags;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -17,7 +16,7 @@ import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Item;
@@ -43,7 +42,7 @@ public class BewitchmentModule extends SimpleModule {
                 )
                 .requiresChildren("slab") // Recipes
                 .addTile(() -> BWBlockEntityTypes.POPPET_SHELF)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
                 .build();
         this.addEntry(poppet_shelf);
@@ -55,7 +54,7 @@ public class BewitchmentModule extends SimpleModule {
                 .requiresChildren("stripped_log") // Recipes
                 .createPaletteFromChild(p -> {}, "log")
                 .addTexture(modRes("item/oak_bark"))
-                .addTag(BWTags.BARKS, Registry.ITEM_REGISTRY)
+                .addTag(BWTags.BARKS, Registries.ITEM)
                 .build();
         this.addEntry(bark);
 

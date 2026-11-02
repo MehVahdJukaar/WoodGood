@@ -9,7 +9,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
@@ -26,9 +26,9 @@ public class WoodenHoppersModule extends SimpleModule {
                         w -> new WoodenHopperBlock(Utils.copyPropertySafe(w.planks).strength(2))
                 )
                 .addTile(() -> Main.WOODEN_HOPPER_BLOCK_ENTITY_TYPE)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(WoodenHoppersBlockTags.WOODEN_HOPPERS, Registry.BLOCK_REGISTRY)
-                .addTag(WoodenHoppersItemTags.WOODEN_HOPPERS, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(WoodenHoppersBlockTags.WOODEN_HOPPERS, Registries.BLOCK)
+                .addTag(WoodenHoppersItemTags.WOODEN_HOPPERS, Registries.ITEM)
                 .defaultRecipe()
                 .build();
         this.addEntry(hoppers);

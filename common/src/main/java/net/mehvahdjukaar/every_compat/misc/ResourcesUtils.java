@@ -19,6 +19,7 @@ import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
@@ -34,6 +35,8 @@ import org.jetbrains.annotations.Nullable;
 import java.io.ByteArrayInputStream;
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ResourcesUtils {
 
@@ -339,35 +342,39 @@ public class ResourcesUtils {
     }
 
     public static <B extends Item, T extends BlockType> void addBlocksRecipes(ResourceManager manager, DynamicDataPack pack,
-                                                                              Map<T, B> items, ResourceLocation oakRecipe, T fromType,
+                                                                              Map<T, B> items, ResourceLocation baseRecipe, T fromType,
                                                                               int index) {
         IRecipeTemplate<?> template = RPUtils.readRecipeAsTemplate(manager,
-                ResType.RECIPES.getPath(oakRecipe));
+                ResType.RECIPES.getPath(baseRecipe));
 
-        items.forEach((w, i) -> {
+        items.forEach((woodType, item) -> {
 
-            if (WoodConfigs.isEntryEnabled(w, i)) {
+            if (WoodConfigs.isEntryEnabled(woodType, item)) {
                 try {
-                    //check for disabled ones. Will actually crash if its null since vanilla recipe builder expects a non-null one
-                    if (i.getItemCategory() != null) {
-                        String id = RecipeBuilder.getDefaultRecipeId(i).toString();
-                        FinishedRecipe newR;
-                        if (index != 0) {
-                            id += "_" + index;
-                            newR = template.createSimilar(fromType, w, w.mainChild().asItem(), id);
-                        } else {
-                            newR = template.createSimilar(fromType, w, w.mainChild().asItem());
-                        }
-                        if (newR == null) {
-                            EveryCompat.LOGGER.error("Failed to generate recipe for {}: recipe template returned null", i);
-                            return;
-                        }
-                        //not even needed
-                        newR = ForgeHelper.addRecipeConditions(newR, template.getConditions());
-                        pack.addRecipe(newR);
+                    String blockId = RecipeBuilder.getDefaultRecipeId(item).toString();
+                    FinishedRecipe newR;
+
+                    String baseRecipePath = baseRecipe.getPath();
+                    String modifiedRecipePath = baseRecipePath.substring(baseRecipePath.lastIndexOf("/") + 1).replace(fromType.getTypeName(), woodType.getTypeName());
+                    String target = blockId.substring(blockId.lastIndexOf("/") + 1);
+                    // Replaced the >text< with modifiedRecipe: everycomp:q/biomesoplenty/ >fir_vertical_slab<
+                    String newId = blockId.replace(target, modifiedRecipePath);
+
+                    // matches() ensure the last word, [a-z]_[a-z] is not one word, CASE: lightman's currency
+                    if (!blockId.equals(newId) && newId.matches("\\w+:\\w+/\\w+/\\w+_\\w+")) {
+                        newR = template.createSimilar(fromType, woodType, woodType.mainChild().asItem(), newId);
                     }
+                    else {
+                        newR = template.createSimilar(fromType, woodType, woodType.mainChild().asItem());
+                    }
+                    if (newR == null) return;
+
+                    newR = ForgeHelper.addRecipeConditions(newR, template.getConditions()); //not even needed
+
+                    // Adding to the resources
+                    pack.addRecipe(newR);
                 } catch (Exception e) {
-                    EveryCompat.LOGGER.error("Failed to generate recipe for {}:", i, e);
+                    EveryCompat.LOGGER.error("Failed to generate recipe @ {} for {}: {}", baseRecipe, item, e.getMessage());
                 }
             }
         });
@@ -398,6 +405,31 @@ public class ResourcesUtils {
             }
         }
         return newIng;
+    }
+
+    protected static final String RES_CHARS = "[a-z,A-Z,\\-,_./]*";
+    protected static final Pattern RES_PATTERN = Pattern.compile("\"(" + RES_CHARS + ":" + RES_CHARS + ")\"");
+
+    /*
+     * NOTE:
+     * if newItem is null, then m.group(0) will ensure that the value remain unchanged.
+     * Utils.getId(NULL) is why it returned "minecraft:air" and the .orElseGet() doesn't work.
+     *  CASE:
+     * Quark's bookshelf and it's loot_table where it has "minecraft:booK" will be replaced with
+     * "minecraft:air". A similar case with "minecraft:shulker_box"
+    **/
+    public static String convertItemIDinText(String text, BlockType fromType, BlockType toType) {
+        Matcher matcher = RES_PATTERN.matcher(text);
+        return matcher.replaceAll(m -> {
+            var item = BuiltInRegistries.ITEM.getOptional(ResourceLocation.tryParse(m.group(1)));
+            return item.map(value -> {
+                Item newItem = BlockType.changeItemType(value, fromType, toType);
+
+                if (newItem != null) return "\"" + Utils.getID(newItem).toString() + "\"";
+                else return m.group(0);
+
+            }).orElseGet(() -> m.group(0));
+        });
     }
 
 }

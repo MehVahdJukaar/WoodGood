@@ -8,7 +8,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
@@ -26,7 +26,7 @@ public class BackpackedModule extends SimpleModule {
                 )
                 .requiresChildren("slab") // Recipes
                 .addTile(ModBlockEntities.SHELF::get)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
                 .addRecipe(modRes("oak_backpack_shelf"))
                 .build();

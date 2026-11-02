@@ -1,5 +1,7 @@
 package net.mehvahdjukaar.every_compat.api;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.ECRegistry;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
@@ -168,10 +170,12 @@ public abstract class CompatModule {
 
     }
 
+    @Environment(EnvType.CLIENT)
     public void addDynamicClientResources(ClientDynamicResourcesHandler handler, ResourceManager manager) {
 
     }
 
+    @Environment(EnvType.CLIENT)
     public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
 
     }
@@ -373,6 +377,21 @@ public abstract class CompatModule {
     //how much crap this module has registered
     public abstract int bloatAmount();
 
-    public void stitchAtlasTextures(ClientHelper.AtlasTextureEvent event) {
+    //used for creative tabs
+    public <T extends BlockType> List<Item> getAllItemsOfType(T type) {
+        return List.of();
     }
+
+//    public <T> Supplier<T> memorize(String id, Registry<?> reg) {
+//        return Suppliers.memoize(() -> {
+//            try {
+//                return (T) reg.getOptional(modRes(id))
+//                        .orElseThrow();
+//            } catch (Throwable e) {
+//                throw new IllegalStateException("Could not find \"" + id + "\" in " + reg + ". This likely means that the reigstry entry was renamed in the original mod and EC needs updating. " +
+//                        "Is the mod, " + this.getModName().toUpperCase() + " up to date, if yes, then downgrade to the previous version & wait for an Every Compat update. Otherwise, update the mod to the latest version.");
+//            }
+//        });
+//    }
+
 }

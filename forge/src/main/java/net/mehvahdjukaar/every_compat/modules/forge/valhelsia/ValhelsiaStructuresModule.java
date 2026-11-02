@@ -2,12 +2,11 @@ package net.mehvahdjukaar.every_compat.modules.forge.valhelsia;
 
 import com.stal111.valhelsia_structures.common.block.CutPostBlock;
 import com.stal111.valhelsia_structures.common.block.PostBlock;
-import com.stal111.valhelsia_structures.common.item.ModCreativeModeTabs;
 import com.stal111.valhelsia_structures.core.init.ModRecipes;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
+import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.TemplateRecipeManager;
@@ -17,11 +16,9 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -43,7 +40,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                         w -> new PostBlock(Utils.getID(w.log), Utils.copyPropertySafe(w.log)))
                 .addTag(modRes("posts"), Registries.BLOCK)
                 .addTag(modRes("posts"), Registries.ITEM)
-                .setTab(() -> ModCreativeModeTabs.MAIN)
+//                .setTab(() -> ModCreativeModeTabs.MAIN)
                 .defaultRecipe()
                 //.addRecipe(modRes("bundled_oak_posts"))
                 .build();
@@ -59,7 +56,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                         })
                 .addTag(modRes("stripped_posts"), Registries.BLOCK)
                 .addTag(modRes("stripped_posts"), Registries.ITEM)
-                .setTab(() -> ModCreativeModeTabs.MAIN)
+//                .setTab(() -> ModCreativeModeTabs.MAIN)
                 .defaultRecipe()
                 //.addRecipe(modRes("bundled_stripped_oak_posts"))
                 .build();
@@ -71,7 +68,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                         w -> new CutPostBlock(cutPostProperties(w)))
                 .addTag(modRes("cut_posts"), Registries.BLOCK)
                 .addTag(modRes("cut_posts"), Registries.ITEM)
-                .setTab(() -> CreativeModeTab.TAB_DECORATIONS) //ModCreativeModeTabs.MAIN
+//                .setTab(() -> CreativeModeTab.TAB_DECORATIONS) //ModCreativeModeTabs.MAIN
                 .defaultRecipe()
                 .copyParentDrop()
                 .setRenderType(() -> RenderType::cutout)
@@ -88,7 +85,7 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                         })
                 .addTag(modRes("cut_stripped_posts"), Registries.BLOCK)
                 .addTag(modRes("cut_stripped_posts"), Registries.ITEM)
-                .setTab(() -> CreativeModeTab.TAB_DECORATIONS) //ModCreativeModeTabs.MAIN
+//                .setTab(() -> CreativeModeTab.TAB_DECORATIONS) //ModCreativeModeTabs.MAIN
                 .defaultRecipe()
                 .copyParentDrop()
                 .setRenderType(() -> RenderType::cutout)
@@ -119,9 +116,9 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                 ResourceLocation id = Utils.getID(block);
 
                 try (TextureImage logTexture = TextureImage.open(manager,
-                        RPUtils.findFirstBlockTextureLocation(manager, w.log, SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
+                        RPUtils.findFirstBlockTextureLocation(manager, w.log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
                      TextureImage topTexture = TextureImage.open(manager,
-                             RPUtils.findFirstBlockTextureLocation(manager, w.log, SpriteHelper.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
+                             RPUtils.findFirstBlockTextureLocation(manager, w.log, CompatSpritesHelper.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
 
                     String newId = BlockTypeResTransformer.replaceTypeNoNamespace("block/post/oak_post", w, id, "oak");
 
@@ -145,9 +142,9 @@ public class ValhelsiaStructuresModule extends SimpleModule {
                 ResourceLocation id = Utils.getID(block);
 
                 try (TextureImage logTexture = TextureImage.open(manager,
-                        RPUtils.findFirstBlockTextureLocation(manager, w.getBlockOfThis("stripped_log"), SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
+                        RPUtils.findFirstBlockTextureLocation(manager, w.getBlockOfThis("stripped_log"), CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
                      TextureImage topTexture = TextureImage.open(manager,
-                             RPUtils.findFirstBlockTextureLocation(manager, w.getBlockOfThis("stripped_log"), SpriteHelper.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
+                             RPUtils.findFirstBlockTextureLocation(manager, w.getBlockOfThis("stripped_log"), CompatSpritesHelper.LOOKS_LIKE_TOP_LOG_TEXTURE))) {
 
                     String newId = BlockTypeResTransformer.replaceTypeNoNamespace("block/post/stripped_oak_post", w, id, "oak");
 
@@ -171,11 +168,10 @@ public class ValhelsiaStructuresModule extends SimpleModule {
         }
     }
 
-
     private void createTopTexture(TextureImage original, TextureImage newImage) {
         original.forEachFrame((i, x, y) -> {
-            int localX = x - original.getFrameX(i);
-            int localY = y - original.getFrameY(i);
+            int localX = x - original.getFrameStartX(i);
+            int localY = y - original.getFrameStartY(i);
             if (localX >= 5 && localX <= 10 && localY >= 5 && localY <= 10) {
                 newImage.getImage().setPixelRGBA(x - 3, y - 3, original.getImage().getPixelRGBA(x, y));
             } else if (localX >= 14 && localY > 0 && localY <= 7) {

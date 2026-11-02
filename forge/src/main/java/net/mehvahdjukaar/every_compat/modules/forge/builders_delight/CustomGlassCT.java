@@ -34,7 +34,7 @@ public class CustomGlassCT extends AbstractGlassBlock implements IConnectedTextu
     }
 
     @Override
-    public ResourceLocation getTexture(){
+    public @org.jetbrains.annotations.Nullable ResourceLocation getTexture(){
         return this.texture;
     }
 }

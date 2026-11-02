@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.forge.backpacked;
 
-import com.mrcrayfish.backpacked.Backpacked;
 import com.mrcrayfish.backpacked.block.ShelfBlock;
 import com.mrcrayfish.backpacked.core.ModBlockEntities;
 import com.mrcrayfish.backpacked.core.ModBlocks;
@@ -10,7 +9,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
@@ -29,8 +28,8 @@ public class BackpackedModule extends SimpleModule {
                         w -> new ShelfBlock(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren("slab") // Recipes
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> Backpacked.TAB)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+//                .setTab(() -> Backpacked.TAB)
                 .addRecipe(modRes("oak_backpack_shelf"))
                 .addTile(ModBlockEntities.SHELF)
                 .setRenderType(() -> RenderType::cutout)

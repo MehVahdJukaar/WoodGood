@@ -6,7 +6,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
@@ -28,9 +28,9 @@ public class AbsentByDesignModule extends SimpleModule {
                         () -> getModBlock("fence_log_oak"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockAbsentFence(BlockBehaviour.Properties.of(Material.WOOD))
                 )
-                .addTag(BlockTags.FENCES, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.FENCES, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.FENCES, Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(ItemTags.FENCES, Registries.ITEM)
                 .defaultRecipe()
                 .build();
         this.addEntry(fence_log);
@@ -39,10 +39,10 @@ public class AbsentByDesignModule extends SimpleModule {
                         () -> getModBlock("wall_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockAbsentWall(BlockBehaviour.Properties.of(Material.WOOD))
                 )
-                .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.WALLS, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.WALLS, Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                .addTag(ItemTags.WALLS, Registries.ITEM)
                 .defaultRecipe()
                 .build();
         this.addEntry(wall_log);
@@ -51,10 +51,10 @@ public class AbsentByDesignModule extends SimpleModule {
                         () -> getModBlock("wall_stripped_oak_log"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockAbsentWall(BlockBehaviour.Properties.of(Material.WOOD))
                 )
-                .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.WALLS, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.WALLS, Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                .addTag(ItemTags.WALLS, Registries.ITEM)
                 .defaultRecipe()
                 .build();
         this.addEntry(wall_stripped_log);
@@ -63,10 +63,10 @@ public class AbsentByDesignModule extends SimpleModule {
                         () -> getModBlock("wall_oak_planks"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlockAbsentWall(BlockBehaviour.Properties.of(Material.WOOD))
                 )
-                .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.WALLS, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.WALLS, Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                .addTag(ItemTags.WALLS, Registries.ITEM)
                 .defaultRecipe()
                 .build();
         this.addEntry(wall_planks);

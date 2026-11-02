@@ -244,7 +244,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         if (isDisabled()) return;
         if (lootMode == LootTableMode.COPY_FROM_PARENT) {
             ResourceLocation reg = Utils.getID(getBaseBlock());
-            ResourcesUtils.addBlockResources(module.getModId(), manager, pack, blocks, baseType.get().getTypeName(),
+            ResourcesUtils.addBlockResources(module.getModId(), manager, pack, blocks,
+                    makeLootTableTransformer(module, manager),
                     ResType.BLOCK_LOOT_TABLES.getPath(reg));
 
         } else if (lootMode == LootTableMode.DROP_SELF) {
@@ -259,6 +260,17 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     public void generateModels(CompatModule module, DynClientResourcesGenerator handler, ResourceManager manager) {
         if (isDisabled()) return;
         ResourcesUtils.addStandardResources(module.getModId(), manager, handler, blocks, baseType.get(), extraTransform);
+    }
+
+    protected BlockTypeResTransformer<T> makeLootTableTransformer(CompatModule module, ResourceManager manager) {
+        String oldTypeName = baseType.get().getTypeName();
+        return BlockTypeResTransformer.<T>create(module.modId, manager)
+                // Modifying the JSON filenames & path
+                .setIDModifier((text, blockId, type) ->
+                        BlockTypeResTransformer.replaceFullGenericType(text, type, blockId, oldTypeName, null, "loot_tables/blocks"))
+                // Modifying the JSON files' content
+                .addModifier((text, blockId, type) ->
+                        ResourcesUtils.convertItemIDinText(text, baseType.get(), type));
     }
 
     //ok...
@@ -298,6 +310,14 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             e.tags.putAll(this.tags);
             e.textures.addAll(textures);
             return e;
+        }
+
+        public <H extends BlockEntity> Builder<T, B> addTile(ResourceLocation idTile) {
+            BlockEntityType<?> entityType = BuiltInRegistries.BLOCK_ENTITY_TYPE.getOptional(idTile)
+                    .orElseThrow(() -> new NoSuchElementException("BlockEntityType's ID: " + idTile + " not found! ID must be wrong!"));
+
+            this.tileHolder = new ExistingTileHolder<>(() -> entityType);
+            return this;
         }
 
         public <H extends BlockEntity> Builder<T, B> addTile(Supplier<BlockEntityType<H>> tile) {

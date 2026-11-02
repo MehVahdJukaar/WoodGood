@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.dramaticdoors;
 
-import com.fizzware.dramaticdoors.fabric.DDRegistry;
 import com.fizzware.dramaticdoors.fabric.blocks.TallDoorBlock;
 import com.fizzware.dramaticdoors.fabric.blocks.TallSlidingDoorBlock;
 import com.fizzware.dramaticdoors.fabric.blocks.TallStableDoorBlock;
@@ -12,7 +11,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
+import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
@@ -22,7 +21,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
@@ -59,6 +58,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
 
     public DramaticDoorsMacawModule(String modId) {
         super(modId, "ddm");
+        ResourceLocation tab = modRes(modId);
 
         tallBarnDoors = SimpleEntrySet.builder(WoodType.class, "barn_door", "tall_macaw",
                         () -> getModBlock("tall_macaw_oak_barn_door"), () -> WoodTypeRegistry.OAK_TYPE,
@@ -68,11 +68,11 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTextureM(modRes("block/macaw/tall_oak_barn_door_upper"), EveryCompat.res("block/ddm/tall_oak_barn_door_upper_m"))
                 .addTextureM(modRes("item/macaw/tall_oak_barn_door"), EveryCompat.res("item/ddm/tall_oak_barn_door_m"))
                 .addModelTransform(m -> m.replaceGenericType("oak", "item/macaw"))
-                .addTag(modRes("tall_wooden_doors"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
+                .addTag(modRes("tall_wooden_doors"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DDRegistry.MAIN_TAB)
+                .setTabKey(tab)
                 .copyParentDrop()
                 .addRecipe(modRes("tall_macaw_oak_barn_door"))
                 .build();
@@ -86,11 +86,11 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTextureM(modRes("block/macaw/tall_oak_barn_glass_door_upper"), EveryCompat.res("block/ddm/tall_oak_barn_glass_door_upper_m"))
                 .addTextureM(modRes("item/macaw/tall_oak_barn_glass_door"), EveryCompat.res("item/ddm/tall_oak_barn_glass_door_m"))
                 .addModelTransform(m -> m.replaceGenericType("oak", "item/macaw"))
-                .addTag(modRes("tall_wooden_doors"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
+                .addTag(modRes("tall_wooden_doors"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DDRegistry.MAIN_TAB)
+                .setTabKey(tab)
                 .copyParentDrop()
                 .addRecipe(modRes("tall_macaw_oak_barn_glass_door"))
                 .build();
@@ -104,11 +104,11 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTextureM(modRes("block/macaw/tall_oak_stable_door_upper"), EveryCompat.res("block/ddm/tall_oak_stable_door_upper_m"))
                 .addTextureM(modRes("item/macaw/tall_oak_stable_door"), EveryCompat.res("item/ddm/tall_oak_stable_door_m"))
                 .addModelTransform(m -> m.replaceGenericType("oak", "item/macaw"))
-                .addTag(modRes("tall_wooden_doors"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
+                .addTag(modRes("tall_wooden_doors"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DDRegistry.MAIN_TAB)
+                .setTabKey(tab)
                 .copyParentDrop()
                 .addRecipe(modRes("tall_macaw_oak_stable_door"))
                 .build();
@@ -122,11 +122,11 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTextureM(modRes("block/macaw/tall_oak_stable_door_upper"), EveryCompat.res("block/ddm/tall_oak_stable_door_upper_m"))
                 .addTextureM(modRes("item/macaw/tall_oak_stable_head_door"), EveryCompat.res("item/ddm/tall_oak_stable_head_door_m"))
                 .addModelTransform(m -> m.replaceGenericType("oak", "item/macaw"))
-                .addTag(modRes("tall_wooden_doors"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
+                .addTag(modRes("tall_wooden_doors"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DDRegistry.MAIN_TAB)
+                .setTabKey(tab)
                 .copyParentDrop()
                 .addRecipe(modRes("tall_macaw_oak_stable_head_door"))
                 .build();
@@ -137,11 +137,11 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                         w -> new TallDoorBlock(BlockInit.OAK_BARK_GLASS_DOOR))
                 .addTextureM(modRes("item/macaw/tall_oak_bark_glass_door"), EveryCompat.res("block/ddm/tall_oak_bark_glass_door_m"))
                 .addModelTransform(m -> m.replaceGenericType("oak", "item/macaw"))
-                .addTag(modRes("tall_wooden_doors"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
+                .addTag(modRes("tall_wooden_doors"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DDRegistry.MAIN_TAB)
+                .setTabKey(tab)
                 .copyParentDrop()
                 .addRecipe(modRes("tall_macaw_oak_bark_glass_door"))
                 .build();
@@ -155,11 +155,11 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTextureM(modRes("block/macaw/tall_oak_glass_door_upper"), EveryCompat.res("block/ddm/tall_oak_glass_door_upper_m"))
                 .addTextureM(modRes("item/macaw/tall_oak_glass_door"), EveryCompat.res("item/ddm/tall_oak_glass_door_m"))
                 .addModelTransform(m -> m.replaceGenericType("oak", "item/macaw"))
-                .addTag(modRes("tall_wooden_doors"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
+                .addTag(modRes("tall_wooden_doors"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DDRegistry.MAIN_TAB)
+                .setTabKey(tab)
                 .copyParentDrop()
                 .addRecipe(modRes("tall_macaw_oak_glass_door"))
                 .build();
@@ -173,11 +173,11 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTextureM(modRes("block/macaw/tall_oak_modern_door_upper"), EveryCompat.res("block/ddm/tall_oak_modern_door_upper_m"))
                 .addTextureM(modRes("item/macaw/tall_oak_modern_door"), EveryCompat.res("item/ddm/tall_oak_modern_door_m"))
                 .addModelTransform(m -> m.replaceGenericType("oak", "item/macaw"))
-                .addTag(modRes("tall_wooden_doors"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
+                .addTag(modRes("tall_wooden_doors"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DDRegistry.MAIN_TAB)
+                .setTabKey(tab)
                 .copyParentDrop()
                 .addRecipe(modRes("tall_macaw_oak_modern_door"))
                 .build();
@@ -191,11 +191,11 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTextureM(modRes("block/macaw/tall_oak_japanese_door_upper"), EveryCompat.res("block/ddm/tall_oak_japanese_door_upper_m"))
                 .addTextureM(modRes("item/macaw/tall_oak_japanese_door"), EveryCompat.res("item/ddm/tall_oak_japanese_door_m"))
                 .addModelTransform(m -> m.replaceGenericType("oak", "item/macaw"))
-                .addTag(modRes("tall_wooden_doors"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
+                .addTag(modRes("tall_wooden_doors"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DDRegistry.MAIN_TAB)
+                .setTabKey(tab)
                 .copyParentDrop()
                 .addRecipe(modRes("tall_macaw_oak_japanese_door"))
                 .build();
@@ -209,11 +209,11 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTextureM(modRes("block/macaw/tall_oak_japanese2_door_upper"), EveryCompat.res("block/ddm/tall_oak_japanese2_door_upper_m"))
                 .addTextureM(modRes("item/macaw/tall_oak_japanese2_door"), EveryCompat.res("item/ddm/tall_oak_japanese2_door_m"))
                 .addModelTransform(m -> m.replaceGenericType("oak", "item/macaw"))
-                .addTag(modRes("tall_wooden_doors"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
+                .addTag(modRes("tall_wooden_doors"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DDRegistry.MAIN_TAB)
+                .setTabKey(tab)
                 .copyParentDrop()
                 .addRecipe(modRes("tall_macaw_oak_japanese2_door"))
                 .build();
@@ -227,11 +227,11 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTextureM(modRes("block/macaw/tall_spruce_classic_door_upper"), EveryCompat.res("block/ddm/tall_oak_classic_door_upper_m"))
                 .addTextureM(modRes("item/macaw/tall_spruce_classic_door"), EveryCompat.res("item/ddm/tall_oak_classic_door_m"))
                 .addModelTransform(m -> m.replaceGenericType("spruce", "item/macaw"))
-                .addTag(modRes("tall_wooden_doors"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
+                .addTag(modRes("tall_wooden_doors"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DDRegistry.MAIN_TAB)
+                .setTabKey(tab)
                 .copyParentDrop()
                 .addRecipe(modRes("tall_macaw_oak_classic_door"))
                 .build();
@@ -245,11 +245,11 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTextureM(modRes("block/macaw/tall_oak_cottage_door_upper"), EveryCompat.res("block/ddm/tall_oak_cottage_door_upper_m"))
                 .addTextureM(modRes("item/macaw/tall_oak_cottage_door"), EveryCompat.res("item/ddm/tall_oak_cottage_door_m"))
                 .addModelTransform(m -> m.replaceGenericType("oak", "item/macaw"))
-                .addTag(modRes("tall_wooden_doors"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
+                .addTag(modRes("tall_wooden_doors"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DDRegistry.MAIN_TAB)
+                .setTabKey(tab)
                 .copyParentDrop()
                 .addRecipe(modRes("tall_macaw_oak_cottage_door"))
                 .build();
@@ -263,11 +263,11 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTextureM(modRes("block/macaw/tall_oak_paper_door_upper"), EveryCompat.res("block/ddm/tall_oak_paper_door_upper_m"))
                 .addTextureM(modRes("item/macaw/tall_oak_paper_door"), EveryCompat.res("item/ddm/tall_oak_paper_door_m"))
                 .addModelTransform(m -> m.replaceGenericType("oak", "item/macaw"))
-                .addTag(modRes("tall_wooden_doors"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
+                .addTag(modRes("tall_wooden_doors"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DDRegistry.MAIN_TAB)
+                .setTabKey(tab)
                 .copyParentDrop()
                 .addRecipe(modRes("tall_macaw_oak_paper_door"))
                 .build();
@@ -281,11 +281,11 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTextureM(modRes("block/macaw/tall_oak_beach_door_upper"), EveryCompat.res("block/ddm/tall_oak_beach_door_upper_m"))
                 .addTextureM(modRes("item/macaw/tall_oak_beach_door"), EveryCompat.res("item/ddm/tall_oak_beach_door_m"))
                 .addModelTransform(m -> m.replaceGenericType("oak", "item/macaw"))
-                .addTag(modRes("tall_wooden_doors"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
+                .addTag(modRes("tall_wooden_doors"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DDRegistry.MAIN_TAB)
+                .setTabKey(tab)
                 .copyParentDrop()
                 .addRecipe(modRes("tall_macaw_oak_beach_door"))
                 .build();
@@ -299,11 +299,11 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTextureM(modRes("block/macaw/tall_oak_tropical_door_upper"), EveryCompat.res("block/ddm/tall_oak_tropical_door_upper_m"))
                 .addTextureM(modRes("item/macaw/tall_oak_tropical_door"), EveryCompat.res("item/ddm/tall_oak_tropical_door_m"))
                 .addModelTransform(m -> m.replaceGenericType("oak", "item/macaw"))
-                .addTag(modRes("tall_wooden_doors"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
+                .addTag(modRes("tall_wooden_doors"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DDRegistry.MAIN_TAB)
+                .setTabKey(tab)
                 .copyParentDrop()
                 .addRecipe(modRes("tall_macaw_oak_tropical_door"))
                 .build();
@@ -317,11 +317,11 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTextureM(modRes("block/macaw/tall_oak_four_panel_door_upper"), EveryCompat.res("block/ddm/tall_oak_four_panel_door_upper_m"))
                 .addTextureM(modRes("item/macaw/tall_oak_four_panel_door"), EveryCompat.res("item/ddm/tall_oak_four_panel_door_m"))
                 .addModelTransform(m -> m.replaceGenericType("oak", "item/macaw"))
-                .addTag(modRes("tall_wooden_doors"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
+                .addTag(modRes("tall_wooden_doors"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DDRegistry.MAIN_TAB)
+                .setTabKey(tab)
                 .copyParentDrop()
                 .addRecipe(modRes("tall_macaw_oak_four_panel_door"))
                 .build();
@@ -335,12 +335,12 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTextureM(modRes("block/macaw/tall_oak_swamp_door_upper"), EveryCompat.res("block/ddm/tall_oak_swamp_door_upper_m"))
                 .addTextureM(modRes("item/macaw/tall_oak_swamp_door"), EveryCompat.res("item/ddm/tall_oak_swamp_door_m"))
                 .addModelTransform(m -> m.replaceGenericType("oak", "item/macaw"))
-                .addTag(modRes("tall_wooden_doors"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
+                .addTag(modRes("tall_wooden_doors"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .createPaletteFromOak(this::swampDoorPalette)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DDRegistry.MAIN_TAB)
+                .setTabKey(tab)
                 .copyParentDrop()
                 .addRecipe(modRes("tall_macaw_oak_swamp_door"))
                 .build();
@@ -354,11 +354,11 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTextureM(modRes("block/macaw/tall_oak_nether_door_upper"), EveryCompat.res("block/ddm/tall_oak_nether_door_upper_m"))
                 .addTextureM(modRes("item/macaw/tall_oak_nether_door"), EveryCompat.res("item/ddm/tall_oak_nether_door_m"))
                 .addModelTransform(m -> m.replaceGenericType("oak", "item/macaw"))
-                .addTag(modRes("tall_wooden_doors"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
+                .addTag(modRes("tall_wooden_doors"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DDRegistry.MAIN_TAB)
+                .setTabKey(tab)
                 .copyParentDrop()
                 .addRecipe(modRes("tall_macaw_oak_nether_door"))
                 .build();
@@ -372,11 +372,11 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTextureM(modRes("block/macaw/tall_oak_mystic_door_upper"), EveryCompat.res("block/ddm/tall_oak_mystic_door_upper_m"))
                 .addTextureM(modRes("item/macaw/tall_oak_mystic_door"), EveryCompat.res("item/ddm/tall_oak_mystic_door_m"))
                 .addModelTransform(m -> m.replaceGenericType("oak", "item/macaw"))
-                .addTag(modRes("tall_wooden_doors"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
+                .addTag(modRes("tall_wooden_doors"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DDRegistry.MAIN_TAB)
+                .setTabKey(tab)
                 .copyParentDrop()
                 .addRecipe(modRes("tall_macaw_oak_mystic_door"))
                 .build();
@@ -390,11 +390,11 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTextureM(modRes("block/macaw/tall_oak_bamboo_door_upper"), EveryCompat.res("block/ddm/tall_oak_bamboo_door_upper_m"))
                 .addTextureM(modRes("item/macaw/tall_oak_bamboo_door"), EveryCompat.res("item/ddm/tall_oak_bamboo_door_m"))
                 .addModelTransform(m -> m.replaceGenericType("oak", "item/macaw"))
-                .addTag(modRes("tall_wooden_doors"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
+                .addTag(modRes("tall_wooden_doors"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DDRegistry.MAIN_TAB)
+                .setTabKey(tab)
                 .copyParentDrop()
                 .addRecipe(modRes("tall_macaw_oak_bamboo_door"))
                 .build();
@@ -408,11 +408,11 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 .addTextureM(modRes("block/macaw/tall_oak_waffle_door_upper"), EveryCompat.res("block/ddm/tall_oak_waffle_door_upper_m"))
                 .addTextureM(modRes("item/macaw/tall_oak_waffle_door"), EveryCompat.res("item/ddm/tall_oak_waffle_door_m"))
                 .addModelTransform(m -> m.replaceGenericType("oak", "item/macaw"))
-                .addTag(modRes("tall_wooden_doors"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("tall_wooden_doors"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("tall_wooden_doors"), Registries.BLOCK)
+                .addTag(modRes("tall_wooden_doors"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> DDRegistry.MAIN_TAB)
+                .setTabKey(tab)
                 .copyParentDrop()
                 .addRecipe(modRes("tall_macaw_oak_waffle_door"))
                 .build();
@@ -438,7 +438,7 @@ public class DramaticDoorsMacawModule extends SimpleModule {
                 var id = Utils.getID(block);
 
                 try (TextureImage logTexture = TextureImage.open(manager,
-                        RPUtils.findFirstBlockTextureLocation(manager, wood.log, SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))) {
+                        RPUtils.findFirstBlockTextureLocation(manager, wood.log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))) {
 
                     var t = mask.makeCopy();
                     t.applyOverlayOnExisting(logTexture.makeCopy(), overlay.makeCopy());

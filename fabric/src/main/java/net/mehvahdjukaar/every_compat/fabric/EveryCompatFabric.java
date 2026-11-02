@@ -5,28 +5,26 @@ import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
-import net.mehvahdjukaar.every_compat.modules.fabric.MacawStairsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.architect_palette.ArchitectsPaletteModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.beautify_decorate.BeautifyRefabricatedModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.bewitchment.BewitchmentModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.clutter.ClutterModule;
-import net.mehvahdjukaar.every_compat.modules.fabric.create.CreateModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.dramaticdoors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.dramaticdoors.DramaticDoorsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.farmersdelight.FarmersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.lightmans_currency.LightmansCurrencyModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.mcaw.*;
+import net.mehvahdjukaar.every_compat.modules.fabric.missing_wilds.MissingWildModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.mrcrayfish.BackpackedModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.mrcrayfish.MightyMailModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.red_bits.RedBitsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.regions_unexplored.RegionsUnexploredModule;
-import net.mehvahdjukaar.every_compat.modules.fabric.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.villagers_plus.VillagersPlusModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.wilder_wild.WilderWildModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.wooden_hoppers.WoodenHoppersModule;
-import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
-import net.mehvahdjukaar.moonlight.fabric.FabricSetupCallbacks;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.fabric.MLFabricSetupCallbacks;
 
 public class EveryCompatFabric extends EveryCompat implements ModInitializer {
 
@@ -34,7 +32,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
     public void onInitialize() {
         this.commonInit();
 
-        if (PlatformHelper.getEnv().isClient())
+        if (PlatHelper.getPhysicalSide().isClient())
             ItemTooltipCallback.EVENT.register(EveryCompatClient::onItemTooltip);
 
 // ========================================= Add Modules ==================================================== \\
@@ -58,23 +56,23 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
         addModule("clutter", () -> ClutterModule::new);
 //        addModule("create", () -> CreateModule::new);
         addModule("dramaticdoors", () -> DramaticDoorsModule::new);
-        if (PlatformHelper.isModLoaded("mcwdoors")) {
+        if (PlatHelper.isModLoaded("mcwdoors")) {
             addModule("dramaticdoors", () -> DramaticDoorsMacawModule::new);
         }
         addModule("farmersdelight", () -> FarmersDelightModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
         addModule("lightmanscurrency", () -> LightmansCurrencyModule::new);
+        addModule("missingwilds", () -> MissingWildModule::new);
         addModule("mighty_mail", () -> MightyMailModule::new);
         addModule("redbits", () -> RedBitsModule::new);
         addModule("regions_unexplored", () -> RegionsUnexploredModule::new);
-        addModule("twilightforest", () -> TwilightForestModule::new);
         addModule("villagersplus", () -> VillagersPlusModule::new);
         addModule("wilderwild", () -> WilderWildModule::new);
         addModule("woodenhoppers", () -> WoodenHoppersModule::new);
 
         // ============================================= OTHERS ===================================================== \\
-        FabricSetupCallbacks.CLIENT_SETUP.add(this::onClientSetup);
-        FabricSetupCallbacks.COMMON_SETUP.add(this::commonSetup);
+        MLFabricSetupCallbacks.CLIENT_SETUP.add(this::onClientSetup);
+        MLFabricSetupCallbacks.COMMON_SETUP.add(this::commonSetup);
 
         forAllModules(CompatModule::onModInit);
     }

@@ -19,7 +19,7 @@ dependencies {
 
     //!! MAVEN
 //    modImplementation("curse.maven:selene-499980:5567103")
-    modImplementation("maven.modrinth:moonlight:${minecraft_version}-${moonlight_version}-fabric")
+    modApi("maven.modrinth:moonlight:${minecraft_version}-${moonlight_version}-fabric")
 
 
 //!! ================================================== DEPENDENCIES ================================================ \\

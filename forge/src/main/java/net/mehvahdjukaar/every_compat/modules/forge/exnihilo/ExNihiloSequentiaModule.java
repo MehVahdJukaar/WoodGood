@@ -6,7 +6,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import novamachina.exnihilosequentia.common.block.barrels.NetherBarrelBlock;
@@ -16,7 +16,6 @@ import novamachina.exnihilosequentia.common.block.crucibles.WoodCrucibleBlock;
 import novamachina.exnihilosequentia.common.block.sieves.NetherSieveBlock;
 import novamachina.exnihilosequentia.common.block.sieves.WoodSieveBlock;
 import novamachina.exnihilosequentia.common.init.ExNihiloBlockEntities;
-import novamachina.exnihilosequentia.common.init.ExNihiloInitialization;
 
 public class ExNihiloSequentiaModule extends SimpleModule {
 
@@ -31,9 +30,9 @@ public class ExNihiloSequentiaModule extends SimpleModule {
                         () -> getModBlock("oak_sieve"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> w.canBurn() ? new WoodSieveBlock() : new NetherSieveBlock()
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTexture(modRes("block/oak_sieve"))
-                .setTab(() -> ExNihiloInitialization.ITEM_GROUP)
+//                .setTab(() -> ExNihiloInitialization.ITEM_GROUP)
                 .addRecipe(modRes("ens_oak_sieve"))
                 .addTile(ExNihiloBlockEntities.SIEVE_ENTITY)
                 .setRenderType(()-> RenderType::cutout)
@@ -45,9 +44,9 @@ public class ExNihiloSequentiaModule extends SimpleModule {
                         () -> getModBlock("oak_barrel"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> w.canBurn() ? new WoodBarrelBlock() : new NetherBarrelBlock()
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTextureM(modRes("block/oak_barrel"), EveryCompat.res("block/ens_barrel_m"))
-                .setTab(() -> ExNihiloInitialization.ITEM_GROUP)
+//                .setTab(() -> ExNihiloInitialization.ITEM_GROUP)
                 .addRecipe(modRes("ens_oak_barrel"))
                 .addTile(() -> getModTile("barrels"))
                 .build();
@@ -58,9 +57,9 @@ public class ExNihiloSequentiaModule extends SimpleModule {
                         () -> getModBlock("oak_crucible"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> w.canBurn() ? new WoodCrucibleBlock() : new NetherCrucibleBlock()
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTexture(modRes("block/oak_crucible"))
-                .setTab(() -> ExNihiloInitialization.ITEM_GROUP)
+//                .setTab(() -> ExNihiloInitialization.ITEM_GROUP)
                 .addRecipe(modRes("ens_oak_crucible"))
                 .addTile(ExNihiloBlockEntities.WOODEN_CRUCIBLE_ENTITY)
                 .build();

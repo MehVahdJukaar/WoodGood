@@ -6,7 +6,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -28,9 +28,9 @@ public class RedBitsModule extends SimpleModule {
                         )
                 )
                 .requiresChildren("button") // Recipes
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("large_buttons"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("large_wooden_buttons"), Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("large_buttons"), Registries.BLOCK)
+                .addTag(modRes("large_wooden_buttons"), Registries.BLOCK)
                 .defaultRecipe()
                 .build();
         this.addEntry(large_buttons);

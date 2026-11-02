@@ -44,15 +44,13 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.modules.handcrafted.client.*;
-import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
+import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.texture.TextureAtlas;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -74,7 +72,9 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ChestMenu;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -127,7 +127,7 @@ public class HandcraftedModule extends SimpleModule {
 
     public HandcraftedModule(String modId) {
         super(modId, "hc");
-        CreativeModeTab tab = ModItems.ITEM_GROUP;
+        ResourceLocation tab = modRes("main");
 
         chair = SimpleEntrySet.builder(WoodType.class, "chair",
                         ModBlocks.OAK_CHAIR, () -> WoodTypeRegistry.OAK_TYPE,
@@ -139,7 +139,7 @@ public class HandcraftedModule extends SimpleModule {
                 .addTag(modRes("chairs"), Registries.BLOCK)
                 .addTag(modRes("chairs"), Registries.ITEM)
                 .addTexture(modRes("block/chair/chair/oak_chair"))
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .addCustomItem((w, b, p) -> new CompatModItems.ChairItem(b, p))
                 .defaultRecipe()
                 .build();
@@ -156,7 +156,7 @@ public class HandcraftedModule extends SimpleModule {
                 .addTag(modRes("tables"), Registries.BLOCK)
                 .addTag(modRes("tables"), Registries.ITEM)
                 .addTexture(modRes("block/table/table/oak_table"))
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .addCustomItem((w, b, p) -> new CompatModItems.TableItem(b, p))
                 .defaultRecipe()
                 .build();
@@ -172,7 +172,7 @@ public class HandcraftedModule extends SimpleModule {
                 .addTag(modRes("benches"), Registries.BLOCK)
                 .addTag(modRes("benches"), Registries.ITEM)
                 .addTexture(modRes("block/chair/bench/oak_bench"))
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .addCustomItem((w, b, p) -> new CompatModItems.BenchItem(b, p))
                 .defaultRecipe()
                 .build();
@@ -188,7 +188,7 @@ public class HandcraftedModule extends SimpleModule {
                 .addTag(modRes("couches"), Registries.BLOCK)
                 .addTag(modRes("couches"), Registries.ITEM)
                 .addTexture(modRes("block/chair/couch/oak_couch"))
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .addCustomItem((w, b, p) -> new CompatModItems.CouchItem(b, p))
                 .defaultRecipe()
                 .build();
@@ -205,7 +205,7 @@ public class HandcraftedModule extends SimpleModule {
                 .addTag(BlockTags.BEDS, Registries.ITEM)
                 .addTexture(modRes("block/bed/single/oak_fancy_bed"))
                 .addTexture(modRes("block/bed/double/oak_fancy_bed"))
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .addCustomItem((w, b, p) -> new CompatModItems.FancyBedItem(b, p))
                 .defaultRecipe()
                 .copyParentDrop()
@@ -222,7 +222,7 @@ public class HandcraftedModule extends SimpleModule {
                 .addTag(modRes("dining_benches"), Registries.BLOCK)
                 .addTag(modRes("dining_benches"), Registries.ITEM)
                 .addTexture(modRes("block/chair/dining_bench/oak_dining_bench"))
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .addCustomItem((w, b, p) -> new CompatModItems.DiningBenchItem(b, p))
                 .defaultRecipe()
                 .build();
@@ -239,7 +239,7 @@ public class HandcraftedModule extends SimpleModule {
                 .addTag(modRes("nightstands"), Registries.BLOCK)
                 .addTag(modRes("nightstands"), Registries.ITEM)
                 .addTextureM(modRes("block/table/nightstand/oak_nightstand"), EveryCompat.res("block/hc/table/oak_nightstand_m"))
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .addCustomItem((w, b, p) -> new CompatModItems.NightstandItem(b, p))
                 .defaultRecipe()
                 .build();
@@ -257,7 +257,7 @@ public class HandcraftedModule extends SimpleModule {
                 .addTag(modRes("desks"), Registries.BLOCK)
                 .addTag(modRes("desks"), Registries.ITEM)
                 .addTextureM(modRes("block/table/desk/oak_desk"), EveryCompat.res("block/hc/table/oak_desk_m"))
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .addCustomItem((w, b, p) -> new CompatModItems.DeskItem(b, p))
                 .defaultRecipe()
                 .build();
@@ -273,7 +273,7 @@ public class HandcraftedModule extends SimpleModule {
                 .addTag(modRes("side_tables"), Registries.BLOCK)
                 .addTag(modRes("side_tables"), Registries.ITEM)
                 .addTextureM(modRes("block/table/side_table/oak_side_table"), EveryCompat.res("block/hc/table/oak_side_table_m"))
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .addCustomItem((w, b, p) -> new CompatModItems.SideTableItem(b, p))
                 .build();
@@ -336,7 +336,7 @@ public class HandcraftedModule extends SimpleModule {
                 .addTexture(modRes("block/counter/cupboard/oak/cupboard_back"))
                 .addTexture(modRes("block/counter/cupboard/oak/cupboard_side"))
                 .addTexture(modRes("block/counter/cupboard/oak/cupboard_top"))
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .noItem()
                 .build();
         this.addEntry(cupboard_1);
@@ -351,7 +351,7 @@ public class HandcraftedModule extends SimpleModule {
                 .addTexture(modRes("block/counter/cupboard/oak/cupboard_back"))
                 .addTexture(modRes("block/counter/cupboard/oak/cupboard_side"))
                 .addTexture(modRes("block/counter/cupboard/oak/cupboard_top"))
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .noItem()
                 .build();
         this.addEntry(cupboard_2);
@@ -377,7 +377,7 @@ public class HandcraftedModule extends SimpleModule {
                 .addTextureM(modRes("block/counter/drawer/oak/front_1/drawer_middle"), EveryCompat.res("block/hc/drawer/drawer_1_middle_m"))
                 .addTextureM(modRes("block/counter/drawer/oak/front_1/drawer_right"), EveryCompat.res("block/hc/drawer/drawer_1_right_m"))
                 .addTextureM(modRes("block/counter/drawer/oak/front_1/drawer_single"), EveryCompat.res("block/hc/drawer/drawer_1_single_m"))
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .noItem()
                 .build();
         this.addEntry(drawer_1);
@@ -398,7 +398,7 @@ public class HandcraftedModule extends SimpleModule {
                 .addTexture(modRes("block/counter/drawer/oak/drawer_side_left"))
                 .addTexture(modRes("block/counter/drawer/oak/drawer_side_right"))
                 .addTexture(modRes("block/counter/drawer/oak/drawer_top"))
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .noItem()
                 .build();
         this.addEntry(drawer_2);
@@ -419,7 +419,7 @@ public class HandcraftedModule extends SimpleModule {
                 .addTexture(modRes("block/counter/drawer/oak/drawer_side_left"))
                 .addTexture(modRes("block/counter/drawer/oak/drawer_side_right"))
                 .addTexture(modRes("block/counter/drawer/oak/drawer_top"))
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .noItem()
                 .build();
         this.addEntry(drawer_3);
@@ -437,7 +437,7 @@ public class HandcraftedModule extends SimpleModule {
                 .addTexture(modRes("block/counter/drawer/oak/drawer_side_left"))
                 .addTexture(modRes("block/counter/drawer/oak/drawer_side_right"))
                 .addTexture(modRes("block/counter/drawer/oak/drawer_top"))
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .noItem()
                 .build();
         this.addEntry(drawer_4);
@@ -468,7 +468,7 @@ public class HandcraftedModule extends SimpleModule {
                 .addTexture(modRes("block/counter/shelf/oak/shelf_side_right"))
                 .addTexture(modRes("block/counter/shelf/oak/shelf_single"))
                 .addTexture(modRes("block/counter/shelf/oak/shelf_top"))
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .noItem()
                 .build();
         this.addEntry(shelf_1);
@@ -499,7 +499,7 @@ public class HandcraftedModule extends SimpleModule {
                 .addTexture(modRes("block/trim/pillar/oak_thicc_pillar_trim_2"))
                 .addTexture(modRes("block/trim/pillar/oak_thin_pillar_trim"))
                 .addTexture(modRes("block/trim/pillar/oak_thin_pillar_trim_2"))
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .addCustomItem((w, b, p) -> new HammerableBlockItem(b, p))
                 .defaultRecipe()
                 .build();
@@ -518,7 +518,7 @@ public class HandcraftedModule extends SimpleModule {
                 .addTexture(modRes("block/trim/corner/oak_corner_trim"))
                 .addTexture(modRes("block/trim/corner/oak_thicc_corner_trim"))
                 .addTexture(modRes("block/trim/corner/oak_thin_corner_trim"))
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .addCustomItem((w, b, p) -> new HammerableBlockItem(b, p))
                 .defaultRecipe()
                 .build();
@@ -576,7 +576,7 @@ public class HandcraftedModule extends SimpleModule {
     @Override
     @Environment(EnvType.CLIENT)
     @SuppressWarnings({"unchecked", "rawtypes"})
-    public void registerBlockEntityRenderers(ClientPlatformHelper.BlockEntityRendererEvent event) {
+    public void registerBlockEntityRenderers(ClientHelper.BlockEntityRendererEvent event) {
         event.register(((BlockEntityType) chair.getTileHolder().get()), OptimizedChairRenderer::new);
         event.register(((BlockEntityType) table.getTileHolder().get()), OptimizedTableRenderer::new);
         event.register(((BlockEntityType) bench.getTileHolder().get()), OptimizedBenchRenderer::new);
@@ -591,220 +591,220 @@ public class HandcraftedModule extends SimpleModule {
         event.register((BlockEntityType) counter_3.getTileHolder().get(), OptimizedCounterRenderer::new);
         event.register((BlockEntityType) shelf_1.getTileHolder().get(), OptimizedShelfRenderer::new);
     }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public void stitchAtlasTextures(ClientPlatformHelper.AtlasTextureEvent event) {
-        String hcFolder = "block/" + shortenedId() + "/";
-
-        if (OptimizedTableRenderer.OBJECT_TO_TEXTURE.isEmpty()) {
-
-            //==================================== CLOTHING | CUSHION ==================================================
-                // CLOTHING - used by TABLE, NIGHTSTAND, DESK, SIDE_TABLE
-            for (var dye : DyeColor.values()) {
-                Item sheetItem = BuiltInRegistries.ITEM.get(this.modRes(dye.getName() + "_sheet"));
-                String dyeName = dye.getName() + "_sheet";
-                if (sheetItem != Items.AIR) {
-                    var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(sheetItem, ignored ->
-                            new Material(TextureAtlas.LOCATION_BLOCKS,
-                                    modRes("block/table/table_cloth/" + dyeName)));
-                    event.addSprite(texture.texture());
-
-                // SHEET - used by FANCY_BED
-                    var bed_sheet = OptimizedFancyBedRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(sheetItem, ignored ->
-                            new Material(TextureAtlas.LOCATION_BLOCKS,
-                                    modRes("block/bed/sheet/" + dyeName)));
-                    event.addSprite(bed_sheet.texture());
-                }
-            }
-
-                // CUSHION - used by CHAIR, BENCH, COUCH
-            for (var dye : DyeColor.values()) {
-                String dyeName = dye.getName() + "_cushion";
-                Item cushionItem = BuiltInRegistries.ITEM.get(this.modRes(dyeName));
-
-                if (cushionItem != Items.AIR) {
-                    // CHAIR
-                    var chairTexture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(cushionItem, ignored ->
-                            new Material(TextureAtlas.LOCATION_BLOCKS,
-                                    modRes("block/chair/chair/cushion/" + dyeName))
-                    );
-                    event.addSprite(chairTexture.texture());
-
-                    // BENCH
-                    var benchTexture = OptimizedBenchRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(cushionItem, ignored ->
-                            new Material(TextureAtlas.LOCATION_BLOCKS,
-                                    modRes("block/chair/bench/cushion/" + dyeName))
-                    );
-                    event.addSprite(benchTexture.texture());
-
-                    // COUCH
-                    var couchTexture = OptimizedCouchRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(cushionItem, ignored ->
-                            new Material(TextureAtlas.LOCATION_BLOCKS,
-                                    modRes("block/chair/couch/cushion/" + dyeName))
-                    );
-                    event.addSprite(couchTexture.texture());
-
-                // CUSHION - used by FANCY_BED
-                    var bed_cushion = OptimizedFancyBedRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(cushionItem, ignored ->
-                            new Material(TextureAtlas.LOCATION_BLOCKS,
-                                    modRes("block/bed/cushion/" + dyeName))
-                    );
-                    event.addSprite(bed_cushion.texture());
-                }
-            }
-            // ======================================== TEXTURE FOR BLOCKS =============================================
-                // TABLE
-            for (var t : table.items.values()) {
-                var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ingored -> {
-                    var blockId = BuiltInRegistries.ITEM.getKey(t);
-                    var s = blockId.getPath().split("/");
-                    return new Material(TextureAtlas.LOCATION_BLOCKS,
-                            EveryCompat.res(hcFolder + s[1] + "/table/table/" + s[2]));
-                });
-                event.addSprite(texture.texture());
-            }
-
-                // CHAIR
-            for (var t : chair.items.values()) {
-                var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ingored -> {
-                    var blockId = BuiltInRegistries.ITEM.getKey(t);
-                    var s = blockId.getPath().split("/");
-                    return new Material(TextureAtlas.LOCATION_BLOCKS,
-                            EveryCompat.res(hcFolder + s[1] + "/chair/chair/" + s[2]));
-                });
-                event.addSprite(texture.texture());
-            }
-
-                // BENCH
-            for (var t : bench.items.values()) {
-                var texture = OptimizedBenchRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ingored -> {
-                    var blockId = BuiltInRegistries.ITEM.getKey(t);
-                    var s = blockId.getPath().split("/");
-                    return new Material(TextureAtlas.LOCATION_BLOCKS,
-                            EveryCompat.res(hcFolder + s[1] + "/chair/bench/" + s[2]));
-                });
-                event.addSprite(texture.texture());
-            }
-
-                // COUCH
-            for (var t : couch.items.values()) {
-                var texture = OptimizedCouchRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ingored -> {
-                    var blockId = BuiltInRegistries.ITEM.getKey(t);
-                    var s = blockId.getPath().split("/");
-                    return new Material(TextureAtlas.LOCATION_BLOCKS,
-                            EveryCompat.res(hcFolder + s[1] + "/chair/couch/" + s[2]));
-                });
-                event.addSprite(texture.texture());
-            }
-
-                // FANCY BED
-            for (var t : fancyBed.items.values()) {
-                var singleBed = OptimizedFancyBedRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ignored -> {
-                    var blockId = BuiltInRegistries.ITEM.getKey(t);
-                    var s = blockId.getPath().split("/");
-                    return new Material(TextureAtlas.LOCATION_BLOCKS,
-                            EveryCompat.res(hcFolder + s[1] + "/bed/single/" + s[2]));
-                });
-                event.addSprite(singleBed.texture());
-
-                var doubleBed = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ignored -> {
-                    var blockId = BuiltInRegistries.ITEM.getKey(t);
-                    var s = blockId.getPath().split("/");
-                    return new Material(TextureAtlas.LOCATION_BLOCKS,
-                            EveryCompat.res(hcFolder + s[1] + "/bed/double/" + s[2]));
-                });
-                event.addSprite(doubleBed.texture());
-            }
-
-                // DINING_BENCH
-            for (var t : diningBench.items.values()) {
-                var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ingored -> {
-                    var blockId = BuiltInRegistries.ITEM.getKey(t);
-                    var s = blockId.getPath().split("/");
-                    return new Material(TextureAtlas.LOCATION_BLOCKS,
-                            EveryCompat.res(hcFolder + s[1] + "/chair/dining_bench/" + s[2]));
-                });
-                event.addSprite(texture.texture());
-            }
-
-                // NIGHTSTAND
-            for (var t : nightstand.items.values()) {
-                var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ingored -> {
-                    var blockId = BuiltInRegistries.ITEM.getKey(t);
-                    var s = blockId.getPath().split("/");
-                    return new Material(TextureAtlas.LOCATION_BLOCKS,
-                            EveryCompat.res(hcFolder + s[1] + "/table/nightstand/" + s[2]));
-                });
-                event.addSprite(texture.texture());
-            }
-
-                // DESK
-            for (var t : desk.items.values()) {
-                var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ingored -> {
-                    var blockId = BuiltInRegistries.ITEM.getKey(t);
-                    var s = blockId.getPath().split("/");
-                    return new Material(TextureAtlas.LOCATION_BLOCKS,
-                            EveryCompat.res(hcFolder + s[1] + "/table/desk/" + s[2]));
-                });
-                event.addSprite(texture.texture());
-            }
-
-                // SIDE_TABLE
-            for (var t : sideTable.items.values()) {
-                var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ingored -> {
-                    var blockId = BuiltInRegistries.ITEM.getKey(t);
-                    var s = blockId.getPath().split("/");
-                    return new Material(TextureAtlas.LOCATION_BLOCKS,
-                            EveryCompat.res(hcFolder + s[1] + "/table/side_table/" + s[2]));
-                });
-                event.addSprite(texture.texture());
-            }
-
-
-                // COUNTER
-            for (var entry : counter.items.entrySet()) {
-                ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(entry.getValue());
-                var itemTexture = OptimizedCounterRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(itemId, ignored -> {
-                    var s = itemId.getPath().split("/");
-                    return new Material(TextureAtlas.LOCATION_BLOCKS,
-                            EveryCompat.res(hcFolder + s[1] + "/counter/counter/" + s[2] + "_1"));
-                });
-                event.addSprite(itemTexture.texture());
-            }
-
-            for (var entry : counter_1.blocks.entrySet()) {
-                ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(entry.getValue());
-                var blockTexture = OptimizedCounterRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(blockId, ignored -> {
-                    var s = blockId.getPath().split("/");
-                    return new Material(TextureAtlas.LOCATION_BLOCKS,
-                            EveryCompat.res(hcFolder + s[1] + "/counter/counter/" + s[2]));
-                });
-                event.addSprite(blockTexture.texture());
-            }
-
-            for (var entry : counter_2.blocks.entrySet()) {
-                ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(entry.getValue());
-                var blockTexture = OptimizedCounterRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(blockId, ignored -> {
-                    var s = blockId.getPath().split("/");
-                    return new Material(TextureAtlas.LOCATION_BLOCKS,
-                            EveryCompat.res(hcFolder + s[1] + "/counter/counter/" + s[2]));
-                });
-                event.addSprite(blockTexture.texture());
-            }
-
-            for (var entry : counter_3.blocks.entrySet()) {
-                ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(entry.getValue());
-                var blockTexture = OptimizedCounterRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(blockId, ignored -> {
-                    var s = blockId.getPath().split("/");
-                    return new Material(TextureAtlas.LOCATION_BLOCKS,
-                            EveryCompat.res(hcFolder + s[1] + "/counter/counter/" + s[2]));
-                });
-                event.addSprite(blockTexture.texture());
-            }
-
-        }
-    }
+//!! TEXTURES
+//    @Override
+//    @SuppressWarnings("deprecation")
+//    public void stitchAtlasTextures(ClientHelper.AtlasTextureEvent event) {
+//        String hcFolder = "block/" + shortenedId() + "/";
+//
+//        if (OptimizedTableRenderer.OBJECT_TO_TEXTURE.isEmpty()) {
+//
+//            //==================================== CLOTHING | CUSHION ==================================================
+//                // CLOTHING - used by TABLE, NIGHTSTAND, DESK, SIDE_TABLE
+//            for (var dye : DyeColor.values()) {
+//                Item sheetItem = BuiltInRegistries.ITEM.get(this.modRes(dye.getName() + "_sheet"));
+//                String dyeName = dye.getName() + "_sheet";
+//                if (sheetItem != Items.AIR) {
+//                    var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(sheetItem, ignored ->
+//                            new Material(TextureAtlas.LOCATION_BLOCKS,
+//                                    modRes("block/table/table_cloth/" + dyeName)));
+//                    event.addSprite(texture.texture());
+//
+//                // SHEET - used by FANCY_BED
+//                    var bed_sheet = OptimizedFancyBedRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(sheetItem, ignored ->
+//                            new Material(TextureAtlas.LOCATION_BLOCKS,
+//                                    modRes("block/bed/sheet/" + dyeName)));
+//                    event.addSprite(bed_sheet.texture());
+//                }
+//            }
+//
+//                // CUSHION - used by CHAIR, BENCH, COUCH
+//            for (var dye : DyeColor.values()) {
+//                String dyeName = dye.getName() + "_cushion";
+//                Item cushionItem = BuiltInRegistries.ITEM.get(this.modRes(dyeName));
+//
+//                if (cushionItem != Items.AIR) {
+//                    // CHAIR
+//                    var chairTexture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(cushionItem, ignored ->
+//                            new Material(TextureAtlas.LOCATION_BLOCKS,
+//                                    modRes("block/chair/chair/cushion/" + dyeName))
+//                    );
+//                    event.addSprite(chairTexture.texture());
+//
+//                    // BENCH
+//                    var benchTexture = OptimizedBenchRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(cushionItem, ignored ->
+//                            new Material(TextureAtlas.LOCATION_BLOCKS,
+//                                    modRes("block/chair/bench/cushion/" + dyeName))
+//                    );
+//                    event.addSprite(benchTexture.texture());
+//
+//                    // COUCH
+//                    var couchTexture = OptimizedCouchRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(cushionItem, ignored ->
+//                            new Material(TextureAtlas.LOCATION_BLOCKS,
+//                                    modRes("block/chair/couch/cushion/" + dyeName))
+//                    );
+//                    event.addSprite(couchTexture.texture());
+//
+//                // CUSHION - used by FANCY_BED
+//                    var bed_cushion = OptimizedFancyBedRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(cushionItem, ignored ->
+//                            new Material(TextureAtlas.LOCATION_BLOCKS,
+//                                    modRes("block/bed/cushion/" + dyeName))
+//                    );
+//                    event.addSprite(bed_cushion.texture());
+//                }
+//            }
+//            // ======================================== TEXTURE FOR BLOCKS =============================================
+//                // TABLE
+//            for (var t : table.items.values()) {
+//                var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ingored -> {
+//                    var blockId = BuiltInRegistries.ITEM.getKey(t);
+//                    var s = blockId.getPath().split("/");
+//                    return new Material(TextureAtlas.LOCATION_BLOCKS,
+//                            EveryCompat.res(hcFolder + s[1] + "/table/table/" + s[2]));
+//                });
+//                event.addSprite(texture.texture());
+//            }
+//
+//                // CHAIR
+//            for (var t : chair.items.values()) {
+//                var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ingored -> {
+//                    var blockId = BuiltInRegistries.ITEM.getKey(t);
+//                    var s = blockId.getPath().split("/");
+//                    return new Material(TextureAtlas.LOCATION_BLOCKS,
+//                            EveryCompat.res(hcFolder + s[1] + "/chair/chair/" + s[2]));
+//                });
+//                event.addSprite(texture.texture());
+//            }
+//
+//                // BENCH
+//            for (var t : bench.items.values()) {
+//                var texture = OptimizedBenchRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ingored -> {
+//                    var blockId = BuiltInRegistries.ITEM.getKey(t);
+//                    var s = blockId.getPath().split("/");
+//                    return new Material(TextureAtlas.LOCATION_BLOCKS,
+//                            EveryCompat.res(hcFolder + s[1] + "/chair/bench/" + s[2]));
+//                });
+//                event.addSprite(texture.texture());
+//            }
+//
+//                // COUCH
+//            for (var t : couch.items.values()) {
+//                var texture = OptimizedCouchRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ingored -> {
+//                    var blockId = BuiltInRegistries.ITEM.getKey(t);
+//                    var s = blockId.getPath().split("/");
+//                    return new Material(TextureAtlas.LOCATION_BLOCKS,
+//                            EveryCompat.res(hcFolder + s[1] + "/chair/couch/" + s[2]));
+//                });
+//                event.addSprite(texture.texture());
+//            }
+//
+//                // FANCY BED
+//            for (var t : fancyBed.items.values()) {
+//                var singleBed = OptimizedFancyBedRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ignored -> {
+//                    var blockId = BuiltInRegistries.ITEM.getKey(t);
+//                    var s = blockId.getPath().split("/");
+//                    return new Material(TextureAtlas.LOCATION_BLOCKS,
+//                            EveryCompat.res(hcFolder + s[1] + "/bed/single/" + s[2]));
+//                });
+//                event.addSprite(singleBed.texture());
+//
+//                var doubleBed = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ignored -> {
+//                    var blockId = BuiltInRegistries.ITEM.getKey(t);
+//                    var s = blockId.getPath().split("/");
+//                    return new Material(TextureAtlas.LOCATION_BLOCKS,
+//                            EveryCompat.res(hcFolder + s[1] + "/bed/double/" + s[2]));
+//                });
+//                event.addSprite(doubleBed.texture());
+//            }
+//
+//                // DINING_BENCH
+//            for (var t : diningBench.items.values()) {
+//                var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ingored -> {
+//                    var blockId = BuiltInRegistries.ITEM.getKey(t);
+//                    var s = blockId.getPath().split("/");
+//                    return new Material(TextureAtlas.LOCATION_BLOCKS,
+//                            EveryCompat.res(hcFolder + s[1] + "/chair/dining_bench/" + s[2]));
+//                });
+//                event.addSprite(texture.texture());
+//            }
+//
+//                // NIGHTSTAND
+//            for (var t : nightstand.items.values()) {
+//                var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ingored -> {
+//                    var blockId = BuiltInRegistries.ITEM.getKey(t);
+//                    var s = blockId.getPath().split("/");
+//                    return new Material(TextureAtlas.LOCATION_BLOCKS,
+//                            EveryCompat.res(hcFolder + s[1] + "/table/nightstand/" + s[2]));
+//                });
+//                event.addSprite(texture.texture());
+//            }
+//
+//                // DESK
+//            for (var t : desk.items.values()) {
+//                var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ingored -> {
+//                    var blockId = BuiltInRegistries.ITEM.getKey(t);
+//                    var s = blockId.getPath().split("/");
+//                    return new Material(TextureAtlas.LOCATION_BLOCKS,
+//                            EveryCompat.res(hcFolder + s[1] + "/table/desk/" + s[2]));
+//                });
+//                event.addSprite(texture.texture());
+//            }
+//
+//                // SIDE_TABLE
+//            for (var t : sideTable.items.values()) {
+//                var texture = OptimizedTableRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(t, ingored -> {
+//                    var blockId = BuiltInRegistries.ITEM.getKey(t);
+//                    var s = blockId.getPath().split("/");
+//                    return new Material(TextureAtlas.LOCATION_BLOCKS,
+//                            EveryCompat.res(hcFolder + s[1] + "/table/side_table/" + s[2]));
+//                });
+//                event.addSprite(texture.texture());
+//            }
+//
+//
+//                // COUNTER
+//            for (var entry : counter.items.entrySet()) {
+//                ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(entry.getValue());
+//                var itemTexture = OptimizedCounterRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(itemId, ignored -> {
+//                    var s = itemId.getPath().split("/");
+//                    return new Material(TextureAtlas.LOCATION_BLOCKS,
+//                            EveryCompat.res(hcFolder + s[1] + "/counter/counter/" + s[2] + "_1"));
+//                });
+//                event.addSprite(itemTexture.texture());
+//            }
+//
+//            for (var entry : counter_1.blocks.entrySet()) {
+//                ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(entry.getValue());
+//                var blockTexture = OptimizedCounterRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(blockId, ignored -> {
+//                    var s = blockId.getPath().split("/");
+//                    return new Material(TextureAtlas.LOCATION_BLOCKS,
+//                            EveryCompat.res(hcFolder + s[1] + "/counter/counter/" + s[2]));
+//                });
+//                event.addSprite(blockTexture.texture());
+//            }
+//
+//            for (var entry : counter_2.blocks.entrySet()) {
+//                ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(entry.getValue());
+//                var blockTexture = OptimizedCounterRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(blockId, ignored -> {
+//                    var s = blockId.getPath().split("/");
+//                    return new Material(TextureAtlas.LOCATION_BLOCKS,
+//                            EveryCompat.res(hcFolder + s[1] + "/counter/counter/" + s[2]));
+//                });
+//                event.addSprite(blockTexture.texture());
+//            }
+//
+//            for (var entry : counter_3.blocks.entrySet()) {
+//                ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(entry.getValue());
+//                var blockTexture = OptimizedCounterRenderer.OBJECT_TO_TEXTURE.computeIfAbsent(blockId, ignored -> {
+//                    var s = blockId.getPath().split("/");
+//                    return new Material(TextureAtlas.LOCATION_BLOCKS,
+//                            EveryCompat.res(hcFolder + s[1] + "/counter/counter/" + s[2]));
+//                });
+//                event.addSprite(blockTexture.texture());
+//            }
+//
+//        }
+//    }
 
 
     //TYPE: Block

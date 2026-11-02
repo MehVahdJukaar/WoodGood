@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.mrcrayfish;
 
-import com.mrcrayfish.mightymail.MightyMail;
 import com.mrcrayfish.mightymail.block.MailboxBlock;
 import com.mrcrayfish.mightymail.core.ModBlockEntities;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -10,7 +9,8 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -22,16 +22,17 @@ public class MightyMailModule extends SimpleModule {
 
     public MightyMailModule(String modId) {
         super(modId, "mm");
+        ResourceLocation tab = modRes("creative_tab");
 
         mailboxes = SimpleEntrySet.builder(WoodType.class, "mail_box",
                         ()-> getModBlock("oak_mail_box"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new MailboxBlock(Utils.copyPropertySafe(w.planks)
                                 .strength(3.5F).sound(SoundType.WOOD)))
-                .setTab(() -> MightyMail.CREATIVE_TAB)
+                .setTabKey(tab)
                 .addTile(ModBlockEntities.MAIL_BOX::get)
                 .addTextureM(modRes("block/oak_mail_box"),
                         EveryCompat.res("block/mm/oak_mail_box_m"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .build();

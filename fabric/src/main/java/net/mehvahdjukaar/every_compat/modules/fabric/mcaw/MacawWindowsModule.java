@@ -2,8 +2,6 @@ package net.mehvahdjukaar.every_compat.modules.fabric.mcaw;
 
 import net.kikoz.mcwwindows.init.BlockInit;
 import net.kikoz.mcwwindows.objects.*;
-import net.kikoz.mcwwindows.util.BlindsGroup;
-import net.kikoz.mcwwindows.util.WindowsGroup;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
@@ -11,7 +9,8 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
@@ -39,12 +38,14 @@ public class MacawWindowsModule extends SimpleModule {
 
     public MacawWindowsModule(String modId) {
         super(modId, "mcw");
+        ResourceLocation blindstab = modRes("blinds_group");
+        ResourceLocation windowsTab = modRes("windows_group");
 
         BLINDS = SimpleEntrySet.builder(WoodType.class, "blinds",
                         () -> BlockInit.OAK_BLINDS, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Blinds(Utils.copyPropertySafe(w.log).noOcclusion()))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> BlindsGroup.BLINDSGROUP)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(blindstab)
                 .defaultRecipe()
                 .build();
 
@@ -53,8 +54,8 @@ public class MacawWindowsModule extends SimpleModule {
         LOG_PARAPETS = SimpleEntrySet.builder(WoodType.class, "log_parapet",
                         () -> BlockInit.OAK_LOG_PARAPET, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Parapet(Utils.copyPropertySafe(w.log)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> BlindsGroup.BLINDSGROUP)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(blindstab)
                 .defaultRecipe()
                 .build();
 
@@ -63,8 +64,8 @@ public class MacawWindowsModule extends SimpleModule {
         PLANKS_PARAPETS = SimpleEntrySet.builder(WoodType.class, "plank_parapet",
                         () -> BlockInit.OAK_PLANK_PARAPET, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Parapet(Utils.copyPropertySafe(w.planks)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> BlindsGroup.BLINDSGROUP)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(blindstab)
                 .defaultRecipe()
                 .build();
 
@@ -73,10 +74,10 @@ public class MacawWindowsModule extends SimpleModule {
         LOG_WINDOWS = SimpleEntrySet.builder(WoodType.class, "window",
                         () -> BlockInit.OAK_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ConnectedWindow(Utils.copyPropertySafe(w.log)))
-                .addTag(modRes("windows"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> WindowsGroup.WINDOWSGROUP)
+                .addTag(modRes("windows"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                .setTabKey(windowsTab)
                 .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .build();
@@ -86,10 +87,10 @@ public class MacawWindowsModule extends SimpleModule {
         PLANKS_WINDOWS = SimpleEntrySet.builder(WoodType.class, "plank_window",
                         () -> BlockInit.OAK_PLANK_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ConnectedWindow(Utils.copyPropertySafe(w.planks)))
-                .addTag(modRes("windows"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> WindowsGroup.WINDOWSGROUP)
+                .addTag(modRes("windows"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                .setTabKey(windowsTab)
                 .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .build();
@@ -99,10 +100,10 @@ public class MacawWindowsModule extends SimpleModule {
         LOG_PANE_WINDOWS = SimpleEntrySet.builder(WoodType.class, "window2",
                         () -> BlockInit.OAK_WINDOW2, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WindowBarred(Utils.copyPropertySafe(w.log)))
-                .addTag(modRes("windows_two"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> WindowsGroup.WINDOWSGROUP)
+                .addTag(modRes("windows_two"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                .setTabKey(windowsTab)
                 .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .build();
@@ -112,10 +113,10 @@ public class MacawWindowsModule extends SimpleModule {
         PLANKS_PANE_WINDOWS = SimpleEntrySet.builder(WoodType.class, "plank_window2",
                         () -> BlockInit.OAK_PLANK_WINDOW2, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WindowBarred(Utils.copyPropertySafe(w.planks)))
-                .addTag(modRes("windows_two"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> WindowsGroup.WINDOWSGROUP)
+                .addTag(modRes("windows_two"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                .setTabKey(windowsTab)
                 .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .build();
@@ -125,10 +126,10 @@ public class MacawWindowsModule extends SimpleModule {
         STRIPPED_LOG_WINDOWS = SimpleEntrySet.builder(WoodType.class, "log_window", "stripped",
                         () -> BlockInit.STRIPPED_OAK_LOG_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ConnectedWindow(Utils.copyPropertySafe(w.log)))
-                .addTag(modRes("windows"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> WindowsGroup.WINDOWSGROUP)
+                .addTag(modRes("windows"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                .setTabKey(windowsTab)
                 .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .build();
@@ -138,10 +139,10 @@ public class MacawWindowsModule extends SimpleModule {
         STRIPPED_LOG_PANE_WINDOWS = SimpleEntrySet.builder(WoodType.class, "log_window2", "stripped",
                         () -> BlockInit.STRIPPED_OAK_LOG_WINDOW2, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WindowBarred(Utils.copyPropertySafe(w.log)))
-                .addTag(modRes("windows_two"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> WindowsGroup.WINDOWSGROUP)
+                .addTag(modRes("windows_two"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                .setTabKey(windowsTab)
                 .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .build();
@@ -151,10 +152,10 @@ public class MacawWindowsModule extends SimpleModule {
         LOG_FOUR_WINDOWS = SimpleEntrySet.builder(WoodType.class, "four_window",
                         () -> BlockInit.OAK_FOUR_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WindowBarred(Utils.copyPropertySafe(w.log)))
-                .addTag(modRes("windows_four"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> WindowsGroup.WINDOWSGROUP)
+                .addTag(modRes("windows_four"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                .setTabKey(windowsTab)
                 .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .build();
@@ -164,10 +165,10 @@ public class MacawWindowsModule extends SimpleModule {
         PLANKS_FOUR_WINDOWS = SimpleEntrySet.builder(WoodType.class, "plank_four_window",
                         () -> BlockInit.OAK_PLANK_FOUR_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WindowBarred(Utils.copyPropertySafe(w.planks)))
-                .addTag(modRes("windows_four"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> WindowsGroup.WINDOWSGROUP)
+                .addTag(modRes("windows_four"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                .setTabKey(windowsTab)
                 .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .build();
@@ -177,10 +178,10 @@ public class MacawWindowsModule extends SimpleModule {
         STRIPPED_LOG_FOUR_WINDOW = SimpleEntrySet.builder(WoodType.class, "log_four_window", "stripped",
                         () -> BlockInit.STRIPPED_OAK_LOG_FOUR_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new WindowBarred(Utils.copyPropertySafe(w.log)))
-                .addTag(modRes("windows_four"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> WindowsGroup.WINDOWSGROUP)
+                .addTag(modRes("windows_four"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
+                .setTabKey(windowsTab)
                 .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .build();
@@ -190,10 +191,10 @@ public class MacawWindowsModule extends SimpleModule {
         LOUVERED_SHUTTERS = SimpleEntrySet.builder(WoodType.class, "louvered_shutter",
                         () -> BlockInit.OAK_LOUVERED_SHUTTER, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Shutter(Utils.copyPropertySafe(w.planks)))
-                .addTag(modRes("shutters"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("shutters"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTexture(modRes("block/oak_louvered_shutter"))
-                .setTab(() -> WindowsGroup.WINDOWSGROUP)
+                .setTabKey(windowsTab)
                 .createPaletteFromOak(this::shutterPalette)
                 .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
@@ -204,10 +205,10 @@ public class MacawWindowsModule extends SimpleModule {
         SHUTTERS = SimpleEntrySet.builder(WoodType.class, "shutter",
                         () -> BlockInit.OAK_SHUTTER, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Shutter(Utils.copyPropertySafe(w.planks)))
-                .addTag(modRes("shutters"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("shutters"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTexture(modRes("block/oak_shutter"))
-                .setTab(() -> WindowsGroup.WINDOWSGROUP)
+                .setTabKey(windowsTab)
                 .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .build();
@@ -217,10 +218,10 @@ public class MacawWindowsModule extends SimpleModule {
         PANE_WINDOW = SimpleEntrySet.builder(WoodType.class, "pane_window",
                         () -> BlockInit.OAK_PANE_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Window(Utils.copyPropertySafe(w.log)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("pane_windows"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> WindowsGroup.WINDOWSGROUP)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.WALLS, Registries.BLOCK)
+                .addTag(modRes("pane_windows"), Registries.BLOCK)
+                .setTabKey(windowsTab)
                 .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .build();
@@ -230,10 +231,10 @@ public class MacawWindowsModule extends SimpleModule {
         STRIPPED_PANE_WINDOW = SimpleEntrySet.builder(WoodType.class, "pane_window", "stripped",
                         () -> BlockInit.STRIPPED_OAK_PANE_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Window(Utils.copyPropertySafe(w.log)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("pane_windows"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> WindowsGroup.WINDOWSGROUP)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.WALLS, Registries.BLOCK)
+                .addTag(modRes("pane_windows"), Registries.BLOCK)
+                .setTabKey(windowsTab)
                 .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .build();
@@ -243,10 +244,10 @@ public class MacawWindowsModule extends SimpleModule {
         PLANK_PANE_WINDOW = SimpleEntrySet.builder(WoodType.class, "plank_pane_window",
                         () -> BlockInit.OAK_PLANK_PANE_WINDOW, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Window(Utils.copyPropertySafe(w.log)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("pane_windows"), Registry.BLOCK_REGISTRY)
-                .setTab(() -> WindowsGroup.WINDOWSGROUP)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.WALLS, Registries.BLOCK)
+                .addTag(modRes("pane_windows"), Registries.BLOCK)
+                .setTabKey(windowsTab)
                 .setRenderType(() -> RenderType::cutout)
                 .defaultRecipe()
                 .build();

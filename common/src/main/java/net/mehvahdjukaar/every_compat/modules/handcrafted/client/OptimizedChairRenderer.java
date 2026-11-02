@@ -2,7 +2,7 @@ package net.mehvahdjukaar.every_compat.modules.handcrafted.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import earth.terrarium.handcrafted.client.block.chair.chair.ChairModel;
 import earth.terrarium.handcrafted.common.block.chair.chair.ChairBlockEntity;
 import earth.terrarium.handcrafted.common.block.chair.couch.ExpandableCouchBlock;
@@ -50,8 +50,8 @@ public class OptimizedChairRenderer implements BlockEntityRenderer<ChairBlockEnt
 
         poseStack.pushPose();
         poseStack.translate(0.5, 1.5, 0.5);
-        poseStack.mulPose(Vector3f.YN.rotationDegrees(direction.getOpposite().toYRot()));
-        poseStack.mulPose(Vector3f.XP.rotationDegrees(180.0F));
+        poseStack.mulPose(Axis.YN.rotationDegrees(direction.getOpposite().toYRot()));
+        poseStack.mulPose(Axis.XP.rotationDegrees(180.0F));
         withCushion.visible = false;
         seat.visible = false;
         base.visible = true;

@@ -17,7 +17,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Map;
@@ -43,9 +43,9 @@ public class OptimizedCounterRenderer implements BlockEntityRenderer<Handcrafted
     @Override
     public void render(HandcraftedModule.compatCounterEntity entity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource,
                        int packedLight, int packedOverlay) {
-        ResourceLocation blockKey = Registry.BLOCK.getKey(entity.getBlockState().getBlock());
+        ResourceLocation blockKey = BuiltInRegistries.BLOCK.getKey(entity.getBlockState().getBlock());
 
-        doRender(Registry.ITEM.getKey(entity.getStack().getItem()), blockKey, entity.getBlockState().getValue(ExpandableCouchBlock.FACING),
+        doRender(BuiltInRegistries.ITEM.getKey(entity.getStack().getItem()), blockKey, entity.getBlockState().getValue(ExpandableCouchBlock.FACING),
                 poseStack, bufferSource, packedLight, packedOverlay);
     }
 

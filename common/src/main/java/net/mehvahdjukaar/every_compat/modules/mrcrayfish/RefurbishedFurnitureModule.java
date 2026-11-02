@@ -2,7 +2,6 @@ package net.mehvahdjukaar.every_compat.modules.mrcrayfish;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.mrcrayfish.furniture.refurbished.FurnitureMod;
 import com.mrcrayfish.furniture.refurbished.block.*;
 import com.mrcrayfish.furniture.refurbished.client.renderer.blockentity.CeilingFanBlockEntityRenderer;
 import com.mrcrayfish.furniture.refurbished.crafting.StackedIngredient;
@@ -12,9 +11,9 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
+import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
-import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
-import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
+import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.StaticResource;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
@@ -27,11 +26,12 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
-import net.minecraft.advancements.critereon.*;
+import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -299,8 +299,8 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(modRes("general"), Registries.BLOCK)
                 .addTag(modRes("bedroom"), Registries.BLOCK)
-                .addTag(modRes("kitchen"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("storage"), Registry.ITEM_REGISTRY)
+                .addTag(modRes("kitchen"), Registries.ITEM)
+                .addTag(modRes("storage"), Registries.ITEM)
                 .build();
         this.addEntry(storage_cabinet);
 
@@ -315,8 +315,8 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTextureM(modRes("block/oak_basin"),
                         EveryCompat.res("block/rfm/oak_basin_m"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
-                .addTag(modRes("wooden_basins"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("bathroom"), Registry.ITEM_REGISTRY)
+                .addTag(modRes("wooden_basins"), Registries.ITEM)
+                .addTag(modRes("bathroom"), Registries.ITEM)
                 .build();
         this.addEntry(basin);
 
@@ -331,8 +331,8 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTextureM(modRes("block/oak_bath"),
                         EveryCompat.res("block/rfm/oak_bath_m"))
                 .addTag(BlockTags.MINEABLE_WITH_PICKAXE, Registries.BLOCK)
-                .addTag(modRes("bathroom"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("wooden_baths"), Registry.ITEM_REGISTRY)
+                .addTag(modRes("bathroom"), Registries.ITEM)
+                .addTag(modRes("wooden_baths"), Registries.ITEM)
                 .build();
         this.addEntry(bath);
 
@@ -346,10 +346,10 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTile(STORAGE_JAR::get)
                 .addTexture(modRes("block/oak_lattice_fence"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
-                .addTag(BlockTags.FENCES, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.WOODEN_FENCES, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("outdoors"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.FENCES, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.FENCES, Registries.BLOCK)
+                .addTag(BlockTags.WOODEN_FENCES, Registries.BLOCK)
+                .addTag(modRes("outdoors"), Registries.ITEM)
+                .addTag(BlockTags.FENCES, Registries.ITEM)
                 .setRenderType(() -> RenderType::cutout)
                 .build();
         this.addEntry(lattice_fence);
@@ -363,10 +363,10 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addTile(STORAGE_JAR::get)
                 .addTextureM(modRes("block/oak_lattice_fence_gate"),
                         EveryCompat.res("block/rfm/oak_lattice_fence_gate_m"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.FENCE_GATES, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.UNSTABLE_BOTTOM_CENTER, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("outdoors"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.FENCE_GATES, Registries.BLOCK)
+                .addTag(BlockTags.UNSTABLE_BOTTOM_CENTER, Registries.BLOCK)
+                .addTag(modRes("outdoors"), Registries.ITEM)
                 .setRenderType(() -> RenderType::cutout)
                 .build();
         this.addEntry(lattice_fence_gate);
@@ -379,10 +379,10 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 .addRecipe(modRes("constructing/oak_desk"))
 //              .setTab() is not needed blc FORGE & FABRIC have different name for CreativeModeTab
                 .addTexture(modRes("block/oak_desk"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("tuckable"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("general"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("bedroom"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("tuckable"), Registries.BLOCK)
+                .addTag(modRes("general"), Registries.ITEM)
+                .addTag(modRes("bedroom"), Registries.ITEM)
                 .build();
         this.addEntry(desk);
 
@@ -395,8 +395,8 @@ public class RefurbishedFurnitureModule extends SimpleModule {
 //              .setTab() is not needed blc FORGE & FABRIC have different name for CreativeModeTab
                 .addTile(CUTTING_BOARD::get)
                 .addTexture(modRes("block/oak_cutting_board"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("kitchen"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("kitchen"), Registries.ITEM)
                 .build();
         this.addEntry(cutting_board);
 
@@ -409,10 +409,10 @@ public class RefurbishedFurnitureModule extends SimpleModule {
 //              .setTab() is not needed blc FORGE & FABRIC have different name for CreativeModeTab
                 .addTile(DRAWER::get)
                 .addTexture(modRes("block/oak_drawer"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("storage"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("bedroom"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("general"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("storage"), Registries.ITEM)
+                .addTag(modRes("bedroom"), Registries.ITEM)
+                .addTag(modRes("general"), Registries.ITEM)
                 .build();
         this.addEntry(drawer);
 
@@ -424,11 +424,11 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 )
                 .requiresChildren("leaves") // Textures
                 .addModelTransform(m -> m.replaceWithTextureFromChild("minecraft:block/oak_leaves",
-                        "leaves", SpriteHelper.LOOKS_LIKE_LEAF_TEXTURE))
+                        "leaves", CompatSpritesHelper.LOOKS_LIKE_LEAF_TEXTURE))
                 .addRecipe(modRes("constructing/oak_hedge"))
 //              .setTab() is not needed blc FORGE & FABRIC have different name for CreativeModeTab
                 .addTile(DRAWER::get)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .setRenderType(() -> RenderType::cutout)
                 .build();
         this.addEntry(hedges);
@@ -469,18 +469,18 @@ public class RefurbishedFurnitureModule extends SimpleModule {
         super.onClientSetup();
         darkFans.blocks.forEach((key, value) -> {
             ResourceLocation res = EveryCompat.res("extra/" + key.getAppendableId() + "_dark_ceiling_fan_blade");
-            CeilingFanBlockEntityRenderer.registerFanBlade(value, () -> ClientPlatformHelper.getModel(Minecraft.getInstance().getModelManager(), res));
+            CeilingFanBlockEntityRenderer.registerFanBlade(value, () -> ClientHelper.getModel(Minecraft.getInstance().getModelManager(), res));
         });
 
         lightFans.blocks.forEach((key, value) -> {
             ResourceLocation res = EveryCompat.res("extra/" + key.getAppendableId() + "_light_ceiling_fan_blade");
-            CeilingFanBlockEntityRenderer.registerFanBlade(value, () -> ClientPlatformHelper.getModel(Minecraft.getInstance().getModelManager(), res));
+            CeilingFanBlockEntityRenderer.registerFanBlade(value, () -> ClientHelper.getModel(Minecraft.getInstance().getModelManager(), res));
         });
     }
     @Override
     public void onClientInit() {
         super.onClientInit();
-        ClientPlatformHelper.addSpecialModelRegistration(event -> darkFans.blocks.keySet().forEach(w -> {
+        ClientHelper.addSpecialModelRegistration(event -> darkFans.blocks.keySet().forEach(w -> {
             event.register(EveryCompat.res("extra/" + w.getAppendableId() + "_dark_ceiling_fan_blade"));
             event.register(EveryCompat.res("extra/" + w.getAppendableId() + "_light_ceiling_fan_blade"));
         }));
@@ -510,7 +510,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
                 count = 1;
             }
 
-            this.result = new ItemStack(Registry.ITEM.get(new ResourceLocation(s1)), count);
+            this.result = new ItemStack(BuiltInRegistries.ITEM.get(new ResourceLocation(s1)), count);
             this.notification = GsonHelper.getAsBoolean(json, "show_notification", true);
         }
 
@@ -525,7 +525,7 @@ public class RefurbishedFurnitureModule extends SimpleModule {
             }
             ItemStack newResult = new ItemStack(newRes);
             if (this.result.hasTag()) newResult.setTag(this.result.getOrCreateTag().copy());
-            if (id == null) id = Registry.ITEM.getKey(newRes.asItem()).toString();
+            if (id == null) id = BuiltInRegistries.ITEM.getKey(newRes.asItem()).toString();
             List<StackedIngredient> newMaterials = new ArrayList<>();
             for (StackedIngredient ing : this.materials) {
                 Ingredient converted = ResourcesUtils.convertIngredient(ing.ingredient(), originalMat, destinationMat);

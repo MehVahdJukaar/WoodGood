@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.forge;
 
+import net.mehvahdjukaar.every_compat.ECNetworking;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
@@ -29,7 +30,6 @@ import net.mehvahdjukaar.every_compat.modules.forge.oreberries_replanted.Oreberr
 import net.mehvahdjukaar.every_compat.modules.forge.pokecube.PokecubeLegendsModule;
 import net.mehvahdjukaar.every_compat.modules.forge.premium_wood.PremiumWoodModule;
 import net.mehvahdjukaar.every_compat.modules.forge.productive_bees.ProductiveBeesModule;
-import net.mehvahdjukaar.every_compat.modules.forge.quark.QuarkModule;
 import net.mehvahdjukaar.every_compat.modules.forge.regions_unexplored.RegionsUnexploredModule;
 import net.mehvahdjukaar.every_compat.modules.forge.storagedrawers.StorageDrawersModule;
 import net.mehvahdjukaar.every_compat.modules.forge.tropicraft.TropicraftModule;
@@ -37,11 +37,9 @@ import net.mehvahdjukaar.every_compat.modules.forge.twilightforest.TwilightFores
 import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.forge.valhelsia.ValhelsiaStructuresModule;
 import net.mehvahdjukaar.every_compat.modules.forge.villagers_plus.VillagersPlusModule;
-import net.mehvahdjukaar.every_compat.modules.forge.woodster.WoodsterModule;
 import net.mehvahdjukaar.every_compat.modules.forge.workshop.WorkshopForHandsomeAdventurerModule;
 import net.mehvahdjukaar.every_compat.modules.forge.xerca.XercaModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -68,6 +66,7 @@ import java.util.Optional;
 public class EveryCompatForge extends EveryCompat {
     public static final String MOD_ID = EveryCompat.MOD_ID;
 
+    @SuppressWarnings("removal")
     public EveryCompatForge() {
         this.commonInit();
 
@@ -113,7 +112,6 @@ public class EveryCompatForge extends EveryCompat {
         addModule("pokecube_legends", () -> PokecubeLegendsModule::new);
         addModule("premium_wood", () -> PremiumWoodModule::new);
         addModule("productivebees", () -> ProductiveBeesModule::new);
-        addModule("quark", () -> QuarkModule::new);
         addModule("regions_unexplored", () -> RegionsUnexploredModule::new);
         addModule("shutter", () -> LauchsShuttersModule::new);
         addModule("storagedrawers", () -> StorageDrawersModule::new);
@@ -122,7 +120,6 @@ public class EveryCompatForge extends EveryCompat {
         addModule("valhelsia_furniture", () -> ValhelsiaFurnitureModule::new);
         addModule("valhelsia_structures", () -> ValhelsiaStructuresModule::new);
         addModule("villagersplus", () -> VillagersPlusModule::new);
-        addModule("woodster", () -> WoodsterModule::new);
         addModule("woodworks", () -> WoodworksModule::new);
         if (ModList.get().getModContainerById("workshop_for_handsome_adventurer") // Won't enabled if version is 1.14.7
                 .map(v->v.getModInfo().getVersion()).toString().compareTo("1.14.7") < 0) {
@@ -166,11 +163,12 @@ public class EveryCompatForge extends EveryCompat {
     }
 
     public static void onDataSync(PlayerEvent.PlayerLoggedInEvent event) {
-        if (event.getEntity() instanceof ServerPlayer s)EveryCompat.sendPacket(s);
+        if (event.getEntity() instanceof ServerPlayer s) ECNetworking.sendPacket(s);
+//            EveryCompat.sendPacket(s);
 
     }
 
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings({"deprecation", "removal"})
     public static void onRemap(MissingMappingsEvent event) {
         for (var mapping : event.getMappings(Registries.BLOCK_ENTITY_TYPE, EveryCompat.MOD_ID)) {
             ResourceLocation key = mapping.getKey();

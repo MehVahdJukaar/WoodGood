@@ -1,7 +1,6 @@
 package net.mehvahdjukaar.every_compat;
 
 
-import io.netty.buffer.Unpooled;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.api.EveryCompatAPI;
 import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
@@ -9,7 +8,6 @@ import net.mehvahdjukaar.every_compat.configs.WoodConfigs;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.misc.AllWoodItem;
-// MODULES
 import net.mehvahdjukaar.every_compat.modules.another_furniture.AnotherFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.camp_chair.CampChairModule;
 import net.mehvahdjukaar.every_compat.modules.chipped.ChippedModule;
@@ -22,34 +20,22 @@ import net.mehvahdjukaar.every_compat.modules.hearth_and_home.HearthAndHomeModul
 import net.mehvahdjukaar.every_compat.modules.mrcrayfish.RefurbishedFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.table_top_craft.TableTopCraftModule;
 import net.mehvahdjukaar.every_compat.modules.twigs.TwigsModule;
-// LIB
-import net.mehvahdjukaar.moonlight.api.client.TextureCache;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
-import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
-import net.mehvahdjukaar.moonlight.api.platform.network.ChannelHandler;
-import net.mehvahdjukaar.moonlight.api.platform.network.Message;
-import net.mehvahdjukaar.moonlight.api.platform.network.NetworkDir;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtUtils;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockState;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -58,11 +44,12 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+// MODULES
+// LIB
+
 /**
  * Author: MehVahdJukaar
  */
-
-//TODO: Fix Chipped recipes
 
 public abstract class EveryCompat {
     public static final String MOD_ID = "everycomp";
@@ -86,6 +73,8 @@ public abstract class EveryCompat {
 
     public static ResourceKey<CreativeModeTab> MOD_TAB = null;
 
+    // all mod that EC directly or indirectly depends on
+    private static final Set<String> DEPENDENCIES = new HashSet<>();
 
     protected void commonInit() {
 
@@ -160,11 +149,6 @@ public abstract class EveryCompat {
 
     }
 
-    private static void addOptional(String blockId, String textureId, String texturePath) {
-        BuiltInRegistries.BLOCK.getOptional(new ResourceLocation(blockId))
-                .ifPresent(b -> TextureCache.registerSpecialTextureForBlock(b, textureId, new ResourceLocation(texturePath)));
-    }
-
     public static <T extends BlockType> void addEntryType(Class<T> type, String childId) {
         ENTRY_TYPES.computeIfAbsent(type, t -> new HashSet<>()).add(childId);
     }
@@ -187,9 +171,14 @@ public abstract class EveryCompat {
 
     protected void addModule(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
         if (PlatHelper.isModLoaded(modId)) {
+            DEPENDENCIES.add(modId);
             var module = moduleFactory.get().apply(modId);
             EveryCompatAPI.registerModule(module);
         }
+    }
+
+    public static Collection<String> getDependencies() {
+        return DEPENDENCIES;
     }
 
     public static final Supplier<AllWoodItem> ALL_WOODS = RegHelper.registerItem(res("all_woods"), AllWoodItem::new);
@@ -257,90 +246,86 @@ public abstract class EveryCompat {
     }
 
 
-    //TODO: replace oak based with acacia based
-
-    public static final ChannelHandler CHANNEL = ChannelHandler.createChannel(EveryCompat.res("network"));
+//    public static final ChannelHandler CHANNEL = ChannelHandler.createChannel(EveryCompat.res("network"));
 
     static {
-        CHANNEL.register(NetworkDir.PLAY_TO_CLIENT, S2CBlockStateCheckMessage.class, S2CBlockStateCheckMessage::new);
+        ECNetworking.registerMessages();
+//        CHANNEL.register(NetworkDir.PLAY_TO_CLIENT, ECNetworking.S2CBlockStateCheckMessage.class, ECNetworking.S2CBlockStateCheckMessage::new);
     }
 
-    public static class S2CBlockStateCheckMessage implements Message {
-
-        public S2CBlockStateCheckMessage(FriendlyByteBuf buf) {
-            int start = buf.readVarInt();
-            int size = buf.readVarInt();
-
-            boolean mismatched = false;
-            for (int i = start; i < (start + size); i++) {
-                try {
-                    var nbt = buf.readNbt();
-                    if (nbt == null) {
-                        int aa = 1;
-                    }
-                    var b = NbtUtils.readBlockState(nbt);
-                    BlockState exp = Block.BLOCK_STATE_REGISTRY.byId(i);
-                    if (b != exp) {
-                        if (!mismatched) {
-                            LOGGER.error("Found blockstate id mismatch from " + b + "at id " + i + ". Was expecting: " + exp);
-                        }
-                        mismatched = true;
-                    } else {
-                        if (mismatched) {
-                            LOGGER.error("to" + b + "at id " + i);
-                        }
-                        mismatched = false;
-                    }
-                } catch (Exception e) {
-                    LOGGER.error("Failed to read blockstate in id map: ", e);
-                    break;
-                }
-            }
-            buf.release();
-        }
-
-        public S2CBlockStateCheckMessage() {
-        }
-
-        @Override
-        public void writeToBuffer(FriendlyByteBuf buf) {
-            FriendlyByteBuf dummy = new FriendlyByteBuf(Unpooled.buffer());
-            int start = lastInd;
-            for (int i = lastInd; i < Block.BLOCK_STATE_REGISTRY.size(); i++) {
-                lastInd++;
-                CompoundTag nbt = NbtUtils.writeBlockState(Block.stateById(i));
-                dummy.writeNbt(nbt);
-                if (dummy.writerIndex() > 1048576 * 0.9) {
-                    break;
-                }
-            }
-            buf.writeVarInt(start);
-            buf.writeVarInt(lastInd - start);
-            buf.writeBytes(dummy);
-            dummy.release();
-        }
-
-        @Override
-        public void handle(ChannelHandler.Context context) {
-
-        }
-    }
+//    public static class S2CBlockStateCheckMessage implements Message {
+//
+//        public S2CBlockStateCheckMessage(FriendlyByteBuf buf) {
+//            int start = buf.readVarInt();
+//            int size = buf.readVarInt();
+//
+//            boolean mismatched = false;
+//            for (int i = start; i < (start + size); i++) {
+//                try {
+//                    CompoundTag nbt = buf.readNbt();
+//                    if (nbt == null) {
+//                        int aa = 1;
+//                    }
+//                    var blockState = NbtUtils.readBlockState(null, nbt);
+//                    BlockState exp = Block.BLOCK_STATE_REGISTRY.byId(i);
+//                    if (blockState != exp) {
+//                        if (!mismatched) {
+//                            LOGGER.error("Found blockstate id mismatch from " + blockState + "at id " + i + ". Was expecting: " + exp);
+//                        }
+//                        mismatched = true;
+//                    } else {
+//                        if (mismatched) {
+//                            LOGGER.error("to" + blockState + "at id " + i);
+//                        }
+//                        mismatched = false;
+//                    }
+//                } catch (Exception e) {
+//                    LOGGER.error("Failed to read blockstate in id map: ", e);
+//                    break;
+//                }
+//            }
+//            buf.release();
+//        }
+//
+//        public S2CBlockStateCheckMessage() {
+//        }
+//
+//        @Override
+//        public void writeToBuffer(FriendlyByteBuf buf) {
+//            FriendlyByteBuf dummy = new FriendlyByteBuf(Unpooled.buffer());
+//            int start = lastInd;
+//            for (int i = lastInd; i < Block.BLOCK_STATE_REGISTRY.size(); i++) {
+//                lastInd++;
+//                CompoundTag nbt = NbtUtils.writeBlockState(Block.stateById(i));
+//                dummy.writeNbt(nbt);
+//                if (dummy.writerIndex() > 1048576 * 0.9) {
+//                    break;
+//                }
+//            }
+//            buf.writeVarInt(start);
+//            buf.writeVarInt(lastInd - start);
+//            buf.writeBytes(dummy);
+//            dummy.release();
+//        }
+//
+//        @Override
+//        public void handle(ChannelHandler.Context context) {}
+//    }
 
     private static void registerItemsToTabs(RegHelper.ItemToTabEvent event) {
         if (EarlyConfigs.TAB_ENABLED.get()) {
             Map<ResourceKey<CreativeModeTab>, Map<BlockType, List<Item>>> typeToEntrySet = new LinkedHashMap<>();
-            for (var r : BlockSetAPI.getRegistries()) {
-                for (var type : r.getValues()) {
-                    forAllModules(m -> {
-                        typeToEntrySet.computeIfAbsent(m.getDedicatedTab(), j -> new LinkedHashMap<>())
-                                .computeIfAbsent(type, j -> new ArrayList<>())
-                                .addAll(m.getAllItemsOfType(type));
-                    });
+            for (var typeRegistry : BlockSetAPI.getRegistries()) {
+                for (var type : typeRegistry.getValues()) {
+                    forAllModules(m ->
+                            typeToEntrySet.computeIfAbsent(m.getDedicatedTab(), j -> new LinkedHashMap<>())
+                                    .computeIfAbsent(type, j -> new ArrayList<>())
+                                    .addAll(m.getAllItemsOfType(type)));
                 }
             }
-            for (var e : typeToEntrySet.entrySet()) {
-                for (var ee : e.getValue().values()) {
-                    event.add(e.getKey(), ee.toArray(ItemLike[]::new));
+            for (Map.Entry<ResourceKey<CreativeModeTab>, Map<BlockType, List<Item>>> mapEntry : typeToEntrySet.entrySet()) {
+                for (List<Item> entry : mapEntry.getValue().values()) {
+                    event.add(PlatHelper.getCreativeModeTab(mapEntry.getKey().location()), entry.toArray(ItemLike[]::new));
                 }
             }
         } else {
@@ -348,15 +333,15 @@ public abstract class EveryCompat {
         }
     }
 
-    private static int lastInd = 0;
+//    private static int lastInd = 0;
 
-    public static void sendPacket(ServerPlayer s) {
-        if (EarlyConfigs.DEBUG_PACKET.get() || PlatHelper.isDev()) {
-            lastInd = 0;
-            LOGGER.warn("Starting Blockstate Map validity check:");
-            while (lastInd < Block.BLOCK_STATE_REGISTRY.size()) {
-                EveryCompat.CHANNEL.sendToClientPlayer(s, new EveryCompat.S2CBlockStateCheckMessage());
-            }
-        }
-    }
+//    public static void sendPacket(ServerPlayer s) {
+//        if (EarlyConfigs.DEBUG_PACKET.get() || PlatHelper.isDev()) {
+//            lastInd = 0;
+//            LOGGER.warn("Starting Blockstate Map validity check:");
+//            while (lastInd < Block.BLOCK_STATE_REGISTRY.size()) {
+//                EveryCompat.CHANNEL.sendToClientPlayer(s, new EveryCompat.S2CBlockStateCheckMessage());
+//            }
+//        }
+//    }
 }

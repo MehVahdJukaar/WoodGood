@@ -10,28 +10,28 @@ import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.tropicraft.Tropicraft;
 import net.tropicraft.core.common.block.BoardwalkBlock;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Objects;
 
 //SUPPORT: v9.5.2-FINAL
+@SuppressWarnings("removal")
 public class TropicraftModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, BoardwalkBlock> boardwalks;
 
     public TropicraftModule(String modId) {
         super(modId, "tc");
+        ResourceLocation tab = modRes(modId);
 
         boardwalks = SimpleEntrySet.builder(WoodType.class, "boardwalk",
                         () -> getModBlock("mangrove_boardwalk", BoardwalkBlock.class), () -> WoodTypeRegistry.getValue(new ResourceLocation("mangrove")),
@@ -44,8 +44,8 @@ public class TropicraftModule extends SimpleModule {
                         "\"tropicraft:block/mangrove_planks\"",
                         "\"" + woodType.getNamespace() + ":block/" + woodType.getTypeName() + "_planks\"")
                 ))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> Tropicraft.TROPICRAFT_ITEM_GROUP)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .build();
         this.addEntry(boardwalks);
 

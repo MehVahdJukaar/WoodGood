@@ -23,7 +23,6 @@ import net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
-import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
@@ -33,12 +32,12 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -56,6 +55,7 @@ import java.util.Objects;
 import static net.mehvahdjukaar.every_compat.common_classes.TagUtility.whichTags;
 
 //SUPPORT v2.2.2+
+@SuppressWarnings("removal")
 public class WoodworksModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> bookshelves;
     public final SimpleEntrySet<WoodType, Block> boards;
@@ -68,11 +68,13 @@ public class WoodworksModule extends SimpleModule {
     public WoodworksModule(String modId) {
         super(modId, "abnww");
 
+        var tab = CreativeModeTabs.BUILDING_BLOCKS;
+
         bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf",
                         () -> getModBlock("acacia_bookshelf"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("acacia")),
                         w -> new BookshelfBlock(WoodworksBlocks.WoodworksProperties.ACACIA_WOOD.bookshelf()))
-                .setTab(() -> CreativeModeTab.TAB_DECORATIONS)
+//                .setTabKey(tab)
                 .copyParentDrop()
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(Tags.Blocks.BOOKSHELVES, Registries.BLOCK)
@@ -85,7 +87,7 @@ public class WoodworksModule extends SimpleModule {
         boards = SimpleEntrySet.builder(WoodType.class, "boards",
                         WoodworksBlocks.OAK_BOARDS, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new RotatedPillarBlock(Utils.copyPropertySafe(w.planks)))
-                .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
+//                .setTab(tab)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTexture(modRes("block/oak_boards"))
                 .defaultRecipe()
@@ -96,7 +98,7 @@ public class WoodworksModule extends SimpleModule {
                         () -> getModBlock("spruce_ladder"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new BlueprintLadderBlock(WoodworksBlocks.WoodworksProperties.OAK_WOOD.ladder()))
-                .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
+//                .setTab(tab)
                 .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
                 .addTag(new ResourceLocation("quark:ladders"), Registries.BLOCK)
                 .addTag(new ResourceLocation("quark:ladders"), Registries.ITEM)
@@ -109,7 +111,7 @@ public class WoodworksModule extends SimpleModule {
                         () -> getModBlock("spruce_beehive"),
                         () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
                         w -> new BlueprintBeehiveBlock(WoodworksBlocks.WoodworksProperties.OAK_WOOD.beehive()))
-                .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
+//                .setTab(tab)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.BEEHIVES, Registries.BLOCK)
                 .defaultRecipe()
@@ -124,7 +126,7 @@ public class WoodworksModule extends SimpleModule {
         chests = SimpleEntrySet.builder(WoodType.class, "chest",
                         () -> getModBlock("oak_chest"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlueprintChestBlock(EveryCompat.MOD_ID + ":" + w.getTypeName(), WoodworksBlocks.WoodworksProperties.OAK_WOOD.chest()))
-                .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
+//                .setTab(tab)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
                 .addTag(Tags.Blocks.CHESTS_WOODEN, Registries.BLOCK)
@@ -142,7 +144,7 @@ public class WoodworksModule extends SimpleModule {
         trappedChests = SimpleEntrySet.builder(WoodType.class, "trapped_chest",
                         () -> getModBlock("oak_trapped_chest"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BlueprintTrappedChestBlock(EveryCompat.MOD_ID + ":" + w.getTypeName() + "_trapped", WoodworksBlocks.WoodworksProperties.OAK_WOOD.chest()))
-                .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
+//                .setTab(tab)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.GUARDED_BY_PIGLINS, Registries.BLOCK)
                 .addTag(Tags.Blocks.CHESTS, Registries.BLOCK)
@@ -168,7 +170,7 @@ public class WoodworksModule extends SimpleModule {
                         "leaves", s -> !s.contains("/snow") && !s.contains("_snow")))
                 .addTag(BlockTags.MINEABLE_WITH_HOE, Registries.BLOCK)
                 .addTag(modRes("leaf_piles"), Registries.BLOCK)
-                .setTab(() -> CreativeModeTab.TAB_BUILDING_BLOCKS)
+//                .setTab(tab)
                 .setRenderType(() -> RenderType::cutout)
                 .copyParentDrop()
                 .defaultRecipe()
@@ -189,7 +191,7 @@ public class WoodworksModule extends SimpleModule {
     }
 
     @Override
-    public void registerBlockColors(ClientPlatformHelper.BlockColorEvent event){
+    public void registerBlockColors(ClientHelper.BlockColorEvent event) {
         super.registerBlockColors(event);
         leafPiles.blocks.forEach((t, b) -> {
             event.register((s, l, p, i) -> event.getColor(t.leaves.defaultBlockState(), l, p, i), b);
@@ -215,7 +217,7 @@ public class WoodworksModule extends SimpleModule {
 
             // Some mods already have chests, it can be used instead of EveryCompat's
             Block chest = (chests.blocks.get(wood) == null)
-                    ? Registry.BLOCK.get(new ResourceLocation(wood.getNamespace(), wood.getTypeName() + "_chest"))
+                    ? BuiltInRegistries.BLOCK.get(new ResourceLocation(wood.getNamespace(), wood.getTypeName() + "_chest"))
                     : chests.blocks.get(wood);
 
             createChestRecipe(chest, trappedChests.blocks.get(wood), handler, manager, wood);

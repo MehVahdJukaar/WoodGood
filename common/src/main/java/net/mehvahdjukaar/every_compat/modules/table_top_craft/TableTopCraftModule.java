@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.table_top_craft;
 
-import andrews.table_top_craft.TableTopCraft;
 import andrews.table_top_craft.objects.blocks.ChessBlock;
 import andrews.table_top_craft.objects.blocks.ChessTimerBlock;
 import andrews.table_top_craft.objects.blocks.ConnectFourBlock;
@@ -9,7 +8,8 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -23,16 +23,15 @@ public class TableTopCraftModule extends SimpleModule {
 
     public TableTopCraftModule(String modId) {
         super(modId, "ttc");
-        // This is fine up to 1.19.2, but after that tab registration changed so the field no longer exists!
-        var tab = TableTopCraft.TABLE_TOP_CRAFT_GROUP;
+        ResourceLocation tab = modRes("tab");
 
         chessBoards = SimpleEntrySet.builder(WoodType.class, "chess",
                         () -> getModBlock("oak_chess"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ChessBlock(w.material, getSound(w)))
                 .addTile(() -> getModTile("chess"))
-                .addTag(modRes("chess_boards"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("chess_boards"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(chessBoards);
@@ -41,9 +40,9 @@ public class TableTopCraftModule extends SimpleModule {
                         () -> getModBlock("oak_chess_timer"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ChessTimerBlock(w.material, getSound(w)))
                 .addTile(() -> getModTile("chess_timer"))
-                .addTag(modRes("chess_timers"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("chess_timers"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(chessTimers);
@@ -52,9 +51,9 @@ public class TableTopCraftModule extends SimpleModule {
                         () -> getModBlock("oak_connect_four"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ConnectFourBlock(w.material, getSound(w)))
                 .addTile(() -> getModTile("connect_four"))
-                .addTag(modRes("connect_four"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(modRes("connect_four"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(connectFours);

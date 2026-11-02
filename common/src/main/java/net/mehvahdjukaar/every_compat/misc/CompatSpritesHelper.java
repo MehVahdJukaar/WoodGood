@@ -2,14 +2,15 @@ package net.mehvahdjukaar.every_compat.misc;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.moonlight.api.client.TextureCache;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.function.Predicate;
 
-public class SpriteHelper {
+public class CompatSpritesHelper {
 
     public static final @NotNull Predicate<String> LOOKS_LIKE_TOP_LOG_TEXTURE = (s) -> {
         s = (new ResourceLocation(s)).getPath();
@@ -21,8 +22,17 @@ public class SpriteHelper {
     };
     public static final @NotNull Predicate<String> LOOKS_LIKE_LEAF_TEXTURE = (s) -> {
         s = (new ResourceLocation(s)).getPath();
-        return !s.contains("_bushy") && !s.contains("_snow") && !s.contains("_overlay");
+        return !s.contains("_top") && !s.contains("_bushy") && !s.contains("_snow") && !s.contains("_overlay") && !s.contains("/snow") && s.contains("_leaves");
     };
+
+    ///REASON: WoodType's log that has ALPHA and is not a full 16x16. It should be excluded.<br>
+    /// The link will help you understand why. @see <a href=https://github.com/KyaniteMods/DeeperAndDarker/blob/neoforge-1.21/src/main/resources/assets/deeperdarker/textures/block/blooming_stem.png>deeperdarker:bloom's texture</a>
+    public static final List<String> EXCLUDED_WOODTYPES = List.of(
+            "deeperdarker:bloom",
+            "terrestria:yucca_palm", "terrestria:sakura",
+            "betternether:nether_mushroom", "betternether:nether_reed",
+            "antarchy:truffalo"
+    );
 
     public static void addHardcodedSprites() {
         TextureCache.registerSpecialTextureForBlock(Blocks.CACTUS, "cactus_log", EveryCompat.res("block/cactus_side"));
@@ -87,7 +97,7 @@ public class SpriteHelper {
     }
 
     private static void addOptional(String blockId, String textureId, String texturePath) {
-        Registry.BLOCK.getOptional(new ResourceLocation(blockId))
+        BuiltInRegistries.BLOCK.getOptional(new ResourceLocation(blockId))
                 .ifPresent(b -> TextureCache.registerSpecialTextureForBlock(b, textureId, new ResourceLocation(texturePath)));
     }
 }

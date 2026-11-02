@@ -11,20 +11,19 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
+import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 
 import java.io.FileNotFoundException;
@@ -41,28 +40,28 @@ public class WilderWildModule extends SimpleModule {
 
     public WilderWildModule(String modId) {
         super(modId, "ww");
-        var tab = CreativeModeTab.TAB_BUILDING_BLOCKS;
+        var tab = CreativeModeTabs.BUILDING_BLOCKS;
 
         hollow_log = SimpleEntrySet.builder(WoodType.class, "log", "hollowed",
                         () -> RegisterBlocks.HOLLOWED_OAK_LOG, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new HollowedLogBlock(Utils.copyPropertySafe(RegisterBlocks.HOLLOWED_OAK_LOG))
                 )
                 .requiresChildren("stripped_log") // Textures
-                .createPaletteFromChild(pallete -> {}, "log", SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)
+                .createPaletteFromChild(pallete -> {}, "log", CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)
                 .addTexture(modRes("block/hollowed_oak_log"))
                 .addTexture(modRes("block/hollowed_oak_log_top"))
                 // TEXTURE: using stripped_hollowed_oak_log from below
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> tab)
+//                .setTab(() -> tab)
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE, Registries.BLOCK)
                 .addTag(BlockTags.LOGS_THAT_BURN, Registries.BLOCK)
                 .addTag(BlockTags.LOGS, Registries.BLOCK)
                 .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK)
                 .addTag(BlockTags.PARROTS_SPAWNABLE_ON, Registries.BLOCK)
-                .addTag(modRes("hollowed_logs"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("splits_coconut"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("hollowed_logs_that_burn"), Registry.BLOCK_REGISTRY)
+                .addTag(modRes("hollowed_logs"), Registries.BLOCK)
+                .addTag(modRes("splits_coconut"), Registries.BLOCK)
+                .addTag(modRes("hollowed_logs_that_burn"), Registries.BLOCK)
                 //TAG: wilderwild:hollowed_<type>_logs
                 .addTag(modRes("hollowed_logs"), Registries.ITEM)
                 .addTag(modRes("hollowed_logs_that_burn"), Registries.ITEM)
@@ -81,23 +80,23 @@ public class WilderWildModule extends SimpleModule {
                         w -> new HollowedLogBlock(Utils.copyPropertySafe(RegisterBlocks.STRIPPED_HOLLOWED_OAK_LOG))
                 )
                 .requiresChildren("stripped_log") // Textures
-                .createPaletteFromChild(pallete -> {}, "stripped_log", SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)
+                .createPaletteFromChild(pallete -> {}, "stripped_log", CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE)
                 .addTexture(modRes("block/stripped_hollowed_oak_log"))
                 .addTexture(modRes("block/stripped_hollowed_oak_log_top"))
                 .setRenderType(() -> RenderType::cutout)
-                .setTab(() -> tab)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.LOGS_THAT_BURN, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.LOGS, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.PARROTS_SPAWNABLE_ON, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("hollowed_logs"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("hollowed_logs_that_burn"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("stripped_hollowed_logs_that_burn"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("termite_breakable"), Registry.BLOCK_REGISTRY)
-                .addTag(WilderBlockTags.STRIPPED_HOLLOWED_LOGS, Registry.BLOCK_REGISTRY)
-                .addTag(WilderBlockTags.SPLITS_COCONUT, Registry.BLOCK_REGISTRY)
+//                .setTab(() -> tab)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE, Registries.BLOCK)
+                .addTag(BlockTags.LOGS_THAT_BURN, Registries.BLOCK)
+                .addTag(BlockTags.LOGS, Registries.BLOCK)
+                .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK)
+                .addTag(BlockTags.PARROTS_SPAWNABLE_ON, Registries.BLOCK)
+                .addTag(modRes("hollowed_logs"), Registries.BLOCK)
+                .addTag(modRes("hollowed_logs_that_burn"), Registries.BLOCK)
+                .addTag(modRes("stripped_hollowed_logs_that_burn"), Registries.BLOCK)
+                .addTag(modRes("termite_breakable"), Registries.BLOCK)
+                .addTag(WilderBlockTags.STRIPPED_HOLLOWED_LOGS, Registries.BLOCK)
+                .addTag(WilderBlockTags.SPLITS_COCONUT, Registries.BLOCK)
                 //TAG: wilderwild:hollowed_<type>_logs
                 .addTag(modRes("hollowed_logs"), Registries.ITEM)
                 .addTag(modRes("hollowed_logs_that_burn"), Registries.ITEM)

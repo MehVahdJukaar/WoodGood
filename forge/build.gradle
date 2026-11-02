@@ -50,7 +50,7 @@ shadowJar {
 remapJar {
     input.set shadowJar.archiveFile
     dependsOn shadowJar
-    archiveClassifier = null
+    archiveClassifier = "forge"
 }
 
 jar {
@@ -61,6 +61,8 @@ sourcesJar {
     def commonSources = project(":common").sourcesJar
     dependsOn commonSources
     from commonSources.archiveFile.map { zipTree(it) }
+
+    archiveClassifier = "forge-sources"
 }
 
 components.java {
@@ -76,43 +78,21 @@ publishing {
             from components.java
         }
     }
-
-    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-    repositories {
-        // Add repositories to publish to here.
-        maven {
-            url = "https://www.cursemaven.com"
-            allowInsecureProtocol = true
-        }
-    }
-}
-
-
-repositories{
-    // Built mods
-    mavenCentral()
-    maven {
-        name "tterrag maven"
-        url "https://maven.tterrag.com/"
-    }
 }
 
 dependencies {
-    forge "net.minecraftforge:forge:${rootProject.forge_version}"
-    // Remove the next line if you don't want to depend on the API
-    // modApi "dev.architectury:architectury-forge:${rootProject.architectury_version}"
+    forge "net.minecraftforge:forge:$forge_version"
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
 
     implementation 'org.jetbrains:annotations:22.0.0'
 
-
     implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}"))
     implementation(include("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}"))
     annotationProcessor 'net.fabricmc:sponge-mixin:0.12.5+mixin.0.8.5'
 
-    modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
+//    modCompileOnly("com.tterrag.registrate:Registrate:${registrate_version}")
 
 //!! MOONLIGHT LIB -------------------------------------------------------------------------------------------------- \\
 
@@ -121,7 +101,7 @@ dependencies {
 
     //!! MAVEN
 //    modImplementation("curse.maven:selene-499980:5567102")
-    modImplementation("maven.modrinth:moonlight:${minecraft_version}-${moonlight_version}-forge")
+    modApi("maven.modrinth:moonlight:${minecraft_version}-${moonlight_version}-forge")
 
 //!! ================================================ DEPENDENCIES ================================================== \\
 
@@ -129,7 +109,7 @@ dependencies {
 //    modImplementation("curse.maven:cloth-config-348521:4973444") // v8.3.115 | REI
     modRuntimeOnly("curse.maven:configured-457570:4462837")
     modCompileOnly("curse.maven:valhelsia-core-416935:4181245") // Valhelsia Structure, Valhelsia Furniture
-    modCompileOnly("curse.maven:autoreglib-250363:3857246") // Quark
+//    modCompileOnly("curse.maven:autoreglib-250363:3857246") // Quark
     modCompileOnly("curse.maven:blueprint-382216:4749000") // Woodworks, Endergetic, Boatload
     modCompileOnly("curse.maven:ctm-267602:4393695") // Chipped
     modCompileOnly("curse.maven:resourceful-lib-570073:4434139") // Chipped, Handcrafted
@@ -155,14 +135,14 @@ dependencies {
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN FORGE
         //!! MACAW's
-    modCompileOnly("curse.maven:macaws-bridges-351725:5240514")
-    modCompileOnly("curse.maven:macaws-doors-378646:4649906")
-    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:5442213")
+    modImplementation("curse.maven:macaws-bridges-351725:7627951")
+    modCompileOnly("curse.maven:macaws-doors-378646:7618710") // v1.1.5
+    modCompileOnly("curse.maven:macaws-fences-and-walls-453925:7308414") // v1.2.1
     modCompileOnly("curse.maven:macaws-furniture-359540:4726294")
     modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:4618179")
     modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:5054877")
     modCompileOnly("curse.maven:macaws-roofs-352039:4590028")
-    modCompileOnly("curse.maven:macaws-trapdoors-400933:4841549")
+    modCompileOnly("curse.maven:macaws-trapdoors-400933:7256184") // v1.1.5
     modCompileOnly("curse.maven:macaws-windows-363569:4961138")
     modCompileOnly("curse.maven:macaws-stairs-1119394:5802530")
 
@@ -173,7 +153,7 @@ dependencies {
     modCompileOnly("curse.maven:backpacked-352835:3923045")
     modCompileOnly("curse.maven:beautify-decorate-633252:4036351")
 //    modCompileOnly("curse.maven:boatload-337396:4776091") //WIP --------- Entity Texturing issue
-    modCompileOnly("curse.maven:buildersaddition-389697:4008246")
+    modCompileOnly("curse.maven:buildersaddition-389697:4527989")
     modCompileOnly("curse.maven:camp-chair-531744:3930598")
     modCompileOnly("curse.maven:chipped-456956:4463479")
     modCompileOnly("curse.maven:create-328085:4547147")
@@ -200,7 +180,7 @@ dependencies {
     modCompileOnly("curse.maven:pokecube-aoi-285121:4109051")
     modCompileOnly("curse.maven:premium-wood-353515:3905203")
     modCompileOnly("curse.maven:productivebees-377897:4418663")
-    modCompileOnly("curse.maven:quark-243121:4587248")
+//    modCompileOnly("curse.maven:quark-243121:4587248")
     modCompileOnly("curse.maven:rechiseled-558998:4364936")
     modCompileOnly("curse.maven:storage-drawers-223852:3884263")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
@@ -236,14 +216,14 @@ dependencies {
 
 //!! =============================================== FOR TESTING ==================================================== \\
 
-//    modRuntimeOnly("curse.maven:biomes-o-plenty-220318:3927361")
-    modRuntimeOnly("curse.maven:blue-skies-312918:3966273")
+//    modRuntimeOnly("curse.maven:biomes-o-plenty-220318:4681520") // TerraBlender
+    modRuntimeOnly("curse.maven:blue-skies-312918:4525734") // Structure-Gel-API
 //    modImplementation("curse.maven:caverns-and-chasms-438005:5222972") // Blueprint
 //    modCompileOnly("curse.maven:endless-biomes-667688:4581653")
 //    modImplementation("curse.maven:endergetic-291509:5146370") // Blueprint
 //    modCompileOnly("curse.maven:gardens-of-the-dead-683174:4435223") // Architectury-API
 
     // Dependencies
-    modRuntimeOnly("curse.maven:terrablender-563928:4618490") // REQUIRED by: BOP, region-unexplored
-    modRuntimeOnly("curse.maven:structure-gel-api-378802:4765558") // REQUIRED by: blue-skies
+    modRuntimeOnly("curse.maven:terrablender-563928:4863577") // REQUIRED by: BOP, region-unexplored
+    modRuntimeOnly("curse.maven:structure-gel-api-378802:4489758") // REQUIRED by: blue-skies
 }

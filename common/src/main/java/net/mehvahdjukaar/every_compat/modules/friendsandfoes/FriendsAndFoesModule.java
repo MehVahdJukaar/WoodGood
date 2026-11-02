@@ -10,14 +10,12 @@ import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.PoiTypeTags;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.BeehiveBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -45,7 +43,7 @@ public class FriendsAndFoesModule extends SimpleModule {
                 .addTexture(EveryCompat.res("block/spruce_beehive_end"))
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.BEEHIVES, Registries.BLOCK)
-                .setTab()
+//                .setTab()
                 .addTile(() -> BlockEntityType.BEEHIVE)
                 .defaultRecipe()
                 .build();
@@ -73,12 +71,12 @@ public class FriendsAndFoesModule extends SimpleModule {
 
         bee_hive.add(POI_ID);
 
-        handler.dynamicPack.addTag(bee_hive, Registry.POINT_OF_INTEREST_TYPE_REGISTRY);
+        handler.dynamicPack.addTag(bee_hive, Registries.POINT_OF_INTEREST_TYPE);
 
         SimpleTagBuilder acquirable_job_site = SimpleTagBuilder.of(PoiTypeTags.ACQUIRABLE_JOB_SITE);
 
         acquirable_job_site.add(POI_ID);
 
-        handler.dynamicPack.addTag(acquirable_job_site, Registry.POINT_OF_INTEREST_TYPE_REGISTRY);
+        handler.dynamicPack.addTag(acquirable_job_site, Registries.POINT_OF_INTEREST_TYPE);
     }
 }

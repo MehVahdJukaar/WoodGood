@@ -4,7 +4,6 @@ import cy.jdkdigital.productivebees.common.block.AdvancedBeehive;
 import cy.jdkdigital.productivebees.common.block.ExpansionBox;
 import cy.jdkdigital.productivebees.init.ModBlockEntityTypes;
 import cy.jdkdigital.productivebees.init.ModBlocks;
-import cy.jdkdigital.productivebees.init.ModItemGroups;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -12,14 +11,14 @@ import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
 
+@SuppressWarnings("removal")
 public class ProductiveBeesModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> advancedBeehives;
@@ -27,7 +26,7 @@ public class ProductiveBeesModule extends SimpleModule {
 
     public ProductiveBeesModule(String modId) {
         super(modId, "pb");
-        CreativeModeTab tab = ModItemGroups.PRODUCTIVE_BEES;
+        ResourceLocation tab = modRes(modId);
 
         advancedBeehives = SimpleEntrySet.builder(WoodType.class, "beehive", "advanced",
                         ModBlocks.ADVANCED_SPRUCE_BEEHIVE, () -> WoodTypeRegistry.getValue(new ResourceLocation("spruce")),
@@ -54,23 +53,23 @@ public class ProductiveBeesModule extends SimpleModule {
                 .addTextureM(EveryCompat.res("block/spruce_beehive_front"), EveryCompat.res("block/spruce_beehive_front_m"))
                 .addTextureM(EveryCompat.res("block/spruce_beehive_front_honey"), EveryCompat.res("block/spruce_beehive_front_honey_m"))
 
-                .addTag(modRes("advanced_beehives"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("nests/slimy_nests"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("nests/sugarbag_nests"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("nests/soul_sands_nests"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("nests/nether_quartz_nests"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("nests/end_nests"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("nests/nether_brick_nests"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("nests/nether_gold_nests"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("nests/glowstone_nests"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("beehives"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.BEEHIVES, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("advanced_beehives"), Registries.ITEM)
+                .addTag(modRes("nests/slimy_nests"), Registries.BLOCK)
+                .addTag(modRes("nests/sugarbag_nests"), Registries.BLOCK)
+                .addTag(modRes("nests/soul_sands_nests"), Registries.BLOCK)
+                .addTag(modRes("nests/nether_quartz_nests"), Registries.BLOCK)
+                .addTag(modRes("nests/end_nests"), Registries.BLOCK)
+                .addTag(modRes("nests/nether_brick_nests"), Registries.BLOCK)
+                .addTag(modRes("nests/nether_gold_nests"), Registries.BLOCK)
+                .addTag(modRes("nests/glowstone_nests"), Registries.BLOCK)
+                .addTag(modRes("beehives"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.BEEHIVES, Registries.BLOCK)
                 .addTile(ModBlockEntityTypes.ADVANCED_BEEHIVE)
                 // Having two recipes overwrites each other TODO: no actually it souldnt
                 .addRecipe(modRes("hives/advanced_spruce_beehive_clear"))
                 .addRecipe(modRes("hives/advanced_spruce_beehive"))
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .build();
         this.addEntry(advancedBeehives);
 
@@ -86,13 +85,13 @@ public class ProductiveBeesModule extends SimpleModule {
 
                 // Using the same generated texture from Advanced Beehives'
                 .createPaletteFromOak(this::removeDarkest)
-                .addTag(modRes("expansion_boxes"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("expansion_boxes"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.BEEHIVES, Registry.BLOCK_REGISTRY)
+                .addTag(modRes("expansion_boxes"), Registries.BLOCK)
+                .addTag(modRes("expansion_boxes"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.BEEHIVES, Registries.BLOCK)
                 .addTile(ModBlockEntityTypes.EXPANSION_BOX)
                 .addRecipe(modRes("boxes/expansion_box_spruce"))
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .build();
         this.addEntry(expansionBoxes);
 

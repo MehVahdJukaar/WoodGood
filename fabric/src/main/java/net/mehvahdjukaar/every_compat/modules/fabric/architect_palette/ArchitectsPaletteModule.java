@@ -9,14 +9,13 @@ import net.mehvahdjukaar.moonlight.api.resources.textures.PaletteColor;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.WallBlock;
-
-import java.util.Objects;
 
 //SUPPORT: v2.2.1+
 public class ArchitectsPaletteModule extends SimpleModule {
@@ -29,15 +28,15 @@ public class ArchitectsPaletteModule extends SimpleModule {
 
     public ArchitectsPaletteModule(String modId) {
         super(modId, "ap");
-        CreativeModeTab tab = CreativeModeTab.TAB_BUILDING_BLOCKS;
+        CreativeModeTab buildingBlocks = CreativeModeTabs.BUILDING_BLOCKS;
 
         railings = SimpleEntrySet.builder(WoodType.class, "railing",
                         () -> getModBlock("oak_railing"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new RailingBlock(Utils.copyPropertySafe(w.planks))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(() -> CreativeModeTab.TAB_DECORATIONS)
+//                .setTab(() -> CreativeModeTab.TAB_DECORATIONS)
                 .build();
         this.addEntry(railings);
 
@@ -45,9 +44,9 @@ public class ArchitectsPaletteModule extends SimpleModule {
                         () -> getModBlock("oak_boards"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BoardBlock(Utils.copyPropertySafe(w.planks))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .defaultRecipe()
-                .setTab(() -> tab)
+//                .setTab(() -> buildingBlocks)
                 .createPaletteFromOak(p -> {
 
                     while (p.size() > 7) {
@@ -79,12 +78,11 @@ public class ArchitectsPaletteModule extends SimpleModule {
                         w -> new SlabBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .addCondition(boards.blocks::containsKey) //REASON: recipes
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.SLABS, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.SLABS, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.SLABS, Registries.BLOCK, Registries.ITEM)
                 .defaultRecipe()
                 .copyParentDrop()
-                .setTab(() -> tab)
+//                .setTab(() -> buildingBlocks)
                 .build();
         this.addEntry(boardSlabs);
 
@@ -93,11 +91,10 @@ public class ArchitectsPaletteModule extends SimpleModule {
                         w -> new WallBlock(Utils.copyPropertySafe(w.planks))
                 )
                 .addCondition(boards.blocks::containsKey) //REASON: recipes
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.WALLS, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.WALLS, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.WALLS, Registries.BLOCK, Registries.ITEM)
                 .defaultRecipe()
-                .setTab(() -> tab)
+//                .setTab(() -> buildingBlocks)
                 .build();
         this.addEntry(boardWalls);
 
@@ -106,11 +103,10 @@ public class ArchitectsPaletteModule extends SimpleModule {
                         w -> new ModStairBlock(() -> boards.blocks.get(w), Utils.copyPropertySafe(w.planks))
                 )
                 .addCondition(boards.blocks::containsKey) //REASON: recipes
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.STAIRS, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.STAIRS, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.STAIRS, Registries.BLOCK, Registries.ITEM)
                 .defaultRecipe()
-                .setTab(() -> tab)
+//                .setTab(() -> buildingBlocks)
                 .build();
         this.addEntry(boardStairs);
     }

@@ -8,19 +8,18 @@ import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
-import net.mehvahdjukaar.moonlight.api.resources.StaticResource;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import xerca.xercamod.common.DecoCreativeTab;
 import xerca.xercamod.common.block.BlockCarvedLog;
 import xerca.xercamod.common.block.Blocks;
 import xerca.xercamod.common.item.CarvedWoodItem;
@@ -30,6 +29,7 @@ import java.io.InputStream;
 import java.util.Objects;
 
 //SUPPORT: v1.0.0
+@SuppressWarnings("removal")
 public class XercaModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> carved1;
@@ -44,17 +44,17 @@ public class XercaModule extends SimpleModule {
 
     public XercaModule(String modId) {
         super(modId, "x");
-        CreativeModeTab tab = DecoCreativeTab.TAB_BUILDING_BLOCKS;
+        CreativeModeTab tab = CreativeModeTabs.BUILDING_BLOCKS;
 
         carved1 = SimpleEntrySet.builder(WoodType.class, "1", "carved",
                         Blocks.CARVED_DARK_OAK_1, () -> WoodTypeRegistry.getValue(new ResourceLocation("dark_oak")),
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
                 .addCustomItem((w, b, p) -> new CarvedWoodItem(b, p, 1))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_dark_oak\"", "\"xercamod:block/carved_wood/carved_spruce\""))
                 .addTexture(EveryCompat.res("block/carved_wood/carved_dark_oak_1"))
                 .addTexture(EveryCompat.res("block/carved_wood/carved_dark_oak_1_top"))
-                .setTab(() -> tab)
+//                .setTab(tab)
                 .build();
 
         this.addEntry(carved1);
@@ -63,11 +63,11 @@ public class XercaModule extends SimpleModule {
                         Blocks.CARVED_DARK_OAK_2, () -> WoodTypeRegistry.getValue(new ResourceLocation("dark_oak")),
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
                 .addCustomItem((w, b, p) -> new CarvedWoodItem(b, p, 2))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_dark_oak\"", "\"xercamod:block/carved_wood/carved_spruce\""))
                 .addTexture(EveryCompat.res("block/carved_wood/carved_dark_oak_2"))
                 .addTexture(EveryCompat.res("block/carved_wood/carved_dark_oak_2_top"))
-                .setTab(() -> tab)
+//                .setTab(tab)
                 .build();
 
         this.addEntry(carved2);
@@ -76,11 +76,11 @@ public class XercaModule extends SimpleModule {
                         Blocks.CARVED_DARK_OAK_3, () -> WoodTypeRegistry.getValue(new ResourceLocation("dark_oak")),
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
                 .addCustomItem((w, b, p) -> new CarvedWoodItem(b, p, 3))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_dark_oak\"", "\"xercamod:block/carved_wood/carved_spruce\""))
                 .addTexture(EveryCompat.res("block/carved_wood/carved_dark_oak_3"))
                 .addTexture(EveryCompat.res("block/carved_wood/carved_dark_oak_3_top"))
-                .setTab(() -> tab)
+//                .setTab(tab)
                 .build();
 
         this.addEntry(carved3);
@@ -89,12 +89,12 @@ public class XercaModule extends SimpleModule {
                         Blocks.CARVED_DARK_OAK_4, () -> WoodTypeRegistry.getValue(new ResourceLocation("dark_oak")),
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
                 .addCustomItem((w, b, p) -> new CarvedWoodItem(b, p, 4))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_dark_oak\"", "\"xercamod:block/carved_wood/carved_spruce\""))
                 .addTexture(EveryCompat.res("block/carved_wood/carved_dark_oak_4a"))
                 .addTexture(EveryCompat.res("block/carved_wood/carved_dark_oak_4b"))
                 .addTexture(EveryCompat.res("block/carved_wood/carved_dark_oak_4_top"))
-                .setTab(() -> tab)
+//                .setTab(tab)
                 .build();
 
         this.addEntry(carved4);
@@ -103,11 +103,11 @@ public class XercaModule extends SimpleModule {
                         Blocks.CARVED_DARK_OAK_5, () -> WoodTypeRegistry.getValue(new ResourceLocation("dark_oak")),
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
                 .addCustomItem((w, b, p) -> new CarvedWoodItem(b, p, 5))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_dark_oak\"", "\"xercamod:block/carved_wood/carved_spruce\""))
                 .addTexture(EveryCompat.res("block/carved_wood/carved_dark_oak_5"))
                 .addTexture(EveryCompat.res("block/carved_wood/carved_dark_oak_5_top"))
-                .setTab(() -> tab)
+//                .setTab(tab)
                 .build();
 
         this.addEntry(carved5);
@@ -116,14 +116,14 @@ public class XercaModule extends SimpleModule {
                         Blocks.CARVED_DARK_OAK_6, () -> WoodTypeRegistry.getValue(new ResourceLocation("dark_oak")),
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
                 .addCustomItem((w, b, p) -> new CarvedWoodItem(b, p, 6))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_dark_oak\"", "\"xercamod:block/carved_wood/carved_spruce\""))
                 .addTexture(EveryCompat.res("block/carved_wood/carved_dark_oak_6a"))
                 .addTexture(EveryCompat.res("block/carved_wood/carved_dark_oak_6b"))
                 .addTexture(EveryCompat.res("block/carved_wood/carved_dark_oak_6c"))
                 .addTexture(EveryCompat.res("block/carved_wood/carved_dark_oak_6d"))
                 .addTexture(EveryCompat.res("block/carved_wood/carved_dark_oak_6_top"))
-                .setTab(() -> tab)
+//                .setTab(tab)
                 .build();
 
         this.addEntry(carved6);
@@ -131,7 +131,7 @@ public class XercaModule extends SimpleModule {
         carved7 = SimpleEntrySet.builder(WoodType.class, "7", "carved",
                         Blocks.CARVED_DARK_OAK_7, () -> WoodTypeRegistry.getValue(new ResourceLocation("dark_oak")),
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addCustomItem((w, b, p) -> new CarvedWoodItem(b, p, 7))
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_dark_oak\"", "\"xercamod:block/carved_wood/carved_spruce\""))
                 .addTexture(EveryCompat.res("block/carved_wood/carved_dark_oak_7a"))
@@ -139,7 +139,7 @@ public class XercaModule extends SimpleModule {
                 .addTexture(EveryCompat.res("block/carved_wood/carved_dark_oak_7c"))
                 .addTexture(EveryCompat.res("block/carved_wood/carved_dark_oak_7d"))
                 .addTexture(EveryCompat.res("block/carved_wood/carved_dark_oak_7_top"))
-                .setTab(() -> tab)
+//                .setTab(tab)
                 .build();
 
         this.addEntry(carved7);
@@ -147,12 +147,12 @@ public class XercaModule extends SimpleModule {
         carved8 = SimpleEntrySet.builder(WoodType.class, "8", "carved",
                         Blocks.CARVED_DARK_OAK_8, () -> WoodTypeRegistry.getValue(new ResourceLocation("dark_oak")),
                         w -> new BlockCarvedLog(Utils.copyPropertySafe(w.log)))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addCustomItem((w, b, p) -> new CarvedWoodItem(b, p, 8))
                 .addModelTransform(m -> m.replaceString("\"xercamod:block/carved_wood/carved_dark_oak\"", "\"xercamod:block/carved_wood/carved_spruce\""))
                 .addTexture(EveryCompat.res("block/carved_wood/carved_dark_oak_8"))
                 .addTexture(EveryCompat.res("block/carved_wood/carved_dark_oak_8_top"))
-                .setTab(() -> tab)
+//                .setTab(tab)
                 .build();
 
         this.addEntry(carved8);

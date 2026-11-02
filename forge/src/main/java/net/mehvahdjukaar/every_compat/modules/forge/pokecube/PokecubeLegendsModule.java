@@ -2,28 +2,23 @@ package net.mehvahdjukaar.every_compat.modules.forge.pokecube;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import java.util.ArrayList;
-import java.util.List;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-
 import net.mehvahdjukaar.moonlight.api.resources.recipe.IRecipeTemplate;
 import net.mehvahdjukaar.moonlight.api.resources.recipe.TemplateRecipeManager;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.mehvahdjukaar.moonlight.core.Moonlight;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.GsonHelper;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -35,11 +30,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pokecube.core.init.ItemGenerator;
-import pokecube.legends.PokecubeLegends;
 import pokecube.legends.init.BlockInit;
 import pokecube.legends.recipes.LegendsDistorticRecipeSerializer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class PokecubeLegendsModule extends SimpleModule {
@@ -50,7 +48,7 @@ public class PokecubeLegendsModule extends SimpleModule {
 
     public PokecubeLegendsModule(String modId) {
         super(modId, "pcl");
-        CreativeModeTab tab = PokecubeLegends.TAB_DECORATIONS;
+        ResourceLocation deco_tab = modRes("decotab");
 
         TemplateRecipeManager.registerTemplate(modRes("legends_recipe"), MirrorRecipeTemplate::new);
 
@@ -58,41 +56,38 @@ public class PokecubeLegendsModule extends SimpleModule {
                         BlockInit.DISTORTIC_OAK_PLANKS, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new Block(Utils.copyPropertySafe(w.planks)))
                 .addRecipe(modRes("dimensions/distorted_world/distortic_planks/distortic_oak_planks"))
-                .addTag(modRes("legends_planks"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("legends_planks"), Registry.ITEM_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.PLANKS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.PLANKS, Registry.ITEM_REGISTRY)
+                .addTag(modRes("legends_planks"), Registries.BLOCK)
+                .addTag(modRes("legends_planks"), Registries.ITEM)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.PLANKS, Registries.BLOCK)
+                .addTag(ItemTags.PLANKS, Registries.ITEM)
                 .addTexture(modRes("block/distortic_oak_planks"))
-                .setTab(() -> tab)
+                .setTabKey(deco_tab)
                 .build();
-
         this.addEntry(distorticPlanks);
 
         distorticStairs = SimpleEntrySet.builder(WoodType.class, "stairs", "distortic",
                         BlockInit.DISTORTIC_OAK_STAIRS, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new ItemGenerator.GenericStairs(w.planks.defaultBlockState(), Utils.copyPropertySafe(w.planks)))
                 .addRecipe(modRes("dimensions/distorted_world/distortic_planks/distortic_oak_stairs"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.WOODEN_STAIRS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.WOODEN_STAIRS, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.WOODEN_STAIRS, Registries.BLOCK)
+                .addTag(ItemTags.WOODEN_STAIRS, Registries.ITEM)
                 .addTexture(modRes("block/distortic_oak_planks"))
-                .setTab(() -> tab)
+                .setTabKey(deco_tab)
                 .build();
-
         this.addEntry(distorticStairs);
 
         DISTORTICSLABS = SimpleEntrySet.builder(WoodType.class, "slab", "distortic",
                         BlockInit.DISTORTIC_OAK_SLAB, () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new SlabBlock(Utils.copyPropertySafe(w.planks)))
                 .addRecipe(modRes("dimensions/distorted_world/distortic_planks/distortic_oak_slab"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.WOODEN_SLABS, Registry.BLOCK_REGISTRY)
-                .addTag(ItemTags.WOODEN_SLABS, Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.WOODEN_SLABS, Registries.BLOCK)
+                .addTag(ItemTags.WOODEN_SLABS, Registries.ITEM)
                 .addTexture(modRes("block/distortic_oak_planks"))
-                .setTab(() -> tab)
+                .setTabKey(deco_tab)
                 .build();
-
         this.addEntry(DISTORTICSLABS);
     }
 
@@ -113,7 +108,7 @@ public class PokecubeLegendsModule extends SimpleModule {
             this.ingredient = ingredient;
             this.result = result;
             this.block = block;
-            this.dimId = ResourceKey.create(Registry.DIMENSION_REGISTRY, dimId);
+            this.dimId = ResourceKey.create(Registries.DIMENSION, dimId);
             this.advancement = advancement;
             this.advancementId = advancementId;
 //            this.group = group;
@@ -133,12 +128,12 @@ public class PokecubeLegendsModule extends SimpleModule {
         }
 
         @Override
-        public ResourceLocation getId() {
+        public @NotNull ResourceLocation getId() {
             return id;
         }
 
         @Override
-        public RecipeSerializer<?> getType() {
+        public @NotNull RecipeSerializer<?> getType() {
             return LegendsDistorticRecipeSerializer.SERIALIZER_DISTORTIC;
         }
 
@@ -155,6 +150,7 @@ public class PokecubeLegendsModule extends SimpleModule {
         }
     }
 
+    @SuppressWarnings("removal")
     public class MirrorRecipeTemplate implements IRecipeTemplate<MirrorFinishedRecipe> {
 
         private final List<Object> conditions = new ArrayList<>();
@@ -176,7 +172,7 @@ public class PokecubeLegendsModule extends SimpleModule {
             this.blockId = new ResourceLocation(GsonHelper.getAsString(json, "blockId"));
             this.dimID = new ResourceLocation(GsonHelper.getAsString(json, "dimId"));
             this.block = ForgeRegistries.BLOCKS.getValue(blockId);
-            this.input = Ingredient.fromJson((JsonElement)inputElement);
+            this.input = Ingredient.fromJson(inputElement);
         }
 
         @Override
@@ -187,13 +183,10 @@ public class PokecubeLegendsModule extends SimpleModule {
                 throw new UnsupportedOperationException(String.format("Could not convert output item %s from type %s to %s",
                         this.result, originalMat, destinationMat));
             }
-            if (newRes.asItem().getItemCategory() == null) {
-                Moonlight.LOGGER.error("Failed to generate recipe for {} in block type {}: Output item {} cannot have empty creative tab, skipping", this.result, destinationMat, newRes);
-                return null;
-            }
+
             ItemStack newResult = new ItemStack(newRes);
             if (this.result.hasTag()) newResult.setTag(this.result.getOrCreateTag().copy());
-            if (id == null) id = Registry.ITEM.getKey(newRes.asItem()).toString();
+            if (id == null) id = Utils.getID(newRes.asItem()).toString();
 
             Ingredient newIng = null;
             for (var in : input.getItems()) {

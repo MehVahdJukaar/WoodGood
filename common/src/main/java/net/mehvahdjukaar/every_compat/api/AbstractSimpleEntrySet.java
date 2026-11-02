@@ -3,8 +3,8 @@ package net.mehvahdjukaar.every_compat.api;
 import com.mojang.datafixers.util.Pair;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.WoodConfigs;
+import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
-import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
@@ -303,19 +303,59 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return (BL) this;
         }
 
+        //exclusive with addCondition
+        public BL requiresFromMap(Map<T, ?> entrySet) {
+            this.addCondition(blockType -> !Objects.isNull(entrySet.get(blockType)));
+            return (BL) this;
+        }
+
+        /// WoodType's log or stripped_log that has ALPHA and is not a full 16x16. It should be excluded.<br>
+        /// The link will help you understand why. @see <a href=https://github.com/KyaniteMods/DeeperAndDarker/blob/neoforge-1.21/src/main/resources/assets/deeperdarker/textures/block/blooming_stem.png>deeperdarker:bloom's texture</a>
+        public BL excludedWoodTypes() {
+            this.addCondition(blockType -> !CompatSpritesHelper.EXCLUDED_WOODTYPES.contains(blockType.getId().toString()));
+            return (BL) this;
+        }
+
+        // Exclude Leaves | Wood | Stone | Other BlockTypes - exclusive with addCondition
+        public BL excludeBlockTypes(String regEx) {
+            this.addCondition(blockType -> !blockType.getId().toString().matches(regEx));
+            return (BL) this;
+        }
+
+        // Exclude Leaves | Wood | Stone | Other BlockTypes - exclusive with addCondition
+        public BL excludeBlockTypes(String modId, String... typeIds) {
+            StringBuilder regexBuilder = new StringBuilder();
+
+            // create "biomesoplenty:(fir)" or "biomesoplenty:(fir|dead|...)
+            regexBuilder.append(modId).append(":(");
+            for (int i = 0; i < typeIds.length; i++) {
+                regexBuilder.append(typeIds[i]);
+                if (i != (typeIds.length - 1)) regexBuilder.append("|"); // Don't append "|" to the last word's
+            }
+            regexBuilder.append(")");
+
+            this.addCondition(blockType -> !blockType.getId().toString().matches(regexBuilder.toString()));
+            return (BL) this;
+        }
+
         public BL addCondition(Predicate<T> condition) {
             this.condition = condition;
             return (BL) this;
         }
 
+//        public BL noTab() {
+//            return setTabKey(NO_TAB_MARKER);
+//        }
+
+        //TODO: Check if this is working
         public BL setTabKey(ResourceLocation res) {
             ResourceKey<CreativeModeTab> key = ResourceKey.create(ResourceKey.createRegistryKey(new ResourceLocation("creative_mode_tab")), res);
             this.tab = () -> key;
             return (BL) this;
         }
 
-        public BL setTab(Supplier<ResourceKey<CreativeModeTab>> tab) {
-            this.tab = tab;
+        public BL setTab(ResourceKey<CreativeModeTab> tab) {
+            this.tab = () -> tab;
             return (BL) this;
         }
 
@@ -325,8 +365,19 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return (BL) this;
         }
 
-        public BL addTag(TagKey<?> tag, ResourceKey<?> registry) {
-            addTag(tag.location(), registry);
+        public BL addTag(ResourceLocation location, ResourceKey<?>... registries) {
+            var s = this.tags.computeIfAbsent(location, b -> new HashSet<>());
+            s.addAll(List.of(registries));
+            return (BL) this;
+        }
+
+        public BL addTag(TagKey<?> tag, ResourceKey<?> registries) {
+            return this.addTag(tag, new ResourceKey[]{registries});
+        }
+
+
+        public BL addTag(TagKey<?> tag, ResourceKey<?>... registries) {
+            addTag(tag.location(), registries);
             return (BL) this;
         }
 
@@ -357,7 +408,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         }
 
         public BL createPaletteFromChild(Consumer<Palette> paletteTransform, String childKey) {
-            return createPaletteFromChild(paletteTransform, childKey, SpriteHelper.LOOKS_LIKE_TOP_LOG_TEXTURE);
+            return createPaletteFromChild(paletteTransform, childKey, CompatSpritesHelper.LOOKS_LIKE_TOP_LOG_TEXTURE);
         }
 
         //only works for oak type. Will fail if its used on leaves

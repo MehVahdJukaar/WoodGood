@@ -6,8 +6,8 @@ import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
-import net.mehvahdjukaar.every_compat.misc.SpriteHelper;
-import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
+import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
+import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
@@ -18,7 +18,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
@@ -37,6 +37,7 @@ import java.io.InputStream;
 import java.util.Map;
 
 // SUPPORT: v0.5.3-FINAL
+@SuppressWarnings("removal")
 public class RegionsUnexploredModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> branchs;
     public final SimpleEntrySet<LeavesType, Block> shrubs;
@@ -48,10 +49,10 @@ public class RegionsUnexploredModule extends SimpleModule {
                         () -> getModBlock("oak_branch"), () -> WoodTypeRegistry.OAK_TYPE,
                         w -> new BranchBlock(BlockBehaviour.Properties.copy(RuBlocks.ACACIA_BRANCH.get()))
                 )
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("branches_can_survive_on"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("branches"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("branches"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("branches_can_survive_on"), Registries.BLOCK)
+                .addTag(modRes("branches"), Registries.BLOCK)
+                .addTag(modRes("branches"), Registries.ITEM)
                 .addRecipe(modRes("oak_branch_from_oak_log"))
                 .setRenderType(() -> RenderType::cutout)
                 .build();
@@ -60,23 +61,19 @@ public class RegionsUnexploredModule extends SimpleModule {
         shrubs = SimpleEntrySet.builder(LeavesType.class, "shrub",
                         () -> getModBlock("dark_oak_shrub"),
                         () -> LeavesTypeRegistry.getValue(new ResourceLocation("dark_oak")),
-                        l -> {
-                            EveryCompat.LOGGER.warn("CHECK: {}", l.getBlockOfThis("sapling"));
-                            return new ShrubBlock(Utils.copyPropertySafe(l.leaves).noCollission().instabreak()
-                                    .sound(SoundType.AZALEA).offsetType(BlockBehaviour.OffsetType.XZ)
-                            );
-                        }
+                        l -> new ShrubBlock(Utils.copyPropertySafe(l.leaves).noCollission().instabreak()
+                                .sound(SoundType.AZALEA).offsetType(BlockBehaviour.OffsetType.XZ)
+                        )
                 )
                 .addCondition(l -> {
                     boolean log = l.getWoodType().log != null; // for textures
-                    boolean leave = l.leaves != null; // for textures
                     boolean sapling = l.getItemOfThis("sapling") != null; // for recipes
-                    return log && leave && sapling;
+                    return log && sapling;
                 })
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("shrubs"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("shrub_can_survive_on"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("shrubs"), Registry.ITEM_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("shrubs"), Registries.BLOCK)
+                .addTag(modRes("shrub_can_survive_on"), Registries.BLOCK)
+                .addTag(modRes("shrubs"), Registries.ITEM)
                 .addTexture(EveryCompat.res("block/dark_oak_shrub_top"))
                 .copyParentDrop()
                 .build();
@@ -84,7 +81,7 @@ public class RegionsUnexploredModule extends SimpleModule {
     }
 
     @Override
-    public void registerItemColors(ClientPlatformHelper.ItemColorEvent event) {
+    public void registerItemColors(ClientHelper.ItemColorEvent event) {
         super.registerItemColors(event);
         for (Map.Entry<LeavesType, Block> entry : shrubs.blocks.entrySet()) {
             LeavesType type = entry.getKey();
@@ -97,7 +94,7 @@ public class RegionsUnexploredModule extends SimpleModule {
     }
 
     @Override
-    public void registerBlockColors(ClientPlatformHelper.BlockColorEvent event) {
+    public void registerBlockColors(ClientHelper.BlockColorEvent event) {
         super.registerBlockColors(event);
         for (Map.Entry<LeavesType, Block> entry : shrubs.blocks.entrySet()) {
             LeavesType type = entry.getKey();
@@ -175,7 +172,7 @@ public class RegionsUnexploredModule extends SimpleModule {
         ) {
 
             branchs.blocks.forEach((wood, block) -> {
-                try (TextureImage logSide_texture = TextureImage.open(manager, RPUtils.findFirstBlockTextureLocation(manager, wood.log, SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
+                try (TextureImage logSide_texture = TextureImage.open(manager, RPUtils.findFirstBlockTextureLocation(manager, wood.log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE));
                      TextureImage logTop_texture = TextureImage.open(manager, RPUtils.findFirstBlockTextureLocation(manager, wood.planks))) {
 
                     ResourceLocation resLocITEM = EveryCompat.res("item/" + this.shortenedId() + "/" + wood.getAppendableId() + "_branch");
@@ -299,7 +296,7 @@ public class RegionsUnexploredModule extends SimpleModule {
                 // Generating textures for shrubs ======================================================================
                 try (TextureImage logTexture = TextureImage.open(manager,
                         RPUtils.findFirstBlockTextureLocation(manager, leavesType.getWoodType().log,
-                                SpriteHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))
+                                CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))
                 ) {
                     Respriter respriterBottom = Respriter.of(shrubBottom);
 

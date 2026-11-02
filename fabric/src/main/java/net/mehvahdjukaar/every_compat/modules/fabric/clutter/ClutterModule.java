@@ -2,8 +2,6 @@ package net.mehvahdjukaar.every_compat.modules.fabric.clutter;
 
 import net.emilsg.clutter.block.custom.*;
 import net.emilsg.clutter.util.ModBlockTags;
-import net.emilsg.clutter.util.ModItemGroup;
-import net.emilsg.clutter.util.ModItemTags;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -12,7 +10,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -24,16 +22,11 @@ import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.StairBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
-import java.util.function.ToIntFunction;
 
 //SUPPORT: v0.2-1-FINAL
 public class ClutterModule extends SimpleModule {
@@ -56,7 +49,7 @@ public class ClutterModule extends SimpleModule {
 
     public ClutterModule(String modId) {
         super(modId, "clu");
-        var tab = ModItemGroup.CLUTTER;
+        ResourceLocation tab = modRes(modId);
 
         wall_bookshelves = SimpleEntrySet.builder(WoodType.class, "wall_bookshelf",
                         () -> getModBlock("oak_wall_bookshelf"), () -> WoodTypeRegistry.OAK_TYPE,
@@ -66,13 +59,13 @@ public class ClutterModule extends SimpleModule {
                 )
                 .addTile(() -> net.emilsg.clutter.block.entity.ModBlockEntities.WALL_BOOKSHELF)
                 //TEXTURE: Using planks
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(ModBlockTags.FLAMMABLE, Registry.BLOCK_REGISTRY)
-                .addTag(ModBlockTags.BOOKSHELVES, Registry.BLOCK_REGISTRY)
-                .addTag(new ResourceLocation("c:bokoshelves"), Registry.BLOCK_REGISTRY)
-                .addTag(modRes("bookshelves"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("flammable"), Registry.ITEM_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
+                .addTag(ModBlockTags.BOOKSHELVES, Registries.BLOCK)
+                .addTag(new ResourceLocation("c:bokoshelves"), Registries.BLOCK)
+                .addTag(modRes("bookshelves"), Registries.ITEM)
+                .addTag(modRes("flammable"), Registries.ITEM)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(wall_bookshelves);
@@ -83,12 +76,12 @@ public class ClutterModule extends SimpleModule {
                 )
                 .setRenderType(() -> RenderType::cutout)
                 //TEXTURE: Using planks
-                .addTag(ModBlockTags.FLAMMABLE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("window_sills"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("window_sills"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("flammable"), Registry.ITEM_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
+                .addTag(modRes("window_sills"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("window_sills"), Registries.ITEM)
+                .addTag(modRes("flammable"), Registries.ITEM)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(window_sills);
@@ -98,14 +91,14 @@ public class ClutterModule extends SimpleModule {
                         w -> new CompatTableBlock(Utils.copyPropertySafe(w.planks))
                 )
                 //TEXTURE: Using log & planks
-                .addTag(ModBlockTags.FLAMMABLE, Registry.BLOCK_REGISTRY)
-                .addTag(ModBlockTags.TABLES, Registry.BLOCK_REGISTRY)
-                .addTag(ModBlockTags.STRIPPABLE_TABLES, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("tables"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("flammable"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("strippable_tables"), Registry.ITEM_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
+                .addTag(ModBlockTags.TABLES, Registries.BLOCK)
+                .addTag(ModBlockTags.STRIPPABLE_TABLES, Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("tables"), Registries.ITEM)
+                .addTag(modRes("flammable"), Registries.ITEM)
+                .addTag(modRes("strippable_tables"), Registries.ITEM)
+                .setTabKey(tab)
                 .defaultRecipe()
                 //REASON: Take a look @ terrestria's logs|stripped_logs' non-standard 16x16 texture, you'll get why
                 //EXCLUDED: sakura & yucca_palm
@@ -119,12 +112,12 @@ public class ClutterModule extends SimpleModule {
                 )
                 .requiresChildren("stripped_log") //REASON: recipes & textures
                 //TEXTURE: Using stripped_log & planks
-                .addTag(ModBlockTags.FLAMMABLE, Registry.BLOCK_REGISTRY)
-                .addTag(ModBlockTags.TABLES, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("flammable"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("tables"), Registry.ITEM_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
+                .addTag(ModBlockTags.TABLES, Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("flammable"), Registries.ITEM)
+                .addTag(modRes("tables"), Registries.ITEM)
+                .setTabKey(tab)
                 .defaultRecipe()
                 //REASON: Take a look @ terrestria's logs|stripped_logs' non-standard 16x16 texture, you'll get why
                 //EXCLUDED: sakura & yucca_palm
@@ -138,14 +131,14 @@ public class ClutterModule extends SimpleModule {
                         w -> new CompatChairBlock(Utils.copyPropertySafe(w.planks))
                 )
                 //TEXTURE: Using log & planks
-                .addTag(ModBlockTags.FLAMMABLE, Registry.BLOCK_REGISTRY)
-                .addTag(ModBlockTags.STRIPPABLE_CHAIRS, Registry.BLOCK_REGISTRY)
-                .addTag(ModBlockTags.WOODEN_CHAIRS, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("wooden_chairs"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("strippable_chairs"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("flammable"), Registry.ITEM_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
+                .addTag(ModBlockTags.STRIPPABLE_CHAIRS, Registries.BLOCK)
+                .addTag(ModBlockTags.WOODEN_CHAIRS, Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("wooden_chairs"), Registries.ITEM)
+                .addTag(modRes("strippable_chairs"), Registries.ITEM)
+                .addTag(modRes("flammable"), Registries.ITEM)
+                .setTabKey(tab)
                 .defaultRecipe()
                 //REASON: Take a look @ terrestria's logs|stripped_logs' non-standard 16x16 texture, you'll get why
                 //EXCLUDED: sakura & yucca_palm
@@ -159,12 +152,12 @@ public class ClutterModule extends SimpleModule {
                 )
                 .requiresChildren("stripped_log") //REASON: recipes & textures
                 //TEXTURE: Using stripped_log & planks
-                .addTag(ModBlockTags.FLAMMABLE, Registry.BLOCK_REGISTRY)
-                .addTag(ModBlockTags.WOODEN_CHAIRS, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("flammable"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("wooden_chairs"), Registry.ITEM_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
+                .addTag(ModBlockTags.WOODEN_CHAIRS, Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("flammable"), Registries.ITEM)
+                .addTag(modRes("wooden_chairs"), Registries.ITEM)
+                .setTabKey(tab)
                 .defaultRecipe()
                 //REASON: Take a look @ terrestria's logs|stripped_logs' non-standard 16x16 texture, you'll get why
                 //EXCLUDED: sakura & yucca_palm
@@ -179,14 +172,14 @@ public class ClutterModule extends SimpleModule {
                 )
                 .addTile(() -> net.emilsg.clutter.block.entity.ModBlockEntities.CUPBOARD)
                 //TEXTURE: Using planks
-                .addTag(ModBlockTags.FLAMMABLE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("cupboards"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("flammable"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("cupboards"), Registry.ITEM_REGISTRY)
+                .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
+                .addTag(modRes("cupboards"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("flammable"), Registries.ITEM)
+                .addTag(modRes("cupboards"), Registries.ITEM)
                 .addTexture(modRes("block/oak_cupboard_inside"))
                 .addTexture(modRes("block/oak_cupboard_doors"))
-                .setTab(() -> tab)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(cupboards);
@@ -197,12 +190,12 @@ public class ClutterModule extends SimpleModule {
                 )
                 .addTile(() -> net.emilsg.clutter.block.entity.ModBlockEntities.WALL_CUPBOARD)
                 //TEXTURE: using cupboards' above
-                .addTag(ModBlockTags.FLAMMABLE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("cupboards"), Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("flammable"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("cupboards"), Registry.ITEM_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
+                .addTag(modRes("cupboards"), Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("flammable"), Registries.ITEM)
+                .addTag(modRes("cupboards"), Registries.ITEM)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(wall_cupboards);
@@ -214,14 +207,14 @@ public class ClutterModule extends SimpleModule {
                 )
                 .setRenderType(() -> RenderType::cutoutMipped)
                 //TEXTURE: Using log
-                .addTag(ModBlockTags.FLAMMABLE, Registry.BLOCK_REGISTRY)
-                .addTag(ModBlockTags.TRELLISES, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.CLIMBABLE, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.FALL_DAMAGE_RESETTING, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("flammable"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("trellises"), Registry.ITEM_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
+                .addTag(ModBlockTags.TRELLISES, Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(BlockTags.CLIMBABLE, Registries.BLOCK)
+                .addTag(BlockTags.FALL_DAMAGE_RESETTING, Registries.BLOCK)
+                .addTag(modRes("flammable"), Registries.ITEM)
+                .addTag(modRes("trellises"), Registries.ITEM)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(trellises);
@@ -231,14 +224,14 @@ public class ClutterModule extends SimpleModule {
                         w -> new WoodenBenchBlock(Utils.copyPropertySafe(w.planks))
                 )
                 //TEXTURE: Using log & planks
-                .addTag(ModBlockTags.FLAMMABLE, Registry.BLOCK_REGISTRY)
-                .addTag(ModBlockTags.BENCHES, Registry.BLOCK_REGISTRY)
-                .addTag(ModBlockTags.STRIPPABLE_BENCHES, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("flammable"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("benches"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("strippable_benches"), Registry.ITEM_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
+                .addTag(ModBlockTags.BENCHES, Registries.BLOCK)
+                .addTag(ModBlockTags.STRIPPABLE_BENCHES, Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("flammable"), Registries.ITEM)
+                .addTag(modRes("benches"), Registries.ITEM)
+                .addTag(modRes("strippable_benches"), Registries.ITEM)
+                .setTabKey(tab)
                 .defaultRecipe()
                 //REASON: Take a look @ terrestria's logs|stripped_logs' non-standard 16x16 texture, you'll get why
                 //EXCLUDED: sakura & yucca_palm
@@ -252,12 +245,12 @@ public class ClutterModule extends SimpleModule {
                 )
                 .requiresChildren("stripped_log") //REASON: recipes & textures
                 //TEXTURE: Using stripped_log & planks
-                .addTag(ModBlockTags.FLAMMABLE, Registry.BLOCK_REGISTRY)
-                .addTag(ModBlockTags.BENCHES, Registry.BLOCK_REGISTRY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(modRes("flammable"), Registry.ITEM_REGISTRY)
-                .addTag(modRes("benches"), Registry.ITEM_REGISTRY)
-                .setTab(() -> tab)
+                .addTag(ModBlockTags.FLAMMABLE, Registries.BLOCK)
+                .addTag(ModBlockTags.BENCHES, Registries.BLOCK)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(modRes("flammable"), Registries.ITEM)
+                .addTag(modRes("benches"), Registries.ITEM)
+                .setTabKey(tab)
                 .defaultRecipe()
                 //REASON: Take a look @ terrestria's logs|stripped_logs' non-standard 16x16 texture, you'll get why
                 //EXCLUDED: sakura & yucca_palm
@@ -301,7 +294,7 @@ public class ClutterModule extends SimpleModule {
         }
 
         @Override
-        public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        public @NotNull InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
             ItemStack itemStack = player.getItemInHand(hand);
 
             if (itemStack.getItem() instanceof AxeItem && state.is(ModBlockTags.STRIPPABLE_TABLES)) {
@@ -331,7 +324,7 @@ public class ClutterModule extends SimpleModule {
         }
 
         @Override
-        public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        public @NotNull InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
             ItemStack itemStack = player.getItemInHand(hand);
             if (itemStack.getItem() instanceof AxeItem && state.is(ModBlockTags.STRIPPABLE_CHAIRS)) {
                 BlockState strippedState = this.getStrippedState(state);

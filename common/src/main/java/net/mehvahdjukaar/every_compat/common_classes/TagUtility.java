@@ -5,8 +5,8 @@ import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.level.block.Block;
 
@@ -76,17 +76,4 @@ public class TagUtility {
         return isTagFull;
     }
 
-    public static class ResourceLocation extends net.minecraft.resources.ResourceLocation {
-        public ResourceLocation(String location)  {
-            super(location);
-        }
-
-        public ResourceLocation(String namespace, String path) {
-            super(namespace, path);
-        }
-
-        public net.minecraft.resources.ResourceLocation withPrefix(String prefix) {
-            return new ResourceLocation(this.namespace, prefix + this.path);
-        }
-    }
 }

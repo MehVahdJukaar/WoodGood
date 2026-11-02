@@ -6,10 +6,10 @@ import net.mehvahdjukaar.moonlight.api.client.ICustomItemRendererProvider;
 import net.mehvahdjukaar.moonlight.api.client.ItemStackRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ChestBlock;
@@ -34,9 +34,8 @@ public class CompatChestItem extends BlockItem implements ICustomItemRendererPro
             return new ItemStackRenderer() {
 
                 @Override
-                public void renderByItem(ItemStack itemStack, ItemTransforms.TransformType transformType,
-                                         PoseStack poseStack, MultiBufferSource BufferSource, int i, int i1) {
-                    renderer.renderItem(dummy, poseStack, BufferSource, i, i1);
+                public void renderByItem(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight, int packedOverlay) {
+                    renderer.renderItem(dummy, poseStack, multiBufferSource, packedLight, packedOverlay);
                 }
 
                 final BlockEntityRenderDispatcher renderer = Minecraft.getInstance().getBlockEntityRenderDispatcher();

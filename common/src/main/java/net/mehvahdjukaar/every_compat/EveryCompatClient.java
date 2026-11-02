@@ -3,19 +3,10 @@ package net.mehvahdjukaar.every_compat;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
-import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
-import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
-import net.mehvahdjukaar.moonlight.api.set.BlockType;
-import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
-import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.world.inventory.InventoryMenu;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.block.Block;
@@ -31,13 +22,12 @@ public class EveryCompatClient {
         ClientHelper.addBlockEntityRenderersRegistration(EveryCompatClient::registerBlockEntityRenderers);
         ClientHelper.addBlockColorsRegistration(EveryCompatClient::registerBlockColors);
         ClientHelper.addItemColorsRegistration(EveryCompatClient::registerItemColors);
-//        ClientHelper.addAtlasTextureCallback(TextureAtlas.LOCATION_BLOCKS, EveryCompatClient::registerTextures);
         ClientDynamicResourcesHandler.getInstance().register();
     }
 
-    private static void registerTextures(ClientPlatformHelper.AtlasTextureEvent event){
-        EveryCompat.forAllModules(m -> m.stitchAtlasTextures(event));
-    }
+//    private static void registerTextures(ClientHelper.AtlasTextureEvent event){
+//        EveryCompat.forAllModules(m -> m.stitchAtlasTextures(event));
+//    }
 
     private static void registerBlockColors(ClientHelper.BlockColorEvent event) {
         EveryCompat.forAllModules(m -> m.registerBlockColors(event));

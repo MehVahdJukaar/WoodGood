@@ -8,7 +8,7 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -46,8 +46,8 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .addTexture(modRes("block/oak_table/oak_table"))
                 // the oak_table_connected texutre is in desk_drawers' EntrySet
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(ModTags.Blocks.TABLES, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(ModTags.Blocks.TABLES, Registries.BLOCK)
                 .defaultRecipe()
                 .build();
         this.addEntry(tables);
@@ -59,8 +59,8 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
                 )
                 .setRenderType(() -> RenderType::cutout)
                 .addTexture(modRes("block/chair/oak/oak_chair"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(ModTags.Blocks.CHAIRS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(ModTags.Blocks.CHAIRS, Registries.BLOCK)
                 .defaultRecipe()
                 .build();
         this.addEntry(chairs);
@@ -73,8 +73,8 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
                 .setRenderType(() -> RenderType::cutout)
                 .addTextureM(modRes("block/chair/oak/hay_oak_chair"),
                         EveryCompat.res("block/vf/hay_oak_chair_m"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(ModTags.Blocks.CHAIRS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(ModTags.Blocks.CHAIRS, Registries.BLOCK)
                 .defaultRecipe()
                 .build();
         this.addEntry(hay_chairs);
@@ -85,8 +85,8 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
                 )
                 .setRenderType(() -> RenderType::cutout)
                 .addTexture(modRes("block/stool/oak_stool"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(ModTags.Blocks.STOOLS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(ModTags.Blocks.STOOLS, Registries.BLOCK)
                 .defaultRecipe()
                 .build();
         this.addEntry(stools);
@@ -102,9 +102,9 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
                 .addTexture(modRes("block/desk/oak/top"))
                 .addTexture(modRes("block/desk/oak/top_middle"))
                 .addTexture(modRes("block/desk/oak/top_side"))
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(ModTags.Blocks.DESKS, Registry.BLOCK_REGISTRY)
-                .addTag(ModTags.Items.DESKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(ModTags.Blocks.DESKS, Registries.BLOCK)
+                .addTag(ModTags.Items.DESKS, Registries.BLOCK)
                 .defaultRecipe()
                 .build();
         this.addEntry(desks);
@@ -115,9 +115,9 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
                 )
                 .addTile(ModBlockEntities.DESK_DRAWER)
                 // Using the same textures from desk's above
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .addTag(ModTags.Blocks.DESKS, Registry.BLOCK_REGISTRY)
-                .addTag(ModTags.Items.DESKS, Registry.BLOCK_REGISTRY)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .addTag(ModTags.Blocks.DESKS, Registries.BLOCK)
+                .addTag(ModTags.Items.DESKS, Registries.BLOCK)
                 .defaultRecipe()
                 /*
                 * Below is a bit special. has to be separated from the Table's EntrySet above. It has 5 color palettes
@@ -134,7 +134,7 @@ public class ValhelsiaFurnitureModule extends SimpleModule {
 
     // Tags
     private TagKey<Block> modTag(String name) {
-        return TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(EveryCompat.MOD_ID, name));
+        return TagKey.create(Registries.BLOCK, new ResourceLocation(EveryCompat.MOD_ID, name));
     }
 
     // Had to create this because of appendHoverText, "Hay Seat" is showing up on both chairs & hay_chairs

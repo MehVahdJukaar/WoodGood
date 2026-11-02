@@ -3,12 +3,12 @@ package net.mehvahdjukaar.every_compat.modules.forge.oreberries_replanted;
 import com.mrbysco.oreberriesreplanted.block.OreBerryBushBlock;
 import com.mrbysco.oreberriesreplanted.block.VatBlock;
 import com.mrbysco.oreberriesreplanted.registry.OreBerryRegistry;
-import com.mrbysco.oreberriesreplanted.registry.OreBerryTab;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -22,6 +22,7 @@ public class OreberriesReplantedModule extends SimpleModule {
 
     public OreberriesReplantedModule(String modId) {
         super(modId, "or");
+        ResourceLocation tab = modRes(modId);
 
         vats = SimpleEntrySet.builder(WoodType.class, "vat",
                         OreBerryRegistry.OAK_VAT, () -> WoodTypeRegistry.OAK_TYPE,
@@ -33,12 +34,11 @@ public class OreberriesReplantedModule extends SimpleModule {
                 )
                 .requiresChildren("slab") //REASON: Recipes
                 .addTile(OreBerryRegistry.VAT_BLOCK_ENTITY)
-                .addTag(BlockTags.MINEABLE_WITH_AXE, Registry.BLOCK_REGISTRY)
-                .setTab(() -> OreBerryTab.TAB)
+                .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
+                .setTabKey(tab)
                 .defaultRecipe()
                 .build();
         this.addEntry(vats);
-
 
     }
 }

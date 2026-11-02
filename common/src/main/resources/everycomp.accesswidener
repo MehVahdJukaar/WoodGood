@@ -5,12 +5,9 @@ mutable field net/minecraft/world/level/block/entity/BlockEntityType validBlocks
 
 accessible method net/minecraft/world/level/block/TorchBlock <init> (Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;Lnet/minecraft/core/particles/ParticleOptions;)V
 accessible method net/minecraft/world/level/block/WallTorchBlock <init> (Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;Lnet/minecraft/core/particles/ParticleOptions;)V
-accessible method net/minecraft/world/level/block/TrapDoorBlock <init> (Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;)V
 accessible method net/minecraft/world/level/block/IronBarsBlock <init> (Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;)V
-accessible method net/minecraft/world/level/block/DoorBlock <init> (Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;)V
 
 ## chest renderer stuff
-
 accessible field net/minecraft/client/renderer/blockentity/ChestRenderer doubleLeftLid Lnet/minecraft/client/model/geom/ModelPart;
 accessible field net/minecraft/client/renderer/blockentity/ChestRenderer doubleRightLid Lnet/minecraft/client/model/geom/ModelPart;
 accessible field net/minecraft/client/renderer/blockentity/ChestRenderer doubleLeftLock Lnet/minecraft/client/model/geom/ModelPart;
@@ -20,3 +17,6 @@ accessible field net/minecraft/client/renderer/blockentity/ChestRenderer doubleR
 accessible field net/minecraft/client/renderer/blockentity/ChestRenderer lid Lnet/minecraft/client/model/geom/ModelPart;
 accessible field net/minecraft/client/renderer/blockentity/ChestRenderer bottom Lnet/minecraft/client/model/geom/ModelPart;
 accessible field net/minecraft/client/renderer/blockentity/ChestRenderer lock Lnet/minecraft/client/model/geom/ModelPart;
+
+## DOOR CLASS
+accessible method net/minecraft/world/level/block/DoorBlock <init> (Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;Lnet/minecraft/world/level/block/state/properties/BlockSetType;)V
