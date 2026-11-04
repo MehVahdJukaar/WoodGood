@@ -80,6 +80,6 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
     public void onClientSetup() {
         EveryCompatClient.commonInit();
         EveryCompatClient.clientSetup();
-        EveryCompat.ALL_WOODS.get().registerFabricRenderer();
+        ECCreativeTabs.ALL_WOODS.get().registerFabricRenderer();
     }
 }
