@@ -81,7 +81,7 @@ dependencies {
 //!! =================================================== IMPORTS ==================================================== \\
     // NOTE: mods with modRunTimeOnly are in compiled in build.gradle (COMMON), modRunTimeOnly is only for testing
     //- ONLY FOR TESTING - can be commented out or enabled
-//    modRuntimeOnly("curse.maven:refurbished-furniture-897116:6186452")
+//    modRuntimeOnly("curse.maven:refurbished-furniture-897116:6186457")
 //    modRuntimeOnly("curse.maven:table-top-craft-fabric-729535:5694015")
 
 

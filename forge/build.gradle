@@ -123,7 +123,7 @@ dependencies {
 
 
     //!! TOOLS
-    modRuntimeOnly("curse.maven:emi-580555:5704395")
+    modRuntimeOnly("curse.maven:emi-580555:6420949")
 //    modRuntimeOnly("curse.maven:jei-238222:5733169")
 
 //!! ================================================== IMPORTS ===================================================== \\
@@ -131,11 +131,11 @@ dependencies {
 
     //- ONLY FOR TESTING - can be commented out or enabled
 //    modRuntimeOnly("curse.maven:table-top-craft-467136:4616489")
-//    modRuntimeOnly("curse.maven:refurbished-furniture-897116:6186454")
+//    modRuntimeOnly("curse.maven:refurbished-furniture-897116:6186460")
 
     //+ REQUIRED - The modules access libaries from below - ONLY IN FORGE
         //!! MACAW's
-    modImplementation("curse.maven:macaws-bridges-351725:7627951")
+    modCompileOnly("curse.maven:macaws-bridges-351725:7627951")
     modCompileOnly("curse.maven:macaws-doors-378646:7618710") // v1.1.5
     modCompileOnly("curse.maven:macaws-fences-and-walls-453925:7308414") // v1.2.1
     modCompileOnly("curse.maven:macaws-furniture-359540:4726294")
