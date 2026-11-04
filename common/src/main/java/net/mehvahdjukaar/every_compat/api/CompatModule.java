@@ -2,7 +2,7 @@ package net.mehvahdjukaar.every_compat.api;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.mehvahdjukaar.every_compat.ECRegistry;
+import net.mehvahdjukaar.every_compat.ECCreativeTabs;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.dynamicpack.ClientDynamicResourcesHandler;
 import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
@@ -23,7 +23,6 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.entity.EntityType;
@@ -370,8 +369,8 @@ public abstract class CompatModule {
         };
     }
 
-    public ResourceKey<CreativeModeTab> getDedicatedTab() {
-        return (ResourceKey<CreativeModeTab>) ECRegistry.MOD_TAB;
+    public CreativeModeTab getDedicatedTab() {
+        return  ECCreativeTabs.MOD_TAB.get();
     }
 
     //how much crap this module has registered

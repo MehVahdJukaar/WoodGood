@@ -1,7 +1,7 @@
 package net.mehvahdjukaar.every_compat;
 
 import io.netty.buffer.Unpooled;
-import net.mehvahdjukaar.every_compat.configs.EarlyConfigs;
+import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.network.ChannelHandler;
 import net.mehvahdjukaar.moonlight.api.platform.network.Message;
@@ -21,7 +21,7 @@ import java.util.Objects;
 public class ECNetworking {
     public static final ChannelHandler CHANNEL = ChannelHandler.createChannel(EveryCompat.res("network"));
 
-    public static void registerMessages() {
+    public static void init() {
         CHANNEL.register(NetworkDir.PLAY_TO_CLIENT, S2CBlockStateCheckMessage.class, S2CBlockStateCheckMessage::new);
         CHANNEL.register(NetworkDir.BOTH, S2CModVersionCheckMessage.class, S2CModVersionCheckMessage::new);
     }
@@ -129,7 +129,7 @@ public class ECNetworking {
     private static int lastInd = 0;
 
     public static void sendPacket(ServerPlayer s) {
-        if (EarlyConfigs.DEBUG_PACKET.get() || PlatHelper.isDev()) {
+        if (ECConfigs.DEBUG_PACKET.get() || PlatHelper.isDev()) {
             lastInd = 0;
             EveryCompat.LOGGER.warn("Starting Blockstate Map validity check:");
             while (lastInd < Block.BLOCK_STATE_REGISTRY.size()) {

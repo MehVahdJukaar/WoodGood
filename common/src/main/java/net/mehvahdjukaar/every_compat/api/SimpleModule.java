@@ -6,6 +6,8 @@ import net.mehvahdjukaar.every_compat.dynamicpack.ServerDynamicResourcesHandler;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
+import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -13,10 +15,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class SimpleModule extends CompatModule {
 
@@ -38,7 +37,7 @@ public class SimpleModule extends CompatModule {
     public void addEntry(EntrySet<?, ?, ?> entryHolder) {
         this.entries.put(entryHolder.getName(), entryHolder);
 
-        EveryCompat.addEntryType(entryHolder.getTypeClass(), entryHolder.getChildKey(this));
+        EveryCompat.addEntryType(entryHolder.getTypeClass(), entryHolder.makeChildKey(this));
     }
 
     public Collection<EntrySet<?, ?, ?>> getEntries() {
@@ -117,5 +116,23 @@ public class SimpleModule extends CompatModule {
     public static void appendTileEntityBlocks(BlockEntityType<?> be, Collection<? extends Block> blocks) {
         be.validBlocks = new HashSet<>(be.validBlocks);
         be.validBlocks.addAll(blocks);
+    }
+
+    @Override
+    public void registerItemsToExistingTabs(RegHelper.ItemToTabEvent event) {
+        getEntries().forEach(e -> e.registerItemsToExistingTabs(this, event));
+    }
+
+    @Override
+    @SuppressWarnings("ConstantValue")
+    public <T extends BlockType> List<Item> getAllItemsOfType(T type) {
+        List<Item> l = new ArrayList<>();
+        for (EntrySet<?, ?, ?> entrySet : entries.values()) {
+            if (entrySet.getTypeClass().isAssignableFrom(type.getClass())) {
+                var itemOfType = entrySet.getItemForECTab(type);
+                if (itemOfType != null) l.add(itemOfType);
+            }
+        }
+        return l;
     }
 }

@@ -16,9 +16,8 @@ import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.BlockTypeRegistry;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
@@ -43,11 +42,12 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
                             Function<T, I> itemFactory,
                             Supplier<@Nullable I> baseItem,
                             Supplier<T> baseType,
-                            Supplier<ResourceKey<CreativeModeTab>> tab,
+                            Supplier<ResourceLocation> tab,
+                            TabAddMode tabMode,
                             @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
                             @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
                             Predicate<T> condition) {
-        super(type, name, prefix, baseType, tab, paletteSupplier, extraTransform, condition);
+        super(type, name, prefix, baseType, tab, tabMode,  paletteSupplier, extraTransform, condition);
         this.itemFactory = itemFactory;
         this.baseItem = baseItem;
     }
@@ -106,9 +106,9 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
                     this.items.put(w, item);
 
                     registry.register(EveryCompat.res(fullName), item);
-                    w.addChild(getChildKey(module), item);
+                    w.addChild(makeChildKey(module), item);
 
-                    var v = w.getChild(getChildKey(module));
+                    var v = w.getChild(makeChildKey(module));
                 }
             }
         }
@@ -120,7 +120,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
         if (base == null || base == Items.AIR)
             //?? wtf im using disabled to allow for null??
             throw new UnsupportedOperationException("Base block cant be null (" + this.typeName + " for " + module.modId + " module)");
-        baseType.get().addChild(getChildKey(module),(Object) base);
+        baseType.get().addChild(makeChildKey(module),(Object) base);
 
     }
 
@@ -171,12 +171,12 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
         }
 
         public ItemOnlyEntrySet<T, I> build() {
-            var e = new ItemOnlyEntrySet<>(type, name, prefix, itemFactory, baseItem, baseType, tab,
+            var entrySet = new ItemOnlyEntrySet<>(type, name, prefix, itemFactory, baseItem, baseType, reslocTab, tabMode,
                     palette, extraModelTransform, condition);
-            e.recipeLocations.addAll(this.recipes);
-            e.tags.putAll(this.tags);
-            e.textures.addAll(textures);
-            return e;
+            entrySet.recipeLocations.addAll(this.recipes);
+            entrySet.tags.putAll(this.tags);
+            entrySet.textures.addAll(textures);
+            return entrySet;
         }
     }
 }

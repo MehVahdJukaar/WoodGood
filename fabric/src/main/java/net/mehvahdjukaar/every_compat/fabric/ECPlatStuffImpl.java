@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.fabric;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 
@@ -18,4 +19,9 @@ public class ECPlatStuffImpl {
                     container.getMetadata().getVersion().getFriendlyString()
                 ).orElse("Unknown");
     }
+
+    public static CreativeModeTab.Builder searchBar(CreativeModeTab.Builder builder) {
+        return builder;
+    }
+
 }

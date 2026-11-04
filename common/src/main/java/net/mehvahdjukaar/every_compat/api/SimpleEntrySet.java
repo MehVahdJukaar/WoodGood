@@ -25,10 +25,8 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -65,7 +63,8 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                           Function<T, B> blockSupplier,
                           Supplier<@Nullable B> baseBlock,
                           Supplier<T> baseType,
-                          Supplier<ResourceKey<CreativeModeTab>> tab,
+                          Supplier<ResourceLocation> tab,
+                          TabAddMode tabMode,
                           LootTableMode lootMode,
                           @Nullable TriFunction<T, B, Item.Properties, Item> itemFactory,
                           @Nullable SimpleEntrySet.ITileHolder<?> tileFactory,
@@ -73,7 +72,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                           @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
                           @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
                           Predicate<T> condition) {
-        super(type, name, prefix, baseType, tab, paletteSupplier, extraTransform, condition);
+        super(type, name, prefix, baseType, tab, tabMode, paletteSupplier, extraTransform, condition);
         this.blockFactory = blockSupplier;
         this.tileHolder = tileFactory;
         this.lootMode = lootMode;
@@ -149,7 +148,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         if (base == null || base == Blocks.AIR)
             //?? wtf im using disabled to allow for null??
             throw new UnsupportedOperationException("Base block cant be null (" + this.typeName + " for " + module.modId + " module)");
-        baseType.get().addChild(getChildKey(module), (Object) base);
+        baseType.get().addChild(makeChildKey(module), (Object) base);
 
         for (T w : woodTypes) {
             String name = getBlockName(w);
@@ -163,7 +162,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                     this.blocks.put(w, block);
 
                     registry.register(EveryCompat.res(fullName), block);
-                    w.addChild(getChildKey(module), (Object) block);
+                    w.addChild(makeChildKey(module), (Object) block);
 
                     if (lootMode == LootTableMode.DROP_SELF && YEET_JSONS) {
                         SIMPLE_DROPS.add(block);
@@ -286,6 +285,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         return new Builder<>(type, name, prefix, baseType, baseBlock, blockSupplier);
     }
 
+    //!! SUBCLASS
     public static class Builder<T extends BlockType, B extends Block> extends AbstractSimpleEntrySet.Builder<Builder<T,B>, T,B,Item> {
         protected final Supplier<@Nullable B> baseBlock;
         protected LootTableMode lootMode = LootTableMode.DROP_SELF;
@@ -294,6 +294,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         protected TriFunction<T, B, Item.Properties, Item> itemFactory;
         @Nullable
         protected SimpleEntrySet.ITileHolder<?> tileHolder;
+
         @Nullable
         protected Supplier<Supplier<RenderType>> renderType = null;
 
@@ -304,7 +305,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         }
 
         public SimpleEntrySet<T, B> build() {
-            var e = new SimpleEntrySet<>(type, name, prefix, blockFactory, baseBlock, baseType, tab, lootMode,
+            var e = new SimpleEntrySet<>(type, name, prefix, blockFactory, baseBlock, baseType, reslocTab, tabMode, lootMode,
                     itemFactory, tileHolder, renderType, palette, extraModelTransform, condition);
             e.recipeLocations.addAll(this.recipes);
             e.tags.putAll(this.tags);
@@ -420,4 +421,6 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         COPY_FROM_PARENT,
         NO_LOOT
     }
+
+
 }

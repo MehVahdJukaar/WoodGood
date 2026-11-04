@@ -5,6 +5,8 @@ import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.WoodConfigs;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.SimpleTagBuilder;
@@ -15,6 +17,7 @@ import net.mehvahdjukaar.moonlight.api.resources.textures.Respriter;
 import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
+import net.mehvahdjukaar.moonlight.api.set.BlockTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.resources.metadata.animation.AnimationMetadataSection;
@@ -40,6 +43,8 @@ import java.util.regex.Pattern;
 //Contrary to popular belief, this class is indeed not simple. Its usage, however is
 public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Block, I extends Item> extends EntrySet<T, B, I> {
 
+    protected static final ResourceLocation NO_TAB_MARKER = new ResourceLocation("none");
+
     protected final Class<T> type;
 
     protected final Pattern nameScheme;
@@ -50,7 +55,9 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     @Nullable
     public final String prefix;
 
-    protected final Supplier<ResourceKey<CreativeModeTab>> tab;
+    protected final @Nullable Supplier<ResourceLocation> resLocTab;
+    protected final Supplier<CreativeModeTab> tabSupplier;
+    protected final TabAddMode tabMode;
     protected final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
     protected final Set<Supplier<ResourceLocation>> recipeLocations = new HashSet<>();
     protected final Set<Pair<ResourceLocation, @Nullable ResourceLocation>> textures = new HashSet<>();
@@ -62,16 +69,21 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
     protected final Predicate<T> condition;
 
     protected AbstractSimpleEntrySet(Class<T> type,
-                                  String name, @Nullable String prefix,
-                                  Supplier<T> baseType,
-                                  Supplier<ResourceKey<CreativeModeTab>> tab,
-                                  @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
-                                  @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
+                                     String name, @Nullable String prefix,
+                                     Supplier<T> baseType,
+                                     @Nullable Supplier<ResourceLocation> resLocTab,
+                                     TabAddMode tabMode,
+                                     @Nullable BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> paletteSupplier,
+                                     @Nullable Consumer<BlockTypeResTransformer<T>> extraTransform,
                                      Predicate<T> condition) {
         super((prefix == null ? "" : prefix + (name.isEmpty() ? "" : "_")) + name);
         this.postfix = name;
         this.prefix = prefix;
-        this.tab = tab;
+
+        this.resLocTab = resLocTab;
+        this.tabSupplier = () -> (resLocTab != null) ? PlatHelper.getCreativeModeTab(resLocTab.get()) : null;
+        this.tabMode = tabMode;
+
         this.baseType = baseType;
         this.type = type;
 
@@ -121,9 +133,54 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         return null;
     }
 
-    protected ResourceKey<CreativeModeTab> getTab(T w, B b) {
-        return WoodConfigs.isEntryEnabled(w, b) ?
-                (EveryCompat.MOD_TAB != null ? EveryCompat.MOD_TAB : this.tab.get()) : null;
+//    protected ResourceKey<CreativeModeTab> getTab(T w, B b) {
+//        CreativeModeTab existingTab = PlatHelper.getCreativeModeTab(this.resLocTab.get());
+//
+//        return WoodConfigs.isEntryEnabled(w, b) ?
+//                (EveryCompat.MOD_TAB != null ? EveryCompat.MOD_TAB : existingTab) : null;
+//    }
+
+    @Override
+    public void registerItemsToExistingTabs(SimpleModule module, RegHelper.ItemToTabEvent event) {
+
+        if (this.resLocTab != null && this.resLocTab.get().equals(NO_TAB_MARKER)) {
+            return;
+        }
+        ResourceLocation tabLoc = (this.resLocTab != null) ? this.resLocTab.get() : null;
+        CreativeModeTab tab = this.tabSupplier.get();
+        String childKey = makeChildKey(module);
+
+        //verify tab
+        if (!PlatHelper.getCreativeModeTabs().contains(tab)) {
+            String tabKey = (tabLoc != null) ? ", " + tabLoc : "";
+                throw new UnsupportedOperationException("The Creative tab " + tabKey + " is not registered found in the registries. " +
+                        "The EntrySet is " + childKey + "." + "This means that the Creative Tab's ID is wrong.");
+        }
+        if (tabMode == TabAddMode.AFTER_ALL) {
+            event.add(tab, items.values().toArray(new Item[0]));
+        }
+        else if (tabMode == TabAddMode.AFTER_SAME_WOOD) {
+            BlockTypeRegistry<T> reg = BlockSetAPI.getBlockSet(type);
+            for (var e : items.entrySet()) {
+                I item = e.getValue();
+                T woodType = e.getKey();
+                //adds after first wooden block it finds. quite bad tbh
+                event.addAfter(tab, s -> reg.getBlockTypeOf(s.getItem()) == woodType, item);
+            }
+        }
+        else if (tabMode == TabAddMode.AFTER_SAME_TYPE) {
+            var reg = BlockSetAPI.getBlockSet(type);
+            Class<T> typeClass = this.getTypeClass();
+            for (var e : items.entrySet()) {
+                I item = e.getValue();
+                event.addAfter(tab, s -> {
+                    T woodType = reg.getBlockTypeOf(s.getItem());
+                    if (woodType == null) return false;
+                    return woodType.getClass() == typeClass
+                            && Objects.equals(woodType.getChildKey(s.getItem()), childKey);
+                }, item);
+            }
+        }
     }
 
     @Override
@@ -269,15 +326,18 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         protected final String name;
         @Nullable
         protected final String prefix;
-        protected Supplier<ResourceKey<CreativeModeTab>> tab = null;
-        @Nullable
-        protected BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> palette = null;
+        protected Supplier<ResourceLocation> reslocTab = null;
+        protected Supplier<CreativeModeTab> tabSupplier = null;
+        protected TabAddMode tabMode = TabAddMode.AFTER_SAME_TYPE;
         protected final Map<ResourceLocation, Set<ResourceKey<?>>> tags = new HashMap<>();
         protected final Set<Supplier<ResourceLocation>> recipes = new HashSet<>();
         protected final Set<Pair<ResourceLocation, @Nullable ResourceLocation>> textures = new HashSet<>();
         @Nullable
         protected Consumer<BlockTypeResTransformer<T>> extraModelTransform = null;
         protected Predicate<T> condition = w -> true;
+
+        @Nullable
+        protected BiFunction<T, ResourceManager, Pair<List<Palette>, @Nullable AnimationMetadataSection>> palette = null;
 
         protected Builder(Class<T> type, String name, @Nullable String prefix, Supplier<T> baseType) {
             this.baseType = baseType;
@@ -343,19 +403,32 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
             return (BL) this;
         }
 
-//        public BL noTab() {
-//            return setTabKey(NO_TAB_MARKER);
-//        }
 
-        //TODO: Check if this is working
-        public BL setTabKey(ResourceLocation res) {
-            ResourceKey<CreativeModeTab> key = ResourceKey.create(ResourceKey.createRegistryKey(new ResourceLocation("creative_mode_tab")), res);
-            this.tab = () -> key;
+        public BL setTabMode(TabAddMode mode) {
+            this.tabMode = mode;
             return (BL) this;
         }
 
-        public BL setTab(ResourceKey<CreativeModeTab> tab) {
-            this.tab = () -> tab;
+        public BL noTab() {
+            return setTabKey(NO_TAB_MARKER);
+        }
+
+        public BL setTabKey(ResourceLocation res) {
+            var getTab = PlatHelper.getCreativeModeTab(res);
+            this.reslocTab = () -> res;
+            this.tabSupplier = () -> getTab;
+            return (BL) this;
+        }
+
+        public BL setTab(ResourceKey<CreativeModeTab> rKeyTab) {
+            this.reslocTab = rKeyTab::location;
+            this.tabSupplier = () -> PlatHelper.getCreativeModeTab(rKeyTab.location());
+            return (BL) this;
+        }
+
+        public BL setTab(CreativeModeTab tab) {
+            this.reslocTab = null;
+            this.tabSupplier = () -> tab;
             return (BL) this;
         }
 
@@ -439,6 +512,37 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         }
     }
 
+    @Override
+    public @Nullable Item getItemOf(BlockType type) {
+        var i = items.get(type);
+        if (WoodConfigs.isEntryEnabled(type, i)) return i;
+        return null;
+    }
+
+    @Nullable
+    @Override
+    //for null tab
+    public Item getItemForECTab(BlockType type) {
+        if (resLocTab == null) {
+//            if (PlatHelper.isDev()) {
+//                throw new UnsupportedOperationException("Creative tab cant be null. Found null one for entry set: " + Utils.getID(this.getBaseType()).toString());
+//            }
+            EveryCompat.LOGGER.error("Creative tab cant be null. Found null one for entry set: {}", Utils.getID(this.getBaseType()).toString());
+            return null;
+        }
+        try {
+            ResourceLocation tabResLoc = resLocTab.get();
+            if (tabResLoc.equals(NO_TAB_MARKER)) {
+                return null;
+            }
+        } catch (Exception e) {
+            if (PlatHelper.isDev()) throw e;
+            EveryCompat.LOGGER.error("Failed to get creative tab for EntrySet - {} : {}", Utils.getID(this.getBaseType()).toString(), e);
+            return null;
+        }
+
+        return super.getItemForECTab(type);
+    }
 
 }
 

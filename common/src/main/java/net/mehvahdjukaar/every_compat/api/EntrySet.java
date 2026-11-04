@@ -3,6 +3,7 @@ package net.mehvahdjukaar.every_compat.api;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynClientResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
@@ -13,6 +14,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -32,9 +34,10 @@ public abstract class EntrySet<T extends BlockType, B extends Block, I extends I
     public String getName() {
         return typeName;
     }
+
     @NotNull
-    public String getChildKey(CompatModule module) {
-        return module.getModId() + ":" + typeName;
+    public String makeChildKey(CompatModule module) {
+        return module.getModId() + ":" + getName();
     }
 
     protected abstract Class<T> getTypeClass();
@@ -75,6 +78,20 @@ public abstract class EntrySet<T extends BlockType, B extends Block, I extends I
 
 
     public abstract void registerEntityRenderers(CompatModule simpleModule, ClientHelper.BlockEntityRendererEvent event);
+
+    public abstract void registerItemsToExistingTabs(SimpleModule module, RegHelper.ItemToTabEvent event);
+
+    //used for tabs
+    @Nullable
+    public Item getItemOf(BlockType type) {
+        return null;
+    }
+
+    @Nullable
+    public Item getItemForECTab(BlockType type) {
+        return this.getItemOf(type);
+    }
+
 
     public void setupExistingTiles() {}
 }

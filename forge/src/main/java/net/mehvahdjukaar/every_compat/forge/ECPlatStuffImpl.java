@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.forge;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraftforge.common.ForgeHooks;
@@ -21,4 +22,9 @@ public class ECPlatStuffImpl {
         IModInfo modInfo = ModList.get().getModContainerById(modId).map(ModContainer::getModInfo).orElse(null);
         return modInfo != null ? modInfo.getVersion().toString() : "unknown";
     }
+
+    public static CreativeModeTab.Builder searchBar(CreativeModeTab.Builder builder) {
+        return builder.withSearchBar();
+    }
+
 }

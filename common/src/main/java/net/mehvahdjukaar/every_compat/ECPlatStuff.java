@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import org.jetbrains.annotations.Nullable;
@@ -20,4 +21,10 @@ public class ECPlatStuff {
     public static String getModVersion(String modId) {
         throw new AssertionError();
     }
+
+    @ExpectPlatform
+    public static CreativeModeTab.Builder searchBar(CreativeModeTab.Builder builder) {
+        throw new AssertionError();
+    }
+
 }
