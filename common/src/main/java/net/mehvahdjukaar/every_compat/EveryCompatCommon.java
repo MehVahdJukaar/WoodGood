@@ -23,6 +23,7 @@ public class EveryCompatCommon {
 
     protected void initialize() {
         EveryCompat.init();
+        EveryCompat.loadPlugins();
 
         this.addModules();
 

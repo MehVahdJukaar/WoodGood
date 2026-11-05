@@ -62,6 +62,7 @@ public abstract class EveryCompat {
     private static final Set<String> API_DISABLED_MODULES = new HashSet<>();
     private static final Set<String> API_DISABLED_BLOCKS = new HashSet<>();
     private static final List<Pattern> API_DISABLED_BLOCK_PATTERNS = new ArrayList<>();
+    private static boolean pluginsLoaded = false;
 
     static boolean canShowErrorScreen = PlatHelper.getPhysicalSide().isClient();
     private static final Map<CompatModule, Throwable> ERRORED = new HashMap<>();
@@ -252,10 +253,20 @@ public abstract class EveryCompat {
                 || isModuleDisabled(modId);
     }
 
+    public static void loadPlugins() {
+        PluginEvent registrar = new PluginEvent();
+        for (EveryCompatPlugin plugin : PlatHelper.loadPlugins(EveryCompatPlugin.class, MOD_ID, ECPlugin.class)) {
+            plugin.register(registrar);
+        }
+        pluginsLoaded = true;
+    }
+
+    public static boolean arePluginsLoaded() {
+        return pluginsLoaded;
+    }
+
     public static synchronized void disableModule(String modId) {
         API_DISABLED_MODULES.add(modId);
-        //caller might load after us, module could already be in
-        ACTIVE_MODULES.removeAll(modId);
     }
 
     public static synchronized void disableBlock(String blockId) {
