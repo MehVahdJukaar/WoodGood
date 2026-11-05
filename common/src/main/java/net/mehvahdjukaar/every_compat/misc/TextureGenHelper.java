@@ -132,7 +132,8 @@ public class TextureGenHelper {
     }
 
     ///STAGE-1: Add respriters from PartialRespriters (Map) to Respriters (Map) with Palette
-    private static void AddRespriterstoMaps(Map<ResourceLocation, TextureImage> partialRespriters, Map<ResourceLocation, Respriter> respriters, Palette globalPalette) {
+    private static void AddRespriterstoMaps(Map<ResourceLocation, TextureImage> partialRespriters,
+                                            Map<ResourceLocation, Respriter> respriters, Palette globalPalette) {
         for (var e : partialRespriters.entrySet()) {
             respriters.put(e.getKey(), Respriter.ofPalette(e.getValue(), globalPalette));
         }
@@ -241,7 +242,7 @@ public class TextureGenHelper {
                 sink.addTextureIfNotPresent(manager, newId, () -> {
                     TextureImage img = createNewTexture(blockType, targetPalette, targetAnimation, respriterSet, info, manager);
                     if (info.overlay() != null) getAndApplyOverlay(img, info.overlay(), manager);
-                    postProcessSpecialTexture(blockType, finalNewId, manager, img, info);
+                    postProcessSpecialTexture(blockType, finalNewId, img, info, manager);
                     return img;
                 });
                 return null;
@@ -278,8 +279,9 @@ public class TextureGenHelper {
 
     //post process some textures.
     @SuppressWarnings("UnusedReturnValue")
-    private static <T extends BlockType> TextureImage postProcessSpecialTexture(T blockType, ResourceLocation newId, ResourceManager manager,
-                                                                                TextureImage texture, TextureInfo textureInfo) {
+    private static <T extends BlockType> TextureImage postProcessSpecialTexture(T blockType, ResourceLocation newId,
+                                                                                TextureImage texture, TextureInfo textureInfo,
+                                                                                ResourceManager manager) {
         if (blockType.getClass() == WoodType.class) {
             CompatSpritesHelper.maybePostProcessWoodTexture((WoodType) blockType, newId, manager, texture, textureInfo);
         }
