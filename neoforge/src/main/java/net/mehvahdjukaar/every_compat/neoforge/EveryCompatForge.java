@@ -38,7 +38,6 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.timber_frames.TimberFrame
 import net.mehvahdjukaar.every_compat.modules.neoforge.tropicraft.TropicraftModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.twilightforest.TwilightForestModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.ultimate_car.UltimateCarModule;
-import net.mehvahdjukaar.every_compat.modules.neoforge.unusual_furniture.UnusualFurnitureModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.valhelsia.ValhelsiaStructuresModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.variants.VariantCraftingTablesModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.woodster.WoodsterModule;
@@ -177,7 +176,6 @@ public class EveryCompatForge extends EveryCompatCommon {
             addOptionalModule("shutter", () -> LauchsShuttersModule.class);
             addOptionalModule("tropicraft", () -> TropicraftModule.class);
             addOptionalModule("twilightforest", () -> TwilightForestModule.class);
-            addOptionalModule("unusual_furniture", () -> UnusualFurnitureModule.class);
             addOptionalModule("valhelsia_structures", () -> ValhelsiaStructuresModule.class);
             addOptionalModule("vct", () -> VariantCraftingTablesModule.class);
             addOptionalModule("woodster", () -> WoodsterModule.class);

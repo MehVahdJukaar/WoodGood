@@ -97,6 +97,7 @@ dependencies {
     modCompileOnly("curse.maven:storage-drawers-223852:6995432") // 1.21.1-13.11.4 NeoForge
     modCompileOnly("curse.maven:table-top-craft-467136:5318681") //!! 1.20.1
     modCompileOnly("curse.maven:twigs-496913:8191595")
+    modCompileOnly("curse.maven:unusual-furniture-1278034:9372047") // 2.0.2 NeoForge
     modCompileOnly("curse.maven:valhelsia-furniture-694349:6341023")
 //    modCompileOnly("curse.maven:villagersplus-forge-817272:4996995") //!! 1.20.1
 

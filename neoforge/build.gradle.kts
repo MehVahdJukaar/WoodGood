@@ -165,7 +165,6 @@ dependencies {
     modCompileOnly("curse.maven:the-twilight-forest-227639:7797302")
     modCompileOnly("curse.maven:timber-frames-606011:5372390") //!! 1.20.1
     modCompileOnly("curse.maven:tropicraft-254794:6600109")
-    modCompileOnly("curse.maven:unusual-furniture-1278034:7332052")
     modCompileOnly("curse.maven:ultimate-car-mod-267458:7518005")
     modCompileOnly("curse.maven:valhelsia-structures-347488:6814480") // Valhelsia-Core
     modCompileOnly("curse.maven:variant-crafting-tables-565095:4585921") //!! 1.20.1
@@ -196,6 +195,7 @@ dependencies {
     modCompileOnly("curse.maven:refurbished-furniture-897116:7473565")
     modCompileOnly("curse.maven:storage-drawers-223852:6995432")
     modCompileOnly("curse.maven:twigs-496913:8191595")
+    modCompileOnly("curse.maven:unusual-furniture-1278034:9372047") // 2.0.2 NeoForge
     modCompileOnly("curse.maven:valhelsia-furniture-694349:6341023") // Valhelsia-Core
     modCompileOnly("curse.maven:mighty-mail-902986:6542124")
     modCompileOnly("curse.maven:missing-wilds-622590:6302230")

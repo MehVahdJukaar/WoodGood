@@ -21,10 +21,7 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 
-import java.util.Map;
 import java.util.function.Supplier;
-
-import static java.util.Map.entry;
 
 ///SUPPORT: v1.0.46+
 public class UltimateCarModule extends EveryCompatModule {
@@ -33,24 +30,6 @@ public class UltimateCarModule extends EveryCompatModule {
     public final ItemOnlyEntrySet<WoodType, Item> bumper;
     public final ItemOnlyEntrySet<WoodType, Item> body;
     public final ItemOnlyEntrySet<WoodType, Item> big_body;
-
-    private static final Map<String, ResourceLocation> mapPlanks = Map.ofEntries(
-            entry("born_in_chaos_v1:scorched", ResourceLocation.parse("born_in_chaos_v1:block/opdosk.png")),
-
-            entry("luminous_nether:withered", ResourceLocation.parse("luminous_nether:textures/block/ashplanks.png") ),
-
-            entry("mofus_better_end_:weepingstar", ResourceLocation.parse("mofus_better_end_:textures/block/weeoingstarplanks.png") ),
-
-            entry("promenade:sakura", ResourceLocation.parse("promenade:textures/block/sakura/planks.png") ),
-            entry("promenade:dark_amaranth", ResourceLocation.parse("promenade:textures/block/dark_amaranth/planks.png") ),
-            entry("promenade:palm", ResourceLocation.parse("promenade:textures/block/palm/planks.png") ),
-            entry("promenade:maple", ResourceLocation.parse("promenade:textures/block/maple/planks.png") ),
-
-            entry("dawnoftimebuilder:waxed_oak", ResourceLocation.parse("dawnoftimebuilder:textures/block/waxed_oak_planks.png") ),
-            entry("dawnoftimebuilder:charred_spruce", ResourceLocation.parse("dawnoftimebuilder:textures/block/charred_spruce_planks.png") ),
-
-            entry("shadowlands:vellium", ResourceLocation.parse("shadowlands:textures/block/velliumplanks.png"))
-    );
 
     public UltimateCarModule(String modId) {
         super(modId, "ucm");
@@ -68,15 +47,6 @@ public class UltimateCarModule extends EveryCompatModule {
                                 planksResLoc = ResourceLocation.withDefaultNamespace("block/oak_planks");
                                 EveryCompat.LOGGER.error("Failed to get ResourceLocation for {} - {}", Utils.getID(w.planks), e);
                             }
-                            /*= (mapPlanks.containsKey(w.getId().toString()))
-                                    ? mapPlanks.get(w.getId().toString()).withPrefix("textures/")
-                                    : ResourceLocation.parse(
-                                    w.createFullIdWith(
-                                            w.getNamespace(),
-                                            "textures/block", "",
-                                            "", "planks.png"
-                                    )
-                            );*/
                             return new ItemCarPart(new PartLicensePlateHolder(planksResLoc.withPrefix("textures/")));
                         }
                 )
@@ -109,16 +79,6 @@ public class UltimateCarModule extends EveryCompatModule {
         body = ItemOnlyEntrySet.builder(WoodType.class, "body",
                         getModItem("oak_body"), () -> VanillaWoodTypes.OAK,
                         w -> {
-//                            ResourceLocation planksResLoc = ResourceLocation.parse(
-//                                    w.createFullIdWith(
-//                                            EveryCompat.MOD_ID,
-//                                            "textures/entity",
-//                                            shortenedId(),
-//                                            "car_wood",
-//                                            ".png"
-//                                    )
-//
-//                            );
                             ResourceLocation planksResLoc;
                             try {
                                 planksResLoc = RPUtils.findFirstBlockTextureLocation(manager, w.planks);
@@ -139,15 +99,6 @@ public class UltimateCarModule extends EveryCompatModule {
         big_body = ItemOnlyEntrySet.builder(WoodType.class, "body", "big",
                         getModItem("big_oak_body"), () -> VanillaWoodTypes.OAK,
                         w -> {
-//                            ResourceLocation planksResLoc =  ResourceLocation.parse(
-//                                    w.createFullIdWith(
-//                                            EveryCompat.MOD_ID,
-//                                            "textures/entity",
-//                                            shortenedId(),
-//                                            "car_big_wood",
-//                                            ".png"
-//                                    )
-//                            );
                             ResourceLocation planksResLoc;
                             try {
                                 planksResLoc = RPUtils.findFirstBlockTextureLocation(manager, w.planks);

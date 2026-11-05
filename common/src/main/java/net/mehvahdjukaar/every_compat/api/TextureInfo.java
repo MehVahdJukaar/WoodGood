@@ -5,12 +5,14 @@ import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
-public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation mask, @Nullable ResourceLocation overlay,
+public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation mask, @Nullable ResourceLocation extraMask, @Nullable ResourceLocation overlay,
                           boolean keepNamespace, boolean copyTexture, boolean noAnimation,
                           String customTexturePath, Pair<String, String> replacePath,
                           boolean autoMask,
                           @Deprecated boolean onAtlas,
-                          PaletteStrategy paletteStrategy) {
+                          PaletteStrategy paletteStrategy,
+                          @Nullable PaletteStrategy extraPaletteStrategy
+) {
 
     public static Builder of(ResourceLocation res) {
         return new Builder(res);
@@ -31,13 +33,14 @@ public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation m
     //remove once you remove the rest of palette madness
     @Deprecated(forRemoval = true)
     public TextureInfo cloneWithPalette(PaletteStrategy newPalette) {
-        return new TextureInfo(this.texture, this.mask, this.overlay, this.keepNamespace, this.copyTexture, noAnimation,
-                this.customTexturePath, replacePath, this.autoMask, this.onAtlas, newPalette);
+        return new TextureInfo(this.texture, this.mask, this.extraMask, this.overlay, this.keepNamespace, this.copyTexture, noAnimation,
+                this.customTexturePath, replacePath, this.autoMask, this.onAtlas, newPalette, extraPaletteStrategy);
     }
 
     public static class Builder {
         private final ResourceLocation texture;
         private ResourceLocation mask;
+        private ResourceLocation extraMask;
         private ResourceLocation overlay;
         private boolean keepNamespace = false;
         private boolean copyTexture = false;
@@ -47,6 +50,7 @@ public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation m
         private String customTexturePath;
         private Pair<String, String> replacePath;
         private PaletteStrategy palette = PaletteStrategies.MAIN_CHILD;
+        private PaletteStrategy extraPalette = PaletteStrategies.LOG_SIDE_STANDARD;
 
         public Builder(ResourceLocation texture) {
             this.texture = texture;
@@ -55,6 +59,11 @@ public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation m
 
         public Builder mask(ResourceLocation mask) {
             this.mask = mask;
+            return this;
+        }
+
+        public Builder extraMask(ResourceLocation extraMask) {
+            this.extraMask = extraMask;
             return this;
         }
 
@@ -106,11 +115,17 @@ public record TextureInfo(ResourceLocation texture, @Nullable ResourceLocation m
             this.palette = paletteProvider;
             return this;
         }
+        //a bit of abuse of type here, should be PaletteStrategy but i want to enforce them being cached
+        public Builder setExtraPalette(PaletteStrategy extraPaletteProvider) {
+            this.extraPalette = extraPaletteProvider;
+            return this;
+        }
 
 
         public TextureInfo build() {
-            return new TextureInfo(texture, mask, overlay, keepNamespace,
-                    copyTexture, noAnimation, customTexturePath, replacePath, autoMask, onAtlas, palette);
+            return new TextureInfo(texture, mask, extraMask, overlay, keepNamespace,
+                    copyTexture, noAnimation, customTexturePath, replacePath, autoMask, onAtlas,
+                    palette, extraPalette);
         }
     }
 
