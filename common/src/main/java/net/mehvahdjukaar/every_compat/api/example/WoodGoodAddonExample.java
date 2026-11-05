@@ -1,23 +1,27 @@
 package net.mehvahdjukaar.every_compat.api.example;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.api.EveryCompatAPI;
+import net.mehvahdjukaar.every_compat.api.EveryCompatPlugin;
+import net.mehvahdjukaar.every_compat.api.PluginEvent;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesTypeRegistry;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 
-public final class WoodGoodAddonExample {
-
-    private WoodGoodAddonExample() {
-    }
+/// your own plugin also needs @ECPlugin (neoforge) or an "everycomp" entrypoint in fabric.mod.json (fabric).
+public final class WoodGoodAddonExample implements EveryCompatPlugin {
     ///      ┌──────────────────────────────────────────────────────────┐
     ///      │   register a custom module and non-detected wood type    │
     ///      └──────────────────────────────────────────────────────────┘
-    /// Call this method from your mod's init method
-    private static void onModInit() {
+    @Override
+    public void register(PluginEvent registrar) {
 
         // Register out module
-        EveryCompatAPI.registerOptionalModule(EveryCompat.MOD_ID, () -> WoodGoodModuleExample.class);
+        registrar.addModule(EveryCompat.MOD_ID, () -> WoodGoodModuleExample.class);
+
+        /// Disable a whole module, a specific block or all the blocks matching a regex:
+        registrar.disableModule("handcrafted");
+        registrar.disableBlock("quark/biomesoplenty/redwood_ladder");
+        registrar.disableBlocksMatching("mcwfences/biomesoplenty/.*_gate");
 
 
         // Only add if you need to add non-detected WoodTypes or LeavesTypes

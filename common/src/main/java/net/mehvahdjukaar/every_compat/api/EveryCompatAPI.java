@@ -11,11 +11,15 @@ import java.util.List;
 import java.util.function.Supplier;
 
 /**
+ * @deprecated use an EveryCompatPlugin instead, it runs at the right time and can also disable modules and blocks.
+ * This class is gone in newer versions
+ * <p>
  * Use this class register new wood type blocks and module to Every Compat
  * To register wood types that aren't detected reference net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
  * <p>
  * Take a look at {@link WoodGoodAddonExample} for examples
  */
+@Deprecated(forRemoval = true)
 public class EveryCompatAPI {
 
     /**

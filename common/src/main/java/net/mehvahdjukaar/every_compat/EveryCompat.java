@@ -32,6 +32,7 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.ENTRY_SETS_BLACKLIST;
@@ -58,6 +59,11 @@ public abstract class EveryCompat {
     // all mod that EC directly or indirectly depends on
     private static final Set<String> DEPENDENCIES = new HashSet<>();
     private static final Set<String> ADDON_IDS = new HashSet<>();
+
+    private static final Set<String> API_DISABLED_MODULES = new HashSet<>();
+    private static final Set<String> API_DISABLED_BLOCKS = new HashSet<>();
+    private static final List<Pattern> API_DISABLED_BLOCK_PATTERNS = new ArrayList<>();
+    private static boolean pluginsLoaded = false;
 
     static boolean canShowErrorScreen = PlatHelper.getPhysicalSide().isClient();
     private static final Map<CompatModule, Throwable> ERRORED = new HashMap<>();
@@ -226,7 +232,7 @@ public abstract class EveryCompat {
     }
 
     public static synchronized void addModule(CompatModule module) {
-        if (!MODULES_BLACKLIST.get().contains(module.getModId())) {
+        if (!MODULES_BLACKLIST.get().contains(module.getModId()) && !isModuleDisabled(module.getModId())) {
             ACTIVE_MODULES.put(module.getModId(), module);
             DEPENDENCIES.add(module.getModId());
             DEPENDENCIES.addAll(module.getAlreadySupportedMods());
@@ -244,7 +250,44 @@ public abstract class EveryCompat {
     }
 
     private static boolean isModuleBlacklisted(String modId) {
-        return MODULES_BLACKLIST.get().contains(modId) || ENTRY_SETS_BLACKLIST.get().contains(modId + ":.*");
+        return MODULES_BLACKLIST.get().contains(modId) || ENTRY_SETS_BLACKLIST.get().contains(modId + ":.*")
+                || isModuleDisabled(modId);
+    }
+
+    public static void loadPlugins() {
+        PluginEvent registrar = new PluginEvent();
+        for (EveryCompatPlugin plugin : PlatHelper.loadPlugins(EveryCompatPlugin.class, MOD_ID, ECPlugin.class)) {
+            plugin.register(registrar);
+        }
+        pluginsLoaded = true;
+    }
+
+    public static boolean arePluginsLoaded() {
+        return pluginsLoaded;
+    }
+
+    public static synchronized void disableModule(String modId) {
+        API_DISABLED_MODULES.add(modId);
+    }
+
+    public static synchronized void disableBlock(String blockId) {
+        API_DISABLED_BLOCKS.add(blockId);
+    }
+
+    public static synchronized void disableBlocksMatching(String blockIdRegex) {
+        API_DISABLED_BLOCK_PATTERNS.add(Pattern.compile(blockIdRegex));
+    }
+
+    public static boolean isModuleDisabled(String modId) {
+        return API_DISABLED_MODULES.contains(modId);
+    }
+
+    public static boolean isBlockDisabled(String blockId) {
+        if (API_DISABLED_BLOCKS.contains(blockId)) return true;
+        for (Pattern p : API_DISABLED_BLOCK_PATTERNS) {
+            if (p.matcher(blockId).matches()) return true;
+        }
+        return false;
     }
 
     public synchronized static void addOptionalModule(String modId, Supplier<Class<? extends CompatModule>> moduleClass) {

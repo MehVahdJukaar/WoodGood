@@ -232,6 +232,8 @@ public class SimpleModule extends CompatModule {
         String slashConvention = woodTypeFrom + "/" + blockName; // quark/blossom_chair
         String underscoreConvention = woodTypeFrom + "_" + blockName; // quark_blossom_chair
 
+        if (EveryCompat.isBlockDisabled(modId + "/" + woodTypeFrom + "/" + blockName)) return true;
+
         // Exclude blocks from a mod that are both Supported-Mod & Wood-Mod
         if (woodTypeFrom.equals(modId)) return true; //Example: quark, blossom
 
