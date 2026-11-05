@@ -35,7 +35,7 @@ dependencies {
     }
     //+ MAVEN
     else {
-        if (findProperty("maven_backup").toString().toBoolean()) modApi("maven.modrinth:moonlight:${property("moonlight_version")}-neoforge")
+        if (findProperty("maven_backup")?.toString().toBoolean()) modApi("maven.modrinth:moonlight:${property("moonlight_version")}-neoforge")
         else modApi("net.mehvahdjukaar:moonlight-common:${property("moonlight_version")}") { isTransitive = false }
     }
     accessTransformers("net.mehvahdjukaar:moonlight-common:${property("moonlight_version")}")
