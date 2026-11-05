@@ -52,6 +52,28 @@ public class EveryCompatAPI {
         EveryCompat.addMultipleOptional(modId, moduleClasses);
     }
 
+    /**
+     * Stops every module for that mod id from registering anything, addons included. Call it during mod init
+     */
+    public static void disableModule(String modId) {
+        EveryCompat.disableModule(modId);
+    }
+
+    /**
+     * Skips that block (and its item). Works on any block type, call it during mod init
+     * ids look like the config blacklist ones: supportedModId/blockTypeNamespace/blockName, e.g. handcrafted/biomesoplenty/fir_chair
+     */
+    public static void disableBlock(String blockId) {
+        EveryCompat.disableBlock(blockId);
+    }
+
+    /**
+     * Same as disableBlock but takes a regex on the id, e.g. handcrafted/biomesoplenty/.*_chair
+     */
+    public static void disableBlocksMatching(String blockIdRegex) {
+        EveryCompat.disableBlocksMatching(blockIdRegex);
+    }
+
     // ┌────────────────────────────────────────────────────────────────────────────────────────────────────────┐
     // │  If your mod has compat mods that support it with Biomes O' Plenty or other mods below can make an     │
     // │  exception so EC & its addons won't generate blocks from your mod with Biomes O' Plenty or other mods  │

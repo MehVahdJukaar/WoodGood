@@ -45,6 +45,7 @@ public abstract class CompatModule {
         //yeah, bad api but doesn't matter if we use wood or other types
         //called here so we get right bus since module construction is delegated
         BlockSetAPI.addDynamicRegistration(myNamespace, (regBlock) -> {
+            if (EveryCompat.isModuleDisabled(modId)) return;
             EveryCompat.executeOrFail(() -> {
                 for (Class<? extends BlockType> typeClass : this.getAffectedTypes()) {
                     this.registerBlocks(typeClass, regBlock);
@@ -53,6 +54,7 @@ public abstract class CompatModule {
         }, BuiltInRegistries.BLOCK);
 
         BlockSetAPI.addDynamicRegistration(myNamespace, (regItem) -> {
+            if (EveryCompat.isModuleDisabled(modId)) return;
             EveryCompat.executeOrFail(() -> {
                 this.registerItems((resourceLocation, item) -> {
                     regItem.register(resourceLocation, item);
@@ -62,12 +64,14 @@ public abstract class CompatModule {
         }, BuiltInRegistries.ITEM);
 
         BlockSetAPI.addDynamicRegistration(myNamespace, r -> {
+            if (EveryCompat.isModuleDisabled(modId)) return;
             EveryCompat.executeOrFail(() -> {
                 this.registerTiles(r);
             }, this);
         }, BuiltInRegistries.BLOCK_ENTITY_TYPE);
 
         BlockSetAPI.addDynamicRegistration(myNamespace, r -> {
+            if (EveryCompat.isModuleDisabled(modId)) return;
             EveryCompat.executeOrFail(() -> {
                 this.registerEntities(r);
             }, this);
