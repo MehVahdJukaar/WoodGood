@@ -17,9 +17,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.Map;
 import java.util.Optional;
 
 @SuppressWarnings("UnusedReturnValue")
@@ -185,68 +183,5 @@ public class UtilityTag {
         /// Regions Unexplored
         module.addBlockTypeTag(WoodType.class, "regions_unexplored:(brimwood|cobalt|dead|yellow_bioshroom)", BlockTags.STRIDER_WARM_BLOCKS);
         module.addBlockTypeTag(WoodType.class, "regions_unexplored:(brimwood|cobalt|dead|yellow_bioshroom)", ItemTags.NON_FLAMMABLE_WOOD);
-    }
-
-    //      ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
-    //      │                                      Marked for Removal                                      │
-    //      └──────────────────────────────────────────────────────────────────────────────────────────────┘
-
-    //TODO: need info for what's the new replacement
-    @Deprecated(forRemoval = true)
-    public static <T extends BlockType, B extends Block>
-    void addTagToAllBlocks(Map<T, B> blocks, String nameBlockTypeOrRegEx, String fromModId, String tagPathOrResLoc,
-                           boolean includeBlock, boolean includeItem, ResourceSink sink
-    ) {
-        addTagToAllBlocks(blocks, nameBlockTypeOrRegEx, fromModId, tagPathOrResLoc, includeBlock, includeItem, sink, null);
-    }
-
-    //TODO: need info for what's the new replacement
-    /**
-     * The tag will be added if the mod is loaded
-     * @param nameBlockTypeOrRegEx name of BlockType without the modId, RegEx can be used, too
-     * @param fromModId The mod that BlockType is from Or "" for any mods
-     * @param regexBlockId RegEx to match EveryCompat's blocks' Id without the modId
-     */
-    @Deprecated(forRemoval = true)
-    public static <T extends BlockType, B extends Block> void addTagToAllBlocks(
-            Map<T, B> blocks, String nameBlockTypeOrRegEx, String fromModId,
-            String tagPathOrResLoc, boolean addToBlockTag, boolean addToItemTag, ResourceSink sink,
-            @Nullable String regexBlockId
-    ) {
-        if (PlatHelper.isModLoaded(fromModId) || fromModId.isEmpty()) {
-
-            if (!tagPathOrResLoc.contains(":")) tagPathOrResLoc = fromModId + ":" + tagPathOrResLoc;
-
-            boolean isBlockTagCreated = false;
-            boolean isItemTagCreated = false;
-            SimpleTagBuilder blocktagBuilder = SimpleTagBuilder.of(Identifier.parse(tagPathOrResLoc));
-            SimpleTagBuilder itemtagBuilder = SimpleTagBuilder.of(Identifier.parse(tagPathOrResLoc));
-            for (Map.Entry<T, B> entry : blocks.entrySet()) {
-                T blockType = entry.getKey();
-                B block = entry.getValue();
-
-                String blockPath = Utils.getID(block).getPath();
-                String blockId = blockPath.substring(blockPath.lastIndexOf("/") + 1);
-
-                if ((blockType.getId().toString().matches(fromModId +":"+ nameBlockTypeOrRegEx) || fromModId.isEmpty())
-                        && (regexBlockId == null || blockId.matches(regexBlockId))) {
-                    // Block Tag
-                    if (addToBlockTag) {
-                        blocktagBuilder.addEntry(block);
-                        isBlockTagCreated = true;
-                    }
-
-                    // Item Tag
-                    if (addToItemTag && block.asItem() instanceof Item item) {
-                        itemtagBuilder.addEntry(item);
-                        isItemTagCreated = true;
-                    }
-                }
-            }
-
-            if (addToBlockTag && isBlockTagCreated) sink.addTag(blocktagBuilder, Registries.BLOCK);
-            if (addToItemTag && isItemTagCreated) sink.addTag(itemtagBuilder, Registries.ITEM);
-
-        }
     }
 }

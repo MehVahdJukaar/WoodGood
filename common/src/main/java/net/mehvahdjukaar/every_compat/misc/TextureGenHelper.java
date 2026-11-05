@@ -26,18 +26,12 @@ import java.util.*;
 //Sprite Helper is too big
 public class TextureGenHelper {
 
-    private static ResourceManager MANAGER;
-    private static ResourceSink SINK;
-
     //TODO: this is unmanageable. needs to be split in smaller manageable bits and commented better
     public static <T extends BlockType, O extends ItemLike> void generateDefault(ResourceSink sink, ResourceManager manager,
                                                              String modId,
                                                              Set<TextureInfo> textureInfos, T baseType,
                                                              boolean mergePalette,
                                                              Map<T, O> entries) throws Exception {
-
-        MANAGER = manager;
-        SINK = sink;
 
         List<TextureImage> imagesToClose = new ArrayList<>();
 
@@ -210,7 +204,7 @@ public class TextureGenHelper {
         for (var info : infoPerTextures.get(oldTextureId)) {
             failures.runSafely("texture generation", () -> blockId + " (" + info.texture() + ")", () -> {
                 // return the texture of: WoodType: Planks, StoneType: stone, LeavesType: leaves
-                var pal = info.paletteStrategy().getPaletteAndAnimation(blockType, MANAGER);
+                var pal = info.paletteStrategy().getPaletteAndAnimation(blockType, manager);
                 McMetaFile targetAnimation = pal.animation();
                 List<Palette> targetPalette = pal.palette();
 
@@ -244,10 +238,10 @@ public class TextureGenHelper {
                 }
 
                 Identifier finalNewId = newId;
-                SINK.addTextureIfNotPresent(MANAGER, newId, () -> {
-                    TextureImage img = createNewTexture(blockType, targetPalette, targetAnimation, respriterSet, info);
-                    if (info.overlay() != null) getAndApplyOverlay(img, info.overlay(), MANAGER);
-                    postProcessSpecialTexture(blockType, finalNewId, MANAGER, img, info);
+                sink.addTextureIfNotPresent(manager, newId, () -> {
+                    TextureImage img = createNewTexture(blockType, targetPalette, targetAnimation, respriterSet, info, manager);
+                    if (info.overlay() != null) getAndApplyOverlay(img, info.overlay(), manager);
+                    postProcessSpecialTexture(blockType, finalNewId, manager, img, info);
                     return img;
                 });
                 return null;
@@ -257,7 +251,7 @@ public class TextureGenHelper {
 
     @SuppressWarnings("DataFlowIssue")
     private static <T extends BlockType> TextureImage createNewTexture(T blockType, List<Palette> targetPalette, McMetaFile targetAnimation, Map.Entry<Identifier, Respriter> respriterSet,
-                                                                       TextureInfo info) {
+                                                                       TextureInfo info, ResourceManager manager) {
         Respriter respriter = respriterSet.getValue();
         TextureImage img = (info.noAnimation())
                 ? respriter.recolor(targetPalette) // noAnimation
@@ -265,8 +259,8 @@ public class TextureGenHelper {
 
         // Extra Texture Swapping with extra mask
         if (info.extraMask() != null) {
-            try (TextureImage extraMask = TextureImage.open(MANAGER, info.extraMask())) {
-                var pal = info.extraPaletteStrategy().getPaletteAndAnimation(blockType, MANAGER);
+            try (TextureImage extraMask = TextureImage.open(manager, info.extraMask())) {
+                var pal = info.extraPaletteStrategy().getPaletteAndAnimation(blockType, manager);
                 McMetaFile extraAnimation = pal.animation();
                 List<Palette> extraPalette = pal.palette();
 
