@@ -72,6 +72,7 @@
 | Twigs                                               |   🟩   |
 | Unusual End                                         |   🟡   |
 | Unusual Furniture                                   |   🟩   |
+| Vanilla Backport                                    |   🟡   |
 | Valhelsia Furniture                                 |   🟩   |
 | Variant Vanilla Blocks (XanthianZ)                  |   🟩   |
 |                                                     |        |
@@ -80,15 +81,16 @@
 
 | MODS                                 | STATUS |
 |--------------------------------------|:------:|
-| Absent by Design                     |   ❔   |
+| Absent by Design                     |   🟩   |
 | Beautify! (Beautify Decorate)        |   🟩   |
 | Beautify Refoxed                     |   🟩   |
 | Bibliocraft Legacy                   |   🟩   |
 | Boatload                             |   🟩   |
 | Builders Crafts & Additions          |   🟩   |
-| Builder's Delight                    |   ❔   |
+| Builder's Delight                    |   🟩   |
 | Corail Woodcutter                    |   🟩   |
-| Create (NEOFORGE)                    |   ❔   |
+| Create (NEOFORGE)                    |   🟩   |
+| Create: Tradeworks                   |   🟡   |
 | Curiosities!                         |   🟩   |
 | Decoration Delight: Refurbished      |   ❔   |
 | Ex Nihilo Sequentia                  |   🟡   |
@@ -103,7 +105,7 @@
 | Mosaic Carpentry                     |   ❔   |
 | No Man's Land                        |   🟡   |
 | Oreberries Replanted                 |   🟩   |
-| Pokecube AIO                         |   ❔   |
+| Pokecube AIO                         |   🟩   |
 | Premium Wood                         |   ❔   |
 | Productive Bees                      |   🟥   |
 | Quark                                |   🟩   |
