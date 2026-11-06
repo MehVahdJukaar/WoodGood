@@ -90,7 +90,7 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
                     .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                     .addTag(modRes("tables"), Registries.BLOCK, Registries.ITEM)
 
-                    ///OPTIONAL: If your block is glasses, then please take a look at below & Looking for // Common Tags which is at the bottom of the class
+                    ///OPTIONAL: If your block is glasses, then please take a look at below and Looking for // Common Tags which is at the bottom of the class
             // https://github.com/MehVahdJukaar/WoodGood/blob/79396eae711cee032635b52d957ddfe9eaa0121b/common/src/main/java/net/mehvahdjukaar/every_compat/misc/UtilityTag.java#L194
 
                     ///OPTIONAL: Creating recipes for the block

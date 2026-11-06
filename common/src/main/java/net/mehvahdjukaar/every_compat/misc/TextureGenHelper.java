@@ -141,7 +141,7 @@ public class TextureGenHelper {
 
     /**
      * <p style="color: YELLOW;">STAGE-2A:</p>
-     * Get BlockType & Block by iterating entries (Map)<br><br>
+     * Get BlockType &amp; Block by iterating entries (Map)<br><br>
      *
      * <p style="color: SILVER;">DETAILS:</p>
      * 1) iterateEntryAndThenCreateNewPath()<br>
@@ -190,7 +190,7 @@ public class TextureGenHelper {
         }
     }
 
-    ///STAGE-2C: Generating the textures & Add it to the resource
+    ///STAGE-2C: Generating the textures&amp;Add it to the resource
     private static <T extends BlockType> void createTextureAndAddToResource(T baseType,
                                                                             T blockType,
                                                                             Identifier oldTextureId,

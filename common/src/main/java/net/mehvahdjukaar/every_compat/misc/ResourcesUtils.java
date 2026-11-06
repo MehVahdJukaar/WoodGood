@@ -67,7 +67,7 @@ public class ResourcesUtils {
 
         Set<String> modelsLoc = new HashSet<>();
 
-        /// Blockstate & Models
+        /// Blockstate and Models
         try {
             StaticResource oakBlockstate = StaticResource.getOrLog(manager, ResType.BLOCKSTATES.getPath(baseId));
 
