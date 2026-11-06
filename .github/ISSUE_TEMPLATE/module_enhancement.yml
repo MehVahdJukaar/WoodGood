@@ -15,13 +15,12 @@ body:
       description: "What's the Minecraft version & loader"
       options:
         - Unknown
+        - 26.1.2 - FABRIC
         - 1.21.1 - FABRIC
         - 1.20.1 - FABRIC
-        - 1.19.2 - FABRIC
+        - 26.1.2 - NEOFORGE
         - 1.21.1 - NEOFORGE
         - 1.20.1 - FORGE
-        - 1.19.2 - FORGE
-        - 1.18.2
       default: 0
     validations:
       required: true
