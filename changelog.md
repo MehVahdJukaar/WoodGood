@@ -12,6 +12,20 @@
 |                                                                                                                                   |
 
 ---
+## v2.9.29
+
+### CHANGES:
+- **Regions Unexplored** (C): Added CUTOUT renderType to SHRUB and BRANCH
+- **Storage Drawers**
+  - Fixed DRAWERS' front not showing the empty slot when drawer is detached - [#1033](https://github.com/MehVahdJukaar/WoodGood/issues/1033)
+  - Improved texture generation for all of the blocks
+- **Every Compat** (C): Fixed a rare case with **Quark** & **Spawn** where hedges' files wasn't generated due to incorrect resourcelocation for date_leaves' texture which was `#side` - [#1348](https://github.com/MehVahdJukaar/WoodGood/issues/1348)
+- **New Shutter** (INCLUDED): **Regions Unexplored**'s 4 WoodType: WISTERIA, WILLOW, MAPLE, CYPRESS
+  - REASON: The mod has a built-in support for other Wood mod with 4 similar name of WoodTypes that caused **Shutter** with **Regions Unexplored** to not generated
+- **Vanilla Backport** (C): Included supported-mods' shelf for PALE_OAK and POPLAR - [#1352](https://github.com/MehVahdJukaar/WoodGood/issues/1352)
+
+---
+
 ## v2.9.28
 
 ### CHANGES
