@@ -1,3 +1,9 @@
+26.1.2-NEOFORGE:
+  - '(26.1.2\s?-\s?NEOFORGE|- \[(x|X)\] 26.1.2 \| NEOFORGE)'
+
+26.1.2-FABRIC:
+  - '(26.1.2\s?-\s?FABRIC|- \[(x|X)\] 26.1.2 \| FABRIC)'
+
 1.21.1-NEOFORGE:
   - '(1.21.1\s?-\s?NEOFORGE|- \[(x|X)\] 1.21.1 \| NEOFORGE)'
 
