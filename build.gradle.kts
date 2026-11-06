@@ -281,7 +281,10 @@ subprojects {
     }
 
     tasks.withType<JavaCompile> {
-        options.compilerArgs.addAll(listOf("-Xmaxerrs", "4000"))
+        options.compilerArgs.addAll(listOf(
+            "-Xmaxerrs", "4000",
+            "-Xlint:-javadoc" // Disable the "warning: no comment" during compiling
+        ))
     }
 
     repositories {
