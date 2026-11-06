@@ -69,7 +69,7 @@ public final class PluginEvent {
     /**
      * Disable a whole module so it won't register anything
      * <br>
-     * Applies to Wood-Good, Stone-Zone & Gems-Realm, same as the modules blacklist config
+     * Applies to Wood-Good, Stone-Zone &amp; Gems-Realm, same as the modules blacklist config
      *
      * @param modId mod id of the supported mod, example: "handcrafted"
      */

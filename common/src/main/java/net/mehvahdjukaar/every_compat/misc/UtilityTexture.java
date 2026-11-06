@@ -88,7 +88,7 @@ public class UtilityTexture {
         }
     }
 
-    /// Apply log's texture over the baseTexture's log parts & swap out the planks' part
+    /// Apply log's texture over the baseTexture's log parts &amp; swap out the planks' part
     public static void applyLogOverlayAndswapPlanks(ResourceLocation baseTextureLoc,
                                                     ResourceLocation logMaskLoc, ResourceLocation planksMaskLoc,
                                                     String shortenedId, String oldTypeName,
