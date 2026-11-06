@@ -42,7 +42,6 @@ import net.neoforged.neoforge.transfer.item.WorldlyContainerWrapper;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.WeakReference;
-import java.util.Objects;
 import java.util.Optional;
 
 import static net.mehvahdjukaar.every_compat.EveryCompat.addOptionalModule;
@@ -168,16 +167,11 @@ public class EveryCompatForge extends EveryCompatCommon {
                 } catch (Exception ignored) {
                 }
 
-//                if (Objects.nonNull(modClass)) addOptionalModule("beautify", () -> BeautifyDecorateModule.class);
+//                if (modClass != null) addOptionalModule("beautify", () -> BeautifyDecorateModule.class);
             }
 
             if (PlatHelper.isModLoaded("mcwdoors")) {
 //                addOptionalModule("dramaticdoors", () -> DramaticDoorsMacawModule.class);
-            }
-
-            // REMOVE this later as timber_frame is not needed beacuse it has internal code that support WoodType
-            if (PlatHelper.isModLoaded("timber_frames") && !PlatHelper.getModVersion("timber_frames").matches("3[.\\d]{4}.*")) {
-//                addOptionalModule("timber_frames", () -> TimberFramesModule.class);
             }
 
         }
