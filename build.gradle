@@ -69,6 +69,7 @@ allprojects {
     }
 
     tasks.withType(JavaCompile).configureEach {
+        options.compilerArgs << "-Xlint:deprecation"
         options.encoding = "UTF-8"
         options.release = 17
     }
