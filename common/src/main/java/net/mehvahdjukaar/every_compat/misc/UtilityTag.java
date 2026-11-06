@@ -154,8 +154,11 @@ public class UtilityTag {
         return (blockTag || blocksTag) || (itemTag || itemsTag);
     }
 
-    // Common tags
+    //      ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+    //      │                                         Common tags                                          │
+    //      └──────────────────────────────────────────────────────────────────────────────────────────────┘
 
+    /// @return c:tagPath
     public static ResourceLocation platformTag(String fabric, String neoforge) {
         return PlatHelper.getPlatform().isFabric() ? commonTag(fabric) : commonTag(neoforge);
     }
@@ -248,5 +251,23 @@ public class UtilityTag {
             if (addToItemTag && isItemTagCreated) sink.addTag(itemtagBuilder, Registries.ITEM);
 
         }
+    }
+
+    //      ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+    //      │                                      MARKED FOR REMOVAL                                      │
+    //      └──────────────────────────────────────────────────────────────────────────────────────────────┘
+
+    /// @return c:tagPath
+    /// @deprecated use {@link UtilityTag#platformTag(String, String)} or {@link UtilityTag#commonTag(String)}
+    @Deprecated(forRemoval = true)
+    public static ResourceLocation fabricTag(String tagPath) {
+        return ResourceLocation.fromNamespaceAndPath("c", tagPath);
+    }
+
+    /// @return c:tagPath
+    /// @deprecated use {@link UtilityTag#platformTag(String, String)} or {@link UtilityTag#commonTag(String)}
+    @Deprecated(forRemoval = true)
+    public static ResourceLocation neoforgeTag(String tagPath) {
+        return ResourceLocation.fromNamespaceAndPath("c", tagPath);
     }
 }
