@@ -110,6 +110,7 @@
 | Productive Bees                      |   🟥   |
 | Quark                                |   🟩   |
 | Re:Deco                              |   ❔   |
+| Saucy Buffs Delight                  |   🟡   |
 | Shadow_x_os's Blocks +               |   🟩   |
 | The Graveyard                        |   ❔   |
 | The Twilight Forest                  |   🟩   |
