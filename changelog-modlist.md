@@ -79,53 +79,54 @@
 
 </td><td valign="top">
 
-| MODS                                 | STATUS |
-|--------------------------------------|:------:|
-| Absent by Design                     |   🟩   |
-| Beautify! (Beautify Decorate)        |   🟩   |
-| Beautify Refoxed                     |   🟩   |
-| Bibliocraft Legacy                   |   🟩   |
-| Boatload                             |   🟩   |
-| Builders Crafts & Additions          |   🟩   |
-| Builder's Delight                    |   🟩   |
-| Corail Woodcutter                    |   🟩   |
-| Create (NEOFORGE)                    |   🟩   |
-| Create: Tradeworks                   |   🟡   |
-| Curiosities!                         |   🟩   |
-| Decoration Delight: Refurbished      |   ❔   |
-| Ex Nihilo Sequentia                  |   🟡   |
-| Functional Storage                   |   🟩   |
-| Just A Raft Mod                      |   🟩   |
-| Legend's Missing Blocks              |   🟩   |
-| Lepton (FORGE)                       |   🟡   |
-| Lightman's Currency                  |   🟩   |
-| Market Crates                        |   ❔   |
-| Marioverse                           |   🟩   |
-| More Crafting Tables for Forge       |   🟩   |
-| Mosaic Carpentry                     |   ❔   |
-| No Man's Land                        |   🟡   |
-| Oreberries Replanted                 |   🟩   |
-| Pokecube AIO                         |   🟩   |
-| Premium Wood                         |   ❔   |
-| Productive Bees                      |   🟥   |
-| Quark                                |   🟩   |
-| Re:Deco                              |   ❔   |
-| Saucy Buffs Delight                  |   🟡   |
-| Shadow_x_os's Blocks +               |   🟩   |
-| The Graveyard                        |   ❔   |
-| The Twilight Forest                  |   🟩   |
-| Timber Frames                        |   🟠   |
-| Tropicraft                           |   🟩   |
-| Ultimate Car Mod                     |   🟩   |
-| Unusual End                          |   🟡   |
-| Valhelsia Structures                 |   🟩   |
-| Variant Crafting Tables (Kitteh6660) |   ❔   |
-| Villagers Plus (NEOFORGE)            |   🟩   |
-| Woodster                             |   🟩   |
-| Woodworks                            |   🟩   |
-| Workshop for Handsome Adventurer     |   🟥   |
-| XercaMod                             |   ❔   |
-|                                      |        |
+| MODS                                                                              | STATUS |
+|-----------------------------------------------------------------------------------|:------:|
+| Absent by Design                                                                  |   🟩   |
+| Beautify! (Beautify Decorate)                                                     |   🟩   |
+| Beautify Refoxed                                                                  |   🟩   |
+| Bibliocraft Legacy                                                                |   🟩   |
+| Boatload                                                                          |   🟩   |
+| Builders Crafts & Additions                                                       |   🟩   |
+| Builder's Delight                                                                 |   🟩   |
+| Corail Woodcutter                                                                 |   🟩   |
+| Create (NEOFORGE)                                                                 |   🟩   |
+| Create: Tradeworks                                                                |   🟡   |
+| Curiosities!                                                                      |   🟩   |
+| Decoration Delight: Refurbished                                                   |   ❔   |
+| Ex Nihilo Sequentia                                                               |   🟡   |
+| Functional Storage                                                                |   🟩   |
+| Just A Raft Mod                                                                   |   🟩   |
+| Legend's Missing Blocks                                                           |   🟩   |
+| Lepton (FORGE)                                                                    |   🟡   |
+| Lightman's Currency                                                               |   🟩   |
+| Market Crates                                                                     |   ❔   |
+| Marioverse                                                                        |   🟩   |
+| More Crafting Tables for Forge                                                    |   🟩   |
+| Mosaic Carpentry                                                                  |   ❔   |
+| No Man's Land                                                                     |   🟡   |
+| Oreberries Replanted                                                              |   🟩   |
+| Pokecube AIO                                                                      |   🟩   |
+| Premium Wood                                                                      |   ❔   |
+| Productive Bees                                                                   |   🟥   |
+| Quark                                                                             |   🟩   |
+| Re:Deco                                                                           |   ❔   |
+| Sandwich Station (Farmer’s Delight × Some Assembly Required) aka Katcraft Kitchen |   🟡   |
+| Saucy Buffs Delight                                                               |   🟡   |
+| Shadow_x_os's Blocks +                                                            |   🟩   |
+| The Graveyard                                                                     |   ❔   |
+| The Twilight Forest                                                               |   🟩   |
+| Timber Frames                                                                     |   🟠   |
+| Tropicraft                                                                        |   🟩   |
+| Ultimate Car Mod                                                                  |   🟩   |
+| Unusual End                                                                       |   🟡   |
+| Valhelsia Structures                                                              |   🟩   |
+| Variant Crafting Tables (Kitteh6660)                                              |   ❔   |
+| Villagers Plus (NEOFORGE)                                                         |   🟩   |
+| Woodster                                                                          |   🟩   |
+| Woodworks                                                                         |   🟩   |
+| Workshop for Handsome Adventurer                                                  |   🟥   |
+| XercaMod                                                                          |   ❔   |
+|                                                                                   |        |
 
 </td></tr> </table>
 
