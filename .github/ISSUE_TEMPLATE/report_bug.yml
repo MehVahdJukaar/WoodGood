@@ -24,14 +24,12 @@ body:
       label: Minecraft Version & Loader
       description: Select your game version and the loader you are using.
       options:
+        - 26.1.2 - NEOFORGE
+        - 26.1.2 - FABRIC
         - 1.21.1 - NEOFORGE
         - 1.21.1 - FABRIC
         - 1.20.1 - FORGE
         - 1.20.1 - FABRIC
-        - 1.19.2 - FORGE
-        - 1.19.2 - FABRIC
-        - 1.18.2
-        - OTHER-SPECIFY
       default: 0
     validations:
       required: true
