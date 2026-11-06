@@ -255,11 +255,11 @@ public class HardcodedBlockType {
     }
 
     private static final Set<String> VANILLA_WOODS = Set.of(
-            "oak", "spruce", "birch", "jungle", "acacia", "dark_oak", "mangrove", "cherry", "bamboo", "crimson", "warped"
+            "oak", "spruce", "birch", "jungle", "acacia", "dark_oak", "mangrove", "cherry", "bamboo", "crimson", "warped", "pale_oak", "poplar"
     );
 
     private static final Set<String> VANILLA_LEAVES = Set.of(
-            "oak", "spruce", "birch", "jungle", "acacia", "dark_oak", "mangrove", "cherry", "bamboo", "crimson", "warped", "azalea", "flowering_azalea"
+            "oak", "spruce", "birch", "jungle", "acacia", "dark_oak", "mangrove", "cherry", "bamboo", "crimson", "warped", "azalea", "flowering_azalea", "pale_oak", "poplar"
     );
 
     public static boolean IsBambooLike(WoodType woodType) {
