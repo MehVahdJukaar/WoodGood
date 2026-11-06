@@ -26,18 +26,12 @@ import java.util.*;
 //Sprite Helper is too big
 public class TextureGenHelper {
 
-    private static ResourceManager MANAGER;
-    private static ResourceSink SINK;
-
     //TODO: this is unmanageable. needs to be split in smaller manageable bits and commented better
     public static <T extends BlockType, O extends ItemLike> void generateDefault(ResourceSink sink, ResourceManager manager,
                                                              String modId,
                                                              Set<TextureInfo> textureInfos, T baseType,
                                                              boolean mergePalette,
                                                              Map<T, O> entries) throws Exception {
-
-        MANAGER = manager;
-        SINK = sink;
 
         List<TextureImage> imagesToClose = new ArrayList<>();
 
@@ -138,7 +132,8 @@ public class TextureGenHelper {
     }
 
     ///STAGE-1: Add respriters from PartialRespriters (Map) to Respriters (Map) with Palette
-    private static void AddRespriterstoMaps(Map<ResourceLocation, TextureImage> partialRespriters, Map<ResourceLocation, Respriter> respriters, Palette globalPalette) {
+    private static void AddRespriterstoMaps(Map<ResourceLocation, TextureImage> partialRespriters,
+                                            Map<ResourceLocation, Respriter> respriters, Palette globalPalette) {
         for (var e : partialRespriters.entrySet()) {
             respriters.put(e.getKey(), Respriter.ofPalette(e.getValue(), globalPalette));
         }
@@ -146,7 +141,7 @@ public class TextureGenHelper {
 
     /**
      * <p style="color: YELLOW;">STAGE-2A:</p>
-     * Get BlockType & Block by iterating entries (Map)<br><br>
+     * Get BlockType &amp; Block by iterating entries (Map)<br><br>
      *
      * <p style="color: SILVER;">DETAILS:</p>
      * 1) iterateEntryAndThenCreateNewPath()<br>
@@ -195,7 +190,7 @@ public class TextureGenHelper {
         }
     }
 
-    ///STAGE-2C: Generating the textures & Add it to the resource
+    ///STAGE-2C: Generating the textures &amp; Add it to the resource
     private static <T extends BlockType> void createTextureAndAddToResource(T baseType,
                                                                             T blockType,
                                                                             ResourceLocation oldTextureId,
@@ -210,7 +205,7 @@ public class TextureGenHelper {
         for (var info : infoPerTextures.get(oldTextureId)) {
             failures.runSafely("texture generation", () -> blockId + " (" + info.texture() + ")", () -> {
                 // return the texture of: WoodType: Planks, StoneType: stone, LeavesType: leaves
-                var pal = info.paletteStrategy().getPaletteAndAnimation(blockType, MANAGER);
+                var pal = info.paletteStrategy().getPaletteAndAnimation(blockType, manager);
                 McMetaFile targetAnimation = pal.animation();
                 List<Palette> targetPalette = pal.palette();
 
@@ -243,10 +238,10 @@ public class TextureGenHelper {
                 }
 
                 ResourceLocation finalNewId = newId;
-                SINK.addTextureIfNotPresent(MANAGER, newId.toString(), () -> {
-                    TextureImage img = createNewTexture(blockType, targetPalette, targetAnimation, respriterSet, info);
-                    if (info.overlay() != null) getAndApplyOverlay(img, info.overlay(), MANAGER);
-                    postProcessSpecialTexture(blockType, finalNewId, MANAGER, img, info);
+                sink.addTextureIfNotPresent(manager, newId.toString(), () -> {
+                    TextureImage img = createNewTexture(blockType, targetPalette, targetAnimation, respriterSet, info, manager);
+                    if (info.overlay() != null) getAndApplyOverlay(img, info.overlay(), manager);
+                    postProcessSpecialTexture(blockType, finalNewId, img, info, manager);
                     return img;
                 });
                 return null;
@@ -256,7 +251,7 @@ public class TextureGenHelper {
 
     @SuppressWarnings("DataFlowIssue")
     private static <T extends BlockType> TextureImage createNewTexture(T blockType, List<Palette> targetPalette, McMetaFile targetAnimation, Map.Entry<ResourceLocation, Respriter> respriterSet,
-                                                                       TextureInfo info) {
+                                                                       TextureInfo info, ResourceManager manager) {
         Respriter respriter = respriterSet.getValue();
         TextureImage img = (info.noAnimation())
                 ? respriter.recolor(targetPalette) // noAnimation
@@ -264,8 +259,8 @@ public class TextureGenHelper {
 
         // Extra Texture Swapping with extra mask
         if (info.extraMask() != null) {
-            try (TextureImage extraMask = TextureImage.open(MANAGER, info.extraMask())) {
-                var pal = info.extraPaletteStrategy().getPaletteAndAnimation(blockType, MANAGER);
+            try (TextureImage extraMask = TextureImage.open(manager, info.extraMask())) {
+                var pal = info.extraPaletteStrategy().getPaletteAndAnimation(blockType, manager);
                 McMetaFile extraAnimation = pal.animation();
                 List<Palette> extraPalette = pal.palette();
 
@@ -283,8 +278,9 @@ public class TextureGenHelper {
 
     //post process some textures.
     @SuppressWarnings("UnusedReturnValue")
-    private static <T extends BlockType> TextureImage postProcessSpecialTexture(T blockType, ResourceLocation newId, ResourceManager manager,
-                                                                                TextureImage texture, TextureInfo textureInfo) {
+    private static <T extends BlockType> TextureImage postProcessSpecialTexture(T blockType, ResourceLocation newId,
+                                                                                TextureImage texture, TextureInfo textureInfo,
+                                                                                ResourceManager manager) {
         if (blockType.getClass() == WoodType.class) {
             CompatSpritesHelper.maybePostProcessWoodTexture((WoodType) blockType, newId, manager, texture, textureInfo);
         }
