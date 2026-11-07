@@ -27,8 +27,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static net.mehvahdjukaar.every_compat.modules.chipped.ChippedMainModule.DARK_PALETTE;
 import static net.mehvahdjukaar.every_compat.modules.chipped.ChippedMainModule.DARKER_PALETTE;
+import static net.mehvahdjukaar.every_compat.modules.chipped.ChippedMainModule.DARK_PALETTE;
 
 //See ChippedAbstractModule's SUPPORTED VERSION
 public class ChippedDoorModule extends ChippedModuleAbstract {
@@ -81,7 +81,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
     public ChippedDoorModule(String modId) {
         super(modId);
         ResourceLocation tab = modRes(TAB_PATH);
-        setBlockType("Door");
+        extendModuleName("'s Door");
 
         barredDoor = SimpleEntrySet.builder(WoodType.class, "door", "barred",
                         getModBlock("barred_oak_door"), () -> VanillaWoodTypes.OAK,

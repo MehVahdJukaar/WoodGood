@@ -48,7 +48,7 @@ public class RechiseledModuleBlock extends RechiseledModuleAbstract {
 
     public RechiseledModuleBlock(String modId) {
         super(modId);
-        setBlockType("Block");
+        extendModuleName("'s Block");
 
         oak_planks_beams = SimpleEntrySet.builder(WoodType.class, "planks_beams",
                         getModBlock("oak_planks_beams"), () -> VanillaWoodTypes.OAK,

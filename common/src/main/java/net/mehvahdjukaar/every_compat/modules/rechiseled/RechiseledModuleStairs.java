@@ -36,7 +36,7 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
     public RechiseledModuleStairs(String modId) {
         super(modId);
-        setBlockType("Stairs");
+        extendModuleName("'s Stairs");
         
         oak_planks_beams_stairs = SimpleEntrySet.builder(WoodType.class, "planks_beams_stairs",
                         getModBlock("oak_planks_beams_stairs"), () -> VanillaWoodTypes.OAK,
