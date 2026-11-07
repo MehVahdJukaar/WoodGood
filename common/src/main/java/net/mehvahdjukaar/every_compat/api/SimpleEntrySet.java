@@ -284,7 +284,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         ResourcesUtils.generateStandardBlockFiles(manager, sink, blocks, baseType.get(),
                 makeModelTransformer(module, manager), makeBlockStateTransformer(module, manager), this.modelConfiguration
         );
-        ResourcesUtils.generateStandardItemModels(manager, sink, items, baseType.get(),
+        ResourcesUtils.generateStandardItemModels(manager, sink, items, baseType.get(), getBaseBlock().asItem(),
                 makeModelTransformer(module, manager), this.modelConfiguration
         );
     }

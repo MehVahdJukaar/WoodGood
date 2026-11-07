@@ -5,33 +5,38 @@ import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
-import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
+import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
-import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
 ///      ┌──────────────────────────────────────────────────────┐
 ///      │   WoodGoodModule example module. Use as a template   │
 ///      └──────────────────────────────────────────────────────┘
-public final class WoodGoodModuleExample extends EveryCompatModule {
+public final class WoodGoodModuleExample extends SimpleModule {
+
+        /// stand-in for your mods own registry classes. on NeoForge these are your DeferredHolders on Fabric () -> YOUR_BLOCK
+        private static final class YourModRegistry {
+            private static final Supplier<Block> OAK_TABLE = () -> null;
+            private static final Supplier<Item> OAK_TABLE_ITEM = () -> null;
+            private static final Supplier<CreativeModeTab> TAB = () -> null;
+        }
 
         /// For Blocks
         private final SimpleEntrySet<WoodType, Block> sampleBlock, sampleBlock_2;
@@ -47,16 +52,14 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
             super("awesome_mod_id", "abm", "Twigs.MOD_ID");
             ///DEFAULT: super("awesome_mod_id", "abm") -> myNamespace will be EveryCompat.MOD_ID
 
-            // minecraft's tab can be used for setTab() - it can use either ResourceKey or CreativeModeTab
-            ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
-            // your mod's tab using helper method
-            String yourModTabPath = "mod_tab";
+            // !!always pass your own blocks, items, tabs and tiles by reference, never by id
+            Supplier<CreativeModeTab> vanillaTab = () -> BuiltInRegistries.CREATIVE_MODE_TAB.getOrThrow(CreativeModeTabs.BUILDING_BLOCKS);
 
             // Here we create 2 simple entry sets. You are free to not use these or make your own entry set implementation
             // Discover all the methods that these simple builders have by pressing "." and invoke what you need
             // after creating the entry set, don't forget to add it to the module via this.addEntry(entrySet);
             sampleBlock_2 = SimpleEntrySet.builder(WoodType.class,"suffix", "prefix",
-                            getModBlock("oak_table"), ()-> VanillaWoodTypes.OAK,
+                            YourModRegistry.OAK_TABLE, ()-> VanillaWoodTypes.OAK,
                     woodType -> new TableBlock(Utils.copyPropertySafe(woodType.planks).instabreak())
                     )
                     /// Similar setup as sampleBlock
@@ -64,12 +67,12 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
             this.addEntry(sampleBlock_2);
 
             sampleBlock = SimpleEntrySet.builder(WoodType.class,"table",
-                            getModBlock("oak_table"), ()-> VanillaWoodTypes.OAK,
+                            YourModRegistry.OAK_TABLE, ()-> VanillaWoodTypes.OAK,
                             woodType -> new TableBlock(Utils.copyPropertySafe(woodType.planks).instabreak())
                     )
                     ///REQUIRED: Add block to your mod's tab or Minecraft's tab
-                    .setTab(getTab(tab))
-                    .setTab(getModTab(yourModTabPath))
+                    .setTab(YourModRegistry.TAB)
+                    //.setTab(vanillaTab)
 
                     ///OPTIONAL: Check if a WoodType or LeavesType has the children required, then block will be generated
                     .requiresChildren("slab", "other_childkey") //REASON: can be for recipes or textures
@@ -77,8 +80,7 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
                     //NOTE: sampleBlock_2 has to be above of this EntrySet for .requiresFromMap to work properly
 
                     ///OPTIONAL: Add the block to EntityBlockType
-                    .addTile(getModTile("id_of_EntityType"))
-                    //.addTile(() -> BlockEntityType.CAMPFIRE) //OPTIONAL: you can use BlockEntity as a reference
+                    //.addTile(YourModRegistry.TABLE_TILE) //your own BlockEntityType, by reference
 
                     ///OPTIONAL: Adding block's textures to be generated
                     .addTexture(modRes("block/oak_table"), PaletteStrategies.LOG_SIDE_STANDARD)
@@ -113,12 +115,12 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
             this.addEntry(sampleBlock);
 
             sampleItem = ItemOnlyEntrySet.builder(WoodType.class,"table",
-                            getModItem("oak_table"), ()-> VanillaWoodTypes.OAK,
+                            YourModRegistry.OAK_TABLE_ITEM, ()-> VanillaWoodTypes.OAK,
                             w -> new Item(new Item.Properties())
                     )
                     .addTexture(modRes("item/itemTexture"))
                     .addTag(modRes("tables"), Registries.ITEM)
-                    .setTab(getTab(tab))
+                    .setTab(vanillaTab)
                     .defaultRecipe()
                     .addRecipe(modRes("path/to/recipeFile"))
                     .build();
@@ -177,68 +179,9 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
         String blockPath = blockId.getPath();
         String blockName = blockPath.substring(blockPath.lastIndexOf("/") + 1);
 
-        if (blockType instanceof WoodType woodType) {
-            Boolean hardcoded = customHardedBlockType.isWoodBlockAlreadyRegistered(entrySetId, blockName, woodType, modId);
-            if (hardcoded != null) return hardcoded;
-        } else if (blockType instanceof LeavesType leavesType) {
-            Boolean hardcoded = customHardedBlockType.isLeavesBlockAlreadyRegistered(entrySetId, blockName, leavesType, modId);
-            if (hardcoded != null) return hardcoded;
-        }
+        /// true skips the block. here whistlecane already ships its ladder
+        if (blockType.getId().toString().equals("gardens_of_the_dead:whistlecane") && blockName.equals("whistlecane_ladder")) return true;
 
-
-//        return super.isEntryAlreadyRegistered(entrySetId, blockId, blockType, registry);
-        return false; /// Instead of this, use above
-    }
-
-/// A subClass of HardedBlockType that will have what you need for any BlockType
-    public static class customHardedBlockType extends HardcodedBlockType {
-
-        @Nullable
-        public static Boolean isWoodBlockAlreadyRegistered(String entrySetId, String blockName, WoodType woodType, String modThatTheBlockIsFrom) {
-            String woodNamespace = woodType.getNamespace();
-            String woodFullId = woodType.getId().toString();
-
-            PendingBlockInfo pendingInfo = PendingBlockInfo.of(modThatTheBlockIsFrom, woodNamespace, woodFullId, blockName);
-
-            if (
-                    /// ID of Supported Mod that Every Compat is supporting
-                    pendingInfo.isForSupportedModId("quark")
-
-                    /// ID of Wood-Mods that new WoodTypes are from
-                            && pendingInfo.isForWoodTypeNamespace("gardens_of_the_dead|snifferent|nethers_exoticism")
-
-                    /// ID of WoodTypes - It can use RegEx (Regular Expression)
-                            && pendingInfo.isForWoodTypeFullId("gardens_of_the_dead:whistlecane")
-
-                    /// Name of Block from Every Compat - It can use RegEx (Regular Expression)
-                    // NOTE: the Name is from everycomp:quark/gardens_of_the_dead/Name_Of_Block <- Right here
-                    // example: everycomp:quark/gardens_of_the_dead/whistle_ladder -> whistle_ladder as Name of Block
-                            && pendingInfo.isForBlockName("(whistlecane|globar|jabuticaba)_ladder")
-            ) {
-                return true; /// - this ensure a block will not be generated/registered
-            }
-
-            return null;
-        }
-
-        /// Below is same as above but it's for LeavesType, a subclass of BlockType
-        // NOTE: the 3rd parameter is LeavesType Instead of WoodType
-        @Nullable
-        public static Boolean isLeavesBlockAlreadyRegistered(String entrySetId, String blockName, LeavesType leavesType, String modThatTheBlockIsFrom) {
-            String leavesNamespace = leavesType.getNamespace();
-            String leavesFullId = leavesType.getId().toString();
-
-            PendingBlockInfo pendingInfo = PendingBlockInfo.of(modThatTheBlockIsFrom, leavesNamespace, leavesFullId, blockName);
-
-            if (pendingInfo.isForSupportedModId("quark")
-                    && pendingInfo.isForWoodTypeNamespace("gardens_of_the_dead|snifferent|nethers_exoticism")
-                    && pendingInfo.isForWoodTypeFullId("gardens_of_the_dead:whistlecane")
-                    && pendingInfo.isForBlockName("(whistlecane|globar|jabuticaba)_hedge")
-            ) {
-                return false; /// - this esnure a block will be generated/registered
-            }
-
-            return null;
-        }
+        return super.isEntryAlreadyRegistered(entrySetId, blockId, blockType, registry);
     }
 }
