@@ -15,12 +15,19 @@ import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
+import net.mehvahdjukaar.every_compat.ECPlatStuff;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.world.entity.ai.village.poi.PoiType;
+import net.minecraft.world.entity.ai.village.poi.PoiTypes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -213,6 +220,24 @@ public class SimpleModule extends CompatModule {
     public static void appendTileEntityBlocks(BlockEntityType<?> be, Collection<? extends Block> blocks) {
         be.validBlocks = new HashSet<>(be.validBlocks);
         be.validBlocks.addAll(blocks);
+    }
+
+    public static void appendPoiBlocks(ResourceKey<PoiType> key, Collection<? extends Block> blocks) {
+        Holder<PoiType> poi = BuiltInRegistries.POINT_OF_INTEREST_TYPE.getHolderOrThrow(key);
+        Set<BlockState> newStates = new HashSet<>();
+        for (Block b : blocks) {
+            for (BlockState s : b.getStateDefinition().getPossibleStates()) {
+                //state in two pois crashes forge on world load
+                if (!PoiTypes.hasPoi(s)) {
+                    newStates.add(s);
+                }
+            }
+        }
+        //other mods could leave this immutable
+        PoiType type = poi.value();
+        type.matchingStates = new HashSet<>(type.matchingStates);
+        type.matchingStates.addAll(newStates);
+        ECPlatStuff.registerPoiStates(poi, newStates);
     }
 
     @Override

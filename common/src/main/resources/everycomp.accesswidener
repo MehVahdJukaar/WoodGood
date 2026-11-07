@@ -3,6 +3,9 @@ accessWidener   v2  named
 accessible field net/minecraft/world/level/block/entity/BlockEntityType validBlocks Ljava/util/Set;
 mutable field net/minecraft/world/level/block/entity/BlockEntityType validBlocks Ljava/util/Set;
 
+accessible field net/minecraft/world/entity/ai/village/poi/PoiType matchingStates Ljava/util/Set;
+mutable field net/minecraft/world/entity/ai/village/poi/PoiType matchingStates Ljava/util/Set;
+
 ## chest renderer stuff
 
 accessible field net/minecraft/client/renderer/blockentity/ChestRenderer doubleLeftLid Lnet/minecraft/client/model/geom/ModelPart;

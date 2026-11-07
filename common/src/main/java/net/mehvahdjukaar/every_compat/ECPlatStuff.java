@@ -2,12 +2,16 @@ package net.mehvahdjukaar.every_compat;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
 
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 
 public class ECPlatStuff {
@@ -19,6 +23,11 @@ public class ECPlatStuff {
 
     @ExpectPlatform
     public static void registerStripping(Block block, Block stripped_block) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static void registerPoiStates(Holder<PoiType> poi, Set<BlockState> states) {
         throw new AssertionError();
     }
 

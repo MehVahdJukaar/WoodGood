@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.variants;
 
-import com.google.common.collect.ImmutableSet;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.mehvahdjukaar.every_compat.EveryCompat;
@@ -21,6 +20,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
+import net.minecraft.world.entity.ai.village.poi.PoiTypes;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
@@ -52,15 +52,9 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> smoker;
     //LOOM?
 
-    // Point-Of-Interest for Beehives -  //!! - remove when the addBlocksToPOI() is fixed & enabled below
-    protected final ResourceLocation poiId = EveryCompat.res("vvb_beehive");
-    public final Supplier<PoiType> compatBeeHivePOI = RegHelper.registerPOI(poiId,
-            () -> new PoiType(getBeehives(), 1, 1));
-    private Set<BlockState> getBeehives() {
-        var set = new ImmutableSet.Builder<BlockState>();
-        beehive.blocks.values().forEach(b -> set.addAll(b.getStateDefinition().getPossibleStates()));
-        return set.build();
-    }
+    //empty. only registered so worlds that saved this id dont complain
+    public final Supplier<PoiType> compatBeeHivePOI = RegHelper.registerPOI(EveryCompat.res("vvb_beehive"),
+            () -> new PoiType(Set.of(), 1, 1));
 
     public VariantVanillaBlocksModule(String modId) {
         super(modId, "vvb");
@@ -335,21 +329,18 @@ public class VariantVanillaBlocksModule extends SimpleModule {
         }
     }
 
-    @SuppressWarnings("CommentedOutCode")
     @Override
     public void onModSetup() {
         super.onModSetup();
-
-        // POI & ACQUIREABLE_JOB //!! Dont use below until the problem is fixed - REASON: crashed upon creating a world or loading a world, cause is unknown
-        /*
-        RegHelper.addBlocksToPOI(PoiTypes.BEEHIVE, beehive.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.LIBRARIAN, lectern.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.FLETCHER, fletchingTable.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.BUTCHER, smoker.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.FISHERMAN, barrel.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.FARMER, composters.blocks.values());
-        RegHelper.addBlocksToPOI(PoiTypes.WEAPONSMITH, grindstones.blocks.values());
-        */
+        appendPoiBlocks(PoiTypes.BEEHIVE, beehive.blocks.values());
+        appendPoiBlocks(PoiTypes.FISHERMAN, barrel.blocks.values());
+        appendPoiBlocks(PoiTypes.CARTOGRAPHER, cartography.blocks.values());
+        appendPoiBlocks(PoiTypes.FARMER, composters.blocks.values());
+        appendPoiBlocks(PoiTypes.FLETCHER, fletchingTable.blocks.values());
+        appendPoiBlocks(PoiTypes.WEAPONSMITH, grindstones.blocks.values());
+        appendPoiBlocks(PoiTypes.LIBRARIAN, lectern.blocks.values());
+        appendPoiBlocks(PoiTypes.TOOLSMITH, smithingTable.blocks.values());
+        appendPoiBlocks(PoiTypes.BUTCHER, smoker.blocks.values());
     }
 
     // REGISTRY --------------------------------------------------------------------------------------------------------

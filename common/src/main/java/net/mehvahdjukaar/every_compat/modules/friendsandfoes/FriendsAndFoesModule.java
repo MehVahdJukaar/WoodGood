@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.every_compat.modules.friendsandfoes;
 
-import com.google.common.collect.ImmutableSet;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
@@ -9,15 +8,14 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
+import net.minecraft.world.entity.ai.village.poi.PoiTypes;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.BeehiveBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Set;
 import java.util.function.Supplier;
@@ -26,18 +24,6 @@ import java.util.function.Supplier;
 public class FriendsAndFoesModule extends SimpleModule {
 
     public final SimpleEntrySet<WoodType, Block> beehives;
-
-    // Point-Of-Interest for Beehives
-    protected final ResourceLocation poiId = EveryCompat.res("faf_beehive");
-
-    public final Supplier<PoiType> compatBeeHivePOI = RegHelper.registerPOI(poiId,
-            () -> new PoiType(getBeehives(), 1, 1));
-
-    private Set<BlockState> getBeehives() {
-        var set = new ImmutableSet.Builder<BlockState>();
-        beehives.blocks.values().forEach(b -> set.addAll(b.getStateDefinition().getPossibleStates()));
-        return set.build();
-    }
 
     public FriendsAndFoesModule(String modId) {
         super(modId, "faf");
@@ -64,10 +50,9 @@ public class FriendsAndFoesModule extends SimpleModule {
 
     }
 
-//    @Override
-//    public void onModSetup() {
-//        super.onModSetup();
-    /// Currently not working properly in FORGE, crashed upon creating a world or loading a world, cause is unknown
-//        RegHelper.addBlocksToPOI(PoiTypes.BEEHIVE, beehives.blocks.values());
-//    }
+    @Override
+    public void onModSetup() {
+        super.onModSetup();
+        appendPoiBlocks(PoiTypes.BEEHIVE, beehives.blocks.values());
+    }
 }
