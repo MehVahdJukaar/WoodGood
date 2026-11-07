@@ -82,7 +82,7 @@ public class ChippedDoorModule extends ChippedModuleAbstract {
     public ChippedDoorModule(String modId) {
         super(modId);
         Identifier tab = modRes(TAB_PATH);
-        setBlockType("Door");
+        extendModuleName("'s Door");
 
         barredDoor = SimpleEntrySet.builder(WoodType.class, "door", "barred",
                         getModBlock("barred_oak_door"), () -> VanillaWoodTypes.OAK,

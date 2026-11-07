@@ -83,7 +83,7 @@ public class ChippedMainModule extends ChippedModuleAbstract {
     public ChippedMainModule(String modId) {
         super(modId);
         Identifier tab = modRes(TAB_PATH);
-        setBlockType("General");
+        extendModuleName("'s General");
 
         mosaicPlanks = SimpleEntrySet.builder(WoodType.class, "planks_mosaic",
                         getModBlock("oak_planks_mosaic"), () -> VanillaWoodTypes.OAK,

@@ -47,7 +47,7 @@ public class ChippedGlassModule extends ChippedModuleAbstract {
     public ChippedGlassModule(String modId) {
         super(modId);
         Identifier tab = modRes(TAB_PATH);
-        setBlockType("Glass");
+        extendModuleName("'s Glass");
 
         circleGlass = SimpleEntrySet.builder(WoodType.class, "glass", "circle",
                         getModBlock("circle_oak_glass"), () -> VanillaWoodTypes.OAK,

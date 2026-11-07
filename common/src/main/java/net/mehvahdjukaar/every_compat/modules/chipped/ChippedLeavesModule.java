@@ -48,7 +48,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
     public ChippedLeavesModule(String modId) {
         super(modId);
         Identifier tab = modRes(TAB_PATH);
-        setBlockType("Leaves");
+        extendModuleName("'s Leaves");
 
         apple = SimpleEntrySet.builder(LeavesType.class, "leaves", "apple",
                         getModBlock("apple_oak_leaves"), () -> VanillaLeavesTypes.OAK,
