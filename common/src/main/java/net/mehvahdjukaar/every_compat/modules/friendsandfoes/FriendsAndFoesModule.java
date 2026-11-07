@@ -3,22 +3,17 @@ package net.mehvahdjukaar.every_compat.modules.friendsandfoes;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.SimpleModule;
-import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.entity.ai.village.poi.PoiTypes;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.BeehiveBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-
-import java.util.Set;
-import java.util.function.Supplier;
 
 //SUPPORT: V3.0.9+
 public class FriendsAndFoesModule extends SimpleModule {
@@ -53,6 +48,8 @@ public class FriendsAndFoesModule extends SimpleModule {
     @Override
     public void onModSetup() {
         super.onModSetup();
+        //NOTE: The hash code is being used in FORGE & FABRIC where they got mismatched and won't work. There is a mixin for the appendPOIBlocks()
+        // The mixin is responsible for overriding the method that add blocks to POI. That's the culprit for why POI won't work on EC's blocks
         appendPoiBlocks(PoiTypes.BEEHIVE, beehives.blocks.values());
     }
 }

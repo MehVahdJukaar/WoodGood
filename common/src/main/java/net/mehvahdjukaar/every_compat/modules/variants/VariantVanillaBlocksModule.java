@@ -52,7 +52,7 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     public final SimpleEntrySet<WoodType, Block> smoker;
     //LOOM?
 
-    //empty. only registered so worlds that saved this id dont complain
+    //empty. only registered so worlds that saved this id
     public final Supplier<PoiType> compatBeeHivePOI = RegHelper.registerPOI(EveryCompat.res("vvb_beehive"),
             () -> new PoiType(Set.of(), 1, 1));
 
@@ -332,6 +332,8 @@ public class VariantVanillaBlocksModule extends SimpleModule {
     @Override
     public void onModSetup() {
         super.onModSetup();
+        //NOTE: The hash code is being used in FORGE & FABRIC where they got mismatched and won't work. There is a mixin for the appendPOIBlocks()
+        // That's the culprit for why POI won't work on EC's blocks
         appendPoiBlocks(PoiTypes.BEEHIVE, beehive.blocks.values());
         appendPoiBlocks(PoiTypes.FISHERMAN, barrel.blocks.values());
         appendPoiBlocks(PoiTypes.CARTOGRAPHER, cartography.blocks.values());
