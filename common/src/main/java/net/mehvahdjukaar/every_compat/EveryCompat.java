@@ -446,7 +446,7 @@ public abstract class EveryCompat {
 // ─────────────────────────────────────── Deprecated & Marked-for-removal ───────────────────────────────────────
 
     @Deprecated(forRemoval = true)
-    /// @deprecated USE {@link EveryCompatAPI#addIfLoaded(String, Supplier)}
+    /// @deprecated USE {@link EveryCompat#addOptionalModule(String, Supplier)}
     public static synchronized void addIfLoaded(String modId, Supplier<Function<String, CompatModule>> moduleFactory) {
         if (PlatHelper.isModLoaded(modId)) {
             try {

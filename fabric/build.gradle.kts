@@ -34,7 +34,7 @@ dependencies {
     }
     //+ MAVEN
     else {
-        if (findProperty("maven_backup").toString().toBoolean()) modApi("maven.modrinth:moonlight:${property("moonlight_version")}-fabric")
+        if (findProperty("maven_backup")?.toString().toBoolean()) modApi("maven.modrinth:moonlight:${property("moonlight_version")}-fabric")
         else modApi("net.mehvahdjukaar:moonlight-fabric:${property("moonlight_version")}") { isTransitive = false }
     }
 

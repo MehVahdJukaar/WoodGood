@@ -48,6 +48,11 @@ public class HardcodedBlockType {
                 && pendingInfo.isForWoodTypeFullId("minecraft:(acacia|birch|jungle|dark_oak|spruce|mangrove|cherry|crimson|warped)")
                 && pendingInfo.isForBlockName("\\w+_glass(_pane)?")) return false;
 
+        // Vanilla-Backport's PALE_OAK_SHELF or POPLAR_SHELF caused other blocks with similar name including Another-Furniture to not be generated
+        // Vanilla-Backport has built-in module and should be excluded
+        if (!pendingInfo.isForSupportedModId("vanillabackport") && pendingInfo.isForWoodTypeNamespace("minecraft")
+                && pendingInfo.isForBlockName("(pale_oak|poplar)_shelf")) return false;
+
         /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ EXCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
         // Exclude all of Vanilla Types that we know of. Excludes other mc namespaced added by mods

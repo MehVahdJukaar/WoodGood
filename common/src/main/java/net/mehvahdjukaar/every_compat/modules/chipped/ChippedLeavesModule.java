@@ -408,7 +408,7 @@ public class ChippedLeavesModule extends ChippedModuleAbstract {
         }
     }
 
-    /// Generate top & overlay for frosted_leaves
+    /// Generate top &amp; overlay for frosted_leaves
     public void generateFrostedLeaves(ResourceLocation targetResLoc, ResourceSink sink, ResourceManager manager) {
         for (LeavesType leavesType : LeavesTypeRegistry.INSTANCE) {
 

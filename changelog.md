@@ -13,6 +13,20 @@
 |                                                                                                                                   |
 
 ---
+## v2.11.57
+
+### CHANGES:
+- **Every Compat** (C): 
+  - Cleaned up a few codes & Tweaked others
+- **Unusual Furniture** (NF): Moved to COMMON (FABRIC is now supported) & UPDATED to support `v2.0.2`+ - [PR#1351 by mod's author](https://github.com/MehVahdJukaar/WoodGood/pull/1351?notification_referrer_id=NT_kwHOAMRUatoAJVJlcG9zaXRvcnk7NDkwNDkwNDQwO0lzc3VlOzYxMTkwNjUxODA#event-34709402229)
+- **Storage Drawers** (C): Finished improving DRAWERS' textures
+- **Vanilla Backport** (C): Included supported-mods' shelf for PALE_OAK and POPLAR - [#1352](https://github.com/MehVahdJukaar/WoodGood/issues/1352)
+
+### MOONLIGHT: Required v3.8.2 or newer
+- **Every Compat** is using new method implemented from **Moonlight**
+
+---
+
 ## v2.11.56
 
 ### FIXES:

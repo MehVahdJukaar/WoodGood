@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/// Add models/block & models/item that are either vanilla or got somehow skipped. They need to be generated
+/// Add models/block &amp; models/item that are either vanilla or got somehow skipped. They need to be generated
 /// <br><br>Used by Gems-Realm, EveryCompat's CopperAgeBackportModule
 public record ExtraModelConfiguration(Set<ResourceLocation> blockModel, Set<ResourceLocation> itemModel,
                                       // Look at ResourceUtils's gatherNonVanillaModels because some non-vanilla models that somehow got skipped
