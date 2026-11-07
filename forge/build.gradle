@@ -187,7 +187,7 @@ dependencies {
 //    modRuntimeOnly("curse.maven:valhelsia-furniture-694349:5189602") // Valhelsia-Core
 //    modRuntimeOnly("curse.maven:table-top-craft-467136:5318681")
 //    modRuntimeOnly("curse.maven:twigs-496913:4605097")
-//    modRuntimeOnly("curse.maven:variant-vanilla-blocks-866509:4997060") //v1.3.6
+    modRuntimeOnly("curse.maven:variant-vanilla-blocks-866509:4997060") //v1.3.6
 //    modRuntimeOnly("curse.maven:villagersplus-forge-817272:4996995")
 
             //- OTHER MAVENS
