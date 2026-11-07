@@ -66,7 +66,6 @@ import net.neoforged.neoforge.items.wrapper.SidedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.WeakReference;
-import java.util.Objects;
 import java.util.Optional;
 
 import static net.mehvahdjukaar.every_compat.EveryCompat.addOptionalModule;
@@ -192,7 +191,7 @@ public class EveryCompatForge extends EveryCompatCommon {
                 } catch (Exception ignored) {
                 }
 
-                if (Objects.nonNull(modClass)) addOptionalModule("beautify", () -> BeautifyDecorateModule.class);
+                if (modClass != null) addOptionalModule("beautify", () -> BeautifyDecorateModule.class);
             }
 
             if (PlatHelper.isModLoaded("mcwdoors")) {

@@ -1,27 +1,22 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.beautify_decorate;
 
-import com.github.Pandarix.beautify.Beautify;
 import com.github.Pandarix.beautify.common.block.Blinds;
 import com.github.Pandarix.beautify.common.block.PictureFrame;
 import com.github.Pandarix.beautify.common.block.Trellis;
 import net.mehvahdjukaar.every_compat.modules.beautify.BeautifyModuleAbstract;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 
-//SUPPORT: v2.0.2+
 //NOTE: Beautify Decorate is now renamed Beautify!
+///SUPPORT: v2.0.2-FINAL - It is no longer updated. Beautify Refoxed replaced it
+@Deprecated(forRemoval = true)
 public class BeautifyDecorateModule extends BeautifyModuleAbstract {
 
     public BeautifyDecorateModule(String modId) {
         super(modId);
-    }
-
-    @Override
-    public ResourceLocation getTabKey() {
-        return modRes(Beautify.MODID);
+        extendModuleName(" Decorate");
     }
 
     @Override

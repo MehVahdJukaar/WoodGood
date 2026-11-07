@@ -6,20 +6,16 @@ import io.github.suel_ki.beautify.common.block.Trellis;
 import net.mehvahdjukaar.every_compat.modules.beautify.BeautifyModuleAbstract;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 
-//SUPPORT: v1.2.0+
+///SUPPORT: v3.6.5+
+//Disabled because Beautify-Refabricated has a built-in module.
 public class BeautifyRefabricatedModule extends BeautifyModuleAbstract {
 
     public BeautifyRefabricatedModule(String modId) {
         super(modId);
-    }
-
-    @Override
-    public ResourceLocation getTabKey() {
-        return modRes("group");
+        extendModuleName(" Refabricated");
     }
 
     @Override

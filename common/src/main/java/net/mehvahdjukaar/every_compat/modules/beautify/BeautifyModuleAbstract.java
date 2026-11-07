@@ -2,12 +2,15 @@ package net.mehvahdjukaar.every_compat.modules.beautify;
 
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
+
+import java.util.function.Supplier;
 
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.SLAB;
 
@@ -20,8 +23,7 @@ public abstract class BeautifyModuleAbstract extends EveryCompatModule {
 
     public BeautifyModuleAbstract(String modId) {
         super(modId, "bd");
-
-        var tab = getTab(getTabKey());
+        Supplier<CreativeModeTab> tab = PlatHelper.getPlatform().isFabric() ? getModTab("group") : getModTab(modId);
 
         tellis = SimpleEntrySet.builder(WoodType.class, "trellis",
                         getModBlock("oak_trellis"), () -> VanillaWoodTypes.OAK,
@@ -60,8 +62,6 @@ public abstract class BeautifyModuleAbstract extends EveryCompatModule {
         this.addEntry(picture_frames);
 
     }
-
-    public abstract ResourceLocation getTabKey();
 
     public abstract Block newTrellis(WoodType woodType);
     public abstract Block newBlinds(WoodType woodType);
