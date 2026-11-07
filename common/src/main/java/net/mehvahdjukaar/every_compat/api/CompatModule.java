@@ -36,7 +36,12 @@ public abstract class CompatModule {
     protected final String modId;
     protected final String modName; //readable name
     protected final String shortId;
-    protected String extendedName = "";
+
+    /// use {@link CompatModule#extendModuleName(String)}
+    @Deprecated(forRemoval = true)
+    protected String blockType = "";
+
+    private String extendedName = "";
 
     //EC or addon namespace
     private final String myNamespace;
@@ -110,7 +115,7 @@ public abstract class CompatModule {
     /// return ModuleName's blockType
     /// @param blockType "Log", "Planks", "Leaves" can be used
     @Deprecated(forRemoval = true)
-    /// use {@link CompatModule#extendModuleName(String)}
+    ///@deprecated use {@link CompatModule#extendModuleName(String)}
     public void setBlockType(String blockType) {
         extendModuleName("'s " + blockType);
     }
