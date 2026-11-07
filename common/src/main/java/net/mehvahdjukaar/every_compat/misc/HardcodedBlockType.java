@@ -45,7 +45,7 @@ public class HardcodedBlockType {
 
         // Chipped's glass & glass_panes has no Vanilla WoodTypes except OAK
         if (pendingInfo.isForSupportedModId("chipped")
-                && pendingInfo.isForWoodTypeFullId("minecraft:(acacia|birch|jungle|dark_oak|spruce|mangrove|cherry)")
+                && pendingInfo.isForWoodTypeFullId("minecraft:(acacia|birch|jungle|dark_oak|spruce|mangrove|cherry|crimson|warped)")
                 && pendingInfo.isForBlockName("\\w+_glass(_pane)?")) return false;
 
         /// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ EXCLUDE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
