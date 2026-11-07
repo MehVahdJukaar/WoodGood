@@ -133,7 +133,7 @@ dependencies {
     modCompileOnly("curse.maven:macaws-stairs-1119394:7317453")
 
     //+ GENERAL
-    modCompileOnly("curse.maven:beautify-refabricated-809311:7553989")
+    modCompileOnly("curse.maven:beautify-refabricated-809311:9419400")
     modCompileOnly("curse.maven:bewitchment-394915:5819540") //!! 1.20.1
     modCompileOnly("curse.maven:blockus-312289:7920575")
     modCompileOnly("curse.maven:building-but-better-989479:7627392") //!! 1.20.1
