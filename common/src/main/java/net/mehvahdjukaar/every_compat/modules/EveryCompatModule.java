@@ -13,12 +13,14 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.util.function.Supplier;
 
 // Module for every compat mod. Just has extra utilities so we can easily query external mods.
 // If you are an addon extend CompatModule instead (and just stuff in the API package)
 // Its fine to extend for our own addon mods I guess
+@ApiStatus.Internal
 @SuppressWarnings("removal")
 public abstract class EveryCompatModule extends SimpleModule {
 

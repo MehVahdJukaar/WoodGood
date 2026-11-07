@@ -414,7 +414,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         }
 
         /// Use {@link net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet.Builder#setTab(java.util.function.Supplier)}
-        /// with EveryCompatModule#getTab(ResourceLocation)
+        /// with your own tab by reference not by id
         @Deprecated(forRemoval = true)
         public BL setTabKey(ResourceLocation res) {
             ResourceKey<CreativeModeTab> key = ResourceKey.create(Registries.CREATIVE_MODE_TAB, res);
@@ -423,7 +423,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         }
 
         /// Use {@link net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet.Builder#setTab(java.util.function.Supplier)}
-        /// with EveryCompatModule#getTab(ResourceKey)
+        /// with your own tab by reference not by id
         @Deprecated(forRemoval = true)
         public BL setTabKey(Supplier<ResourceKey<CreativeModeTab>> tab) {
             this.tab = () -> BuiltInRegistries.CREATIVE_MODE_TAB.getHolderOrThrow(tab.get());
@@ -431,7 +431,7 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         }
 
         /// Use {@link net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet.Builder#setTab(java.util.function.Supplier)}
-        /// with EveryCompatModule#getTab(ResourceKey)
+        /// with your own tab by reference not by id
         @Deprecated(forRemoval = true)
         public BL setTabKey(ResourceKey<CreativeModeTab> key) {
             this.setTabKey(() -> key);

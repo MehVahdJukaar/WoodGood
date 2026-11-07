@@ -174,7 +174,7 @@ public class ItemOnlyEntrySet<T extends BlockType, I extends Item> extends Abstr
 
     @Override
     public void generateModels(SimpleModule module, ResourceManager manager, ResourceSink handler) {
-        ResourcesUtils.generateStandardItemModels(manager, handler, items, baseType.get(),
+        ResourcesUtils.generateStandardItemModels(manager, handler, items, baseType.get(), getBaseItem(),
                 makeModelTransformer(module, manager), modelConfig);
     }
 
