@@ -138,7 +138,7 @@ public class ResourcesUtils {
     @SuppressWarnings("PointlessBooleanExpression")
     public static <I extends Item, T extends BlockType> void generateStandardItemModels(
             ResourceManager manager, ResourceSink sink,
-            Map<T, I> items, T baseType, BlockTypeResTransformer<T> itemModelTransformer,
+            Map<T, I> items, T baseType, @Nullable Item oakItem, BlockTypeResTransformer<T> itemModelTransformer,
             ExtraModelConfiguration modelConfig
     ) {
 
@@ -146,12 +146,8 @@ public class ResourcesUtils {
 
         TaskRunnerWithFailureCollection failures = TaskRunnerWithFailureCollection.active();
 
-        //finds one entry. used so we can grab the oak equivalent
-        var first = items.entrySet().stream().findFirst().get();
-        Item oakItem = BlockType.changeItemType(first.getValue(), first.getKey(), baseType);
-
-        if (oakItem == null) {
-            EveryCompat.LOGGER.error("Skipped generating some item assets because oakItem is NULL for {}", Utils.getID(first.getValue()));
+        if (oakItem == null || oakItem == Items.AIR) {
+            EveryCompat.LOGGER.error("Skipped generating some item assets because oakItem is NULL for {}", Utils.getID(items.values().iterator().next()));
             return;
         }
         String baseItemName = baseType.getTypeName();
