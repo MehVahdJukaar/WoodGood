@@ -9,7 +9,9 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
@@ -32,5 +34,15 @@ public class BackpackedModule extends SimpleModule {
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
         this.addEntry(shelves);
+    }
+
+    @Override
+    public void onModSetup() {
+        super.onModSetup();
+        var shelfPoi = ResourceKey.create(Registries.POINT_OF_INTEREST_TYPE, modRes("backpack_shelf"));
+
+        if (BuiltInRegistries.POINT_OF_INTEREST_TYPE.containsKey(shelfPoi)) {
+            appendPoiBlocks(shelfPoi, shelves.blocks.values());
+        }
     }
 }
