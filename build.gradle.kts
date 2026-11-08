@@ -42,7 +42,7 @@ subprojects {
     }
 
     upload {
-        var modLoader = name
+        val modLoader = name
         curseforge {
             dependencies {
                 required("selene")

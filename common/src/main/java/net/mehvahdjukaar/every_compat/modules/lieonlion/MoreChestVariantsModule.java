@@ -45,7 +45,6 @@ public class MoreChestVariantsModule extends EveryCompatModule {
         Supplier<CreativeModeTab> functionalTab = getTab(CreativeModeTabs.FUNCTIONAL_BLOCKS);
         Supplier<CreativeModeTab> redstoneTab = getTab(CreativeModeTabs.REDSTONE_BLOCKS);
 
-
         chests = SimpleEntrySet.builder(WoodType.class, "chest",
                         getModBlock("oak_chest"), () -> VanillaWoodTypes.OAK,
                         (w, p) -> new CompatChestBlock(this::getChestTile,
@@ -99,7 +98,10 @@ public class MoreChestVariantsModule extends EveryCompatModule {
 
     }
 
-    // GetTile ---------------------------------------------------------------------------------------------------------
+    //      ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+    //      │                                          Utilities                                           │
+    //      └──────────────────────────────────────────────────────────────────────────────────────────────┘
+
     private BlockEntityType<? extends ChestBlockEntity> getChestTile() {
         return chests.getTile(CompatChestBlockEntity.class);
     }
@@ -108,7 +110,10 @@ public class MoreChestVariantsModule extends EveryCompatModule {
         return trappedChests.getTile(CompatChestBlockEntity.class);
     }
 
-    // BlockEntity -----------------------------------------------------------------------------------------------------
+    //      ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+    //      │                                         BlockEntity                                          │
+    //      └──────────────────────────────────────────────────────────────────────────────────────────────┘
+
     private class MoreChestBlockEntity extends CompatChestBlockEntity {
         public MoreChestBlockEntity(BlockPos pos, BlockState state) {
             super(chests.getTile(), pos, state);
@@ -121,7 +126,9 @@ public class MoreChestVariantsModule extends EveryCompatModule {
         }
     }
 
-    // Registry --------------------------------------------------------------------------------------------------------
+    //      ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+    //      │                                            Client                                            │
+    //      └──────────────────────────────────────────────────────────────────────────────────────────────┘
 
     @Override
     public CompatModuleClient<?> createClient() {

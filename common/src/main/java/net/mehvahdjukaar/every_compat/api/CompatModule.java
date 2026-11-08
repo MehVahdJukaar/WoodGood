@@ -29,7 +29,12 @@ public abstract class CompatModule {
     protected final String modId;
     protected final String modName; //readable name
     protected final String shortId;
+
+    /// use {@link CompatModule#extendModuleName(String)}
+    @Deprecated(forRemoval = true)
     protected String blockType = "";
+
+    private String extendedName = "";
 
     //EC or addon namespace
     private final String myNamespace;
@@ -94,14 +99,28 @@ public abstract class CompatModule {
     }
 
     /// Adding extra info to {@link CompatModule#toString()}
+    /// <br>
+    /// return ModuleName's blockType
+    /// @deprecated use {@link CompatModule#extendModuleName(String)}
+    /// @param blockType "Log", "Planks", "Leaves" can be used
+    @Deprecated(forRemoval = true)
+    ///@deprecated use {@link CompatModule#extendModuleName(String)}
     public void setBlockType(String blockType) {
-        this.blockType = blockType;
+        extendModuleName("'s " + blockType);
+    }
+
+    /// Adding extra info to {@link CompatModule#toString()}
+    ///<br>return "Module's Name" or "Module Name"
+    ///@param name The parameter are
+    ///            <br>* "'s Name"
+    ///            <br>* " Name" with a space
+    public void extendModuleName(String name) {
+        this.extendedName = name;
     }
 
     @Override
     public String toString() {
-        String typeOrEmpty = (!blockType.isEmpty()) ? "'s " + blockType : "";
-        return "module[ " + getModName() + typeOrEmpty + " @ " + getMyNamespace() + " ]";
+        return "module[ " + getModName() + extendedName + " @ " + getMyNamespace() + " ]";
     }
 
     public Identifier modRes(String string) {

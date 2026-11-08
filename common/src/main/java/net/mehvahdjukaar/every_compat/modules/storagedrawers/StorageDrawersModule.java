@@ -214,6 +214,10 @@ public class StorageDrawersModule extends EveryCompatModule {
         this.addEntry(TRIMS);
     }
 
+    //      ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+    //      │                                       PaletteStrategy                                        │
+    //      └──────────────────────────────────────────────────────────────────────────────────────────────┘
+
     private static final PaletteStrategy PLANKS_CUSTOM_PALETTE = registerCached((blockType, manager) ->
             PaletteStrategies.makePaletteFromChild(blockType, manager, VanillaWoodChildKeys.PLANKS, null,
                     (p) -> {
@@ -235,6 +239,10 @@ public class StorageDrawersModule extends EveryCompatModule {
                         p.matchLuminanceStep(p.getAverageLuminanceStep() * 0.4f);
                     }
             ));
+
+    //      ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+    //      │                                           Utilties                                           │
+    //      └──────────────────────────────────────────────────────────────────────────────────────────────┘
 
     static BlockBehaviour.Properties getWoodenDrawerBlockProperties() {
         return BlockBehaviour.Properties.of()
@@ -262,10 +270,6 @@ public class StorageDrawersModule extends EveryCompatModule {
     }
 
     //      ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
-    //      │                                      Dynamic Resources                                       │
-    //      └──────────────────────────────────────────────────────────────────────────────────────────────┘
-
-    //      ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
     //      │                                  ModDrawersGeometry methods                                  │
     //      └──────────────────────────────────────────────────────────────────────────────────────────────┘
 
@@ -289,6 +293,10 @@ public class StorageDrawersModule extends EveryCompatModule {
     public <BD extends BlockDrawers> Stream<BD> getDrawersOfTypeAndSizeAndDepth(Class<BD> drawerClass, int size, boolean halfDepth) {
         return getDrawersOfTypeAndSize(drawerClass, size).filter((blockDrawers) -> blockDrawers.isHalfDepth() == halfDepth);
     }
+
+    //      ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+    //      │                                            Client                                            │
+    //      └──────────────────────────────────────────────────────────────────────────────────────────────┘
 
     @Override
     public CompatModuleClient<?> createClient() {
