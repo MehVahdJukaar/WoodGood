@@ -97,7 +97,7 @@
 | Just A Raft Mod                      |   🟩   |
 | Legend's Missing Blocks              |   ❔   |
 | Lepton (FORGE)                       |   🟡   |
-| Lightman's Currency                  |   ❔   |
+| Lightman's Currency                  |   🟩   |
 | Market Crates                        |   ❔   |
 | Marioverse                           |   🟩   |
 | More Crafting Tables for Forge       |   ❔   |

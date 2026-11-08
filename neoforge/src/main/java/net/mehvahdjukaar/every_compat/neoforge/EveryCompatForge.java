@@ -10,6 +10,7 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.absent_by_design.AbsentBy
 import net.mehvahdjukaar.every_compat.modules.neoforge.bibliocraft.BibliocraftLegacyModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.functional_storage.FunctionalStorageModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.just_a_raft.JustARaftModule;
+import net.mehvahdjukaar.every_compat.modules.neoforge.lightmans_currency.LightmansCurrencyModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.neoforge.oreberries_replanted.OreberriesReplantedModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.premium_wood.PremiumWoodModule;
@@ -139,7 +140,7 @@ public class EveryCompatForge extends EveryCompatCommon {
 //        addOptionalModule("missing_blocks", () -> LegendsMissingBlocksModule.class);
 //        addOptionalModule("mosaic_carpentry", () -> MosaicCarpentryModule.class);
         addOptionalModule("oreberriesreplanted", () -> OreberriesReplantedModule.class);
-//        addOptionalModule("lightmanscurrency", () -> LightmansCurrencyModule.class); //TODO: add back
+        addOptionalModule("lightmanscurrency", () -> LightmansCurrencyModule.class);
 //        addOptionalModule("pokecube_legends", () -> PokecubeAIOModule.class);
         addOptionalModule("premium_wood", () -> PremiumWoodModule.class);
 //        addOptionalModule("quark", () -> QuarkModule.class);
