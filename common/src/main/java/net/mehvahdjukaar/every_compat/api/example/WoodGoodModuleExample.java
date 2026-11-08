@@ -1,23 +1,18 @@
 package net.mehvahdjukaar.every_compat.api.example;
 
-import net.mehvahdjukaar.every_compat.api.CompatModuleClient;
-import net.mehvahdjukaar.every_compat.api.ItemOnlyEntrySet;
-import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
-import net.mehvahdjukaar.every_compat.api.RenderLayer;
-import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleModuleClient;
+import net.mehvahdjukaar.every_compat.api.*;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.leaves.LeavesType;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -28,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.function.Consumer;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "DanglingJavadoc"})
 ///      ┌──────────────────────────────────────────────────────┐
 ///      │   WoodGoodModule example module. Use as a template   │
 ///      └──────────────────────────────────────────────────────┘
@@ -47,6 +42,15 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
             // You can change myNamespace to your MOD_ID if you want the blocks to be registered under your mod's namespace
             super("awesome_mod_id", "abm", "Twigs.MOD_ID");
             ///DEFAULT: super("awesome_mod_id", "abm") -> myNamespace will be EveryCompat.MOD_ID
+
+            /** Clarify the actual providing mod in crash reports.
+             * If a built-in module (like Beautify) crashes, the default report might just say "Beautify".
+             * Another good example is: Create Fly (Fabric) and Create (Neoforge)
+             * This makes it hard for users to find the right fork/port on CurseForge (e.g., Refabricated vs. Refoxed).
+             * Setting the specific provider ID ensures crash logs point users to the correct mod for bug reporting.
+            **/
+            String providerId = (PlatHelper.getPlatform().isFabric()) ? "Beautify Refabricated" : "Beautify Refoxed";
+            setProviderId(providerId);
 
             // minecraft's tab can be used for setTab() - it can use either ResourceKey or CreativeModeTab
             ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;
