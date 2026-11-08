@@ -3,7 +3,7 @@ package net.mehvahdjukaar.every_compat.fabric;
 import net.fabricmc.api.ModInitializer;
 import net.mehvahdjukaar.every_compat.EveryCompatCommon;
 import net.mehvahdjukaar.every_compat.modules.fabric.blockus.BlockusModule;
-import net.mehvahdjukaar.every_compat.modules.fabric.create.CreateModule;
+import net.mehvahdjukaar.every_compat.modules.fabric.create.CreateFlyModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.farmersdelight.FarmersDelightRefabricatedModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.fabric.regions_unexplored.RegionsUnexploredModule;
@@ -45,6 +45,7 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
 //        addOptionalModule("bbb", () -> BuildingButBetterModule.class);
 //        addOptionalModule("bewitchment", () -> BewitchmentModule.class);
         addOptionalModule("blockus", () -> BlockusModule.class);
+        addOptionalModule("create", () -> CreateFlyModule.class);
         addOptionalModule("farmersdelight", () -> FarmersDelightRefabricatedModule.class);
 //        addOptionalModule("clutter", () -> ClutterModule.class);
 //        addOptionalModule("dramaticdoors", () -> DramaticDoorsModule.class);
@@ -60,8 +61,6 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
 //        if (PlatHelper.isModLoaded("mcwdoors")) {
 //            addOptionalModule("dramaticdoors", () -> DramaticDoorsMacawModule.class);
 //        }
-
-        addOptionalModule("create", () -> CreateModule.class);
 
         // Load if The-New-Shutters is loaded, not Vanilla-Shutters
 //        if (PlatHelper.isModLoaded("shutter")) {

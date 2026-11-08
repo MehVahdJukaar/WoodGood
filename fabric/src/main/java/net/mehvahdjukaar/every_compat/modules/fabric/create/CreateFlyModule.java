@@ -16,15 +16,16 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
-// SUPPORT: Create Fly v6.0.9+
-public class CreateModule extends EveryCompatModule {
+///SUPPORT: Create Fly v6.0.9+
+public class CreateFlyModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> windows;
     public final SimpleEntrySet<WoodType, Block> windowPanes;
 
-    public CreateModule(String modId) {
+    public CreateFlyModule(String modId) {
         super(modId, "c");
         Identifier tab = modRes("palettes");
+        extendModuleName(" Fly");
 
         windows = SimpleEntrySet.builder(WoodType.class, "window",
                         getModBlock("oak_window"), () -> VanillaWoodTypes.OAK,
@@ -55,6 +56,10 @@ public class CreateModule extends EveryCompatModule {
                 .build();
         this.addEntry(windowPanes);
     }
+
+    //      ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+    //      │                                            Client                                            │
+    //      └──────────────────────────────────────────────────────────────────────────────────────────────┘
 
     @Override
     public CompatModuleClient<?> createClient() {
