@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.misc;
 
+import net.mehvahdjukaar.every_compat.ECModules;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
@@ -75,7 +76,7 @@ public class FurnitureShowcaseWidget extends AbstractWidget {
 
     private void collectWoodSets() {
         List<List<Block>> found = new ArrayList<>();
-        for (CompatModule module : EveryCompat.getActiveModules()) {
+        for (CompatModule module : ECModules.getActiveModules()) {
             if (!(module instanceof SimpleModule simpleModule)) continue;
 
             for (EntrySet<?> entry : simpleModule.getEntries()) {

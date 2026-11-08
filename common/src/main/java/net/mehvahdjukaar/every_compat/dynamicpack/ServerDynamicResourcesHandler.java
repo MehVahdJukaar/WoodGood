@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.dynamicpack;
 
+import net.mehvahdjukaar.every_compat.ECModules;
 import net.mehvahdjukaar.every_compat.ECPlatStuff;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
@@ -70,7 +71,7 @@ public class ServerDynamicResourcesHandler extends DynamicServerResourceProvider
     @Override
     public void regenerateDynamicAssets(Consumer<ResourceGenTask> executor) {
         List<ResourceGenTask> tasks = new ArrayList<>();
-        EveryCompat.forAllModules(m -> m.addDynamicServerResources(tasks::add));
+        ECModules.forAllModules(m -> m.addDynamicServerResources(tasks::add));
         ECPlatStuff.addPlatformServerResources(tasks::add);
 
         int cores = Runtime.getRuntime().availableProcessors();

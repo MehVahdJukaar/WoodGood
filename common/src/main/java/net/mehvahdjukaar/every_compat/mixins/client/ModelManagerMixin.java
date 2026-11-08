@@ -1,6 +1,6 @@
 package net.mehvahdjukaar.every_compat.mixins.client;
 
-import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.ECModules;
 import net.mehvahdjukaar.every_compat.misc.ModelWarningSuppressor;
 import net.minecraft.client.resources.model.ModelManager;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,7 +18,7 @@ public class ModelManagerMixin {
     @Inject(method = {"lambda$loadModels$2", "lambda$loadModels$4"}, at = @At("HEAD"), cancellable = true, require = 0)
     private static void everycompat$suppressMissingTextureSpam(String modelName, Collection<?> missing, CallbackInfo ci) {
         int colon = modelName.indexOf(':');
-        if (colon > 0 && EveryCompat.isMyIdOrAddon(modelName.substring(0, colon))) {
+        if (colon > 0 && ECModules.isMyIdOrAddon(modelName.substring(0, colon))) {
             ModelWarningSuppressor.missingTextures++;
             ci.cancel();
         }

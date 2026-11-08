@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.api;
 
+import net.mehvahdjukaar.every_compat.ECModules;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.configs.ModEntriesConfigs;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
@@ -59,7 +60,7 @@ public class SimpleModule extends CompatModule {
         }
         this.affectedTypes.add(entrySet.getTypeClass());
         //ugly
-        EveryCompat.trackChildType(entrySet.getTypeClass(), entrySet.makeChildKey(this));
+        ECModules.trackChildType(entrySet.getTypeClass(), entrySet.makeChildKey(this));
         if (entrySet instanceof AbstractSimpleEntrySet<?, ?, ?> simpleEntry && simpleEntry.getModConfigToggle() != null) {
             ModEntriesConfigs.addModConfigToggle(simpleEntry.makeRegisteredChildKey(this), simpleEntry.getModConfigToggle());
         }
@@ -189,7 +190,7 @@ public class SimpleModule extends CompatModule {
         String slashConvention = woodTypeFrom + "/" + blockName; // quark/blossom_chair
         String underscoreConvention = woodTypeFrom + "_" + blockName; // quark_blossom_chair
 
-        if (EveryCompat.isBlockDisabled(modId + "/" + woodTypeFrom + "/" + blockName)) return true;
+        if (ECModules.isBlockDisabled(modId + "/" + woodTypeFrom + "/" + blockName)) return true;
 
         // Exclude blocks from a mod that are both Supported-Mod & Wood-Mod
         if (woodTypeFrom.equals(modId)) return true; //Example: quark, blossom
@@ -221,7 +222,7 @@ public class SimpleModule extends CompatModule {
         if (registry.containsKey(Identifier.fromNamespaceAndPath(woodTypeFrom, blockName)))
             return true; //REASON: prevent duplicated blocks for now & above is WIP for now
 
-        for (var c : EveryCompat.getCompatMods()) {
+        for (var c : ECModules.getCompatMods()) {
             String compatModId = c.modId();  //bopcomp : bop->quark, twigs
             //if the wood is from the mod this adds compat for && it supports this block type
             if (c.woodsFrom().contains(woodTypeFrom) && c.blocksFrom().contains(modId)) {
@@ -237,6 +238,6 @@ public class SimpleModule extends CompatModule {
 
     /// @return Collection of OtherCompatMods
     public static Collection<OtherCompatMod> getOtherCompatMods() {
-        return EveryCompat.getCompatMods();
+        return ECModules.getCompatMods();
     }
 }

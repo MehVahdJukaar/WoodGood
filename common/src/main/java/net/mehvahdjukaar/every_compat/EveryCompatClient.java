@@ -46,16 +46,16 @@ public class EveryCompatClient {
 
     @EventCalled
     public static void onFirstScreen(Screen screen) {
-        var errors = EveryCompat.getModulesThatErrored();
+        var errors = ECModules.getModulesThatErrored();
         if (!errors.isEmpty()) {
             Minecraft.getInstance().setScreen(ErrorMessageScreen.create(screen, errors));
         }
-        EveryCompat.canShowErrorScreen = false;
+        ECModules.setCanShowErrorScreen(false);
     }
 
     // lazy so modules added late by addons still get one
     public static void forAllClients(Consumer<CompatModuleClient<?>> action) {
-        EveryCompat.forAllModules(m -> action.accept(CLIENTS.computeIfAbsent(m, CompatModule::createClient)));
+        ECModules.forAllModules(m -> action.accept(CLIENTS.computeIfAbsent(m, CompatModule::createClient)));
     }
 
     private static void registerBlockColors(ClientHelper.BlockColorEvent event) {
@@ -76,7 +76,7 @@ public class EveryCompatClient {
 
         if (modTooltip || blockTooltip && (tooltipFlag.isAdvanced() || !ECConfigs.TOOLTIPS_ADVANCED.get())) {
             Item item = stack.getItem();
-            var compatModule = EveryCompat.getModuleOfItem(item);
+            var compatModule = ECModules.getModuleOfItem(item);
             if (compatModule != null) {
                 if (blockTooltip) {
                     BlockType woodType = WoodTypeRegistry.INSTANCE.getBlockTypeOf(item);

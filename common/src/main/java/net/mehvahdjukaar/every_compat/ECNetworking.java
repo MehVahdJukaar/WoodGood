@@ -40,7 +40,7 @@ public class ECNetworking {
         private final Map<String, String> mods = new HashMap<>();
 
         public S2CModVersionCheckMessage() {
-            for (var m : EveryCompat.getDependencies()) {
+            for (var m : ECModules.getDependencies()) {
                 var v = PlatHelper.getModVersion(m);
                 if (v != null) {
                     mods.put(m, v);

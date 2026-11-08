@@ -16,19 +16,21 @@ import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 
 import java.util.List;
 
-import static net.mehvahdjukaar.every_compat.EveryCompat.*;
+import static net.mehvahdjukaar.every_compat.ECModules.*;
 import static net.mehvahdjukaar.every_compat.configs.UnsafeDisablerConfigs.INCLUDE_ALL_WOOD_MODULES;
 
-public class EveryCompatCommon {
+public abstract class EveryCompatCommon {
 
     private static final String[] MACAW_MODS = {"mcwbridges", "mcwroofs", "mcwfences", "mcwfurnitures", "mcwstairs",
             "mcwdoors", "mcwtrpdoors", "mcwpaths", "mcwwindows"};
 
     protected void initialize() {
         EveryCompat.init();
-        EveryCompat.loadPlugins();
+        loadPlugins();
 
-        this.addModules();
+        if (INCLUDE_ALL_WOOD_MODULES.get()) {
+            this.addModules();
+        }
 
         forAllModules(CompatModule::onModInit);
 
@@ -38,90 +40,84 @@ public class EveryCompatCommon {
     }
 
     protected void addModules() {
-
-        if (INCLUDE_ALL_WOOD_MODULES.get()) {
-
 //!! =============================================== Add Other Compat Mods ========================================== \\
-            addOtherCompatMod("compatoplenty", "biomesoplenty",
-                    "twigs", "farmersdelight", "quark", "woodworks", "boatload");
-            addOtherCompatMod("compat_makeover", "biomemakeover",
-                    "habitat", "farmersdelight", "quark", "decorative_blocks");
-            addOtherCompatMod("decorative_compat", "biomesoplenty", "decorative_blocks");
-            addOtherCompatMod("storagedrawersunlimited", "biomesoplenty", "storagedrawers");
-            addOtherCompatMod("lolmcvbop", "biomesoplenty", "lolmcv");
-            addOtherCompatMod("lolmcvbmo", "biomemakeover", "lolmcv");
-            addOtherCompatMod("arts_and_crafts_compat","arts_and_crafts",
-                    "twigs", "decorative_blocks", "farmersdelight", "dramaticdoors");
+        addOtherCompatMod("compatoplenty", "biomesoplenty",
+                "twigs", "farmersdelight", "quark", "woodworks", "boatload");
+        addOtherCompatMod("compat_makeover", "biomemakeover",
+                "habitat", "farmersdelight", "quark", "decorative_blocks");
+        addOtherCompatMod("decorative_compat", "biomesoplenty", "decorative_blocks");
+        addOtherCompatMod("storagedrawersunlimited", "biomesoplenty", "storagedrawers");
+        addOtherCompatMod("lolmcvbop", "biomesoplenty", "lolmcv");
+        addOtherCompatMod("lolmcvbmo", "biomemakeover", "lolmcv");
+        addOtherCompatMod("arts_and_crafts_compat","arts_and_crafts",
+                "twigs", "decorative_blocks", "farmersdelight", "dramaticdoors");
 
-            addOtherCompatMod("ascended_quark", List.of("aether", "deep_aether"), "quark");
+        addOtherCompatMod("ascended_quark", List.of("aether", "deep_aether"), "quark");
 
-            // Farmer's Delight
-            addOtherCompatMod("natures_delight", "natures_spirit", "farmersdelight");
-            addOtherCompatMod("undergardendelight", "undergarden", "farmersdelight");
-            addOtherCompatMod("windswept_delights", "windswept", "farmersdelight");
+        // Farmer's Delight
+        addOtherCompatMod("natures_delight", "natures_spirit", "farmersdelight");
+        addOtherCompatMod("undergardendelight", "undergarden", "farmersdelight");
+        addOtherCompatMod("windswept_delights", "windswept", "farmersdelight");
 
-            // Macaw's Addon
-            addOtherCompatMod("macawsbridgesbop", "biomesoplenty", "mcwbridges");
-            addOtherCompatMod("macawbridgesbyg", "biomeswevegone", "mcwbridges");
-            addOtherCompatMod("mcwfencesbop", "biomesoplenty", "mcwfences");
-            addOtherCompatMod("mcwfencesbyg", "biomeswevegone", "mcwfences");
-            addOtherCompatMod("macawsroofsbop", "biomesoplenty", "mcwroofs");
-            addOtherCompatMod("macawsroofsbyg", "biomeswevegone", "mcwroofs");
-            addOtherCompatMod("mcwbyg", List.of("biomeswevegone", "byg"), MACAW_MODS);
-            addOtherCompatMod("mcwbiomesoplenty", "biomesoplenty", MACAW_MODS);
-            addOtherCompatMod("mcwmoddinglegacy", List.of("blue_skies", "premium_wood"), MACAW_MODS);
-            addOtherCompatMod("mcwabnormals", List.of("buzzier_bees", "environmental", "upgrade_aquatic", "autumnity", "endergetic", "atmospheric", "caverns_and_chasms"), MACAW_MODS);
-            addOtherCompatMod("mcwterraformersmc", List.of("terrestria", "traverse", "cinderscape"), MACAW_MODS);
-            addOtherCompatMod("mcwaurora", "enhanced_mushrooms", MACAW_MODS);
-            addOtherCompatMod("mcwquark", "quark", MACAW_MODS);
+        // Macaw's Addon
+        addOtherCompatMod("macawsbridgesbop", "biomesoplenty", "mcwbridges");
+        addOtherCompatMod("macawbridgesbyg", "biomeswevegone", "mcwbridges");
+        addOtherCompatMod("mcwfencesbop", "biomesoplenty", "mcwfences");
+        addOtherCompatMod("mcwfencesbyg", "biomeswevegone", "mcwfences");
+        addOtherCompatMod("macawsroofsbop", "biomesoplenty", "mcwroofs");
+        addOtherCompatMod("macawsroofsbyg", "biomeswevegone", "mcwroofs");
+        addOtherCompatMod("mcwbyg", List.of("biomeswevegone", "byg"), MACAW_MODS);
+        addOtherCompatMod("mcwbiomesoplenty", "biomesoplenty", MACAW_MODS);
+        addOtherCompatMod("mcwmoddinglegacy", List.of("blue_skies", "premium_wood"), MACAW_MODS);
+        addOtherCompatMod("mcwabnormals", List.of("buzzier_bees", "environmental", "upgrade_aquatic", "autumnity", "endergetic", "atmospheric", "caverns_and_chasms"), MACAW_MODS);
+        addOtherCompatMod("mcwterraformersmc", List.of("terrestria", "traverse", "cinderscape"), MACAW_MODS);
+        addOtherCompatMod("mcwaurora", "enhanced_mushrooms", MACAW_MODS);
+        addOtherCompatMod("mcwquark", "quark", MACAW_MODS);
 
-            // Abnormals Delight
-            addOtherCompatMod("abnormals_delight",
-                    List.of("autumnity", "upgrade_aquatic", "environmental", "atmospheric", "endergetic", "caverns_and_chasms"),
-                    "farmersdelight");
+        // Abnormals Delight
+        addOtherCompatMod("abnormals_delight",
+                List.of("autumnity", "upgrade_aquatic", "environmental", "atmospheric", "endergetic", "caverns_and_chasms"),
+                "farmersdelight");
 
-            // Bibliocraft Legacy
-            addOtherCompatMod("bibliowoods",
-                    List.of("aether_ii", "allthemodium", "arsmagicalegacy", "ecologics", "evilcraft", "forbidden_arcanus",
-                    "integrateddynamics", "occultism", "silentgear", "tropicraft"),
-                    "bibliocraft");
+        // Bibliocraft Legacy
+        addOtherCompatMod("bibliowoods",
+                List.of("aether_ii", "allthemodium", "arsmagicalegacy", "ecologics", "evilcraft", "forbidden_arcanus",
+                "integrateddynamics", "occultism", "silentgear", "tropicraft"),
+                "bibliocraft");
 
-            addOtherCompatMod("bibliobiomes",
-                    List.of("biomesoplenty", "biomeswevegone", "regions_unexplored"),
-                    "bibliocraft");
+        addOtherCompatMod("bibliobiomes",
+                List.of("biomesoplenty", "biomeswevegone", "regions_unexplored"),
+                "bibliocraft");
 
 
     //!! =========================================== Add Modules ==================================================== \\
-//            addOptionalModule("architects_palette", () -> ArchitectsPaletteModule.class);
-//            addOptionalModule("another_furniture", () -> AnotherFurnitureModule.class);
-            addOptionalModule("backpacked", () -> BackpackedModule.class);
-//            addOptionalModule("barkcarpets", () -> BarkCarpetsModule.class); //- Not-Available-For-1.21.1
-//            addOptionalModule("beautifulcampfires", () -> BeautifulCampfiresModule.class);
-//            addOptionalModule("campchair", () -> CampChairModule.class); //- Not-Available-For-1.21.1
-//            addMultipleOptional("chipped", () -> ChippedMainModule.class, () -> ChippedLogModule.class, () -> ChippedDoorModule.class, () -> ChippedGlassModule.class, () -> ChippedLeavesModule.class);
-//            addOptionalModule("copperagebackport", () -> CopperAgeBackportModule.class);
-//            addOptionalModule("corail_pillar", () -> CorailPillarModule.class);
-//            addOptionalModule("dawnoftimebuilder", () -> DawnOfTimeModule.class);
-            addOptionalModule("decorative_blocks", () -> DecorativeBlocksModule.class);
-//            addOptionalModule("farmersdelight", () -> FarmersDelightModule.class);
-            addOptionalModule("friendsandfoes", () -> FriendsAndFoesModule.class);
-//            addOptionalModule("handcrafted", () -> HandcraftedModule.class);
-//            addOptionalModule("hearth_and_home", () -> HearthAndHomeModule.class); //- Not-Available-For-1.21.1
-//            addOptionalModule("lolmct", () -> MoreCraftingTablesModule.class);
-            addOptionalModule("lolmcv", () -> MoreChestVariantsModule.class);
-//            addOptionalModule("mighty_mail", () -> MightyMailModule.class);
-//            addOptionalModule("missingwilds", () -> MissingWildModule.class);
-            addOptionalModule("more_beautiful_torches", () -> MoreBeautifulTorches.class);
-            addOptionalModule("refurbished_furniture", () -> RefurbishedFurnitureModule.class);
-            addMultipleOptional("rechiseled", () -> RechiseledModuleBlock.class, () -> RechiseledModuleSlab.class, () -> RechiseledModuleStairs.class);
-            addOptionalModule("storagedrawers", () -> StorageDrawersModule.class);
-//            addOptionalModule("table_top_craft", () -> TableTopCraftModule.class); //- Not-Available-For-1.21.1
-//            addOptionalModule("twigs", () -> TwigsModule.class);
-//            addOptionalModule("unusual_furniture", () -> UnusualFurnitureModule.class);
-//            addOptionalModule("valhelsia_furniture", () -> ValhelsiaFurnitureModule.class);
-//            addOptionalModule("variantvanillablocks", () -> VariantVanillaBlocksModule.class);
-        }
+//        addOptionalModule("architects_palette", () -> ArchitectsPaletteModule.class);
+//        addOptionalModule("another_furniture", () -> AnotherFurnitureModule.class);
+        addOptionalModule("backpacked", () -> BackpackedModule.class);
+//        addOptionalModule("barkcarpets", () -> BarkCarpetsModule.class); //- Not-Available-For-1.21.1
+//        addOptionalModule("beautifulcampfires", () -> BeautifulCampfiresModule.class);
+//        addOptionalModule("campchair", () -> CampChairModule.class); //- Not-Available-For-1.21.1
+//        addMultipleOptional("chipped", () -> ChippedMainModule.class, () -> ChippedLogModule.class, () -> ChippedDoorModule.class, () -> ChippedGlassModule.class, () -> ChippedLeavesModule.class);
+//        addOptionalModule("copperagebackport", () -> CopperAgeBackportModule.class);
+//        addOptionalModule("corail_pillar", () -> CorailPillarModule.class);
+//        addOptionalModule("dawnoftimebuilder", () -> DawnOfTimeModule.class);
+        addOptionalModule("decorative_blocks", () -> DecorativeBlocksModule.class);
+//        addOptionalModule("farmersdelight", () -> FarmersDelightModule.class);
+        addOptionalModule("friendsandfoes", () -> FriendsAndFoesModule.class);
+//        addOptionalModule("handcrafted", () -> HandcraftedModule.class);
+//        addOptionalModule("hearth_and_home", () -> HearthAndHomeModule.class); //- Not-Available-For-1.21.1
+//        addOptionalModule("lolmct", () -> MoreCraftingTablesModule.class);
+        addOptionalModule("lolmcv", () -> MoreChestVariantsModule.class);
+//        addOptionalModule("mighty_mail", () -> MightyMailModule.class);
+//        addOptionalModule("missingwilds", () -> MissingWildModule.class);
+        addOptionalModule("more_beautiful_torches", () -> MoreBeautifulTorches.class);
+        addOptionalModule("refurbished_furniture", () -> RefurbishedFurnitureModule.class);
+        addMultipleOptional("rechiseled", () -> RechiseledModuleBlock.class, () -> RechiseledModuleSlab.class, () -> RechiseledModuleStairs.class);
+        addOptionalModule("storagedrawers", () -> StorageDrawersModule.class);
+//        addOptionalModule("table_top_craft", () -> TableTopCraftModule.class); //- Not-Available-For-1.21.1
+//        addOptionalModule("twigs", () -> TwigsModule.class);
+//        addOptionalModule("unusual_furniture", () -> UnusualFurnitureModule.class);
+//        addOptionalModule("valhelsia_furniture", () -> ValhelsiaFurnitureModule.class);
+//        addOptionalModule("variantvanillablocks", () -> VariantVanillaBlocksModule.class);
     }
-
-
 }

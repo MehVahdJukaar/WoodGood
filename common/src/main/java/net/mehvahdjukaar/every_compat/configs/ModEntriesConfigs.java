@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.configs;
 
+import net.mehvahdjukaar.every_compat.ECModules;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
 import net.mehvahdjukaar.every_compat.api.EntrySet;
@@ -84,7 +85,7 @@ public class ModEntriesConfigs {
             builder.icon(defaultIcon(reg)).push(reg.typeName().replace(" ", "_"));
             // child keys are "modid:name" - group by that mod id
             Map<String, List<String>> byNamespace = new TreeMap<>();
-            for (var c : EveryCompat.getChildKeys(reg.getType())) {
+            for (var c : ECModules.getChildKeys(reg.getType())) {
                 int i = c.indexOf(':');
                 byNamespace.computeIfAbsent(i < 0 ? "minecraft" : c.substring(0, i), k -> new ArrayList<>()).add(c);
             }
@@ -122,7 +123,7 @@ public class ModEntriesConfigs {
 
     private static Map<String, Identifier> entryIcons() {
         Map<String, Identifier> map = new HashMap<>();
-        for (CompatModule module : EveryCompat.getActiveModules()) {
+        for (CompatModule module : ECModules.getActiveModules()) {
             if (!(module instanceof SimpleModule simpleModule)) continue;
             for (EntrySet<?> entry : simpleModule.getEntries()) {
                 Identifier icon = baseIcon(entry);

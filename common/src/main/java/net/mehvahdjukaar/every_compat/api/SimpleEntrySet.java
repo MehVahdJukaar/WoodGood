@@ -1,8 +1,8 @@
 package net.mehvahdjukaar.every_compat.api;
 
+import net.mehvahdjukaar.every_compat.ECModules;
 import com.google.common.base.Preconditions;
 import net.mehvahdjukaar.candlelight.api.ClientOnly;
-import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.misc.ExtraModelConfiguration;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
@@ -153,7 +153,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                         blockType.addChild(childKey, block);
 
                         if (lootMode == LootTableMode.DROP_SELF && YEET_JSONS) {
-                            EveryCompat.addSimpleDrop(block);
+                            ECModules.addSimpleDrop(block);
                         }
                     } catch (Exception e) {
                         throw new UnsupportedOperationException("Failed to create or register block of " + blockType.getTranslationKey() + " with an EntrySetId: " + childKey + ". ERROR: " + e);

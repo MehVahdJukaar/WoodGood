@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.configs;
 
+import net.mehvahdjukaar.every_compat.ECModules;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.AbstractSimpleEntrySet;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
@@ -130,7 +131,7 @@ public class UnsafeDisablerConfigs {
                 """;
         MODULES_BLACKLIST = builder.comment("Exclude Module From Wood-Good, Stone-Zone & Gems-Realm\n"+moduleExample)
                 .defineSuggestionList("blacklist", List.of(),
-                        EveryCompat::getActiveModuleIds, ConfigBuilder.STRING_CHECK, null);
+                        ECModules::getActiveModuleIds, ConfigBuilder.STRING_CHECK, null);
         builder.pop();
 
         builder.push("other");
@@ -179,7 +180,7 @@ public class UnsafeDisablerConfigs {
     // every "modid:entry" child key across all registries
     private static List<String> entrySetIds() {
         return BlockSetAPI.getRegistries().stream()
-                .flatMap(r -> EveryCompat.getChildKeys(r.getType()).stream())
+                .flatMap(r -> ECModules.getChildKeys(r.getType()).stream())
                 .distinct().sorted().toList();
     }
 
@@ -201,7 +202,7 @@ public class UnsafeDisablerConfigs {
     private static Map<String, ItemStack> blockEntries() {
         if (blockEntriesCache != null) return blockEntriesCache;
         Map<String, ItemStack> map = new TreeMap<>();
-        for (CompatModule module : EveryCompat.getActiveModules()) {
+        for (CompatModule module : ECModules.getActiveModules()) {
             if (!(module instanceof SimpleModule simpleModule)) continue;
             String modId = module.getModId();
             for (EntrySet<?> entry : simpleModule.getEntries()) {

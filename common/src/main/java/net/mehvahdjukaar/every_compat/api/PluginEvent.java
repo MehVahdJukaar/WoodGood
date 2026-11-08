@@ -1,6 +1,6 @@
 package net.mehvahdjukaar.every_compat.api;
 
-import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.ECModules;
 import net.mehvahdjukaar.every_compat.api.example.WoodGoodAddonExample;
 import org.jetbrains.annotations.ApiStatus;
 
@@ -21,7 +21,7 @@ public final class PluginEvent {
     }
 
     private static void checkStillLoading() {
-        if (EveryCompat.arePluginsLoaded()) {
+        if (ECModules.arePluginsLoaded()) {
             throw new IllegalStateException("Every Compat plugins already loaded. Only use the registrar inside EveryCompatPlugin.register");
         }
     }
@@ -36,13 +36,13 @@ public final class PluginEvent {
      */
     public void addModule(String modId, Supplier<Class<? extends CompatModule>> moduleClass) {
         checkStillLoading();
-        EveryCompat.addOptionalModule(modId, moduleClass);
+        ECModules.addOptionalModule(modId, moduleClass);
     }
 
     @SafeVarargs
     public final void addModules(String modId, Supplier<Class<? extends CompatModule>>... moduleClasses) {
         checkStillLoading();
-        EveryCompat.addMultipleOptional(modId, moduleClasses);
+        ECModules.addMultipleOptional(modId, moduleClasses);
     }
 
     // ┌────────────────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -57,13 +57,13 @@ public final class PluginEvent {
     // Single ModiD & Multiple SupportedModId
     public void addOtherCompatMod(String compatModId, String fromModId, String... supportedModIds) {
         checkStillLoading();
-        EveryCompat.addOtherCompatMod(compatModId, fromModId, supportedModIds);
+        ECModules.addOtherCompatMod(compatModId, fromModId, supportedModIds);
     }
 
     // Multiple ModiD & Multiple SupportedModId
     public void addOtherCompatMod(String compatModId, List<String> fromModIds, String... supportedModIds) {
         checkStillLoading();
-        EveryCompat.addOtherCompatMod(compatModId, fromModIds, supportedModIds);
+        ECModules.addOtherCompatMod(compatModId, fromModIds, supportedModIds);
     }
 
     /**
@@ -75,7 +75,7 @@ public final class PluginEvent {
      */
     public void disableModule(String modId) {
         checkStillLoading();
-        EveryCompat.disableModule(modId);
+        ECModules.disableModule(modId);
     }
 
     /**
@@ -87,7 +87,7 @@ public final class PluginEvent {
      */
     public void disableBlock(String blockId) {
         checkStillLoading();
-        EveryCompat.disableBlock(blockId);
+        ECModules.disableBlock(blockId);
     }
 
     /**
@@ -97,6 +97,6 @@ public final class PluginEvent {
      */
     public void disableBlocksMatching(String blockIdRegex) {
         checkStillLoading();
-        EveryCompat.disableBlocksMatching(blockIdRegex);
+        ECModules.disableBlocksMatching(blockIdRegex);
     }
 }

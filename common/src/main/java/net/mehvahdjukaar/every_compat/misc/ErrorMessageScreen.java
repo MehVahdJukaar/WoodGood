@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.every_compat.misc;
 
+import net.mehvahdjukaar.every_compat.ECModules;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -92,7 +93,7 @@ public class ErrorMessageScreen extends Screen {
 
     public MutableComponent getErrorMessages() {
         MutableComponent errorMessage = Component.literal("\n");
-        EveryCompat.getModulesThatErrored().forEach((mod, error) -> {
+        ECModules.getModulesThatErrored().forEach((mod, error) -> {
             MutableComponent line = Component.literal("- ")
                     .append(Component.literal(mod).withStyle(ChatFormatting.GOLD))
                     .append(Component.literal(" : ").withStyle(ChatFormatting.WHITE))

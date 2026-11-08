@@ -1,7 +1,7 @@
 package net.mehvahdjukaar.every_compat.api;
 
+import net.mehvahdjukaar.every_compat.ECModules;
 import net.mehvahdjukaar.every_compat.ECRegistry;
-import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
@@ -45,7 +45,7 @@ public abstract class CompatModule {
         //yeah, bad api but doesn't matter if we use wood or other types
         //called here so we get right bus since module construction is delegated
         BlockSetAPI.addDynamicRegistration(myNamespace, (regBlock) -> {
-            EveryCompat.executeOrFail(() -> {
+            ECModules.executeOrFail(() -> {
                 for (Class<? extends BlockType> typeClass : this.getAffectedTypes()) {
                     this.registerBlocks(typeClass, regBlock);
                 }
@@ -53,22 +53,22 @@ public abstract class CompatModule {
         }, BuiltInRegistries.BLOCK);
 
         BlockSetAPI.addDynamicRegistration(myNamespace, (regItem) -> {
-            EveryCompat.executeOrFail(() -> {
+            ECModules.executeOrFail(() -> {
                 this.registerItems((resourceLocation, item) -> {
                     regItem.register(resourceLocation, item);
-                    EveryCompat.addItemToModuleMapping(item, this);
+                    ECModules.addItemToModuleMapping(item, this);
                 });
             }, this);
         }, BuiltInRegistries.ITEM);
 
         BlockSetAPI.addDynamicRegistration(myNamespace, r -> {
-            EveryCompat.executeOrFail(() -> {
+            ECModules.executeOrFail(() -> {
                 this.registerTiles(r);
             }, this);
         }, BuiltInRegistries.BLOCK_ENTITY_TYPE);
 
         BlockSetAPI.addDynamicRegistration(myNamespace, r -> {
-            EveryCompat.executeOrFail(() -> {
+            ECModules.executeOrFail(() -> {
                 this.registerEntities(r);
             }, this);
         }, BuiltInRegistries.ENTITY_TYPE);
