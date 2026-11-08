@@ -135,7 +135,7 @@ public abstract class CompatModule {
 
     /** Clarify the actual providing mod in crash reports.<br><br>
      *
-     * If a built-in module (like Beautify) crashes, the default report might just say "Beautify".
+     * If a built-in module (like Beautify) crashes, the default report might just say "Every Compat".
      * Another good example is: Create Fly (Fabric) and Create (Neoforge).<br>
      *
      * This makes it hard for users to find the right fork/port on CurseForge (e.g., Refabricated vs. Refoxed).<br><br>

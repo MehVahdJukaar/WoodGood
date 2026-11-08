@@ -44,9 +44,12 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
             ///DEFAULT: super("awesome_mod_id", "abm") -> myNamespace will be EveryCompat.MOD_ID
 
             /** Clarify the actual providing mod in crash reports.
-             * If a built-in module (like Beautify) crashes, the default report might just say "Beautify".
+             *
+             * If a built-in module (like Beautify) crashes, the default report might just say "Every Compat".
              * Another good example is: Create Fly (Fabric) and Create (Neoforge)
+             *
              * This makes it hard for users to find the right fork/port on CurseForge (e.g., Refabricated vs. Refoxed).
+             * Users may or may not be aware that Supported-Mods can have built-in modules instead of Every Compat
              * Setting the specific provider ID ensures crash logs point users to the correct mod for bug reporting.
             **/
             String providerId = (PlatHelper.getPlatform().isFabric()) ? "Beautify Refabricated" : "Beautify Refoxed";
