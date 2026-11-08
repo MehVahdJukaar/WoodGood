@@ -11,7 +11,6 @@
 | Blockus                    |   🟩   |
 | Clutter                    |   ❔   |
 | Create (FABRIC)            |   ❔   |
-| Excessive Building         |   ❔   |
 | Exline's Awnings           |   ❔   |
 | Farmer's Delight Refabricated                       |   🟩   |
 | Furnish                    |   ❔   |

@@ -72,12 +72,6 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
 //            if (modClass != null) addOptionalModule("shutter", () -> LauchsShuttersModule.class);
 //        }
 
-        //REASON: v4.0.0+ is no longer supported because it no longer has variant blocks
-//        if (PlatHelper.isModLoaded("excessive_building")) {
-//            if (!PlatHelper.getModVersion("excessive_building").matches("4[.\\d]{4}"))
-//                addOptionalModule("excessive_building", () -> ExcessiveBuildingModule.class);
-//        }
-
 // ============================================== DISABLED FOR A REASON ============================================= \\
 //        addModule("twilightforest", () -> TwilightForestModule::new); //!! NOT AVAILABLE
 
