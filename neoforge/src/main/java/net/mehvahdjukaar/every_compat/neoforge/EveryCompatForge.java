@@ -155,18 +155,6 @@ public class EveryCompatForge extends EveryCompatCommon {
 //        addOptionalModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule.class); //REASON: Not 100% compatible & CreativeTab key is outdated but even it's correct & will still crash
 //        addOptionalModule("xercamod", () -> XercaModule.class);
 
-        //REASON: There are 2 mods with the same modId but has different group_id. only Beautify! (Beautify Decorate) is applied
-        // Beautify Refoxed has the built-in module
-//        if (PlatHelper.isModLoaded("beautify")) {
-//            Class<?> modClass = null;
-//            try {
-//                modClass = Class.forName("com.github.Pandarix.beautify.Beautify");
-//            } catch (Exception ignored) {
-//            }
-//
-//            if (modClass != null) addOptionalModule("beautify", () -> BeautifyDecorateModule.class);
-//        }
-
 //        if (PlatHelper.isModLoaded("mcwdoors")) {
 //            addOptionalModule("dramaticdoors", () -> DramaticDoorsMacawModule.class);
 //        }
