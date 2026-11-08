@@ -51,6 +51,7 @@ public final class WoodGoodModuleExample extends EveryCompatModule {
             **/
             String providerId = (PlatHelper.getPlatform().isFabric()) ? "Beautify Refabricated" : "Beautify Refoxed";
             setProviderId(providerId);
+            //NOTE: providerId need to be full Mod-Name
 
             // minecraft's tab can be used for setTab() - it can use either ResourceKey or CreativeModeTab
             ResourceKey<CreativeModeTab> tab = CreativeModeTabs.BUILDING_BLOCKS;

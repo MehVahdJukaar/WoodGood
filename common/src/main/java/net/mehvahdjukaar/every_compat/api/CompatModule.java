@@ -140,6 +140,7 @@ public abstract class CompatModule {
      *
      * This makes it hard for users to find the right fork/port on CurseForge (e.g., Refabricated vs. Refoxed).<br><br>
      * Setting the specific provider ID ensures crash logs point users to the correct mod for bug reporting.
+     * @param displayName Require the full Mod-Name
      **/
     public void setProviderId(String displayName) {
         this.providerId = displayName;
