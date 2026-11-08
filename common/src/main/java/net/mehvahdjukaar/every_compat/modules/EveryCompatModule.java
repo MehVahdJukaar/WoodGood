@@ -6,8 +6,8 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.misc.UtilityTag;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -19,7 +19,6 @@ import java.util.function.Supplier;
 // Module for every compat mod. Just has extra utilities so we can easily query external mods.
 // If you are an addon extend CompatModule instead (and just stuff in the API package)
 // Its fine to extend for our own addon mods I guess
-@SuppressWarnings("removal")
 public abstract class EveryCompatModule extends SimpleModule {
 
     //DEFAULT: using EveryCompat.MOD_ID as myNamespace
