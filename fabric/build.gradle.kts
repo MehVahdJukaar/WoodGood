@@ -139,6 +139,7 @@ dependencies {
 //    modCompileOnly("curse.maven:building-but-better-989479:7627392") //!! 1.20.1
 //    modCompileOnly("curse.maven:clutter-826060:7876249") //@RML: Geckolib //!! 1.20.1
 //    modCompileOnly("curse.maven:create-fabric-624165:7286603") //!! 1.20.1
+    modCompileOnly("curse.maven:create-fly-1346281:8250336") // v6.0.9-4
 //    modCompileOnly("curse.maven:dramatic-doors-380617:6479044")
 //    modCompileOnly("curse.maven:excessive-building-845097:6075987") // v3.3.10
 //    modCompileOnly("curse.maven:exlines-awnings-526698:5478883")
