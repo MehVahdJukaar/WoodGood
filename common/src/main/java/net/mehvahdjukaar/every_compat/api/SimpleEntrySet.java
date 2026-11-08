@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.api;
 
 import com.google.common.base.Preconditions;
 import net.mehvahdjukaar.candlelight.api.ClientOnly;
+import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.misc.ExtraModelConfiguration;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
@@ -152,7 +153,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
                         blockType.addChild(childKey, block);
 
                         if (lootMode == LootTableMode.DROP_SELF && YEET_JSONS) {
-                            SIMPLE_DROPS.add(block);
+                            EveryCompat.addSimpleDrop(block);
                         }
                     } catch (Exception e) {
                         throw new UnsupportedOperationException("Failed to create or register block of " + blockType.getTranslationKey() + " with an EntrySetId: " + childKey + ". ERROR: " + e);
@@ -312,7 +313,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         protected final Supplier<@Nullable B> baseBlock;
         protected LootTableMode lootMode = LootTableMode.DROP_SELF;
         protected final BiFunction<T, BlockBehaviour.Properties, B> blockFactory;
-        protected Function<T, BlockBehaviour.Properties> propertiesFactory = SimpleEntrySet::copyMainChildProperties;
+        protected Function<T, BlockBehaviour.Properties> propertiesFactory = BlockTypeChildrenHelper::copyMainChildProperties;
         @Nullable
         protected TriFunction<T, B, Item.Properties, Item> itemFactory;
         @Nullable
@@ -498,17 +499,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
     }
 
 
-    protected static final boolean YEET_JSONS = true;
-    protected static final Set<Block> SIMPLE_DROPS = new HashSet<>();
-
-    public static <T extends BlockType> BlockBehaviour.Properties copyMainChildProperties(T type) {
-        if (type.mainChild() instanceof Block main) return Utils.copyPropertySafe(main);
-        throw new UnsupportedOperationException("Main child of " + type + " is not a block, entry set needs setProperties");
-    }
-
-    public static boolean isSimpleDrop(Block block) {
-        return SIMPLE_DROPS.contains(block);
-    }
+    private static final boolean YEET_JSONS = true;
 
     public enum LootTableMode {
         DROP_SELF,

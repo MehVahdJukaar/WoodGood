@@ -126,6 +126,11 @@ public abstract class AbstractSimpleEntrySet<T extends BlockType, B extends Bloc
         return null;
     }
 
+    public boolean isEnabled(T type) {
+        ItemLike entry = blocks.containsKey(type) ? blocks.get(type) : items.get(type);
+        return entry != null && ModEntriesConfigs.isEntryEnabled(type, entry);
+    }
+
     public Class<T> getTypeClass() {
         return type;
     }

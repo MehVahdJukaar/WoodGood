@@ -22,6 +22,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.ItemLike;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -54,6 +55,7 @@ public abstract class EveryCompat {
     //these are the names of the block types we add wooden variants for
     private static final Map<Class<? extends BlockType>, Set<String>> TYPES_TO_CHILD_KEYS = new Object2ObjectOpenHashMap<>();
     private static final Map<Item, CompatModule> ITEMS_TO_MODULES = new Object2ObjectOpenHashMap<>();
+    private static final Set<Block> SIMPLE_DROPS = new HashSet<>();
 
     // all mod that EC directly or indirectly depends on
     private static final Set<String> DEPENDENCIES = new HashSet<>();
@@ -207,6 +209,14 @@ public abstract class EveryCompat {
 
     public static CompatModule getModuleOfItem(Item item) {
         return ITEMS_TO_MODULES.get(item);
+    }
+
+    public static synchronized void addSimpleDrop(Block block) {
+        SIMPLE_DROPS.add(block);
+    }
+
+    public static boolean isSimpleDrop(Block block) {
+        return SIMPLE_DROPS.contains(block);
     }
 
     public static synchronized <T extends BlockType> void trackChildType(Class<T> type, String childId) {

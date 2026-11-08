@@ -28,7 +28,7 @@ import java.io.InputStream;
 import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
-import static net.mehvahdjukaar.every_compat.misc.UtilityMisc.doChildrenExistFor;
+import static net.mehvahdjukaar.every_compat.api.BlockTypeChildrenHelper.doChildrenExist;
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.createAndAddCustomTags;
 
 //SUPPORT: v4.0+
@@ -120,17 +120,17 @@ public class WilderWildModule extends EveryCompatModule {
             boolean isStem = Utils.getID(wood.log).toString().contains("stem");
             if (isStem) {
                 HollowedLogBlock.registerAxeHollowBehaviorStem(wood.log, hollow_logs.blocks.get(wood));
-                if (doChildrenExistFor(wood,"stripped_log"))
+                if (doChildrenExist(wood, "stripped_log"))
                     HollowedLogBlock.registerAxeHollowBehaviorStem(wood.getBlockOfThis("stripped_log"), stripped_hollow_logs.blocks.get(wood));
             }
             else {
                 HollowedLogBlock.registerAxeHollowBehavior(wood.log, hollow_logs.blocks.get(wood));
-                if (doChildrenExistFor(wood,"stripped_log")) {
+                if (doChildrenExist(wood, "stripped_log")) {
                     HollowedLogBlock.registerAxeHollowBehavior(wood.getBlockOfThis("stripped_log"), stripped_hollow_logs.blocks.get(wood));
                 }
             }
 
-            if (doChildrenExistFor(wood, stripped_hollow_logs)) // For stripping the logs
+            if (stripped_hollow_logs.blocks.containsKey(wood)) // For stripping the logs
                 StrippableBlockRegistry.register(block, stripped_hollow_logs.blocks.get(wood));
         });
     }

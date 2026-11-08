@@ -35,8 +35,7 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.EveryCompat.res;
-import static net.mehvahdjukaar.every_compat.misc.UtilityMisc.copyChildrenPropertySafe;
-import static net.mehvahdjukaar.every_compat.misc.UtilityMisc.doChildrenExistFor;
+import static net.mehvahdjukaar.every_compat.api.BlockTypeChildrenHelper.copyChildProperties;
 
 //SUPPORT: v2.9.11+ (FABRIC)
 public class BlockusModule extends EveryCompatModule {
@@ -95,7 +94,7 @@ public class BlockusModule extends EveryCompatModule {
                         getModBlock("mossy_oak_slab"), () -> VanillaWoodTypes.OAK,
                         (woodType, p) -> new SlabBlock(p)
                 )
-                .setProperties(woodType -> copyChildrenPropertySafe("slab", woodType))
+                .setProperties(woodType -> copyChildProperties(woodType, "slab"))
                 .requiresFromMap(mossy_planks.blocks) //REASON: textures, recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.SLABS, Registries.BLOCK)
@@ -112,7 +111,7 @@ public class BlockusModule extends EveryCompatModule {
                                 p)
 
                 )
-                .setProperties(woodType -> copyChildrenPropertySafe("stairs", woodType))
+                .setProperties(woodType -> copyChildProperties(woodType, "stairs"))
                 .requiresFromMap(mossy_planks.blocks) //REASON: textures, recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.STAIRS, Registries.BLOCK)
@@ -174,7 +173,7 @@ public class BlockusModule extends EveryCompatModule {
                         getModBlock("oak_mosaic_slab"), () -> VanillaWoodTypes.OAK,
                         (woodType, p) -> new SlabBlock(p)
                 )
-                .setProperties(woodType -> copyChildrenPropertySafe("slab", woodType))
+                .setProperties(woodType -> copyChildProperties(woodType, "slab"))
                 .requiresFromMap(mosaic.blocks) //REASON: textures, recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.SLABS, Registries.BLOCK)
@@ -190,7 +189,7 @@ public class BlockusModule extends EveryCompatModule {
                                 p)
 
                 )
-                .setProperties(woodType -> copyChildrenPropertySafe("stairs", woodType))
+                .setProperties(woodType -> copyChildProperties(woodType, "stairs"))
                 .requiresFromMap(mosaic.blocks) //REASON: textures, recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.STAIRS, Registries.BLOCK)
@@ -318,7 +317,7 @@ public class BlockusModule extends EveryCompatModule {
     @Override
     public void onModSetup() {
         post.blocks.forEach((woodType, block) -> {
-            if (doChildrenExistFor(woodType, stripped_post)) // For stripping the logs
+            if (stripped_post.blocks.containsKey(woodType)) // For stripping the logs
                 StrippableBlockRegistry.register(block, stripped_post.blocks.get(woodType));
         });
     }
