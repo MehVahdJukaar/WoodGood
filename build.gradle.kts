@@ -42,7 +42,7 @@ subprojects {
     }
 
     upload {
-        var modLoader = name
+        val modLoader = name
         curseforge {
             dependencies {
                 required("selene")
@@ -283,7 +283,7 @@ subprojects {
     tasks.withType<JavaCompile> {
         options.compilerArgs.addAll(listOf(
             "-Xmaxerrs", "4000",
-            "-Xlint:-javadoc" // Disable the "warning: no comment" during compiling
+            "-Xlint:deprecation" // Disable the "warning: no comment" during compiling
         ))
     }
 
