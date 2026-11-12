@@ -13,6 +13,17 @@
 |                                                                                                                                   |
 
 ---
+## v2.11.58
+
+### CHANGES:
+- **Every Compat** (C): 
+  - Re-added 2 methods via UtilityTag & Marked them as deprecated & for removal.
+  - Improved the loggings, the one with "module\[ Supported Mod @ namespace \]" & Others
+  - Tweaked code that is somehow responsible for baseItem being null when used F3 + T, Hopefully this will fix one issue
+- **Chipped** (INCLUDED): Minecraft's CRIMSON & WARPED for glass and glass_pane - [#1275](https://github.com/MehVahdJukaar/WoodGood/issues/1275)
+
+---
+
 ## v2.11.57
 
 ### CHANGES:
