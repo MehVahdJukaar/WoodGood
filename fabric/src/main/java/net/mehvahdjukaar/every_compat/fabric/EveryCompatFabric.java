@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.fabric;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
+import net.mehvahdjukaar.every_compat.ECCreativeTabs;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.EveryCompatClient;
 import net.mehvahdjukaar.every_compat.api.CompatModule;
@@ -12,6 +13,7 @@ import net.mehvahdjukaar.every_compat.modules.fabric.clutter.ClutterModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.dramaticdoors.DramaticDoorsMacawModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.dramaticdoors.DramaticDoorsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.farmersdelight.FarmersDelightModule;
+import net.mehvahdjukaar.every_compat.modules.fabric.handcrafted.HandcraftedModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.infinitybuttons.InfinityButtonsModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.lightmans_currency.LightmansCurrencyModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.mcaw.*;
@@ -60,6 +62,7 @@ public class EveryCompatFabric extends EveryCompat implements ModInitializer {
             addModule("dramaticdoors", () -> DramaticDoorsMacawModule::new);
         }
         addModule("farmersdelight", () -> FarmersDelightModule::new);
+        addModule("handcrafted", () -> HandcraftedModule::new);
         addModule("infinitybuttons", () -> InfinityButtonsModule::new);
         addModule("lightmanscurrency", () -> LightmansCurrencyModule::new);
         addModule("missingwilds", () -> MissingWildModule::new);

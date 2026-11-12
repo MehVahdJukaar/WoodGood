@@ -27,21 +27,22 @@ import net.minecraft.world.item.Items;
 @Environment(EnvType.CLIENT)
 public class CompatItemRenderer {
 
-    public static class TableItemRenderer extends ItemStackRenderer {
-
-        @Override
-        public void renderByItem(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight, int packedOverlay) {
-            OptimizedTableRenderer.INSTANCE.doRender(poseStack, multiBufferSource, packedLight, packedOverlay,
-                    TableState.SINGLE, SheetState.SINGLE, Items.AIR, itemStack.getItem());
-        }
-    }
-
     public static class ChairItemRenderer extends ItemStackRenderer {
+
         @Override
         public void renderByItem(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight, int packedOverlay) {
             poseStack.scale(0.75f, 0.75f, 0.75f);
             OptimizedChairRenderer.INSTANCE.doRender(Direction.SOUTH, poseStack, multiBufferSource,
                     packedLight, packedOverlay, itemStack.getItem(), Items.AIR);
+        }
+    }
+
+    public static class TableItemRenderer extends ItemStackRenderer {
+        @Override
+        public void renderByItem(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack poseStack,
+                                 MultiBufferSource multiBufferSource, int i, int i1) {
+            OptimizedTableRenderer.INSTANCE.doRender(poseStack, multiBufferSource, i, i1,
+                    TableState.SINGLE, SheetState.SINGLE, Items.AIR, itemStack.getItem());
         }
     }
 
@@ -61,7 +62,8 @@ public class CompatItemRenderer {
     public static class CouchItemRenderer extends ItemStackRenderer {
 
         @Override
-        public void renderByItem(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight, int packedOverlay) {
+        public void renderByItem(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack poseStack,
+                                 MultiBufferSource multiBufferSource, int packedLight, int packedOverlay) {
             CouchModel model = new CouchModel(Minecraft.getInstance().getEntityModels().bakeLayer(CouchModel.LAYER_LOCATION_SINGLE));
             Item whiteCushion = BuiltInRegistries.ITEM.get(new ResourceLocation(Handcrafted.MOD_ID, "white_cushion"));
 
@@ -77,7 +79,8 @@ public class CompatItemRenderer {
     public static class FancyBedItemRenderer extends ItemStackRenderer {
 
         @Override
-        public void renderByItem(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight, int packedOverlay) {
+        public void renderByItem(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack poseStack,
+                                 MultiBufferSource multiBufferSource, int packedLight, int packedOverlay) {
             FancyBedModel model = new FancyBedModel(Minecraft.getInstance().getEntityModels().bakeLayer(FancyBedModel.LAYER_LOCATION_SINGLE));
             Item sheet = BuiltInRegistries.ITEM.get(new ResourceLocation(Handcrafted.MOD_ID, "white_sheet"));
             Item cushion = BuiltInRegistries.ITEM.get(new ResourceLocation(Handcrafted.MOD_ID, "white_cushion"));
@@ -94,7 +97,8 @@ public class CompatItemRenderer {
     public static class DiningBenchItemRenderer extends ItemStackRenderer {
 
         @Override
-        public void renderByItem(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight, int packedOverlay) {
+        public void renderByItem(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack poseStack,
+                                 MultiBufferSource multiBufferSource, int packedLight, int packedOverlay) {
             DiningBenchModel model = new DiningBenchModel(Minecraft.getInstance().getEntityModels().bakeLayer(DiningBenchModel.LAYER_LOCATION_SINGLE));
 
             OptimizedDiningBenchRenderer.INSTANCE.doRender(itemStack.getItem(), model, Direction.SOUTH, poseStack,
@@ -104,7 +108,8 @@ public class CompatItemRenderer {
 
     public static class NightstandItemRenderer extends ItemStackRenderer {
         @Override
-        public void renderByItem(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight, int packedOverlay) {
+        public void renderByItem(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack poseStack,
+                                 MultiBufferSource multiBufferSource, int packedLight, int packedOverlay) {
             OptimizedNightstandRenderer.INSTANCE.doRender(Direction.SOUTH, poseStack, multiBufferSource,
                     packedLight, packedOverlay, Items.AIR, itemStack.getItem());
         }
@@ -112,7 +117,8 @@ public class CompatItemRenderer {
 
     public static class DeskItemRenderer extends ItemStackRenderer {
         @Override
-        public void renderByItem(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight, int packedOverlay) {
+        public void renderByItem(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack poseStack,
+                                 MultiBufferSource multiBufferSource, int packedLight, int packedOverlay) {
             OptimizedDeskRenderer.INSTANCE.doRender(Direction.SOUTH, poseStack, multiBufferSource,
                     packedLight, packedOverlay, Items.AIR, itemStack.getItem());
         }
@@ -121,7 +127,8 @@ public class CompatItemRenderer {
     public static class SideTableItemRenderer extends ItemStackRenderer {
 
         @Override
-        public void renderByItem(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight, int packedOverlay) {
+        public void renderByItem(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack poseStack,
+                                 MultiBufferSource multiBufferSource, int packedLight, int packedOverlay) {
 
             OptimizedSideTableRenderer.INSTANCE.doRender(Direction.SOUTH, poseStack, multiBufferSource,
                     packedLight, packedOverlay, Items.AIR, itemStack.getItem());
@@ -131,7 +138,8 @@ public class CompatItemRenderer {
     public static class CounterItemRenderer extends ItemStackRenderer {
 
         @Override
-        public void renderByItem(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight, int packedOverlay) {
+        public void renderByItem(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack poseStack,
+                                 MultiBufferSource multiBufferSource, int packedLight, int packedOverlay) {
             var blockId = BuiltInRegistries.ITEM.getKey(itemStack.getItem());
 
             OptimizedCounterRenderer.INSTANCE.doRender(new ResourceLocation("calcite"), blockId,
