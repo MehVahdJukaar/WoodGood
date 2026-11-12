@@ -26,12 +26,14 @@ public class ModelWarningSuppressor {
                     missingTextures);
         }
         if (!MISSING_VARIANT_BLOCKSTATES.isEmpty()) {
+            String blockstatesFile = String.format("\n\t- %s", MISSING_VARIANT_BLOCKSTATES.stream().limit(8).toList());
             EveryCompat.LOGGER.error("{} of our blockstates have states with no model (blockstate json missing or pointing to models that were never generated). First few: {}",
-                    MISSING_VARIANT_BLOCKSTATES.size(), MISSING_VARIANT_BLOCKSTATES.stream().limit(8).toList());
+                    MISSING_VARIANT_BLOCKSTATES.size(), blockstatesFile);
         }
         if (!UNLOADABLE_MODELS.isEmpty()) {
+            String modelsFile = String.format("\n\t- %s", UNLOADABLE_MODELS.stream().limit(8).toList());
             EveryCompat.LOGGER.error("{} of our models could not be loaded (json missing or broken). First few: {}",
-                    UNLOADABLE_MODELS.size(), UNLOADABLE_MODELS.stream().limit(8).toList());
+                    UNLOADABLE_MODELS.size(), modelsFile);
         }
     }
 }
