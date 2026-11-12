@@ -87,6 +87,7 @@ public class QuarkModule extends EveryCompatModule {
                 .setTab(getTab(tab))
                 .setTabMode(TabAddMode.AFTER_SAME_WOOD)
                 .addRecipe(modRes("building/crafting/vertslabs/oak_vertical_slab"))
+                .addRecipe(modRes("building/crafting/vertslabs/oak_vertical_slab_revert"))
                 //RECIPES: See addDynamicServerResources for oak_vertical_slab_revert
                 .addCondition(woodType -> !PlatHelper.isModLoaded("v_slab_compat"))
                 .copyParentDrop()
@@ -420,8 +421,8 @@ public class QuarkModule extends EveryCompatModule {
                 if (block != null) createHedgeRecipe(leavesType, block, sink, manager);
             });
 
-            forEachSafely("vertical slab recipe", verticalSlabs.blocks, (woodType, block) ->
-                    createVertSlabRecipe(woodType, block, sink));
+//            forEachSafely("vertical slab recipe", verticalSlabs.blocks, (woodType, block) ->
+//                    createVertSlabRecipe(woodType, block, sink));
         });
     }
 
@@ -496,7 +497,7 @@ public class QuarkModule extends EveryCompatModule {
                 }\s
                 """;
 
-        if (Objects.nonNull(woodType.getBlockOfThis(SLAB))) {
+        if (woodType.getBlockOfThis(SLAB) != null) {
             String newRecipe = recipe
                     .replace("[SLAB]", Utils.getID(Objects.requireNonNull(woodType.getBlockOfThis(SLAB))).toString())
                     .replace("[VERTICAL_SLAB]", Utils.getID(vertSlab).toString());
