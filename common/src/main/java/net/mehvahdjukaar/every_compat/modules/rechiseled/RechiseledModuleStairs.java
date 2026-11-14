@@ -4,7 +4,6 @@ import com.supermartijn642.rechiseled.blocks.RechiseledStairBlock;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
@@ -40,9 +39,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
         
         oak_planks_beams_stairs = SimpleEntrySet.builder(WoodType.class, "planks_beams_stairs",
                         getModBlock("oak_planks_beams_stairs"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(false,
+                        (type, properties) -> new RechiseledStairBlock(false,
                                 getParentBlockState(type, "planks_beams"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -61,9 +60,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_beams_stairs_connecting = SimpleEntrySet.builder(WoodType.class, "planks_beams_stairs_connecting",
                         getModBlock("oak_planks_beams_stairs_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(true,
+                        (type, properties) -> new RechiseledStairBlock(true,
                                 getParentBlockState(type, "planks_beams_connecting"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -82,9 +81,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_brick_pattern_stairs = SimpleEntrySet.builder(WoodType.class, "planks_brick_pattern_stairs",
                         getModBlock("oak_planks_brick_pattern_stairs"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(false,
+                        (type, properties) -> new RechiseledStairBlock(false,
                                 getParentBlockState(type, "planks_brick_pattern"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -103,9 +102,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_brick_pattern_stairs_connecting = SimpleEntrySet.builder(WoodType.class, "planks_brick_pattern_stairs_connecting",
                         getModBlock("oak_planks_brick_pattern_stairs_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(true,
+                        (type, properties) -> new RechiseledStairBlock(true,
                                 getParentBlockState(type, "planks_brick_pattern_connecting"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -124,9 +123,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_brick_paving_stairs = SimpleEntrySet.builder(WoodType.class, "planks_brick_paving_stairs",
                         getModBlock("oak_planks_brick_paving_stairs"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(false,
+                        (type, properties) -> new RechiseledStairBlock(false,
                                 getParentBlockState(type, "planks_brick_paving"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -145,9 +144,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_brick_paving_stairs_connecting = SimpleEntrySet.builder(WoodType.class, "planks_brick_paving_stairs_connecting",
                         getModBlock("oak_planks_brick_paving_stairs_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(true,
+                        (type, properties) -> new RechiseledStairBlock(true,
                                 getParentBlockState(type, "planks_brick_paving_connecting"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -166,9 +165,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_bricks_stairs = SimpleEntrySet.builder(WoodType.class, "planks_bricks_stairs",
                         getModBlock("oak_planks_bricks_stairs"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(false,
+                        (type, properties) -> new RechiseledStairBlock(false,
                                 getParentBlockState(type, "planks_bricks"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -187,9 +186,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_bricks_stairs_connecting = SimpleEntrySet.builder(WoodType.class, "planks_bricks_stairs_connecting",
                         getModBlock("oak_planks_bricks_stairs_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(true,
+                        (type, properties) -> new RechiseledStairBlock(true,
                                 getParentBlockState(type, "planks_bricks_connecting"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -208,9 +207,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_crate_stairs = SimpleEntrySet.builder(WoodType.class, "planks_crate_stairs",
                         getModBlock("oak_planks_crate_stairs"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(false,
+                        (type, properties) -> new RechiseledStairBlock(false,
                                 getParentBlockState(type, "planks_crate"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -229,9 +228,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_crate_stairs_connecting = SimpleEntrySet.builder(WoodType.class, "planks_crate_stairs_connecting",
                         getModBlock("oak_planks_crate_stairs_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(true,
+                        (type, properties) -> new RechiseledStairBlock(true,
                                 getParentBlockState(type, "planks_crate_connecting"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -250,9 +249,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_diagonal_stripes_stairs = SimpleEntrySet.builder(WoodType.class, "planks_diagonal_stripes_stairs",
                         getModBlock("oak_planks_diagonal_stripes_stairs"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(false,
+                        (type, properties) -> new RechiseledStairBlock(false,
                                 getParentBlockState(type, "planks_diagonal_stripes"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -271,9 +270,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_diagonal_stripes_stairs_connecting = SimpleEntrySet.builder(WoodType.class, "planks_diagonal_stripes_stairs_connecting",
                         getModBlock("oak_planks_diagonal_stripes_stairs_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(true,
+                        (type, properties) -> new RechiseledStairBlock(true,
                                 getParentBlockState(type, "planks_diagonal_stripes_connecting"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -292,9 +291,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_diagonal_tiles_stairs = SimpleEntrySet.builder(WoodType.class, "planks_diagonal_tiles_stairs",
                         getModBlock("oak_planks_diagonal_tiles_stairs"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(false,
+                        (type, properties) -> new RechiseledStairBlock(false,
                                 getParentBlockState(type, "planks_diagonal_tiles"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -313,9 +312,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_diagonal_tiles_stairs_connecting = SimpleEntrySet.builder(WoodType.class, "planks_diagonal_tiles_stairs_connecting",
                         getModBlock("oak_planks_diagonal_tiles_stairs_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(true,
+                        (type, properties) -> new RechiseledStairBlock(true,
                                 getParentBlockState(type, "planks_diagonal_tiles_connecting"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -334,9 +333,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_dotted_stairs = SimpleEntrySet.builder(WoodType.class, "planks_dotted_stairs",
                         getModBlock("oak_planks_dotted_stairs"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(false,
+                        (type, properties) -> new RechiseledStairBlock(false,
                                 getParentBlockState(type, "planks_dotted"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -355,9 +354,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_dotted_stairs_connecting = SimpleEntrySet.builder(WoodType.class, "planks_dotted_stairs_connecting",
                         getModBlock("oak_planks_dotted_stairs_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(true,
+                        (type, properties) -> new RechiseledStairBlock(true,
                                 getParentBlockState(type, "planks_dotted_connecting"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -376,9 +375,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_flooring_stairs = SimpleEntrySet.builder(WoodType.class, "planks_flooring_stairs",
                         getModBlock("oak_planks_flooring_stairs"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(false,
+                        (type, properties) -> new RechiseledStairBlock(false,
                                 getParentBlockState(type, "planks_flooring"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -397,9 +396,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_flooring_stairs_connecting = SimpleEntrySet.builder(WoodType.class, "planks_flooring_stairs_connecting",
                         getModBlock("oak_planks_flooring_stairs_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(true,
+                        (type, properties) -> new RechiseledStairBlock(true,
                                 getParentBlockState(type, "planks_flooring_connecting"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -418,9 +417,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_large_tiles_stairs = SimpleEntrySet.builder(WoodType.class, "planks_large_tiles_stairs",
                         getModBlock("oak_planks_large_tiles_stairs"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(false,
+                        (type, properties) -> new RechiseledStairBlock(false,
                                 getParentBlockState(type, "planks_large_tiles"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -439,9 +438,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_large_tiles_stairs_connecting = SimpleEntrySet.builder(WoodType.class, "planks_large_tiles_stairs_connecting",
                         getModBlock("oak_planks_large_tiles_stairs_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(true,
+                        (type, properties) -> new RechiseledStairBlock(true,
                                 getParentBlockState(type, "planks_large_tiles_connecting"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -460,9 +459,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_pattern_stairs = SimpleEntrySet.builder(WoodType.class, "planks_pattern_stairs",
                         getModBlock("oak_planks_pattern_stairs"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(false,
+                        (type, properties) -> new RechiseledStairBlock(false,
                                 getParentBlockState(type, "planks_pattern"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -481,9 +480,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_pattern_stairs_connecting = SimpleEntrySet.builder(WoodType.class, "planks_pattern_stairs_connecting",
                         getModBlock("oak_planks_pattern_stairs_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(true,
+                        (type, properties) -> new RechiseledStairBlock(true,
                                 getParentBlockState(type, "planks_pattern_connecting"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -502,9 +501,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_rotated_bricks_stairs = SimpleEntrySet.builder(WoodType.class, "planks_rotated_bricks_stairs",
                         getModBlock("oak_planks_rotated_bricks_stairs"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(false,
+                        (type, properties) -> new RechiseledStairBlock(false,
                                 getParentBlockState(type, "planks_rotated_bricks"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -523,9 +522,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_rotated_bricks_stairs_connecting = SimpleEntrySet.builder(WoodType.class, "planks_rotated_bricks_stairs_connecting",
                         getModBlock("oak_planks_rotated_bricks_stairs_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(true,
+                        (type, properties) -> new RechiseledStairBlock(true,
                                 getParentBlockState(type, "planks_rotated_bricks_connecting"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -544,9 +543,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_small_bricks_stairs = SimpleEntrySet.builder(WoodType.class, "planks_small_bricks_stairs",
                         getModBlock("oak_planks_small_bricks_stairs"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(false,
+                        (type, properties) -> new RechiseledStairBlock(false,
                                 getParentBlockState(type, "planks_small_bricks"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -565,9 +564,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_small_bricks_stairs_connecting = SimpleEntrySet.builder(WoodType.class, "planks_small_bricks_stairs_connecting",
                         getModBlock("oak_planks_small_bricks_stairs_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(true,
+                        (type, properties) -> new RechiseledStairBlock(true,
                                 getParentBlockState(type, "planks_small_bricks_connecting"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -586,9 +585,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_small_tiles_stairs = SimpleEntrySet.builder(WoodType.class, "planks_small_tiles_stairs",
                         getModBlock("oak_planks_small_tiles_stairs"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(false,
+                        (type, properties) -> new RechiseledStairBlock(false,
                                 getParentBlockState(type, "planks_small_tiles"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -607,9 +606,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_small_tiles_stairs_connecting = SimpleEntrySet.builder(WoodType.class, "planks_small_tiles_stairs_connecting",
                         getModBlock("oak_planks_small_tiles_stairs_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(true,
+                        (type, properties) -> new RechiseledStairBlock(true,
                                 getParentBlockState(type, "planks_small_tiles_connecting"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -628,9 +627,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_squares_stairs = SimpleEntrySet.builder(WoodType.class, "planks_squares_stairs",
                         getModBlock("oak_planks_squares_stairs"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(false,
+                        (type, properties) -> new RechiseledStairBlock(false,
                                 getParentBlockState(type, "planks_squares"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -649,9 +648,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_squares_stairs_connecting = SimpleEntrySet.builder(WoodType.class, "planks_squares_stairs_connecting",
                         getModBlock("oak_planks_squares_stairs_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(true,
+                        (type, properties) -> new RechiseledStairBlock(true,
                                 getParentBlockState(type, "planks_squares_connecting"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -670,9 +669,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_tiles_stairs = SimpleEntrySet.builder(WoodType.class, "planks_tiles_stairs",
                         getModBlock("oak_planks_tiles_stairs"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(false,
+                        (type, properties) -> new RechiseledStairBlock(false,
                                 getParentBlockState(type, "planks_tiles"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -691,9 +690,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_tiles_stairs_connecting = SimpleEntrySet.builder(WoodType.class, "planks_tiles_stairs_connecting",
                         getModBlock("oak_planks_tiles_stairs_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(true,
+                        (type, properties) -> new RechiseledStairBlock(true,
                                 getParentBlockState(type, "planks_tiles_connecting"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -712,9 +711,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_wavy_stairs = SimpleEntrySet.builder(WoodType.class, "planks_wavy_stairs",
                         getModBlock("oak_planks_wavy_stairs"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(false,
+                        (type, properties) -> new RechiseledStairBlock(false,
                                 getParentBlockState(type, "planks_wavy"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -733,9 +732,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_wavy_stairs_connecting = SimpleEntrySet.builder(WoodType.class, "planks_wavy_stairs_connecting",
                         getModBlock("oak_planks_wavy_stairs_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(true,
+                        (type, properties) -> new RechiseledStairBlock(true,
                                 getParentBlockState(type, "planks_wavy_connecting"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -754,9 +753,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_woven_stairs = SimpleEntrySet.builder(WoodType.class, "planks_woven_stairs",
                         getModBlock("oak_planks_woven_stairs"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(false,
+                        (type, properties) -> new RechiseledStairBlock(false,
                                 getParentBlockState(type, "planks_woven"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -775,9 +774,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_woven_stairs_connecting = SimpleEntrySet.builder(WoodType.class, "planks_woven_stairs_connecting",
                         getModBlock("oak_planks_woven_stairs_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(true,
+                        (type, properties) -> new RechiseledStairBlock(true,
                                 getParentBlockState(type, "planks_woven_connecting"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block
@@ -797,9 +796,9 @@ public class RechiseledModuleStairs extends RechiseledModuleAbstract {
 
         oak_planks_mosaic_stairs = SimpleEntrySet.builder(WoodType.class, "planks_mosaic_stairs",
                         getModBlock("oak_planks_mosaic_stairs"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledStairBlock(false,
+                        (type, properties) -> new RechiseledStairBlock(false,
                                 getParentBlockState(type, "planks_mosaic"),
-                                p
+                                properties
                         )
                 )
                 //REASON: stairs' parent-block

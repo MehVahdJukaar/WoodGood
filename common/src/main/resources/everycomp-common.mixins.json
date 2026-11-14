@@ -2,14 +2,15 @@
   "required": true,
   "minVersion": "0.8",
   "package": "net.mehvahdjukaar.every_compat.mixins",
-  "compatibilityLevel": "JAVA_21",
+  "compatibilityLevel": "JAVA_25",
   "client": [
     "client.BlockStateModelLoaderMixin",
     "client.ModelDiscoveryMixin",
     "client.ModelManagerMixin"
   ],
   "mixins": [
-    "LootTablesHackMixin"
+    "LootTablesHackMixin",
+    "RechiseledBaseBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1
