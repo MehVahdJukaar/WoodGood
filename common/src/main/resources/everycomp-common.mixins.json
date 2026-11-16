@@ -9,6 +9,7 @@
     "client.ModelManagerMixin"
   ],
   "mixins": [
+    "BlockPropertiesAccessorMixin",
     "LootTablesHackMixin",
     "RechiseledBaseBlockMixin"
   ],

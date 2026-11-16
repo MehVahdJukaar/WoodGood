@@ -26,8 +26,9 @@ public abstract class RechiseledBaseBlockMixin {
             BlockBehaviour.Properties properties,
             ResourceKey<Block> id
     ) {
+        ResourceKey<Block> resourceKey = ((BlockPropertiesAccessorMixin) properties).everyCompat$getId();
         // Keep EveryCompat's existing ID if it is already set on properties
-        if (properties.id != null && properties.id.identifier().getNamespace().equals("everycomp")) {
+        if (resourceKey != null && resourceKey.identifier().getNamespace().equals("everycomp")) {
             return properties;
         }
         // Otherwise, let Rechiseled apply its dummy ID as normal
