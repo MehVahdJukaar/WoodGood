@@ -13,6 +13,13 @@
 |                                                                                                                                   |
 
 ---
+## v3.0.2
+
+### FIXES:
+- **Rechiseled** (C): Fix the crash due to Properties' Id not being EveryCompat's id - See Details @ [#1260](https://github.com/MehVahdJukaar/WoodGood/issues/1260)
+
+---
+
 ## v3.0.1
 
 ### CHANGES:
