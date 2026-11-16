@@ -1,8 +1,8 @@
 package net.mehvahdjukaar.every_compat.api;
 
-import net.mehvahdjukaar.every_compat.ECModules;
 import com.google.common.base.Preconditions;
 import net.mehvahdjukaar.candlelight.api.ClientOnly;
+import net.mehvahdjukaar.every_compat.ECModules;
 import net.mehvahdjukaar.every_compat.misc.ExtraModelConfiguration;
 import net.mehvahdjukaar.every_compat.misc.ResourcesUtils;
 import net.mehvahdjukaar.moonlight.api.events.AfterLanguageLoadEvent;
@@ -365,7 +365,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
             return this;
         }
 
-        /// Defaults to a copy of the type main block (planks, leaves)
+        /// Defaults to a copy of the mainBlock (planks, leaves) - Using this method to use a different block instead of mainBlock
         public Builder<T, B> setProperties(Function<T, BlockBehaviour.Properties> propertiesFactory) {
             this.propertiesFactory = propertiesFactory;
             return this;
@@ -377,7 +377,7 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         }
 
         public Builder<T, B> noItem() {
-            this.itemFactory = (a, b, c) -> null;
+            this.itemFactory = (_, _, _) -> null;
             return this;
         }
 
