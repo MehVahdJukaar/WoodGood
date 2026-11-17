@@ -174,7 +174,7 @@ public class ResourcesUtils {
 
             Identifier oakItemId = Utils.getID(oakItem);
             if (manager.getResource(ResType.ITEM_MODELS.getPath(oakItemId)).isEmpty()) {
-                copyItemDefinitions(manager, sink, items, oakItemId, itemModelTransformer);
+                copyItemDefinitions(manager, sink, items, oakItemId, itemModelTransformer, modelConfig);
                 return;
             }
             StaticResource oakItemModel = StaticResource.getOrLog(manager, ResType.ITEM_MODELS.getPath(oakItemId));
@@ -244,9 +244,15 @@ public class ResourcesUtils {
 
     //no models/item, so the items/ json points straight at block modesl (or a special renderer). copy it over
     private static <I extends Item, T extends BlockType> void copyItemDefinitions(ResourceManager manager, ResourceSink sink, Map<T, I> items,
-                                                                                  Identifier oakItemId, BlockTypeResTransformer<T> transformer) {
+                                                                                  Identifier oakItemId, BlockTypeResTransformer<T> transformer,
+                                                                                  ExtraModelConfiguration modelConfig) {
         StaticResource oakDefinition = StaticResource.getOrLog(manager, ResType.ITEMS.getPath(oakItemId));
         if (oakDefinition == null) return;
+
+        //models only the item uses
+        JsonElement json = RPUtils.deserializeJson(new ByteArrayInputStream(oakDefinition.data));
+        Set<String> modelsLoc = new HashSet<>(RPUtils.findAllResourcesInJsonRecursive(json, s -> s.equals("model")));
+        List<StaticResource> oakModels = gatherNonVanillaModels(manager, modelsLoc, modelConfig);
 
         items.forEach((blockType, item) -> {
             if (isCompatChest(item)) return;
@@ -255,6 +261,10 @@ public class ResourcesUtils {
                 StaticResource newDefinition = transformer.transform(oakDefinition, id, blockType);
                 sink.addJsonUnlessPresent(manager, ResType.ITEMS.getPath(id),
                         () -> RPUtils.deserializeJson(new ByteArrayInputStream(newDefinition.data)));
+
+                for (StaticResource model : oakModels) {
+                    sink.addResourceIfNotPresent(manager, transformer.transform(model, id, blockType));
+                }
             });
         });
     }
