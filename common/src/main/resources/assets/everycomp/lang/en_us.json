@@ -855,5 +855,13 @@
   "block_type.lightmanscurrency.shelf_2x2": "%s 2x2 Shelf",
   "block_type.lightmanscurrency.bookshelf_trader": "%s Bookshelf Trader",
   "block_type.lightmanscurrency.auction_stand": "%s Auction Stand",
-  "block_type.lightmanscurrency.card_display": "%s Card Display"
+  "block_type.lightmanscurrency.card_display": "%s Card Display",
+
+  "block_type.excessive_building.crafting_table": "%s Crafting Table",
+  "block_type.excessive_building.vertical_stairs": "%s Vertical Stairs",
+  "block_type.excessive_building.chiseled": "Chiseled %s Planks",
+  "block_type.excessive_building.mosaic": "%s Mosaic",
+  "block_type.excessive_building.mosaic_slab": "%s Mosaic Slab",
+  "block_type.excessive_building.mosaic_stairs": "%s Mosaic Stairs",
+  "block_type.excessive_building.mosaic_vertical_stairs": "%s Mosaic Vertical Stairs"
 }

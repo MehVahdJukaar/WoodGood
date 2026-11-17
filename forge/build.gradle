@@ -106,15 +106,15 @@ dependencies {
 //!! ================================================ DEPENDENCIES ================================================== \\
 
 //    modImplementation("curse.maven:architectury-api-419699:5137942") // v6.6.92 | REI, Gardens-Of-The-Dead
-//    modImplementation("curse.maven:cloth-config-348521:4973444") // v8.3.115 | REI
-    modRuntimeOnly("curse.maven:configured-457570:4462837")
-    modCompileOnly("curse.maven:valhelsia-core-416935:4181245") // Valhelsia Structure, Valhelsia Furniture
+//    modImplementation("curse.maven:cloth-config-348521:5729100") // v8.3.115 | REI
+    modRuntimeOnly("curse.maven:configured-457570:4462894")
+    modCompileOnly("curse.maven:valhelsia-core-416935:4626649") // Valhelsia Structure, Valhelsia Furniture
 //    modCompileOnly("curse.maven:autoreglib-250363:3857246") // Quark
     modCompileOnly("curse.maven:blueprint-382216:4749000") // Woodworks, Endergetic, Boatload
     modCompileOnly("curse.maven:ctm-267602:4393695") // Chipped
-    modCompileOnly("curse.maven:resourceful-lib-570073:4434139") // Chipped, Handcrafted
-    modCompileOnly("curse.maven:framework-549225:5692394") //v0.7.12 | Mighty Mail, Furniture, Refurbished-Furniture
-    modCompileOnly("curse.maven:fusion-connected-textures-854949:5129280") // Dawn Of Time
+    modImplementation("curse.maven:resourceful-lib-570073:4553782") // v1.3.6 | Chipped, Handcrafted
+    modCompileOnly("curse.maven:framework-549225:5692396") //v0.7.12 | Mighty Mail, Furniture, Refurbished-Furniture
+    modCompileOnly("curse.maven:fusion-connected-textures-854949:9070197") // Dawn Of Time
 
     //!! ================================================= LOCAL ====================================================== \\
 //    modCompileOnly("com.jozufozu.flywheel:flywheel-forge-1.19.2:${flywheel_version}") // Create
@@ -124,7 +124,7 @@ dependencies {
 
     //!! TOOLS
     modRuntimeOnly("curse.maven:emi-580555:6420949")
-//    modRuntimeOnly("curse.maven:jei-238222:5733169")
+//    modRuntimeOnly("curse.maven:jei-238222:5846852")
 
 //!! ================================================== IMPORTS ===================================================== \\
     // NOTE: mods with modRunTimeOnly are in compiled in build.gradle (COMMON), modRunTimeOnly is only for testing
@@ -138,53 +138,54 @@ dependencies {
     modCompileOnly("curse.maven:macaws-bridges-351725:7627951")
     modCompileOnly("curse.maven:macaws-doors-378646:7618710") // v1.1.5
     modCompileOnly("curse.maven:macaws-fences-and-walls-453925:7308414") // v1.2.1
-    modCompileOnly("curse.maven:macaws-furniture-359540:4726294")
-    modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:4618179")
-    modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:5054877")
-    modCompileOnly("curse.maven:macaws-roofs-352039:4590028")
+    modCompileOnly("curse.maven:macaws-furniture-359540:7255613")
+    modCompileOnly("curse.maven:macaws-lights-and-lamps-502372:7304112")
+    modCompileOnly("curse.maven:macaws-paths-and-pavings-629153:7029539")
+    modCompileOnly("curse.maven:macaws-roofs-352039:6494464")
     modCompileOnly("curse.maven:macaws-trapdoors-400933:7256184") // v1.1.5
-    modCompileOnly("curse.maven:macaws-windows-363569:4961138")
-    modCompileOnly("curse.maven:macaws-stairs-1119394:5802530")
+    modCompileOnly("curse.maven:macaws-windows-363569:7317709")
+    modCompileOnly("curse.maven:macaws-stairs-1119394:7317570")
 
         //!! OTHERS
-    modCompileOnly("curse.maven:absent-by-design-305840:3835331")
+    modCompileOnly("curse.maven:absent-by-design-305840:5653960")
     modCompileOnly("curse.maven:another-furniture-610492:4034009")
     modCompileOnly("curse.maven:architects-palette-433862:5038498")
-    modCompileOnly("curse.maven:backpacked-352835:3923045")
-    modCompileOnly("curse.maven:beautify-decorate-633252:4036351")
+    modCompileOnly("curse.maven:backpacked-352835:4725665")
+    modCompileOnly("curse.maven:beautify-decorate-633252:4869818")
 //    modCompileOnly("curse.maven:boatload-337396:4776091") //WIP --------- Entity Texturing issue
     modCompileOnly("curse.maven:buildersaddition-389697:4527989")
-    modCompileOnly("curse.maven:camp-chair-531744:3930598")
+    modCompileOnly("curse.maven:camp-chair-531744:4507849")
     modCompileOnly("curse.maven:chipped-456956:4463479")
     modCompileOnly("curse.maven:create-328085:4547147")
-    modCompileOnly("curse.maven:corail-pillar-266228:3903803")
+    modCompileOnly("curse.maven:corail-pillar-266228:4442573")
     modCompileOnly("curse.maven:dawn-of-time-312359:5214071")
     modCompileOnly("curse.maven:decorative-blocks-362528:3941638")
     modCompileOnly("curse.maven:decoration-delight-687475:5563960")
-    modCompileOnly("curse.maven:domum-ornamentum-527361:4174257")
+    modCompileOnly("curse.maven:domum-ornamentum-527361:4447344")
     modCompileOnly("curse.maven:dramatic-doors-380617:4817180")
     modCompileOnly("curse.maven:ex-nihilo-sequentia-400012:4731378")
+    modCompileOnly("curse.maven:excessive-building-845097:4598407")
     modCompileOnly("curse.maven:exlines-bark-carpets-527296:4094399")
     modCompileOnly("curse.maven:farmersdelight-398521:3999157")
-    modCompileOnly("curse.maven:friends-and-foes-forge-602059:4429819")
+    modCompileOnly("curse.maven:friends-and-foes-forge-602059:4429819") // v1.8.0 (1.19.2)
     modCompileOnly("curse.maven:furnish-547069:4449620")
     modCompileOnly("curse.maven:habitat-422972:4594207")
-    modCompileOnly("curse.maven:handcrafted-538214:4438942")
+    modCompileOnly("curse.maven:handcrafted-538214:4438942") // Resourceful-Lib
     modCompileOnly("curse.maven:infinitybuttons-661902:5330366")
     modCompileOnly("curse.maven:lightmans-currency-472521:5793387")
-    modCompileOnly("curse.maven:mighty-mail-902986:4750268")
-    modCompileOnly("curse.maven:missing-wilds-forge-634277:3840197")
+    modCompileOnly("curse.maven:mighty-mail-902986:5733307")
+    modCompileOnly("curse.maven:missing-wilds-forge-634277:4605959")
     modCompileOnly("curse.maven:mosaic-carpentry-690226:4068673")
-    modCompileOnly("curse.maven:mrcrayfish-furniture-mod-55438:4374996") // LEGACY
-    modCompileOnly("curse.maven:oreberries-replanted-454062:4614499")
+    modCompileOnly("curse.maven:mrcrayfish-furniture-mod-55438:4600202") // LEGACY
+    modCompileOnly("curse.maven:oreberries-replanted-454062:4614549")
     modCompileOnly("curse.maven:pokecube-aoi-285121:4109051")
-    modCompileOnly("curse.maven:premium-wood-353515:3905203")
-    modCompileOnly("curse.maven:productivebees-377897:4418663")
+    modCompileOnly("curse.maven:premium-wood-353515:4441988")
+    modCompileOnly("curse.maven:productivebees-377897:4549743")
 //    modCompileOnly("curse.maven:quark-243121:4587248")
-    modCompileOnly("curse.maven:rechiseled-558998:4364936")
-    modCompileOnly("curse.maven:storage-drawers-223852:3884263")
+    modCompileOnly("curse.maven:rechiseled-558998:8875652")
+    modCompileOnly("curse.maven:storage-drawers-223852:4663000")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
-    modCompileOnly("curse.maven:the-twilight-forest-227639:4389567")
+    modCompileOnly("curse.maven:the-twilight-forest-227639:4539671")
     modCompileOnly("curse.maven:tropicraft-254794:5312670")
     modCompileOnly("curse.maven:twigs-496913:4533061")
     modCompileOnly("curse.maven:valhelsia-furniture-694349:4520253")
@@ -193,15 +194,15 @@ dependencies {
     modCompileOnly("curse.maven:woodster-869951:4575175")
     modCompileOnly("curse.maven:woodworks-543610:4776123")
     modCompileOnly("curse.maven:workshop-for-handsome-adventurer-875843:4692349")
-    modCompileOnly("curse.maven:xercamod-341575:3947222")
+    modCompileOnly("curse.maven:xercamod-341575:4655335")
 
-    modCompileOnly("curse.maven:regions-unexplored-659110:4807303")
+    modCompileOnly("curse.maven:regions-unexplored-659110:4470201")
 
 //!! ============================================= NOT ADDED YET ================================================== \\
 
 //    modImplementation("curse.maven:i-like-wood-324164:4463114")
-//    modImplementation("curse.maven:just-a-raft-mod-274350:4688639")
-//    modCompileOnly("curse.maven:valhelsia-furniture-694349:4085201")
+//    modImplementation("curse.maven:just-a-raft-mod-274350:4688643")
+//    modCompileOnly("curse.maven:valhelsia-furniture-694349:4479191")
     modCompileOnly("curse.maven:functional-storage-556861:4810636")
     modCompileOnly("curse.maven:carpenter-549446:4673192") //WIP
 
@@ -209,7 +210,7 @@ dependencies {
 
 //     implementation fg.deobf("curse.maven:crimson-nbt-tags-445260:3670163")
 //    modImplementation("curse.maven:curios-309927:5302436") // LIBRARY
-//    modImplementation("curse.maven:geckolib-388172:4407241") // LIBRARY
+//    modImplementation("curse.maven:geckolib-388172:4568326") // LIBRARY
 //     implementation fg.deobf("curse.maven:marg-324494:3723497") // LIBRARY
 //     implementation fg.deobf("curse.maven:ortuslib-616457:3768197") // LIBRARY
 //     implementation fg.deobf("curse.maven:project-brazier-238326:3835038")
@@ -219,9 +220,9 @@ dependencies {
 //    modRuntimeOnly("curse.maven:biomes-o-plenty-220318:4681520") // TerraBlender
     modRuntimeOnly("curse.maven:blue-skies-312918:4525734") // Structure-Gel-API
 //    modImplementation("curse.maven:caverns-and-chasms-438005:5222972") // Blueprint
-//    modCompileOnly("curse.maven:endless-biomes-667688:4581653")
+//    modCompileOnly("curse.maven:endless-biomes-667688:4715136")
 //    modImplementation("curse.maven:endergetic-291509:5146370") // Blueprint
-//    modCompileOnly("curse.maven:gardens-of-the-dead-683174:4435223") // Architectury-API
+//    modCompileOnly("curse.maven:gardens-of-the-dead-683174:4644435") // Architectury-API
 
     // Dependencies
     modRuntimeOnly("curse.maven:terrablender-563928:4863577") // REQUIRED by: BOP, region-unexplored
