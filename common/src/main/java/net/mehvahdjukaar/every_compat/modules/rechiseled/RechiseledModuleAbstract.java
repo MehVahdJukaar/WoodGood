@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-///SUPPORT: v1.2.5+
+///SUPPORT: v1.2.6+
 public abstract class RechiseledModuleAbstract extends EveryCompatModule {
 
     public final Supplier<CreativeModeTab> tab = getModTab(getModId());

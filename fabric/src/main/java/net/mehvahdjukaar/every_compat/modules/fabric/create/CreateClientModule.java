@@ -1,18 +1,14 @@
 package net.mehvahdjukaar.every_compat.modules.fabric.create;
 
 import com.zurrtum.create.client.AllModels;
-import com.zurrtum.create.client.foundation.block.connected.AllCTTypes;
-import com.zurrtum.create.client.foundation.block.connected.CTSpriteShiftEntry;
-import com.zurrtum.create.client.foundation.block.connected.CTSpriteShifter;
-import com.zurrtum.create.client.foundation.block.connected.GlassPaneCTBehaviour;
-import com.zurrtum.create.client.foundation.block.connected.HorizontalCTBehaviour;
+import com.zurrtum.create.client.foundation.block.connected.*;
 import com.zurrtum.create.client.infrastructure.model.CTModel;
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.SimpleModuleClient;
 
-public class CreateClientModule extends SimpleModuleClient<CreateModule> {
+public class CreateClientModule extends SimpleModuleClient<CreateFlyModule> {
 
-    public CreateClientModule(CreateModule module) {
+    public CreateClientModule(CreateFlyModule module) {
         super(module);
     }
 

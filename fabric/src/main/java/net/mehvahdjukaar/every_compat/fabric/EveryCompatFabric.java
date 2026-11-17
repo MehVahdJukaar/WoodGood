@@ -3,8 +3,8 @@ package net.mehvahdjukaar.every_compat.fabric;
 import net.fabricmc.api.ModInitializer;
 import net.mehvahdjukaar.every_compat.EveryCompatCommon;
 import net.mehvahdjukaar.every_compat.modules.fabric.blockus.BlockusModule;
-import net.mehvahdjukaar.every_compat.modules.fabric.create.CreateModule;
-import net.mehvahdjukaar.every_compat.modules.fabric.farmersdelight.FarmersDelightModule;
+import net.mehvahdjukaar.every_compat.modules.fabric.create.CreateFlyModule;
+import net.mehvahdjukaar.every_compat.modules.fabric.farmersdelight.FarmersDelightRefabricatedModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.fabric.regions_unexplored.RegionsUnexploredModule;
 import net.mehvahdjukaar.every_compat.modules.fabric.wilder_wild.WilderWildModule;
@@ -45,7 +45,8 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
 //        addOptionalModule("bbb", () -> BuildingButBetterModule.class);
 //        addOptionalModule("bewitchment", () -> BewitchmentModule.class);
         addOptionalModule("blockus", () -> BlockusModule.class);
-        addOptionalModule("farmersdelight", () -> FarmersDelightModule.class);
+        addOptionalModule("create", () -> CreateFlyModule.class);
+        addOptionalModule("farmersdelight", () -> FarmersDelightRefabricatedModule.class);
 //        addOptionalModule("clutter", () -> ClutterModule.class);
 //        addOptionalModule("dramaticdoors", () -> DramaticDoorsModule.class);
 //        addOptionalModule("exlineawnings", () -> AwningModule.class);
@@ -61,8 +62,6 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
 //            addOptionalModule("dramaticdoors", () -> DramaticDoorsMacawModule.class);
 //        }
 
-        addOptionalModule("create", () -> CreateModule.class);
-
         // Load if The-New-Shutters is loaded, not Vanilla-Shutters
 //        if (PlatHelper.isModLoaded("shutter")) {
 //            Class<?> modClass = null;
@@ -71,12 +70,6 @@ public class EveryCompatFabric extends EveryCompatCommon implements ModInitializ
 //            } catch (Exception ignored) {}
 //
 //            if (modClass != null) addOptionalModule("shutter", () -> LauchsShuttersModule.class);
-//        }
-
-        //REASON: v4.0.0+ is no longer supported because it no longer has variant blocks
-//        if (PlatHelper.isModLoaded("excessive_building")) {
-//            if (!PlatHelper.getModVersion("excessive_building").matches("4[.\\d]{4}"))
-//                addOptionalModule("excessive_building", () -> ExcessiveBuildingModule.class);
 //        }
 
 // ============================================== DISABLED FOR A REASON ============================================= \\

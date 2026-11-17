@@ -15,8 +15,8 @@ import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.CreativeModeTab;
@@ -27,9 +27,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.function.Consumer;
 
-import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 import static net.mehvahdjukaar.every_compat.api.BlockTypeChildrenHelper.doChildrenExist;
+import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.createAndAddCustomTags;
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
 //SUPPORT: v4.0+
 public class WilderWildModule extends EveryCompatModule {
@@ -120,13 +121,13 @@ public class WilderWildModule extends EveryCompatModule {
             boolean isStem = Utils.getID(wood.log).toString().contains("stem");
             if (isStem) {
                 HollowedLogBlock.registerAxeHollowBehaviorStem(wood.log, hollow_logs.blocks.get(wood));
-                if (doChildrenExist(wood, "stripped_log"))
-                    HollowedLogBlock.registerAxeHollowBehaviorStem(wood.getBlockOfThis("stripped_log"), stripped_hollow_logs.blocks.get(wood));
+                if (doChildrenExist(wood, STRIPPED_LOG))
+                    HollowedLogBlock.registerAxeHollowBehaviorStem(wood.getBlockOfThis(STRIPPED_LOG), stripped_hollow_logs.blocks.get(wood));
             }
             else {
                 HollowedLogBlock.registerAxeHollowBehavior(wood.log, hollow_logs.blocks.get(wood));
-                if (doChildrenExist(wood, "stripped_log")) {
-                    HollowedLogBlock.registerAxeHollowBehavior(wood.getBlockOfThis("stripped_log"), stripped_hollow_logs.blocks.get(wood));
+                if (doChildrenExist(wood, STRIPPED_LOG)) {
+                    HollowedLogBlock.registerAxeHollowBehavior(wood.getBlockOfThis(STRIPPED_LOG), stripped_hollow_logs.blocks.get(wood));
                 }
             }
 

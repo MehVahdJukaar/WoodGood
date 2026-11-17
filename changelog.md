@@ -13,6 +13,26 @@
 |                                                                                                                                   |
 
 ---
+## v3.0.2
+
+### FIXES:
+- **Rechiseled** (C): Fix the crash due to Properties' Id not being EveryCompat's id - See Details @ [#1260](https://github.com/MehVahdJukaar/WoodGood/issues/1260)
+
+---
+
+## v3.0.1
+
+### CHANGES:
+- **Lightman's Currency** (NF): Re-added & Updated for 26.1.2 (NEOFORGE)
+- **Farmer's Delight** (FB): Re-added & Updated for 26.1.2 (FABRIC) 
+- **Every Compat** (C): 
+  - UtilityMisc are moved to BlockTypeChildrenHelper
+  - Main Class are split & moved to ECModules
+
+### REMOVED:
+- **Beautify Decorate** is no longer needed as it is replaced by "Beautify Refoxed" or "Beautify Refabricated" for 26.1.2
+
+---
 
 ## v3.0.0
 

@@ -10,6 +10,7 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.absent_by_design.AbsentBy
 import net.mehvahdjukaar.every_compat.modules.neoforge.bibliocraft.BibliocraftLegacyModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.functional_storage.FunctionalStorageModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.just_a_raft.JustARaftModule;
+import net.mehvahdjukaar.every_compat.modules.neoforge.lightmans_currency.LightmansCurrencyModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.mcaw.*;
 import net.mehvahdjukaar.every_compat.modules.neoforge.oreberries_replanted.OreberriesReplantedModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.premium_wood.PremiumWoodModule;
@@ -139,7 +140,7 @@ public class EveryCompatForge extends EveryCompatCommon {
 //        addOptionalModule("missing_blocks", () -> LegendsMissingBlocksModule.class);
 //        addOptionalModule("mosaic_carpentry", () -> MosaicCarpentryModule.class);
         addOptionalModule("oreberriesreplanted", () -> OreberriesReplantedModule.class);
-//        addOptionalModule("lightmanscurrency", () -> LightmansCurrencyModule.class); //TODO: add back
+        addOptionalModule("lightmanscurrency", () -> LightmansCurrencyModule.class);
 //        addOptionalModule("pokecube_legends", () -> PokecubeAIOModule.class);
         addOptionalModule("premium_wood", () -> PremiumWoodModule.class);
 //        addOptionalModule("quark", () -> QuarkModule.class);
@@ -154,18 +155,6 @@ public class EveryCompatForge extends EveryCompatCommon {
 //        addOptionalModule("woodworks", () -> WoodworksModule.class);
 //        addOptionalModule("workshop_for_handsome_adventurer", () -> WorkshopForHandsomeAdventurerModule.class); //REASON: Not 100% compatible & CreativeTab key is outdated but even it's correct & will still crash
 //        addOptionalModule("xercamod", () -> XercaModule.class);
-
-        //REASON: There are 2 mods with the same modId but has different group_id. only Beautify! (Beautify Decorate) is applied
-        // Beautify Refoxed has the built-in module
-//        if (PlatHelper.isModLoaded("beautify")) {
-//            Class<?> modClass = null;
-//            try {
-//                modClass = Class.forName("com.github.Pandarix.beautify.Beautify");
-//            } catch (Exception ignored) {
-//            }
-//
-//            if (modClass != null) addOptionalModule("beautify", () -> BeautifyDecorateModule.class);
-//        }
 
 //        if (PlatHelper.isModLoaded("mcwdoors")) {
 //            addOptionalModule("dramaticdoors", () -> DramaticDoorsMacawModule.class);

@@ -4,7 +4,6 @@ import com.supermartijn642.rechiseled.blocks.RechiseledSlabBlock;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
-import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
@@ -40,7 +39,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_beams_slab = SimpleEntrySet.builder(WoodType.class, "planks_beams_slab",
                         getModBlock("oak_planks_beams_slab"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(false, p)
+                        (type, properties) -> new RechiseledSlabBlock(false, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_beams")))
@@ -52,7 +51,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_beams_slab_connecting = SimpleEntrySet.builder(WoodType.class, "planks_beams_slab_connecting",
                         getModBlock("oak_planks_beams_slab_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(true, p)
+                        (type, properties) -> new RechiseledSlabBlock(true, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_beams_connecting")))
@@ -64,7 +63,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_brick_pattern_slab = SimpleEntrySet.builder(WoodType.class, "planks_brick_pattern_slab",
                         getModBlock("oak_planks_brick_pattern_slab"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(false, p)
+                        (type, properties) -> new RechiseledSlabBlock(false, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_brick_pattern")))
@@ -76,7 +75,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_brick_pattern_slab_connecting = SimpleEntrySet.builder(WoodType.class, "planks_brick_pattern_slab_connecting",
                         getModBlock("oak_planks_brick_pattern_slab_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(true, p)
+                        (type, properties) -> new RechiseledSlabBlock(true, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_brick_pattern_connecting")))
@@ -88,7 +87,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_brick_paving_slab = SimpleEntrySet.builder(WoodType.class, "planks_brick_paving_slab",
                         getModBlock("oak_planks_brick_paving_slab"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(false, p)
+                        (type, properties) -> new RechiseledSlabBlock(false, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_brick_paving")))
@@ -100,7 +99,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_brick_paving_slab_connecting = SimpleEntrySet.builder(WoodType.class, "planks_brick_paving_slab_connecting",
                         getModBlock("oak_planks_brick_paving_slab_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(true, p)
+                        (type, properties) -> new RechiseledSlabBlock(true, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_brick_paving_connecting")))
@@ -112,7 +111,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_bricks_slab = SimpleEntrySet.builder(WoodType.class, "planks_bricks_slab",
                         getModBlock("oak_planks_bricks_slab"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(false, p)
+                        (type, properties) -> new RechiseledSlabBlock(false, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_bricks")))
@@ -124,7 +123,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_bricks_slab_connecting = SimpleEntrySet.builder(WoodType.class, "planks_bricks_slab_connecting",
                         getModBlock("oak_planks_bricks_slab_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(true, p)
+                        (type, properties) -> new RechiseledSlabBlock(true, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_bricks_connecting")))
@@ -136,7 +135,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_crate_slab = SimpleEntrySet.builder(WoodType.class, "planks_crate_slab",
                         getModBlock("oak_planks_crate_slab"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(false, p)
+                        (type, properties) -> new RechiseledSlabBlock(false, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_crate")))
@@ -148,7 +147,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_crate_slab_connecting = SimpleEntrySet.builder(WoodType.class, "planks_crate_slab_connecting",
                         getModBlock("oak_planks_crate_slab_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(true, p)
+                        (type, properties) -> new RechiseledSlabBlock(true, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_crate_connecting")))
@@ -160,7 +159,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_diagonal_stripes_slab = SimpleEntrySet.builder(WoodType.class, "planks_diagonal_stripes_slab",
                         getModBlock("oak_planks_diagonal_stripes_slab"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(false, p)
+                        (type, properties) -> new RechiseledSlabBlock(false, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_diagonal_stripes")))
@@ -172,7 +171,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_diagonal_stripes_slab_connecting = SimpleEntrySet.builder(WoodType.class, "planks_diagonal_stripes_slab_connecting",
                         getModBlock("oak_planks_diagonal_stripes_slab_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(true, p)
+                        (type, properties) -> new RechiseledSlabBlock(true, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_diagonal_stripes_connecting")))
@@ -184,7 +183,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_diagonal_tiles_slab = SimpleEntrySet.builder(WoodType.class, "planks_diagonal_tiles_slab",
                         getModBlock("oak_planks_diagonal_tiles_slab"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(false, p)
+                        (type, properties) -> new RechiseledSlabBlock(false, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_diagonal_tiles")))
@@ -196,7 +195,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_diagonal_tiles_slab_connecting = SimpleEntrySet.builder(WoodType.class, "planks_diagonal_tiles_slab_connecting",
                         getModBlock("oak_planks_diagonal_tiles_slab_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(true, p)
+                        (type, properties) -> new RechiseledSlabBlock(true, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_diagonal_tiles_connecting")))
@@ -208,7 +207,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_dotted_slab = SimpleEntrySet.builder(WoodType.class, "planks_dotted_slab",
                         getModBlock("oak_planks_dotted_slab"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(false, p)
+                        (type, properties) -> new RechiseledSlabBlock(false, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_dotted")))
@@ -220,7 +219,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_dotted_slab_connecting = SimpleEntrySet.builder(WoodType.class, "planks_dotted_slab_connecting",
                         getModBlock("oak_planks_dotted_slab_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(true, p)
+                        (type, properties) -> new RechiseledSlabBlock(true, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_dotted_connecting")))
@@ -232,7 +231,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_flooring_slab = SimpleEntrySet.builder(WoodType.class, "planks_flooring_slab",
                         getModBlock("oak_planks_flooring_slab"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(false, p)
+                        (type, properties) -> new RechiseledSlabBlock(false, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_flooring")))
@@ -244,7 +243,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_flooring_slab_connecting = SimpleEntrySet.builder(WoodType.class, "planks_flooring_slab_connecting",
                         getModBlock("oak_planks_flooring_slab_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(true, p)
+                        (type, properties) -> new RechiseledSlabBlock(true, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_flooring_connecting")))
@@ -256,7 +255,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_large_tiles_slab = SimpleEntrySet.builder(WoodType.class, "planks_large_tiles_slab",
                         getModBlock("oak_planks_large_tiles_slab"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(false, p)
+                        (type, properties) -> new RechiseledSlabBlock(false, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_large_tiles")))
@@ -268,7 +267,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_large_tiles_slab_connecting = SimpleEntrySet.builder(WoodType.class, "planks_large_tiles_slab_connecting",
                         getModBlock("oak_planks_large_tiles_slab_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(true, p)
+                        (type, properties) -> new RechiseledSlabBlock(true, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_large_tiles_connecting")))
@@ -280,7 +279,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_pattern_slab = SimpleEntrySet.builder(WoodType.class, "planks_pattern_slab",
                         getModBlock("oak_planks_pattern_slab"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(false, p)
+                        (type, properties) -> new RechiseledSlabBlock(false, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_pattern")))
@@ -292,7 +291,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_pattern_slab_connecting = SimpleEntrySet.builder(WoodType.class, "planks_pattern_slab_connecting",
                         getModBlock("oak_planks_pattern_slab_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(true, p)
+                        (type, properties) -> new RechiseledSlabBlock(true, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_pattern_connecting")))
@@ -304,7 +303,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_rotated_bricks_slab = SimpleEntrySet.builder(WoodType.class, "planks_rotated_bricks_slab",
                         getModBlock("oak_planks_rotated_bricks_slab"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(false, p)
+                        (type, properties) -> new RechiseledSlabBlock(false, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_rotated_bricks")))
@@ -316,7 +315,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_rotated_bricks_slab_connecting = SimpleEntrySet.builder(WoodType.class, "planks_rotated_bricks_slab_connecting",
                         getModBlock("oak_planks_rotated_bricks_slab_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(true, p)
+                        (type, properties) -> new RechiseledSlabBlock(true, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_rotated_bricks_connecting")))
@@ -328,7 +327,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_small_bricks_slab = SimpleEntrySet.builder(WoodType.class, "planks_small_bricks_slab",
                         getModBlock("oak_planks_small_bricks_slab"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(false, p)
+                        (type, properties) -> new RechiseledSlabBlock(false, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_small_bricks")))
@@ -340,7 +339,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_small_bricks_slab_connecting = SimpleEntrySet.builder(WoodType.class, "planks_small_bricks_slab_connecting",
                         getModBlock("oak_planks_small_bricks_slab_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(true, p)
+                        (type, properties) -> new RechiseledSlabBlock(true, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_small_bricks_connecting")))
@@ -352,7 +351,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_small_tiles_slab = SimpleEntrySet.builder(WoodType.class, "planks_small_tiles_slab",
                         getModBlock("oak_planks_small_tiles_slab"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(false, p)
+                        (type, properties) -> new RechiseledSlabBlock(false, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_small_tiles")))
@@ -364,7 +363,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_small_tiles_slab_connecting = SimpleEntrySet.builder(WoodType.class, "planks_small_tiles_slab_connecting",
                         getModBlock("oak_planks_small_tiles_slab_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(true, p)
+                        (type, properties) -> new RechiseledSlabBlock(true, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_small_tiles_connecting")))
@@ -376,7 +375,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_squares_slab = SimpleEntrySet.builder(WoodType.class, "planks_squares_slab",
                         getModBlock("oak_planks_squares_slab"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(false, p)
+                        (type, properties) -> new RechiseledSlabBlock(false, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_squares")))
@@ -388,7 +387,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_squares_slab_connecting = SimpleEntrySet.builder(WoodType.class, "planks_squares_slab_connecting",
                         getModBlock("oak_planks_squares_slab_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(true, p)
+                        (type, properties) -> new RechiseledSlabBlock(true, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_squares_connecting")))
@@ -400,7 +399,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_tiles_slab = SimpleEntrySet.builder(WoodType.class, "planks_tiles_slab",
                         getModBlock("oak_planks_tiles_slab"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(false, p)
+                        (type, properties) -> new RechiseledSlabBlock(false, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_tiles")))
@@ -412,7 +411,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_tiles_slab_connecting = SimpleEntrySet.builder(WoodType.class, "planks_tiles_slab_connecting",
                         getModBlock("oak_planks_tiles_slab_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(true, p)
+                        (type, properties) -> new RechiseledSlabBlock(true, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_tiles_connecting")))
@@ -424,7 +423,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_wavy_slab = SimpleEntrySet.builder(WoodType.class, "planks_wavy_slab",
                         getModBlock("oak_planks_wavy_slab"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(false, p)
+                        (type, properties) -> new RechiseledSlabBlock(false, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_wavy")))
@@ -436,7 +435,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_wavy_slab_connecting = SimpleEntrySet.builder(WoodType.class, "planks_wavy_slab_connecting",
                         getModBlock("oak_planks_wavy_slab_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(true, p)
+                        (type, properties) -> new RechiseledSlabBlock(true, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_wavy_connecting")))
@@ -448,7 +447,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_woven_slab = SimpleEntrySet.builder(WoodType.class, "planks_woven_slab",
                         getModBlock("oak_planks_woven_slab"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(false, p)
+                        (type, properties) -> new RechiseledSlabBlock(false, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_woven")))
@@ -460,7 +459,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_woven_slab_connecting = SimpleEntrySet.builder(WoodType.class, "planks_woven_slab_connecting",
                         getModBlock("oak_planks_woven_slab_connecting"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(true, p)
+                        (type, properties) -> new RechiseledSlabBlock(true, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_woven_connecting")))
@@ -473,7 +472,7 @@ public class RechiseledModuleSlab extends RechiseledModuleAbstract {
 
         oak_planks_mosaic_slab = SimpleEntrySet.builder(WoodType.class, "planks_mosaic_slab",
                         getModBlock("oak_planks_mosaic_slab"), () -> VanillaWoodTypes.OAK,
-                        (type, p) -> new RechiseledSlabBlock(false, p)
+                        (type, properties) -> new RechiseledSlabBlock(false, properties)
                 )
                 //REASON: slab's parent-block
                 .addCondition(type -> Objects.nonNull(getParentBlock(type, "planks_mosaic")))

@@ -247,10 +247,7 @@ public abstract class ECModules {
     public static Map<String, String> getModulesThatErrored() {
         return ERRORED.entrySet().stream()
                 .collect(Collectors.toMap(
-                        entry -> {
-                            var modName = entry.getKey().getModName();
-                            return modName != null ? modName : "UNKNOWN MOD";
-                        },
+                        entry -> getModuleWithProvider(entry.getKey()),
                         entry -> {
                             var message = entry.getValue().getMessage();
                             var cause = entry.getValue().getCause();
@@ -262,6 +259,19 @@ public abstract class ECModules {
                         (a, b) -> a + "\n" + b,
                         LinkedHashMap::new
                 ));
+    }
+
+    /// This help anyone to know which mod provide the module. This is useful for logs and crash-reports
+    /// @return Rechiseled @-Every Compat or Rechiseled @-Gems Realm
+    public static String getModuleWithProvider(CompatModule module) {
+        String packagePath = module.getClass().toString();
+        String moduleName = module.getModName();
+
+        if (!module.getProviderId().isEmpty()) return moduleName + " @ " + module.getProviderId();
+
+        if (packagePath.contains("mehvahdjukaar") && packagePath.contains("every_compat")) return moduleName + " @ Wood Good";
+
+        return moduleName + " @ " + PlatHelper.getModName(module.getModId());
     }
 
     /// Total amount of blocks all active modules have registered

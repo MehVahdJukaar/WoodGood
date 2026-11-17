@@ -11,8 +11,8 @@
 | Blockus                    |   🟩   |
 | Clutter                    |   ❔   |
 | Create (FABRIC)            |   ❔   |
-| Excessive Building         |   ❔   |
 | Exline's Awnings           |   ❔   |
+| Farmer's Delight Refabricated                       |   🟩   |
 | Furnish                    |   ❔   |
 | Lightman's Currency Fabric |   ❔   |
 | More Barrier Variants      |   🟡   |
@@ -47,7 +47,6 @@
 | Dramatic Doors' <br>Supported Macaw's Door          |   ❔   |
 | Envelope                                            |   🟡   |
 | Exline's Bark Carpets                               |   ❔   |
-| Farmer's Delight                                    |   ❔   |
 | Friends & Foes                                      |   🟩   |
 | Guita's Woodworks                                   |   🟡   |
 | Handcrafted                                         |   ❔   |
@@ -93,11 +92,12 @@
 | Curiosities!                         |   ❔   |
 | Decoration Delight: Refurbished      |   ❔   |
 | Ex Nihilo Sequentia                  |   🟡   |
+| Farmer's Delight                                    |   ❔   |
 | Functional Storage                   |   🟩   |
 | Just A Raft Mod                      |   🟩   |
 | Legend's Missing Blocks              |   ❔   |
 | Lepton (FORGE)                       |   🟡   |
-| Lightman's Currency                  |   ❔   |
+| Lightman's Currency                  |   🟩   |
 | Market Crates                        |   ❔   |
 | Marioverse                           |   🟩   |
 | More Crafting Tables for Forge       |   ❔   |

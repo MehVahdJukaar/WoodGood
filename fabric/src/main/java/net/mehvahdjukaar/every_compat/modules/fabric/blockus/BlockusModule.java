@@ -6,11 +6,7 @@ import com.brand.blockus.blocks.base.SmallHedgeBlock;
 import com.brand.blockus.utils.helper.BlockFactory;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.mehvahdjukaar.every_compat.EveryCompat;
-import net.mehvahdjukaar.every_compat.api.CompatModuleClient;
-import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
-import net.mehvahdjukaar.every_compat.api.RenderLayer;
-import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
-import net.mehvahdjukaar.every_compat.api.SimpleModuleClient;
+import net.mehvahdjukaar.every_compat.api.*;
 import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.every_compat.misc.UtilityTag;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
@@ -36,6 +32,8 @@ import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.EveryCompat.res;
 import static net.mehvahdjukaar.every_compat.api.BlockTypeChildrenHelper.copyChildProperties;
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.SLAB;
+import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STAIRS;
 
 //SUPPORT: v2.9.11+ (FABRIC)
 public class BlockusModule extends EveryCompatModule {
@@ -90,11 +88,11 @@ public class BlockusModule extends EveryCompatModule {
                 .build();
         this.addEntry(mossy_planks);
 
-        mossy_slab = SimpleEntrySet.builder(WoodType.class, "slab", "mossy",
+        mossy_slab = SimpleEntrySet.builder(WoodType.class, SLAB, "mossy",
                         getModBlock("mossy_oak_slab"), () -> VanillaWoodTypes.OAK,
                         (woodType, p) -> new SlabBlock(p)
                 )
-                .setProperties(woodType -> copyChildProperties(woodType, "slab"))
+                .setProperties(woodType -> copyChildProperties(woodType, SLAB))
                 .requiresFromMap(mossy_planks.blocks) //REASON: textures, recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.SLABS, Registries.BLOCK)
@@ -105,13 +103,13 @@ public class BlockusModule extends EveryCompatModule {
                 .build();
         this.addEntry(mossy_slab);
 
-        mossy_stairs = SimpleEntrySet.builder(WoodType.class, "stairs", "mossy",
+        mossy_stairs = SimpleEntrySet.builder(WoodType.class, STAIRS, "mossy",
                         getModBlock("mossy_oak_stairs"), () -> VanillaWoodTypes.OAK,
                         (woodType, p) -> new StairBlock(mossy_planks.blocks.get(woodType).defaultBlockState(),
                                 p)
 
                 )
-                .setProperties(woodType -> copyChildProperties(woodType, "stairs"))
+                .setProperties(woodType -> copyChildProperties(woodType, STAIRS))
                 .requiresFromMap(mossy_planks.blocks) //REASON: textures, recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.STAIRS, Registries.BLOCK)
@@ -173,7 +171,7 @@ public class BlockusModule extends EveryCompatModule {
                         getModBlock("oak_mosaic_slab"), () -> VanillaWoodTypes.OAK,
                         (woodType, p) -> new SlabBlock(p)
                 )
-                .setProperties(woodType -> copyChildProperties(woodType, "slab"))
+                .setProperties(woodType -> copyChildProperties(woodType, SLAB))
                 .requiresFromMap(mosaic.blocks) //REASON: textures, recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.SLABS, Registries.BLOCK)
@@ -189,7 +187,7 @@ public class BlockusModule extends EveryCompatModule {
                                 p)
 
                 )
-                .setProperties(woodType -> copyChildProperties(woodType, "stairs"))
+                .setProperties(woodType -> copyChildProperties(woodType, STAIRS))
                 .requiresFromMap(mosaic.blocks) //REASON: textures, recipes
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.STAIRS, Registries.BLOCK)

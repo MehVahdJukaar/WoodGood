@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.every_compat.modules.fabric.farmersdelight;
+package net.mehvahdjukaar.every_compat.modules.farmersdelight;
 
 import net.mehvahdjukaar.every_compat.EveryCompat;
 import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
@@ -8,51 +8,38 @@ import net.mehvahdjukaar.every_compat.api.TabAddMode;
 import net.mehvahdjukaar.every_compat.misc.HardcodedBlockType;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
-import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
-import net.mehvahdjukaar.moonlight.api.set.BlockType;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
-import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStackTemplate;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.Block;
-import vectorwing.farmersdelight.common.block.CabinetBlock;
-import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
-import vectorwing.farmersdelight.common.crafting.ingredient.ChanceResult;
-import vectorwing.farmersdelight.common.item.FuelBlockItem;
-import vectorwing.farmersdelight.common.registry.ModItems;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
 import static java.util.Map.entry;
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
-import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.IsBambooLike;
 import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
 
-///SUPPORT: FABRIC-v3.6.30+
-public class FarmersDelightModule extends EveryCompatModule {
+///SUPPORT: FABRIC-v3.6.30+ | NEOFORGE- NOT AVAILABLE YET
+public abstract class FarmersDelightModuleAbstract extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> cabinets;
 
-    public FarmersDelightModule(String modId) {
+    public FarmersDelightModuleAbstract(String modId) {
         super(modId, "fd");
 
         cabinets = SimpleEntrySet.builder(WoodType.class, "cabinet",
                         getModBlock("oak_cabinet"), () -> VanillaWoodTypes.OAK,
-                        (w, p) -> new CabinetBlock(p)
+                        this::newCabinetBlock
                 )
                 .requiresChildren(TRAPDOOR, SLAB) //REASON: recipes
                 .addTile(getModTile("cabinet"))
@@ -68,10 +55,13 @@ public class FarmersDelightModule extends EveryCompatModule {
                 .setTab(getModTab("farmersdelight"))
                 .setTabMode(TabAddMode.AFTER_SAME_TYPE)
                 .defaultRecipe()
-                .addCustomItem((w, block, p) -> new FuelBlockItem(block, p, 300))
+                .addCustomItem(this::newBlockItem)
                 .build();
         this.addEntry(cabinets);
     }
+
+    public abstract Block newCabinetBlock(WoodType wOodType, BlockBehaviour.Properties properties);
+    public abstract Item newBlockItem(WoodType wOodType, Block block, Item.Properties properties);
 
     public static final PaletteStrategy CUSTOM_PALETTE = registerCached((blockType, manager) -> PaletteStrategies.makePaletteFromChild(
             blockType, manager, PLANKS, null, p -> {
@@ -109,78 +99,24 @@ public class FarmersDelightModule extends EveryCompatModule {
 
                 if (isRecipeModNotInstalled && isCollectionModNotInstalled && isNotAlreadySupportedMods) {
 
-                    createCuttingRecipe(LOG, woodType.getBlockOfThis(LOG), woodType.getBlockOfThis(STRIPPED_LOG), woodType, sink, manager);
-                    createCuttingRecipe(WOOD, woodType.getBlockOfThis(WOOD), woodType.getBlockOfThis(STRIPPED_WOOD), woodType, sink, manager);
+                    createCuttingRecipe(LOG, woodType.getBlockOfThis(LOG), woodType.getBlockOfThis(STRIPPED_LOG), woodType, manager, sink);
+                    createCuttingRecipe(WOOD, woodType.getBlockOfThis(WOOD), woodType.getBlockOfThis(STRIPPED_WOOD), woodType, manager, sink);
 
-                    createSalvagingRecipe("furniture", woodType, sink, manager);
-                    createSalvagingRecipe(CHEST_BOAT, woodType, sink, manager);
+                    createSalvagingRecipe("furniture", woodType, manager, sink);
+                    createSalvagingRecipe(CHEST_BOAT, woodType, manager, sink);
                 }
             });
         });
     }
 
-    public void createCuttingRecipe(String recipeType, Block input, Block output,
-                                    WoodType targetType, ResourceSink sink, ResourceManager manager) {
+    public abstract void createCuttingRecipe(String recipeType, Block input, Block output,
+                                             WoodType targetType, ResourceManager manager, ResourceSink sink);
 
-        if (input == null || output == null || IsBambooLike(targetType)) return;
-
-        Recipe<?> recipe = RPUtils.readRecipe(manager, modRes("cutting/oak_" + recipeType).toString());
-
-        if (recipe instanceof CuttingBoardRecipe cuttingRecipe) {
-            List<ChanceResult> newResult = convertResults(cuttingRecipe.getRollableResults(), targetType);
-
-            String newPath = targetType.createPathWith(shortenedId(), "cutting/", recipeType);
-            CuttingBoardRecipe newRecipe = new CuttingBoardRecipe(modRes("cutting").toString(), Ingredient.of(input),
-                    cuttingRecipe.getTool(), newResult, cuttingRecipe.getSoundEventHolder().orElse(null));
-
-            sink.addRecipe(newRecipe, EveryCompat.res(newPath));
-        }
-    }
-
-    public void createSalvagingRecipe(String recipeType, WoodType newWoodType, ResourceSink sink, ResourceManager manager) {
-
-        Recipe<?> recipe = RPUtils.readRecipe(manager, modRes("salvaging/oak_" + recipeType).toString());
-
-        if (recipe instanceof CuttingBoardRecipe cuttingRecipe) {
-
-            List<Item> newInputs = new ArrayList<>();
-            for (Holder<Item> holder : cuttingRecipe.getInput().items().toList()) {
-                Item oldItem = holder.value();
-                WoodType oldWoodType = WoodTypeRegistry.INSTANCE.getBlockTypeOf(oldItem);
-                if (oldWoodType == null) continue;
-                Item newItem = BlockType.changeItemType(oldItem, oldWoodType, newWoodType);
-                if (newItem != null) newInputs.add(newItem);
-            }
-            if (newInputs.isEmpty()) return;
-
-            List<ChanceResult> newResult = convertResults(cuttingRecipe.getRollableResults(), newWoodType);
-
-            String newPath = newWoodType.createPathWith(shortenedId(), "salvaging/", recipeType);
-            CuttingBoardRecipe newRecipe = new CuttingBoardRecipe(modRes("cutting").toString(), Ingredient.of(newInputs.stream()),
-                    cuttingRecipe.getTool(), newResult, cuttingRecipe.getSoundEventHolder().orElse(null));
-
-            sink.addRecipe(newRecipe, EveryCompat.res(newPath));
-        }
-    }
-
-    //only oak results get swapped bark and such stay
-    private static List<ChanceResult> convertResults(List<ChanceResult> oldResults, WoodType targetType) {
-        List<ChanceResult> newResults = new ArrayList<>(oldResults.size());
-        for (ChanceResult chanceResult : oldResults) {
-            ItemStackTemplate stack = chanceResult.stack();
-            Item baseItem = stack.item().value();
-            WoodType originalType = WoodTypeRegistry.INSTANCE.getBlockTypeOf(baseItem);
-            Item newItem = originalType == VanillaWoodTypes.OAK ? BlockType.changeItemType(baseItem, originalType, targetType) : null;
-            if (newItem != null) {
-                newResults.add(new ChanceResult(new ItemStackTemplate(newItem, stack.components()).withCount(stack.count()), chanceResult.chance()));
-            } else newResults.add(chanceResult);
-        }
-        return newResults;
-    }
+    public abstract void createSalvagingRecipe(String recipeType, WoodType newWoodType, ResourceManager manager, ResourceSink sink);
 
     // a recipe mod, not full Compat-Mod providing cutting-board recipes for other Wood-Mods
     // farmers-cutting-collection.*.jar
-    private final Map<String, String> COMPAT_RECIPE_MODS = Map.ofEntries(
+    protected final Map<String, String> COMPAT_RECIPE_MODS = Map.ofEntries(
         entry("aether", "fcaether"),
         entry("betterend", "fcbe"),
         entry("betternether", "fcbn"),
