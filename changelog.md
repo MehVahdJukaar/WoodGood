@@ -13,6 +13,13 @@
 |                                                                                                                                   |
 
 ---
+## v2.11.59
+
+### FIXES: 
+- **Storage Drawers** (C): Added the missing mask texture to fix Drawers' missing textures - [#1361](https://github.com/MehVahdJukaar/WoodGood/issues/1361)
+
+---
+
 ## v2.11.58
 
 ### CHANGES:
