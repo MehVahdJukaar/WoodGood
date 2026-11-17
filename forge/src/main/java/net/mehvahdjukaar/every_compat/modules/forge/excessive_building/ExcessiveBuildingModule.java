@@ -33,7 +33,7 @@ public class ExcessiveBuildingModule extends SimpleModule {
 
     public ExcessiveBuildingModule(String modId) {
         super(modId, "eb");
-        ResourceLocation tab = modRes(modId);
+        ResourceLocation tab = modRes("excessive_building_tab");
 
 //!! OAK
         vertical_stairs = SimpleEntrySet.builder(WoodType.class, "vertical_stairs",
