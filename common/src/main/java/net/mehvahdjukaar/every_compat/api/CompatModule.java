@@ -226,4 +226,8 @@ public abstract class CompatModule {
         return List.of();
     }
 
+    public static CompatModule getModuleOfItem(Item item) {
+        return ECModules.getItemsToModuleMapping().get(item);
+    }
+
 }

@@ -202,8 +202,8 @@ public abstract class ECModules {
         ITEMS_TO_MODULES.put(item, module);
     }
 
-    public static CompatModule getModuleOfItem(Item item) {
-        return ITEMS_TO_MODULES.get(item);
+    public static Map<Item, CompatModule> getItemsToModuleMapping() {
+        return ITEMS_TO_MODULES;
     }
 
     public static synchronized void addSimpleDrop(Block block) {
