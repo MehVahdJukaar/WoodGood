@@ -12,6 +12,16 @@
 |                                                                                                                                   |
 
 ---
+## v2.9.30
+
+### FIXES:
+- **Every Compat** (C): Finally fixed The Blocks with Point-Of-Interest (POI) not working properly - [#900](https://github.com/MehVahdJukaar/WoodGood/issues/900) & [#1043](https://github.com/MehVahdJukaar/WoodGood/issues/1043)
+  - AFFECTED MODS: **Friends And Foes** & **Variant Vanilla Blocks**
+- **Chipped** (INCLUDED): minecraft:crimson & minecraft:warped for GLASS and GLASS_PANE - REASON: **Chipped** are missing the blocks for 2 woodTypes - [#1275](https://github.com/MehVahdJukaar/WoodGood/issues/1275)
+- **Storage Drawers** (C): Fixed a crash with `java.lang.NoSuchMethodError` - [#1357](https://github.com/MehVahdJukaar/WoodGood/issues/1357)
+
+---
+
 ## v2.9.29
 
 ### CHANGES:
