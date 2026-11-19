@@ -183,11 +183,10 @@ dependencies {
 //    modRuntimeOnly("curse.maven:more-crafting-tables-lieonlion-913586:5330971") // Quad - LieOnLion
 //    modRuntimeOnly("curse.maven:rechiseled-558998:8301383") // Fusion, supermartijn642s-[ Config-Lib, Core-Lib ]
 //    modRuntimeOnly("curse.maven:refurbished-furniture-897116:6272885") // Framework
-//    modRuntimeOnly("curse.maven:storage-drawers-223852:8997897")
 //    modRuntimeOnly("curse.maven:valhelsia-furniture-694349:5189602") // Valhelsia-Core
 //    modRuntimeOnly("curse.maven:table-top-craft-467136:5318681")
 //    modRuntimeOnly("curse.maven:twigs-496913:4605097")
-    modRuntimeOnly("curse.maven:variant-vanilla-blocks-866509:4997060") //v1.3.6
+//    modRuntimeOnly("curse.maven:variant-vanilla-blocks-866509:4997060") //v1.3.6
 //    modRuntimeOnly("curse.maven:villagersplus-forge-817272:4996995")
 
             //- OTHER MAVENS
@@ -247,6 +246,7 @@ dependencies {
     modCompileOnly("curse.maven:redeco-897377:5603009")
     modCompileOnly("curse.maven:regions-unexplored-659110:5558225")
     modCompileOnly("curse.maven:smidgeon-o-bliss-remastered-1288021:6710528") // Farmer's-Delight, Brewing'-And-Chewin' - NOTE: Test in production (PrismLauncher or others), idk why it don't work in DEV
+    modCompileOnly("curse.maven:storage-drawers-223852:8997897") //REQUIRED by ModDrawersModelsImpl & ModDrawersModels
     modCompileOnly("curse.maven:storage-delight-forge-979761:6696771")
     modCompileOnly("curse.maven:the-graveyard-forge-531188:4025847")
     modCompileOnly("curse.maven:the-twilight-forest-227639:5468648")
