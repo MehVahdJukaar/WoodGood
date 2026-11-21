@@ -2,6 +2,7 @@ package net.mehvahdjukaar.every_compat.misc;
 
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
+import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -21,7 +22,7 @@ public final class ColoringUtils {
         items.forEach((type, item) -> {
             event.register((stack, tintIndex) -> {
                         ItemStack parentItem = new ItemStack(type.mainChild());
-                        if (parentItem.isEmpty()) return 1;
+                        if (parentItem.isEmpty()) return getItemlessParentColor(type, tintIndex);
                         return event.getColor(parentItem, tintIndex);
                     },
                     item.asItem());
@@ -32,11 +33,19 @@ public final class ColoringUtils {
         blocks.forEach((type, item) -> {
             event.register((stack, tintIndex) -> {
                         ItemStack parentItem = new ItemStack(type.mainChild());
-                        if (parentItem.isEmpty()) return 1;
+                        if (parentItem.isEmpty()) return getItemlessParentColor(type, tintIndex);
                         return event.getColor(parentItem, tintIndex);
                     },
                     item.asItem());
         });
+    }
+
+    //some leaves have no item (for example nml apple fruit leaves).  using their block color instead
+    private static int getItemlessParentColor(BlockType type, int tintIndex) {
+        if (type.mainChild() instanceof Block bl) {
+            return Minecraft.getInstance().getBlockColors().getColor(bl.defaultBlockState(), null, null, tintIndex);
+        }
+        return -1;
     }
 
     public static void copyBlockTint(ClientHelper.BlockColorEvent event, Map<? extends BlockType,? extends Block> blocks) {
