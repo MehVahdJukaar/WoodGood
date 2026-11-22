@@ -12,7 +12,6 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 
-import java.util.List;
 import java.util.function.Supplier;
 
 ///SUPPORT: FABRIC-v2.0.2+ | NEOFORGE-v2.1.6+
@@ -47,12 +46,4 @@ public abstract class LauchsShuttersModuleAbstract extends EveryCompatModule {
 
     public abstract Block newShutter(WoodType woodType);
 
-    @Override
-    public List<String> getAlreadySupportedMods() {
-        return List.of(
-                "autumnity", "beachparty", "caverns_and_chasms", "ecologics",
-                "environments", "goodending", "natures_spirit", "quark",
-                "snowyspirit", "twigs", "upgrade_aquatic"
-        );
-    }
 }
