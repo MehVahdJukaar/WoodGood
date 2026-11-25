@@ -17,7 +17,10 @@ public interface EveryCompatPlugin {
     /**
      * id of the mod shipping this plugin
      */
-    String getModId();
+    //TODO: make non default and mandatory
+    default String getModId(){
+        return null; //You must implement this. null is temporary
+    };
 
     void register(PluginEvent registrar);
 

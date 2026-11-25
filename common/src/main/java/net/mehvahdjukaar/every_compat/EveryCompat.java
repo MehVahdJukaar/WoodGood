@@ -257,7 +257,9 @@ public abstract class EveryCompat {
 
     public static void loadPlugins() {
         for (EveryCompatPlugin plugin : PlatHelper.loadPlugins(EveryCompatPlugin.class, MOD_ID, ECPlugin.class)) {
-            plugin.register(new PluginEvent(plugin.getModId()));
+            String modId = plugin.getModId();
+            if(modId == null)modId = "unknown";
+            plugin.register(new PluginEvent(modId));
         }
         pluginsLoaded = true;
     }

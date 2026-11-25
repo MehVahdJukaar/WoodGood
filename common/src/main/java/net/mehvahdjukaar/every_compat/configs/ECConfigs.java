@@ -6,6 +6,7 @@ import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigBuilder;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ModConfigHolder;
 import net.mehvahdjukaar.moonlight.api.resources.pack.PackGenerationStrategy;
+import net.minecraft.core.RegistryAccess;
 
 import java.util.function.Supplier;
 
@@ -48,7 +49,6 @@ public class ECConfigs {
 
 
     static {
-
         if (PlatHelper.getPhysicalSide().isClient()) {
             ConfigBuilder builder = ConfigBuilder.create(EveryCompat.MOD_ID, ConfigType.CLIENT);
 

@@ -13,10 +13,13 @@
 |                                                                                                                                   |
 
 ---
+## v2.11.62
+fixed accidental breaking change breaking some addons
 
 ## v2.11.61
 
 Added BlockBox compat (thanks to partonetrain)
+give mbetter logic for wood chest textures usage
 
 ## v2.11.60
 
