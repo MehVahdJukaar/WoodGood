@@ -76,7 +76,7 @@ public class EveryCompatClient {
 
         if (modTooltip || blockTooltip && (tooltipFlag.isAdvanced() || !ECConfigs.TOOLTIPS_ADVANCED.get())) {
             Item item = stack.getItem();
-            var compatModule = ECModules.getModuleOfItem(item);
+            var compatModule = CompatModule.getModuleOfItem(item);
             if (compatModule != null) {
                 if (blockTooltip) {
                     BlockType woodType = WoodTypeRegistry.INSTANCE.getBlockTypeOf(item);
