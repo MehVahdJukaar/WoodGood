@@ -13,6 +13,11 @@
 |                                                                                                                                   |
 
 ---
+
+## v2.11.61
+
+Added BlockBox compat (thanks to partonetrain)
+
 ## v2.11.60
 
 ### UPDATED:

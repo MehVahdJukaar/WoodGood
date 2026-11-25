@@ -1,12 +1,22 @@
 package net.mehvahdjukaar.every_compat.modules.neoforge.blockbox;
 
+import net.mehvahdjukaar.every_compat.EveryCompat;
+import net.mehvahdjukaar.every_compat.api.PaletteStrategies;
 import net.mehvahdjukaar.every_compat.api.RenderLayer;
 import net.mehvahdjukaar.every_compat.api.SimpleEntrySet;
+import net.mehvahdjukaar.every_compat.misc.CompatSpritesHelper;
 import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
+import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
+import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
+import net.mehvahdjukaar.moonlight.api.resources.textures.Palette;
+import net.mehvahdjukaar.moonlight.api.resources.textures.PaletteColor;
+import net.mehvahdjukaar.moonlight.api.resources.textures.TextureImage;
 import net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodTypes;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -17,6 +27,8 @@ import vectorwing.blockbox.common.block.SeatBlock;
 import vectorwing.blockbox.common.block.SpikedPalisadeBlock;
 import vectorwing.blockbox.common.registry.ModCreativeTabs;
 
+import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.*;
@@ -34,10 +46,8 @@ public class BlockBoxModule extends EveryCompatModule {
 
     //texture constants since they are used more than once
     public static final String BLOCK_OAK_PALISADE_CORE = "block/oak_palisade_core";
-    public static final String BLOCK_OAK_PALISADE_SIDE = "block/oak_palisade_side";
     public static final String BLOCK_OAK_PALISADE_TOP = "block/oak_palisade_top";
     public static final String BLOCK_STRIPPED_OAK_PALISADE_CORE = "block/stripped_oak_palisade_core";
-    public static final String BLOCK_STRIPPED_OAK_PALISADE_SIDE = "block/stripped_oak_palisade_side";
     public static final String BLOCK_STRIPPED_OAK_PALISADE_TOP = "block/stripped_oak_palisade_top";
 
 
@@ -71,9 +81,8 @@ public class BlockBoxModule extends EveryCompatModule {
                 .copyParentDrop()
                 .addRecipe(modRes("oak_palisade"))
                 .addRecipe(modRes("oak_palisade_from_spiked"))
-                .addTexture(modRes(BLOCK_OAK_PALISADE_CORE))
-                .addTexture(modRes(BLOCK_OAK_PALISADE_SIDE))
-                .addTexture(modRes(BLOCK_OAK_PALISADE_TOP)) //<-- spike texture in here
+                .addTexture(modRes(BLOCK_OAK_PALISADE_CORE), PaletteStrategies.PLANKS_STANDARD)
+                .addTexture(modRes(BLOCK_OAK_PALISADE_TOP), PaletteStrategies.LOG_TOP_STANDARD) //<-- spike texture in here
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
         this.addEntry(palisade);
@@ -86,9 +95,8 @@ public class BlockBoxModule extends EveryCompatModule {
                 .setTab(getTab(creativeTabRL))
                 .copyParentDrop()
                 .addRecipe(modRes("spiked_oak_palisade"))
-                .addTexture(modRes(BLOCK_OAK_PALISADE_CORE))
-                .addTexture(modRes(BLOCK_OAK_PALISADE_SIDE))
-                .addTexture(modRes(BLOCK_OAK_PALISADE_TOP))
+                .addTexture(modRes(BLOCK_OAK_PALISADE_CORE), PaletteStrategies.PLANKS_STANDARD)
+                .addTexture(modRes(BLOCK_OAK_PALISADE_TOP), PaletteStrategies.LOG_TOP_STANDARD)
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
         this.addEntry(spikedPalisade);
@@ -103,9 +111,8 @@ public class BlockBoxModule extends EveryCompatModule {
                 .copyParentDrop()
                 .addRecipe(modRes("stripped_oak_palisade"))
                 .addRecipe(modRes("stripped_oak_palisade_from_spiked"))
-                .addTexture(modRes(BLOCK_STRIPPED_OAK_PALISADE_CORE))
-                .addTexture(modRes(BLOCK_STRIPPED_OAK_PALISADE_SIDE))
-                .addTexture(modRes(BLOCK_STRIPPED_OAK_PALISADE_TOP))
+                .addTexture(modRes(BLOCK_STRIPPED_OAK_PALISADE_CORE), PaletteStrategies.STRIPPED_LOG_SIDE_STANDARD)
+                .addTexture(modRes(BLOCK_STRIPPED_OAK_PALISADE_TOP), PaletteStrategies.STRIPPED_LOG_TOP_STANDARD)
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
         this.addEntry(strippedPalisade);
@@ -118,13 +125,72 @@ public class BlockBoxModule extends EveryCompatModule {
                 .setTab(getTab(creativeTabRL))
                 .copyParentDrop()
                 .addRecipe(modRes("stripped_spiked_oak_palisade"))
-                .addTexture(modRes(BLOCK_STRIPPED_OAK_PALISADE_CORE))
-                .addTexture(modRes(BLOCK_STRIPPED_OAK_PALISADE_SIDE))
-                .addTexture(modRes(BLOCK_STRIPPED_OAK_PALISADE_TOP))
+                .addTexture(modRes(BLOCK_STRIPPED_OAK_PALISADE_CORE), PaletteStrategies.STRIPPED_LOG_SIDE_STANDARD)
+                .addTexture(modRes(BLOCK_STRIPPED_OAK_PALISADE_TOP), PaletteStrategies.STRIPPED_LOG_TOP_STANDARD)
                 .setRenderType(RenderLayer.CUTOUT)
                 .build();
         this.addEntry(strippedSpikedPalisade);
 
+    }
+
+    @Override
+    public void addDynamicClientResources(Consumer<ResourceGenTask> executor) {
+        super.addDynamicClientResources(executor);
+        executor.accept((manager, sink) -> {
+            for (var entry : List.of(palisade, spikedPalisade)) {
+                entry.blocks.forEach((w, block) -> addPalisadeSide(manager, sink, w, w.log, "", false, block));
+            }
+            for (var e : List.of(strippedPalisade, strippedSpikedPalisade)) {
+                e.blocks.forEach((w, block) -> addPalisadeSide(manager, sink, w, w.getBlockOfThis("stripped_log"), "stripped_", true, block));
+            }
+        });
+    }
+
+    private void addPalisadeSide(ResourceManager manager, ResourceSink sink, WoodType w, Block log, String prefix, boolean hasDarkSides, Block block) {
+        try (TextureImage logTexture = TextureImage.open(manager,
+                RPUtils.findFirstBlockTextureLocation(manager, log, CompatSpritesHelper.LOOKS_LIKE_SIDE_LOG_TEXTURE))) {
+
+            ResourceLocation newId = EveryCompat.res("block/" + shortenedId() + "/" + w.getNamespace() + "/" + prefix + w.getTypeName() + "_palisade_side");
+            var newTexture = logTexture.makeCopy();
+            if (hasDarkSides) moveDarkSideAway(newTexture);
+            darkenEdges(newTexture);
+
+            sink.addTextureIfNotPresent(manager, newId, () -> newTexture);
+
+        } catch (Exception e) {
+            EveryCompat.LOGGER.error("Failed to generate Palisade texture for for {} : {}", block, e);
+        }
+    }
+
+    private static void moveDarkSideAway(TextureImage t) {
+        //int w = t.imageWidth();
+        int w = t.frameWidth();
+        for (int f = 0; f < t.frameCount(); f++) {
+            for (int y = 0; y < t.frameHeight(); y++) {
+                t.setFramePixel(f, 0, y, t.getFramePixel(f, w / 2, y));
+                t.setFramePixel(f, 1, y, t.getFramePixel(f, w / 2 + 1, y));
+            }
+        }
+    }
+
+    //nonsense edge darkening, mimics block box
+    private static void darkenEdges(TextureImage t) {
+        Palette p = Palette.fromImage(t, null, 0);
+
+        int n = p.size();
+        int w = t.frameWidth();
+        for (int f = 0; f < t.frameCount(); f++) {
+            for (int edge : new int[]{w / 2 - 1, w - 1}) {
+                for (int y = 0; y < t.frameHeight(); y++) {
+                    // if (t.getFramePixel(f, edge, y) == 0) continue;
+                    int i = p.indexOf(p.getColorClosestTo(new PaletteColor(t.getFramePixel(f, edge, y))));
+                    t.setFramePixel(f, edge, y, p.get(Math.min(i > n / 2 ? 1 : 0, n - 1)).value());
+
+                    int j = p.indexOf(p.getColorClosestTo(new PaletteColor(t.getFramePixel(f, edge - 1, y))));
+                    t.setFramePixel(f, edge - 1, y, p.get(j * (n / 2) / n).value());
+                }
+            }
+        }
     }
 
     private BlockBehaviour.Properties palisadeProperties(WoodType w) {
