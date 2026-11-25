@@ -11,6 +11,7 @@ import net.mehvahdjukaar.every_compat.modules.neoforge.abnormal.WoodworksModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.absent_by_design.AbsentByDesignModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.beautify_decorate.BeautifyDecorateModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.bibliocraft.BibliocraftLegacyModule;
+import net.mehvahdjukaar.every_compat.modules.neoforge.blockbox.BlockBoxModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.blocks_plus.BlocksPlusModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.builders_delight.BuildersDelightModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.buildersaddition.BuildersAdditionModule;
@@ -150,6 +151,7 @@ public class EveryCompatForge extends EveryCompatCommon {
             // ========================================= GENERAL ======================================================== \\
             addOptionalModule("absentbydesign", () -> AbsentByDesignModule.class);
             addOptionalModule("bibliocraft", () -> BibliocraftLegacyModule.class);
+            addOptionalModule("blockbox", () -> BlockBoxModule.class);
             addOptionalModule("blocksplus", () -> BlocksPlusModule.class);
             addOptionalModule("boatload", () -> BoatLoadModule.class);
             addOptionalModule("buildersaddition", () -> BuildersAdditionModule.class);

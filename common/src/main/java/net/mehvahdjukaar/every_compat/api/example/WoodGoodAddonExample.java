@@ -9,6 +9,12 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 
 /// your own plugin also needs @ECPlugin (neoforge) or an "everycomp" entrypoint in fabric.mod.json (fabric).
 public final class WoodGoodAddonExample implements EveryCompatPlugin {
+
+    @Override
+    public String getModId() {
+        return "mod_id";
+    }
+
     ///      ┌──────────────────────────────────────────────────────────┐
     ///      │   register a custom module and non-detected wood type    │
     ///      └──────────────────────────────────────────────────────────┘

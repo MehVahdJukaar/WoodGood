@@ -14,6 +14,11 @@ package net.mehvahdjukaar.every_compat.api;
  */
 public interface EveryCompatPlugin {
 
+    /**
+     * id of the mod shipping this plugin
+     */
+    String getModId();
+
     void register(PluginEvent registrar);
 
 

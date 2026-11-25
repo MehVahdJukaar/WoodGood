@@ -61,6 +61,7 @@ public abstract class EveryCompat {
     private static final Set<String> ADDON_IDS = new HashSet<>();
 
     private static final Set<String> API_DISABLED_MODULES = new HashSet<>();
+    private static final Set<String> MODS_WITH_OWN_MODULE = new HashSet<>();
     private static final Set<String> API_DISABLED_BLOCKS = new HashSet<>();
     private static final List<Pattern> API_DISABLED_BLOCK_PATTERNS = new ArrayList<>();
     private static boolean pluginsLoaded = false;
@@ -255,11 +256,14 @@ public abstract class EveryCompat {
     }
 
     public static void loadPlugins() {
-        PluginEvent registrar = new PluginEvent();
         for (EveryCompatPlugin plugin : PlatHelper.loadPlugins(EveryCompatPlugin.class, MOD_ID, ECPlugin.class)) {
-            plugin.register(registrar);
+            plugin.register(new PluginEvent(plugin.getModId()));
         }
         pluginsLoaded = true;
+    }
+
+    public static synchronized void markModuleProvidedByMod(String modId) {
+        MODS_WITH_OWN_MODULE.add(modId);
     }
 
     public static boolean arePluginsLoaded() {
@@ -292,6 +296,12 @@ public abstract class EveryCompat {
 
     public synchronized static void addOptionalModule(String modId, Supplier<Class<? extends CompatModule>> moduleClass) {
         if (PlatHelper.isModLoaded(modId) && !isModuleBlacklisted(modId)) {
+            //plugins run before our modules so mod's own one always gets loaded here first
+            if (pluginsLoaded && MODS_WITH_OWN_MODULE.contains(modId)) {
+                LOGGER.info("Skipping built-in module for {}, the mod provides its own", modId);
+
+                return;
+            }
             try {
                 Class<? extends CompatModule> klazz = moduleClass.get();
 
