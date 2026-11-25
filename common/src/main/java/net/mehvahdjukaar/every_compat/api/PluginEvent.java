@@ -16,8 +16,11 @@ import java.util.function.Supplier;
  * Take a look at {@link WoodGoodAddonExample} for examples
  */
 public final class PluginEvent {
+    private final String pluginModId;
+
     @ApiStatus.Internal
-    public PluginEvent() {
+    public PluginEvent(String pluginModId) {
+        this.pluginModId = pluginModId;
     }
 
     private static void checkStillLoading() {
@@ -36,12 +39,14 @@ public final class PluginEvent {
      */
     public void addModule(String modId, Supplier<Class<? extends CompatModule>> moduleClass) {
         checkStillLoading();
+        if (modId.equals(pluginModId)) ECModules.markModuleProvidedByMod(modId);
         ECModules.addOptionalModule(modId, moduleClass);
     }
 
     @SafeVarargs
     public final void addModules(String modId, Supplier<Class<? extends CompatModule>>... moduleClasses) {
         checkStillLoading();
+        if (modId.equals(pluginModId)) ECModules.markModuleProvidedByMod(modId);
         ECModules.addMultipleOptional(modId, moduleClasses);
     }
 

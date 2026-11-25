@@ -105,7 +105,6 @@ dependencies {
 
     //- ONLY FOR TESTING - can be commented out or enabled
 //    modRuntimeOnly("curse.maven:beautiful-campfires-1085950:6162194")
-//    modRuntimeOnly("curse.maven:the-block-box-1199971:8089815")
 //    modRuntimeOnly("curse.maven:camp-chair-531744:4579679") //!! 1.20.1
 //    modRuntimeOnly("curse.maven:dawn-of-time-312359:7029195") // Fusion-Connected-Texture //@ Use Local mods blc Distribution is not allowed
 //    modRuntimeOnly("curse.maven:exlines-bark-carpets-527296:4094399") //!! 1.20.1
@@ -127,6 +126,7 @@ dependencies {
 //    modCompileOnly("local-blocks_plus:blocks+1.21.1-1.8")
 //    modCompileOnly("local-shutter-neoforge:shutter-2.1.6-neoforge-1.21.1")
 //    modCompileOnly("local-buildersdelight-neoforge:BuildersDelight-1.20.1-v.1.3")
+    modCompileOnly("maven.modrinth:the-block-box:bbRrdEN7") // v0.1.3
     //modCompileOnly("local-giacomos_bookshelf-neoforge:giacomos_bookshelf-1.20.1-1.3.9") // WIP
 
     // MACAW's

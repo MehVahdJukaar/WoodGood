@@ -8,6 +8,7 @@ import net.mehvahdjukaar.every_compat.api.SimpleModule;
 import net.mehvahdjukaar.every_compat.configs.ECConfigs;
 import net.mehvahdjukaar.every_compat.modules.neoforge.absent_by_design.AbsentByDesignModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.bibliocraft.BibliocraftLegacyModule;
+import net.mehvahdjukaar.every_compat.modules.neoforge.blockbox.BlockBoxModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.functional_storage.FunctionalStorageModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.just_a_raft.JustARaftModule;
 import net.mehvahdjukaar.every_compat.modules.neoforge.lightmans_currency.LightmansCurrencyModule;
@@ -124,6 +125,7 @@ public class EveryCompatForge extends EveryCompatCommon {
         // ========================================= GENERAL ======================================================== \\
         addOptionalModule("absentbydesign", () -> AbsentByDesignModule.class);
         addOptionalModule("bibliocraft", () -> BibliocraftLegacyModule.class);
+        addOptionalModule("blockbox", () -> BlockBoxModule.class);
 //        addOptionalModule("blocksplus", () -> BlocksPlusModule.class);
 //        addOptionalModule("boatload", () -> BoatLoadModule.class);
 //        addOptionalModule("buildersaddition", () -> BuildersAdditionModule.class);

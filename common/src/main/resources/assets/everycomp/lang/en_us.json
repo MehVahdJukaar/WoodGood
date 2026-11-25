@@ -808,6 +808,11 @@
 
   "block_type.woodster.chiseled_bookshelf": "%s Chiseled Bookshelf",
   "block_type.woodster.ladder": "%s Ladder",
+  "block_type.blockbox.seat": "%s Seat",
+  "block_type.blockbox.palisade": "%s Palisade",
+  "block_type.blockbox.spiked_palisade": "Spiked %s Palisade",
+  "block_type.blockbox.stripped_palisade": "Stripped %s Palisade",
+  "block_type.blockbox.stripped_spiked_palisade": "Stripped Spiked %s Palisade",
 
 
   "block_type.workshop_for_handsome_adventurer.simple_table": "Crafting Table (%s)",
