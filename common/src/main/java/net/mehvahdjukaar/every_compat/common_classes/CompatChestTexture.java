@@ -30,6 +30,13 @@ public class CompatChestTexture {
             "_trapped_chest", "_trapped_chest_left", "_trapped_chest_right"
     };
 
+
+    public static boolean copyExistingChestTextures(ResourceSink sink, ResourceManager manager,
+                                                    String shortenedID, WoodType wood) {
+        return copyModProvidedChestTextures(sink, manager, shortenedID, wood)
+                || copyBundledChestTextures(sink, manager, shortenedID, wood);
+    }
+
     /**
      * Copies the chest textures that the mod adding this wood already ships onto our own chest path, so hand made
      * art wins over a generated recolor. Only copies when the whole set is there, otherwise the trapped variants
@@ -59,29 +66,26 @@ public class CompatChestTexture {
         return true;
     }
 
-
-    public static boolean copyHandmadeChestTextures(ResourceSink sink, ResourceManager manager,
-                                                    String fromShortenedId, String toShortenedID, WoodType wood) {
-        List<ResourceLocation> sources = new ArrayList<>();
-        List<ResourceLocation> sourcesMCMETA = new ArrayList<>();
-        for (String chestTextureSuffix : CHEST_TEXTURE_SUFFIXES) {
-            ResourceLocation from = EveryCompat.res("entity/chest/" + fromShortenedId + "/" +
-                    wood.getAppendableId() + chestTextureSuffix);
-            ResourceLocation textureId = ResType.TEXTURES.getPath(from);
-            ResourceLocation mcmetaId = ResType.MCMETA.getPath(from);
-
-            if (manager.getResource(textureId).isEmpty()) return false;
-            sources.add(textureId);
-            if (manager.getResource(mcmetaId).isPresent()) sourcesMCMETA.add(mcmetaId);
+    private static boolean copyBundledChestTextures(ResourceSink sink, ResourceManager manager,
+                                                    String shortenedID, WoodType wood) {
+        for (String suffix : CHEST_TEXTURE_SUFFIXES) {
+            //ResourceLocation from = EveryCompat.res("entity/chest/quark/" + wood.getAppendableId() + suffix);
+            ResourceLocation from = EveryCompat.res("entity/chest/q/" + wood.getAppendableId() + suffix);
+            if (manager.getResource(ResType.TEXTURES.getPath(from)).isEmpty()) return false;
         }
 
-        for (int idx = 0; idx < CHEST_TEXTURE_SUFFIXES.length; idx++) {
-            ResourceLocation to = EveryCompat.res("entity/chest/" + toShortenedID + "/" +
-                    wood.getAppendableId() + CHEST_TEXTURE_SUFFIXES[idx]);
+        for (String suffix : CHEST_TEXTURE_SUFFIXES) {
+            ResourceLocation from = EveryCompat.res("entity/chest/q/" + wood.getAppendableId() + suffix);
+            ResourceLocation to = EveryCompat.res("entity/chest/" + shortenedID + "/" + wood.getAppendableId() + suffix);
 
+            //also true for quark itself, these are already in place
             if (sink.alreadyHasTextureAtLocation(manager, to)) continue;
-            sink.copyResource(manager, sources.get(idx), ResType.TEXTURES.getPath(to), true);
-            if (idx < sourcesMCMETA.size()) sink.copyResource(manager, sourcesMCMETA.get(idx), ResType.MCMETA.getPath(to), true);
+            sink.copyResource(manager, ResType.TEXTURES.getPath(from), ResType.TEXTURES.getPath(to), true);
+
+            ResourceLocation m = ResType.MCMETA.getPath(from);
+            if (manager.getResource(m).isPresent()) {
+                sink.copyResource(manager, m, ResType.MCMETA.getPath(to), true);
+            }
         }
         return true;
     }

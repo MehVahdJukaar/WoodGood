@@ -27,6 +27,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.function.Consumer;
 
+import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.copyExistingChestTextures;
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 
 ///SUPPORT: FABRIC-v2.1+ | NEOFORGE-NOT_AVAILABLE
@@ -331,6 +332,7 @@ public class VariantVanillaBlocksModule extends EveryCompatModule {
         super.addDynamicClientResources(executor);
         executor.accept((manager, sink) -> {
             chests.blocks.forEach((wood, block) -> {
+                if (copyExistingChestTextures(sink, manager, shortenedId(), wood)) return;
                 // SINGLE
                 generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/acacia_chest"),

@@ -30,6 +30,7 @@ import net.minecraft.world.level.material.MapColor;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.copyExistingChestTextures;
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 
@@ -134,6 +135,8 @@ public class MoreChestVariantsModule extends EveryCompatModule {
 
         executor.accept((manager, sink) ->
             forEachSafely("mcv's chest texture", trappedChests.blocks, (wood, block) -> {
+                if (copyExistingChestTextures(sink, manager, shortenedId(), wood)) return;
+
                 // SINGLE
                 generateChestTexture(sink, manager, shortenedId(), wood,
                         modRes("entity/chest/acacia"),

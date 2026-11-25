@@ -29,6 +29,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.copyExistingChestTextures;
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 
 //SUPPORT: v1.7+
@@ -288,6 +289,8 @@ public class BlocksPlusModule extends EveryCompatModule {
 
         executor.accept((manager, sink) ->
                 trapped_chest.blocks.forEach((wood, block) -> {
+                    if (copyExistingChestTextures(sink, manager, shortenedId(), wood)) return;
+
                     // SINGLE
                     generateChestTexture(sink, manager, shortenedId(), wood,
                             modRes("entity/chest/acacia/acacia"),

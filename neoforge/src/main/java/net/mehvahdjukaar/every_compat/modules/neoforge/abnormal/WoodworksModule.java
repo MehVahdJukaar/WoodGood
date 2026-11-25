@@ -451,10 +451,7 @@ public class WoodworksModule extends EveryCompatModule {
         executor.accept((manager, sink) ->
             forEachSafely("chest texture", trappedChests.blocks, (wood, block) -> {
                 // mods like environmental already ship chest textures for their own wood. reuse those over a recolor
-                if (copyModProvidedChestTextures(sink, manager, shortenedId(), wood)) return;
-
-                if (PlatHelper.isModLoaded("quark")
-                        && copyHandmadeChestTextures(sink, manager, "q", shortenedId(), wood)) return;
+                if (copyExistingChestTextures(sink, manager, shortenedId(), wood)) return;
 
                 // SINGLE
                 generateChestTexture(sink, manager, shortenedId(), wood,

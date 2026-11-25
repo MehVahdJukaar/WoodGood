@@ -46,7 +46,7 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 import static net.mehvahdjukaar.every_compat.api.PaletteStrategies.registerCached;
-import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.copyModProvidedChestTextures;
+import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.copyExistingChestTextures;
 import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
 import static net.mehvahdjukaar.every_compat.misc.UtilityTag.getATagOrCreateANew;
@@ -378,7 +378,7 @@ public class QuarkModule extends EveryCompatModule {
     private void generateChestTextures(ResourceManager manager, ResourceSink sink) {
         forEachSafely("chest texture", trappedChests.blocks, (wood, block) -> {
             // mods like environmental already ship chest textures for their own wood. reuse those over a recolor
-            if (copyModProvidedChestTextures(sink, manager, shortenedId(), wood)) return;
+            if (copyExistingChestTextures(sink, manager, shortenedId(), wood)) return;
 
             // SINGLE
             generateChestTexture(sink, manager, shortenedId(), wood,
