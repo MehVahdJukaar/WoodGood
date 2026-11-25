@@ -13,6 +13,16 @@
 |                                                                                                                                   |
 
 ---
+## v2.11.60
+
+### UPDATED:
+- **The New Shutters** (C): Updated the getalreadySupportedMods() with different list for FABRIC & NEOFORGE - [#1363](https://github.com/MehVahdJukaar/WoodGood/issues/1363)
+
+### LANG
+- **EN_US** (WoodType): Corrected **Unusual End**'s Chorus Nest to Chorus Cane - [#1359](https://github.com/MehVahdJukaar/WoodGood/issues/1359)
+
+---
+
 ## v2.11.59
 
 ### FIXES: 
