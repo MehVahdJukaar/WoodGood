@@ -14,12 +14,17 @@
 
 ---
 ## v2.11.62
-fixed accidental breaking change breaking some addons
+
+### HOT-FIXES:
+- **Every Compat** (C): fixed accidental breaking change breaking some addons - [#1364](https://github.com/MehVahdJukaar/WoodGood/issues/1364)
 
 ## v2.11.61
 
-Added BlockBox compat (thanks to partonetrain)
-give mbetter logic for wood chest textures usage
+### CHANGES:
+- **Every Compat** (C): provided better logic for wood chest textures usage
+
+### NEW:
+- **Block Box** (NF) - Thanks to partonetrain
 
 ## v2.11.60
 
