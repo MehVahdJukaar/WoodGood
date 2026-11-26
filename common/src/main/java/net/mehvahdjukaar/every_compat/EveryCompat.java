@@ -83,6 +83,12 @@ public abstract class EveryCompat {
         RegHelper.registerDynamicResourceProvider(ServerDynamicResourcesHandler.getInstance());
         RegHelper.addItemsToTabsRegistration(EveryCompat::registerItemsToTabs);
         PlatHelper.addCommonSetup(EveryCompat::setup);
+        //late so original mods already registered theirs. Tbh might not be late enough
+        PlatHelper.addReloadableCommonSetup((ra, client) -> {
+            if (!client) {
+                forAllModules(EveryCompat::copyFlammability);
+            }
+        });
 
         BlockSetAPI.addDynamicRegistration(MOD_ID, (r) -> {
             ModEntriesConfigs.initEarlyButNotSuperEarly(); // assure configs are loaded since they depend on wood stuff being init
@@ -180,6 +186,16 @@ public abstract class EveryCompat {
             }
             ServerDynamicResourcesHandler.getInstance()
                     .addSupportedNamespaces(modIdsThatHaveBlockSets.toArray(String[]::new));
+        }
+    }
+
+    private static void copyFlammability(CompatModule m) {
+        if (m instanceof SimpleModule sm) {
+            for (var e : sm.getEntries()) {
+                if (e instanceof SimpleEntrySet<?, ?> s) {
+                    s.copyFlammability();
+                }
+            }
         }
     }
 

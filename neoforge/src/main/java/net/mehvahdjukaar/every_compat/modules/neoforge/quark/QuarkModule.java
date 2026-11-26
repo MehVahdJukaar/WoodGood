@@ -29,13 +29,9 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.common.ItemAbilities;
 import org.violetmoon.quark.content.building.block.*;
 import org.violetmoon.quark.content.building.module.*;
@@ -159,14 +155,7 @@ public class QuarkModule extends EveryCompatModule {
                         getModBlock("vertical_oak_planks"), () -> VanillaWoodTypes.OAK,
                         w -> {
                             String name = shortenedId() + "/" + w.getVariantId("planks", "vertical");
-                            return new ZetaBlock(name, null,
-                                    BlockBehaviour.Properties.of()
-                                            .mapColor(MapColor.WOOD)
-                                            .ignitedByLava()
-                                            .instrument(NoteBlockInstrument.BASS)
-                                            .strength(2.0F, 3.0F)
-                                            .sound(SoundType.WOOD)
-                            );
+                            return new ZetaBlock(name, null, Utils.copyPropertySafe(w.planks));
                         }
                 )
                 .addCondition(w -> !w.getId().toString().equals("gardens_of_the_dead:whistle_planks")) //REASON: The look is no different from a normal plank

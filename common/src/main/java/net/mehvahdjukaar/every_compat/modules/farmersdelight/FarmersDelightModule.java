@@ -54,7 +54,7 @@ public class FarmersDelightModule extends EveryCompatModule {
 
         cabinets = SimpleEntrySet.builder(WoodType.class, "cabinet",
                         getModBlock("oak_cabinet"), () -> VanillaWoodTypes.OAK,
-                        w -> new CabinetBlock(Utils.copyPropertySafe(w.planks))
+                        w -> new CabinetBlock(Utils.copyPropertySafe(getModBlock("oak_cabinet").get()))
                 )
                 .requiresChildren(TRAPDOOR, SLAB) //REASON: recipes
                 .addTile(getModTile("cabinet"))

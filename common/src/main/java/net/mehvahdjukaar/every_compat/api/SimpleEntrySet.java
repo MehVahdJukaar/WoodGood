@@ -10,21 +10,25 @@ import net.mehvahdjukaar.moonlight.api.item.BlockTypeBasedBlockItem;
 import net.mehvahdjukaar.moonlight.api.misc.Registrator;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.BlockTypeResTransformer;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.assets.LangBuilder;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceSink;
 import net.mehvahdjukaar.moonlight.api.set.BlockSetAPI;
 import net.mehvahdjukaar.moonlight.api.set.BlockType;
+import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.EmptyBlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -256,6 +260,19 @@ public class SimpleEntrySet<T extends BlockType, B extends Block> extends Abstra
         if (tileHolder instanceof ExistingTileHolder<?> et) {
             SimpleModule.appendTileEntityBlocks(et.get(), blocks.values());
         }
+    }
+
+    public void copyFlammability() {
+        BlockState base = getBaseBlock().defaultBlockState();
+        int ignite = PlatHelper.getFireSpreadSpeed(base, EmptyBlockGetter.INSTANCE, BlockPos.ZERO, Direction.UP);
+        int burn = PlatHelper.getFlammability(base, EmptyBlockGetter.INSTANCE, BlockPos.ZERO, Direction.UP);
+        if (ignite == 0 && burn == 0) return;
+
+        blocks.forEach((t, b) -> {
+            if (t instanceof WoodType w && !w.canBurn()) {
+                RegHelper.registerBlockFlammability(b, 0, 0);
+            } else RegHelper.registerBlockFlammability(b, ignite, burn);
+        });
     }
 
     @Override
