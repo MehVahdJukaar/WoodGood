@@ -17,7 +17,6 @@ import net.mehvahdjukaar.moonlight.api.set.wood.WoodTypeRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.renderer.item.ItemModels;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -39,7 +38,7 @@ public class EveryCompatClient {
         ClientHelper.addBlockEntityRenderersRegistration(EveryCompatClient::registerBlockEntityRenderers);
         ClientHelper.addBlockColorsRegistration(EveryCompatClient::registerBlockColors);
         RegHelper.registerDynamicResourceProvider(ClientDynamicResourcesHandler.getInstance());
-        ItemModels.ID_MAPPER.put(EveryCompat.res("wood_type_cycle"), WoodTypeCycleItemModel.Unbaked.MAP_CODEC);
+        ClientHelper.addItemModelRegistration(e -> e.register(EveryCompat.res("wood_type_cycle"), WoodTypeCycleItemModel.Unbaked.MAP_CODEC));
         BlockCountConfigOverlay.register();
         FurnitureShowcaseWidget.register();
     }
