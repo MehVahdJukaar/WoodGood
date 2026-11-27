@@ -23,7 +23,6 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 import twilightforest.block.*;
 import twilightforest.enums.HollowLogVariants;
-import twilightforest.init.TFBlocks;
 import twilightforest.item.HollowLogItem;
 
 import java.util.function.Supplier;
@@ -31,14 +30,14 @@ import java.util.function.Supplier;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.SLAB;
 import static net.mehvahdjukaar.moonlight.api.set.wood.VanillaWoodChildKeys.STRIPPED_LOG;
 
-//SUPPORT: v4.8.3345+
+///SUPPORT: v4.8.3345+
 public class TwilightForestModule extends EveryCompatModule {
 
-    public final SimpleEntrySet<WoodType, BanisterBlock> banisters;
+    public final SimpleEntrySet<WoodType, Block> banisters;
     public final SimpleEntrySet<WoodType, Block> drying_rack;
-    public final SimpleEntrySet<WoodType, VerticalHollowLogBlock> hollow_log_vertical;
-    public final SimpleEntrySet<WoodType, HorizontalHollowLogBlock> hollow_log_horizontal;
-    public final SimpleEntrySet<WoodType, ClimbableHollowLogBlock> hollow_log_climbable;
+    public final SimpleEntrySet<WoodType, Block> hollow_log_vertical;
+    public final SimpleEntrySet<WoodType, Block> hollow_log_horizontal;
+    public final SimpleEntrySet<WoodType, Block> hollow_log_climbable;
     public final ItemOnlyEntrySet<WoodType, Item> hollow_log;
 
     public TwilightForestModule(String modId) {
@@ -46,8 +45,8 @@ public class TwilightForestModule extends EveryCompatModule {
         Supplier<CreativeModeTab> tab = getTab(CreativeModeTabs.BUILDING_BLOCKS);
 
         banisters = SimpleEntrySet.builder(WoodType.class, "banister",
-                        TFBlocks.OAK_BANISTER, () -> VanillaWoodTypes.OAK,
-                        w -> new BanisterBlock(Utils.copyPropertySafe(w.planks).noOcclusion())
+                        getModBlock("oak_banister"), () -> VanillaWoodTypes.OAK,
+                        w -> new BanisterBlock(Utils.copyPropertySafe(w.planks))
                 )
                 //TEXTURES: planks
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
@@ -74,7 +73,7 @@ public class TwilightForestModule extends EveryCompatModule {
         this.addEntry(drying_rack);
 
         hollow_log_horizontal = SimpleEntrySet.builder(WoodType.class, "log_horizontal", "hollow",
-                        TFBlocks.HOLLOW_BIRCH_LOG_HORIZONTAL, () -> VanillaWoodTypes.BIRCH,
+                        getModBlock("hollow_birch_log_horizontal"), () -> VanillaWoodTypes.BIRCH,
                         w -> new HorizontalHollowLogBlock(Utils.copyPropertySafe(w.log))
                 )
                 .requiresChildren(STRIPPED_LOG) //REASON: Textures
@@ -89,7 +88,7 @@ public class TwilightForestModule extends EveryCompatModule {
         this.addEntry(hollow_log_horizontal);
 
         hollow_log_vertical = SimpleEntrySet.builder(WoodType.class, "log_vertical", "hollow",
-                        TFBlocks.HOLLOW_BIRCH_LOG_VERTICAL, () -> VanillaWoodTypes.BIRCH,
+                        getModBlock("hollow_birch_log_vertical"), () -> VanillaWoodTypes.BIRCH,
                         w -> {
                             var id = EveryCompat.res(this.shortenedId() + "/" + w.getVariantId("hollow", true) + "_log_climbable");
                             return new VerticalHollowLogBlock(Utils.copyPropertySafe(w.log), DeferredHolder.create(Registries.BLOCK, id));
@@ -106,7 +105,7 @@ public class TwilightForestModule extends EveryCompatModule {
         this.addEntry(hollow_log_vertical);
 
         hollow_log_climbable = SimpleEntrySet.builder(WoodType.class, "log_climbable", "hollow",
-                        TFBlocks.HOLLOW_BIRCH_LOG_CLIMBABLE, () -> VanillaWoodTypes.BIRCH,
+                        getModBlock("hollow_birch_log_climbable"), () -> VanillaWoodTypes.BIRCH,
                         w -> new ClimbableHollowLogBlock(
                                 DeferredHolder.create(Registries.BLOCK, Utils.getID(hollow_log_vertical.blocks.get(w))),
                                 Utils.copyPropertySafe(w.log))
@@ -155,7 +154,7 @@ public class TwilightForestModule extends EveryCompatModule {
                 hollow_log_horizontal.blocks.values().toArray(Block[]::new));
     }
 
-    @SuppressWarnings("DataFlowIssue")
+    @SuppressWarnings({"DataFlowIssue", "SameParameterValue"})
     private BlockBehaviour.Properties copySlabPropertySafe(WoodType woodType, float scale) {
         Block slab = (woodType.getBlockOfThis(SLAB) != null)
                 ? woodType.getBlockOfThis(SLAB)

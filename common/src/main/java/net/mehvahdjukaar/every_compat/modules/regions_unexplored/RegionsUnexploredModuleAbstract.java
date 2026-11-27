@@ -25,9 +25,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ComposterBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.PushReaction;
 
 import java.util.List;
 import java.util.Objects;
@@ -39,8 +37,6 @@ import static net.mehvahdjukaar.every_compat.misc.UtilityTag.createAndAddCustomT
 
 ///SUPPORT: v0.6.3+
 public abstract class RegionsUnexploredModuleAbstract extends EveryCompatModule {
-    public final BlockBehaviour.Properties BRANCH_PROPERTIES = BlockBehaviour.Properties.of().noOcclusion().sound(SoundType.MANGROVE_ROOTS).strength(1.0F, 1.5F).dynamicShape();
-    public final BlockBehaviour.Properties SHRUB_PROPERTIES = BlockBehaviour.Properties.of().pushReaction(PushReaction.DESTROY).noCollission().instabreak().sound(SoundType.AZALEA).offsetType(BlockBehaviour.OffsetType.XZ);
 
     public final SimpleEntrySet<WoodType, Block> branches;
     public final SimpleEntrySet<LeavesType, Block> shrubs;
@@ -51,7 +47,7 @@ public abstract class RegionsUnexploredModuleAbstract extends EveryCompatModule 
 
         branches = SimpleEntrySet.builder(WoodType.class, "branch",
                         getModBlock("oak_branch"), () -> VanillaWoodTypes.OAK,
-                        this::newBranchBlock
+                        woodType -> newBranchBlock(Utils.copyPropertySafe(getModBlock("oak_branch").get()))
                 )
                 .addTag(BlockTags.MINEABLE_WITH_AXE, Registries.BLOCK)
                 .addTag(BlockTags.COMPLETES_FIND_TREE_TUTORIAL, Registries.BLOCK)
@@ -72,7 +68,7 @@ public abstract class RegionsUnexploredModuleAbstract extends EveryCompatModule 
         shrubs = SimpleEntrySet.builder(LeavesType.class, "shrub",
                         getModBlock("dark_oak_shrub"),
                         () -> VanillaLeavesTypes.DARK_OAK,
-                        this::newShrubBlock
+                        leavesType -> newShrubBlock(Utils.copyPropertySafe(getModBlock("dark_oak_shrub").get()))
                 )
                 .addCondition(l -> {
                     boolean log = l.getAssociatedWoodType() != null; //REASON: textures
@@ -92,9 +88,9 @@ public abstract class RegionsUnexploredModuleAbstract extends EveryCompatModule 
         this.addEntry(shrubs);
     }
 
-    public abstract Block newShrubBlock(LeavesType leavesType);
+    public abstract Block newShrubBlock(BlockBehaviour.Properties properties);
 
-    public abstract Block newBranchBlock(WoodType w);
+    public abstract Block newBranchBlock(BlockBehaviour.Properties properties);
 
     @Override
     public void onModSetup() {

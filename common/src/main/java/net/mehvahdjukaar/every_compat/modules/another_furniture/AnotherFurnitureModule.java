@@ -14,7 +14,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 
-//SUPPORT: v3.0.1+
+///SUPPORT: v3.0.1+
 public class AnotherFurnitureModule extends EveryCompatModule {
 
     public final SimpleEntrySet<WoodType, Block> tables;
@@ -33,7 +33,11 @@ public class AnotherFurnitureModule extends EveryCompatModule {
 
         flowerBoxes = SimpleEntrySet.builder(WoodType.class, "flower_box",
                        getModBlock("oak_flower_box"), () -> VanillaWoodTypes.OAK,
-                        w -> new FlowerBoxBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new FlowerBoxBlock(Utils.copyPropertySafe(getModBlock("oak_flower_box").get())
+                                .mapColor(w.getColor())
+                                .sound(w.getSound())
+                        )
+                )
                 .addTag(modRes("flower_boxes"), Registries.BLOCK)
                 .addTag(modRes("flower_boxes"), Registries.ITEM)
                 .copyParentDrop()
@@ -48,7 +52,13 @@ public class AnotherFurnitureModule extends EveryCompatModule {
 
         shutters = SimpleEntrySet.builder(WoodType.class, "shutter",
                        getModBlock("oak_shutter"), () -> VanillaWoodTypes.OAK,
-                        w -> new ShutterBlock(1, Utils.copyPropertySafe(w.planks).noOcclusion()))
+                        w -> new ShutterBlock(1, Utils.copyPropertySafe(getModBlock("oak_shutter").get())
+                                .mapColor(w.getColor())
+                                .sound(w.getSound())
+                                .noOcclusion()
+
+                        )
+                )
                 .addTag(modRes("shutters"), Registries.BLOCK)
                 .addTag(modRes("shutters"), Registries.ITEM)
                 .copyParentDrop()
@@ -103,7 +113,11 @@ public class AnotherFurnitureModule extends EveryCompatModule {
 
         tables = SimpleEntrySet.builder(WoodType.class, "table",
                        getModBlock("oak_table"), () -> VanillaWoodTypes.OAK,
-                        w -> new TableBlock(Utils.copyPropertySafe(w.planks)))
+                        w -> new TableBlock(Utils.copyPropertySafe(getModBlock("oak_table").get())
+                                .mapColor(w.getColor())
+                                .sound(w.getSound())
+                        )
+                )
                 .addTag(modRes("tables"), Registries.BLOCK)
                 .addTag(modRes("tables"), Registries.ITEM)
                 .copyParentDrop()
@@ -120,7 +134,11 @@ public class AnotherFurnitureModule extends EveryCompatModule {
 
         chairs = SimpleEntrySet.builder(WoodType.class, "chair",
                        getModBlock("oak_chair"), () -> VanillaWoodTypes.OAK,
-                        w -> new ChairBlock(1, Utils.copyPropertySafe(w.planks)))
+                        w -> new ChairBlock(1, Utils.copyPropertySafe(getModBlock("oak_chair").get())
+                                .mapColor(w.getColor())
+                                .sound(w.getSound())
+                        )
+                )
                 .addTag(modRes("chairs"), Registries.BLOCK)
                 .addTag(modRes("chairs"), Registries.ITEM)
                 .defaultRecipe()
@@ -145,7 +163,10 @@ public class AnotherFurnitureModule extends EveryCompatModule {
 
         shelves = SimpleEntrySet.builder(WoodType.class, "shelf",
                        getModBlock("oak_shelf"), () -> VanillaWoodTypes.OAK,
-                        w -> new ShelfBlock(Utils.copyPropertySafe(w.planks))
+                        w -> new ShelfBlock(Utils.copyPropertySafe(getModBlock("oak_shelf").get())
+                                .mapColor(w.getColor())
+                                .sound(w.getSound())
+                        )
                 )
                 .addTag(modRes("shelves"), Registries.BLOCK, Registries.ITEM)
                 .addTile(getModTile("shelf"))
@@ -161,7 +182,10 @@ public class AnotherFurnitureModule extends EveryCompatModule {
 
         drawers = SimpleEntrySet.builder(WoodType.class, "drawer",
                        getModBlock("oak_drawer"), () -> VanillaWoodTypes.OAK,
-                        w -> new DrawerBlock(Utils.copyPropertySafe(w.planks))
+                        w -> new DrawerBlock(Utils.copyPropertySafe(getModBlock("oak_drawer").get())
+                                .mapColor(w.getColor())
+                                .sound(w.getSound())
+                        )
                 )
                 .addTag(modRes("drawers"), Registries.BLOCK, Registries.ITEM)
                 .addTile(getModTile("drawer"))
@@ -177,7 +201,10 @@ public class AnotherFurnitureModule extends EveryCompatModule {
 
         benches = SimpleEntrySet.builder(WoodType.class, "bench",
                        getModBlock("oak_bench"), () -> VanillaWoodTypes.OAK,
-                        w -> new BenchBlock(Utils.copyPropertySafe(w.planks))
+                        w -> new BenchBlock(Utils.copyPropertySafe(getModBlock("oak_drawer").get())
+                                .mapColor(w.getColor())
+                                .sound(w.getSound())
+                        )
                 )
                 .addTag(modRes("benches"), Registries.BLOCK, Registries.ITEM)
                 .defaultRecipe()

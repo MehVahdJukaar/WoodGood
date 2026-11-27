@@ -21,7 +21,6 @@ import net.mehvahdjukaar.every_compat.modules.EveryCompatModule;
 import net.mehvahdjukaar.moonlight.api.client.ICustomItemRendererProvider;
 import net.mehvahdjukaar.moonlight.api.client.ItemStackRenderer;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
-import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.ResourceGenTask;
@@ -63,7 +62,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.*;
+import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.copyExistingChestTextures;
+import static net.mehvahdjukaar.every_compat.common_classes.CompatChestTexture.generateChestTexture;
 import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.IsBambooLike;
 import static net.mehvahdjukaar.every_compat.misc.HardcodedBlockType.isKnownVanillaWood;
 import static net.mehvahdjukaar.every_compat.misc.TaskRunnerWithFailureCollection.forEachSafely;
@@ -88,9 +88,9 @@ public class WoodworksModule extends EveryCompatModule {
         bookshelves = SimpleEntrySet.builder(WoodType.class, "bookshelf",
                         getModBlock("acacia_bookshelf"),
                         () -> VanillaWoodTypes.ACACIA,
-                        woodType -> new Block(Utils.copyPropertySafe(woodType.log)
+                        woodType -> new Block(Utils.copyPropertySafe( getModBlock("acacia_bookshelf").get())
+                                .mapColor(woodType.getColor())
                                 .sound(woodType.getSound())
-                                .strength(1.5F)
                         )
                 )
                 .addTextureM(EveryCompat.res("block/acacia_bookshelf"), EveryCompat.res("block/acacia_bookshelf_m"))
@@ -132,8 +132,11 @@ public class WoodworksModule extends EveryCompatModule {
 
         boards = SimpleEntrySet.builder(WoodType.class, "boards",
                         WoodworksBlocks.OAK_BOARDS, () -> VanillaWoodTypes.OAK,
-                        woodType -> new RotatedPillarBlock(Utils.copyPropertySafe(woodType.planks)
-                                .strength(2.0F, 3.0F))
+                        woodType -> new RotatedPillarBlock(
+                                Utils.copyPropertySafe(getModBlock("oak_board").get())
+                                        .mapColor(woodType.getColor())
+                                        .sound(woodType.getSound())
+                        )
                 )
                 .copyParentDrop()
                 .addTexture(modRes("block/oak_boards"))
@@ -289,13 +292,10 @@ public class WoodworksModule extends EveryCompatModule {
 
         leafPiles = SimpleEntrySet.builder(LeavesType.class, "leaf_pile",
                         WoodworksBlocks.OAK_LEAF_PILE, () -> VanillaLeavesTypes.OAK,
-                        leavesType -> new LeafPileBlock(Utils.copyPropertySafe(leavesType.leaves)
-                                .noCollission()
-                                .strength(0.2F)
+                        leavesType -> new LeafPileBlock(Utils.copyPropertySafe(getModBlock("oak_leaf_pile").get())
+                                .mapColor(leavesType.leaves.defaultMapColor())
                                 .sound(leavesType.getSound())
-                                .noOcclusion()
                                 .ignitedByLava()
-                                .pushReaction(PushReaction.DESTROY)
                         )
                 )
                 .addModelTransform(m ->
